@@ -1,476 +1,784 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Colors - Design System GPOS Lite V 2.0</title>
-    <link rel="stylesheet" href="../css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Colors - Design System GPOS Lite V 2.0</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+  /* ===== GPOS Lite color tokens ===== */
+  :root{
+    --gpl-blue-50:#E9F2FB;--gpl-blue-75:#A3CBEE;--gpl-blue-100:#7DB5E7;
+    --gpl-blue-200:#4495DD;--gpl-blue-300:#1E7FD6;--gpl-blue-400:#155996;--gpl-blue-500:#124D83;
+    --gpl-orange-50:#FFF4E8;--gpl-orange-75:#FFD19F;--gpl-orange-100:#FFBF77;
+    --gpl-orange-200:#FFA33D;--gpl-orange-300:#FF9015;--gpl-orange-400:#B3650F;--gpl-orange-500:#9C580D;
+    --gpl-red-50:#FDE8E9;--gpl-red-75:#F7A2A5;--gpl-red-100:#F47B80;
+    --gpl-red-200:#EF4349;--gpl-red-300:#EC1C24;--gpl-red-400:#A51419;--gpl-red-500:#901116;
+    --gpl-green-50:#E6F7EF;--gpl-green-75:#96DCBC;--gpl-green-100:#6BCEA0;
+    --gpl-green-200:#2BB877;--gpl-green-300:#00AA5B;--gpl-green-400:#007740;--gpl-green-500:#006838;
+    --gpl-purple-50:#F1ECFE;--gpl-purple-75:#C4B0FB;--gpl-purple-100:#AB8FFA;
+    --gpl-purple-200:#875FF8;--gpl-purple-300:#6E3EF6;--gpl-purple-400:#4D2BAC;--gpl-purple-500:#432696;
+    --gpl-neutral-0:#FFFFFF;--gpl-neutral-10:#FAFBFB;--gpl-neutral-20:#F5F6F7;
+    --gpl-neutral-30:#EBEDF0;--gpl-neutral-40:#DFE2E6;--gpl-neutral-50:#C2C7D0;
+    --gpl-neutral-60:#B3B9C4;--gpl-neutral-70:#A6AEBB;--gpl-neutral-80:#98A1B0;
+    --gpl-neutral-90:#8993A4;--gpl-neutral-100:#7A8699;--gpl-neutral-200:#6B788E;
+    --gpl-neutral-300:#5D6B82;--gpl-neutral-400:#505F79;--gpl-neutral-500:#42526D;
+    --gpl-neutral-600:#354764;--gpl-neutral-700:#243757;--gpl-neutral-800:#15294B;
+    --gpl-neutral-900:#091E42;
+    --gpl-text-bold:var(--gpl-neutral-900);
+    --gpl-text-inverse:var(--gpl-neutral-0);
+    --gpl-text-subtle:var(--gpl-neutral-300);
+  }
+
+  /* ===== Main tabs ===== */
+  .main-tab-bar {
+    display: flex;
+    gap: 4px;
+    background: var(--gpl-neutral-20);
+    border: 1px solid var(--gpl-neutral-40);
+    border-radius: 10px;
+    padding: 4px;
+    width: fit-content;
+    margin-bottom: 32px;
+  }
+  .main-tab-btn {
+    padding: 9px 20px;
+    border-radius: 7px;
+    border: none;
+    background: transparent;
+    font: 600 13px/1 inherit;
+    cursor: pointer;
+    color: var(--gpl-text-subtle);
+    transition: all .15s;
+  }
+  .main-tab-btn.active {
+    background: #fff;
+    color: var(--gpl-text-bold);
+    box-shadow: 0 1px 3px rgba(9,30,66,.10), 0 0 0 1px rgba(9,30,66,.07);
+  }
+
+  /* ===== TOC (Color Palette tab) ===== */
+  .toc-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 32px;
+  }
+  .toc-bar a {
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--gpl-text-bold);
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--gpl-neutral-40);
+    background: #fff;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: border-color .15s;
+  }
+  .toc-bar a:hover { border-color: var(--gpl-blue-300); }
+  .toc-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ===== Color Section ===== */
+  .gpl-section { padding: 40px 0; border-top: 1px solid var(--gpl-neutral-40); }
+  .gpl-section:first-of-type { border-top: none; padding-top: 0; }
+
+  .gpl-section-head { margin-bottom: 20px; }
+  .gpl-eyebrow { font-size: 11px; font-weight: 700; color: var(--gpl-text-subtle); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+  .gpl-title { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .gpl-title h2 { font-size: 26px; font-weight: 700; margin: 0; color: var(--gpl-text-bold); letter-spacing: -.01em; }
+  .gpl-role-badge { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 5px; background: var(--gpl-neutral-20); color: var(--gpl-text-bold); }
+  .gpl-lead { font-size: 13.5px; color: var(--gpl-text-subtle); margin: 0; max-width: 70ch; line-height: 1.6; }
+
+  /* Info card */
+  .gpl-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    background: #fff;
+    border: 1px solid var(--gpl-neutral-40);
+    border-radius: 12px;
+    padding: 18px;
+    margin: 18px 0 20px;
+  }
+  @media(max-width: 860px){ .gpl-info { grid-template-columns: 1fr; } }
+  .gpl-info-col h4 {
+    margin: 0 0 8px;
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .gpl-info-col h4 .badge-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .gpl-info-col ul { margin: 0; padding-left: 16px; }
+  .gpl-info-col ul li { font-size: 12.5px; color: var(--gpl-text-subtle); line-height: 1.55; margin-bottom: 4px; }
+
+  /* ===== Swatch Row ===== */
+  .swatch-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .swatch-card {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(9,30,66,.10);
+    cursor: pointer;
+    transition: transform .15s, box-shadow .15s;
+    background: #fff;
+    user-select: none;
+  }
+  .swatch-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(9,30,66,.12);
+    border-color: rgba(9,30,66,.18);
+  }
+  .swatch-card:active { transform: scale(.97); }
+  .swatch-card .sw-block { height: 72px; width: 100%; display: block; }
+  .swatch-card .sw-info {
+    padding: 8px 9px 9px;
+  }
+  .swatch-card .sw-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gpl-text-bold);
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .swatch-card .sw-hex {
+    font-size: 10.5px;
+    color: var(--gpl-text-subtle);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    white-space: nowrap;
+  }
+
+  /* ===== Code Section ===== */
+  .code-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 4px;
+  }
+  @media(max-width: 760px){ .code-section { grid-template-columns: 1fr; } }
+  .code-panel {
+    background: var(--gpl-neutral-20);
+    border: 1px solid var(--gpl-neutral-40);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .code-panel-header {
+    background: #fff;
+    border-bottom: 1px solid var(--gpl-neutral-40);
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .code-panel-header .cp-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .cp-icon.tw { background: #EFF6FF; color: #1d4ed8; }
+  .cp-icon.css { background: #FFF7ED; color: #c2410c; }
+  .code-panel-header .cp-title { font-size: 13px; font-weight: 700; color: var(--gpl-text-bold); }
+  .code-panel-header .cp-desc { font-size: 11.5px; color: var(--gpl-text-subtle); margin-left: auto; }
+  .code-panel-body {
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 220px;
+    overflow-y: auto;
+  }
+  .code-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 5px 9px;
+    border-radius: 6px;
+    background: #fff;
+    border: 1px solid var(--gpl-neutral-40);
+    cursor: pointer;
+    transition: border-color .15s;
+  }
+  .code-row:hover { border-color: var(--gpl-blue-200); }
+  .code-row .cr-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .code-row .cr-label { font-size: 11px; font-weight: 600; color: var(--gpl-text-subtle); flex-shrink: 0; min-width: 28px; }
+  .code-row .cr-code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; color: var(--gpl-text-bold); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .code-row .cr-copy { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--gpl-text-subtle); flex-shrink: 0; padding: 2px 6px; border-radius: 4px; border: 1px solid var(--gpl-neutral-40); background: transparent; cursor: pointer; font-family: inherit; }
+  .code-row:hover .cr-copy { color: var(--gpl-blue-300); border-color: var(--gpl-blue-200); }
+
+  /* ===== Semantic Tokens Tab ===== */
+  .sem-group { margin-bottom: 40px; }
+  .sem-group-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gpl-text-bold);
+    margin: 0 0 4px;
+  }
+  .sem-group-desc { font-size: 13px; color: var(--gpl-text-subtle); margin: 0 0 16px; }
+  .sem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px;
+  }
+  .sem-card {
+    background: #fff;
+    border: 1px solid var(--gpl-neutral-40);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: box-shadow .15s, border-color .15s;
+    display: flex;
+    align-items: stretch;
+  }
+  .sem-card:hover { box-shadow: 0 4px 12px rgba(9,30,66,.09); border-color: var(--gpl-neutral-60); }
+  .sem-card .sc-swatch { width: 44px; flex-shrink: 0; border-right: 1px solid rgba(9,30,66,.08); }
+  .sem-card .sc-body { padding: 10px 12px; flex: 1; min-width: 0; }
+  .sem-card .sc-name { font-size: 12px; font-weight: 600; color: var(--gpl-text-bold); margin-bottom: 3px; line-height: 1.4; word-break: break-word; }
+  .sem-card .sc-ref { font-size: 11px; color: var(--gpl-text-subtle); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; margin-bottom: 1px; }
+  .sem-card .sc-hex { font-size: 11px; color: var(--gpl-text-subtle); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+
+  .sem-sep { border: none; border-top: 1px solid var(--gpl-neutral-40); margin: 32px 0; }
+
+  /* Toast */
+  .gpl-toast {
+    position: fixed;
+    left: 50%; bottom: 32px;
+    transform: translate(-50%, 40px);
+    background: var(--gpl-neutral-900);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    box-shadow: 0 8px 24px rgba(9,30,66,.24);
+    opacity: 0;
+    transition: all .25s ease;
+    pointer-events: none;
+    z-index: 100;
+    white-space: nowrap;
+  }
+  .gpl-toast.show { opacity: 1; transform: translate(-50%, 0); }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Sidebar Navigation -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h1 class="logo">GPOS Lite</h1>
-                <p class="version">Design System V2.0</p>
-            </div>
+<div class="container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h1 class="logo">GPOS Lite</h1>
+      <p class="version">Design System V2.0</p>
+    </div>
+    <nav class="nav-menu">
+      <div class="nav-section">
+        <h3 class="nav-title">Foundations</h3>
+        <ul class="nav-list">
+          <li><a href="../index.html" class="nav-link">Home</a></li>
+          <li><a href="colors.html" class="nav-link" style="color:var(--color-primary-400);">Colors</a></li>
+          <li><a href="typography.html" class="nav-link">Typography</a></li>
+          <li><a href="spacing.html" class="nav-link">Spacing</a></li>
+          <li><a href="shadows.html" class="nav-link">Shadows</a></li>
+          <li><a href="borders.html" class="nav-link">Borders & Radius</a></li>
+          <li><a href="grid.html" class="nav-link">Grid & Layout</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <h3 class="nav-title">Components</h3>
+        <ul class="nav-list">
+          <li><a href="components.html" class="nav-link">Component Library</a></li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
 
-            <nav class="nav-menu">
-                <div class="nav-section">
-                    <h3 class="nav-title">Foundations</h3>
-                    <ul class="nav-list">
-                        <li><a href="../index.html" class="nav-link">Home</a></li>
-                        <li><a href="colors.html" class="nav-link" style="color: var(--color-primary-400);">Colors</a></li>
-                        <li><a href="typography.html" class="nav-link">Typography</a></li>
-                        <li><a href="spacing.html" class="nav-link">Spacing</a></li>
-                        <li><a href="shadows.html" class="nav-link">Shadows</a></li>
-                        <li><a href="borders.html" class="nav-link">Borders & Radius</a></li>
-                        <li><a href="grid.html" class="nav-link">Grid & Layout</a></li>
-                    </ul>
-                </div>
+  <!-- Main Content -->
+  <main class="main-content">
+    <header class="page-header">
+      <h1>Color System</h1>
+      <p class="subtitle">Palet GPOS Lite dikelompokkan menjadi 6 family — 5 warna chromatic dengan peran semantik dan 1 skala neutral. Setiap token sinkron dengan <code>GP Lite — Token.json</code>.</p>
+    </header>
 
-                <div class="nav-section">
-                    <h3 class="nav-title">Components</h3>
-                    <ul class="nav-list">
-                        <li><a href="components.html" class="nav-link">Component Library</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Header -->
-            <header class="page-header">
-                <h1>Color System</h1>
-                <p class="subtitle">Comprehensive color palette dengan semantic naming untuk konsistensi visual</p>
-            </header>
-
-            <!-- Color System Overview -->
-            <section>
-                <h2>Pengenalan Color System</h2>
-                <p>Sistem warna kami dibangun dengan 6 core color palettes dan grayscale yang komprehensif. Setiap warna memiliki 10 tingkat shade dari 50 (lightest) hingga 900 (darkest).</p>
-
-                <div class="guide-section">
-                    <h3>Struktur Naming</h3>
-                    <p>Format: <code>--color-[palette]-[shade]</code></p>
-                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
-                        <li><code>--color-primary-500</code> = Core primary color</li>
-                        <li><code>--color-primary-100</code> = Light variant untuk backgrounds</li>
-                        <li><code>--color-primary-900</code> = Dark variant untuk text/borders</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Primary Color -->
-            <section>
-                <h2>Primary Color</h2>
-                <p>Warna utama yang menjadi identitas brand. Gunakan untuk CTA, focus states, dan key interactions.</p>
-
-                <h3 style="margin-top: var(--spacing-8); margin-bottom: var(--spacing-4);">Color Palette</h3>
-                <div class="color-grid">
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-primary-50);"></div>
-                        <div class="color-name">Primary-50</div>
-                        <div class="color-value">#eef2ff</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-primary-100);"></div>
-                        <div class="color-name">Primary-100</div>
-                        <div class="color-value">#e0e7ff</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-primary-200);"></div>
-                        <div class="color-name">Primary-200</div>
-                        <div class="color-value">#c7d2fe</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-primary-300);"></div>
-                        <div class="color-name">Primary-300</div>
-                        <div class="color-value">#a5b4fc</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-primary-400);"></div>
-                        <div class="color-name">Primary-400</div>
-                        <div class="color-value">#818cf8</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-primary-500); border: 2px solid var(--color-primary-900);"></div>
-                        <div class="color-name"><strong>Primary-500</strong></div>
-                        <div class="color-value">#6366f1 (Core)</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-primary-600);"></div>
-                        <div class="color-name">Primary-600</div>
-                        <div class="color-value">#4f46e5</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-primary-700);"></div>
-                        <div class="color-name">Primary-700</div>
-                        <div class="color-value">#4338ca</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-primary-800);"></div>
-                        <div class="color-name">Primary-800</div>
-                        <div class="color-value">#3730a3</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-primary-900);"></div>
-                        <div class="color-name">Primary-900</div>
-                        <div class="color-value">#312e81</div>
-                    </div>
-                </div>
-
-                <div class="guide-section">
-                    <h3>✅ Usage Guidelines</h3>
-                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
-                        <li><strong>Primary-500:</strong> Button primary, links, focus states</li>
-                        <li><strong>Primary-600:</strong> Hover states untuk primary buttons</li>
-                        <li><strong>Primary-100:</strong> Background untuk highlighted content</li>
-                        <li><strong>Primary-50:</strong> Subtle background untuk notifications</li>
-                    </ul>
-                </div>
-
-                <div class="guide-section">
-                    <h3>❌ Don't Use</h3>
-                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
-                        <li>Jangan mix primary color dengan semantic colors (success, warning, error)</li>
-                        <li>Jangan gunakan primary-900 untuk backgrounds</li>
-                        <li>Jangan buat custom shade dari primary color</li>
-                    </ul>
-                </div>
-
-                <div class="guide-section">
-                    <h3>Code Examples</h3>
-                    <h4>Tailwind CSS:</h4>
-                    <pre><code>&lt;button class="bg-primary-500 text-white hover:bg-primary-600"&gt;
-  Primary Button
-&lt;/button&gt;</code></pre>
-
-                    <h4>CSS Variables:</h4>
-                    <pre><code>.button-primary {
-  background-color: var(--color-primary-500);
-  color: white;
-}
-
-.button-primary:hover {
-  background-color: var(--color-primary-600);
-}</code></pre>
-                </div>
-            </section>
-
-            <!-- Secondary Color -->
-            <section>
-                <h2>Secondary Color</h2>
-                <p>Warna pendamping untuk accents, secondary buttons, dan alternative interactions.</p>
-
-                <h3 style="margin-top: var(--spacing-8); margin-bottom: var(--spacing-4);">Color Palette</h3>
-                <div class="color-grid">
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-secondary-50);"></div>
-                        <div class="color-name">Secondary-50</div>
-                        <div class="color-value">#f5f3ff</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-secondary-100);"></div>
-                        <div class="color-name">Secondary-100</div>
-                        <div class="color-value">#ede9fe</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-secondary-200);"></div>
-                        <div class="color-name">Secondary-200</div>
-                        <div class="color-value">#ddd6fe</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-secondary-300);"></div>
-                        <div class="color-name">Secondary-300</div>
-                        <div class="color-value">#cab5fd</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-secondary-400);"></div>
-                        <div class="color-name">Secondary-400</div>
-                        <div class="color-value">#a78bfa</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-secondary-500); border: 2px solid var(--color-secondary-900);"></div>
-                        <div class="color-name"><strong>Secondary-500</strong></div>
-                        <div class="color-value">#a855f7 (Core)</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-secondary-600);"></div>
-                        <div class="color-name">Secondary-600</div>
-                        <div class="color-value">#9333ea</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-secondary-700);"></div>
-                        <div class="color-name">Secondary-700</div>
-                        <div class="color-value">#7e22ce</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-secondary-800);"></div>
-                        <div class="color-name">Secondary-800</div>
-                        <div class="color-value">#6b21a8</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-secondary-900);"></div>
-                        <div class="color-name">Secondary-900</div>
-                        <div class="color-value">#581c87</div>
-                    </div>
-                </div>
-
-                <div class="guide-section">
-                    <h3>✅ Usage Guidelines</h3>
-                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
-                        <li><strong>Secondary-500:</strong> Secondary buttons, accent elements</li>
-                        <li><strong>Secondary-100:</strong> Secondary backgrounds</li>
-                        <li>Gunakan untuk membedakan dari primary actions</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Semantic Colors -->
-            <section>
-                <h2>Semantic Colors</h2>
-                <p>Warna dengan makna semantik untuk status, feedback, dan messaging.</p>
-
-                <!-- Success -->
-                <h3 style="margin-top: var(--spacing-8); margin-bottom: var(--spacing-4);">Success Color</h3>
-                <div class="color-grid">
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-success-50);"></div>
-                        <div class="color-name">Success-50</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-success-100);"></div>
-                        <div class="color-name">Success-100</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-success-500); border: 2px solid var(--color-success-900);"></div>
-                        <div class="color-name"><strong>Success-500</strong></div>
-                        <div class="color-value">#22c55e</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-success-600);"></div>
-                        <div class="color-name">Success-600</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-success-700);"></div>
-                        <div class="color-name">Success-700</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-success-900);"></div>
-                        <div class="color-name">Success-900</div>
-                    </div>
-                </div>
-                <div class="guide-section">
-                    <h3>Usage: Success Messages, Confirmations, Positive Feedback</h3>
-                </div>
-
-                <!-- Warning -->
-                <h3 style="margin-top: var(--spacing-8); margin-bottom: var(--spacing-4);">Warning Color</h3>
-                <div class="color-grid">
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-warning-50);"></div>
-                        <div class="color-name">Warning-50</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-warning-100);"></div>
-                        <div class="color-name">Warning-100</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-warning-500); border: 2px solid var(--color-warning-900);"></div>
-                        <div class="color-name"><strong>Warning-500</strong></div>
-                        <div class="color-value">#f59e0b</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-warning-600);"></div>
-                        <div class="color-name">Warning-600</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-warning-700);"></div>
-                        <div class="color-name">Warning-700</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-warning-900);"></div>
-                        <div class="color-name">Warning-900</div>
-                    </div>
-                </div>
-                <div class="guide-section">
-                    <h3>Usage: Warnings, Cautions, Alerts</h3>
-                </div>
-
-                <!-- Error -->
-                <h3 style="margin-top: var(--spacing-8); margin-bottom: var(--spacing-4);">Error Color</h3>
-                <div class="color-grid">
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-error-50);"></div>
-                        <div class="color-name">Error-50</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-error-100);"></div>
-                        <div class="color-name">Error-100</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-error-500); border: 2px solid var(--color-error-900);"></div>
-                        <div class="color-name"><strong>Error-500</strong></div>
-                        <div class="color-value">#ef4444</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-error-600);"></div>
-                        <div class="color-name">Error-600</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-error-700);"></div>
-                        <div class="color-name">Error-700</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-error-900);"></div>
-                        <div class="color-name">Error-900</div>
-                    </div>
-                </div>
-                <div class="guide-section">
-                    <h3>Usage: Errors, Failures, Destructive Actions</h3>
-                </div>
-
-                <!-- Info -->
-                <h3 style="margin-top: var(--spacing-8); margin-bottom: var(--spacing-4);">Info Color</h3>
-                <div class="color-grid">
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-info-50);"></div>
-                        <div class="color-name">Info-50</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-info-100);"></div>
-                        <div class="color-name">Info-100</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-info-500); border: 2px solid var(--color-info-900);"></div>
-                        <div class="color-name"><strong>Info-500</strong></div>
-                        <div class="color-value">#0ea5e9</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-info-600);"></div>
-                        <div class="color-name">Info-600</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-info-700);"></div>
-                        <div class="color-name">Info-700</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-info-900);"></div>
-                        <div class="color-name">Info-900</div>
-                    </div>
-                </div>
-                <div class="guide-section">
-                    <h3>Usage: Informational Messages, Tips, Help Text</h3>
-                </div>
-            </section>
-
-            <!-- Grayscale -->
-            <section>
-                <h2>Grayscale Colors</h2>
-                <p>Skala abu-abu untuk text, borders, backgrounds, dan disabled states.</p>
-
-                <div class="color-grid">
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-gray-50);"></div>
-                        <div class="color-name">Gray-50</div>
-                        <div class="color-value">#f9fafb</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-gray-100);"></div>
-                        <div class="color-name">Gray-100</div>
-                        <div class="color-value">#f3f4f6</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-gray-200);"></div>
-                        <div class="color-name">Gray-200</div>
-                        <div class="color-value">#e5e7eb</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-gray-300); border: 2px solid var(--color-gray-600);"></div>
-                        <div class="color-name">Gray-300</div>
-                        <div class="color-value">#d1d5db</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-gray-400); border: 2px solid var(--color-gray-600);"></div>
-                        <div class="color-name">Gray-400</div>
-                        <div class="color-value">#9ca3af</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-gray-500); border: 2px solid white;"></div>
-                        <div class="color-name">Gray-500</div>
-                        <div class="color-value">#6b7280</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-gray-600); border: 2px solid white;"></div>
-                        <div class="color-name">Gray-600</div>
-                        <div class="color-value">#4b5563</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-gray-700); border: 2px solid white;"></div>
-                        <div class="color-name">Gray-700</div>
-                        <div class="color-value">#374151</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-gray-800); border: 2px solid white;"></div>
-                        <div class="color-name">Gray-800</div>
-                        <div class="color-value">#1f2937</div>
-                    </div>
-                    <div class="color-box">
-                        <div class="color-sample" style="background-color: var(--color-gray-900); border: 2px solid white;"></div>
-                        <div class="color-name">Gray-900</div>
-                        <div class="color-value">#111827</div>
-                    </div>
-                </div>
-
-                <div class="guide-section">
-                    <h3>✅ Usage Guidelines</h3>
-                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
-                        <li><strong>Gray-50 & 100:</strong> Backgrounds untuk cards, sections</li>
-                        <li><strong>Gray-200:</strong> Borders, dividers, subtle backgrounds</li>
-                        <li><strong>Gray-500:</strong> Secondary text, placeholders</li>
-                        <li><strong>Gray-700 & 800:</strong> Primary text untuk light backgrounds</li>
-                        <li><strong>Gray-900:</strong> Body text, headings untuk light backgrounds</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Accessibility -->
-            <section>
-                <h2>Accessibility & Contrast</h2>
-                <div class="guide-section">
-                    <h3>WCAG 2.1 AA Compliance</h3>
-                    <p>Semua kombinasi color pair dalam design system telah memenuhi WCAG 2.1 AA standards untuk contrast ratio (minimum 4.5:1 untuk normal text, 3:1 untuk large text).</p>
-                </div>
-
-                <div class="guide-section">
-                    <h3>✅ Approved Combinations</h3>
-                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
-                        <li>Primary-500 text on Gray-50 background ✓ 4.87:1</li>
-                        <li>Gray-700 text on Gray-50 background ✓ 7.21:1</li>
-                        <li>Gray-900 text on White background ✓ 19.6:1</li>
-                        <li>White text on Primary-600 background ✓ 6.41:1</li>
-                    </ul>
-                </div>
-
-                <div class="guide-section">
-                    <h3>❌ Not Recommended</h3>
-                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
-                        <li>Gray-400 text on Gray-100 background - insufficient contrast</li>
-                        <li>Primary-100 text on Gray-50 background - too light</li>
-                        <li>Color alone to convey status - selalu tambahkan icons atau text</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Footer -->
-            <footer class="page-footer">
-                <p>&copy; 2024 GPOS Lite Design System V 2.0 | Maintained with ❤️</p>
-            </footer>
-        </main>
+    <!-- Main Tabs -->
+    <div class="main-tab-bar" role="tablist">
+      <button class="main-tab-btn active" data-view="palette" role="tab" aria-selected="true">Color Palette</button>
+      <button class="main-tab-btn" data-view="semantic" role="tab" aria-selected="false">Semantic Tokens</button>
     </div>
 
-    <script src="../js/script.js"></script>
+    <!-- ======================== COLOR PALETTE VIEW ======================== -->
+    <div id="view-palette">
+      <!-- TOC -->
+      <div class="toc-bar" id="toc-bar"></div>
+      <!-- Sections rendered by JS -->
+      <div id="gpl-sections"></div>
+    </div>
+
+    <!-- ======================== SEMANTIC TOKENS VIEW ======================== -->
+    <div id="view-semantic" style="display:none">
+      <div id="sem-sections"></div>
+    </div>
+
+    <footer class="page-footer">
+      <p>&copy; 2024 GPOS Lite Design System V 2.0 | Maintained with ❤️</p>
+    </footer>
+  </main>
+</div>
+
+<div class="gpl-toast" id="gpl-toast"></div>
+
+<script src="../js/script.js"></script>
+<script>
+/* ============================================================
+   DATA: Color Palette Families
+   ============================================================ */
+const FAMILIES = [
+  {
+    id:"gpl-blue", name:"Blue", role:"Brand (Primary)",
+    dotColor:"#1E7FD6",
+    lead:"Warna utama brand. Gunakan untuk identitas, primary action, link, dan selected state.",
+    usage:["Primary button & CTA utama","Link dan item terpilih","Icon brand & permukaan kunci","Focus ring pada input"],
+    best:["Gunakan B300 sebagai warna brand default","B400 untuk hover, B500 untuk pressed","Pair background B50 dengan teks B300 pada tag"],
+    avoid:["Mencampur blue dengan warna primary lain","B100/B200 untuk body text","Dekorasi saja pada UI success/error"],
+    shades:[
+      { token:"B50",  hex:"#E9F2FB", tw:"bg-blue-50",  cssVar:"--color-blue-50"  },
+      { token:"B75",  hex:"#A3CBEE", tw:"bg-blue-75",  cssVar:"--color-blue-75"  },
+      { token:"B100", hex:"#7DB5E7", tw:"bg-blue-100", cssVar:"--color-blue-100" },
+      { token:"B200", hex:"#4495DD", tw:"bg-blue-200", cssVar:"--color-blue-200" },
+      { token:"B300", hex:"#1E7FD6", tw:"bg-blue-300", cssVar:"--color-blue-300" },
+      { token:"B400", hex:"#155996", tw:"bg-blue-400", cssVar:"--color-blue-400" },
+      { token:"B500", hex:"#124D83", tw:"bg-blue-500", cssVar:"--color-blue-500" }
+    ]
+  },
+  {
+    id:"gpl-orange", name:"Orange", role:"Warning (Secondary)",
+    dotColor:"#FF9015",
+    lead:"Warning dan highlight sekunder. Komunikasikan caution, status menunggu, atau atensi non-blocking.",
+    usage:["Warning banner & alert inline","State pending / menunggu aksi","Highlight sekunder & tag","Ikon caution"],
+    best:["Pakai O300 untuk teks/ikon warning","O200 untuk background warning bold","Pair background O50 dengan teks O300"],
+    avoid:["Memakai orange untuk aksi destruktif","Mencampur dengan red dalam satu alert","O75/O100 untuk body text"],
+    shades:[
+      { token:"O50",  hex:"#FFF4E8", tw:"bg-orange-50",  cssVar:"--color-orange-50"  },
+      { token:"O75",  hex:"#FFD19F", tw:"bg-orange-75",  cssVar:"--color-orange-75"  },
+      { token:"O100", hex:"#FFBF77", tw:"bg-orange-100", cssVar:"--color-orange-100" },
+      { token:"O200", hex:"#FFA33D", tw:"bg-orange-200", cssVar:"--color-orange-200" },
+      { token:"O300", hex:"#FF9015", tw:"bg-orange-300", cssVar:"--color-orange-300" },
+      { token:"O400", hex:"#B3650F", tw:"bg-orange-400", cssVar:"--color-orange-400" },
+      { token:"O500", hex:"#9C580D", tw:"bg-orange-500", cssVar:"--color-orange-500" }
+    ]
+  },
+  {
+    id:"gpl-red", name:"Red", role:"Danger",
+    dotColor:"#EC1C24",
+    lead:"Danger dan destructive state. Gunakan secukupnya agar tetap punya bobot atensi untuk error.",
+    usage:["Tombol destructive & konfirmasi","Validation error & teks error inline","Critical alert dan tag danger","Ikon danger"],
+    best:["Pakai R300 untuk teks/ikon danger & background bold","R400 hover, R500 pressed","Pair background R50 dengan teks R300 pada tag"],
+    avoid:["Memakai red untuk warning (pakai orange)","R75/R100 untuk body text","Mengombinasikan dengan green pada affordance sama"],
+    shades:[
+      { token:"R50",  hex:"#FDE8E9", tw:"bg-red-50",  cssVar:"--color-red-50"  },
+      { token:"R75",  hex:"#F7A2A5", tw:"bg-red-75",  cssVar:"--color-red-75"  },
+      { token:"R100", hex:"#F47B80", tw:"bg-red-100", cssVar:"--color-red-100" },
+      { token:"R200", hex:"#EF4349", tw:"bg-red-200", cssVar:"--color-red-200" },
+      { token:"R300", hex:"#EC1C24", tw:"bg-red-300", cssVar:"--color-red-300" },
+      { token:"R400", hex:"#A51419", tw:"bg-red-400", cssVar:"--color-red-400" },
+      { token:"R500", hex:"#901116", tw:"bg-red-500", cssVar:"--color-red-500" }
+    ]
+  },
+  {
+    id:"gpl-green", name:"Green", role:"Success",
+    dotColor:"#00AA5B",
+    lead:"Success dan konfirmasi positif. Komunikasikan state completed, available, atau online.",
+    usage:["Pesan sukses & toast konfirmasi","Indikator online / available","Delta nilai positif","Ikon success"],
+    best:["Pakai G300 untuk teks/ikon success & background bold","G400 untuk hover pada button success","Pair background G50 dengan teks G300 pada tag"],
+    avoid:["Memakai green untuk in-progress / loading","G75/G100 untuk body text","Mencampur dengan red pada permukaan sama"],
+    shades:[
+      { token:"G50",  hex:"#E6F7EF", tw:"bg-green-50",  cssVar:"--color-green-50"  },
+      { token:"G75",  hex:"#96DCBC", tw:"bg-green-75",  cssVar:"--color-green-75"  },
+      { token:"G100", hex:"#6BCEA0", tw:"bg-green-100", cssVar:"--color-green-100" },
+      { token:"G200", hex:"#2BB877", tw:"bg-green-200", cssVar:"--color-green-200" },
+      { token:"G300", hex:"#00AA5B", tw:"bg-green-300", cssVar:"--color-green-300" },
+      { token:"G400", hex:"#007740", tw:"bg-green-400", cssVar:"--color-green-400" },
+      { token:"G500", hex:"#006838", tw:"bg-green-500", cssVar:"--color-green-500" }
+    ]
+  },
+  {
+    id:"gpl-purple", name:"Purple", role:"Discovery",
+    dotColor:"#6E3EF6",
+    lead:"Discovery, beta, dan highlight fitur baru. Untuk permukaan informasional non-kritis yang ingin terasa novel.",
+    usage:["Badge fitur baru / beta","Permukaan AI & discovery","Highlight informasional","Ikon & tag discovery"],
+    best:["Pakai P300 untuk teks/ikon discovery & background bold","Pair background P50 dengan teks P300 pada tag","Khusus untuk novelty — bukan status"],
+    avoid:["Memakai purple untuk error atau warning","P75/P100 untuk body text","Mencampur dengan brand blue pada control sama"],
+    shades:[
+      { token:"P50",  hex:"#F1ECFE", tw:"bg-purple-50",  cssVar:"--color-purple-50"  },
+      { token:"P75",  hex:"#C4B0FB", tw:"bg-purple-75",  cssVar:"--color-purple-75"  },
+      { token:"P100", hex:"#AB8FFA", tw:"bg-purple-100", cssVar:"--color-purple-100" },
+      { token:"P200", hex:"#875FF8", tw:"bg-purple-200", cssVar:"--color-purple-200" },
+      { token:"P300", hex:"#6E3EF6", tw:"bg-purple-300", cssVar:"--color-purple-300" },
+      { token:"P400", hex:"#4D2BAC", tw:"bg-purple-400", cssVar:"--color-purple-400" },
+      { token:"P500", hex:"#432696", tw:"bg-purple-500", cssVar:"--color-purple-500" }
+    ]
+  },
+  {
+    id:"gpl-neutral", name:"Neutral", role:"Foundation",
+    dotColor:"#42526D",
+    lead:"Fondasi sistem — hirarki teks, border, divider, dan permukaan. Mayoritas UI memakai neutral.",
+    usage:["Teks body, heading, dan subtle","Permukaan, sunken layer, dan divider","Input, border, dan state disabled","Background bold untuk permukaan gelap"],
+    best:["Text: N900 (Bold) · N300 (Subtle) · N0 (Inverse)","Surface: N0 card di atas page N10/N20","Border: N40 default · N60 disabled icon"],
+    avoid:["Pure black (#000) — pakai N900","N50/N60 untuk body text (kontras rendah)","Mencampur terlalu banyak step neutral pada satu layar"],
+    shades:[
+      { token:"N0",   hex:"#FFFFFF", tw:"bg-neutral-0",   cssVar:"--color-neutral-0"   },
+      { token:"N10",  hex:"#FAFBFB", tw:"bg-neutral-10",  cssVar:"--color-neutral-10"  },
+      { token:"N20",  hex:"#F5F6F7", tw:"bg-neutral-20",  cssVar:"--color-neutral-20"  },
+      { token:"N30",  hex:"#EBEDF0", tw:"bg-neutral-30",  cssVar:"--color-neutral-30"  },
+      { token:"N40",  hex:"#DFE2E6", tw:"bg-neutral-40",  cssVar:"--color-neutral-40"  },
+      { token:"N50",  hex:"#C2C7D0", tw:"bg-neutral-50",  cssVar:"--color-neutral-50"  },
+      { token:"N60",  hex:"#B3B9C4", tw:"bg-neutral-60",  cssVar:"--color-neutral-60"  },
+      { token:"N70",  hex:"#A6AEBB", tw:"bg-neutral-70",  cssVar:"--color-neutral-70"  },
+      { token:"N80",  hex:"#98A1B0", tw:"bg-neutral-80",  cssVar:"--color-neutral-80"  },
+      { token:"N90",  hex:"#8993A4", tw:"bg-neutral-90",  cssVar:"--color-neutral-90"  },
+      { token:"N100", hex:"#7A8699", tw:"bg-neutral-100", cssVar:"--color-neutral-100" },
+      { token:"N200", hex:"#6B788E", tw:"bg-neutral-200", cssVar:"--color-neutral-200" },
+      { token:"N300", hex:"#5D6B82", tw:"bg-neutral-300", cssVar:"--color-neutral-300" },
+      { token:"N400", hex:"#505F79", tw:"bg-neutral-400", cssVar:"--color-neutral-400" },
+      { token:"N500", hex:"#42526D", tw:"bg-neutral-500", cssVar:"--color-neutral-500" },
+      { token:"N600", hex:"#354764", tw:"bg-neutral-600", cssVar:"--color-neutral-600" },
+      { token:"N700", hex:"#243757", tw:"bg-neutral-700", cssVar:"--color-neutral-700" },
+      { token:"N800", hex:"#15294B", tw:"bg-neutral-800", cssVar:"--color-neutral-800" },
+      { token:"N900", hex:"#091E42", tw:"bg-neutral-900", cssVar:"--color-neutral-900" }
+    ]
+  }
+];
+
+/* ============================================================
+   DATA: Semantic Tokens (dari GP Lite — Token.json)
+   ============================================================ */
+const SEMANTIC_GROUPS = [
+  {
+    id:"sem-background", name:"Background",
+    desc:"Token warna untuk permukaan, layer, dan elemen background di seluruh sistem.",
+    tokens:[
+      { name:"Background",              ref:"Color.Neutral.N20",  hex:"#F5F6F7",  cssVar:"--color-background"               },
+      { name:"Background/Disable",      ref:"Color.Neutral.N40",  hex:"#DFE2E6",  cssVar:"--color-background-disable"       },
+      { name:"Background/Information",  ref:"Color.Blue.B50",     hex:"#E9F2FB",  cssVar:"--color-background-information"   },
+      { name:"Background/Input",        ref:"Color.Neutral.N0",   hex:"#FFFFFF",  cssVar:"--color-background-input"         },
+      { name:"Background/Input/Hover",  ref:"Color.Neutral.N20",  hex:"#F5F6F7",  cssVar:"--color-background-input-hover"   },
+      { name:"Background/Input/Pressed",ref:"Color.Neutral.N0",   hex:"#FFFFFF",  cssVar:"--color-background-input-pressed" },
+      { name:"Background/Brand/Bold",   ref:"Color.Blue.B300",    hex:"#1E7FD6",  cssVar:"--color-background-brand-bold"    },
+      { name:"Background/Brand/Hover",  ref:"Color.Blue.B400",    hex:"#155996",  cssVar:"--color-background-brand-hover"   },
+      { name:"Background/Brand/Pressed",ref:"Color.Blue.B500",    hex:"#124D83",  cssVar:"--color-background-brand-pressed" },
+      { name:"Background/Selected",     ref:"Color.Blue.B50",     hex:"#E9F2FB",  cssVar:"--color-background-selected"      },
+      { name:"Background/Selected/Hover",ref:"Color.Blue.B400",   hex:"#155996",  cssVar:"--color-background-selected-hover"},
+      { name:"Background/Neutral",      ref:"Color.Neutral.N20",  hex:"#F5F6F7",  cssVar:"--color-background-neutral"       },
+      { name:"Background/Neutral/Subtle",ref:"Color.Neutral.N10", hex:"#FAFBFB",  cssVar:"--color-background-neutral-subtle"},
+      { name:"Background/Neutral/Hover",ref:"Color.Neutral.N20",  hex:"#F5F6F7",  cssVar:"--color-background-neutral-hover" },
+      { name:"Background/Neutral/Pressed",ref:"Color.Neutral.N40",hex:"#DFE2E6",  cssVar:"--color-background-neutral-pressed"},
+      { name:"Background/Neutral/Bold", ref:"Color.Neutral.N500", hex:"#42526D",  cssVar:"--color-background-neutral-bold"  },
+      { name:"Background/Neutral/Bold/Hover",ref:"Color.Neutral.N40",hex:"#DFE2E6",cssVar:"--color-background-neutral-bold-hover"},
+      { name:"Background/Neutral/Bold/Pressed",ref:"Color.Neutral.N60",hex:"#B3B9C4",cssVar:"--color-background-neutral-bold-pressed"},
+      { name:"Background/Bold/Hover",   ref:"Color.Neutral.N300", hex:"#5D6B82",  cssVar:"--color-background-bold-hover"    },
+      { name:"Background/Bold/Pressed", ref:"Color.Neutral.N700", hex:"#243757",  cssVar:"--color-background-bold-pressed"  },
+      { name:"Background/Success",      ref:"Color.Green.G50",    hex:"#E6F7EF",  cssVar:"--color-background-success"       },
+      { name:"Background/Success/Bold", ref:"Color.Green.G300",   hex:"#00AA5B",  cssVar:"--color-background-success-bold"  },
+      { name:"Background/Success/Bold/Hovered",ref:"Color.Green.G400",hex:"#007740",cssVar:"--color-background-success-bold-hovered"},
+      { name:"Background/Warning",      ref:"Color.Orange.O50",   hex:"#FFF4E8",  cssVar:"--color-background-warning"       },
+      { name:"Background/Warning/Bold", ref:"Color.Orange.O200",  hex:"#FFA33D",  cssVar:"--color-background-warning-bold"  },
+      { name:"Background/Warning/Pressed",ref:"Color.Orange.O400",hex:"#B3650F",  cssVar:"--color-background-warning-pressed"},
+      { name:"Background/Danger/Inverse",ref:"Color.Red.R50",     hex:"#FDE8E9",  cssVar:"--color-background-danger-inverse"},
+      { name:"Background/Danger/Bold",  ref:"Color.Red.R300",     hex:"#EC1C24",  cssVar:"--color-background-danger-bold"   },
+      { name:"Background/Danger/Button/Hover",ref:"Color.Red.R400",hex:"#A51419", cssVar:"--color-background-danger-btn-hover"},
+      { name:"Background/Danger/Pressed",ref:"Color.Red.R500",    hex:"#901116",  cssVar:"--color-background-danger-pressed"},
+      { name:"Background/Danger/Tag",   ref:"Color.Red.R50",      hex:"#FDE8E9",  cssVar:"--color-background-danger-tag"    },
+      { name:"Background/Danger/Tag/Hovered",ref:"Color.Red.R75", hex:"#F7A2A5",  cssVar:"--color-background-danger-tag-hover"},
+      { name:"Background/Discovery",    ref:"Color.Purple.P50",   hex:"#F1ECFE",  cssVar:"--color-background-discovery"     },
+      { name:"Background/Discovery/Bold",ref:"Color.Purple.P300", hex:"#6E3EF6",  cssVar:"--color-background-discovery-bold"},
+      { name:"Background/Select/Pressed",ref:"Color.Blue.B100",   hex:"#7DB5E7",  cssVar:"--color-background-select-pressed"},
+      { name:"Background/Accent/Blue/Subtlest",ref:"Color.Blue.B50",hex:"#E9F2FB",cssVar:"--color-background-accent-blue-subtlest"},
+      { name:"Background/Accent/Blue/Subtler",ref:"Color.Blue.B75",hex:"#A3CBEE", cssVar:"--color-background-accent-blue-subtler"},
+      { name:"Background/Accent/Blue/Subtle",ref:"Color.Blue.B200",hex:"#4495DD", cssVar:"--color-background-accent-blue-subtle"},
+      { name:"Background/Accent/Green/Subtlest",ref:"Color.Green.G50",hex:"#E6F7EF",cssVar:"--color-background-accent-green-subtlest"},
+      { name:"Background/Accent/Green/Subtler",ref:"Color.Green.G75",hex:"#96DCBC",cssVar:"--color-background-accent-green-subtler"},
+      { name:"Background/Accent/Green/Subtle",ref:"Color.Green.G100",hex:"#6BCEA0",cssVar:"--color-background-accent-green-subtle"},
+      { name:"Background/Accent/Yellow/Subtlest",ref:"Color.Orange.O50",hex:"#FFF4E8",cssVar:"--color-background-accent-yellow-subtlest"},
+      { name:"Background/Accent/Yellow/Subtler",ref:"Color.Orange.O75",hex:"#FFD19F",cssVar:"--color-background-accent-yellow-subtler"},
+      { name:"Background/Accent/Yellow/Subtle",ref:"Color.Orange.O100",hex:"#FFBF77",cssVar:"--color-background-accent-yellow-subtle"},
+      { name:"Background/Accent/Red/Subtlest",ref:"Color.Red.R50",hex:"#FDE8E9",   cssVar:"--color-background-accent-red-subtlest"},
+      { name:"Background/Accent/Red/Subtler",ref:"Color.Red.R75",hex:"#F7A2A5",    cssVar:"--color-background-accent-red-subtler"},
+      { name:"Background/Accent/Red/Subtle",ref:"Color.Red.R100",hex:"#F47B80",    cssVar:"--color-background-accent-red-subtle"},
+      { name:"Background/Accent/Purple/Subtlest",ref:"Color.Purple.P50",hex:"#F1ECFE",cssVar:"--color-background-accent-purple-subtlest"},
+      { name:"Background/Accent/Purple/Subtler",ref:"Color.Purple.P75",hex:"#C4B0FB",cssVar:"--color-background-accent-purple-subtler"},
+      { name:"Background/Accent/Purple/Subtle",ref:"Color.Purple.P100",hex:"#AB8FFA",cssVar:"--color-background-accent-purple-subtle"},
+      { name:"Background/Accent/Gray/Subtlest",ref:"Color.Neutral.N20",hex:"#F5F6F7",cssVar:"--color-background-accent-gray-subtlest"},
+      { name:"Background/Accent/Gray/Subtler",ref:"Color.Neutral.N40",hex:"#DFE2E6",cssVar:"--color-background-accent-gray-subtler"},
+      { name:"Background/Accent/Gray/Subtle",ref:"Color.Neutral.N70",hex:"#A6AEBB", cssVar:"--color-background-accent-gray-subtle"}
+    ]
+  },
+  {
+    id:"sem-text", name:"Text",
+    desc:"Token warna untuk teks di seluruh komponen dan layout.",
+    tokens:[
+      { name:"Text/Bold",            ref:"Color.Neutral.N900", hex:"#091E42", cssVar:"--color-text-bold"            },
+      { name:"Text/Subtle",          ref:"Color.Neutral.N300", hex:"#5D6B82", cssVar:"--color-text-subtle"          },
+      { name:"Text/Disabled",        ref:"Color.Neutral.N60",  hex:"#B3B9C4", cssVar:"--color-text-disabled"        },
+      { name:"Text/Inverse",         ref:"Color.Neutral.N0",   hex:"#FFFFFF", cssVar:"--color-text-inverse"         },
+      { name:"Text/Brand",           ref:"Color.Blue.B300",    hex:"#1E7FD6", cssVar:"--color-text-brand"           },
+      { name:"Text/Selected",        ref:"Color.Blue.B300",    hex:"#1E7FD6", cssVar:"--color-text-selected"        },
+      { name:"Text/Link",            ref:"Color.Blue.B300",    hex:"#1E7FD6", cssVar:"--color-text-link"            },
+      { name:"Text/Link/Pressed",    ref:"Color.Blue.B400",    hex:"#155996", cssVar:"--color-text-link-pressed"    },
+      { name:"Text/Success",         ref:"Color.Green.G300",   hex:"#00AA5B", cssVar:"--color-text-success"         },
+      { name:"Text/Danger",          ref:"Color.Red.R300",     hex:"#EC1C24", cssVar:"--color-text-danger"          },
+      { name:"Text/Warning",         ref:"Color.Orange.O300",  hex:"#FF9015", cssVar:"--color-text-warning"         },
+      { name:"Text/Warning/Inverse", ref:"Color.Neutral.N900", hex:"#091E42", cssVar:"--color-text-warning-inverse" },
+      { name:"Text/Discovery",       ref:"Color.Purple.P300",  hex:"#6E3EF6", cssVar:"--color-text-discovery"       },
+      { name:"Text/Accent/Purple",   ref:"Color.Purple.P500",  hex:"#432696", cssVar:"--color-text-accent-purple"   },
+      { name:"Text/Accent/Green",    ref:"Color.Green.G500",   hex:"#006838", cssVar:"--color-text-accent-green"    },
+      { name:"Text/Accent/Yellow",   ref:"Color.Orange.O500",  hex:"#9C580D", cssVar:"--color-text-accent-yellow"   },
+      { name:"Text/Accent/Red",      ref:"Color.Red.R500",     hex:"#901116", cssVar:"--color-text-accent-red"      }
+    ]
+  },
+  {
+    id:"sem-icon", name:"Icon",
+    desc:"Token warna untuk ikon di seluruh sistem.",
+    tokens:[
+      { name:"Icon/Bold",            ref:"Color.Neutral.N900", hex:"#091E42", cssVar:"--color-icon-bold"            },
+      { name:"Icon/Subtle",          ref:"Color.Neutral.N200", hex:"#6B788E", cssVar:"--color-icon-subtle"          },
+      { name:"Icon/Disable",         ref:"Color.Neutral.N70",  hex:"#A6AEBB", cssVar:"--color-icon-disable"         },
+      { name:"Icon/Inverse",         ref:"Color.Neutral.N0",   hex:"#FFFFFF", cssVar:"--color-icon-inverse"         },
+      { name:"Icon/Brand",           ref:"Color.Blue.B300",    hex:"#1E7FD6", cssVar:"--color-icon-brand"           },
+      { name:"Icon/Link",            ref:"Color.Blue.B300",    hex:"#1E7FD6", cssVar:"--color-icon-link"            },
+      { name:"Icon/Selected",        ref:"Color.Blue.B400",    hex:"#155996", cssVar:"--color-icon-selected"        },
+      { name:"Icon/Success",         ref:"Color.Green.G300",   hex:"#00AA5B", cssVar:"--color-icon-success"         },
+      { name:"Icon/Danger",          ref:"Color.Red.R300",     hex:"#EC1C24", cssVar:"--color-icon-danger"          },
+      { name:"Icon/Warning",         ref:"Color.Orange.O300",  hex:"#FF9015", cssVar:"--color-icon-warning"         },
+      { name:"Icon/Warning/Inverse", ref:"Color.Neutral.N800", hex:"#15294B", cssVar:"--color-icon-warning-inverse" },
+      { name:"Icon/Discovery",       ref:"Color.Purple.P300",  hex:"#6E3EF6", cssVar:"--color-icon-discovery"       }
+    ]
+  },
+  {
+    id:"sem-border", name:"Border",
+    desc:"Token warna untuk border dan garis pemisah.",
+    tokens:[
+      { name:"Border",         ref:"Color.Neutral.N40",  hex:"#DFE2E6", cssVar:"--color-border"          },
+      { name:"Border/Input",   ref:"Color.Neutral.N40",  hex:"#DFE2E6", cssVar:"--color-border-input"    },
+      { name:"Border/Focused", ref:"Color.Blue.B200",    hex:"#4495DD", cssVar:"--color-border-focused"  },
+      { name:"Border/Danger",  ref:"Color.Red.R200",     hex:"#EF4349", cssVar:"--color-border-danger"   }
+    ]
+  },
+  {
+    id:"sem-elevation", name:"Elevation",
+    desc:"Token warna untuk permukaan bertingkat (elevation / surface).",
+    tokens:[
+      { name:"Elevation/Surface",        ref:"Color.Neutral.N10", hex:"#FAFBFB", cssVar:"--color-elevation-surface"        },
+      { name:"Elevation/Surface/Sunken", ref:"Color.Neutral.N20", hex:"#F5F6F7", cssVar:"--color-elevation-surface-sunken" }
+    ]
+  },
+  {
+    id:"sem-notification", name:"Notification",
+    desc:"Token warna untuk notifikasi dan status online.",
+    tokens:[
+      { name:"Notification/Online",     ref:"Color.Green.G300",  hex:"#00AA5B", cssVar:"--color-notification-online"     },
+      { name:"Notification/Background", ref:"Color.Neutral.N0",  hex:"#FFFFFF", cssVar:"--color-notification-background" }
+    ]
+  }
+];
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+const toast = document.getElementById("gpl-toast");
+let toastTimer;
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove("show"), 1600);
+}
+function copyText(text) {
+  navigator.clipboard?.writeText(text);
+}
+
+/* ============================================================
+   RENDER: Color Palette
+   ============================================================ */
+function renderPalette() {
+  // TOC
+  const tocBar = document.getElementById("toc-bar");
+  tocBar.innerHTML = FAMILIES.map(f => `
+    <a href="#${f.id}">
+      <span class="toc-dot" style="background:${f.dotColor}"></span>${f.name}
+    </a>
+  `).join("");
+
+  // Sections
+  const container = document.getElementById("gpl-sections");
+  container.innerHTML = FAMILIES.map(f => {
+    const swatchCards = f.shades.map(s => `
+      <div class="swatch-card" data-hex="${s.hex}" title="Klik untuk copy ${s.hex}">
+        <div class="sw-block" style="background:${s.hex};"></div>
+        <div class="sw-info">
+          <div class="sw-name">${s.token}</div>
+          <div class="sw-hex">${s.hex}</div>
+        </div>
+      </div>
+    `).join("");
+
+    const twRows = f.shades.map(s => `
+      <div class="code-row" data-copy="${s.tw}">
+        <span class="cr-dot" style="background:${s.hex};border:1px solid rgba(9,30,66,.12)"></span>
+        <span class="cr-label">${s.token}</span>
+        <span class="cr-code">${s.tw}</span>
+        <button class="cr-copy">copy</button>
+      </div>
+    `).join("");
+
+    const cssRows = f.shades.map(s => `
+      <div class="code-row" data-copy="var(${s.cssVar})">
+        <span class="cr-dot" style="background:${s.hex};border:1px solid rgba(9,30,66,.12)"></span>
+        <span class="cr-label">${s.token}</span>
+        <span class="cr-code">var(${s.cssVar})</span>
+        <button class="cr-copy">copy</button>
+      </div>
+    `).join("");
+
+    return `
+      <section class="gpl-section" id="${f.id}">
+        <div class="gpl-section-head">
+          <div class="gpl-eyebrow">${f.shades.length} token</div>
+          <div class="gpl-title">
+            <h2>${f.name}</h2>
+            <span class="gpl-role-badge">${f.role}</span>
+          </div>
+          <p class="gpl-lead">${f.lead}</p>
+        </div>
+
+        <div class="gpl-info">
+          <div class="gpl-info-col">
+            <h4><span class="badge-dot" style="background:#1E7FD6"></span>Kapan Dipakai</h4>
+            <ul>${f.usage.map(x => `<li>${x}</li>`).join("")}</ul>
+          </div>
+          <div class="gpl-info-col">
+            <h4><span class="badge-dot" style="background:#00AA5B"></span>Best Practice</h4>
+            <ul>${f.best.map(x => `<li>${x}</li>`).join("")}</ul>
+          </div>
+          <div class="gpl-info-col">
+            <h4><span class="badge-dot" style="background:#EC1C24"></span>Hindari</h4>
+            <ul>${f.avoid.map(x => `<li>${x}</li>`).join("")}</ul>
+          </div>
+        </div>
+
+        <div class="swatch-row">${swatchCards}</div>
+
+        <div class="code-section">
+          <div class="code-panel">
+            <div class="code-panel-header">
+              <span class="cp-icon tw">TW</span>
+              <span class="cp-title">Tailwind</span>
+              <span class="cp-desc">Class utility untuk background</span>
+            </div>
+            <div class="code-panel-body">${twRows}</div>
+          </div>
+          <div class="code-panel">
+            <div class="code-panel-header">
+              <span class="cp-icon css">CSS</span>
+              <span class="cp-title">CSS Variable</span>
+              <span class="cp-desc">Gunakan via var()</span>
+            </div>
+            <div class="code-panel-body">${cssRows}</div>
+          </div>
+        </div>
+      </section>
+    `;
+  }).join("");
+
+  // Click on swatch card → copy hex
+  container.addEventListener("click", e => {
+    const card = e.target.closest(".swatch-card");
+    if (card) {
+      const hex = card.dataset.hex;
+      copyText(hex);
+      showToast(`Tersalin: ${hex}`);
+      return;
+    }
+    const codeRow = e.target.closest(".code-row");
+    if (codeRow) {
+      const text = codeRow.dataset.copy;
+      copyText(text);
+      showToast(`Tersalin: ${text}`);
+    }
+  });
+}
+
+/* ============================================================
+   RENDER: Semantic Tokens
+   ============================================================ */
+function renderSemantic() {
+  const container = document.getElementById("sem-sections");
+
+  container.innerHTML = SEMANTIC_GROUPS.map((group, gi) => {
+    const cards = group.tokens.map(t => `
+      <div class="sem-card" data-hex="${t.hex}" title="Klik copy ${t.hex}">
+        <div class="sc-swatch" style="background:${t.hex};border-right:1px solid rgba(9,30,66,.08)"></div>
+        <div class="sc-body">
+          <div class="sc-name">${t.name}</div>
+          <div class="sc-ref">${t.ref}</div>
+          <div class="sc-hex">${t.hex}</div>
+        </div>
+      </div>
+    `).join("");
+
+    return `
+      ${gi > 0 ? '<hr class="sem-sep">' : ''}
+      <div class="sem-group" id="${group.id}">
+        <div class="sem-group-title">${group.name}</div>
+        <p class="sem-group-desc">${group.desc}</p>
+        <div class="sem-grid">${cards}</div>
+      </div>
+    `;
+  }).join("");
+
+  // Click to copy hex
+  container.addEventListener("click", e => {
+    const card = e.target.closest(".sem-card");
+    if (card) {
+      const hex = card.dataset.hex;
+      copyText(hex);
+      showToast(`Tersalin: ${hex}`);
+    }
+  });
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+renderPalette();
+renderSemantic();
+
+// Main tab switching
+document.querySelectorAll(".main-tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const view = btn.dataset.view;
+    document.querySelectorAll(".main-tab-btn").forEach(b => {
+      b.classList.toggle("active", b === btn);
+      b.setAttribute("aria-selected", b === btn ? "true" : "false");
+    });
+    document.getElementById("view-palette").style.display = view === "palette" ? "" : "none";
+    document.getElementById("view-semantic").style.display = view === "semantic" ? "" : "none";
+  });
+});
+</script>
 </body>
 </html>
