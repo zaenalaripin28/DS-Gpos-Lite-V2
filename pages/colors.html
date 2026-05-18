@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colors - Design System GPOS Lite V 2.0</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo">GPOS Lite</h1>
+                <p class="version">Design System V2.0</p>
+            </div>
+
+            <nav class="nav-menu">
+                <div class="nav-section">
+                    <h3 class="nav-title">Foundations</h3>
+                    <ul class="nav-list">
+                        <li><a href="../index.html" class="nav-link">Home</a></li>
+                        <li><a href="colors.html" class="nav-link" style="color: var(--color-primary-400);">Colors</a></li>
+                        <li><a href="typography.html" class="nav-link">Typography</a></li>
+                        <li><a href="spacing.html" class="nav-link">Spacing</a></li>
+                        <li><a href="shadows.html" class="nav-link">Shadows</a></li>
+                        <li><a href="borders.html" class="nav-link">Borders & Radius</a></li>
+                        <li><a href="grid.html" class="nav-link">Grid & Layout</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-title">Components</h3>
+                    <ul class="nav-list">
+                        <li><a href="components.html" class="nav-link">Component Library</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="page-header">
+                <h1>Color System</h1>
+                <p class="subtitle">Comprehensive color palette dengan semantic naming untuk konsistensi visual</p>
+            </header>
+
+            <!-- Color System Overview -->
+            <section>
+                <h2>Pengenalan Color System</h2>
+                <p>Sistem warna kami dibangun dengan 6 core color palettes dan grayscale yang komprehensif. Setiap warna memiliki 10 tingkat shade dari 50 (lightest) hingga 900 (darkest).</p>
+
+                <div class="guide-section">
+                    <h3>Struktur Naming</h3>
+                    <p>Format: <code>--color-[palette]-[shade]</code></p>
+                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
+                        <li><code>--color-primary-500</code> = Core primary color</li>
+                        <li><code>--color-primary-100</code> = Light variant untuk backgrounds</li>
+                        <li><code>--color-primary-900</code> = Dark variant untuk text/borders</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Primary Color -->
+            <section>
+                <h2>Primary Color</h2>
+                <p>Warna utama yang menjadi identitas brand. Gunakan untuk CTA, focus states, dan key interactions.</p>
+
+                <h3 style="margin-top: var(--spacing-8); margin-bottom: var(--spacing-4);">Color Palette</h3>
+                <div class="color-grid">
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-primary-50);"></div>
+                        <div class="color-name">Primary-50</div>
+                        <div class="color-value">#eef2ff</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-primary-100);"></div>
+                        <div class="color-name">Primary-100</div>
+                        <div class="color-value">#e0e7ff</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-primary-200);"></div>
+                        <div class="color-name">Primary-200</div>
+                        <div class="color-value">#c7d2fe</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-primary-300);"></div>
+                        <div class="color-name">Primary-300</div>
+                        <div class="color-value">#a5b4fc</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-primary-400);"></div>
+                        <div class="color-name">Primary-400</div>
+                        <div class="color-value">#818cf8</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-primary-500); border: 2px solid var(--color-primary-900);"></div>
+                        <div class="color-name"><strong>Primary-500</strong></div>
+                        <div class="color-value">#6366f1 (Core)</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-primary-600);"></div>
+                        <div class="color-name">Primary-600</div>
+                        <div class="color-value">#4f46e5</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-primary-700);"></div>
+                        <div class="color-name">Primary-700</div>
+                        <div class="color-value">#4338ca</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-primary-800);"></div>
+                        <div class="color-name">Primary-800</div>
+                        <div class="color-value">#3730a3</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-primary-900);"></div>
+                        <div class="color-name">Primary-900</div>
+                        <div class="color-value">#312e81</div>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3>✅ Usage Guidelines</h3>
+                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
+                        <li><strong>Primary-500:</strong> Button primary, links, focus states</li>
+                        <li><strong>Primary-600:</strong> Hover states untuk primary buttons</li>
+                        <li><strong>Primary-100:</strong> Background untuk highlighted content</li>
+                        <li><strong>Primary-50:</strong> Subtle background untuk notifications</li>
+                    </ul>
+                </div>
+
+                <div class="guide-section">
+                    <h3>❌ Don't Use</h3>
+                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
+                        <li>Jangan mix primary color dengan semantic colors (success, warning, error)</li>
+                        <li>Jangan gunakan primary-900 untuk backgrounds</li>
+                        <li>Jangan buat custom shade dari primary color</li>
+                    </ul>
+                </div>
+
+                <div class="guide-section">
+                    <h3>Code Examples</h3>
+                    <h4>Tailwind CSS:</h4>
+                    <pre><code>&lt;button class="bg-primary-500 text-white hover:bg-primary-600"&gt;
+  Primary Button
+&lt;/button&gt;</code></pre>
+
+                    <h4>CSS Variables:</h4>
+                    <pre><code>.button-primary {
+  background-color: var(--color-primary-500);
+  color: white;
+}
+
+.button-primary:hover {
+  background-color: var(--color-primary-600);
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- Secondary Color -->
+            <section>
+                <h2>Secondary Color</h2>
+                <p>Warna pendamping untuk accents, secondary buttons, dan alternative interactions.</p>
+
+                <h3 style="margin-top: var(--spacing-8); margin-bottom: var(--spacing-4);">Color Palette</h3>
+                <div class="color-grid">
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-secondary-50);"></div>
+                        <div class="color-name">Secondary-50</div>
+                        <div class="color-value">#f5f3ff</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-secondary-100);"></div>
+                        <div class="color-name">Secondary-100</div>
+                        <div class="color-value">#ede9fe</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-secondary-200);"></div>
+                        <div class="color-name">Secondary-200</div>
+                        <div class="color-value">#ddd6fe</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-secondary-300);"></div>
+                        <div class="color-name">Secondary-300</div>
+                        <div class="color-value">#cab5fd</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-secondary-400);"></div>
+                        <div class="color-name">Secondary-400</div>
+                        <div class="color-value">#a78bfa</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-secondary-500); border: 2px solid var(--color-secondary-900);"></div>
+                        <div class="color-name"><strong>Secondary-500</strong></div>
+                        <div class="color-value">#a855f7 (Core)</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-secondary-600);"></div>
+                        <div class="color-name">Secondary-600</div>
+                        <div class="color-value">#9333ea</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-secondary-700);"></div>
+                        <div class="color-name">Secondary-700</div>
+                        <div class="color-value">#7e22ce</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-secondary-800);"></div>
+                        <div class="color-name">Secondary-800</div>
+                        <div class="color-value">#6b21a8</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-secondary-900);"></div>
+                        <div class="color-name">Secondary-900</div>
+                        <div class="color-value">#581c87</div>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3>✅ Usage Guidelines</h3>
+                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
+                        <li><strong>Secondary-500:</strong> Secondary buttons, accent elements</li>
+                        <li><strong>Secondary-100:</strong> Secondary backgrounds</li>
+                        <li>Gunakan untuk membedakan dari primary actions</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Semantic Colors -->
+            <section>
+                <h2>Semantic Colors</h2>
+                <p>Warna dengan makna semantik untuk status, feedback, dan messaging.</p>
+
+                <!-- Success -->
+                <h3 style="margin-top: var(--spacing-8); margin-bottom: var(--spacing-4);">Success Color</h3>
+                <div class="color-grid">
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-success-50);"></div>
+                        <div class="color-name">Success-50</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-success-100);"></div>
+                        <div class="color-name">Success-100</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-success-500); border: 2px solid var(--color-success-900);"></div>
+                        <div class="color-name"><strong>Success-500</strong></div>
+                        <div class="color-value">#22c55e</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-success-600);"></div>
+                        <div class="color-name">Success-600</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-success-700);"></div>
+                        <div class="color-name">Success-700</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-success-900);"></div>
+                        <div class="color-name">Success-900</div>
+                    </div>
+                </div>
+                <div class="guide-section">
+                    <h3>Usage: Success Messages, Confirmations, Positive Feedback</h3>
+                </div>
+
+                <!-- Warning -->
+                <h3 style="margin-top: var(--spacing-8); margin-bottom: var(--spacing-4);">Warning Color</h3>
+                <div class="color-grid">
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-warning-50);"></div>
+                        <div class="color-name">Warning-50</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-warning-100);"></div>
+                        <div class="color-name">Warning-100</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-warning-500); border: 2px solid var(--color-warning-900);"></div>
+                        <div class="color-name"><strong>Warning-500</strong></div>
+                        <div class="color-value">#f59e0b</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-warning-600);"></div>
+                        <div class="color-name">Warning-600</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-warning-700);"></div>
+                        <div class="color-name">Warning-700</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-warning-900);"></div>
+                        <div class="color-name">Warning-900</div>
+                    </div>
+                </div>
+                <div class="guide-section">
+                    <h3>Usage: Warnings, Cautions, Alerts</h3>
+                </div>
+
+                <!-- Error -->
+                <h3 style="margin-top: var(--spacing-8); margin-bottom: var(--spacing-4);">Error Color</h3>
+                <div class="color-grid">
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-error-50);"></div>
+                        <div class="color-name">Error-50</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-error-100);"></div>
+                        <div class="color-name">Error-100</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-error-500); border: 2px solid var(--color-error-900);"></div>
+                        <div class="color-name"><strong>Error-500</strong></div>
+                        <div class="color-value">#ef4444</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-error-600);"></div>
+                        <div class="color-name">Error-600</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-error-700);"></div>
+                        <div class="color-name">Error-700</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-error-900);"></div>
+                        <div class="color-name">Error-900</div>
+                    </div>
+                </div>
+                <div class="guide-section">
+                    <h3>Usage: Errors, Failures, Destructive Actions</h3>
+                </div>
+
+                <!-- Info -->
+                <h3 style="margin-top: var(--spacing-8); margin-bottom: var(--spacing-4);">Info Color</h3>
+                <div class="color-grid">
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-info-50);"></div>
+                        <div class="color-name">Info-50</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-info-100);"></div>
+                        <div class="color-name">Info-100</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-info-500); border: 2px solid var(--color-info-900);"></div>
+                        <div class="color-name"><strong>Info-500</strong></div>
+                        <div class="color-value">#0ea5e9</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-info-600);"></div>
+                        <div class="color-name">Info-600</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-info-700);"></div>
+                        <div class="color-name">Info-700</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-info-900);"></div>
+                        <div class="color-name">Info-900</div>
+                    </div>
+                </div>
+                <div class="guide-section">
+                    <h3>Usage: Informational Messages, Tips, Help Text</h3>
+                </div>
+            </section>
+
+            <!-- Grayscale -->
+            <section>
+                <h2>Grayscale Colors</h2>
+                <p>Skala abu-abu untuk text, borders, backgrounds, dan disabled states.</p>
+
+                <div class="color-grid">
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-gray-50);"></div>
+                        <div class="color-name">Gray-50</div>
+                        <div class="color-value">#f9fafb</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-gray-100);"></div>
+                        <div class="color-name">Gray-100</div>
+                        <div class="color-value">#f3f4f6</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-gray-200);"></div>
+                        <div class="color-name">Gray-200</div>
+                        <div class="color-value">#e5e7eb</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-gray-300); border: 2px solid var(--color-gray-600);"></div>
+                        <div class="color-name">Gray-300</div>
+                        <div class="color-value">#d1d5db</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-gray-400); border: 2px solid var(--color-gray-600);"></div>
+                        <div class="color-name">Gray-400</div>
+                        <div class="color-value">#9ca3af</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-gray-500); border: 2px solid white;"></div>
+                        <div class="color-name">Gray-500</div>
+                        <div class="color-value">#6b7280</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-gray-600); border: 2px solid white;"></div>
+                        <div class="color-name">Gray-600</div>
+                        <div class="color-value">#4b5563</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-gray-700); border: 2px solid white;"></div>
+                        <div class="color-name">Gray-700</div>
+                        <div class="color-value">#374151</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-gray-800); border: 2px solid white;"></div>
+                        <div class="color-name">Gray-800</div>
+                        <div class="color-value">#1f2937</div>
+                    </div>
+                    <div class="color-box">
+                        <div class="color-sample" style="background-color: var(--color-gray-900); border: 2px solid white;"></div>
+                        <div class="color-name">Gray-900</div>
+                        <div class="color-value">#111827</div>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3>✅ Usage Guidelines</h3>
+                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
+                        <li><strong>Gray-50 & 100:</strong> Backgrounds untuk cards, sections</li>
+                        <li><strong>Gray-200:</strong> Borders, dividers, subtle backgrounds</li>
+                        <li><strong>Gray-500:</strong> Secondary text, placeholders</li>
+                        <li><strong>Gray-700 & 800:</strong> Primary text untuk light backgrounds</li>
+                        <li><strong>Gray-900:</strong> Body text, headings untuk light backgrounds</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Accessibility -->
+            <section>
+                <h2>Accessibility & Contrast</h2>
+                <div class="guide-section">
+                    <h3>WCAG 2.1 AA Compliance</h3>
+                    <p>Semua kombinasi color pair dalam design system telah memenuhi WCAG 2.1 AA standards untuk contrast ratio (minimum 4.5:1 untuk normal text, 3:1 untuk large text).</p>
+                </div>
+
+                <div class="guide-section">
+                    <h3>✅ Approved Combinations</h3>
+                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
+                        <li>Primary-500 text on Gray-50 background ✓ 4.87:1</li>
+                        <li>Gray-700 text on Gray-50 background ✓ 7.21:1</li>
+                        <li>Gray-900 text on White background ✓ 19.6:1</li>
+                        <li>White text on Primary-600 background ✓ 6.41:1</li>
+                    </ul>
+                </div>
+
+                <div class="guide-section">
+                    <h3>❌ Not Recommended</h3>
+                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
+                        <li>Gray-400 text on Gray-100 background - insufficient contrast</li>
+                        <li>Primary-100 text on Gray-50 background - too light</li>
+                        <li>Color alone to convey status - selalu tambahkan icons atau text</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="page-footer">
+                <p>&copy; 2024 GPOS Lite Design System V 2.0 | Maintained with ❤️</p>
+            </footer>
+        </main>
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

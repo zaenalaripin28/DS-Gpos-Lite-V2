@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design System GPOS Lite V 2.0</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo">GPOS Lite</h1>
+                <p class="version">Design System V2.0</p>
+            </div>
+
+            <nav class="nav-menu">
+                <div class="nav-section">
+                    <h3 class="nav-title">Foundations</h3>
+                    <ul class="nav-list">
+                        <li><a href="pages/colors.html" class="nav-link">Colors</a></li>
+                        <li><a href="pages/typography.html" class="nav-link">Typography</a></li>
+                        <li><a href="pages/spacing.html" class="nav-link">Spacing</a></li>
+                        <li><a href="pages/shadows.html" class="nav-link">Shadows</a></li>
+                        <li><a href="pages/borders.html" class="nav-link">Borders & Radius</a></li>
+                        <li><a href="pages/grid.html" class="nav-link">Grid & Layout</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-title">Components</h3>
+                    <ul class="nav-list">
+                        <li><a href="pages/components.html" class="nav-link">Component Library</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-title">Resources</h3>
+                    <ul class="nav-list">
+                        <li><a href="#" class="nav-link">Tailwind Config</a></li>
+                        <li><a href="#" class="nav-link">GitHub Repo</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="page-header">
+                <h1>Design System GPOS Lite V 2.0</h1>
+                <p class="subtitle">Comprehensive design system documentation untuk konsistensi visual dan pengalaman pengguna</p>
+            </header>
+
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h2>Welcome to GPOS Lite Design System</h2>
+                    <p>Dokumentasi lengkap tentang design tokens, components, dan guidelines untuk membangun interface yang konsisten dan scalable.</p>
+                    <div class="cta-buttons">
+                        <a href="pages/colors.html" class="btn btn-primary">Mulai Explore</a>
+                        <a href="#" class="btn btn-secondary">View on GitHub</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Start -->
+            <section class="quick-start">
+                <h2>Quick Start</h2>
+                <div class="grid grid-3">
+                    <div class="card">
+                        <div class="card-icon">🎨</div>
+                        <h3>Colors</h3>
+                        <p>Pelajari palette warna lengkap, semantic colors, dan usage guidelines</p>
+                        <a href="pages/colors.html" class="card-link">Lihat Selengkapnya →</a>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">✏️</div>
+                        <h3>Typography</h3>
+                        <p>Font families, sizes, weights, dan line heights untuk berbagai use cases</p>
+                        <a href="pages/typography.html" class="card-link">Lihat Selengkapnya →</a>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">📐</div>
+                        <h3>Spacing</h3>
+                        <p>Spacing scale, margin, padding, dan gap untuk layout yang konsisten</p>
+                        <a href="pages/spacing.html" class="card-link">Lihat Selengkapnya →</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Design Tokens Overview -->
+            <section class="tokens-overview">
+                <h2>Design Tokens Overview</h2>
+                <p>Semua design tokens telah terdokumentasi dan siap untuk digunakan dalam project Anda.</p>
+
+                <div class="tokens-grid">
+                    <div class="token-item">
+                        <h4>Color System</h4>
+                        <p>12 warna primary, secondary, success, warning, error + grayscale</p>
+                        <code class="token-code">--color-primary-500: #6366f1</code>
+                    </div>
+                    <div class="token-item">
+                        <h4>Typography</h4>
+                        <p>3 font families, 8 size scales, weight options</p>
+                        <code class="token-code">--font-size-base: 1rem (16px)</code>
+                    </div>
+                    <div class="token-item">
+                        <h4>Spacing</h4>
+                        <p>12-step spacing scale dari 4px hingga 96px</p>
+                        <code class="token-code">--spacing-4: 1rem (16px)</code>
+                    </div>
+                    <div class="token-item">
+                        <h4>Shadows</h4>
+                        <p>6 elevation levels untuk depth dan hierarchy</p>
+                        <code class="token-code">--shadow-sm: 0 1px 2px rgba(...)</code>
+                    </div>
+                    <div class="token-item">
+                        <h4>Borders</h4>
+                        <p>Border widths, colors, dan border radius</p>
+                        <code class="token-code">--border-radius-md: 0.5rem (8px)</code>
+                    </div>
+                    <div class="token-item">
+                        <h4>Grid</h4>
+                        <p>12-column grid system dengan responsive breakpoints</p>
+                        <code class="token-code">--breakpoint-md: 768px</code>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Implementation Guide -->
+            <section class="implementation">
+                <h2>Implementation Guide</h2>
+
+                <div class="guide-section">
+                    <h3>1. Copy Tailwind Config</h3>
+                    <p>Gunakan <code>tailwind.config.js</code> yang telah dikonfigurasi dengan semua design tokens kami:</p>
+                    <pre><code>// tailwind.config.js
+module.exports = {
+  theme: {
+    colors: { ... },
+    spacing: { ... },
+    shadows: { ... },
+    // dan seterusnya
+  }
+}</code></pre>
+                </div>
+
+                <div class="guide-section">
+                    <h3>2. Use Tailwind Classes</h3>
+                    <p>Semua design tokens sudah menjadi Tailwind utilities. Copy class names langsung:</p>
+                    <pre><code>&lt;div class="bg-primary-500 text-white px-4 py-2 rounded-md shadow-md"&gt;
+  Button
+&lt;/div&gt;</code></pre>
+                </div>
+
+                <div class="guide-section">
+                    <h3>3. Reference CSS Variables</h3>
+                    <p>Atau gunakan CSS variables untuk custom styling:</p>
+                    <pre><code>.custom-element {
+  background-color: var(--color-primary-500);
+  padding: var(--spacing-4);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- Best Practices -->
+            <section class="best-practices">
+                <h2>Best Practices</h2>
+                <ul class="practices-list">
+                    <li>✅ Gunakan design tokens dari system kami, jangan hardcode nilai</li>
+                    <li>✅ Konsistenkan spacing menggunakan spacing scale kami (4px base unit)</li>
+                    <li>✅ Selalu gunakan semantic color naming (primary, success, error, etc)</li>
+                    <li>✅ Ikuti typography guidelines untuk readability dan hierarchy</li>
+                    <li>✅ Test responsive design pada semua breakpoints</li>
+                    <li>✅ Dokumentasikan component variant dan usage guidelines</li>
+                    <li>❌ Jangan hardcode warna, spacing, atau shadow values</li>
+                    <li>❌ Jangan buat custom color palette di luar design system</li>
+                    <li>❌ Jangan skip accessibility guidelines dalam component design</li>
+                </ul>
+            </section>
+
+            <!-- Footer -->
+            <footer class="page-footer">
+                <p>&copy; 2024 GPOS Lite Design System V 2.0 | Maintained with ❤️</p>
+            </footer>
+        </main>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

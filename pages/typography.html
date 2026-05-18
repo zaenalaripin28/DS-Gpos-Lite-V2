@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typography - Design System GPOS Lite V 2.0</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo">GPOS Lite</h1>
+                <p class="version">Design System V2.0</p>
+            </div>
+
+            <nav class="nav-menu">
+                <div class="nav-section">
+                    <h3 class="nav-title">Foundations</h3>
+                    <ul class="nav-list">
+                        <li><a href="../index.html" class="nav-link">Home</a></li>
+                        <li><a href="colors.html" class="nav-link">Colors</a></li>
+                        <li><a href="typography.html" class="nav-link" style="color: var(--color-primary-400);">Typography</a></li>
+                        <li><a href="spacing.html" class="nav-link">Spacing</a></li>
+                        <li><a href="shadows.html" class="nav-link">Shadows</a></li>
+                        <li><a href="borders.html" class="nav-link">Borders & Radius</a></li>
+                        <li><a href="grid.html" class="nav-link">Grid & Layout</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-title">Components</h3>
+                    <ul class="nav-list">
+                        <li><a href="components.html" class="nav-link">Component Library</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="page-header">
+                <h1>Typography</h1>
+                <p class="subtitle">Font families, sizes, weights, dan line heights untuk hierarchy dan readability</p>
+            </header>
+
+            <!-- Overview -->
+            <section>
+                <h2>Typography Principles</h2>
+                <div class="guide-section">
+                    <h3>Design Goals</h3>
+                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
+                        <li><strong>Clarity:</strong> Teks harus mudah dibaca di semua ukuran</li>
+                        <li><strong>Hierarchy:</strong> Ukuran, weight, dan color membedakan konten penting</li>
+                        <li><strong>Consistency:</strong> Gunakan hanya typography scale yang telah ditentukan</li>
+                        <li><strong>Accessibility:</strong> Minimum font size 14px untuk body text, contrast ratio memenuhi WCAG AA</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Font Families -->
+            <section>
+                <h2>Font Families</h2>
+
+                <div class="guide-section">
+                    <h3>Primary Font - System Stack</h3>
+                    <p><code>-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif</code></p>
+                    <p style="margin-bottom: var(--spacing-2); color: var(--color-text-secondary);">Gunakan untuk semua body text, labels, dan paragraf</p>
+                    <div style="padding: var(--spacing-4); background-color: white; border-radius: var(--border-radius-md); border: 1px solid var(--color-border-light);">
+                        <p style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; font-size: var(--font-size-lg);">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz 0123456789</p>
+                    </div>
+
+                    <div class="guide-section" style="margin-top: var(--spacing-6);">
+                        <h4>✅ Usage</h4>
+                        <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
+                            <li>Body text dan paragraf</li>
+                            <li>Labels dan form inputs</li>
+                            <li>Navigation dan menus</li>
+                            <li>Semua UI text kecuali special cases</li>
+                        </ul>
+                    </div>
+
+                    <div class="guide-section">
+                        <h4>Tailwind CSS Utilities</h4>
+                        <pre><code>&lt;p class="font-sans"&gt;Body text&lt;/p&gt;</code></pre>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3>Monospace Font</h3>
+                    <p><code>Courier New, monospace</code></p>
+                    <p style="margin-bottom: var(--spacing-2); color: var(--color-text-secondary);">Gunakan untuk code, technical content, dan fixed-width display</p>
+                    <div style="padding: var(--spacing-4); background-color: var(--color-gray-900); border-radius: var(--border-radius-md); color: #f8f8f2;">
+                        <code style="background: none; padding: 0; color: inherit; font-size: var(--font-size-base);">const greeting = "Hello World";</code>
+                    </div>
+
+                    <div class="guide-section" style="margin-top: var(--spacing-6);">
+                        <h4>✅ Usage</h4>
+                        <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
+                            <li>Code blocks dan snippets</li>
+                            <li>Variables dan technical terms</li>
+                            <li>IDs dan unique identifiers</li>
+                            <li>Console output</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Font Sizes -->
+            <section>
+                <h2>Font Sizes</h2>
+                <p>Skala 9 levels dari 12px hingga 48px dengan spacing yang konsisten.</p>
+
+                <div style="display: grid; gap: var(--spacing-4); margin-bottom: var(--spacing-8);">
+                    <!-- XS -->
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <p style="font-size: var(--font-size-xs); margin: 0; color: var(--color-text-primary);">Extra Small</p>
+                                <p style="font-size: var(--font-size-xs); margin: 0; color: var(--color-text-secondary);">--font-size-xs / 12px</p>
+                            </div>
+                            <code style="font-size: var(--font-size-xs);">text-xs</code>
+                        </div>
+                    </div>
+
+                    <!-- SM -->
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <p style="font-size: var(--font-size-sm); margin: 0; color: var(--color-text-primary);">Small</p>
+                                <p style="font-size: var(--font-size-xs); margin: 0; color: var(--color-text-secondary);">--font-size-sm / 14px</p>
+                            </div>
+                            <code style="font-size: var(--font-size-xs);">text-sm</code>
+                        </div>
+                    </div>
+
+                    <!-- Base -->
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <p style="font-size: var(--font-size-base); margin: 0; color: var(--color-text-primary);">Base</p>
+                                <p style="font-size: var(--font-size-xs); margin: 0; color: var(--color-text-secondary);">--font-size-base / 16px (default)</p>
+                            </div>
+                            <code style="font-size: var(--font-size-xs);">text-base</code>
+                        </div>
+                    </div>
+
+                    <!-- LG -->
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <p style="font-size: var(--font-size-lg); margin: 0; color: var(--color-text-primary);">Large</p>
+                                <p style="font-size: var(--font-size-xs); margin: 0; color: var(--color-text-secondary);">--font-size-lg / 18px</p>
+                            </div>
+                            <code style="font-size: var(--font-size-xs);">text-lg</code>
+                        </div>
+                    </div>
+
+                    <!-- XL -->
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <p style="font-size: var(--font-size-xl); margin: 0; color: var(--color-text-primary);">Extra Large</p>
+                                <p style="font-size: var(--font-size-xs); margin: 0; color: var(--color-text-secondary);">--font-size-xl / 20px</p>
+                            </div>
+                            <code style="font-size: var(--font-size-xs);">text-xl</code>
+                        </div>
+                    </div>
+
+                    <!-- 2XL -->
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <p style="font-size: var(--font-size-2xl); margin: 0; color: var(--color-text-primary);">2XL</p>
+                                <p style="font-size: var(--font-size-xs); margin: 0; color: var(--color-text-secondary);">--font-size-2xl / 24px</p>
+                            </div>
+                            <code style="font-size: var(--font-size-xs);">text-2xl</code>
+                        </div>
+                    </div>
+
+                    <!-- 3XL -->
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <p style="font-size: var(--font-size-3xl); margin: 0; color: var(--color-text-primary);">3XL</p>
+                                <p style="font-size: var(--font-size-xs); margin: 0; color: var(--color-text-secondary);">--font-size-3xl / 30px</p>
+                            </div>
+                            <code style="font-size: var(--font-size-xs);">text-3xl</code>
+                        </div>
+                    </div>
+
+                    <!-- 4XL -->
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <p style="font-size: var(--font-size-4xl); margin: 0; color: var(--color-text-primary);">4XL</p>
+                                <p style="font-size: var(--font-size-xs); margin: 0; color: var(--color-text-secondary);">--font-size-4xl / 36px</p>
+                            </div>
+                            <code style="font-size: var(--font-size-xs);">text-4xl</code>
+                        </div>
+                    </div>
+
+                    <!-- 5XL -->
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <p style="font-size: var(--font-size-5xl); margin: 0; color: var(--color-text-primary);">5XL</p>
+                                <p style="font-size: var(--font-size-xs); margin: 0; color: var(--color-text-secondary);">--font-size-5xl / 48px</p>
+                            </div>
+                            <code style="font-size: var(--font-size-xs);">text-5xl</code>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Font Weights -->
+            <section>
+                <h2>Font Weights</h2>
+
+                <div style="display: grid; gap: var(--spacing-4); margin-bottom: var(--spacing-8);">
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <p style="font-weight: 300; font-size: var(--font-size-lg); margin: 0;">Light (300) - --font-weight-light</p>
+                        <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin: 0;">Untuk text yang kurang penting atau subtle</p>
+                    </div>
+
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <p style="font-weight: 400; font-size: var(--font-size-lg); margin: 0;">Normal (400) - --font-weight-normal</p>
+                        <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin: 0;">Default weight untuk body text</p>
+                    </div>
+
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <p style="font-weight: 500; font-size: var(--font-size-lg); margin: 0;">Medium (500) - --font-weight-medium</p>
+                        <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin: 0;">Untuk labels dan secondary headings</p>
+                    </div>
+
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <p style="font-weight: 600; font-size: var(--font-size-lg); margin: 0;">Semibold (600) - --font-weight-semibold</p>
+                        <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin: 0;">Untuk subheadings dan emphasis</p>
+                    </div>
+
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <p style="font-weight: 700; font-size: var(--font-size-lg); margin: 0;">Bold (700) - --font-weight-bold</p>
+                        <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin: 0;">Untuk headings dan strong emphasis</p>
+                    </div>
+                </div>
+
+                <div class="guide-section">
+                    <h3>✅ Usage Guidelines</h3>
+                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
+                        <li><strong>H1-H6:</strong> Gunakan font-weight-bold (700)</li>
+                        <li><strong>Labels:</strong> Gunakan font-weight-medium (500)</li>
+                        <li><strong>Body text:</strong> Gunakan font-weight-normal (400)</li>
+                        <li><strong>Secondary text:</strong> Gunakan font-weight-normal (400) + gray-500 color</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Line Heights -->
+            <section>
+                <h2>Line Heights</h2>
+                <p>Spacing vertikal antara baris teks untuk readability yang optimal.</p>
+
+                <div style="display: grid; gap: var(--spacing-4); margin-bottom: var(--spacing-8);">
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <p style="line-height: 1.2; margin: 0;">Tight (1.2) - --line-height-tight<br>Gunakan untuk headings dan subheadings</p>
+                        <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: var(--spacing-2); margin-bottom: 0;">Cocok untuk text yang singkat dan besar</p>
+                    </div>
+
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <p style="line-height: 1.375; margin: 0;">Snug (1.375) - --line-height-snug<br>Good untuk smaller headings dan labels</p>
+                        <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: var(--spacing-2); margin-bottom: 0;">Balanced spacing untuk readability</p>
+                    </div>
+
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <p style="line-height: 1.5; margin: 0;">Normal (1.5) - --line-height-normal<br>Default untuk body text dan paragraf. Memberikan readability optimal.</p>
+                        <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: var(--spacing-2); margin-bottom: 0;">Recommended untuk kebanyakan use case</p>
+                    </div>
+
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <p style="line-height: 1.625; margin: 0;">Relaxed (1.625) - --line-height-relaxed<br>Untuk long-form content dan documentation.</p>
+                        <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: var(--spacing-2); margin-bottom: 0;">Extra spacing untuk ease of reading</p>
+                    </div>
+
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <p style="line-height: 2; margin: 0;">Loose (2) - --line-height-loose<br>Maximum spacing antara lines.</p>
+                        <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: var(--spacing-2); margin-bottom: 0;">Gunakan hanya untuk special cases</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Text Styles -->
+            <section>
+                <h2>Predefined Text Styles</h2>
+
+                <div class="guide-section">
+                    <h3>Heading Styles</h3>
+                    <pre><code>&lt;!-- H1 Styles --&gt;
+.text-h1 {
+  font-size: var(--font-size-4xl); /* 36px */
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+}
+
+&lt;!-- H2 Styles --&gt;
+.text-h2 {
+  font-size: var(--font-size-3xl); /* 30px */
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+}</code></pre>
+                </div>
+
+                <div class="guide-section">
+                    <h3>Body Text Styles</h3>
+                    <pre><code>&lt;!-- Body Large --&gt;
+.text-body-lg {
+  font-size: var(--font-size-lg); /* 18px */
+  line-height: var(--line-height-normal);
+}
+
+&lt;!-- Body Base (default) --&gt;
+.text-body-base {
+  font-size: var(--font-size-base); /* 16px */
+  line-height: var(--line-height-normal);
+}
+
+&lt;!-- Body Small --&gt;
+.text-body-sm {
+  font-size: var(--font-size-sm); /* 14px */
+  line-height: var(--line-height-normal);
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- Best Practices -->
+            <section>
+                <h2>Best Practices</h2>
+                <div class="guide-section">
+                    <h3>✅ Do</h3>
+                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
+                        <li>Gunakan scale yang telah ditentukan, jangan buat custom sizes</li>
+                        <li>Maintain font-size dan line-height yang sesuai untuk readability (minimum 14px untuk body)</li>
+                        <li>Gunakan semantic HTML tags (h1-h6, p, strong, em)</li>
+                        <li>Test readability pada dark dan light backgrounds</li>
+                        <li>Ensure contrast ratio memenuhi WCAG AA (4.5:1 untuk normal text)</li>
+                    </ul>
+                </div>
+
+                <div class="guide-section">
+                    <h3>❌ Don't</h3>
+                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
+                        <li>Jangan buat custom font sizes - gunakan scale yang ada</li>
+                        <li>Jangan gunakan font size kurang dari 12px untuk body text</li>
+                        <li>Jangan mix font families dalam single component</li>
+                        <li>Jangan gunakan text decoration lain dari underline untuk links</li>
+                        <li>Jangan skip line-height untuk readability</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="page-footer">
+                <p>&copy; 2024 GPOS Lite Design System V 2.0 | Maintained with ❤️</p>
+            </footer>
+        </main>
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>
