@@ -1,142 +1,54 @@
 // Design System GPOS Lite V 2.0
-// Enhanced JavaScript for interactive features
+// Interactive Features Script
 
 document.addEventListener('DOMContentLoaded', function () {
 
-  // ========================================
-  // Dark Mode Toggle
-  // ========================================
-  const DARK_KEY = 'gpos-theme';
-  const root = document.documentElement;
-  const darkModeToggle = document.getElementById('darkModeToggle');
-  const topbarTheme = document.getElementById('topbarTheme');
-  const toggleIcon = document.getElementById('toggleIcon');
-  const toggleLabel = document.getElementById('toggleLabel');
-
-  const sunIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
-  const moonIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
-  const moonIconSm = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
-  const sunIconSm = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
-
-  function applyTheme(isDark) {
-    if (isDark) {
-      root.setAttribute('data-theme', 'dark');
-      if (toggleIcon) toggleIcon.innerHTML = sunIcon;
-      if (toggleLabel) toggleLabel.textContent = 'Light Mode';
-      if (topbarTheme) topbarTheme.innerHTML = sunIconSm;
-    } else {
-      root.removeAttribute('data-theme');
-      if (toggleIcon) toggleIcon.innerHTML = moonIcon;
-      if (toggleLabel) toggleLabel.textContent = 'Dark Mode';
-      if (topbarTheme) topbarTheme.innerHTML = moonIconSm;
-    }
-  }
-
-  // Initialise from saved preference or system preference
-  const saved = localStorage.getItem(DARK_KEY);
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const isDark = saved !== null ? saved === 'dark' : prefersDark;
-  applyTheme(isDark);
-
-  function toggleTheme() {
-    const current = root.getAttribute('data-theme') === 'dark';
-    localStorage.setItem(DARK_KEY, current ? 'light' : 'dark');
-    applyTheme(!current);
-  }
-
-  if (darkModeToggle) darkModeToggle.addEventListener('click', toggleTheme);
-  if (topbarTheme) topbarTheme.addEventListener('click', toggleTheme);
-
-  // ========================================
-  // Mobile Sidebar Toggle
-  // ========================================
-  const sidebar = document.getElementById('sidebar');
-  const hamburger = document.getElementById('hamburger');
-  const sidebarClose = document.getElementById('sidebarClose');
-  const overlay = document.getElementById('sidebarOverlay');
+  // ================================================
+  // MOBILE SIDEBAR MENU
+  // ================================================
+  const sidebar         = document.getElementById('sidebar');
+  const overlay         = document.getElementById('sidebar-overlay');
+  const hamburgerBtn    = document.getElementById('hamburger-btn');
+  const sidebarCloseBtn = document.getElementById('sidebar-close');
 
   function openSidebar() {
-    sidebar.classList.add('open');
-    overlay.classList.add('active');
+    if (!sidebar) return;
+    sidebar.classList.add('mobile-open');
+    if (overlay) overlay.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
+
   function closeSidebar() {
-    sidebar.classList.remove('open');
-    overlay.classList.remove('active');
+    if (!sidebar) return;
+    sidebar.classList.remove('mobile-open');
+    if (overlay) overlay.classList.remove('active');
     document.body.style.overflow = '';
   }
 
-  if (hamburger) hamburger.addEventListener('click', openSidebar);
-  if (sidebarClose) sidebarClose.addEventListener('click', closeSidebar);
-  if (overlay) overlay.addEventListener('click', closeSidebar);
+  if (hamburgerBtn)    hamburgerBtn.addEventListener('click', openSidebar);
+  if (sidebarCloseBtn) sidebarCloseBtn.addEventListener('click', closeSidebar);
+  if (overlay)         overlay.addEventListener('click', closeSidebar);
 
-  // Close sidebar when clicking a nav link on mobile
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-      if (window.innerWidth < 768) closeSidebar();
-    });
+  // Close on Escape key
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeSidebar();
   });
 
-  // ========================================
-  // Desktop Sidebar Collapse Toggle
-  // ========================================
-  const SIDEBAR_KEY = 'gpos-sidebar';
-  const sidebarCollapseBtn = document.getElementById('sidebarCollapseBtn');
-  const sidebarReopenTab   = document.getElementById('sidebarReopenTab');
-
-  function applySidebarCollapse(isHidden) {
-    document.body.classList.toggle('sidebar-hidden', isHidden);
-  }
-
-  // Restore saved state (only on desktop)
-  if (window.innerWidth >= 769) {
-    const savedSidebar = localStorage.getItem(SIDEBAR_KEY);
-    if (savedSidebar === 'hidden') applySidebarCollapse(true);
-  }
-
-  function toggleSidebarCollapse() {
-    const isNowHidden = !document.body.classList.contains('sidebar-hidden');
-    applySidebarCollapse(isNowHidden);
-    localStorage.setItem(SIDEBAR_KEY, isNowHidden ? 'hidden' : 'visible');
-  }
-
-  if (sidebarCollapseBtn) sidebarCollapseBtn.addEventListener('click', toggleSidebarCollapse);
-  if (sidebarReopenTab)   sidebarReopenTab.addEventListener('click', toggleSidebarCollapse);
-
-  // ========================================
-  // Active Nav Link Highlight
-  // ========================================
+  // ================================================
+  // ACTIVE NAV LINK HIGHLIGHT
+  // ================================================
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-link').forEach(link => {
-    const href = link.getAttribute('href') || '';
-    const linkFile = href.split('/').pop();
-    if (linkFile === currentPath || (currentPath === '' && linkFile === 'index.html')) {
+  document.querySelectorAll('.nav-link').forEach(function (link) {
+    const href = (link.getAttribute('href') || '').split('/').pop();
+    if (href === currentPath) {
       link.classList.add('active');
     }
   });
 
-  // ========================================
-  // Scroll to Top Button
-  // ========================================
-  const scrollBtn = document.getElementById('scrollToTop');
-  if (scrollBtn) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 320) {
-        scrollBtn.classList.add('visible');
-      } else {
-        scrollBtn.classList.remove('visible');
-      }
-    }, { passive: true });
-
-    scrollBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-
-  // ========================================
-  // Smooth Scroll for Anchor Links
-  // ========================================
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  // ================================================
+  // SMOOTH SCROLL FOR ANCHOR LINKS
+  // ================================================
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {
       const target = document.querySelector(this.getAttribute('href'));
       if (target) {
@@ -146,119 +58,163 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // ========================================
-  // Copy Button for Code Blocks
-  // ========================================
-  document.querySelectorAll('pre code').forEach(block => {
-    const pre = block.parentElement;
-    pre.style.position = 'relative';
+  // ================================================
+  // COLOR BOX — COPY TO CLIPBOARD
+  // ================================================
+  document.querySelectorAll('.color-box').forEach(function (box) {
+    box.addEventListener('click', function () {
+      const valueEl = this.querySelector('.color-value');
+      if (!valueEl) return;
+      const colorValue = valueEl.textContent.trim();
+      navigator.clipboard.writeText(colorValue).then(function () {
+        const original = valueEl.textContent;
+        valueEl.textContent = '✓ Copied!';
+        setTimeout(function () { valueEl.textContent = original; }, 1600);
+      }).catch(function () {
+        // Fallback for older browsers
+        const ta = document.createElement('textarea');
+        ta.value = colorValue;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        const original = valueEl.textContent;
+        valueEl.textContent = '✓ Copied!';
+        setTimeout(function () { valueEl.textContent = original; }, 1600);
+      });
+    });
+  });
 
-    const btn = document.createElement('button');
-    btn.textContent = 'Copy';
-    btn.setAttribute('aria-label', 'Copy code');
-    btn.style.cssText = `
-      position: absolute; top: 10px; right: 10px;
-      padding: 4px 10px;
-      background: rgba(255,255,255,.1);
-      color: rgba(255,255,255,.75);
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 11px;
-      font-weight: 500;
-      font-family: inherit;
-      transition: all 150ms ease;
-    `;
-    btn.addEventListener('mouseenter', () => {
-      btn.style.background = 'rgba(255,255,255,.18)';
-      btn.style.color = 'white';
+  // ================================================
+  // CODE BLOCK — COPY BUTTON
+  // ================================================
+  document.querySelectorAll('pre code').forEach(function (block) {
+    const pre    = block.parentElement;
+    const button = document.createElement('button');
+
+    button.textContent = 'Copy';
+    button.className   = 'code-copy-btn';
+    button.style.cssText = [
+      'position:absolute',
+      'top:10px',
+      'right:10px',
+      'padding:3px 10px',
+      'background:rgba(255,255,255,0.1)',
+      'color:#94A3B8',
+      'border:1px solid rgba(255,255,255,0.15)',
+      'border-radius:6px',
+      'cursor:pointer',
+      'font-size:11px',
+      'font-weight:500',
+      'font-family:var(--font-primary)',
+      'transition:all 150ms ease',
+      'letter-spacing:0.02em',
+    ].join(';');
+
+    button.addEventListener('mouseenter', function () {
+      this.style.background = 'rgba(30,127,214,0.3)';
+      this.style.color       = '#7CC5FF';
+      this.style.borderColor = 'rgba(30,127,214,0.4)';
     });
-    btn.addEventListener('mouseleave', () => {
-      btn.style.background = 'rgba(255,255,255,.1)';
-      btn.style.color = 'rgba(255,255,255,.75)';
+    button.addEventListener('mouseleave', function () {
+      if (this.textContent !== '✓ Done!') {
+        this.style.background   = 'rgba(255,255,255,0.1)';
+        this.style.color        = '#94A3B8';
+        this.style.borderColor  = 'rgba(255,255,255,0.15)';
+      }
     });
-    btn.addEventListener('click', () => {
-      navigator.clipboard.writeText(block.textContent).then(() => {
-        btn.textContent = '✓ Copied';
-        btn.style.color = '#86efac';
+
+    button.addEventListener('click', function () {
+      const text = block.textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        button.textContent = '✓ Done!';
+        button.style.background   = 'rgba(34,197,94,0.2)';
+        button.style.color        = '#4ADE80';
+        button.style.borderColor  = 'rgba(34,197,94,0.3)';
         setTimeout(() => {
-          btn.textContent = 'Copy';
-          btn.style.color = 'rgba(255,255,255,.75)';
+          button.textContent = 'Copy';
+          button.style.background   = 'rgba(255,255,255,0.1)';
+          button.style.color        = '#94A3B8';
+          button.style.borderColor  = 'rgba(255,255,255,0.15)';
         }, 1800);
       });
     });
 
-    pre.appendChild(btn);
+    pre.style.position = 'relative';
+    pre.appendChild(button);
   });
 
-  // ========================================
-  // Color Box Click to Copy
-  // ========================================
-  document.querySelectorAll('.color-box').forEach(box => {
-    box.addEventListener('click', function () {
-      const valueEl = this.querySelector('.color-value');
-      if (!valueEl) return;
-      const colorValue = valueEl.textContent;
-      navigator.clipboard.writeText(colorValue).then(() => {
-        const orig = valueEl.textContent;
-        valueEl.textContent = 'Copied!';
-        setTimeout(() => { valueEl.textContent = orig; }, 1500);
-      });
-    });
-  });
-
-  // ========================================
-  // Table of Contents Generator
-  // ========================================
+  // ================================================
+  // TABLE OF CONTENTS (auto-generate if .toc exists)
+  // ================================================
   const tocContainer = document.querySelector('.toc');
   if (tocContainer) {
-    const headings = document.querySelectorAll('h2, h3');
-    const toc = document.createElement('ul');
-    toc.style.cssText = 'list-style:none; padding:0;';
+    const headings = document.querySelectorAll('.content-inner h2, .content-inner h3');
+    const toc      = document.createElement('ul');
+    toc.style.listStyle = 'none';
 
-    headings.forEach((heading, i) => {
-      heading.id = `heading-${i}`;
-      const li = document.createElement('li');
-      const a = document.createElement('a');
-      a.href = `#heading-${i}`;
-      a.textContent = heading.textContent;
-      if (heading.tagName === 'H3') li.style.paddingLeft = '16px';
-      li.appendChild(a);
+    headings.forEach(function (heading, i) {
+      heading.id = 'section-' + i;
+      const li   = document.createElement('li');
+      const link = document.createElement('a');
+      link.href        = '#section-' + i;
+      link.textContent = heading.textContent.replace(/^[│]?\s*/, '');
+      link.style.cssText = [
+        'color:var(--color-text-secondary)',
+        'font-size:var(--font-size-sm)',
+        'text-decoration:none',
+        'display:block',
+        'padding:3px 0',
+        'transition:color 150ms ease',
+      ].join(';');
+
+      if (heading.tagName === 'H3') {
+        li.style.paddingLeft = '16px';
+      }
+      li.appendChild(link);
       toc.appendChild(li);
     });
 
     if (headings.length > 0) tocContainer.appendChild(toc);
   }
 
-  // ========================================
-  // Entrance Animations (Intersection Observer)
-  // ========================================
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-          observer.unobserve(entry.target);
+  // ================================================
+  // SEARCH INPUT — Filter Nav Links (cosmetic)
+  // ================================================
+  const searchInput = document.querySelector('.search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', function () {
+      const query = this.value.toLowerCase().trim();
+      document.querySelectorAll('.nav-link').forEach(function (link) {
+        const text = link.textContent.toLowerCase();
+        const li   = link.parentElement;
+        if (query === '' || text.includes(query)) {
+          li.style.display = '';
+        } else {
+          li.style.display = 'none';
         }
       });
-    }, { threshold: 0.08 });
-
-    document.querySelectorAll('.card, .token-item, .guide-step, .practice-group, .stat-item').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(16px)';
-      el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
-      observer.observe(el);
+      // Show/hide section titles
+      document.querySelectorAll('.nav-section').forEach(function (section) {
+        const visible = Array.from(section.querySelectorAll('.nav-link'))
+          .some(function (l) { return l.parentElement.style.display !== 'none'; });
+        section.style.display = (query === '' || visible) ? '' : 'none';
+      });
     });
   }
 
 });
 
-// Utility: get CSS variable value
+// ================================================
+// UTILITY — Read CSS Variable Value
+// ================================================
 function getCSSVariableValue(varName) {
-  return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+  return getComputedStyle(document.documentElement)
+    .getPropertyValue(varName)
+    .trim();
 }
 
+// Export for module environments
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = { getCSSVariableValue };
 }

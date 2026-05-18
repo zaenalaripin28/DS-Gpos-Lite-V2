@@ -5,957 +5,250 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spacing - Design System GPOS Lite V 2.0</title>
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        darkMode: ['selector', '[data-theme="dark"]'],
-        theme: {
-          extend: {
-            colors: {
-              primary: {
-                50:  'var(--color-primary-50)',
-                100: 'var(--color-primary-100)',
-                200: 'var(--color-primary-200)',
-                300: 'var(--color-primary-300)',
-                400: 'var(--color-primary-400)',
-                500: 'var(--color-primary-500)',
-                600: 'var(--color-primary-600)',
-                700: 'var(--color-primary-700)',
-              },
-            },
-            fontFamily: {
-              sans: ['Inter', '-apple-system', 'sans-serif'],
-              mono: ['JetBrains Mono', 'monospace'],
-            },
-            spacing: {
-              'ds-1':  '4px',
-              'ds-2':  '8px',
-              'ds-3':  '12px',
-              'ds-4':  '16px',
-              'ds-5':  '20px',
-              'ds-6':  '24px',
-              'ds-8':  '32px',
-              'ds-10': '40px',
-              'ds-12': '48px',
-              'ds-16': '64px',
-            },
-          },
-        },
-      }
-    </script>
-    <style>
-      /* ─── Tailwind + CSS Variable bridge ───────────────────────────── */
-      .tw-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        padding: 2px 8px;
-        border-radius: var(--radius-full);
-        font-family: var(--font-mono);
-        font-size: 0.7rem;
-        font-weight: 500;
-        background-color: var(--color-primary-100);
-        color: var(--color-primary-700);
-        white-space: nowrap;
-      }
-      [data-theme="dark"] .tw-badge {
-        background-color: rgba(99,102,241,0.18);
-        color: var(--color-primary-300);
-      }
-
-      /* spacing scale bar */
-      .space-bar {
-        height: 10px;
-        border-radius: 3px;
-        background: linear-gradient(90deg, var(--color-primary-500), var(--color-secondary-500));
-        flex-shrink: 0;
-        transition: width 0.3s ease;
-      }
-
-      /* scale card */
-      .scale-card {
-        display: flex;
-        align-items: center;
-        gap: var(--spacing-4);
-        padding: var(--spacing-4) var(--spacing-6);
-        background-color: var(--bg-surface);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-lg);
-        transition: box-shadow var(--transition-base), border-color var(--transition-base), transform var(--transition-fast);
-      }
-      .scale-card:hover {
-        border-color: var(--color-primary-400);
-        box-shadow: var(--shadow-md);
-        transform: translateY(-1px);
-      }
-      [data-theme="dark"] .scale-card {
-        background-color: var(--bg-surface);
-      }
-
-      /* code block */
-      .code-block {
-        background-color: #0f172a;
-        border-radius: var(--radius-lg);
-        overflow: hidden;
-        font-family: var(--font-mono);
-        font-size: 0.8125rem;
-        line-height: 1.7;
-      }
-      .code-block-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px 16px;
-        background-color: #1e293b;
-        border-bottom: 1px solid #334155;
-      }
-      .code-block pre {
-        padding: 16px;
-        overflow-x: auto;
-        color: #e2e8f0;
-      }
-      .code-token-var   { color: #93c5fd; }
-      .code-token-value { color: #86efac; }
-      .code-token-comment { color: #64748b; font-style: italic; }
-      .code-token-prop  { color: #f9a8d4; }
-      .code-token-sel   { color: #fde68a; }
-
-      /* copy btn */
-      .copy-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-        padding: 4px 10px;
-        border-radius: var(--radius-md);
-        font-size: 0.72rem;
-        font-weight: 500;
-        cursor: pointer;
-        background: rgba(255,255,255,0.08);
-        color: #94a3b8;
-        border: 1px solid #334155;
-        transition: background var(--transition-fast), color var(--transition-fast);
-      }
-      .copy-btn:hover { background: rgba(99,102,241,0.25); color: #c7d2fe; }
-      .copy-btn.copied { color: #86efac; background: rgba(34,197,94,0.15); border-color: rgba(34,197,94,0.3); }
-
-      /* tab nav */
-      .tab-nav {
-        display: flex;
-        gap: 4px;
-        border-bottom: 2px solid var(--border);
-        margin-bottom: var(--spacing-6);
-      }
-      .tab-btn {
-        padding: var(--spacing-2) var(--spacing-4);
-        font-size: var(--font-size-sm);
-        font-weight: var(--font-weight-medium);
-        color: var(--text-2);
-        border: none;
-        background: transparent;
-        cursor: pointer;
-        border-bottom: 2px solid transparent;
-        margin-bottom: -2px;
-        border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-        transition: color var(--transition-fast), border-color var(--transition-fast);
-      }
-      .tab-btn.active { color: var(--color-primary-600); border-bottom-color: var(--color-primary-600); }
-      .tab-btn:hover:not(.active) { color: var(--text-1); background-color: var(--bg-subtle); }
-      .tab-pane { display: none; }
-      .tab-pane.active { display: block; }
-
-      /* visual demo blocks */
-      .demo-pad-wrap {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--spacing-4);
-      }
-      .demo-pad {
-        background-color: var(--bg-subtle);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-md);
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.7rem;
-        font-weight: 600;
-        color: var(--text-2);
-        font-family: var(--font-mono);
-        transition: transform var(--transition-fast);
-      }
-      .demo-pad:hover { transform: scale(1.04); }
-      .demo-pad-inner {
-        background-color: var(--color-primary-100);
-        border-radius: var(--radius-sm);
-        width: 24px;
-        height: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.6rem;
-        color: var(--color-primary-700);
-        font-weight: 700;
-      }
-      [data-theme="dark"] .demo-pad-inner {
-        background-color: rgba(99,102,241,0.2);
-        color: var(--color-primary-300);
-      }
-
-      /* do/dont cards */
-      .guide-do {
-        background-color: var(--color-success-50);
-        border: 1px solid #bbf7d0;
-        border-radius: var(--radius-lg);
-        padding: var(--spacing-6);
-      }
-      .guide-dont {
-        background-color: var(--color-error-50);
-        border: 1px solid #fecaca;
-        border-radius: var(--radius-lg);
-        padding: var(--spacing-6);
-      }
-      [data-theme="dark"] .guide-do {
-        background-color: rgba(34,197,94,0.07);
-        border-color: rgba(34,197,94,0.2);
-      }
-      [data-theme="dark"] .guide-dont {
-        background-color: rgba(239,68,68,0.07);
-        border-color: rgba(239,68,68,0.2);
-      }
-      .guide-do h3   { color: #16a34a; margin-bottom: var(--spacing-3); }
-      .guide-dont h3 { color: #dc2626; margin-bottom: var(--spacing-3); }
-      [data-theme="dark"] .guide-do h3   { color: #4ade80; }
-      [data-theme="dark"] .guide-dont h3 { color: #f87171; }
-
-      /* section chips */
-      .section-chip {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 4px 12px;
-        background-color: var(--color-primary-50);
-        color: var(--color-primary-600);
-        border-radius: var(--radius-full);
-        font-size: var(--font-size-xs);
-        font-weight: var(--font-weight-semibold);
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        margin-bottom: var(--spacing-3);
-      }
-      [data-theme="dark"] .section-chip {
-        background-color: rgba(99,102,241,0.15);
-        color: var(--color-primary-300);
-      }
-
-      /* table */
-      .spacing-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: var(--font-size-sm);
-      }
-      .spacing-table th {
-        text-align: left;
-        padding: var(--spacing-3) var(--spacing-4);
-        background-color: var(--bg-subtle);
-        font-weight: var(--font-weight-semibold);
-        color: var(--text-2);
-        font-size: var(--font-size-xs);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        border-bottom: 1px solid var(--border);
-      }
-      .spacing-table td {
-        padding: var(--spacing-3) var(--spacing-4);
-        border-bottom: 1px solid var(--border);
-        vertical-align: middle;
-        color: var(--text-1);
-      }
-      .spacing-table tr:last-child td { border-bottom: none; }
-      .spacing-table tr:hover td { background-color: var(--bg-subtle); }
-
-      /* responsive */
-      @media (max-width: 640px) {
-        .scale-card { padding: var(--spacing-3) var(--spacing-4); }
-        .space-bar   { max-width: calc(50vw - 80px); }
-        .demo-pad-wrap { gap: var(--spacing-3); }
-      }
-    </style>
 </head>
 <body>
-<!-- Mobile Overlay -->
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="container">
 
-<!-- Desktop re-open tab -->
-<button class="sidebar-reopen-tab" id="sidebarReopenTab" aria-label="Buka sidebar">
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
-</button>
+  <!-- Mobile overlay -->
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
-<div class="container">
-  <!-- Sidebar -->
-  <aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-      <div class="logo-wrap">
-        <div class="logo-icon">G</div>
-        <div>
-          <h1 class="logo">GPOS Lite</h1>
-          <p class="version">Design System V2.0</p>
+    <!-- ===================== SIDEBAR ===================== -->
+    <aside class="sidebar" id="sidebar">
+
+      <div class="sidebar-header">
+        <div class="sidebar-brand">
+          <div class="sidebar-logo-icon">GL</div>
+          <div class="sidebar-brand-text">
+            <div class="logo">GPOS Lite</div>
+            <div class="version">Design System V2.0</div>
+          </div>
+        </div>
+        <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">&#x2715;</button>
+      </div>
+
+      <div class="sidebar-search">
+        <input type="search" class="search-input" placeholder="&#x1F50D;  Cari token, component...">
+      </div>
+
+      <div class="nav-scroll">
+        <nav class="nav-menu">
+
+          <div class="nav-section">
+            <h3 class="nav-title">Overview</h3>
+            <ul class="nav-list">
+              <li>
+                <a href="../index.html" class="nav-link">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+                  Home
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="nav-section">
+            <h3 class="nav-title">Foundations</h3>
+            <ul class="nav-list">
+              <li><a href="colors.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg>Colors</a></li>
+              <li><a href="typography.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Typography</a></li>
+              <li><a href="spacing.html" class="nav-link  active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>Spacing</a></li>
+              <li><a href="shadows.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h12a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V7z" opacity="0.4"/></svg>Shadows</a></li>
+              <li><a href="borders.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>Borders &amp; Radius</a></li>
+              <li><a href="grid.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Grid &amp; Layout</a></li>
+            </ul>
+          </div>
+
+          <div class="nav-section">
+            <h3 class="nav-title">Components</h3>
+            <ul class="nav-list">
+              <li>
+                <a href="components.html" class="nav-link">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                  Component Library
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="nav-section">
+            <h3 class="nav-title">Resources</h3>
+            <ul class="nav-list">
+              <li>
+                <a href="../tailwind.config.js" class="nav-link" target="_blank">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16,18 22,12 16,6"/><polyline points="8,6 2,12 8,18"/></svg>
+                  Tailwind Config
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="nav-link" target="_blank">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                  GitHub Repo
+                </a>
+              </li>
+            </ul>
+          </div>
+
+        </nav>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="tailwind-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 6C9.33 6 7.67 7.33 7 10c1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35.98 1 2.09 2.15 4.59 2.15C19.67 12 21.33 10.67 22 8c-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C15.61 7.15 14.5 6 12 6zm-7 6c-2.67 0-4.33 1.33-5 4 1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35C6.39 17.15 7.5 18 10 18c2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C8.61 12.85 7.5 12 5 12z"/></svg>
+          Built with Tailwind CSS
         </div>
       </div>
-      <div class="sidebar-actions">
-        <button class="sidebar-collapse-btn" id="sidebarCollapseBtn" aria-label="Collapse sidebar" title="Collapse sidebar">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+
+    </aside>
+
+        
+
+        <main class="main-content">
+
+      <!-- Topbar -->
+      <div class="topbar">
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         </button>
-        <button class="sidebar-close" id="sidebarClose" aria-label="Tutup menu">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-        </button>
+        <div class="breadcrumb">
+          <a href="../index.html">Home</a><span class="breadcrumb-sep">/</span><a href="#">Foundations</a><span class="breadcrumb-sep">/</span><span class="current">Spacing</span>
+        </div>
+        <div class="topbar-actions">
+          <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="topbar-link" target="_blank">GitHub</a>
+          <span class="version-badge">v2.0</span>
+        </div>
       </div>
+      <div class="content-inner">
+            <header class="page-header">
+                <h1>Spacing System</h1>
+                <p class="subtitle">12-step spacing scale dengan 4px base unit untuk consistent rhythm dan alignment</p>
+            </header>
+
+            <section>
+                <h2>Spacing Scale</h2>
+                <p>Semua spacing value berbasis 4px unit untuk mathematical harmony dan consistency.</p>
+
+                <div style="display: grid; gap: var(--spacing-4); margin-bottom: var(--spacing-8);">
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <div style="display: flex; align-items: center; gap: var(--spacing-4);">
+                            <div style="width: 16px; height: 16px; background-color: var(--color-primary-500); border-radius: 2px;"></div>
+                            <div style="flex: 1;">
+                                <p style="margin: 0; font-weight: 500;">--spacing-1: 4px</p>
+                                <code style="font-size: var(--font-size-xs);">p-1, m-1, gap-1</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <div style="display: flex; align-items: center; gap: var(--spacing-4);">
+                            <div style="width: 32px; height: 16px; background-color: var(--color-primary-500); border-radius: 2px;"></div>
+                            <div style="flex: 1;">
+                                <p style="margin: 0; font-weight: 500;">--spacing-2: 8px</p>
+                                <code style="font-size: var(--font-size-xs);">p-2, m-2, gap-2</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <div style="display: flex; align-items: center; gap: var(--spacing-4);">
+                            <div style="width: 48px; height: 16px; background-color: var(--color-primary-500); border-radius: 2px;"></div>
+                            <div style="flex: 1;">
+                                <p style="margin: 0; font-weight: 500;">--spacing-3: 12px</p>
+                                <code style="font-size: var(--font-size-xs);">p-3, m-3, gap-3</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <div style="display: flex; align-items: center; gap: var(--spacing-4);">
+                            <div style="width: 64px; height: 16px; background-color: var(--color-primary-500); border-radius: 2px;"></div>
+                            <div style="flex: 1;">
+                                <p style="margin: 0; font-weight: 500;">--spacing-4: 16px</p>
+                                <code style="font-size: var(--font-size-xs);">p-4, m-4, gap-4</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <div style="display: flex; align-items: center; gap: var(--spacing-4);">
+                            <div style="width: 96px; height: 16px; background-color: var(--color-primary-500); border-radius: 2px;"></div>
+                            <div style="flex: 1;">
+                                <p style="margin: 0; font-weight: 500;">--spacing-6: 24px</p>
+                                <code style="font-size: var(--font-size-xs);">p-6, m-6, gap-6</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <div style="display: flex; align-items: center; gap: var(--spacing-4);">
+                            <div style="width: 128px; height: 16px; background-color: var(--color-primary-500); border-radius: 2px;"></div>
+                            <div style="flex: 1;">
+                                <p style="margin: 0; font-weight: 500;">--spacing-8: 32px</p>
+                                <code style="font-size: var(--font-size-xs);">p-8, m-8, gap-8</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <div style="display: flex; align-items: center; gap: var(--spacing-4);">
+                            <div style="width: 192px; height: 16px; background-color: var(--color-primary-500); border-radius: 2px;"></div>
+                            <div style="flex: 1;">
+                                <p style="margin: 0; font-weight: 500;">--spacing-12: 48px</p>
+                                <code style="font-size: var(--font-size-xs);">p-12, m-12, gap-12</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
+                        <div style="display: flex; align-items: center; gap: var(--spacing-4);">
+                            <div style="width: 256px; height: 16px; background-color: var(--color-primary-500); border-radius: 2px;"></div>
+                            <div style="flex: 1;">
+                                <p style="margin: 0; font-weight: 500;">--spacing-16: 64px</p>
+                                <code style="font-size: var(--font-size-xs);">p-16, m-16, gap-16</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Usage Guidelines</h2>
+
+                <div class="guide-section">
+                    <h3>✅ Do</h3>
+                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
+                        <li>Gunakan scale yang telah ditentukan untuk consistency</li>
+                        <li>Mulai dengan spacing-4 (16px) untuk default padding/margin</li>
+                        <li>Gunakan spacing-2 atau 3 untuk compact components</li>
+                        <li>Gunakan spacing-6 atau 8 untuk section spacing</li>
+                        <li>Maintain breathing room antara elements</li>
+                    </ul>
+                </div>
+
+                <div class="guide-section">
+                    <h3>Code Examples</h3>
+                    <pre><code>&lt;!-- Padding all sides --&gt;
+&lt;div class="p-4"&gt;Padded element&lt;/div&gt;
+
+&lt;!-- Margin bottom --&gt;
+&lt;p class="mb-4"&gt;Paragraph with bottom margin&lt;/p&gt;
+
+&lt;!-- Gap between flex items --&gt;
+&lt;div class="flex gap-4"&gt;
+  &lt;div&gt;Item 1&lt;/div&gt;
+  &lt;div&gt;Item 2&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+                </div>
+            </section>
+
+                    <footer class="page-footer">
+          <div class="footer-left">
+            &copy; 2026 <strong>GPOS Lite Design System V2.0</strong> &mdash; Maintained with &#x2764;&#xFE0F;
+          </div>
+          <div class="footer-right">
+            GitHub Pages
+          </div>
+        </footer>
+              </div><!-- /content-inner -->
+    </main>
     </div>
-
-    <nav class="nav-menu" role="navigation" aria-label="Navigasi utama">
-      <div class="nav-section">
-        <h3 class="nav-title">Foundations</h3>
-        <ul class="nav-list">
-          <li>
-            <a href="../index.html" class="nav-link">
-              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="colors.html" class="nav-link">
-              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a7 7 0 1 0 7 7"/></svg></span>
-              Colors
-            </a>
-          </li>
-          <li>
-            <a href="typography.html" class="nav-link">
-              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg></span>
-              Typography
-            </a>
-          </li>
-          <li>
-            <a href="spacing.html" class="nav-link active" aria-current="page">
-              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg></span>
-              Spacing
-            </a>
-          </li>
-          <li>
-            <a href="shadows.html" class="nav-link">
-              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg></span>
-              Shadows
-            </a>
-          </li>
-          <li>
-            <a href="borders.html" class="nav-link">
-              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="6"/></svg></span>
-              Borders &amp; Radius
-            </a>
-          </li>
-          <li>
-            <a href="grid.html" class="nav-link">
-              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>
-              Grid &amp; Layout
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div class="nav-section">
-        <h3 class="nav-title">Components</h3>
-        <ul class="nav-list">
-          <li>
-            <a href="components.html" class="nav-link">
-              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="6" height="6" rx="1"/><rect x="2" y="15" width="6" height="6" rx="1"/><rect x="14" y="3" width="8" height="6" rx="1"/><rect x="14" y="15" width="8" height="6" rx="1"/></svg></span>
-              Component Library
-            </a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <div class="sidebar-footer">
-      <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
-        <span class="toggle-icon" id="toggleIcon"></span>
-        <span id="toggleLabel">Dark Mode</span>
-      </button>
-    </div>
-  </aside>
-
-  <!-- Main Content -->
-  <main class="main-content" id="mainContent">
-    <!-- Mobile topbar -->
-    <div class="topbar" id="topbar">
-      <button class="hamburger" id="hamburger" aria-label="Buka menu">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      </button>
-      <span class="topbar-title">Spacing</span>
-      <button class="topbar-theme" id="topbarTheme" aria-label="Toggle theme"></button>
-    </div>
-
-    <!-- ─── Page Header ──────────────────────────────────────────── -->
-    <header class="page-header">
-      <div style="display:flex;align-items:center;gap:var(--spacing-3);flex-wrap:wrap;margin-bottom:var(--spacing-2);">
-        <span class="section-chip">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>
-          Foundation
-        </span>
-        <span class="tw-badge">Tailwind + CSS Variables</span>
-      </div>
-      <h1>Spacing System</h1>
-      <p class="subtitle">12-step spacing scale dengan <strong>4px base unit</strong> untuk consistent rhythm dan alignment — tersedia sebagai CSS Custom Properties maupun Tailwind utility classes.</p>
-
-      <!-- Stat pills -->
-      <div style="display:flex;flex-wrap:wrap;gap:var(--spacing-3);margin-top:var(--spacing-5);">
-        <div style="display:flex;align-items:center;gap:6px;padding:6px 14px;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-full);font-size:var(--font-size-sm);">
-          <span style="color:var(--color-primary-500);font-weight:700;">8</span>
-          <span style="color:var(--text-2);">Spacing steps</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:6px;padding:6px 14px;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-full);font-size:var(--font-size-sm);">
-          <span style="color:var(--color-secondary-500);font-weight:700;">4px</span>
-          <span style="color:var(--text-2);">Base unit</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:6px;padding:6px 14px;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-full);font-size:var(--font-size-sm);">
-          <span style="color:var(--color-success-500);font-weight:700;">4–64px</span>
-          <span style="color:var(--text-2);">Scale range</span>
-        </div>
-      </div>
-    </header>
-
-    <!-- ─── Section 1: Spacing Scale ────────────────────────────── -->
-    <section style="margin-bottom:var(--spacing-12);">
-      <div style="margin-bottom:var(--spacing-6);">
-        <span class="section-chip">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
-          Scale
-        </span>
-        <h2 style="margin-bottom:var(--spacing-2);">Spacing Scale</h2>
-        <p style="color:var(--text-2);font-size:var(--font-size-sm);">Semua spacing value berbasis 4px unit untuk mathematical harmony dan consistency. Setiap token tersedia sebagai CSS variable <em>dan</em> Tailwind class.</p>
-      </div>
-
-      <!-- Scale cards -->
-      <div style="display:flex;flex-direction:column;gap:var(--spacing-3);margin-bottom:var(--spacing-8);" id="scaleList">
-
-        <!-- 4px -->
-        <div class="scale-card">
-          <div class="space-bar" style="width:4px;" aria-hidden="true"></div>
-          <div style="min-width:56px;">
-            <p style="margin:0;font-weight:600;font-size:var(--font-size-sm);color:var(--text-1);">4px</p>
-            <p style="margin:0;font-size:0.68rem;color:var(--text-3);">0.25rem</p>
-          </div>
-          <div style="flex:1;min-width:0;">
-            <p style="margin:0;font-weight:500;font-size:var(--font-size-sm);font-family:var(--font-mono);color:var(--color-primary-600);">--spacing-1</p>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;">
-            <span class="tw-badge">p-1</span>
-            <span class="tw-badge">m-1</span>
-            <span class="tw-badge">gap-1</span>
-          </div>
-        </div>
-
-        <!-- 8px -->
-        <div class="scale-card">
-          <div class="space-bar" style="width:8px;" aria-hidden="true"></div>
-          <div style="min-width:56px;">
-            <p style="margin:0;font-weight:600;font-size:var(--font-size-sm);color:var(--text-1);">8px</p>
-            <p style="margin:0;font-size:0.68rem;color:var(--text-3);">0.5rem</p>
-          </div>
-          <div style="flex:1;min-width:0;">
-            <p style="margin:0;font-weight:500;font-size:var(--font-size-sm);font-family:var(--font-mono);color:var(--color-primary-600);">--spacing-2</p>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;">
-            <span class="tw-badge">p-2</span>
-            <span class="tw-badge">m-2</span>
-            <span class="tw-badge">gap-2</span>
-          </div>
-        </div>
-
-        <!-- 12px -->
-        <div class="scale-card">
-          <div class="space-bar" style="width:12px;" aria-hidden="true"></div>
-          <div style="min-width:56px;">
-            <p style="margin:0;font-weight:600;font-size:var(--font-size-sm);color:var(--text-1);">12px</p>
-            <p style="margin:0;font-size:0.68rem;color:var(--text-3);">0.75rem</p>
-          </div>
-          <div style="flex:1;min-width:0;">
-            <p style="margin:0;font-weight:500;font-size:var(--font-size-sm);font-family:var(--font-mono);color:var(--color-primary-600);">--spacing-3</p>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;">
-            <span class="tw-badge">p-3</span>
-            <span class="tw-badge">m-3</span>
-            <span class="tw-badge">gap-3</span>
-          </div>
-        </div>
-
-        <!-- 16px -->
-        <div class="scale-card" style="border-color:var(--color-primary-300);">
-          <div class="space-bar" style="width:16px;" aria-hidden="true"></div>
-          <div style="min-width:56px;">
-            <p style="margin:0;font-weight:700;font-size:var(--font-size-sm);color:var(--text-1);">16px</p>
-            <p style="margin:0;font-size:0.68rem;color:var(--text-3);">1rem</p>
-          </div>
-          <div style="flex:1;min-width:0;">
-            <p style="margin:0;font-weight:500;font-size:var(--font-size-sm);font-family:var(--font-mono);color:var(--color-primary-600);">--spacing-4</p>
-            <span style="font-size:0.65rem;background:var(--color-primary-100);color:var(--color-primary-700);padding:1px 6px;border-radius:var(--radius-full);font-weight:600;">Default</span>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;">
-            <span class="tw-badge">p-4</span>
-            <span class="tw-badge">m-4</span>
-            <span class="tw-badge">gap-4</span>
-          </div>
-        </div>
-
-        <!-- 24px -->
-        <div class="scale-card">
-          <div class="space-bar" style="width:24px;" aria-hidden="true"></div>
-          <div style="min-width:56px;">
-            <p style="margin:0;font-weight:600;font-size:var(--font-size-sm);color:var(--text-1);">24px</p>
-            <p style="margin:0;font-size:0.68rem;color:var(--text-3);">1.5rem</p>
-          </div>
-          <div style="flex:1;min-width:0;">
-            <p style="margin:0;font-weight:500;font-size:var(--font-size-sm);font-family:var(--font-mono);color:var(--color-primary-600);">--spacing-6</p>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;">
-            <span class="tw-badge">p-6</span>
-            <span class="tw-badge">m-6</span>
-            <span class="tw-badge">gap-6</span>
-          </div>
-        </div>
-
-        <!-- 32px -->
-        <div class="scale-card">
-          <div class="space-bar" style="width:32px;" aria-hidden="true"></div>
-          <div style="min-width:56px;">
-            <p style="margin:0;font-weight:600;font-size:var(--font-size-sm);color:var(--text-1);">32px</p>
-            <p style="margin:0;font-size:0.68rem;color:var(--text-3);">2rem</p>
-          </div>
-          <div style="flex:1;min-width:0;">
-            <p style="margin:0;font-weight:500;font-size:var(--font-size-sm);font-family:var(--font-mono);color:var(--color-primary-600);">--spacing-8</p>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;">
-            <span class="tw-badge">p-8</span>
-            <span class="tw-badge">m-8</span>
-            <span class="tw-badge">gap-8</span>
-          </div>
-        </div>
-
-        <!-- 48px -->
-        <div class="scale-card">
-          <div class="space-bar" style="width:48px;" aria-hidden="true"></div>
-          <div style="min-width:56px;">
-            <p style="margin:0;font-weight:600;font-size:var(--font-size-sm);color:var(--text-1);">48px</p>
-            <p style="margin:0;font-size:0.68rem;color:var(--text-3);">3rem</p>
-          </div>
-          <div style="flex:1;min-width:0;">
-            <p style="margin:0;font-weight:500;font-size:var(--font-size-sm);font-family:var(--font-mono);color:var(--color-primary-600);">--spacing-12</p>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;">
-            <span class="tw-badge">p-12</span>
-            <span class="tw-badge">m-12</span>
-            <span class="tw-badge">gap-12</span>
-          </div>
-        </div>
-
-        <!-- 64px -->
-        <div class="scale-card">
-          <div class="space-bar" style="width:64px;" aria-hidden="true"></div>
-          <div style="min-width:56px;">
-            <p style="margin:0;font-weight:600;font-size:var(--font-size-sm);color:var(--text-1);">64px</p>
-            <p style="margin:0;font-size:0.68rem;color:var(--text-3);">4rem</p>
-          </div>
-          <div style="flex:1;min-width:0;">
-            <p style="margin:0;font-weight:500;font-size:var(--font-size-sm);font-family:var(--font-mono);color:var(--color-primary-600);">--spacing-16</p>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;">
-            <span class="tw-badge">p-16</span>
-            <span class="tw-badge">m-16</span>
-            <span class="tw-badge">gap-16</span>
-          </div>
-        </div>
-
-      </div><!-- /scale cards -->
-
-      <!-- Full reference table -->
-      <details style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;">
-        <summary style="padding:var(--spacing-4) var(--spacing-6);font-weight:var(--font-weight-semibold);font-size:var(--font-size-sm);cursor:pointer;color:var(--text-1);list-style:none;display:flex;align-items:center;gap:var(--spacing-2);">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-          Full Reference Table
-        </summary>
-        <div style="overflow-x:auto;">
-          <table class="spacing-table">
-            <thead>
-              <tr>
-                <th>Token</th>
-                <th>px</th>
-                <th>rem</th>
-                <th>Tailwind (p)</th>
-                <th>Tailwind (m)</th>
-                <th>Tailwind (gap)</th>
-                <th>Use case</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><code style="font-family:var(--font-mono);color:var(--color-primary-600);font-size:var(--font-size-xs);">--spacing-1</code></td>
-                <td><strong>4px</strong></td><td>0.25rem</td>
-                <td><span class="tw-badge">p-1</span></td>
-                <td><span class="tw-badge">m-1</span></td>
-                <td><span class="tw-badge">gap-1</span></td>
-                <td style="color:var(--text-2);">Icon nudges, fine-tuning</td>
-              </tr>
-              <tr>
-                <td><code style="font-family:var(--font-mono);color:var(--color-primary-600);font-size:var(--font-size-xs);">--spacing-2</code></td>
-                <td><strong>8px</strong></td><td>0.5rem</td>
-                <td><span class="tw-badge">p-2</span></td>
-                <td><span class="tw-badge">m-2</span></td>
-                <td><span class="tw-badge">gap-2</span></td>
-                <td style="color:var(--text-2);">Tight labels, badges</td>
-              </tr>
-              <tr>
-                <td><code style="font-family:var(--font-mono);color:var(--color-primary-600);font-size:var(--font-size-xs);">--spacing-3</code></td>
-                <td><strong>12px</strong></td><td>0.75rem</td>
-                <td><span class="tw-badge">p-3</span></td>
-                <td><span class="tw-badge">m-3</span></td>
-                <td><span class="tw-badge">gap-3</span></td>
-                <td style="color:var(--text-2);">Compact buttons, inputs</td>
-              </tr>
-              <tr style="background:var(--color-primary-50);">
-                <td><code style="font-family:var(--font-mono);color:var(--color-primary-600);font-size:var(--font-size-xs);">--spacing-4</code></td>
-                <td><strong>16px</strong></td><td>1rem</td>
-                <td><span class="tw-badge">p-4</span></td>
-                <td><span class="tw-badge">m-4</span></td>
-                <td><span class="tw-badge">gap-4</span></td>
-                <td style="color:var(--text-2);">⭐ Default padding/margin</td>
-              </tr>
-              <tr>
-                <td><code style="font-family:var(--font-mono);color:var(--color-primary-600);font-size:var(--font-size-xs);">--spacing-5</code></td>
-                <td><strong>20px</strong></td><td>1.25rem</td>
-                <td><span class="tw-badge">p-5</span></td>
-                <td><span class="tw-badge">m-5</span></td>
-                <td><span class="tw-badge">gap-5</span></td>
-                <td style="color:var(--text-2);">Card padding (medium)</td>
-              </tr>
-              <tr>
-                <td><code style="font-family:var(--font-mono);color:var(--color-primary-600);font-size:var(--font-size-xs);">--spacing-6</code></td>
-                <td><strong>24px</strong></td><td>1.5rem</td>
-                <td><span class="tw-badge">p-6</span></td>
-                <td><span class="tw-badge">m-6</span></td>
-                <td><span class="tw-badge">gap-6</span></td>
-                <td style="color:var(--text-2);">Card padding, section gaps</td>
-              </tr>
-              <tr>
-                <td><code style="font-family:var(--font-mono);color:var(--color-primary-600);font-size:var(--font-size-xs);">--spacing-8</code></td>
-                <td><strong>32px</strong></td><td>2rem</td>
-                <td><span class="tw-badge">p-8</span></td>
-                <td><span class="tw-badge">m-8</span></td>
-                <td><span class="tw-badge">gap-8</span></td>
-                <td style="color:var(--text-2);">Section spacing</td>
-              </tr>
-              <tr>
-                <td><code style="font-family:var(--font-mono);color:var(--color-primary-600);font-size:var(--font-size-xs);">--spacing-10</code></td>
-                <td><strong>40px</strong></td><td>2.5rem</td>
-                <td><span class="tw-badge">p-10</span></td>
-                <td><span class="tw-badge">m-10</span></td>
-                <td><span class="tw-badge">gap-10</span></td>
-                <td style="color:var(--text-2);">Large section gaps</td>
-              </tr>
-              <tr>
-                <td><code style="font-family:var(--font-mono);color:var(--color-primary-600);font-size:var(--font-size-xs);">--spacing-12</code></td>
-                <td><strong>48px</strong></td><td>3rem</td>
-                <td><span class="tw-badge">p-12</span></td>
-                <td><span class="tw-badge">m-12</span></td>
-                <td><span class="tw-badge">gap-12</span></td>
-                <td style="color:var(--text-2);">Page sections</td>
-              </tr>
-              <tr>
-                <td><code style="font-family:var(--font-mono);color:var(--color-primary-600);font-size:var(--font-size-xs);">--spacing-16</code></td>
-                <td><strong>64px</strong></td><td>4rem</td>
-                <td><span class="tw-badge">p-16</span></td>
-                <td><span class="tw-badge">m-16</span></td>
-                <td><span class="tw-badge">gap-16</span></td>
-                <td style="color:var(--text-2);">Hero sections, headers</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-    </section>
-
-    <!-- ─── Section 2: CSS Variables Code ───────────────────────── -->
-    <section style="margin-bottom:var(--spacing-12);">
-      <div style="margin-bottom:var(--spacing-6);">
-        <span class="section-chip">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-          Code
-        </span>
-        <h2 style="margin-bottom:var(--spacing-2);">CSS Variables &amp; Tailwind</h2>
-        <p style="color:var(--text-2);font-size:var(--font-size-sm);">Gunakan token langsung via CSS Custom Properties atau melalui Tailwind utility classes. Keduanya mengacu pada nilai yang sama.</p>
-      </div>
-
-      <!-- Tabs -->
-      <div class="tab-nav" role="tablist">
-        <button class="tab-btn active" role="tab" aria-selected="true" data-tab="css-var">CSS Variables</button>
-        <button class="tab-btn" role="tab" aria-selected="false" data-tab="tailwind">Tailwind Config</button>
-        <button class="tab-btn" role="tab" aria-selected="false" data-tab="usage">Usage Examples</button>
-      </div>
-
-      <!-- CSS Variables pane -->
-      <div class="tab-pane active" id="tab-css-var">
-        <div class="code-block">
-          <div class="code-block-header">
-            <span style="color:#94a3b8;font-size:0.75rem;font-family:var(--font-mono);">styles.css — :root</span>
-            <button class="copy-btn" onclick="copyCode(this, 'code-css-var')">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-              Copy
-            </button>
-          </div>
-          <pre id="code-css-var"><code><span class="code-token-sel">:root</span> <span style="color:#e2e8f0;">{</span>
-  <span class="code-token-comment">/* ─── Spacing Scale (4px base) ───────────────── */</span>
-  <span class="code-token-prop">--spacing-1</span>:  <span class="code-token-value">0.25rem</span>;   <span class="code-token-comment">/* 4px  */</span>
-  <span class="code-token-prop">--spacing-2</span>:  <span class="code-token-value">0.5rem</span>;    <span class="code-token-comment">/* 8px  */</span>
-  <span class="code-token-prop">--spacing-3</span>:  <span class="code-token-value">0.75rem</span>;   <span class="code-token-comment">/* 12px */</span>
-  <span class="code-token-prop">--spacing-4</span>:  <span class="code-token-value">1rem</span>;      <span class="code-token-comment">/* 16px — default */</span>
-  <span class="code-token-prop">--spacing-5</span>:  <span class="code-token-value">1.25rem</span>;   <span class="code-token-comment">/* 20px */</span>
-  <span class="code-token-prop">--spacing-6</span>:  <span class="code-token-value">1.5rem</span>;    <span class="code-token-comment">/* 24px */</span>
-  <span class="code-token-prop">--spacing-8</span>:  <span class="code-token-value">2rem</span>;      <span class="code-token-comment">/* 32px */</span>
-  <span class="code-token-prop">--spacing-10</span>: <span class="code-token-value">2.5rem</span>;    <span class="code-token-comment">/* 40px */</span>
-  <span class="code-token-prop">--spacing-12</span>: <span class="code-token-value">3rem</span>;      <span class="code-token-comment">/* 48px */</span>
-  <span class="code-token-prop">--spacing-16</span>: <span class="code-token-value">4rem</span>;      <span class="code-token-comment">/* 64px */</span>
-  <span class="code-token-prop">--spacing-20</span>: <span class="code-token-value">5rem</span>;      <span class="code-token-comment">/* 80px */</span>
-  <span class="code-token-prop">--spacing-24</span>: <span class="code-token-value">6rem</span>;      <span class="code-token-comment">/* 96px */</span>
-<span style="color:#e2e8f0;">}</span></code></pre>
-        </div>
-      </div>
-
-      <!-- Tailwind pane -->
-      <div class="tab-pane" id="tab-tailwind">
-        <div class="code-block">
-          <div class="code-block-header">
-            <span style="color:#94a3b8;font-size:0.75rem;font-family:var(--font-mono);">tailwind.config.js</span>
-            <button class="copy-btn" onclick="copyCode(this, 'code-tailwind')">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-              Copy
-            </button>
-          </div>
-          <pre id="code-tailwind"><code><span class="code-token-comment">/** @type {import('tailwindcss').Config} */</span>
-<span style="color:#f8fafc;">module</span>.<span style="color:#f9a8d4;">exports</span> = <span style="color:#e2e8f0;">{</span>
-  <span class="code-token-prop">theme</span>: <span style="color:#e2e8f0;">{</span>
-    <span class="code-token-prop">extend</span>: <span style="color:#e2e8f0;">{</span>
-      <span class="code-token-prop">spacing</span>: <span style="color:#e2e8f0;">{</span>
-        <span class="code-token-comment">/* Maps Tailwind classes → CSS variables */</span>
-        <span class="code-token-var">'ds-1'</span>:  <span class="code-token-value">'var(--spacing-1)'</span>,   <span class="code-token-comment">/* 4px  */</span>
-        <span class="code-token-var">'ds-2'</span>:  <span class="code-token-value">'var(--spacing-2)'</span>,   <span class="code-token-comment">/* 8px  */</span>
-        <span class="code-token-var">'ds-3'</span>:  <span class="code-token-value">'var(--spacing-3)'</span>,   <span class="code-token-comment">/* 12px */</span>
-        <span class="code-token-var">'ds-4'</span>:  <span class="code-token-value">'var(--spacing-4)'</span>,   <span class="code-token-comment">/* 16px */</span>
-        <span class="code-token-var">'ds-6'</span>:  <span class="code-token-value">'var(--spacing-6)'</span>,   <span class="code-token-comment">/* 24px */</span>
-        <span class="code-token-var">'ds-8'</span>:  <span class="code-token-value">'var(--spacing-8)'</span>,   <span class="code-token-comment">/* 32px */</span>
-        <span class="code-token-var">'ds-12'</span>: <span class="code-token-value">'var(--spacing-12)'</span>,  <span class="code-token-comment">/* 48px */</span>
-        <span class="code-token-var">'ds-16'</span>: <span class="code-token-value">'var(--spacing-16)'</span>,  <span class="code-token-comment">/* 64px */</span>
-      <span style="color:#e2e8f0;">},</span>
-    <span style="color:#e2e8f0;">},</span>
-  <span style="color:#e2e8f0;">},</span>
-<span style="color:#e2e8f0;">}</span></code></pre>
-        </div>
-      </div>
-
-      <!-- Usage Examples pane -->
-      <div class="tab-pane" id="tab-usage">
-        <div class="code-block">
-          <div class="code-block-header">
-            <span style="color:#94a3b8;font-size:0.75rem;font-family:var(--font-mono);">HTML — Tailwind classes</span>
-            <button class="copy-btn" onclick="copyCode(this, 'code-usage')">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-              Copy
-            </button>
-          </div>
-          <pre id="code-usage"><code><span class="code-token-comment">&lt;!-- Padding all sides (16px) --&gt;</span>
-<span style="color:#f9a8d4;">&lt;div</span> <span class="code-token-var">class</span>=<span class="code-token-value">"p-4"</span><span style="color:#f9a8d4;">&gt;</span>Padded element<span style="color:#f9a8d4;">&lt;/div&gt;</span>
-
-<span class="code-token-comment">&lt;!-- Margin bottom (16px) --&gt;</span>
-<span style="color:#f9a8d4;">&lt;p</span> <span class="code-token-var">class</span>=<span class="code-token-value">"mb-4"</span><span style="color:#f9a8d4;">&gt;</span>Paragraph with bottom margin<span style="color:#f9a8d4;">&lt;/p&gt;</span>
-
-<span class="code-token-comment">&lt;!-- Gap between flex items (16px) --&gt;</span>
-<span style="color:#f9a8d4;">&lt;div</span> <span class="code-token-var">class</span>=<span class="code-token-value">"flex gap-4"</span><span style="color:#f9a8d4;">&gt;</span>
-  <span style="color:#f9a8d4;">&lt;div&gt;</span>Item 1<span style="color:#f9a8d4;">&lt;/div&gt;</span>
-  <span style="color:#f9a8d4;">&lt;div&gt;</span>Item 2<span style="color:#f9a8d4;">&lt;/div&gt;</span>
-<span style="color:#f9a8d4;">&lt;/div&gt;</span>
-
-<span class="code-token-comment">&lt;!-- Section layout with spacing --&gt;</span>
-<span style="color:#f9a8d4;">&lt;section</span> <span class="code-token-var">class</span>=<span class="code-token-value">"px-6 py-12 mb-8"</span><span style="color:#f9a8d4;">&gt;</span>
-  <span style="color:#f9a8d4;">&lt;h2</span> <span class="code-token-var">class</span>=<span class="code-token-value">"mb-4"</span><span style="color:#f9a8d4;">&gt;</span>Section Title<span style="color:#f9a8d4;">&lt;/h2&gt;</span>
-  <span style="color:#f9a8d4;">&lt;div</span> <span class="code-token-var">class</span>=<span class="code-token-value">"grid grid-cols-3 gap-6"</span><span style="color:#f9a8d4;">&gt;</span>...cards...<span style="color:#f9a8d4;">&lt;/div&gt;</span>
-<span style="color:#f9a8d4;">&lt;/section&gt;</span>
-
-<span class="code-token-comment">&lt;!-- CSS Variable syntax (plain CSS) --&gt;</span>
-<span style="color:#f9a8d4;">&lt;div</span> <span class="code-token-var">style</span>=<span class="code-token-value">"padding: var(--spacing-6); gap: var(--spacing-4);"</span><span style="color:#f9a8d4;">&gt;</span>
-  Vanilla CSS approach
-<span style="color:#f9a8d4;">&lt;/div&gt;</span></code></pre>
-        </div>
-      </div>
-    </section>
-
-    <!-- ─── Section 3: Visual Demo ───────────────────────────────── -->
-    <section style="margin-bottom:var(--spacing-12);">
-      <div style="margin-bottom:var(--spacing-6);">
-        <span class="section-chip">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-          Visual Demo
-        </span>
-        <h2 style="margin-bottom:var(--spacing-2);">Padding Visual Preview</h2>
-        <p style="color:var(--text-2);font-size:var(--font-size-sm);">Hover setiap kotak untuk melihat efek spacing. Ukuran padding ditunjukkan oleh ruang di luar elemen inner.</p>
-      </div>
-
-      <div class="demo-pad-wrap">
-        <div class="demo-pad" style="padding:4px;" title="p-1 — 4px">
-          <div class="demo-pad-inner">1</div>
-          <span style="display:block;text-align:center;margin-top:4px;font-size:0.6rem;padding:0 2px;">4px</span>
-        </div>
-        <div class="demo-pad" style="padding:8px;" title="p-2 — 8px">
-          <div class="demo-pad-inner">2</div>
-          <span style="display:block;text-align:center;margin-top:4px;font-size:0.6rem;padding:0 2px;">8px</span>
-        </div>
-        <div class="demo-pad" style="padding:12px;" title="p-3 — 12px">
-          <div class="demo-pad-inner">3</div>
-          <span style="display:block;text-align:center;margin-top:4px;font-size:0.6rem;padding:0 4px;">12px</span>
-        </div>
-        <div class="demo-pad" style="padding:16px;border-color:var(--color-primary-400);" title="p-4 — 16px (default)">
-          <div class="demo-pad-inner" style="background:var(--color-primary-500);color:#fff;">4</div>
-          <span style="display:block;text-align:center;margin-top:4px;font-size:0.6rem;padding:0 4px;color:var(--color-primary-600);">16px ★</span>
-        </div>
-        <div class="demo-pad" style="padding:24px;" title="p-6 — 24px">
-          <div class="demo-pad-inner">6</div>
-          <span style="display:block;text-align:center;margin-top:4px;font-size:0.6rem;padding:0 4px;">24px</span>
-        </div>
-        <div class="demo-pad" style="padding:32px;" title="p-8 — 32px">
-          <div class="demo-pad-inner">8</div>
-          <span style="display:block;text-align:center;margin-top:4px;font-size:0.6rem;padding:0 4px;">32px</span>
-        </div>
-        <div class="demo-pad" style="padding:48px;" title="p-12 — 48px">
-          <div class="demo-pad-inner">12</div>
-          <span style="display:block;text-align:center;margin-top:4px;font-size:0.6rem;padding:0 4px;">48px</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- ─── Section 4: Usage Guidelines ─────────────────────────── -->
-    <section style="margin-bottom:var(--spacing-12);">
-      <div style="margin-bottom:var(--spacing-6);">
-        <span class="section-chip">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-          Guidelines
-        </span>
-        <h2>Usage Guidelines</h2>
-      </div>
-
-      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:var(--spacing-4);margin-bottom:var(--spacing-6);">
-
-        <div class="guide-do">
-          <h3 style="font-size:var(--font-size-base);display:flex;align-items:center;gap:6px;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
-            Do
-          </h3>
-          <ul style="margin:0;padding-left:var(--spacing-5);font-size:var(--font-size-sm);color:var(--text-1);display:flex;flex-direction:column;gap:var(--spacing-2);">
-            <li>Gunakan scale yang telah ditentukan untuk consistency</li>
-            <li>Mulai dengan <code style="font-family:var(--font-mono);font-size:0.75em;">spacing-4</code> (16px) untuk default padding/margin</li>
-            <li>Gunakan <code style="font-family:var(--font-mono);font-size:0.75em;">spacing-2</code> atau <code style="font-family:var(--font-mono);font-size:0.75em;">spacing-3</code> untuk compact components</li>
-            <li>Gunakan <code style="font-family:var(--font-mono);font-size:0.75em;">spacing-6</code> atau <code style="font-family:var(--font-mono);font-size:0.75em;">spacing-8</code> untuk section spacing</li>
-            <li>Maintain breathing room antara elemen</li>
-          </ul>
-        </div>
-
-        <div class="guide-dont">
-          <h3 style="font-size:var(--font-size-base);display:flex;align-items:center;gap:6px;">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M15 9l-6 6M9 9l6 6"/></svg>
-            Don't
-          </h3>
-          <ul style="margin:0;padding-left:var(--spacing-5);font-size:var(--font-size-sm);color:var(--text-1);display:flex;flex-direction:column;gap:var(--spacing-2);">
-            <li>Jangan gunakan nilai spacing arbitrary (e.g. 7px, 13px)</li>
-            <li>Jangan campurkan unit yang berbeda (px, em, %) secara acak</li>
-            <li>Jangan abaikan hierarki spacing (kecil → dalam, besar → section)</li>
-            <li>Jangan gunakan hardcoded values bila token sudah tersedia</li>
-            <li>Jangan skip spacing step (misal langsung dari 8px ke 32px)</li>
-          </ul>
-        </div>
-
-      </div>
-
-      <!-- Contextual guide -->
-      <div style="background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:var(--spacing-6);">
-        <h3 style="margin-bottom:var(--spacing-4);font-size:var(--font-size-base);">Contextual Spacing Guide</h3>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:var(--spacing-4);">
-          <div style="display:flex;flex-direction:column;gap:var(--spacing-2);">
-            <p style="font-size:var(--font-size-xs);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-3);">Icons &amp; tight UI</p>
-            <div style="display:flex;flex-wrap:wrap;gap:4px;"><span class="tw-badge">spacing-1</span><span class="tw-badge">spacing-2</span></div>
-            <p style="font-size:var(--font-size-xs);color:var(--text-2);">Icon gaps, badge padding, fine nudges</p>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:var(--spacing-2);">
-            <p style="font-size:var(--font-size-xs);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-3);">Components</p>
-            <div style="display:flex;flex-wrap:wrap;gap:4px;"><span class="tw-badge">spacing-3</span><span class="tw-badge">spacing-4</span></div>
-            <p style="font-size:var(--font-size-xs);color:var(--text-2);">Buttons, inputs, list items</p>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:var(--spacing-2);">
-            <p style="font-size:var(--font-size-xs);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-3);">Cards &amp; Groups</p>
-            <div style="display:flex;flex-wrap:wrap;gap:4px;"><span class="tw-badge">spacing-5</span><span class="tw-badge">spacing-6</span></div>
-            <p style="font-size:var(--font-size-xs);color:var(--text-2);">Card padding, grouped items</p>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:var(--spacing-2);">
-            <p style="font-size:var(--font-size-xs);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-3);">Sections &amp; Page</p>
-            <div style="display:flex;flex-wrap:wrap;gap:4px;"><span class="tw-badge">spacing-8</span><span class="tw-badge">spacing-12</span><span class="tw-badge">spacing-16</span></div>
-            <p style="font-size:var(--font-size-xs);color:var(--text-2);">Page sections, hero areas</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="page-footer">
-      <p>&copy; 2024 GPOS Lite Design System V 2.0</p>
-    </footer>
-
-    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll ke atas">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
-    </button>
-  </main>
-</div><!-- /container -->
-
-<script src="../js/script.js"></script>
-<script>
-  /* ─── Tab switching ─────────────────────────────────────────── */
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const target = btn.dataset.tab;
-      document.querySelectorAll('.tab-btn').forEach(b => {
-        b.classList.toggle('active', b === btn);
-        b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
-      });
-      document.querySelectorAll('.tab-pane').forEach(p => {
-        p.classList.toggle('active', p.id === 'tab-' + target);
-      });
-    });
-  });
-
-  /* ─── Copy code ─────────────────────────────────────────────── */
-  function copyCode(btn, id) {
-    const el = document.getElementById(id);
-    const text = el ? el.innerText : '';
-    navigator.clipboard.writeText(text).then(() => {
-      btn.classList.add('copied');
-      btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Copied!`;
-      setTimeout(() => {
-        btn.classList.remove('copied');
-        btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy`;
-      }, 2000);
-    });
-  }
-
-  /* ─── Details arrow animation ──────────────────────────────── */
-  document.querySelectorAll('details').forEach(d => {
-    const arrow = d.querySelector('summary svg');
-    d.addEventListener('toggle', () => {
-      if (arrow) arrow.style.transform = d.open ? 'rotate(90deg)' : '';
-    });
-  });
-</script>
 </body>
 </html>
