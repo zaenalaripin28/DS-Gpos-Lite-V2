@@ -1,169 +1,1279 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shadows - Design System GPOS Lite V 2.0</title>
-    <link rel="stylesheet" href="../css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shadows - Design System GPOS Lite V 2.0</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+  /* ===== GPOS Lite Shadow CSS Variables ===== */
+  :root {
+    --shadow-none : none;
+    --shadow-sm   : 0 1px 2px rgba(0,0,0,.05);
+    --shadow-md   : 0 4px 6px rgba(0,0,0,.1), 0 2px 4px rgba(0,0,0,.06);
+    --shadow-lg   : 0 10px 15px rgba(0,0,0,.1), 0 4px 6px rgba(0,0,0,.05);
+    --shadow-xl   : 0 20px 25px rgba(0,0,0,.1), 0 10px 10px rgba(0,0,0,.04);
+    --shadow-2xl  : 0 25px 50px rgba(0,0,0,.25);
+  }
+
+  /* ===== Shadow page layout ===== */
+  .shadow-page-inner {
+    padding: 0 var(--spacing-10) var(--spacing-16);
+    max-width: 1200px;
+  }
+
+  /* ===== Shadow Hero Header ===== */
+  .shadow-hero {
+    margin: 0 var(--spacing-10) var(--spacing-6);
+    background: linear-gradient(135deg, #0f0c29 0%, #1a1040 40%, #24243e 100%);
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-10) var(--spacing-12);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-10);
+  }
+  .shadow-hero-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .shadow-hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.35;
+  }
+  .shadow-hero-orb-1 { width: 240px; height: 240px; background: #4D2BAC; top: -60px; right: 160px; }
+  .shadow-hero-orb-2 { width: 180px; height: 180px; background: #091E42; bottom: -40px; right: 50px; opacity:.6; }
+  .shadow-hero-orb-3 { width: 110px; height: 110px; background: #1E7FD6; top: 20px; right: 380px; opacity: 0.2; }
+  .shadow-hero-content { position: relative; z-index: 1; flex: 1; }
+  .shadow-hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,.1);
+    backdrop-filter: blur(4px);
+    color: rgba(255,255,255,.85);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    padding: 5px 12px;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255,255,255,.15);
+    margin-bottom: var(--spacing-4);
+  }
+  .shadow-hero h1 {
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    font-weight: 800;
+    color: white;
+    line-height: 1.1;
+    margin: 0 0 var(--spacing-3);
+    letter-spacing: -.025em;
+  }
+  .shadow-hero p {
+    color: rgba(255,255,255,.7);
+    font-size: 14px;
+    line-height: 1.65;
+    margin: 0;
+    max-width: 52ch;
+  }
+
+  /* Hero elevation stack preview */
+  .shadow-hero-preview {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+  }
+  .hero-shadow-card {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 12px;
+    padding: 10px 18px;
+    color: rgba(255,255,255,.75);
+    font-size: 11.5px;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    letter-spacing: .03em;
+    transition: transform .2s;
+    min-width: 160px;
+  }
+  .hero-shadow-card:hover { transform: translateX(-4px); }
+  .hero-shadow-card.hs-0  { box-shadow: none; }
+  .hero-shadow-card.hs-sm { box-shadow: 0 1px 2px rgba(0,0,0,.35); }
+  .hero-shadow-card.hs-md { box-shadow: 0 4px 8px rgba(0,0,0,.45), 0 2px 4px rgba(0,0,0,.3); }
+  .hero-shadow-card.hs-lg { box-shadow: 0 10px 20px rgba(0,0,0,.55), 0 4px 8px rgba(0,0,0,.3); }
+  .hero-shadow-card.hs-xl { box-shadow: 0 20px 30px rgba(0,0,0,.6), 0 10px 12px rgba(0,0,0,.35); }
+  .hero-shadow-card.hs-2xl{ box-shadow: 0 25px 50px rgba(0,0,0,.75); }
+
+  /* ===== Stats bar ===== */
+  .shadow-stats {
+    margin: 0 var(--spacing-10) var(--spacing-6);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .shadow-stat-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-4) var(--spacing-5);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
+  }
+  .shadow-stat-card:hover {
+    border-color: var(--color-primary-300);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+  }
+  .stat-icon-wrap {
+    width: 40px; height: 40px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+  }
+  .stat-num {
+    font-size: var(--font-size-xl);
+    font-weight: 800;
+    color: var(--text-1);
+    letter-spacing: -.02em;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .stat-lbl {
+    font-size: 11px;
+    color: var(--text-3);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+  }
+
+  /* ===== Main tabs ===== */
+  .main-tab-bar {
+    display: flex;
+    gap: 4px;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 4px;
+    width: fit-content;
+    margin-bottom: var(--spacing-8);
+  }
+  .main-tab-btn {
+    padding: 9px 22px;
+    border-radius: calc(var(--radius-lg) - 2px);
+    border: none;
+    background: transparent;
+    font: 600 13px/1 var(--font-sans);
+    cursor: pointer;
+    color: var(--text-3);
+    transition: all .15s;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .main-tab-btn.active {
+    background: var(--bg-surface);
+    color: var(--text-1);
+    box-shadow: 0 1px 4px rgba(0,0,0,.08), 0 0 0 1px rgba(0,0,0,.05);
+  }
+  .tab-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ===== TOC Chips ===== */
+  .toc-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: var(--spacing-8);
+  }
+  .toc-bar a {
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-1);
+    padding: 6px 13px;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border);
+    background: var(--bg-surface);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all .15s;
+    box-shadow: var(--shadow-sm);
+  }
+  .toc-bar a:hover {
+    border-color: var(--color-primary-300);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+    text-decoration: none;
+  }
+  .toc-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ===== Shadow Section ===== */
+  .gpl-section { padding: 40px 0; border-top: 1px solid var(--border); }
+  .gpl-section:first-of-type { border-top: none; padding-top: 0; }
+
+  .gpl-section-head { margin-bottom: var(--spacing-6); }
+  .gpl-eyebrow {
+    font-size: 11px; font-weight: 700; color: var(--text-3);
+    text-transform: uppercase; letter-spacing: .09em; margin-bottom: 6px;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .gpl-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 16px; height: 2px;
+    background: var(--color-primary-400);
+    border-radius: 2px;
+  }
+  .gpl-title { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+  .gpl-title h2 {
+    font-size: 28px; font-weight: 800; margin: 0;
+    color: var(--text-1); letter-spacing: -.02em;
+  }
+  .gpl-role-badge {
+    font-size: 11px; font-weight: 600; padding: 4px 10px;
+    border-radius: var(--radius-full);
+    background: var(--color-primary-50);
+    color: var(--color-primary-700);
+    border: 1px solid var(--color-primary-200);
+  }
+  [data-theme="dark"] .gpl-role-badge {
+    background: rgba(99,102,241,.1);
+    color: var(--color-primary-400);
+    border-color: rgba(99,102,241,.2);
+  }
+  .gpl-lead { font-size: 14px; color: var(--text-2); margin: 0; max-width: 70ch; line-height: 1.65; }
+
+  /* Info card grid */
+  .gpl-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-5);
+    margin: var(--spacing-5) 0 var(--spacing-6);
+    box-shadow: var(--shadow-sm);
+  }
+  @media(max-width: 860px) { .gpl-info { grid-template-columns: 1fr; } }
+  .gpl-info-col h4 {
+    margin: 0 0 10px;
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .07em;
+    display: flex; align-items: center; gap: 7px;
+    color: var(--text-1);
+  }
+  .gpl-info-col h4 .badge-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .gpl-info-col ul { margin: 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .gpl-info-col ul li {
+    font-size: 12.5px; color: var(--text-2); line-height: 1.5;
+    padding: 5px 10px;
+    background: var(--bg-subtle);
+    border-radius: var(--radius-md);
+    display: flex; align-items: flex-start; gap: 6px;
+  }
+  .gpl-info-col ul li::before { content: '·'; color: var(--text-3); flex-shrink: 0; font-size: 16px; line-height: 1.2; }
+
+  /* ===== Shadow Preview Card ===== */
+  .shadow-preview-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+    margin-bottom: var(--spacing-5);
+  }
+  .shadow-demo-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform .15s, border-color .15s;
+    user-select: none;
+  }
+  .shadow-demo-card:hover { transform: translateY(-3px) scale(1.02); border-color: rgba(99,102,241,.25); }
+  .shadow-demo-card:active { transform: scale(.97); }
+
+  .sdemo-preview {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-subtle);
+    padding: var(--spacing-4);
+  }
+  .sdemo-box {
+    width: 70px; height: 70px;
+    border-radius: 12px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    transition: box-shadow .3s;
+  }
+
+  .sdemo-info { padding: 10px 12px 12px; }
+  .sdemo-name {
+    font-size: 12px; font-weight: 700; color: var(--text-1);
+    margin-bottom: 2px;
+  }
+  .sdemo-token {
+    font-size: 10.5px; color: var(--text-3);
+    font-family: var(--font-mono);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .sdemo-elevation {
+    display: inline-flex; align-items: center; gap: 3px;
+    margin-top: 6px;
+  }
+  .elev-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--border);
+    transition: background .2s;
+  }
+  .elev-dot.active { background: var(--color-primary-400); }
+
+  /* ===== Code Section (accordion + tabs) ===== */
+  .code-accordion {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    margin-top: 4px;
+    box-shadow: var(--shadow-sm);
+  }
+  .code-accordion-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 18px;
+    background: var(--bg-surface);
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background .15s;
+  }
+  .code-accordion-trigger:hover { background: var(--bg-subtle); }
+  .code-accordion-trigger .ca-label {
+    font-size: 13px; font-weight: 700; color: var(--text-1); flex: 1;
+  }
+  .code-accordion-trigger .ca-hint { font-size: 11.5px; color: var(--text-3); }
+  .code-accordion-trigger .ca-arrow { font-size: 11px; color: var(--text-3); transition: transform .2s; }
+  .code-accordion.open .ca-arrow { transform: rotate(180deg); }
+  .code-accordion-body {
+    display: none;
+    border-top: 1px solid var(--border);
+    background: var(--bg-subtle);
+  }
+  .code-accordion.open .code-accordion-body { display: block; }
+
+  /* Tab bar inside accordion */
+  .code-tab-bar {
+    display: flex;
+    gap: 4px;
+    padding: 10px 14px 0;
+  }
+  .code-tab-btn {
+    padding: 7px 14px;
+    border-radius: 7px 7px 0 0;
+    border: 1px solid transparent;
+    border-bottom: none;
+    background: transparent;
+    font: 600 12px/1 var(--font-sans);
+    cursor: pointer;
+    color: var(--text-3);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all .15s;
+  }
+  .code-tab-btn.active {
+    background: var(--bg-surface);
+    color: var(--text-1);
+    border-color: var(--border);
+  }
+  .code-tab-btn .ct-icon {
+    width: 18px; height: 18px;
+    border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 800;
+  }
+  .ct-icon.tw  { background: #EFF6FF; color: #1d4ed8; }
+  .ct-icon.css { background: #FFF7ED; color: #c2410c; }
+  [data-theme="dark"] .ct-icon.tw  { background: rgba(29,78,216,.15); color: #93c5fd; }
+  [data-theme="dark"] .ct-icon.css { background: rgba(194,65,12,.15); color: #fca5a5; }
+
+  .code-tab-content {
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border);
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-height: 260px;
+    overflow-y: auto;
+  }
+  .code-pane { display: none; }
+  .code-pane.active { display: contents; }
+
+  .code-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: var(--radius-md);
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .code-row:hover { border-color: var(--color-primary-300); background: var(--bg-surface); box-shadow: var(--shadow-sm); }
+  .code-row .cr-label { font-size: 11px; font-weight: 600; color: var(--text-3); flex-shrink: 0; min-width: 60px; }
+  .code-row .cr-code { font-family: var(--font-mono); font-size: 11.5px; color: var(--text-1); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .code-row .cr-copy {
+    font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em;
+    color: var(--text-3); flex-shrink: 0; padding: 2px 7px;
+    border-radius: var(--radius-sm); border: 1px solid var(--border);
+    background: transparent; cursor: pointer; font-family: var(--font-sans); margin-left: auto;
+    transition: all .15s;
+  }
+  .code-row:hover .cr-copy { color: var(--color-primary-600); border-color: var(--color-primary-300); }
+
+  /* ===== Usage Guidelines Tab ===== */
+  .usage-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+    margin-bottom: var(--spacing-8);
+  }
+  .usage-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-5);
+    box-shadow: var(--shadow-sm);
+    transition: all .15s;
+  }
+  .usage-card:hover { box-shadow: var(--shadow-md); border-color: rgba(99,102,241,.2); transform: translateY(-1px); }
+  .usage-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: var(--spacing-3);
+  }
+  .usage-card-icon {
+    width: 36px; height: 36px;
+    border-radius: var(--radius-lg);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; flex-shrink: 0;
+  }
+  .usage-card-name { font-size: 14px; font-weight: 700; color: var(--text-1); }
+  .usage-card-role { font-size: 11px; color: var(--text-3); margin-top: 1px; }
+  .usage-card-demo {
+    height: 64px;
+    background: var(--bg-subtle);
+    border-radius: var(--radius-lg);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: var(--spacing-3);
+  }
+  .usage-card-demo-box {
+    width: 44px; height: 44px;
+    background: var(--bg-surface);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  .usage-card-body { font-size: 12.5px; color: var(--text-2); line-height: 1.5; }
+
+  /* Usage chart table */
+  .usage-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--spacing-8);
+  }
+  .usage-table thead { background: var(--bg-subtle); }
+  .usage-table th {
+    padding: 12px 16px;
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .07em;
+    color: var(--text-3);
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .usage-table td {
+    padding: 12px 16px;
+    font-size: 13px; color: var(--text-2);
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  .usage-table tr:last-child td { border-bottom: none; }
+  .usage-table tr:hover td { background: var(--bg-subtle); }
+  .token-chip {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: var(--bg-subtle); border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 3px 8px;
+    font-family: var(--font-mono); font-size: 11.5px; color: var(--text-1);
+    font-weight: 500;
+  }
+  .token-chip-dot { width: 7px; height: 7px; border-radius: 50%; }
+
+  /* Code examples block */
+  .code-block {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: var(--spacing-6);
+  }
+  .code-block-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-subtle);
+  }
+  .code-block-title { font-size: 12px; font-weight: 700; color: var(--text-1); }
+  .code-block-copy-btn {
+    font-size: 11px; font-weight: 600; color: var(--text-3);
+    border: 1px solid var(--border); background: transparent;
+    padding: 4px 10px; border-radius: var(--radius-md);
+    cursor: pointer; transition: all .15s; font-family: var(--font-sans);
+  }
+  .code-block-copy-btn:hover { color: var(--color-primary-600); border-color: var(--color-primary-300); }
+  .code-block pre {
+    margin: 0; padding: 16px;
+    font-family: var(--font-mono); font-size: 12.5px; line-height: 1.7;
+    color: var(--text-1);
+    overflow-x: auto;
+    background: var(--bg-surface);
+  }
+
+  /* ===== Section divider label ===== */
+  .section-view-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: var(--spacing-6);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-view-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ===== Toast ===== */
+  .gpl-toast {
+    position: fixed;
+    left: 50%; bottom: 32px;
+    transform: translate(-50%, 40px);
+    background: var(--gpl-neutral-900, #091E42);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: var(--radius-lg);
+    font-size: 13px; font-weight: 500;
+    box-shadow: var(--shadow-xl);
+    opacity: 0;
+    transition: all .25s ease;
+    pointer-events: none;
+    z-index: 9999;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .gpl-toast::before { content: '✓'; font-weight: 700; color: #86efac; }
+  .gpl-toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+  /* ===== Mobile ===== */
+  @media(max-width: 768px) {
+    .shadow-hero { flex-direction: column; margin: 0 var(--spacing-4) var(--spacing-4); padding: var(--spacing-8); }
+    .shadow-hero-preview { display: none; }
+    .shadow-stats { grid-template-columns: repeat(2, 1fr); margin: 0 var(--spacing-4) var(--spacing-4); }
+    .shadow-page-inner { padding: 0 var(--spacing-4) var(--spacing-12); }
+  }
+  @media(max-width: 480px) {
+    .shadow-stats { grid-template-columns: 1fr; }
+    .shadow-preview-row { grid-template-columns: repeat(2, 1fr); }
+  }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h1 class="logo">GPOS Lite</h1>
-                <p class="version">Design System V2.0</p>
-            </div>
-            <nav class="nav-menu">
-                <div class="nav-section">
-                    <h3 class="nav-title">Foundations</h3>
-                    <ul class="nav-list">
-                        <li><a href="../index.html" class="nav-link">Home</a></li>
-                        <li><a href="colors.html" class="nav-link">Colors</a></li>
-                        <li><a href="typography.html" class="nav-link">Typography</a></li>
-                        <li><a href="spacing.html" class="nav-link">Spacing</a></li>
-                        <li><a href="shadows.html" class="nav-link" style="color: var(--color-primary-400);">Shadows</a></li>
-                        <li><a href="borders.html" class="nav-link">Borders & Radius</a></li>
-                        <li><a href="grid.html" class="nav-link">Grid & Layout</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </aside>
 
-        <main class="main-content">
-            <header class="page-header">
-                <h1>Shadow System</h1>
-                <p class="subtitle">6-level elevation system untuk depth, hierarchy, dan visual layering</p>
-            </header>
+<!-- Mobile Overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-            <section>
-                <h2>Shadow Levels</h2>
-                <p>Gunakan shadows untuk menunjukkan elevasi dan create visual hierarchy dalam design.</p>
+<!-- Desktop: re-open tab (shows when sidebar is hidden) -->
+<button class="sidebar-reopen-tab" id="sidebarReopenTab" aria-label="Buka sidebar">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+</button>
 
-                <div style="display: grid; gap: var(--spacing-6); margin-bottom: var(--spacing-8);">
-                    <!-- Shadow None -->
-                    <div style="padding: var(--spacing-6); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md); box-shadow: none;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-3);">
-                            <div>
-                                <p style="margin: 0; font-weight: 500;">None (No Shadow)</p>
-                                <code style="font-size: var(--font-size-xs);">shadow-none</code>
-                            </div>
-                        </div>
-                        <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm); margin: 0;">Gunakan untuk flat design atau elemen tanpa depth</p>
-                    </div>
+<div class="container">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-wrap">
+        <div class="logo-icon">G</div>
+        <div>
+          <h1 class="logo">GPOS Lite</h1>
+          <p class="version">Design System V2.0</p>
+        </div>
+      </div>
+      <div class="sidebar-actions">
+        <button class="sidebar-collapse-btn" id="sidebarCollapseBtn" aria-label="Collapse sidebar" title="Collapse sidebar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="sidebar-close" id="sidebarClose" aria-label="Tutup menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </div>
 
-                    <!-- Shadow SM -->
-                    <div style="padding: var(--spacing-6); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md); box-shadow: var(--shadow-sm);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-3);">
-                            <div>
-                                <p style="margin: 0; font-weight: 500;">Small Shadow</p>
-                                <code style="font-size: var(--font-size-xs);">shadow-sm / 0 1px 2px rgba(0,0,0,0.05)</code>
-                            </div>
-                        </div>
-                        <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm); margin: 0;">Subtle shadow untuk light elevation</p>
-                    </div>
+    <nav class="nav-menu" role="navigation" aria-label="Navigasi utama">
+      <div class="nav-section">
+        <h3 class="nav-title">Foundations</h3>
+        <ul class="nav-list">
+          <li>
+            <a href="../index.html" class="nav-link">
+              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="colors.html" class="nav-link">
+              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a7 7 0 1 0 7 7"/></svg></span>
+              Colors
+            </a>
+          </li>
+          <li>
+            <a href="typography.html" class="nav-link">
+              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg></span>
+              Typography
+            </a>
+          </li>
+          <li>
+            <a href="spacing.html" class="nav-link">
+              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg></span>
+              Spacing
+            </a>
+          </li>
+          <li>
+            <a href="shadows.html" class="nav-link active" aria-current="page">
+              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg></span>
+              Shadows
+            </a>
+          </li>
+          <li>
+            <a href="borders.html" class="nav-link">
+              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="6"/></svg></span>
+              Borders &amp; Radius
+            </a>
+          </li>
+          <li>
+            <a href="grid.html" class="nav-link">
+              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>
+              Grid &amp; Layout
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <h3 class="nav-title">Components</h3>
+        <ul class="nav-list">
+          <li>
+            <a href="components.html" class="nav-link">
+              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="6" height="6" rx="1"/><rect x="2" y="15" width="6" height="6" rx="1"/><rect x="14" y="3" width="8" height="6" rx="1"/><rect x="14" y="15" width="8" height="6" rx="1"/></svg></span>
+              Component Library
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-                    <!-- Shadow MD -->
-                    <div style="padding: var(--spacing-6); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md); box-shadow: var(--shadow-md);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-3);">
-                            <div>
-                                <p style="margin: 0; font-weight: 500;">Medium Shadow (Default)</p>
-                                <code style="font-size: var(--font-size-xs);">shadow-md</code>
-                            </div>
-                        </div>
-                        <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm); margin: 0;">Default shadow untuk cards dan components</p>
-                    </div>
+    <div class="sidebar-footer">
+      <button class="dark-mode-toggle" id="darkModeToggle">
+        <span class="toggle-icon" id="toggleIcon"></span>
+        <span id="toggleLabel">Dark Mode</span>
+      </button>
+    </div>
+  </aside>
 
-                    <!-- Shadow LG -->
-                    <div style="padding: var(--spacing-6); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md); box-shadow: var(--shadow-lg);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-3);">
-                            <div>
-                                <p style="margin: 0; font-weight: 500;">Large Shadow</p>
-                                <code style="font-size: var(--font-size-xs);">shadow-lg</code>
-                            </div>
-                        </div>
-                        <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm); margin: 0;">Untuk floating elements dan popovers</p>
-                    </div>
+  <!-- Main Content -->
+  <main class="main-content">
 
-                    <!-- Shadow XL -->
-                    <div style="padding: var(--spacing-6); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md); box-shadow: var(--shadow-xl);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-3);">
-                            <div>
-                                <p style="margin: 0; font-weight: 500;">Extra Large Shadow</p>
-                                <code style="font-size: var(--font-size-xs);">shadow-xl</code>
-                            </div>
-                        </div>
-                        <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm); margin: 0;">Untuk modals dan dropdowns</p>
-                    </div>
+    <!-- Mobile topbar -->
+    <div class="topbar" id="topbar">
+      <button class="hamburger" id="hamburger" aria-label="Buka menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <span class="topbar-title">Shadows</span>
+      <button class="topbar-theme" id="topbarTheme" aria-label="Toggle theme"></button>
+    </div>
 
-                    <!-- Shadow 2XL -->
-                    <div style="padding: var(--spacing-6); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md); box-shadow: var(--shadow-2xl);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-3);">
-                            <div>
-                                <p style="margin: 0; font-weight: 500;">2XL Shadow</p>
-                                <code style="font-size: var(--font-size-xs);">shadow-2xl</code>
-                            </div>
-                        </div>
-                        <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm); margin: 0;">Maximum depth untuk page overlays</p>
-                    </div>
-                </div>
-            </section>
+    <!-- ===== HERO ===== -->
+    <div class="shadow-hero">
+      <div class="shadow-hero-bg">
+        <div class="shadow-hero-orb shadow-hero-orb-1"></div>
+        <div class="shadow-hero-orb shadow-hero-orb-2"></div>
+        <div class="shadow-hero-orb shadow-hero-orb-3"></div>
+      </div>
+      <div class="shadow-hero-content">
+        <div class="shadow-hero-tag">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+          Foundations
+        </div>
+        <h1>Shadow System</h1>
+        <p>6-level elevation system untuk depth, hierarchy, dan visual layering. Setiap token terhubung dengan <strong style="color:rgba(255,255,255,.9)">Tailwind class</strong> dan <strong style="color:rgba(255,255,255,.9)">CSS variable</strong>.</p>
+      </div>
+      <div class="shadow-hero-preview" aria-hidden="true">
+        <div class="hero-shadow-card hs-0">shadow-none</div>
+        <div class="hero-shadow-card hs-sm">shadow-sm</div>
+        <div class="hero-shadow-card hs-md">shadow-md</div>
+        <div class="hero-shadow-card hs-lg">shadow-lg</div>
+        <div class="hero-shadow-card hs-xl">shadow-xl</div>
+        <div class="hero-shadow-card hs-2xl">shadow-2xl</div>
+      </div>
+    </div>
 
-            <section>
-                <h2>Usage Guidelines</h2>
+    <!-- ===== STATS ===== -->
+    <div class="shadow-stats">
+      <div class="shadow-stat-card">
+        <div class="stat-icon-wrap" style="background:#F5F3FF;">🏔️</div>
+        <div>
+          <div class="stat-num">6</div>
+          <div class="stat-lbl">Elevation Levels</div>
+        </div>
+      </div>
+      <div class="shadow-stat-card">
+        <div class="stat-icon-wrap" style="background:#EFF6FF;">🎯</div>
+        <div>
+          <div class="stat-num">6</div>
+          <div class="stat-lbl">CSS Variables</div>
+        </div>
+      </div>
+      <div class="shadow-stat-card">
+        <div class="stat-icon-wrap" style="background:#F0FDF4;">TW</div>
+        <div>
+          <div class="stat-num">6</div>
+          <div class="stat-lbl">Tailwind Classes</div>
+        </div>
+      </div>
+      <div class="shadow-stat-card">
+        <div class="stat-icon-wrap" style="background:#FFF7ED;">☀️</div>
+        <div>
+          <div class="stat-num">2</div>
+          <div class="stat-lbl">Mode Dukungan</div>
+        </div>
+      </div>
+    </div>
 
-                <div class="guide-section">
-                    <h3>✅ Usage Chart</h3>
-                    <table style="width: 100%; border-collapse: collapse; margin-bottom: var(--spacing-4);">
-                        <tr style="border-bottom: 1px solid var(--color-border-light);">
-                            <td style="padding: var(--spacing-3); font-weight: 500;">Shadow</td>
-                            <td style="padding: var(--spacing-3); font-weight: 500;">Use Case</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--color-border-light);">
-                            <td style="padding: var(--spacing-3);">shadow-sm</td>
-                            <td style="padding: var(--spacing-3);">Hover state, subtle lift</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--color-border-light);">
-                            <td style="padding: var(--spacing-3);">shadow-md</td>
-                            <td style="padding: var(--spacing-3);">Cards, buttons on hover</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--color-border-light);">
-                            <td style="padding: var(--spacing-3);">shadow-lg</td>
-                            <td style="padding: var(--spacing-3);">Floating panels, tooltips</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--color-border-light);">
-                            <td style="padding: var(--spacing-3);">shadow-xl</td>
-                            <td style="padding: var(--spacing-3);">Modals, dropdowns</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: var(--spacing-3);">shadow-2xl</td>
-                            <td style="padding: var(--spacing-3);">Full page overlays, dialogs</td>
-                        </tr>
-                    </table>
-                </div>
+    <!-- ===== CONTENT ===== -->
+    <div class="shadow-page-inner">
 
-                <div class="guide-section">
-                    <h3>Code Examples</h3>
-                    <pre><code>&lt;!-- Card with default shadow --&gt;
-&lt;div class="shadow-md p-4 rounded-lg"&gt;
+      <!-- Main Tabs -->
+      <div class="main-tab-bar" role="tablist">
+        <button class="main-tab-btn active" data-view="levels" role="tab" aria-selected="true">
+          <span class="tab-dot" style="background:#4D2BAC"></span>Shadow Levels
+        </button>
+        <button class="main-tab-btn" data-view="usage" role="tab" aria-selected="false">
+          <span class="tab-dot" style="background:#1E7FD6"></span>Usage Guidelines
+        </button>
+      </div>
+
+      <!-- ======================== SHADOW LEVELS VIEW ======================== -->
+      <div id="view-levels">
+        <div class="section-view-label">Semua Level Elevasi</div>
+        <div class="toc-bar" id="toc-bar"></div>
+        <div id="shadow-sections"></div>
+      </div>
+
+      <!-- ======================== USAGE GUIDELINES VIEW ======================== -->
+      <div id="view-usage" style="display:none">
+        <div class="section-view-label">Panduan Penggunaan</div>
+
+        <!-- Usage Cards Grid -->
+        <div class="usage-grid" id="usage-cards-grid"></div>
+
+        <!-- Usage Table -->
+        <h3 style="font-size:18px;font-weight:700;color:var(--text-1);margin:0 0 var(--spacing-4);letter-spacing:-.01em;">
+          ✅ Usage Chart
+        </h3>
+        <table class="usage-table" id="usage-table-el"></table>
+
+        <!-- Code Examples -->
+        <h3 style="font-size:18px;font-weight:700;color:var(--text-1);margin:var(--spacing-8) 0 var(--spacing-4);letter-spacing:-.01em;">
+          Code Examples
+        </h3>
+
+        <div class="code-block">
+          <div class="code-block-header">
+            <span class="code-block-title">🔷 Tailwind — Card dengan Shadow</span>
+            <button class="code-block-copy-btn" data-copy-block="tw-card">Copy</button>
+          </div>
+          <pre id="tw-card">&lt;!-- Card dengan shadow default --&gt;
+&lt;div class="shadow-md p-6 rounded-xl bg-white"&gt;
   Card with medium shadow
 &lt;/div&gt;
 
-&lt;!-- Hover effect --&gt;
-&lt;div class="shadow-sm hover:shadow-md transition-shadow"&gt;
+&lt;!-- Hover elevation effect --&gt;
+&lt;div class="shadow-sm hover:shadow-lg transition-shadow duration-200 rounded-xl p-6"&gt;
   Elevate on hover
 &lt;/div&gt;
 
-&lt;!-- Modal --&gt;
-&lt;div class="fixed inset-0 shadow-2xl"&gt;
+&lt;!-- Modal dengan shadow maximum --&gt;
+&lt;div class="fixed inset-0 shadow-2xl rounded-2xl bg-white"&gt;
   Full page modal
-&lt;/div&gt;</code></pre>
-                </div>
-            </section>
+&lt;/div&gt;
 
-            <footer class="page-footer">
-                <p>&copy; 2024 GPOS Lite Design System V 2.0</p>
-            </footer>
-        </main>
+&lt;!-- Floating panel --&gt;
+&lt;div class="absolute top-4 right-4 shadow-xl rounded-xl bg-white p-4"&gt;
+  Floating panel
+&lt;/div&gt;</pre>
+        </div>
+
+        <div class="code-block">
+          <div class="code-block-header">
+            <span class="code-block-title">🟠 CSS Variable — Token Langsung</span>
+            <button class="code-block-copy-btn" data-copy-block="css-vars">Copy</button>
+          </div>
+          <pre id="css-vars">/* Deklarasi CSS Variables di :root */
+:root {
+  --shadow-none : none;
+  --shadow-sm   : 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md   : 0 4px 6px rgba(0,0,0,.1), 0 2px 4px rgba(0,0,0,.06);
+  --shadow-lg   : 0 10px 15px rgba(0,0,0,.1), 0 4px 6px rgba(0,0,0,.05);
+  --shadow-xl   : 0 20px 25px rgba(0,0,0,.1), 0 10px 10px rgba(0,0,0,.04);
+  --shadow-2xl  : 0 25px 50px rgba(0,0,0,.25);
+}
+
+/* Penggunaan di komponen */
+.card          { box-shadow: var(--shadow-md); }
+.card:hover    { box-shadow: var(--shadow-lg); }
+.modal         { box-shadow: var(--shadow-2xl); }
+.tooltip       { box-shadow: var(--shadow-lg); }
+.input:focus   { box-shadow: var(--shadow-sm); }</pre>
+        </div>
+
+        <div class="code-block">
+          <div class="code-block-header">
+            <span class="code-block-title">⚡ Transition Shadow — Smooth Elevation</span>
+            <button class="code-block-copy-btn" data-copy-block="transition-shadow">Copy</button>
+          </div>
+          <pre id="transition-shadow">/* Smooth elevation transition */
+.interactive-card {
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 200ms ease, transform 200ms ease;
+}
+.interactive-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* Tailwind equivalent */
+/* class="shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200" */</pre>
+        </div>
+
+      </div>
+
+    </div><!-- /shadow-page-inner -->
+
+    <footer class="page-footer">
+      <p>&copy; 2024 GPOS Lite Design System V 2.0 | Maintained with ❤️</p>
+    </footer>
+  </main>
+</div>
+
+<div class="gpl-toast" id="gpl-toast"></div>
+<button class="scroll-to-top" id="scrollToTop" aria-label="Scroll ke atas">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
+
+<script src="../js/script.js"></script>
+<script>
+/* ============================================================
+   DATA: Shadow Levels
+   ============================================================ */
+const SHADOWS = [
+  {
+    id: "shadow-none",
+    name: "None",
+    token: "shadow-none",
+    cssVar: "--shadow-none",
+    value: "none",
+    tw: "shadow-none",
+    role: "Flat / No Elevation",
+    dotColor: "#DFE2E6",
+    elevationLevel: 0,
+    lead: "Elemen flat tanpa depth. Gunakan untuk permukaan yang tidak perlu elevasi atau ketika border sudah cukup untuk pemisahan visual antar elemen.",
+    usage: ["Flat design elements", "Table rows & cells", "Elemen dengan border tegas", "Disabled state cards"],
+    best: ["Pair dengan border N40 untuk pemisahan", "Gunakan pada body text container", "Cocok untuk inline elements"],
+    avoid: ["Cards yang butuh elevasi", "Floating elements", "Modals & popovers"]
+  },
+  {
+    id: "shadow-sm",
+    name: "Small",
+    token: "shadow-sm",
+    cssVar: "--shadow-sm",
+    value: "0 1px 2px rgba(0,0,0,.05)",
+    tw: "shadow-sm",
+    role: "Subtle Elevation",
+    dotColor: "#B3B9C4",
+    elevationLevel: 1,
+    lead: "Elevasi ringan yang hampir tidak terlihat. Ideal untuk memberikan sedikit depth pada elemen interaktif tanpa mendominasi layout.",
+    usage: ["Hover state dari shadow-none", "Subtle lift on buttons", "Input fields & form elements", "Tag & badges"],
+    best: ["Gunakan sebagai default untuk elemen ringan", "Kombinasikan dengan border N40", "Ideal untuk hover state transisi"],
+    avoid: ["Modals & overlays", "Floating panels", "Elemen yang butuh elevasi kuat"]
+  },
+  {
+    id: "shadow-md",
+    name: "Medium",
+    token: "shadow-md",
+    cssVar: "--shadow-md",
+    value: "0 4px 6px rgba(0,0,0,.1), 0 2px 4px rgba(0,0,0,.06)",
+    tw: "shadow-md",
+    role: "Default / Cards",
+    dotColor: "#8993A4",
+    elevationLevel: 2,
+    lead: "Shadow default untuk komponen utama. Memberikan depth yang jelas tanpa berlebihan — pilihan utama untuk card dan panel konten di GPOS Lite.",
+    usage: ["Cards & content panels", "Tombol dengan hover elevation", "Dropdown menus", "Side panels"],
+    best: ["Default untuk semua card di GPOS Lite", "Hover state dari shadow-sm", "Kombinasi terbaik dengan border-radius-lg"],
+    avoid: ["Modals utama (terlalu ringan)", "Full-page overlays", "Elemen yang sudah punya strong border"]
+  },
+  {
+    id: "shadow-lg",
+    name: "Large",
+    token: "shadow-lg",
+    cssVar: "--shadow-lg",
+    value: "0 10px 15px rgba(0,0,0,.1), 0 4px 6px rgba(0,0,0,.05)",
+    tw: "shadow-lg",
+    role: "Floating Elements",
+    dotColor: "#505F79",
+    elevationLevel: 3,
+    lead: "Elevasi kuat untuk elemen yang melayang di atas konten. Memberikan sinyal visual yang jelas bahwa elemen ini berada di atas layer utama.",
+    usage: ["Floating panels & drawers", "Tooltips & popovers", "Context menus", "Navigation sticky header"],
+    best: ["Gunakan untuk elemen yang truly float", "Pair dengan backdrop blur untuk glassmorphism", "Ideal untuk side panels yang slide in"],
+    avoid: ["Elemen inline dalam konten", "Regular cards (terlalu berat)", "Disabled state"]
+  },
+  {
+    id: "shadow-xl",
+    name: "Extra Large",
+    token: "shadow-xl",
+    cssVar: "--shadow-xl",
+    value: "0 20px 25px rgba(0,0,0,.1), 0 10px 10px rgba(0,0,0,.04)",
+    tw: "shadow-xl",
+    role: "Modals & Dropdowns",
+    dotColor: "#243757",
+    elevationLevel: 4,
+    lead: "Elevasi sangat kuat untuk komponen yang memerlukan fokus penuh user. Digunakan untuk dialog dan dropdown yang bersifat kritis.",
+    usage: ["Modal dialogs", "Dropdown menus utama", "Date pickers & color pickers", "Command palette"],
+    best: ["Selalu pair dengan overlay/scrim", "Gunakan dengan border-radius-2xl", "Tambahkan border tipis N40 untuk edge definition"],
+    avoid: ["Cards biasa (terlalu dominan)", "Hover states", "Elemen kecil seperti badges"]
+  },
+  {
+    id: "shadow-2xl",
+    name: "2XL",
+    token: "shadow-2xl",
+    cssVar: "--shadow-2xl",
+    value: "0 25px 50px rgba(0,0,0,.25)",
+    tw: "shadow-2xl",
+    role: "Maximum Depth",
+    dotColor: "#091E42",
+    elevationLevel: 5,
+    lead: "Depth maksimal untuk overlay penuh yang memerlukan penekanan kuat. Gunakan sparingly — hanya untuk level teratas dalam hierarki elevasi UI.",
+    usage: ["Full-page overlays & dialogs", "Bottom sheets mobile", "Critical confirmation dialogs", "Toast notifications penting"],
+    best: ["Gunakan hanya untuk level teratas UI", "Pair dengan backdrop gelap penuh", "Selalu ada cara untuk dismiss"],
+    avoid: ["Penggunaan berlebihan (kehilangan impact)", "Konten inline", "Navigasi reguler"]
+  }
+];
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+const toast = document.getElementById("gpl-toast");
+let toastTimer;
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove("show"), 1800);
+}
+function copyText(text) {
+  navigator.clipboard?.writeText(text);
+}
+
+/* Elevation dot builder */
+function buildElevDots(level) {
+  return Array.from({length: 6}, (_, i) =>
+    `<span class="elev-dot${i <= level ? ' active' : ''}"></span>`
+  ).join('');
+}
+
+/* Box shadow value per level (for live preview) */
+const SHADOW_VALUES = {
+  0: 'none',
+  1: '0 1px 2px rgba(0,0,0,.15)',
+  2: '0 4px 8px rgba(0,0,0,.18), 0 2px 4px rgba(0,0,0,.1)',
+  3: '0 10px 18px rgba(0,0,0,.2), 0 4px 8px rgba(0,0,0,.1)',
+  4: '0 20px 28px rgba(0,0,0,.22), 0 10px 12px rgba(0,0,0,.1)',
+  5: '0 25px 50px rgba(0,0,0,.35)'
+};
+
+/* ============================================================
+   RENDER: Shadow Levels
+   ============================================================ */
+function renderShadowLevels() {
+  // TOC
+  const tocBar = document.getElementById("toc-bar");
+  tocBar.innerHTML = SHADOWS.map(s => `
+    <a href="#${s.id}">
+      <span class="toc-dot" style="background:${s.dotColor};border:1px solid rgba(0,0,0,.08)"></span>${s.name}
+    </a>
+  `).join("");
+
+  // Sections
+  const container = document.getElementById("shadow-sections");
+  container.innerHTML = SHADOWS.map((s, idx) => {
+    const twRows = `
+      <div class="code-row" data-copy="${s.tw}">
+        <span class="cr-label">Class</span>
+        <span class="cr-code">${s.tw}</span>
+        <button class="cr-copy">copy</button>
+      </div>
+      <div class="code-row" data-copy="box-shadow: var(${s.cssVar});">
+        <span class="cr-label">CSS</span>
+        <span class="cr-code">box-shadow: var(${s.cssVar});</span>
+        <button class="cr-copy">copy</button>
+      </div>
+    `;
+
+    const cssRows = `
+      <div class="code-row" data-copy="var(${s.cssVar})">
+        <span class="cr-label">Var</span>
+        <span class="cr-code">var(${s.cssVar})</span>
+        <button class="cr-copy">copy</button>
+      </div>
+      <div class="code-row" data-copy="${s.value}">
+        <span class="cr-label">Value</span>
+        <span class="cr-code">${s.value}</span>
+        <button class="cr-copy">copy</button>
+      </div>
+    `;
+
+    return `
+      <section class="gpl-section" id="${s.id}">
+        <div class="gpl-section-head">
+          <div class="gpl-eyebrow">Elevation Level ${s.elevationLevel}</div>
+          <div class="gpl-title">
+            <h2>${s.name}</h2>
+            <span class="gpl-role-badge">${s.role}</span>
+          </div>
+          <p class="gpl-lead">${s.lead}</p>
+        </div>
+
+        <div class="gpl-info">
+          <div class="gpl-info-col">
+            <h4><span class="badge-dot" style="background:#1E7FD6"></span>Kapan Dipakai</h4>
+            <ul>${s.usage.map(x => `<li>${x}</li>`).join("")}</ul>
+          </div>
+          <div class="gpl-info-col">
+            <h4><span class="badge-dot" style="background:#00AA5B"></span>Best Practice</h4>
+            <ul>${s.best.map(x => `<li>${x}</li>`).join("")}</ul>
+          </div>
+          <div class="gpl-info-col">
+            <h4><span class="badge-dot" style="background:#EC1C24"></span>Hindari</h4>
+            <ul>${s.avoid.map(x => `<li>${x}</li>`).join("")}</ul>
+          </div>
+        </div>
+
+        <!-- Shadow Preview Cards (interactive) -->
+        <div class="shadow-preview-row">
+          ${SHADOWS.map(ps => `
+            <div class="shadow-demo-card${ps.id === s.id ? ' active-level' : ''}"
+                 data-shadow-value="${SHADOW_VALUES[ps.elevationLevel]}"
+                 title="Klik untuk menyalin ${ps.tw}"
+                 data-copy="${ps.tw}">
+              <div class="sdemo-preview">
+                <div class="sdemo-box" style="box-shadow:${SHADOW_VALUES[ps.elevationLevel]}"></div>
+              </div>
+              <div class="sdemo-info">
+                <div class="sdemo-name">${ps.name}</div>
+                <div class="sdemo-token">${ps.tw}</div>
+                <div class="sdemo-elevation">${buildElevDots(ps.elevationLevel)}</div>
+              </div>
+            </div>
+          `).join("")}
+        </div>
+
+        <!-- Code accordion -->
+        <div class="code-accordion" id="acc-${s.id}">
+          <button class="code-accordion-trigger" data-acc="${s.id}">
+            <span class="ca-label">Kode Implementasi</span>
+            <span class="ca-hint">Tailwind &amp; CSS Variable</span>
+            <span class="ca-arrow">▼</span>
+          </button>
+          <div class="code-accordion-body">
+            <div class="code-tab-bar" data-acc-tabs="${s.id}">
+              <button class="code-tab-btn active" data-tab="tw">
+                <span class="ct-icon tw">TW</span>Tailwind
+              </button>
+              <button class="code-tab-btn" data-tab="css">
+                <span class="ct-icon css">CSS</span>CSS Variable
+              </button>
+            </div>
+            <div class="code-tab-content">
+              <div class="code-pane active" data-pane="${s.id}-tw">${twRows}</div>
+              <div class="code-pane" data-pane="${s.id}-css">${cssRows}</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    `;
+  }).join("");
+
+  // Accordion toggle
+  container.addEventListener("click", e => {
+    const trigger = e.target.closest(".code-accordion-trigger");
+    if (trigger) {
+      const acc = document.getElementById("acc-" + trigger.dataset.acc);
+      acc.classList.toggle("open");
+      return;
+    }
+    const tabBtn = e.target.closest(".code-tab-btn");
+    if (tabBtn) {
+      const bar = tabBtn.closest(".code-tab-bar");
+      const uid = bar.dataset.accTabs;
+      const tab = tabBtn.dataset.tab;
+      bar.querySelectorAll(".code-tab-btn").forEach(b => b.classList.toggle("active", b === tabBtn));
+      const content = bar.nextElementSibling;
+      content.querySelectorAll(".code-pane").forEach(p => {
+        p.classList.toggle("active", p.dataset.pane === `${uid}-${tab}`);
+      });
+      return;
+    }
+    // Copy on demo card click
+    const demoCard = e.target.closest(".shadow-demo-card");
+    if (demoCard) {
+      const val = demoCard.dataset.copy;
+      copyText(val);
+      showToast(`Tersalin: ${val}`);
+      return;
+    }
+    // Copy on code row
+    const codeRow = e.target.closest(".code-row");
+    if (codeRow) {
+      const text = codeRow.dataset.copy;
+      copyText(text);
+      showToast(`Tersalin: ${text}`);
+    }
+  });
+}
+
+/* ============================================================
+   RENDER: Usage Guidelines
+   ============================================================ */
+function renderUsageGuidelines() {
+  // Usage cards
+  const cardGrid = document.getElementById("usage-cards-grid");
+  const bgIcons = ['#F5F3FF','#EFF6FF','#E9F2FB','#F0FDF4','#FFF7ED','#FDE8E9'];
+  const emojis  = ['📄','✨','🃏','🪟','📋','🌑'];
+  cardGrid.innerHTML = SHADOWS.map((s, i) => `
+    <div class="usage-card">
+      <div class="usage-card-header">
+        <div class="usage-card-icon" style="background:${bgIcons[i]}">${emojis[i]}</div>
+        <div>
+          <div class="usage-card-name">${s.name}</div>
+          <div class="usage-card-role">${s.role}</div>
+        </div>
+      </div>
+      <div class="usage-card-demo">
+        <div class="usage-card-demo-box" style="box-shadow:${SHADOW_VALUES[s.elevationLevel]}"></div>
+      </div>
+      <div class="usage-card-body">${s.usage.join(' · ')}</div>
     </div>
+  `).join("");
+
+  // Usage table
+  const table = document.getElementById("usage-table-el");
+  table.innerHTML = `
+    <thead>
+      <tr>
+        <th>Token</th>
+        <th>Tailwind Class</th>
+        <th>CSS Variable</th>
+        <th>Use Case Utama</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${SHADOWS.map(s => `
+        <tr>
+          <td><span class="token-chip"><span class="token-chip-dot" style="background:${s.dotColor};border:1px solid rgba(0,0,0,.08)"></span>${s.name}</span></td>
+          <td><code style="font-family:var(--font-mono);font-size:12px">${s.tw}</code></td>
+          <td><code style="font-family:var(--font-mono);font-size:12px">var(${s.cssVar})</code></td>
+          <td style="color:var(--text-2)">${s.usage[0]}</td>
+        </tr>
+      `).join("")}
+    </tbody>
+  `;
+}
+
+/* ============================================================
+   CODE BLOCK COPY
+   ============================================================ */
+document.addEventListener("click", e => {
+  const copyBtn = e.target.closest(".code-block-copy-btn");
+  if (copyBtn) {
+    const targetId = copyBtn.dataset.copyBlock;
+    const pre = document.getElementById(targetId);
+    if (pre) {
+      copyText(pre.textContent);
+      copyBtn.textContent = "Tersalin ✓";
+      setTimeout(() => copyBtn.textContent = "Copy", 1800);
+    }
+  }
+});
+
+/* ============================================================
+   INIT
+   ============================================================ */
+renderShadowLevels();
+renderUsageGuidelines();
+
+document.querySelectorAll(".main-tab-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const view = btn.dataset.view;
+    document.querySelectorAll(".main-tab-btn").forEach(b => {
+      b.classList.toggle("active", b === btn);
+      b.setAttribute("aria-selected", b === btn ? "true" : "false");
+    });
+    document.getElementById("view-levels").style.display = view === "levels" ? "" : "none";
+    document.getElementById("view-usage").style.display  = view === "usage"  ? "" : "none";
+  });
+});
+</script>
 </body>
 </html>

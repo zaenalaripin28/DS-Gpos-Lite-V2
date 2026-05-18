@@ -1,157 +1,238 @@
 // Design System GPOS Lite V 2.0
-// JavaScript for interactive features
+// Enhanced JavaScript for interactive features
 
-// Mobile menu toggle (if needed)
-document.addEventListener('DOMContentLoaded', function() {
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    });
+document.addEventListener('DOMContentLoaded', function () {
 
-    // Active nav link highlight
-    const currentPage = window.location.pathname;
-    document.querySelectorAll('.nav-link').forEach(link => {
-        if (link.getAttribute('href') === currentPage) {
-            link.style.color = 'var(--color-primary-400)';
-            link.style.backgroundColor = 'var(--color-gray-800)';
-        }
-    });
+  // ========================================
+  // Dark Mode Toggle
+  // ========================================
+  const DARK_KEY = 'gpos-theme';
+  const root = document.documentElement;
+  const darkModeToggle = document.getElementById('darkModeToggle');
+  const topbarTheme = document.getElementById('topbarTheme');
+  const toggleIcon = document.getElementById('toggleIcon');
+  const toggleLabel = document.getElementById('toggleLabel');
 
-    // Color copy to clipboard
-    document.querySelectorAll('.color-box').forEach(box => {
-        box.style.cursor = 'pointer';
-        box.addEventListener('click', function() {
-            const colorValue = this.querySelector('.color-value').textContent;
-            navigator.clipboard.writeText(colorValue).then(() => {
-                const originalText = this.querySelector('.color-value').textContent;
-                this.querySelector('.color-value').textContent = 'Copied!';
-                setTimeout(() => {
-                    this.querySelector('.color-value').textContent = originalText;
-                }, 1500);
-            });
-        });
-    });
+  const sunIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+  const moonIcon = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+  const moonIconSm = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
+  const sunIconSm = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
 
-    // Code block copy button
-    document.querySelectorAll('pre code').forEach((block) => {
-        const button = document.createElement('button');
-        button.className = 'copy-btn';
-        button.textContent = 'Copy';
-        button.style.cssText = `
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            padding: 4px 12px;
-            background-color: var(--color-primary-500);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 500;
-            transition: background-color 0.2s;
-        `;
-
-        button.addEventListener('mouseenter', () => {
-            button.style.backgroundColor = 'var(--color-primary-600)';
-        });
-
-        button.addEventListener('mouseleave', () => {
-            button.style.backgroundColor = 'var(--color-primary-500)';
-        });
-
-        button.addEventListener('click', () => {
-            const text = block.textContent;
-            navigator.clipboard.writeText(text).then(() => {
-                const originalText = button.textContent;
-                button.textContent = 'Copied!';
-                setTimeout(() => {
-                    button.textContent = originalText;
-                }, 1500);
-            });
-        });
-
-        // Position the button relative to pre
-        const pre = block.parentElement;
-        pre.style.position = 'relative';
-        pre.appendChild(button);
-    });
-
-    // Table of contents generator
-    const tocContainer = document.querySelector('.toc');
-    if (tocContainer) {
-        const headings = document.querySelectorAll('h2, h3');
-        const toc = document.createElement('ul');
-
-        headings.forEach((heading, index) => {
-            heading.id = `heading-${index}`;
-            const li = document.createElement('li');
-            const link = document.createElement('a');
-            link.href = `#heading-${index}`;
-            link.textContent = heading.textContent;
-
-            if (heading.tagName === 'H3') {
-                li.style.marginLeft = '20px';
-            }
-
-            li.appendChild(link);
-            toc.appendChild(li);
-        });
-
-        if (headings.length > 0) {
-            tocContainer.appendChild(toc);
-        }
+  function applyTheme(isDark) {
+    if (isDark) {
+      root.setAttribute('data-theme', 'dark');
+      if (toggleIcon) toggleIcon.innerHTML = sunIcon;
+      if (toggleLabel) toggleLabel.textContent = 'Light Mode';
+      if (topbarTheme) topbarTheme.innerHTML = sunIconSm;
+    } else {
+      root.removeAttribute('data-theme');
+      if (toggleIcon) toggleIcon.innerHTML = moonIcon;
+      if (toggleLabel) toggleLabel.textContent = 'Dark Mode';
+      if (topbarTheme) topbarTheme.innerHTML = moonIconSm;
     }
+  }
 
-    // Page scrolling utility
-    const mainContent = document.querySelector('.main-content');
-    if (mainContent) {
-        // Show scroll to top button
-        const scrollTop = document.querySelector('.scroll-to-top');
-        if (scrollTop) {
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
-                    scrollTop.style.display = 'block';
-                } else {
-                    scrollTop.style.display = 'none';
-                }
-            });
+  // Initialise from saved preference or system preference
+  const saved = localStorage.getItem(DARK_KEY);
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const isDark = saved !== null ? saved === 'dark' : prefersDark;
+  applyTheme(isDark);
 
-            scrollTop.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        }
+  function toggleTheme() {
+    const current = root.getAttribute('data-theme') === 'dark';
+    localStorage.setItem(DARK_KEY, current ? 'light' : 'dark');
+    applyTheme(!current);
+  }
+
+  if (darkModeToggle) darkModeToggle.addEventListener('click', toggleTheme);
+  if (topbarTheme) topbarTheme.addEventListener('click', toggleTheme);
+
+  // ========================================
+  // Mobile Sidebar Toggle
+  // ========================================
+  const sidebar = document.getElementById('sidebar');
+  const hamburger = document.getElementById('hamburger');
+  const sidebarClose = document.getElementById('sidebarClose');
+  const overlay = document.getElementById('sidebarOverlay');
+
+  function openSidebar() {
+    sidebar.classList.add('open');
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  if (hamburger) hamburger.addEventListener('click', openSidebar);
+  if (sidebarClose) sidebarClose.addEventListener('click', closeSidebar);
+  if (overlay) overlay.addEventListener('click', closeSidebar);
+
+  // Close sidebar when clicking a nav link on mobile
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 768) closeSidebar();
+    });
+  });
+
+  // ========================================
+  // Active Nav Link Highlight
+  // ========================================
+  const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-link').forEach(link => {
+    const href = link.getAttribute('href') || '';
+    const linkFile = href.split('/').pop();
+    if (linkFile === currentPath || (currentPath === '' && linkFile === 'index.html')) {
+      link.classList.add('active');
     }
+  });
 
-    // Dark mode toggle (optional future feature)
-    const darkModeToggle = document.querySelector('.dark-mode-toggle');
-    if (darkModeToggle) {
-        const isDarkMode = localStorage.getItem('darkMode') === 'true';
+  // ========================================
+  // Scroll to Top Button
+  // ========================================
+  const scrollBtn = document.getElementById('scrollToTop');
+  if (scrollBtn) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 320) {
+        scrollBtn.classList.add('visible');
+      } else {
+        scrollBtn.classList.remove('visible');
+      }
+    }, { passive: true });
 
-        if (isDarkMode) {
-            document.documentElement.style.colorScheme = 'dark';
+    scrollBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // ========================================
+  // Smooth Scroll for Anchor Links
+  // ========================================
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // ========================================
+  // Copy Button for Code Blocks
+  // ========================================
+  document.querySelectorAll('pre code').forEach(block => {
+    const pre = block.parentElement;
+    pre.style.position = 'relative';
+
+    const btn = document.createElement('button');
+    btn.textContent = 'Copy';
+    btn.setAttribute('aria-label', 'Copy code');
+    btn.style.cssText = `
+      position: absolute; top: 10px; right: 10px;
+      padding: 4px 10px;
+      background: rgba(255,255,255,.1);
+      color: rgba(255,255,255,.75);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 500;
+      font-family: inherit;
+      transition: all 150ms ease;
+    `;
+    btn.addEventListener('mouseenter', () => {
+      btn.style.background = 'rgba(255,255,255,.18)';
+      btn.style.color = 'white';
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.background = 'rgba(255,255,255,.1)';
+      btn.style.color = 'rgba(255,255,255,.75)';
+    });
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(block.textContent).then(() => {
+        btn.textContent = '✓ Copied';
+        btn.style.color = '#86efac';
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.style.color = 'rgba(255,255,255,.75)';
+        }, 1800);
+      });
+    });
+
+    pre.appendChild(btn);
+  });
+
+  // ========================================
+  // Color Box Click to Copy
+  // ========================================
+  document.querySelectorAll('.color-box').forEach(box => {
+    box.addEventListener('click', function () {
+      const valueEl = this.querySelector('.color-value');
+      if (!valueEl) return;
+      const colorValue = valueEl.textContent;
+      navigator.clipboard.writeText(colorValue).then(() => {
+        const orig = valueEl.textContent;
+        valueEl.textContent = 'Copied!';
+        setTimeout(() => { valueEl.textContent = orig; }, 1500);
+      });
+    });
+  });
+
+  // ========================================
+  // Table of Contents Generator
+  // ========================================
+  const tocContainer = document.querySelector('.toc');
+  if (tocContainer) {
+    const headings = document.querySelectorAll('h2, h3');
+    const toc = document.createElement('ul');
+    toc.style.cssText = 'list-style:none; padding:0;';
+
+    headings.forEach((heading, i) => {
+      heading.id = `heading-${i}`;
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = `#heading-${i}`;
+      a.textContent = heading.textContent;
+      if (heading.tagName === 'H3') li.style.paddingLeft = '16px';
+      li.appendChild(a);
+      toc.appendChild(li);
+    });
+
+    if (headings.length > 0) tocContainer.appendChild(toc);
+  }
+
+  // ========================================
+  // Entrance Animations (Intersection Observer)
+  // ========================================
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          observer.unobserve(entry.target);
         }
+      });
+    }, { threshold: 0.08 });
 
-        darkModeToggle.addEventListener('click', () => {
-            const isDark = localStorage.getItem('darkMode') === 'true';
-            localStorage.setItem('darkMode', !isDark);
-            location.reload();
-        });
-    }
+    document.querySelectorAll('.card, .token-item, .guide-step, .practice-group, .stat-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(16px)';
+      el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+      observer.observe(el);
+    });
+  }
+
 });
 
-// Utility function to get CSS variable value
+// Utility: get CSS variable value
 function getCSSVariableValue(varName) {
-    return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+  return getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
 }
 
-// Export for use in other modules
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { getCSSVariableValue };
+  module.exports = { getCSSVariableValue };
 }

@@ -4,124 +4,340 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Design System GPOS Lite V 2.0</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div class="container">
+    <!-- Mobile Overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="layout">
         <!-- Sidebar Navigation -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <h1 class="logo">GPOS Lite</h1>
-                <p class="version">Design System V2.0</p>
+                <div class="logo-wrap">
+                    <div class="logo-icon">G</div>
+                    <div>
+                        <h1 class="logo">GPOS Lite</h1>
+                        <p class="version">Design System V2.0</p>
+                    </div>
+                </div>
+                <button class="sidebar-close" id="sidebarClose" aria-label="Close menu">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
             </div>
 
-            <nav class="nav-menu">
+            <nav class="nav-menu" role="navigation" aria-label="Navigasi utama">
                 <div class="nav-section">
                     <h3 class="nav-title">Foundations</h3>
                     <ul class="nav-list">
-                        <li><a href="pages/colors.html" class="nav-link">Colors</a></li>
-                        <li><a href="pages/typography.html" class="nav-link">Typography</a></li>
-                        <li><a href="pages/spacing.html" class="nav-link">Spacing</a></li>
-                        <li><a href="pages/shadows.html" class="nav-link">Shadows</a></li>
-                        <li><a href="pages/borders.html" class="nav-link">Borders & Radius</a></li>
-                        <li><a href="pages/grid.html" class="nav-link">Grid & Layout</a></li>
+                        <li>
+                            <a href="pages/colors.html" class="nav-link">
+                                <span class="nav-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a7 7 0 1 0 7 7"/></svg>
+                                </span>
+                                Colors
+                            </a>
+                        </li>
+                        <li>
+                            <a href="pages/typography.html" class="nav-link">
+                                <span class="nav-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+                                </span>
+                                Typography
+                            </a>
+                        </li>
+                        <li>
+                            <a href="pages/spacing.html" class="nav-link">
+                                <span class="nav-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>
+                                </span>
+                                Spacing
+                            </a>
+                        </li>
+                        <li>
+                            <a href="pages/shadows.html" class="nav-link">
+                                <span class="nav-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+                                </span>
+                                Shadows
+                            </a>
+                        </li>
+                        <li>
+                            <a href="pages/borders.html" class="nav-link">
+                                <span class="nav-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="6"/></svg>
+                                </span>
+                                Borders &amp; Radius
+                            </a>
+                        </li>
+                        <li>
+                            <a href="pages/grid.html" class="nav-link">
+                                <span class="nav-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                                </span>
+                                Grid &amp; Layout
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
                 <div class="nav-section">
                     <h3 class="nav-title">Components</h3>
                     <ul class="nav-list">
-                        <li><a href="pages/components.html" class="nav-link">Component Library</a></li>
+                        <li>
+                            <a href="pages/components.html" class="nav-link">
+                                <span class="nav-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                                </span>
+                                Component Library
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
                 <div class="nav-section">
                     <h3 class="nav-title">Resources</h3>
                     <ul class="nav-list">
-                        <li><a href="#" class="nav-link">Tailwind Config</a></li>
-                        <li><a href="#" class="nav-link">GitHub Repo</a></li>
+                        <li>
+                            <a href="#" class="nav-link">
+                                <span class="nav-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                </span>
+                                Tailwind Config
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" target="_blank" rel="noopener" class="nav-link">
+                                <span class="nav-icon">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                                </span>
+                                GitHub Repo
+                                <span class="nav-badge">↗</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </nav>
+
+            <div class="sidebar-footer">
+                <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+                    <span class="toggle-icon" id="toggleIcon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </span>
+                    <span id="toggleLabel">Dark Mode</span>
+                </button>
+            </div>
         </aside>
 
         <!-- Main Content -->
-        <main class="main-content">
-            <!-- Header -->
+        <main class="main-content" id="mainContent">
+            <!-- Top Bar (mobile) -->
+            <div class="topbar">
+                <button class="hamburger" id="hamburger" aria-label="Open menu">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+                <span class="topbar-title">GPOS Lite DS</span>
+                <button class="topbar-theme" id="topbarTheme" aria-label="Toggle theme">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                </button>
+            </div>
+
+            <!-- Page Header -->
             <header class="page-header">
-                <h1>Design System GPOS Lite V 2.0</h1>
-                <p class="subtitle">Comprehensive design system documentation untuk konsistensi visual dan pengalaman pengguna</p>
+                <div class="header-badge">Design System</div>
+                <h1>GPOS Lite <span class="header-accent">V 2.0</span></h1>
+                <p class="subtitle">Comprehensive design system documentation untuk konsistensi visual dan pengalaman pengguna yang luar biasa.</p>
             </header>
 
             <!-- Hero Section -->
-            <section class="hero-section">
+            <section class="hero-section" aria-label="Hero">
+                <div class="hero-bg-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                </div>
                 <div class="hero-content">
-                    <h2>Welcome to GPOS Lite Design System</h2>
-                    <p>Dokumentasi lengkap tentang design tokens, components, dan guidelines untuk membangun interface yang konsisten dan scalable.</p>
+                    <div class="hero-tag">✦ Design System GPOS Lite</div>
+                    <h2>Welcome to<br>GPOS Lite Design System</h2>
+                    <p>Dokumentasi lengkap tentang design tokens, components, dan guidelines untuk membangun interface yang konsisten, scalable, dan accessible.</p>
                     <div class="cta-buttons">
-                        <a href="pages/colors.html" class="btn btn-primary">Mulai Explore</a>
-                        <a href="#" class="btn btn-secondary">View on GitHub</a>
+                        <a href="pages/colors.html" class="btn btn-primary">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                            Mulai Explore
+                        </a>
+                        <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" target="_blank" rel="noopener" class="btn btn-ghost">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                            View on GitHub
+                        </a>
                     </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="token-preview-card">
+                        <div class="tp-header">
+                            <span class="tp-dot red"></span>
+                            <span class="tp-dot yellow"></span>
+                            <span class="tp-dot green"></span>
+                            <span class="tp-title">design-tokens.css</span>
+                        </div>
+                        <div class="tp-body">
+                            <div class="tp-line"><span class="tp-var">--color-primary-500</span><span class="tp-sep">:</span><span class="tp-val color-val"> #6366f1</span><span class="tp-color-dot" style="background:#6366f1"></span></div>
+                            <div class="tp-line"><span class="tp-var">--font-size-base</span><span class="tp-sep">:</span><span class="tp-val"> 1rem</span></div>
+                            <div class="tp-line"><span class="tp-var">--spacing-4</span><span class="tp-sep">:</span><span class="tp-val"> 1rem</span></div>
+                            <div class="tp-line"><span class="tp-var">--shadow-md</span><span class="tp-sep">:</span><span class="tp-val"> 0 4px 6px...</span></div>
+                            <div class="tp-line"><span class="tp-var">--border-radius-lg</span><span class="tp-sep">:</span><span class="tp-val"> 0.75rem</span></div>
+                            <div class="tp-line tp-muted"><span class="tp-var">--breakpoint-md</span><span class="tp-sep">:</span><span class="tp-val"> 768px</span></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Bar -->
+            <section class="stats-bar" aria-label="Design system statistics">
+                <div class="stat-item">
+                    <span class="stat-number">60+</span>
+                    <span class="stat-label">Design Tokens</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number">6</span>
+                    <span class="stat-label">Foundations</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Components</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number">WCAG</span>
+                    <span class="stat-label">AA Accessible</span>
                 </div>
             </section>
 
             <!-- Quick Start -->
-            <section class="quick-start">
-                <h2>Quick Start</h2>
-                <div class="grid grid-3">
-                    <div class="card">
-                        <div class="card-icon">🎨</div>
-                        <h3>Colors</h3>
-                        <p>Pelajari palette warna lengkap, semantic colors, dan usage guidelines</p>
-                        <a href="pages/colors.html" class="card-link">Lihat Selengkapnya →</a>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">✏️</div>
-                        <h3>Typography</h3>
-                        <p>Font families, sizes, weights, dan line heights untuk berbagai use cases</p>
-                        <a href="pages/typography.html" class="card-link">Lihat Selengkapnya →</a>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">📐</div>
-                        <h3>Spacing</h3>
-                        <p>Spacing scale, margin, padding, dan gap untuk layout yang konsisten</p>
-                        <a href="pages/spacing.html" class="card-link">Lihat Selengkapnya →</a>
-                    </div>
+            <section class="quick-start" aria-labelledby="quick-start-title">
+                <div class="section-header">
+                    <h2 id="quick-start-title">Quick Start</h2>
+                    <p>Mulai eksplorasi design system kami dari sini</p>
+                </div>
+                <div class="cards-grid">
+                    <a href="pages/colors.html" class="card" tabindex="0">
+                        <div class="card-icon-wrap" style="--icon-color: #6366f1; --icon-bg: #eef2ff;">
+                            <span class="card-icon">🎨</span>
+                        </div>
+                        <div class="card-body">
+                            <h3>Colors</h3>
+                            <p>Palette warna lengkap, semantic colors, dan usage guidelines untuk konsistensi brand</p>
+                        </div>
+                        <span class="card-arrow">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                        </span>
+                    </a>
+                    <a href="pages/typography.html" class="card" tabindex="0">
+                        <div class="card-icon-wrap" style="--icon-color: #9333ea; --icon-bg: #f5f3ff;">
+                            <span class="card-icon">✏️</span>
+                        </div>
+                        <div class="card-body">
+                            <h3>Typography</h3>
+                            <p>Font families, sizes, weights, dan line heights untuk berbagai use cases</p>
+                        </div>
+                        <span class="card-arrow">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                        </span>
+                    </a>
+                    <a href="pages/spacing.html" class="card" tabindex="0">
+                        <div class="card-icon-wrap" style="--icon-color: #0284c7; --icon-bg: #f0f9ff;">
+                            <span class="card-icon">📐</span>
+                        </div>
+                        <div class="card-body">
+                            <h3>Spacing</h3>
+                            <p>Spacing scale, margin, padding, dan gap untuk layout yang konsisten dan harmonis</p>
+                        </div>
+                        <span class="card-arrow">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                        </span>
+                    </a>
+                    <a href="pages/shadows.html" class="card" tabindex="0">
+                        <div class="card-icon-wrap" style="--icon-color: #d97706; --icon-bg: #fefce8;">
+                            <span class="card-icon">🌓</span>
+                        </div>
+                        <div class="card-body">
+                            <h3>Shadows</h3>
+                            <p>6 elevation levels untuk depth dan visual hierarchy yang tepat</p>
+                        </div>
+                        <span class="card-arrow">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                        </span>
+                    </a>
+                    <a href="pages/borders.html" class="card" tabindex="0">
+                        <div class="card-icon-wrap" style="--icon-color: #16a34a; --icon-bg: #f0fdf4;">
+                            <span class="card-icon">⬡</span>
+                        </div>
+                        <div class="card-body">
+                            <h3>Borders &amp; Radius</h3>
+                            <p>Border widths, border colors, dan sistem border radius yang konsisten</p>
+                        </div>
+                        <span class="card-arrow">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                        </span>
+                    </a>
+                    <a href="pages/components.html" class="card card-highlight" tabindex="0">
+                        <div class="card-icon-wrap" style="--icon-color: #e11d48; --icon-bg: #fff1f2;">
+                            <span class="card-icon">🧩</span>
+                        </div>
+                        <div class="card-body">
+                            <h3>Components</h3>
+                            <p>Library komponen siap pakai: buttons, forms, cards, modals, dan banyak lagi</p>
+                        </div>
+                        <span class="card-arrow">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
+                        </span>
+                    </a>
                 </div>
             </section>
 
             <!-- Design Tokens Overview -->
-            <section class="tokens-overview">
-                <h2>Design Tokens Overview</h2>
-                <p>Semua design tokens telah terdokumentasi dan siap untuk digunakan dalam project Anda.</p>
-
+            <section class="tokens-overview" aria-labelledby="tokens-title">
+                <div class="section-header">
+                    <h2 id="tokens-title">Design Tokens Overview</h2>
+                    <p>Semua design tokens telah terdokumentasi dan siap untuk digunakan dalam project Anda</p>
+                </div>
                 <div class="tokens-grid">
-                    <div class="token-item">
+                    <div class="token-item token-color">
+                        <div class="token-icon">🎨</div>
                         <h4>Color System</h4>
                         <p>12 warna primary, secondary, success, warning, error + grayscale</p>
                         <code class="token-code">--color-primary-500: #6366f1</code>
                     </div>
-                    <div class="token-item">
+                    <div class="token-item token-type">
+                        <div class="token-icon">✏️</div>
                         <h4>Typography</h4>
                         <p>3 font families, 8 size scales, weight options</p>
                         <code class="token-code">--font-size-base: 1rem (16px)</code>
                     </div>
-                    <div class="token-item">
+                    <div class="token-item token-spacing">
+                        <div class="token-icon">📐</div>
                         <h4>Spacing</h4>
                         <p>12-step spacing scale dari 4px hingga 96px</p>
                         <code class="token-code">--spacing-4: 1rem (16px)</code>
                     </div>
-                    <div class="token-item">
+                    <div class="token-item token-shadow">
+                        <div class="token-icon">🌑</div>
                         <h4>Shadows</h4>
                         <p>6 elevation levels untuk depth dan hierarchy</p>
                         <code class="token-code">--shadow-sm: 0 1px 2px rgba(...)</code>
                     </div>
-                    <div class="token-item">
+                    <div class="token-item token-border">
+                        <div class="token-icon">⬡</div>
                         <h4>Borders</h4>
                         <p>Border widths, colors, dan border radius</p>
                         <code class="token-code">--border-radius-md: 0.5rem (8px)</code>
                     </div>
-                    <div class="token-item">
+                    <div class="token-item token-grid">
+                        <div class="token-icon">⊞</div>
                         <h4>Grid</h4>
                         <p>12-column grid system dengan responsive breakpoints</p>
                         <code class="token-code">--breakpoint-md: 768px</code>
@@ -130,13 +346,19 @@
             </section>
 
             <!-- Implementation Guide -->
-            <section class="implementation">
-                <h2>Implementation Guide</h2>
+            <section class="implementation" aria-labelledby="impl-title">
+                <div class="section-header">
+                    <h2 id="impl-title">Implementation Guide</h2>
+                    <p>Tiga cara mudah untuk menggunakan design system ini</p>
+                </div>
 
-                <div class="guide-section">
-                    <h3>1. Copy Tailwind Config</h3>
-                    <p>Gunakan <code>tailwind.config.js</code> yang telah dikonfigurasi dengan semua design tokens kami:</p>
-                    <pre><code>// tailwind.config.js
+                <div class="guide-steps">
+                    <div class="guide-step">
+                        <div class="step-number">01</div>
+                        <div class="step-content">
+                            <h3>Copy Tailwind Config</h3>
+                            <p>Gunakan <code>tailwind.config.js</code> yang telah dikonfigurasi dengan semua design tokens kami:</p>
+                            <pre><code>// tailwind.config.js
 module.exports = {
   theme: {
     colors: { ... },
@@ -145,50 +367,99 @@ module.exports = {
     // dan seterusnya
   }
 }</code></pre>
-                </div>
+                        </div>
+                    </div>
 
-                <div class="guide-section">
-                    <h3>2. Use Tailwind Classes</h3>
-                    <p>Semua design tokens sudah menjadi Tailwind utilities. Copy class names langsung:</p>
-                    <pre><code>&lt;div class="bg-primary-500 text-white px-4 py-2 rounded-md shadow-md"&gt;
+                    <div class="guide-step">
+                        <div class="step-number">02</div>
+                        <div class="step-content">
+                            <h3>Use Tailwind Classes</h3>
+                            <p>Semua design tokens sudah menjadi Tailwind utilities. Copy class names langsung:</p>
+                            <pre><code>&lt;div class="bg-primary-500 text-white px-4 py-2 rounded-md shadow-md"&gt;
   Button
 &lt;/div&gt;</code></pre>
-                </div>
+                        </div>
+                    </div>
 
-                <div class="guide-section">
-                    <h3>3. Reference CSS Variables</h3>
-                    <p>Atau gunakan CSS variables untuk custom styling:</p>
-                    <pre><code>.custom-element {
+                    <div class="guide-step">
+                        <div class="step-number">03</div>
+                        <div class="step-content">
+                            <h3>Reference CSS Variables</h3>
+                            <p>Atau gunakan CSS variables untuk custom styling:</p>
+                            <pre><code>.custom-element {
   background-color: var(--color-primary-500);
   padding: var(--spacing-4);
   border-radius: var(--border-radius-md);
   box-shadow: var(--shadow-md);
 }</code></pre>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- Best Practices -->
-            <section class="best-practices">
-                <h2>Best Practices</h2>
-                <ul class="practices-list">
-                    <li>✅ Gunakan design tokens dari system kami, jangan hardcode nilai</li>
-                    <li>✅ Konsistenkan spacing menggunakan spacing scale kami (4px base unit)</li>
-                    <li>✅ Selalu gunakan semantic color naming (primary, success, error, etc)</li>
-                    <li>✅ Ikuti typography guidelines untuk readability dan hierarchy</li>
-                    <li>✅ Test responsive design pada semua breakpoints</li>
-                    <li>✅ Dokumentasikan component variant dan usage guidelines</li>
-                    <li>❌ Jangan hardcode warna, spacing, atau shadow values</li>
-                    <li>❌ Jangan buat custom color palette di luar design system</li>
-                    <li>❌ Jangan skip accessibility guidelines dalam component design</li>
-                </ul>
+            <section class="best-practices" aria-labelledby="bp-title">
+                <div class="section-header">
+                    <h2 id="bp-title">Best Practices</h2>
+                    <p>Panduan untuk menggunakan design system secara konsisten dan efektif</p>
+                </div>
+                <div class="practices-grid">
+                    <div class="practice-group">
+                        <h3 class="practice-group-title do">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                            Do
+                        </h3>
+                        <ul class="practices-list">
+                            <li class="practice-item do">Gunakan design tokens dari system kami, jangan hardcode nilai</li>
+                            <li class="practice-item do">Konsistenkan spacing menggunakan spacing scale (4px base unit)</li>
+                            <li class="practice-item do">Selalu gunakan semantic color naming (primary, success, error, etc)</li>
+                            <li class="practice-item do">Ikuti typography guidelines untuk readability dan hierarchy</li>
+                            <li class="practice-item do">Test responsive design pada semua breakpoints</li>
+                            <li class="practice-item do">Dokumentasikan component variant dan usage guidelines</li>
+                        </ul>
+                    </div>
+                    <div class="practice-group">
+                        <h3 class="practice-group-title dont">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            Don't
+                        </h3>
+                        <ul class="practices-list">
+                            <li class="practice-item dont">Jangan hardcode warna, spacing, atau shadow values</li>
+                            <li class="practice-item dont">Jangan buat custom color palette di luar design system</li>
+                            <li class="practice-item dont">Jangan skip accessibility guidelines dalam component design</li>
+                        </ul>
+                    </div>
+                </div>
             </section>
 
             <!-- Footer -->
             <footer class="page-footer">
-                <p>&copy; 2024 GPOS Lite Design System V 2.0 | Maintained with ❤️</p>
+                <div class="footer-inner">
+                    <div class="footer-brand">
+                        <div class="footer-logo">
+                            <div class="logo-icon sm">G</div>
+                            <span>GPOS Lite DS</span>
+                        </div>
+                        <p>Design System untuk konsistensi dan scalability</p>
+                    </div>
+                    <div class="footer-links">
+                        <a href="pages/colors.html">Colors</a>
+                        <a href="pages/typography.html">Typography</a>
+                        <a href="pages/components.html">Components</a>
+                        <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" target="_blank" rel="noopener">GitHub ↗</a>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2024 GPOS Lite Design System V 2.0 &mdash; Maintained with ❤️</p>
+                </div>
             </footer>
         </main>
     </div>
+
+    <!-- Scroll to Top -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+    </button>
 
     <script src="js/script.js"></script>
 </body>

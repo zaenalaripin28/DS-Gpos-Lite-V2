@@ -160,112 +160,68 @@
     white-space: nowrap;
   }
 
-  /* ===== Code Section (accordion + tabs) ===== */
-  .code-accordion {
+  /* ===== Code Section ===== */
+  .code-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 4px;
+  }
+  @media(max-width: 760px){ .code-section { grid-template-columns: 1fr; } }
+  .code-panel {
+    background: var(--gpl-neutral-20);
     border: 1px solid var(--gpl-neutral-40);
     border-radius: 10px;
     overflow: hidden;
-    margin-top: 4px;
   }
-  .code-accordion-trigger {
-    width: 100%;
+  .code-panel-header {
+    background: #fff;
+    border-bottom: 1px solid var(--gpl-neutral-40);
+    padding: 10px 14px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 11px 16px;
-    background: #fff;
-    border: none;
-    cursor: pointer;
-    text-align: left;
-    transition: background .15s;
+    gap: 8px;
   }
-  .code-accordion-trigger:hover { background: var(--gpl-neutral-20); }
-  .code-accordion-trigger .ca-label {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--gpl-text-bold);
-    flex: 1;
-  }
-  .code-accordion-trigger .ca-hint {
-    font-size: 11.5px;
-    color: var(--gpl-text-subtle);
-  }
-  .code-accordion-trigger .ca-arrow {
+  .code-panel-header .cp-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 11px;
-    color: var(--gpl-text-subtle);
-    transition: transform .2s;
+    font-weight: 800;
+    flex-shrink: 0;
   }
-  .code-accordion.open .ca-arrow { transform: rotate(180deg); }
-  .code-accordion-body {
-    display: none;
-    border-top: 1px solid var(--gpl-neutral-40);
-    background: var(--gpl-neutral-20);
-  }
-  .code-accordion.open .code-accordion-body { display: block; }
-
-  /* Tab bar inside accordion */
-  .code-tab-bar {
-    display: flex;
-    gap: 4px;
-    padding: 10px 14px 0;
-  }
-  .code-tab-btn {
-    padding: 7px 14px;
-    border-radius: 7px 7px 0 0;
-    border: 1px solid transparent;
-    border-bottom: none;
-    background: transparent;
-    font: 600 12px/1 inherit;
-    cursor: pointer;
-    color: var(--gpl-text-subtle);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: all .15s;
-  }
-  .code-tab-btn.active {
-    background: #fff;
-    color: var(--gpl-text-bold);
-    border-color: var(--gpl-neutral-40);
-  }
-  .code-tab-btn .ct-icon {
-    width: 18px; height: 18px;
-    border-radius: 4px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 9px; font-weight: 800;
-  }
-  .ct-icon.tw  { background: #EFF6FF; color: #1d4ed8; }
-  .ct-icon.css { background: #FFF7ED; color: #c2410c; }
-
-  .code-tab-content {
-    background: #fff;
-    border-top: 1px solid var(--gpl-neutral-40);
+  .cp-icon.tw { background: #EFF6FF; color: #1d4ed8; }
+  .cp-icon.css { background: #FFF7ED; color: #c2410c; }
+  .code-panel-header .cp-title { font-size: 13px; font-weight: 700; color: var(--gpl-text-bold); }
+  .code-panel-header .cp-desc { font-size: 11.5px; color: var(--gpl-text-subtle); margin-left: auto; }
+  .code-panel-body {
     padding: 12px 14px;
     display: flex;
     flex-direction: column;
     gap: 4px;
-    max-height: 240px;
+    max-height: 220px;
     overflow-y: auto;
   }
-  .code-pane { display: none; }
-  .code-pane.active { display: contents; }
-
   .code-row {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 8px;
     padding: 5px 9px;
     border-radius: 6px;
-    background: var(--gpl-neutral-20);
+    background: #fff;
     border: 1px solid var(--gpl-neutral-40);
     cursor: pointer;
     transition: border-color .15s;
   }
-  .code-row:hover { border-color: var(--gpl-blue-200); background: #fff; }
+  .code-row:hover { border-color: var(--gpl-blue-200); }
   .code-row .cr-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
   .code-row .cr-label { font-size: 11px; font-weight: 600; color: var(--gpl-text-subtle); flex-shrink: 0; min-width: 28px; }
   .code-row .cr-code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 11.5px; color: var(--gpl-text-bold); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .code-row .cr-copy { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--gpl-text-subtle); flex-shrink: 0; padding: 2px 6px; border-radius: 4px; border: 1px solid var(--gpl-neutral-40); background: transparent; cursor: pointer; font-family: inherit; margin-left: auto; }
+  .code-row .cr-copy { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--gpl-text-subtle); flex-shrink: 0; padding: 2px 6px; border-radius: 4px; border: 1px solid var(--gpl-neutral-40); background: transparent; cursor: pointer; font-family: inherit; }
   .code-row:hover .cr-copy { color: var(--gpl-blue-300); border-color: var(--gpl-blue-200); }
 
   /* ===== Semantic Tokens Tab ===== */
@@ -680,7 +636,6 @@ function renderPalette() {
       </div>
     `).join("");
 
-    const uid = f.id;
     const twRows = f.shades.map(s => `
       <div class="code-row" data-copy="${s.tw}">
         <span class="cr-dot" style="background:${s.hex};border:1px solid rgba(9,30,66,.12)"></span>
@@ -727,53 +682,27 @@ function renderPalette() {
 
         <div class="swatch-row">${swatchCards}</div>
 
-        <div class="code-accordion" id="acc-${uid}">
-          <button class="code-accordion-trigger" data-acc="${uid}">
-            <span class="ca-label">Kode Implementasi</span>
-            <span class="ca-hint">Tailwind &amp; CSS Variable</span>
-            <span class="ca-arrow">▼</span>
-          </button>
-          <div class="code-accordion-body">
-            <div class="code-tab-bar" data-acc-tabs="${uid}">
-              <button class="code-tab-btn active" data-tab="tw">
-                <span class="ct-icon tw">TW</span>Tailwind
-              </button>
-              <button class="code-tab-btn" data-tab="css">
-                <span class="ct-icon css">CSS</span>CSS Variable
-              </button>
+        <div class="code-section">
+          <div class="code-panel">
+            <div class="code-panel-header">
+              <span class="cp-icon tw">TW</span>
+              <span class="cp-title">Tailwind</span>
+              <span class="cp-desc">Class utility untuk background</span>
             </div>
-            <div class="code-tab-content">
-              <div class="code-pane active" data-pane="${uid}-tw">${twRows}</div>
-              <div class="code-pane" data-pane="${uid}-css">${cssRows}</div>
+            <div class="code-panel-body">${twRows}</div>
+          </div>
+          <div class="code-panel">
+            <div class="code-panel-header">
+              <span class="cp-icon css">CSS</span>
+              <span class="cp-title">CSS Variable</span>
+              <span class="cp-desc">Gunakan via var()</span>
             </div>
+            <div class="code-panel-body">${cssRows}</div>
           </div>
         </div>
       </section>
     `;
   }).join("");
-
-  // Accordion toggle
-  container.addEventListener("click", e => {
-    const trigger = e.target.closest(".code-accordion-trigger");
-    if (trigger) {
-      const acc = document.getElementById("acc-" + trigger.dataset.acc);
-      acc.classList.toggle("open");
-      return;
-    }
-    // Tab switching
-    const tabBtn = e.target.closest(".code-tab-btn");
-    if (tabBtn) {
-      const bar = tabBtn.closest(".code-tab-bar");
-      const uid = bar.dataset.accTabs;
-      const tab = tabBtn.dataset.tab;
-      bar.querySelectorAll(".code-tab-btn").forEach(b => b.classList.toggle("active", b === tabBtn));
-      const content = bar.nextElementSibling;
-      content.querySelectorAll(".code-pane").forEach(p => {
-        p.classList.toggle("active", p.dataset.pane === `${uid}-${tab}`);
-      });
-      return;
-    }
-  });
 
   // Click on swatch card → copy hex
   container.addEventListener("click", e => {
