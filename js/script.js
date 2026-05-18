@@ -78,6 +78,32 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // ========================================
+  // Desktop Sidebar Collapse Toggle
+  // ========================================
+  const SIDEBAR_KEY = 'gpos-sidebar';
+  const sidebarCollapseBtn = document.getElementById('sidebarCollapseBtn');
+  const sidebarReopenTab   = document.getElementById('sidebarReopenTab');
+
+  function applySidebarCollapse(isHidden) {
+    document.body.classList.toggle('sidebar-hidden', isHidden);
+  }
+
+  // Restore saved state (only on desktop)
+  if (window.innerWidth >= 769) {
+    const savedSidebar = localStorage.getItem(SIDEBAR_KEY);
+    if (savedSidebar === 'hidden') applySidebarCollapse(true);
+  }
+
+  function toggleSidebarCollapse() {
+    const isNowHidden = !document.body.classList.contains('sidebar-hidden');
+    applySidebarCollapse(isNowHidden);
+    localStorage.setItem(SIDEBAR_KEY, isNowHidden ? 'hidden' : 'visible');
+  }
+
+  if (sidebarCollapseBtn) sidebarCollapseBtn.addEventListener('click', toggleSidebarCollapse);
+  if (sidebarReopenTab)   sidebarReopenTab.addEventListener('click', toggleSidebarCollapse);
+
+  // ========================================
   // Active Nav Link Highlight
   // ========================================
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';

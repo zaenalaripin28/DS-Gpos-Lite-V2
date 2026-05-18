@@ -5,368 +5,1320 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Typography - Design System GPOS Lite V 2.0</title>
     <link rel="stylesheet" href="../css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== Typography Page Enhancements ===== */
+
+    /* Section headings */
+    section h2 {
+      font-size: var(--font-size-2xl);
+      font-weight: var(--font-weight-bold);
+      color: var(--text-1);
+      margin-bottom: var(--spacing-2);
+      letter-spacing: -.01em;
+    }
+
+    /* ===== Font Family Card ===== */
+    .font-family-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow var(--transition-base);
+    }
+    .font-family-card:hover { box-shadow: var(--shadow-md); }
+
+    .font-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--spacing-5) var(--spacing-6);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-subtle);
+    }
+    .font-card-meta { display: flex; flex-direction: column; gap: 4px; }
+    .font-card-name {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-bold);
+      color: var(--text-1);
+    }
+    .font-card-stack {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-3);
+    }
+    .font-card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--color-primary-50);
+      color: var(--color-primary-700);
+      font-size: 11px;
+      font-weight: var(--font-weight-semibold);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--color-primary-200);
+    }
+    [data-theme="dark"] .font-card-badge {
+      background: rgba(99,102,241,.12);
+      color: var(--color-primary-400);
+      border-color: rgba(99,102,241,.2);
+    }
+
+    .font-card-body { padding: var(--spacing-6); }
+
+    .font-alphabet {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(15px, 2.5vw, 22px);
+      font-weight: 400;
+      color: var(--text-1);
+      line-height: 1.8;
+      letter-spacing: .01em;
+      margin-bottom: var(--spacing-3);
+      word-break: break-all;
+    }
+    .font-numbers {
+      font-family: 'Poppins', sans-serif;
+      font-size: var(--font-size-lg);
+      font-weight: 400;
+      color: var(--text-2);
+      letter-spacing: .08em;
+      margin-bottom: var(--spacing-5);
+    }
+
+    .font-weights-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--spacing-3);
+      padding-top: var(--spacing-5);
+      border-top: 1px solid var(--border);
+    }
+    .font-weight-chip {
+      flex: 1;
+      min-width: 140px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: var(--spacing-3) var(--spacing-4);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .font-weight-chip-label {
+      font-size: 10px;
+      font-weight: var(--font-weight-semibold);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--text-3);
+    }
+    .font-weight-chip-sample {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-1);
+      font-size: var(--font-size-base);
+      line-height: 1.4;
+    }
+
+    /* ===== Type Specimen ===== */
+    .type-specimen {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .specimen-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: var(--spacing-4);
+      padding: var(--spacing-5) var(--spacing-6);
+      border-bottom: 1px solid var(--border);
+      transition: background var(--transition-base);
+    }
+    .specimen-row:last-child { border-bottom: none; }
+    .specimen-row:hover { background: var(--bg-subtle); }
+
+    .specimen-text {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-1);
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      min-width: 0;
+    }
+    .specimen-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+    .specimen-size {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-primary-600);
+      font-weight: var(--font-weight-semibold);
+      white-space: nowrap;
+    }
+    [data-theme="dark"] .specimen-size { color: var(--color-primary-400); }
+    .specimen-label {
+      font-size: 10px;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      white-space: nowrap;
+    }
+
+    /* ===== Typography Table ===== */
+    .typo-table-wrap {
+      overflow-x: auto;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: var(--spacing-8);
+    }
+    .typo-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg-surface);
+      min-width: 640px;
+    }
+    .typo-table th {
+      text-align: left;
+      padding: 12px 16px;
+      font-size: 11px;
+      font-weight: var(--font-weight-semibold);
+      color: var(--text-3);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-subtle);
+      font-family: 'Poppins', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .typo-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .typo-table tr:last-child td { border-bottom: none; }
+    .typo-table td:nth-child(2),
+    .typo-table td:nth-child(3) {
+      white-space: nowrap;
+      color: var(--text-3);
+      font-size: 12px;
+      font-family: var(--font-mono);
+    }
+    .typo-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 13px;
+      color: var(--text-1);
+    }
+    .typo-sample {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-1);
+    }
+    .typo-section-row td {
+      background: var(--bg-subtle);
+      padding: 7px 16px;
+      font-size: 10px;
+      font-weight: var(--font-weight-semibold);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--text-3);
+      font-family: 'Poppins', sans-serif;
+      border-bottom: 1px solid var(--border);
+    }
+    .weight-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      padding: 2px 7px;
+      border-radius: var(--radius-sm);
+      background: var(--color-primary-50);
+      color: var(--color-primary-700);
+      border: 1px solid var(--color-primary-200);
+    }
+    [data-theme="dark"] .weight-pill {
+      background: rgba(99,102,241,.12);
+      color: var(--color-primary-400);
+      border-color: rgba(99,102,241,.2);
+    }
+
+    /* ===== Font Weights Section ===== */
+    .weight-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--spacing-4);
+      margin-bottom: var(--spacing-8);
+    }
+    .weight-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-5) var(--spacing-6);
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-5);
+      transition: all var(--transition-base);
+      box-shadow: var(--shadow-sm);
+    }
+    .weight-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-primary-300);
+      transform: translateY(-2px);
+    }
+    [data-theme="dark"] .weight-card:hover { border-color: rgba(99,102,241,.35); }
+    .weight-badge {
+      background: linear-gradient(135deg, var(--color-primary-500), var(--color-secondary-600));
+      color: white;
+      font-family: var(--font-mono);
+      font-size: var(--font-size-base);
+      font-weight: 700;
+      padding: var(--spacing-3) var(--spacing-4);
+      border-radius: var(--radius-lg);
+      min-width: 60px;
+      text-align: center;
+      box-shadow: var(--shadow-primary);
+      flex-shrink: 0;
+    }
+    .weight-info { flex: 1; min-width: 0; }
+    .weight-name {
+      font-size: 11px;
+      font-weight: var(--font-weight-semibold);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--text-3);
+      margin-bottom: 4px;
+    }
+    .weight-sample {
+      font-family: 'Poppins', sans-serif;
+      font-size: var(--font-size-lg);
+      color: var(--text-1);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ===== Code Accordion (unchanged) ===== */
+    .code-accordion {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      margin-bottom: var(--spacing-4);
+      box-shadow: var(--shadow-sm);
+    }
+    .code-accordion-trigger {
+      width: 100%; display: flex; align-items: center; gap: 10px;
+      padding: 13px 18px; background: var(--bg-surface);
+      border: none; cursor: pointer; text-align: left; transition: background .15s;
+    }
+    .code-accordion-trigger:hover { background: var(--bg-subtle); }
+    .code-accordion-trigger .ca-label { font-size: 13px; font-weight: 700; color: var(--text-1); flex: 1; font-family: var(--font-sans); }
+    .code-accordion-trigger .ca-hint { font-size: 11.5px; color: var(--text-3); }
+    .code-accordion-trigger .ca-arrow { font-size: 11px; color: var(--text-3); transition: transform .2s; }
+    .code-accordion.open .ca-arrow { transform: rotate(180deg); }
+    .code-accordion-body { display: none; border-top: 1px solid var(--border); background: var(--bg-subtle); }
+    .code-accordion.open .code-accordion-body { display: block; }
+
+    .code-tab-bar { display: flex; gap: 4px; padding: 10px 14px 0; }
+    .code-tab-btn {
+      padding: 7px 14px; border-radius: 7px 7px 0 0;
+      border: 1px solid transparent; border-bottom: none;
+      background: transparent; font: 600 12px/1 var(--font-sans);
+      cursor: pointer; color: var(--text-3);
+      display: flex; align-items: center; gap: 6px; transition: all .15s;
+    }
+    .code-tab-btn.active { background: var(--bg-surface); color: var(--text-1); border-color: var(--border); }
+    .code-tab-btn .ct-icon {
+      width: 18px; height: 18px; border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px; font-weight: 800;
+    }
+    .ct-icon.tw  { background: #EFF6FF; color: #1d4ed8; }
+    .ct-icon.css { background: #FFF7ED; color: #c2410c; }
+    [data-theme="dark"] .ct-icon.tw  { background: rgba(29,78,216,.15); color: #93c5fd; }
+    [data-theme="dark"] .ct-icon.css { background: rgba(194,65,12,.15); color: #fca5a5; }
+
+    .code-tab-content {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      padding: 12px 14px; display: flex; flex-direction: column; gap: 4px;
+      max-height: 320px; overflow-y: auto;
+    }
+    .code-pane { display: none; }
+    .code-pane.active { display: contents; }
+
+    .code-row {
+      display: flex; align-items: center; gap: 8px; padding: 8px 10px;
+      border-radius: var(--radius-md);
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      cursor: pointer; transition: all .15s;
+    }
+    .code-row:hover { border-color: var(--color-primary-300); background: var(--bg-surface); box-shadow: var(--shadow-sm); }
+    .code-row .cr-tag {
+      font-size: 9px; font-weight: 800; flex-shrink: 0;
+      background: var(--color-primary-50);
+      color: var(--color-primary-700);
+      border: 1px solid var(--color-primary-200);
+      border-radius: 4px; padding: 2px 5px;
+      font-family: var(--font-mono);
+      min-width: 28px; text-align: center;
+    }
+    [data-theme="dark"] .code-row .cr-tag { background: rgba(29,78,216,.1); color: #93c5fd; border-color: rgba(29,78,216,.2); }
+    .code-row .cr-label { font-size: 11px; font-weight: 600; color: var(--text-3); flex-shrink: 0; min-width: 160px; }
+    .code-row .cr-code { font-family: var(--font-mono); font-size: 11.5px; color: var(--text-1); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .code-row .cr-copy {
+      font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em;
+      color: var(--text-3); flex-shrink: 0; padding: 2px 7px;
+      border-radius: var(--radius-sm); border: 1px solid var(--border);
+      background: transparent; cursor: pointer; font-family: var(--font-sans);
+      margin-left: auto; transition: all .15s;
+    }
+    .code-row:hover .cr-copy { color: var(--color-primary-600); border-color: var(--color-primary-300); }
+
+    .typo-impl-lead { font-size: 13px; color: var(--text-2); margin-bottom: var(--spacing-4); }
+
+    /* ===== Toast ===== */
+    .gpl-toast {
+      position: fixed; left: 50%; bottom: 32px;
+      transform: translate(-50%, 40px);
+      background: #0f172a; color: #fff;
+      padding: 10px 20px; border-radius: 12px;
+      font-size: 13px; font-weight: 500;
+      box-shadow: 0 8px 24px rgba(0,0,0,.18);
+      opacity: 0; transition: all .25s ease;
+      pointer-events: none; z-index: 9999;
+      white-space: nowrap; display: flex; align-items: center; gap: 8px;
+    }
+    .gpl-toast::before { content: '✓'; font-weight: 700; color: #86efac; }
+    .gpl-toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 640px) {
+      .font-weights-strip { flex-direction: column; }
+      .weight-cards { grid-template-columns: 1fr; }
+      .specimen-row { grid-template-columns: 1fr; gap: var(--spacing-2); }
+      .specimen-meta { align-items: flex-start; flex-direction: row; gap: var(--spacing-3); }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Sidebar Navigation -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h1 class="logo">GPOS Lite</h1>
-                <p class="version">Design System V2.0</p>
-            </div>
+<!-- Mobile Overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-            <nav class="nav-menu">
-                <div class="nav-section">
-                    <h3 class="nav-title">Foundations</h3>
-                    <ul class="nav-list">
-                        <li><a href="../index.html" class="nav-link">Home</a></li>
-                        <li><a href="colors.html" class="nav-link">Colors</a></li>
-                        <li><a href="typography.html" class="nav-link" style="color: var(--color-primary-400);">Typography</a></li>
-                        <li><a href="spacing.html" class="nav-link">Spacing</a></li>
-                        <li><a href="shadows.html" class="nav-link">Shadows</a></li>
-                        <li><a href="borders.html" class="nav-link">Borders & Radius</a></li>
-                        <li><a href="grid.html" class="nav-link">Grid & Layout</a></li>
-                    </ul>
-                </div>
+<!-- Desktop re-open tab -->
+<button class="sidebar-reopen-tab" id="sidebarReopenTab" aria-label="Buka sidebar">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+</button>
 
-                <div class="nav-section">
-                    <h3 class="nav-title">Components</h3>
-                    <ul class="nav-list">
-                        <li><a href="components.html" class="nav-link">Component Library</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Header -->
-            <header class="page-header">
-                <h1>Typography</h1>
-                <p class="subtitle">Font families, sizes, weights, dan line heights untuk hierarchy dan readability</p>
-            </header>
-
-            <!-- Overview -->
-            <section>
-                <h2>Typography Principles</h2>
-                <div class="guide-section">
-                    <h3>Design Goals</h3>
-                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
-                        <li><strong>Clarity:</strong> Teks harus mudah dibaca di semua ukuran</li>
-                        <li><strong>Hierarchy:</strong> Ukuran, weight, dan color membedakan konten penting</li>
-                        <li><strong>Consistency:</strong> Gunakan hanya typography scale yang telah ditentukan</li>
-                        <li><strong>Accessibility:</strong> Minimum font size 14px untuk body text, contrast ratio memenuhi WCAG AA</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Font Families -->
-            <section>
-                <h2>Font Families</h2>
-
-                <div class="guide-section">
-                    <h3>Primary Font - System Stack</h3>
-                    <p><code>-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif</code></p>
-                    <p style="margin-bottom: var(--spacing-2); color: var(--color-text-secondary);">Gunakan untuk semua body text, labels, dan paragraf</p>
-                    <div style="padding: var(--spacing-4); background-color: white; border-radius: var(--border-radius-md); border: 1px solid var(--color-border-light);">
-                        <p style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; font-size: var(--font-size-lg);">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz 0123456789</p>
-                    </div>
-
-                    <div class="guide-section" style="margin-top: var(--spacing-6);">
-                        <h4>✅ Usage</h4>
-                        <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
-                            <li>Body text dan paragraf</li>
-                            <li>Labels dan form inputs</li>
-                            <li>Navigation dan menus</li>
-                            <li>Semua UI text kecuali special cases</li>
-                        </ul>
-                    </div>
-
-                    <div class="guide-section">
-                        <h4>Tailwind CSS Utilities</h4>
-                        <pre><code>&lt;p class="font-sans"&gt;Body text&lt;/p&gt;</code></pre>
-                    </div>
-                </div>
-
-                <div class="guide-section">
-                    <h3>Monospace Font</h3>
-                    <p><code>Courier New, monospace</code></p>
-                    <p style="margin-bottom: var(--spacing-2); color: var(--color-text-secondary);">Gunakan untuk code, technical content, dan fixed-width display</p>
-                    <div style="padding: var(--spacing-4); background-color: var(--color-gray-900); border-radius: var(--border-radius-md); color: #f8f8f2;">
-                        <code style="background: none; padding: 0; color: inherit; font-size: var(--font-size-base);">const greeting = "Hello World";</code>
-                    </div>
-
-                    <div class="guide-section" style="margin-top: var(--spacing-6);">
-                        <h4>✅ Usage</h4>
-                        <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
-                            <li>Code blocks dan snippets</li>
-                            <li>Variables dan technical terms</li>
-                            <li>IDs dan unique identifiers</li>
-                            <li>Console output</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Font Sizes -->
-            <section>
-                <h2>Font Sizes</h2>
-                <p>Skala 9 levels dari 12px hingga 48px dengan spacing yang konsisten.</p>
-
-                <div style="display: grid; gap: var(--spacing-4); margin-bottom: var(--spacing-8);">
-                    <!-- XS -->
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <p style="font-size: var(--font-size-xs); margin: 0; color: var(--color-text-primary);">Extra Small</p>
-                                <p style="font-size: var(--font-size-xs); margin: 0; color: var(--color-text-secondary);">--font-size-xs / 12px</p>
-                            </div>
-                            <code style="font-size: var(--font-size-xs);">text-xs</code>
-                        </div>
-                    </div>
-
-                    <!-- SM -->
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <p style="font-size: var(--font-size-sm); margin: 0; color: var(--color-text-primary);">Small</p>
-                                <p style="font-size: var(--font-size-xs); margin: 0; color: var(--color-text-secondary);">--font-size-sm / 14px</p>
-                            </div>
-                            <code style="font-size: var(--font-size-xs);">text-sm</code>
-                        </div>
-                    </div>
-
-                    <!-- Base -->
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <p style="font-size: var(--font-size-base); margin: 0; color: var(--color-text-primary);">Base</p>
-                                <p style="font-size: var(--font-size-xs); margin: 0; color: var(--color-text-secondary);">--font-size-base / 16px (default)</p>
-                            </div>
-                            <code style="font-size: var(--font-size-xs);">text-base</code>
-                        </div>
-                    </div>
-
-                    <!-- LG -->
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <p style="font-size: var(--font-size-lg); margin: 0; color: var(--color-text-primary);">Large</p>
-                                <p style="font-size: var(--font-size-xs); margin: 0; color: var(--color-text-secondary);">--font-size-lg / 18px</p>
-                            </div>
-                            <code style="font-size: var(--font-size-xs);">text-lg</code>
-                        </div>
-                    </div>
-
-                    <!-- XL -->
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <p style="font-size: var(--font-size-xl); margin: 0; color: var(--color-text-primary);">Extra Large</p>
-                                <p style="font-size: var(--font-size-xs); margin: 0; color: var(--color-text-secondary);">--font-size-xl / 20px</p>
-                            </div>
-                            <code style="font-size: var(--font-size-xs);">text-xl</code>
-                        </div>
-                    </div>
-
-                    <!-- 2XL -->
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <p style="font-size: var(--font-size-2xl); margin: 0; color: var(--color-text-primary);">2XL</p>
-                                <p style="font-size: var(--font-size-xs); margin: 0; color: var(--color-text-secondary);">--font-size-2xl / 24px</p>
-                            </div>
-                            <code style="font-size: var(--font-size-xs);">text-2xl</code>
-                        </div>
-                    </div>
-
-                    <!-- 3XL -->
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <p style="font-size: var(--font-size-3xl); margin: 0; color: var(--color-text-primary);">3XL</p>
-                                <p style="font-size: var(--font-size-xs); margin: 0; color: var(--color-text-secondary);">--font-size-3xl / 30px</p>
-                            </div>
-                            <code style="font-size: var(--font-size-xs);">text-3xl</code>
-                        </div>
-                    </div>
-
-                    <!-- 4XL -->
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <p style="font-size: var(--font-size-4xl); margin: 0; color: var(--color-text-primary);">4XL</p>
-                                <p style="font-size: var(--font-size-xs); margin: 0; color: var(--color-text-secondary);">--font-size-4xl / 36px</p>
-                            </div>
-                            <code style="font-size: var(--font-size-xs);">text-4xl</code>
-                        </div>
-                    </div>
-
-                    <!-- 5XL -->
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <p style="font-size: var(--font-size-5xl); margin: 0; color: var(--color-text-primary);">5XL</p>
-                                <p style="font-size: var(--font-size-xs); margin: 0; color: var(--color-text-secondary);">--font-size-5xl / 48px</p>
-                            </div>
-                            <code style="font-size: var(--font-size-xs);">text-5xl</code>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Font Weights -->
-            <section>
-                <h2>Font Weights</h2>
-
-                <div style="display: grid; gap: var(--spacing-4); margin-bottom: var(--spacing-8);">
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <p style="font-weight: 300; font-size: var(--font-size-lg); margin: 0;">Light (300) - --font-weight-light</p>
-                        <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin: 0;">Untuk text yang kurang penting atau subtle</p>
-                    </div>
-
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <p style="font-weight: 400; font-size: var(--font-size-lg); margin: 0;">Normal (400) - --font-weight-normal</p>
-                        <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin: 0;">Default weight untuk body text</p>
-                    </div>
-
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <p style="font-weight: 500; font-size: var(--font-size-lg); margin: 0;">Medium (500) - --font-weight-medium</p>
-                        <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin: 0;">Untuk labels dan secondary headings</p>
-                    </div>
-
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <p style="font-weight: 600; font-size: var(--font-size-lg); margin: 0;">Semibold (600) - --font-weight-semibold</p>
-                        <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin: 0;">Untuk subheadings dan emphasis</p>
-                    </div>
-
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <p style="font-weight: 700; font-size: var(--font-size-lg); margin: 0;">Bold (700) - --font-weight-bold</p>
-                        <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin: 0;">Untuk headings dan strong emphasis</p>
-                    </div>
-                </div>
-
-                <div class="guide-section">
-                    <h3>✅ Usage Guidelines</h3>
-                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
-                        <li><strong>H1-H6:</strong> Gunakan font-weight-bold (700)</li>
-                        <li><strong>Labels:</strong> Gunakan font-weight-medium (500)</li>
-                        <li><strong>Body text:</strong> Gunakan font-weight-normal (400)</li>
-                        <li><strong>Secondary text:</strong> Gunakan font-weight-normal (400) + gray-500 color</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Line Heights -->
-            <section>
-                <h2>Line Heights</h2>
-                <p>Spacing vertikal antara baris teks untuk readability yang optimal.</p>
-
-                <div style="display: grid; gap: var(--spacing-4); margin-bottom: var(--spacing-8);">
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <p style="line-height: 1.2; margin: 0;">Tight (1.2) - --line-height-tight<br>Gunakan untuk headings dan subheadings</p>
-                        <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: var(--spacing-2); margin-bottom: 0;">Cocok untuk text yang singkat dan besar</p>
-                    </div>
-
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <p style="line-height: 1.375; margin: 0;">Snug (1.375) - --line-height-snug<br>Good untuk smaller headings dan labels</p>
-                        <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: var(--spacing-2); margin-bottom: 0;">Balanced spacing untuk readability</p>
-                    </div>
-
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <p style="line-height: 1.5; margin: 0;">Normal (1.5) - --line-height-normal<br>Default untuk body text dan paragraf. Memberikan readability optimal.</p>
-                        <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: var(--spacing-2); margin-bottom: 0;">Recommended untuk kebanyakan use case</p>
-                    </div>
-
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <p style="line-height: 1.625; margin: 0;">Relaxed (1.625) - --line-height-relaxed<br>Untuk long-form content dan documentation.</p>
-                        <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: var(--spacing-2); margin-bottom: 0;">Extra spacing untuk ease of reading</p>
-                    </div>
-
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <p style="line-height: 2; margin: 0;">Loose (2) - --line-height-loose<br>Maximum spacing antara lines.</p>
-                        <p style="font-size: var(--font-size-xs); color: var(--color-text-secondary); margin-top: var(--spacing-2); margin-bottom: 0;">Gunakan hanya untuk special cases</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Text Styles -->
-            <section>
-                <h2>Predefined Text Styles</h2>
-
-                <div class="guide-section">
-                    <h3>Heading Styles</h3>
-                    <pre><code>&lt;!-- H1 Styles --&gt;
-.text-h1 {
-  font-size: var(--font-size-4xl); /* 36px */
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-tight);
-  color: var(--color-text-primary);
-}
-
-&lt;!-- H2 Styles --&gt;
-.text-h2 {
-  font-size: var(--font-size-3xl); /* 30px */
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-tight);
-}</code></pre>
-                </div>
-
-                <div class="guide-section">
-                    <h3>Body Text Styles</h3>
-                    <pre><code>&lt;!-- Body Large --&gt;
-.text-body-lg {
-  font-size: var(--font-size-lg); /* 18px */
-  line-height: var(--line-height-normal);
-}
-
-&lt;!-- Body Base (default) --&gt;
-.text-body-base {
-  font-size: var(--font-size-base); /* 16px */
-  line-height: var(--line-height-normal);
-}
-
-&lt;!-- Body Small --&gt;
-.text-body-sm {
-  font-size: var(--font-size-sm); /* 14px */
-  line-height: var(--line-height-normal);
-}</code></pre>
-                </div>
-            </section>
-
-            <!-- Best Practices -->
-            <section>
-                <h2>Best Practices</h2>
-                <div class="guide-section">
-                    <h3>✅ Do</h3>
-                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
-                        <li>Gunakan scale yang telah ditentukan, jangan buat custom sizes</li>
-                        <li>Maintain font-size dan line-height yang sesuai untuk readability (minimum 14px untuk body)</li>
-                        <li>Gunakan semantic HTML tags (h1-h6, p, strong, em)</li>
-                        <li>Test readability pada dark dan light backgrounds</li>
-                        <li>Ensure contrast ratio memenuhi WCAG AA (4.5:1 untuk normal text)</li>
-                    </ul>
-                </div>
-
-                <div class="guide-section">
-                    <h3>❌ Don't</h3>
-                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
-                        <li>Jangan buat custom font sizes - gunakan scale yang ada</li>
-                        <li>Jangan gunakan font size kurang dari 12px untuk body text</li>
-                        <li>Jangan mix font families dalam single component</li>
-                        <li>Jangan gunakan text decoration lain dari underline untuk links</li>
-                        <li>Jangan skip line-height untuk readability</li>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Footer -->
-            <footer class="page-footer">
-                <p>&copy; 2024 GPOS Lite Design System V 2.0 | Maintained with ❤️</p>
-            </footer>
-        </main>
+<div class="container">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-wrap">
+        <div class="logo-icon">G</div>
+        <div>
+          <h1 class="logo">GPOS Lite</h1>
+          <p class="version">Design System V2.0</p>
+        </div>
+      </div>
+      <div class="sidebar-actions">
+        <button class="sidebar-collapse-btn" id="sidebarCollapseBtn" aria-label="Collapse sidebar" title="Collapse sidebar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="sidebar-close" id="sidebarClose" aria-label="Tutup menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
     </div>
 
-    <script src="../js/script.js"></script>
+    <nav class="nav-menu" role="navigation" aria-label="Navigasi utama">
+      <div class="nav-section">
+        <h3 class="nav-title">Foundations</h3>
+        <ul class="nav-list">
+          <li>
+            <a href="../index.html" class="nav-link">
+              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+              Home
+            </a>
+          </li>
+          <li>
+            <a href="colors.html" class="nav-link">
+              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a7 7 0 1 0 7 7"/></svg></span>
+              Colors
+            </a>
+          </li>
+          <li>
+            <a href="typography.html" class="nav-link active" aria-current="page">
+              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg></span>
+              Typography
+            </a>
+          </li>
+          <li>
+            <a href="spacing.html" class="nav-link">
+              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg></span>
+              Spacing
+            </a>
+          </li>
+          <li>
+            <a href="shadows.html" class="nav-link">
+              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg></span>
+              Shadows
+            </a>
+          </li>
+          <li>
+            <a href="borders.html" class="nav-link">
+              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="6"/></svg></span>
+              Borders &amp; Radius
+            </a>
+          </li>
+          <li>
+            <a href="grid.html" class="nav-link">
+              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>
+              Grid &amp; Layout
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <h3 class="nav-title">Components</h3>
+        <ul class="nav-list">
+          <li>
+            <a href="components.html" class="nav-link">
+              <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="6" height="6" rx="1"/><rect x="2" y="15" width="6" height="6" rx="1"/><rect x="14" y="3" width="8" height="6" rx="1"/><rect x="14" y="15" width="8" height="6" rx="1"/></svg></span>
+              Component Library
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+        <span class="toggle-icon" id="toggleIcon"></span>
+        <span id="toggleLabel">Dark Mode</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content" id="mainContent">
+    <!-- Mobile topbar -->
+    <div class="topbar" id="topbar">
+      <button class="hamburger" id="hamburger" aria-label="Buka menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <span class="topbar-title">Typography</span>
+      <button class="topbar-theme" id="topbarTheme" aria-label="Toggle theme"></button>
+    </div>
+
+    <!-- Page Header -->
+    <header class="page-header">
+      <div class="header-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+        Typography Foundation
+      </div>
+      <h1>Typography</h1>
+      <p class="subtitle">Font family, sizes, weights, dan line heights untuk hierarchy dan readability yang konsisten di seluruh produk.</p>
+    </header>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+      <div class="stat-item">
+        <span class="stat-number">1</span>
+        <span class="stat-label">Font Family</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-number">20</span>
+        <span class="stat-label">Type Styles</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-number">2</span>
+        <span class="stat-label">Font Weights</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-number">7</span>
+        <span class="stat-label">Categories</span>
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────
+         1. FONT FAMILY
+    ───────────────────────────────────────── -->
+    <section>
+      <div class="section-header">
+        <h2>Font Family</h2>
+        <p>Poppins digunakan sebagai satu-satunya font family untuk semua text UI — heading, body, label, caption, dan overline.</p>
+      </div>
+
+      <div class="font-family-card">
+        <div class="font-card-header">
+          <div class="font-card-meta">
+            <span class="font-card-name">Poppins</span>
+            <span class="font-card-stack">'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif</span>
+          </div>
+          <div class="font-card-badge">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Primary Font
+          </div>
+        </div>
+        <div class="font-card-body">
+          <p class="font-alphabet">Aa Bb Cc Dd Ee Ff Gg Hh Ii Jj Kk Ll Mm Nn Oo Pp Qq Rr Ss Tt Uu Vv Ww Xx Yy Zz</p>
+          <p class="font-numbers">0 &nbsp;1 &nbsp;2 &nbsp;3 &nbsp;4 &nbsp;5 &nbsp;6 &nbsp;7 &nbsp;8 &nbsp;9</p>
+          <div class="font-weights-strip">
+            <div class="font-weight-chip">
+              <span class="font-weight-chip-label">Regular · 400</span>
+              <span class="font-weight-chip-sample" style="font-weight:400;">The quick brown fox</span>
+            </div>
+            <div class="font-weight-chip">
+              <span class="font-weight-chip-label">Medium · 500</span>
+              <span class="font-weight-chip-sample" style="font-weight:500;">The quick brown fox</span>
+            </div>
+            <div class="font-weight-chip">
+              <span class="font-weight-chip-label">SemiBold · 600</span>
+              <span class="font-weight-chip-sample" style="font-weight:600;">The quick brown fox</span>
+            </div>
+            <div class="font-weight-chip">
+              <span class="font-weight-chip-label">Bold · 700</span>
+              <span class="font-weight-chip-sample" style="font-weight:700;">The quick brown fox</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────────────────
+         2. TYPE SPECIMEN
+    ───────────────────────────────────────── -->
+    <section>
+      <div class="section-header">
+        <h2>Type Specimen</h2>
+        <p>Gambaran visual hierarki tipografi dari ukuran terbesar hingga terkecil.</p>
+      </div>
+
+      <div class="type-specimen" role="list" aria-label="Typography scale specimen">
+        <div class="specimen-row" role="listitem">
+          <span class="specimen-text" style="font-size:clamp(32px,5vw,64px); font-weight:500; line-height:1.1;" aria-label="Display Medium">Bermain kata adalah passion ku</span>
+          <div class="specimen-meta">
+            <span class="specimen-size">64px / 68px</span>
+            <span class="specimen-label">Display</span>
+          </div>
+        </div>
+        <div class="specimen-row" role="listitem">
+          <span class="specimen-text" style="font-size:clamp(28px,4vw,44px); font-weight:500; line-height:1.2;" aria-label="Header Large">Bermain kata adalah passion ku</span>
+          <div class="specimen-meta">
+            <span class="specimen-size">44px / 52px</span>
+            <span class="specimen-label">Header / Large</span>
+          </div>
+        </div>
+        <div class="specimen-row" role="listitem">
+          <span class="specimen-text" style="font-size:clamp(22px,3.5vw,36px); font-weight:500; line-height:1.25;" aria-label="Header Medium">Bermain kata adalah passion ku</span>
+          <div class="specimen-meta">
+            <span class="specimen-size">36px / 44px</span>
+            <span class="specimen-label">Header / Medium</span>
+          </div>
+        </div>
+        <div class="specimen-row" role="listitem">
+          <span class="specimen-text" style="font-size:clamp(18px,2.5vw,24px); font-weight:500; line-height:1.35;" aria-label="Header Small">Bermain kata adalah passion ku</span>
+          <div class="specimen-meta">
+            <span class="specimen-size">24px / 32px</span>
+            <span class="specimen-label">Header / Small</span>
+          </div>
+        </div>
+        <div class="specimen-row" role="listitem">
+          <span class="specimen-text" style="font-size:20px; font-weight:500; line-height:1.4;" aria-label="Title">Bermain kata adalah passion ku</span>
+          <div class="specimen-meta">
+            <span class="specimen-size">20px / 24px</span>
+            <span class="specimen-label">Title</span>
+          </div>
+        </div>
+        <div class="specimen-row" role="listitem">
+          <span class="specimen-text" style="font-size:18px; font-weight:400; line-height:1.6;" aria-label="Body Large">Bermain kata adalah passion ku</span>
+          <div class="specimen-meta">
+            <span class="specimen-size">18px / 28px</span>
+            <span class="specimen-label">Body / Large</span>
+          </div>
+        </div>
+        <div class="specimen-row" role="listitem">
+          <span class="specimen-text" style="font-size:16px; font-weight:400; line-height:1.6;" aria-label="Body Medium">Bermain kata adalah passion ku</span>
+          <div class="specimen-meta">
+            <span class="specimen-size">16px / 24px</span>
+            <span class="specimen-label">Body / Medium</span>
+          </div>
+        </div>
+        <div class="specimen-row" role="listitem">
+          <span class="specimen-text" style="font-size:14px; font-weight:400; line-height:1.5;" aria-label="Body Small">Bermain kata adalah passion ku</span>
+          <div class="specimen-meta">
+            <span class="specimen-size">14px / 20px</span>
+            <span class="specimen-label">Body / Small</span>
+          </div>
+        </div>
+        <div class="specimen-row" role="listitem">
+          <span class="specimen-text" style="font-size:12px; font-weight:400; line-height:1.4;" aria-label="Caption">Bermain kata adalah passion ku</span>
+          <div class="specimen-meta">
+            <span class="specimen-size">12px / 14px</span>
+            <span class="specimen-label">Caption</span>
+          </div>
+        </div>
+        <div class="specimen-row" role="listitem">
+          <span class="specimen-text" style="font-size:12px; font-weight:500; line-height:1.65; letter-spacing:.08em; text-transform:uppercase;" aria-label="Overline">Bermain kata adalah passion ku</span>
+          <div class="specimen-meta">
+            <span class="specimen-size">12px / 20px</span>
+            <span class="specimen-label">Overline</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────────────────
+         3. TYPOGRAPHY SCALE (TABLE)
+    ───────────────────────────────────────── -->
+    <section>
+      <div class="section-header">
+        <h2>Typography Scale</h2>
+        <p>Semua style menggunakan font family <strong>Poppins</strong> dengan dua weight utama: Regular (400) dan Medium (500).</p>
+      </div>
+
+      <div class="typo-table-wrap">
+        <table class="typo-table">
+          <thead>
+            <tr>
+              <th style="width:34%;">Style name</th>
+              <th style="width:12%;">Size</th>
+              <th style="width:12%;">Line-h</th>
+              <th style="width:10%;">Weight</th>
+              <th>Sample</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <!-- OVERLINE -->
+            <tr class="typo-section-row"><td colspan="5">Overline</td></tr>
+            <tr>
+              <td><span class="typo-name" style="font-weight:500;letter-spacing:.08em;text-transform:uppercase;font-size:12px;">OVERLINE / MEDIUM</span></td>
+              <td>12px</td><td>20px</td>
+              <td><span class="weight-pill">500</span></td>
+              <td><span class="typo-sample" style="font-size:12px;font-weight:500;line-height:20px;letter-spacing:.08em;text-transform:uppercase;">BERMAIN KATA ADALAH PASSION KU</span></td>
+            </tr>
+
+            <!-- CAPTION -->
+            <tr class="typo-section-row"><td colspan="5">Caption</td></tr>
+            <tr>
+              <td><span class="typo-name" style="text-decoration:underline;">Caption / Link</span></td>
+              <td>12px</td><td>14px</td>
+              <td><span class="weight-pill">400</span></td>
+              <td><span class="typo-sample" style="font-size:12px;font-weight:400;line-height:14px;text-decoration:underline;">Bermain kata adalah passion ku</span></td>
+            </tr>
+            <tr>
+              <td><span class="typo-name">Caption / Regular</span></td>
+              <td>12px</td><td>14px</td>
+              <td><span class="weight-pill">400</span></td>
+              <td><span class="typo-sample" style="font-size:12px;font-weight:400;line-height:14px;">Bermain kata adalah passion ku</span></td>
+            </tr>
+            <tr>
+              <td><span class="typo-name">Caption / Medium</span></td>
+              <td>12px</td><td>20px</td>
+              <td><span class="weight-pill">500</span></td>
+              <td><span class="typo-sample" style="font-size:12px;font-weight:500;line-height:20px;">Bermain kata adalah passion ku</span></td>
+            </tr>
+
+            <!-- BODY -->
+            <tr class="typo-section-row"><td colspan="5">Body</td></tr>
+            <tr>
+              <td><span class="typo-name" style="text-decoration:underline;">Body / Link</span></td>
+              <td>14px</td><td>20px</td>
+              <td><span class="weight-pill">400</span></td>
+              <td><span class="typo-sample" style="font-size:14px;font-weight:400;line-height:20px;text-decoration:underline;">Bermain kata adalah passion ku</span></td>
+            </tr>
+            <tr>
+              <td><span class="typo-name">Body / Small / Regular</span></td>
+              <td>14px</td><td>20px</td>
+              <td><span class="weight-pill">400</span></td>
+              <td><span class="typo-sample" style="font-size:14px;font-weight:400;line-height:20px;">Bermain kata adalah passion ku</span></td>
+            </tr>
+            <tr>
+              <td><span class="typo-name">Body / Small / Medium</span></td>
+              <td>14px</td><td>20px</td>
+              <td><span class="weight-pill">500</span></td>
+              <td><span class="typo-sample" style="font-size:14px;font-weight:500;line-height:20px;">Bermain kata adalah passion ku</span></td>
+            </tr>
+            <tr>
+              <td><span class="typo-name" style="text-decoration:underline;">Body / Small / Link</span></td>
+              <td>14px</td><td>20px</td>
+              <td><span class="weight-pill">500</span></td>
+              <td><span class="typo-sample" style="font-size:14px;font-weight:500;line-height:20px;text-decoration:underline;">Bermain kata adalah passion ku</span></td>
+            </tr>
+            <tr>
+              <td><span class="typo-name" style="font-weight:600;">Body / Medium / Medium</span></td>
+              <td>16px</td><td>24px</td>
+              <td><span class="weight-pill">500</span></td>
+              <td><span class="typo-sample" style="font-size:16px;font-weight:500;line-height:24px;">Bermain kata adalah passion ku</span></td>
+            </tr>
+            <tr>
+              <td><span class="typo-name">Body / Medium / Regular</span></td>
+              <td>16px</td><td>24px</td>
+              <td><span class="weight-pill">400</span></td>
+              <td><span class="typo-sample" style="font-size:16px;font-weight:400;line-height:24px;">Bermain kata adalah passion ku</span></td>
+            </tr>
+            <tr>
+              <td><span class="typo-name">Body / Large / Regular</span></td>
+              <td>18px</td><td>28px</td>
+              <td><span class="weight-pill">400</span></td>
+              <td><span class="typo-sample" style="font-size:18px;font-weight:400;line-height:28px;">Bermain kata adalah passion ku</span></td>
+            </tr>
+
+            <!-- TITLE -->
+            <tr class="typo-section-row"><td colspan="5">Title</td></tr>
+            <tr>
+              <td><span class="typo-name">Title / Medium</span></td>
+              <td>20px</td><td>24px</td>
+              <td><span class="weight-pill">500</span></td>
+              <td><span class="typo-sample" style="font-size:20px;font-weight:500;line-height:24px;">Bermain kata adalah passion ku</span></td>
+            </tr>
+
+            <!-- HEADER -->
+            <tr class="typo-section-row"><td colspan="5">Header</td></tr>
+            <tr>
+              <td><span class="typo-name" style="font-size:15px;font-weight:600;">Header / Small / Medium</span></td>
+              <td>24px</td><td>32px</td>
+              <td><span class="weight-pill">500</span></td>
+              <td><span class="typo-sample" style="font-size:24px;font-weight:500;line-height:32px;">Bermain kata adalah passion ku</span></td>
+            </tr>
+            <tr>
+              <td><span class="typo-name" style="font-size:15px;">Header / Small / Regular</span></td>
+              <td>24px</td><td>32px</td>
+              <td><span class="weight-pill">400</span></td>
+              <td><span class="typo-sample" style="font-size:24px;font-weight:400;line-height:32px;">Bermain kata adalah passion ku</span></td>
+            </tr>
+            <tr>
+              <td><span class="typo-name" style="font-size:18px;">Header / Medium / Regular</span></td>
+              <td>36px</td><td>44px</td>
+              <td><span class="weight-pill">400</span></td>
+              <td><span class="typo-sample" style="font-size:36px;font-weight:400;line-height:44px;">Bermain kata adalah passion ku</span></td>
+            </tr>
+            <tr>
+              <td><span class="typo-name" style="font-size:18px;font-weight:600;">Header / Medium / Medium</span></td>
+              <td>36px</td><td>44px</td>
+              <td><span class="weight-pill">500</span></td>
+              <td><span class="typo-sample" style="font-size:36px;font-weight:500;line-height:44px;">Bermain kata adalah passion ku</span></td>
+            </tr>
+            <tr>
+              <td><span class="typo-name" style="font-size:22px;">Header / Large / Regular</span></td>
+              <td>44px</td><td>52px</td>
+              <td><span class="weight-pill">400</span></td>
+              <td><span class="typo-sample" style="font-size:44px;font-weight:400;line-height:52px;">Bermain kata adalah passion ku</span></td>
+            </tr>
+            <tr>
+              <td><span class="typo-name" style="font-size:22px;font-weight:600;">Header / Large / Medium</span></td>
+              <td>44px</td><td>52px</td>
+              <td><span class="weight-pill">500</span></td>
+              <td><span class="typo-sample" style="font-size:44px;font-weight:500;line-height:52px;">Bermain kata adalah passion ku</span></td>
+            </tr>
+
+            <!-- DISPLAY -->
+            <tr class="typo-section-row"><td colspan="5">Display</td></tr>
+            <tr>
+              <td><span class="typo-name" style="font-size:28px;">Display / Regular</span></td>
+              <td>64px</td><td>68px</td>
+              <td><span class="weight-pill">400</span></td>
+              <td><span class="typo-sample" style="font-size:64px;font-weight:400;line-height:68px;">Bermain kata</span></td>
+            </tr>
+            <tr>
+              <td><span class="typo-name" style="font-size:28px;font-weight:600;">Display / Medium</span></td>
+              <td>64px</td><td>68px</td>
+              <td><span class="weight-pill">500</span></td>
+              <td><span class="typo-sample" style="font-size:64px;font-weight:500;line-height:68px;">Bermain kata</span></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────────────────
+         4. FONT WEIGHTS
+    ───────────────────────────────────────── -->
+    <section>
+      <div class="section-header">
+        <h2>Font Weights</h2>
+        <p>Dua weight utama yang digunakan dalam design system ini untuk menjaga konsistensi visual.</p>
+      </div>
+
+      <div class="weight-cards">
+        <div class="weight-card">
+          <div class="weight-badge">400</div>
+          <div class="weight-info">
+            <div class="weight-name">Regular</div>
+            <div class="weight-sample" style="font-weight:400;">Bermain kata adalah passion ku</div>
+          </div>
+        </div>
+        <div class="weight-card">
+          <div class="weight-badge">500</div>
+          <div class="weight-info">
+            <div class="weight-name">Medium</div>
+            <div class="weight-sample" style="font-weight:500;">Bermain kata adalah passion ku</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────────────────
+         5. KODE IMPLEMENTASI
+    ───────────────────────────────────────── -->
+    <section>
+      <div class="section-header">
+        <h2>Kode Implementasi</h2>
+        <p>Salin kode Tailwind class atau CSS variable untuk setiap typography style langsung ke dalam project kamu.</p>
+      </div>
+
+      <p class="typo-impl-lead">Klik baris atau tombol <strong>copy</strong> untuk menyalin snippet.</p>
+
+      <!-- Overline -->
+      <div class="code-accordion" id="acc-overline">
+        <button class="code-accordion-trigger" data-acc="overline">
+          <span class="ca-label">Overline</span>
+          <span class="ca-hint">1 style</span>
+          <span class="ca-arrow">▼</span>
+        </button>
+        <div class="code-accordion-body">
+          <div class="code-tab-bar" data-acc-tabs="overline">
+            <button class="code-tab-btn active" data-tab="tw"><span class="ct-icon tw">TW</span>Tailwind</button>
+            <button class="code-tab-btn" data-tab="css"><span class="ct-icon css">CSS</span>CSS Variable</button>
+          </div>
+          <div class="code-tab-content">
+            <div class="code-pane active" data-pane="overline-tw">
+              <div class="code-row" data-copy="font-poppins text-xs font-medium leading-5 uppercase tracking-[0.08em]">
+                <span class="cr-tag">500</span>
+                <span class="cr-label">Overline / Medium</span>
+                <span class="cr-code">font-poppins text-xs font-medium leading-5 uppercase tracking-[0.08em]</span>
+                <button class="cr-copy">copy</button>
+              </div>
+            </div>
+            <div class="code-pane" data-pane="overline-css">
+              <div class="code-row" data-copy="font-size: var(--font-size-xs); font-weight: var(--font-weight-medium); line-height: 20px; text-transform: uppercase; letter-spacing: 0.08em;">
+                <span class="cr-tag">500</span>
+                <span class="cr-label">Overline / Medium</span>
+                <span class="cr-code">font-size: var(--font-size-xs); font-weight: var(--font-weight-medium); line-height: 20px; text-transform: uppercase; letter-spacing: 0.08em;</span>
+                <button class="cr-copy">copy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Caption -->
+      <div class="code-accordion" id="acc-caption">
+        <button class="code-accordion-trigger" data-acc="caption">
+          <span class="ca-label">Caption</span>
+          <span class="ca-hint">3 styles</span>
+          <span class="ca-arrow">▼</span>
+        </button>
+        <div class="code-accordion-body">
+          <div class="code-tab-bar" data-acc-tabs="caption">
+            <button class="code-tab-btn active" data-tab="tw"><span class="ct-icon tw">TW</span>Tailwind</button>
+            <button class="code-tab-btn" data-tab="css"><span class="ct-icon css">CSS</span>CSS Variable</button>
+          </div>
+          <div class="code-tab-content">
+            <div class="code-pane active" data-pane="caption-tw">
+              <div class="code-row" data-copy="font-poppins text-xs font-normal leading-[14px] underline">
+                <span class="cr-tag">400</span><span class="cr-label">Caption / Link</span>
+                <span class="cr-code">font-poppins text-xs font-normal leading-[14px] underline</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-poppins text-xs font-normal leading-[14px]">
+                <span class="cr-tag">400</span><span class="cr-label">Caption / Regular</span>
+                <span class="cr-code">font-poppins text-xs font-normal leading-[14px]</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-poppins text-xs font-medium leading-5">
+                <span class="cr-tag">500</span><span class="cr-label">Caption / Medium</span>
+                <span class="cr-code">font-poppins text-xs font-medium leading-5</span>
+                <button class="cr-copy">copy</button>
+              </div>
+            </div>
+            <div class="code-pane" data-pane="caption-css">
+              <div class="code-row" data-copy="font-size: var(--font-size-xs); font-weight: var(--font-weight-normal); line-height: 14px; text-decoration: underline;">
+                <span class="cr-tag">400</span><span class="cr-label">Caption / Link</span>
+                <span class="cr-code">font-size: var(--font-size-xs); font-weight: var(--font-weight-normal); line-height: 14px; text-decoration: underline;</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-size: var(--font-size-xs); font-weight: var(--font-weight-normal); line-height: 14px;">
+                <span class="cr-tag">400</span><span class="cr-label">Caption / Regular</span>
+                <span class="cr-code">font-size: var(--font-size-xs); font-weight: var(--font-weight-normal); line-height: 14px;</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-size: var(--font-size-xs); font-weight: var(--font-weight-medium); line-height: 20px;">
+                <span class="cr-tag">500</span><span class="cr-label">Caption / Medium</span>
+                <span class="cr-code">font-size: var(--font-size-xs); font-weight: var(--font-weight-medium); line-height: 20px;</span>
+                <button class="cr-copy">copy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div class="code-accordion" id="acc-body">
+        <button class="code-accordion-trigger" data-acc="body">
+          <span class="ca-label">Body</span>
+          <span class="ca-hint">7 styles</span>
+          <span class="ca-arrow">▼</span>
+        </button>
+        <div class="code-accordion-body">
+          <div class="code-tab-bar" data-acc-tabs="body">
+            <button class="code-tab-btn active" data-tab="tw"><span class="ct-icon tw">TW</span>Tailwind</button>
+            <button class="code-tab-btn" data-tab="css"><span class="ct-icon css">CSS</span>CSS Variable</button>
+          </div>
+          <div class="code-tab-content">
+            <div class="code-pane active" data-pane="body-tw">
+              <div class="code-row" data-copy="font-poppins text-sm font-normal leading-5 underline">
+                <span class="cr-tag">400</span><span class="cr-label">Body / Link</span>
+                <span class="cr-code">font-poppins text-sm font-normal leading-5 underline</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-poppins text-sm font-normal leading-5">
+                <span class="cr-tag">400</span><span class="cr-label">Body / Small / Regular</span>
+                <span class="cr-code">font-poppins text-sm font-normal leading-5</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-poppins text-sm font-medium leading-5">
+                <span class="cr-tag">500</span><span class="cr-label">Body / Small / Medium</span>
+                <span class="cr-code">font-poppins text-sm font-medium leading-5</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-poppins text-sm font-medium leading-5 underline">
+                <span class="cr-tag">500</span><span class="cr-label">Body / Small / Link</span>
+                <span class="cr-code">font-poppins text-sm font-medium leading-5 underline</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-poppins text-base font-medium leading-6">
+                <span class="cr-tag">500</span><span class="cr-label">Body / Medium / Medium</span>
+                <span class="cr-code">font-poppins text-base font-medium leading-6</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-poppins text-base font-normal leading-6">
+                <span class="cr-tag">400</span><span class="cr-label">Body / Medium / Regular</span>
+                <span class="cr-code">font-poppins text-base font-normal leading-6</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-poppins text-lg font-normal leading-7">
+                <span class="cr-tag">400</span><span class="cr-label">Body / Large / Regular</span>
+                <span class="cr-code">font-poppins text-lg font-normal leading-7</span>
+                <button class="cr-copy">copy</button>
+              </div>
+            </div>
+            <div class="code-pane" data-pane="body-css">
+              <div class="code-row" data-copy="font-size: var(--font-size-sm); font-weight: var(--font-weight-normal); line-height: 20px; text-decoration: underline;">
+                <span class="cr-tag">400</span><span class="cr-label">Body / Link</span>
+                <span class="cr-code">font-size: var(--font-size-sm); font-weight: var(--font-weight-normal); line-height: 20px; text-decoration: underline;</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-size: var(--font-size-sm); font-weight: var(--font-weight-normal); line-height: 20px;">
+                <span class="cr-tag">400</span><span class="cr-label">Body / Small / Regular</span>
+                <span class="cr-code">font-size: var(--font-size-sm); font-weight: var(--font-weight-normal); line-height: 20px;</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); line-height: 20px;">
+                <span class="cr-tag">500</span><span class="cr-label">Body / Small / Medium</span>
+                <span class="cr-code">font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); line-height: 20px;</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); line-height: 20px; text-decoration: underline;">
+                <span class="cr-tag">500</span><span class="cr-label">Body / Small / Link</span>
+                <span class="cr-code">font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); line-height: 20px; text-decoration: underline;</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-size: var(--font-size-base); font-weight: var(--font-weight-medium); line-height: 24px;">
+                <span class="cr-tag">500</span><span class="cr-label">Body / Medium / Medium</span>
+                <span class="cr-code">font-size: var(--font-size-base); font-weight: var(--font-weight-medium); line-height: 24px;</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-size: var(--font-size-base); font-weight: var(--font-weight-normal); line-height: 24px;">
+                <span class="cr-tag">400</span><span class="cr-label">Body / Medium / Regular</span>
+                <span class="cr-code">font-size: var(--font-size-base); font-weight: var(--font-weight-normal); line-height: 24px;</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-size: var(--font-size-lg); font-weight: var(--font-weight-normal); line-height: 28px;">
+                <span class="cr-tag">400</span><span class="cr-label">Body / Large / Regular</span>
+                <span class="cr-code">font-size: var(--font-size-lg); font-weight: var(--font-weight-normal); line-height: 28px;</span>
+                <button class="cr-copy">copy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Title -->
+      <div class="code-accordion" id="acc-title">
+        <button class="code-accordion-trigger" data-acc="title">
+          <span class="ca-label">Title</span>
+          <span class="ca-hint">1 style</span>
+          <span class="ca-arrow">▼</span>
+        </button>
+        <div class="code-accordion-body">
+          <div class="code-tab-bar" data-acc-tabs="title">
+            <button class="code-tab-btn active" data-tab="tw"><span class="ct-icon tw">TW</span>Tailwind</button>
+            <button class="code-tab-btn" data-tab="css"><span class="ct-icon css">CSS</span>CSS Variable</button>
+          </div>
+          <div class="code-tab-content">
+            <div class="code-pane active" data-pane="title-tw">
+              <div class="code-row" data-copy="font-poppins text-xl font-medium leading-6">
+                <span class="cr-tag">500</span><span class="cr-label">Title / Medium</span>
+                <span class="cr-code">font-poppins text-xl font-medium leading-6</span>
+                <button class="cr-copy">copy</button>
+              </div>
+            </div>
+            <div class="code-pane" data-pane="title-css">
+              <div class="code-row" data-copy="font-size: var(--font-size-xl); font-weight: var(--font-weight-medium); line-height: 24px;">
+                <span class="cr-tag">500</span><span class="cr-label">Title / Medium</span>
+                <span class="cr-code">font-size: var(--font-size-xl); font-weight: var(--font-weight-medium); line-height: 24px;</span>
+                <button class="cr-copy">copy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Header -->
+      <div class="code-accordion" id="acc-header">
+        <button class="code-accordion-trigger" data-acc="header">
+          <span class="ca-label">Header</span>
+          <span class="ca-hint">6 styles</span>
+          <span class="ca-arrow">▼</span>
+        </button>
+        <div class="code-accordion-body">
+          <div class="code-tab-bar" data-acc-tabs="header">
+            <button class="code-tab-btn active" data-tab="tw"><span class="ct-icon tw">TW</span>Tailwind</button>
+            <button class="code-tab-btn" data-tab="css"><span class="ct-icon css">CSS</span>CSS Variable</button>
+          </div>
+          <div class="code-tab-content">
+            <div class="code-pane active" data-pane="header-tw">
+              <div class="code-row" data-copy="font-poppins text-2xl font-medium leading-8">
+                <span class="cr-tag">500</span><span class="cr-label">Header / Small / Medium</span>
+                <span class="cr-code">font-poppins text-2xl font-medium leading-8</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-poppins text-2xl font-normal leading-8">
+                <span class="cr-tag">400</span><span class="cr-label">Header / Small / Regular</span>
+                <span class="cr-code">font-poppins text-2xl font-normal leading-8</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-poppins text-4xl font-normal leading-[44px]">
+                <span class="cr-tag">400</span><span class="cr-label">Header / Medium / Regular</span>
+                <span class="cr-code">font-poppins text-4xl font-normal leading-[44px]</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-poppins text-4xl font-medium leading-[44px]">
+                <span class="cr-tag">500</span><span class="cr-label">Header / Medium / Medium</span>
+                <span class="cr-code">font-poppins text-4xl font-medium leading-[44px]</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-poppins text-[44px] font-normal leading-[52px]">
+                <span class="cr-tag">400</span><span class="cr-label">Header / Large / Regular</span>
+                <span class="cr-code">font-poppins text-[44px] font-normal leading-[52px]</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-poppins text-[44px] font-medium leading-[52px]">
+                <span class="cr-tag">500</span><span class="cr-label">Header / Large / Medium</span>
+                <span class="cr-code">font-poppins text-[44px] font-medium leading-[52px]</span>
+                <button class="cr-copy">copy</button>
+              </div>
+            </div>
+            <div class="code-pane" data-pane="header-css">
+              <div class="code-row" data-copy="font-size: var(--font-size-2xl); font-weight: var(--font-weight-medium); line-height: 32px;">
+                <span class="cr-tag">500</span><span class="cr-label">Header / Small / Medium</span>
+                <span class="cr-code">font-size: var(--font-size-2xl); font-weight: var(--font-weight-medium); line-height: 32px;</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-size: var(--font-size-2xl); font-weight: var(--font-weight-normal); line-height: 32px;">
+                <span class="cr-tag">400</span><span class="cr-label">Header / Small / Regular</span>
+                <span class="cr-code">font-size: var(--font-size-2xl); font-weight: var(--font-weight-normal); line-height: 32px;</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-size: var(--font-size-4xl); font-weight: var(--font-weight-normal); line-height: 44px;">
+                <span class="cr-tag">400</span><span class="cr-label">Header / Medium / Regular</span>
+                <span class="cr-code">font-size: var(--font-size-4xl); font-weight: var(--font-weight-normal); line-height: 44px;</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-size: var(--font-size-4xl); font-weight: var(--font-weight-medium); line-height: 44px;">
+                <span class="cr-tag">500</span><span class="cr-label">Header / Medium / Medium</span>
+                <span class="cr-code">font-size: var(--font-size-4xl); font-weight: var(--font-weight-medium); line-height: 44px;</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-size: 44px; font-weight: var(--font-weight-normal); line-height: 52px;">
+                <span class="cr-tag">400</span><span class="cr-label">Header / Large / Regular</span>
+                <span class="cr-code">font-size: 44px; font-weight: var(--font-weight-normal); line-height: 52px;</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-size: 44px; font-weight: var(--font-weight-medium); line-height: 52px;">
+                <span class="cr-tag">500</span><span class="cr-label">Header / Large / Medium</span>
+                <span class="cr-code">font-size: 44px; font-weight: var(--font-weight-medium); line-height: 52px;</span>
+                <button class="cr-copy">copy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Display -->
+      <div class="code-accordion" id="acc-display">
+        <button class="code-accordion-trigger" data-acc="display">
+          <span class="ca-label">Display</span>
+          <span class="ca-hint">2 styles</span>
+          <span class="ca-arrow">▼</span>
+        </button>
+        <div class="code-accordion-body">
+          <div class="code-tab-bar" data-acc-tabs="display">
+            <button class="code-tab-btn active" data-tab="tw"><span class="ct-icon tw">TW</span>Tailwind</button>
+            <button class="code-tab-btn" data-tab="css"><span class="ct-icon css">CSS</span>CSS Variable</button>
+          </div>
+          <div class="code-tab-content">
+            <div class="code-pane active" data-pane="display-tw">
+              <div class="code-row" data-copy="font-poppins text-[64px] font-normal leading-[68px]">
+                <span class="cr-tag">400</span><span class="cr-label">Display / Regular</span>
+                <span class="cr-code">font-poppins text-[64px] font-normal leading-[68px]</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-poppins text-[64px] font-medium leading-[68px]">
+                <span class="cr-tag">500</span><span class="cr-label">Display / Medium</span>
+                <span class="cr-code">font-poppins text-[64px] font-medium leading-[68px]</span>
+                <button class="cr-copy">copy</button>
+              </div>
+            </div>
+            <div class="code-pane" data-pane="display-css">
+              <div class="code-row" data-copy="font-size: 64px; font-weight: var(--font-weight-normal); line-height: 68px;">
+                <span class="cr-tag">400</span><span class="cr-label">Display / Regular</span>
+                <span class="cr-code">font-size: 64px; font-weight: var(--font-weight-normal); line-height: 68px;</span>
+                <button class="cr-copy">copy</button>
+              </div>
+              <div class="code-row" data-copy="font-size: 64px; font-weight: var(--font-weight-medium); line-height: 68px;">
+                <span class="cr-tag">500</span><span class="cr-label">Display / Medium</span>
+                <span class="cr-code">font-size: 64px; font-weight: var(--font-weight-medium); line-height: 68px;</span>
+                <button class="cr-copy">copy</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────────────────────────────
+         6. BEST PRACTICES
+    ───────────────────────────────────────── -->
+    <section>
+      <div class="section-header">
+        <h2>Best Practices</h2>
+        <p>Panduan penggunaan tipografi untuk memastikan konsistensi dan aksesibilitas di seluruh produk.</p>
+      </div>
+
+      <div class="practices-grid">
+        <div class="practice-group">
+          <div class="practice-group-title do">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Do
+          </div>
+          <ul class="practices-list">
+            <li class="practice-item do">Selalu gunakan <strong>Poppins</strong> sebagai font family utama untuk semua elemen UI.</li>
+            <li class="practice-item do">Gunakan style dari typography scale yang telah ditentukan — jangan buat custom sizes.</li>
+            <li class="practice-item do">Maintain font-size dan line-height yang sesuai untuk readability (minimum 12px untuk caption).</li>
+            <li class="practice-item do">Gunakan semantic HTML tags (h1–h6, p, strong, em) untuk struktur konten.</li>
+            <li class="practice-item do">Ensure contrast ratio memenuhi WCAG AA (4.5:1 untuk normal text, 3:1 untuk large text).</li>
+          </ul>
+        </div>
+        <div class="practice-group">
+          <div class="practice-group-title dont">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            Don't
+          </div>
+          <ul class="practices-list">
+            <li class="practice-item dont">Jangan gunakan font family selain Poppins untuk elemen UI.</li>
+            <li class="practice-item dont">Jangan buat custom font sizes di luar typography scale yang ada.</li>
+            <li class="practice-item dont">Jangan gunakan font size kurang dari 12px untuk teks yang perlu dibaca.</li>
+            <li class="practice-item dont">Jangan mix font weights secara acak di luar ketentuan style yang ada.</li>
+            <li class="practice-item dont">Jangan skip line-height karena sangat memengaruhi readability dan aksesibilitas.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="page-footer">
+      <p>&copy; 2024 GPOS Lite Design System V 2.0 | Maintained with ❤️</p>
+    </footer>
+
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll ke atas">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+    </button>
+
+  </main>
+</div><!-- /container -->
+
+  <script src="../js/script.js"></script>
+
+  <!-- Toast for copy feedback -->
+  <div class="gpl-toast" id="typoToast">Disalin!</div>
+
+  <script>
+    (function () {
+      // --- Copy helper ---
+      function copyText(text) {
+        navigator.clipboard.writeText(text).catch(() => {
+          const ta = document.createElement("textarea");
+          ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+          document.body.appendChild(ta); ta.select();
+          document.execCommand("copy"); document.body.removeChild(ta);
+        });
+        const toast = document.getElementById("typoToast");
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 1800);
+      }
+
+      // --- Accordion toggle ---
+      document.querySelectorAll(".code-accordion-trigger").forEach(trigger => {
+        trigger.addEventListener("click", () => {
+          const acc = trigger.closest(".code-accordion");
+          acc.classList.toggle("open");
+        });
+      });
+
+      // --- Tab switching ---
+      document.querySelectorAll(".code-tab-bar").forEach(tabBar => {
+        const accId = tabBar.dataset.accTabs;
+        tabBar.querySelectorAll(".code-tab-btn").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const tab = btn.dataset.tab;
+            tabBar.querySelectorAll(".code-tab-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            const content = tabBar.nextElementSibling;
+            content.querySelectorAll(".code-pane").forEach(pane => {
+              pane.classList.toggle("active", pane.dataset.pane === accId + "-" + tab);
+            });
+          });
+        });
+      });
+
+      // --- Copy on row click or copy button click ---
+      document.querySelectorAll(".code-accordion").forEach(acc => {
+        acc.addEventListener("click", e => {
+          const copyBtn = e.target.closest(".cr-copy");
+          const codeRow = e.target.closest(".code-row");
+          if (!codeRow) return;
+          copyText(codeRow.dataset.copy);
+        });
+      });
+    })();
+  </script>
+
 </body>
 </html>

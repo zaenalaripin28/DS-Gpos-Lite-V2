@@ -13,6 +13,11 @@
     <!-- Mobile Overlay -->
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
+    <!-- Desktop re-open tab -->
+    <button class="sidebar-reopen-tab" id="sidebarReopenTab" aria-label="Buka sidebar">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+
     <div class="layout">
         <!-- Sidebar Navigation -->
         <aside class="sidebar" id="sidebar">
@@ -24,9 +29,14 @@
                         <p class="version">Design System V2.0</p>
                     </div>
                 </div>
-                <button class="sidebar-close" id="sidebarClose" aria-label="Close menu">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                </button>
+                <div class="sidebar-actions">
+                    <button class="sidebar-collapse-btn" id="sidebarCollapseBtn" aria-label="Collapse sidebar" title="Collapse sidebar">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                    </button>
+                    <button class="sidebar-close" id="sidebarClose" aria-label="Tutup menu">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                    </button>
+                </div>
             </div>
 
             <nav class="nav-menu" role="navigation" aria-label="Navigasi utama">
