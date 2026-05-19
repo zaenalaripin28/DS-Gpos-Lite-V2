@@ -607,7 +607,7 @@
                 <td class="td-style-name"><span class="style-group">BD</span>Body / Medium / Medium</td>
                 <td class="td-size">16 px</td>
                 <td class="td-lh">24 px</td>
-                <td class="td-sample" style="font-size:16px;font-weight:600;line-height:24px;">Bermain kata adalah passion ku</td>
+                <td class="td-sample" style="font-size:16px;font-weight:500;line-height:24px;">Bermain kata adalah passion ku</td>
               </tr>
               <tr>
                 <td class="td-style-name"><span class="style-group">BD</span>Body / Medium / Regular</td>
@@ -670,13 +670,13 @@
                 <td class="td-style-name"><span class="style-group">DP</span>Display / Regular</td>
                 <td class="td-size">64 px</td>
                 <td class="td-lh">68 px</td>
-                <td class="td-sample" style="font-size:48px;font-weight:400;line-height:56px;">Bermain kata adalah passion ku</td>
+                <td class="td-sample" style="font-size:64px;font-weight:400;line-height:68px;">Bermain kata adalah passion ku</td>
               </tr>
               <tr>
                 <td class="td-style-name"><span class="style-group">DP</span>Display / Medium</td>
                 <td class="td-size">64 px</td>
                 <td class="td-lh">68 px</td>
-                <td class="td-sample" style="font-size:48px;font-weight:600;line-height:56px;">Bermain kata adalah passion ku</td>
+                <td class="td-sample" style="font-size:64px;font-weight:600;line-height:68px;">Bermain kata adalah passion ku</td>
               </tr>
             </tbody>
           </table>
@@ -779,147 +779,132 @@
       ══════════════════════════════════════ -->
       <section style="margin-bottom: 40px;">
         <p class="typo-section-title">Implementation Code</p>
-        <p class="typo-section-desc">Copy code siap pakai untuk setiap style — pilih antara Tailwind CSS atau CSS Variable.</p>
+        <p class="typo-section-desc">Copy code siap pakai — pilih Tailwind CSS atau CSS Variable (Figma-synced token names).</p>
 
-        <!-- FONT FAMILY -->
+        <!-- ── PANEL 1: Type Style Tokens (Figma Sync) ── -->
         <div class="impl-section">
           <div class="impl-header">
-            <span class="impl-title">Font Family</span>
-            <div class="tab-group" id="tabs-fontfamily">
-              <button class="tab-btn active" data-tab="tw" data-group="fontfamily">Tailwind</button>
-              <button class="tab-btn" data-tab="css" data-group="fontfamily">CSS Variable</button>
+            <div>
+              <span class="impl-title">Type Style Tokens</span>
+              <span style="font-family:'Poppins',sans-serif;font-size:11px;color:#9CA3AF;margin-left:8px;">Figma: Text.{Category}.{Variant}</span>
+            </div>
+            <div class="tab-group" id="tabs-tokenstyle">
+              <button class="tab-btn active" data-tab="tw" data-group="tokenstyle">Tailwind</button>
+              <button class="tab-btn" data-tab="css" data-group="tokenstyle">CSS Variable</button>
             </div>
           </div>
 
-          <!-- Tailwind -->
-          <div class="tab-content active" id="fontfamily-tw">
+          <!-- Tailwind — composite classes per style -->
+          <div class="tab-content active" id="tokenstyle-tw">
             <div class="impl-rows">
-              <div class="impl-row">
-                <span class="impl-style-label">Poppins (Primary)</span>
-                <span class="impl-code">font-sans</span>
-                <button class="impl-copy-btn" onclick="copyCode(this, 'font-sans')">COPY</button>
-              </div>
+              <div class="impl-row"><span class="impl-style-label">Overline / Medium</span><span class="impl-code">text-xs font-medium leading-5 tracking-widest uppercase</span><button class="impl-copy-btn" onclick="copyCode(this,'text-xs font-medium leading-5 tracking-widest uppercase')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Caption / Regular</span><span class="impl-code">text-xs font-normal leading-[14px]</span><button class="impl-copy-btn" onclick="copyCode(this,'text-xs font-normal leading-[14px]')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Caption / Medium</span><span class="impl-code">text-xs font-medium leading-5</span><button class="impl-copy-btn" onclick="copyCode(this,'text-xs font-medium leading-5')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Caption / Link</span><span class="impl-code">text-xs font-normal leading-[14px] underline</span><button class="impl-copy-btn" onclick="copyCode(this,'text-xs font-normal leading-[14px] underline')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Body / Small / Regular</span><span class="impl-code">text-sm font-normal leading-5</span><button class="impl-copy-btn" onclick="copyCode(this,'text-sm font-normal leading-5')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Body / Small / Medium</span><span class="impl-code">text-sm font-medium leading-5</span><button class="impl-copy-btn" onclick="copyCode(this,'text-sm font-medium leading-5')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Body / Link</span><span class="impl-code">text-sm font-normal leading-5 underline</span><button class="impl-copy-btn" onclick="copyCode(this,'text-sm font-normal leading-5 underline')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Body / Medium / Regular</span><span class="impl-code">text-base font-normal leading-6</span><button class="impl-copy-btn" onclick="copyCode(this,'text-base font-normal leading-6')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Body / Medium / Medium</span><span class="impl-code">text-base font-medium leading-6</span><button class="impl-copy-btn" onclick="copyCode(this,'text-base font-medium leading-6')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Body / Large / Regular</span><span class="impl-code">text-lg font-normal leading-7</span><button class="impl-copy-btn" onclick="copyCode(this,'text-lg font-normal leading-7')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Title / Medium</span><span class="impl-code">text-xl font-medium leading-6</span><button class="impl-copy-btn" onclick="copyCode(this,'text-xl font-medium leading-6')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Header / Small / Regular</span><span class="impl-code">text-2xl font-normal leading-8</span><button class="impl-copy-btn" onclick="copyCode(this,'text-2xl font-normal leading-8')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Header / Small / Medium</span><span class="impl-code">text-2xl font-medium leading-8</span><button class="impl-copy-btn" onclick="copyCode(this,'text-2xl font-medium leading-8')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Header / Medium / Regular</span><span class="impl-code">text-4xl font-normal leading-[44px]</span><button class="impl-copy-btn" onclick="copyCode(this,'text-4xl font-normal leading-[44px]')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Header / Medium / Medium</span><span class="impl-code">text-4xl font-medium leading-[44px]</span><button class="impl-copy-btn" onclick="copyCode(this,'text-4xl font-medium leading-[44px]')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Header / Large / Regular</span><span class="impl-code">text-5xl font-normal leading-[52px]</span><button class="impl-copy-btn" onclick="copyCode(this,'text-5xl font-normal leading-[52px]')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Header / Large / Medium</span><span class="impl-code">text-5xl font-medium leading-[52px]</span><button class="impl-copy-btn" onclick="copyCode(this,'text-5xl font-medium leading-[52px]')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Display / Regular</span><span class="impl-code">text-7xl font-normal leading-[68px]</span><button class="impl-copy-btn" onclick="copyCode(this,'text-7xl font-normal leading-[68px]')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Display / Medium</span><span class="impl-code">text-7xl font-semibold leading-[68px]</span><button class="impl-copy-btn" onclick="copyCode(this,'text-7xl font-semibold leading-[68px]')">COPY</button></div>
             </div>
           </div>
 
-          <!-- CSS Variable -->
-          <div class="tab-content" id="fontfamily-css">
+          <!-- CSS Variable — Figma token names -->
+          <div class="tab-content" id="tokenstyle-css">
             <div class="impl-rows">
-              <div class="impl-row">
-                <span class="impl-style-label">Poppins (Primary)</span>
-                <span class="impl-code">font-family: var(--font-primary);</span>
-                <button class="impl-copy-btn" onclick="copyCode(this, 'font-family: var(--font-primary);')">COPY</button>
-              </div>
+              <div class="impl-row"><span class="impl-style-label">Overline / Medium</span><span class="impl-code">--text-overline-medium-size / -weight / -lh / -ls</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--text-overline-medium-size);\nfont-weight: var(--text-overline-medium-weight);\nline-height: var(--text-overline-medium-lh);\nletter-spacing: var(--text-overline-medium-ls);\ntext-transform: uppercase;')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Caption / Regular</span><span class="impl-code">--text-caption-regular-size / -weight / -lh</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--text-caption-regular-size);\nfont-weight: var(--text-caption-regular-weight);\nline-height: var(--text-caption-regular-lh);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Caption / Medium</span><span class="impl-code">--text-caption-medium-size / -weight / -lh</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--text-caption-medium-size);\nfont-weight: var(--text-caption-medium-weight);\nline-height: var(--text-caption-medium-lh);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Caption / Link</span><span class="impl-code">--text-caption-link-size / -weight / -lh</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--text-caption-link-size);\nfont-weight: var(--text-caption-link-weight);\nline-height: var(--text-caption-link-lh);\ntext-decoration: underline;')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Body / Small / Regular</span><span class="impl-code">--text-body-small-regular-size / -weight / -lh</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--text-body-small-regular-size);\nfont-weight: var(--text-body-small-regular-weight);\nline-height: var(--text-body-small-regular-lh);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Body / Small / Medium</span><span class="impl-code">--text-body-small-medium-size / -weight / -lh</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--text-body-small-medium-size);\nfont-weight: var(--text-body-small-medium-weight);\nline-height: var(--text-body-small-medium-lh);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Body / Link</span><span class="impl-code">--text-body-link-size / -weight / -lh</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--text-body-link-size);\nfont-weight: var(--text-body-link-weight);\nline-height: var(--text-body-link-lh);\ntext-decoration: underline;')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Body / Medium / Regular</span><span class="impl-code">--text-body-medium-regular-size / -weight / -lh</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--text-body-medium-regular-size);\nfont-weight: var(--text-body-medium-regular-weight);\nline-height: var(--text-body-medium-regular-lh);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Body / Medium / Medium</span><span class="impl-code">--text-body-medium-medium-size / -weight / -lh</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--text-body-medium-medium-size);\nfont-weight: var(--text-body-medium-medium-weight);\nline-height: var(--text-body-medium-medium-lh);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Body / Large / Regular</span><span class="impl-code">--text-body-large-regular-size / -weight / -lh</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--text-body-large-regular-size);\nfont-weight: var(--text-body-large-regular-weight);\nline-height: var(--text-body-large-regular-lh);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Title / Medium</span><span class="impl-code">--text-title-medium-size / -weight / -lh</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--text-title-medium-size);\nfont-weight: var(--text-title-medium-weight);\nline-height: var(--text-title-medium-lh);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Header / Small / Regular</span><span class="impl-code">--text-header-small-regular-size / -weight / -lh</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--text-header-small-regular-size);\nfont-weight: var(--text-header-small-regular-weight);\nline-height: var(--text-header-small-regular-lh);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Header / Small / Medium</span><span class="impl-code">--text-header-small-medium-size / -weight / -lh</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--text-header-small-medium-size);\nfont-weight: var(--text-header-small-medium-weight);\nline-height: var(--text-header-small-medium-lh);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Header / Medium / Regular</span><span class="impl-code">--text-header-medium-regular-size / -weight / -lh</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--text-header-medium-regular-size);\nfont-weight: var(--text-header-medium-regular-weight);\nline-height: var(--text-header-medium-regular-lh);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Header / Medium / Medium</span><span class="impl-code">--text-header-medium-medium-size / -weight / -lh</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--text-header-medium-medium-size);\nfont-weight: var(--text-header-medium-medium-weight);\nline-height: var(--text-header-medium-medium-lh);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Header / Large / Regular</span><span class="impl-code">--text-header-large-regular-size / -weight / -lh</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--text-header-large-regular-size);\nfont-weight: var(--text-header-large-regular-weight);\nline-height: var(--text-header-large-regular-lh);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Header / Large / Medium</span><span class="impl-code">--text-header-large-medium-size / -weight / -lh</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--text-header-large-medium-size);\nfont-weight: var(--text-header-large-medium-weight);\nline-height: var(--text-header-large-medium-lh);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Display / Regular</span><span class="impl-code">--text-display-regular-size / -weight / -lh</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--text-display-regular-size);\nfont-weight: var(--text-display-regular-weight);\nline-height: var(--text-display-regular-lh);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Display / Medium</span><span class="impl-code">--text-display-medium-size / -weight / -lh</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--text-display-medium-size);\nfont-weight: var(--text-display-medium-weight);\nline-height: var(--text-display-medium-lh);')">COPY</button></div>
             </div>
           </div>
         </div>
 
-        <!-- TYPE SCALE -->
+        <!-- ── PANEL 2: Primitive Font Weight ── -->
         <div class="impl-section">
           <div class="impl-header">
-            <span class="impl-title">Type Scale — Font Size</span>
-            <div class="tab-group" id="tabs-fontsize">
-              <button class="tab-btn active" data-tab="tw" data-group="fontsize">Tailwind</button>
-              <button class="tab-btn" data-tab="css" data-group="fontsize">CSS Variable</button>
-            </div>
-          </div>
-
-          <!-- Tailwind -->
-          <div class="tab-content active" id="fontsize-tw">
-            <div class="impl-rows">
-              <div class="impl-row"><span class="impl-style-label">Caption (12px)</span><span class="impl-code">text-xs</span><button class="impl-copy-btn" onclick="copyCode(this,'text-xs')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">Body Small (14px)</span><span class="impl-code">text-sm</span><button class="impl-copy-btn" onclick="copyCode(this,'text-sm')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">Body Medium (16px)</span><span class="impl-code">text-base</span><button class="impl-copy-btn" onclick="copyCode(this,'text-base')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">Body Large (18px)</span><span class="impl-code">text-lg</span><button class="impl-copy-btn" onclick="copyCode(this,'text-lg')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">Title (20px)</span><span class="impl-code">text-xl</span><button class="impl-copy-btn" onclick="copyCode(this,'text-xl')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">Header Small (24px)</span><span class="impl-code">text-2xl</span><button class="impl-copy-btn" onclick="copyCode(this,'text-2xl')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">Header Medium (36px)</span><span class="impl-code">text-4xl</span><button class="impl-copy-btn" onclick="copyCode(this,'text-4xl')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">Header Large (44px)</span><span class="impl-code">text-5xl</span><button class="impl-copy-btn" onclick="copyCode(this,'text-5xl')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">Display (64px)</span><span class="impl-code">text-7xl</span><button class="impl-copy-btn" onclick="copyCode(this,'text-7xl')">COPY</button></div>
-            </div>
-          </div>
-
-          <!-- CSS Variable -->
-          <div class="tab-content" id="fontsize-css">
-            <div class="impl-rows">
-              <div class="impl-row"><span class="impl-style-label">Caption (12px)</span><span class="impl-code">font-size: var(--font-size-xs);</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--font-size-xs);')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">Body Small (14px)</span><span class="impl-code">font-size: var(--font-size-sm);</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--font-size-sm);')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">Body Medium (16px)</span><span class="impl-code">font-size: var(--font-size-base);</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--font-size-base);')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">Body Large (18px)</span><span class="impl-code">font-size: var(--font-size-lg);</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--font-size-lg);')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">Title (20px)</span><span class="impl-code">font-size: var(--font-size-xl);</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--font-size-xl);')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">Header Small (24px)</span><span class="impl-code">font-size: var(--font-size-2xl);</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--font-size-2xl);')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">Header Medium (36px)</span><span class="impl-code">font-size: var(--font-size-4xl);</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--font-size-4xl);')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">Header Large (44px)</span><span class="impl-code">font-size: var(--font-size-5xl);</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: var(--font-size-5xl);')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">Display (64px)</span><span class="impl-code">font-size: 64px; /* custom */</span><button class="impl-copy-btn" onclick="copyCode(this,'font-size: 64px;')">COPY</button></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- FONT WEIGHT -->
-        <div class="impl-section">
-          <div class="impl-header">
-            <span class="impl-title">Font Weight</span>
+            <span class="impl-title">Primitive — Font Weight</span>
             <div class="tab-group" id="tabs-fontweight">
               <button class="tab-btn active" data-tab="tw" data-group="fontweight">Tailwind</button>
               <button class="tab-btn" data-tab="css" data-group="fontweight">CSS Variable</button>
             </div>
           </div>
-
-          <!-- Tailwind -->
           <div class="tab-content active" id="fontweight-tw">
             <div class="impl-rows">
-              <div class="impl-row"><span class="impl-style-label">Light (300)</span><span class="impl-code">font-light</span><button class="impl-copy-btn" onclick="copyCode(this,'font-light')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">Regular (400)</span><span class="impl-code">font-normal</span><button class="impl-copy-btn" onclick="copyCode(this,'font-normal')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">Medium (500)</span><span class="impl-code">font-medium</span><button class="impl-copy-btn" onclick="copyCode(this,'font-medium')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">SemiBold (600)</span><span class="impl-code">font-semibold</span><button class="impl-copy-btn" onclick="copyCode(this,'font-semibold')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">Bold (700)</span><span class="impl-code">font-bold</span><button class="impl-copy-btn" onclick="copyCode(this,'font-bold')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Light — 300</span><span class="impl-code">font-light</span><button class="impl-copy-btn" onclick="copyCode(this,'font-light')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Regular — 400</span><span class="impl-code">font-normal</span><button class="impl-copy-btn" onclick="copyCode(this,'font-normal')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Medium — 500</span><span class="impl-code">font-medium</span><button class="impl-copy-btn" onclick="copyCode(this,'font-medium')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">SemiBold — 600</span><span class="impl-code">font-semibold</span><button class="impl-copy-btn" onclick="copyCode(this,'font-semibold')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Bold — 700</span><span class="impl-code">font-bold</span><button class="impl-copy-btn" onclick="copyCode(this,'font-bold')">COPY</button></div>
             </div>
           </div>
-
-          <!-- CSS Variable -->
           <div class="tab-content" id="fontweight-css">
             <div class="impl-rows">
-              <div class="impl-row"><span class="impl-style-label">Light (300)</span><span class="impl-code">font-weight: var(--font-weight-light);</span><button class="impl-copy-btn" onclick="copyCode(this,'font-weight: var(--font-weight-light);')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">Regular (400)</span><span class="impl-code">font-weight: var(--font-weight-normal);</span><button class="impl-copy-btn" onclick="copyCode(this,'font-weight: var(--font-weight-normal);')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">Medium (500)</span><span class="impl-code">font-weight: var(--font-weight-medium);</span><button class="impl-copy-btn" onclick="copyCode(this,'font-weight: var(--font-weight-medium);')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">SemiBold (600)</span><span class="impl-code">font-weight: var(--font-weight-semibold);</span><button class="impl-copy-btn" onclick="copyCode(this,'font-weight: var(--font-weight-semibold);')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">Bold (700)</span><span class="impl-code">font-weight: var(--font-weight-bold);</span><button class="impl-copy-btn" onclick="copyCode(this,'font-weight: var(--font-weight-bold);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Light — 300</span><span class="impl-code">font-weight: var(--font-weight-light);</span><button class="impl-copy-btn" onclick="copyCode(this,'font-weight: var(--font-weight-light);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Regular — 400</span><span class="impl-code">font-weight: var(--font-weight-normal);</span><button class="impl-copy-btn" onclick="copyCode(this,'font-weight: var(--font-weight-normal);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Medium — 500</span><span class="impl-code">font-weight: var(--font-weight-medium);</span><button class="impl-copy-btn" onclick="copyCode(this,'font-weight: var(--font-weight-medium);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">SemiBold — 600</span><span class="impl-code">font-weight: var(--font-weight-semibold);</span><button class="impl-copy-btn" onclick="copyCode(this,'font-weight: var(--font-weight-semibold);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">Bold — 700</span><span class="impl-code">font-weight: var(--font-weight-bold);</span><button class="impl-copy-btn" onclick="copyCode(this,'font-weight: var(--font-weight-bold);')">COPY</button></div>
             </div>
           </div>
         </div>
 
-        <!-- LINE HEIGHT -->
+        <!-- ── PANEL 3: Primitive Line Height ── -->
         <div class="impl-section">
           <div class="impl-header">
-            <span class="impl-title">Line Height</span>
+            <span class="impl-title">Primitive — Line Height</span>
             <div class="tab-group" id="tabs-lineheight">
               <button class="tab-btn active" data-tab="tw" data-group="lineheight">Tailwind</button>
               <button class="tab-btn" data-tab="css" data-group="lineheight">CSS Variable</button>
             </div>
           </div>
-
-          <!-- Tailwind -->
           <div class="tab-content active" id="lineheight-tw">
             <div class="impl-rows">
-              <div class="impl-row"><span class="impl-style-label">14px (Caption)</span><span class="impl-code">leading-none</span><button class="impl-copy-btn" onclick="copyCode(this,'leading-none')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">20px (Body Small)</span><span class="impl-code">leading-5</span><button class="impl-copy-btn" onclick="copyCode(this,'leading-5')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">24px (Body Medium)</span><span class="impl-code">leading-6</span><button class="impl-copy-btn" onclick="copyCode(this,'leading-6')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">28px (Body Large)</span><span class="impl-code">leading-7</span><button class="impl-copy-btn" onclick="copyCode(this,'leading-7')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">32px (Header Small)</span><span class="impl-code">leading-8</span><button class="impl-copy-btn" onclick="copyCode(this,'leading-8')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">44px (Header Medium)</span><span class="impl-code">leading-[44px]</span><button class="impl-copy-btn" onclick="copyCode(this,'leading-[44px]')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">52px (Header Large)</span><span class="impl-code">leading-[52px]</span><button class="impl-copy-btn" onclick="copyCode(this,'leading-[52px]')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">68px (Display)</span><span class="impl-code">leading-[68px]</span><button class="impl-copy-btn" onclick="copyCode(this,'leading-[68px]')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">14px — Caption</span><span class="impl-code">leading-[14px]</span><button class="impl-copy-btn" onclick="copyCode(this,'leading-[14px]')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">20px — Body Small / Overline</span><span class="impl-code">leading-5</span><button class="impl-copy-btn" onclick="copyCode(this,'leading-5')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">24px — Body Medium / Title</span><span class="impl-code">leading-6</span><button class="impl-copy-btn" onclick="copyCode(this,'leading-6')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">28px — Body Large</span><span class="impl-code">leading-7</span><button class="impl-copy-btn" onclick="copyCode(this,'leading-7')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">32px — Header Small</span><span class="impl-code">leading-8</span><button class="impl-copy-btn" onclick="copyCode(this,'leading-8')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">44px — Header Medium</span><span class="impl-code">leading-[44px]</span><button class="impl-copy-btn" onclick="copyCode(this,'leading-[44px]')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">52px — Header Large</span><span class="impl-code">leading-[52px]</span><button class="impl-copy-btn" onclick="copyCode(this,'leading-[52px]')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">68px — Display</span><span class="impl-code">leading-[68px]</span><button class="impl-copy-btn" onclick="copyCode(this,'leading-[68px]')">COPY</button></div>
             </div>
           </div>
-
-          <!-- CSS Variable -->
           <div class="tab-content" id="lineheight-css">
             <div class="impl-rows">
-              <div class="impl-row"><span class="impl-style-label">14px (Caption)</span><span class="impl-code">line-height: var(--line-height-tight);</span><button class="impl-copy-btn" onclick="copyCode(this,'line-height: var(--line-height-tight);')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">20px (Body Small)</span><span class="impl-code">line-height: var(--line-height-snug);</span><button class="impl-copy-btn" onclick="copyCode(this,'line-height: var(--line-height-snug);')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">24px (Body Medium)</span><span class="impl-code">line-height: var(--line-height-normal);</span><button class="impl-copy-btn" onclick="copyCode(this,'line-height: var(--line-height-normal);')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">28px (Body Large)</span><span class="impl-code">line-height: var(--line-height-relaxed);</span><button class="impl-copy-btn" onclick="copyCode(this,'line-height: var(--line-height-relaxed);')">COPY</button></div>
-              <div class="impl-row"><span class="impl-style-label">32px+ (Header)</span><span class="impl-code">line-height: 2rem; /* 32px */</span><button class="impl-copy-btn" onclick="copyCode(this,'line-height: 2rem;')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">14px — Caption</span><span class="impl-code">line-height: var(--text-caption-regular-lh);</span><button class="impl-copy-btn" onclick="copyCode(this,'line-height: var(--text-caption-regular-lh);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">20px — Body Small / Overline</span><span class="impl-code">line-height: var(--text-body-small-regular-lh);</span><button class="impl-copy-btn" onclick="copyCode(this,'line-height: var(--text-body-small-regular-lh);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">24px — Body Medium / Title</span><span class="impl-code">line-height: var(--text-body-medium-regular-lh);</span><button class="impl-copy-btn" onclick="copyCode(this,'line-height: var(--text-body-medium-regular-lh);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">28px — Body Large</span><span class="impl-code">line-height: var(--text-body-large-regular-lh);</span><button class="impl-copy-btn" onclick="copyCode(this,'line-height: var(--text-body-large-regular-lh);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">32px — Header Small</span><span class="impl-code">line-height: var(--text-header-small-regular-lh);</span><button class="impl-copy-btn" onclick="copyCode(this,'line-height: var(--text-header-small-regular-lh);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">44px — Header Medium</span><span class="impl-code">line-height: var(--text-header-medium-regular-lh);</span><button class="impl-copy-btn" onclick="copyCode(this,'line-height: var(--text-header-medium-regular-lh);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">52px — Header Large</span><span class="impl-code">line-height: var(--text-header-large-regular-lh);</span><button class="impl-copy-btn" onclick="copyCode(this,'line-height: var(--text-header-large-regular-lh);')">COPY</button></div>
+              <div class="impl-row"><span class="impl-style-label">68px — Display</span><span class="impl-code">line-height: var(--text-display-regular-lh);</span><button class="impl-copy-btn" onclick="copyCode(this,'line-height: var(--text-display-regular-lh);')">COPY</button></div>
             </div>
           </div>
         </div>
