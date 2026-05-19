@@ -312,7 +312,17 @@
 
   /* ============================================================
      SHADOW TOKENS — Elevation System
+     DS GPOS Lite V2 menggunakan 1 shadow token multi-layer (Shadow 1)
+     Layer 1: edge definition | Layer 2: main elevation
+     Warna dasar: #091E42 (GPOS Dark Navy)
      ============================================================ */
+
+  /* ── Shadow 1 — Primary Token (Multi-layer) ── */
+  --shadow-1:
+    0px 0px 1px 0px rgba(9, 30, 66, 0.31),   /* Layer 1 — subtle edge */
+    0px 8px 12px 0px rgba(9, 30, 66, 0.15);  /* Layer 2 — main depth */
+
+  /* ── Legacy aliases (kept for backward compat) ── */
   --shadow-none:  none;
   --shadow-xs:    0 1px 2px 0 rgba(0,0,0,0.04);
   --shadow-sm:    0 1px 3px 0 rgba(0,0,0,0.08), 0 1px 2px -1px rgba(0,0,0,0.06);

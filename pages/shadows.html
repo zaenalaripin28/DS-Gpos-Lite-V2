@@ -1,262 +1,944 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shadows - Design System GPOS Lite V 2.0</title>
-    <link rel="stylesheet" href="../css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shadows - Design System GPOS Lite V 2.0</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    /* ============================================================
+       SHADOWS PAGE — Design Token
+       Shadow 1 — Multi-layer drop shadow
+       Layer 1: 0px 0px 1px 0px rgba(9,30,66,0.31)
+       Layer 2: 0px 8px 12px 0px rgba(9,30,66,0.15)
+       ============================================================ */
+
+    /* ── Token Reference ─────────────────────────────────────── */
+    :root {
+      --shadow-1: 0px 0px 1px 0px rgba(9, 30, 66, 0.31),
+                  0px 8px 12px 0px rgba(9, 30, 66, 0.15);
+    }
+
+    /* ── Hero Preview ────────────────────────────────────────── */
+    .shadow-preview-wrap {
+      background: #F5F6F7;
+      background-image:
+        linear-gradient(45deg, #E0E4EA 25%, transparent 25%),
+        linear-gradient(-45deg, #E0E4EA 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #E0E4EA 75%),
+        linear-gradient(-45deg, transparent 75%, #E0E4EA 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+      border-radius: 16px;
+      padding: 60px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 32px;
+      border: 1px solid #DFE2E6;
+    }
+    .shadow-card-demo {
+      width: 200px;
+      height: 120px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: var(--shadow-1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .shadow-card-demo-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #6B788E;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-family: var(--font-primary);
+    }
+    .shadow-card-demo-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #091E42;
+      font-family: var(--font-primary);
+    }
+
+    /* ── Token Header Card ───────────────────────────────────── */
+    .token-header-card {
+      background: #fff;
+      border: 1px solid #DFE2E6;
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .token-header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .token-chip {
+      background: #091E42;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-family: var(--font-primary);
+      letter-spacing: 0.04em;
+    }
+    .token-name-big {
+      font-size: 18px;
+      font-weight: 700;
+      color: #091E42;
+      font-family: var(--font-primary);
+    }
+    .token-sub {
+      font-size: 12px;
+      color: #6B788E;
+      font-family: var(--font-primary);
+    }
+    .multilayer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #EBF5FF;
+      border: 1px solid #A3CBEE;
+      color: #155996;
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-family: var(--font-primary);
+    }
+    .multilayer-badge svg { flex-shrink: 0; }
+
+    /* ── Layer Anatomy Table ─────────────────────────────────── */
+    .anatomy-section {
+      background: #fff;
+      border: 1px solid #DFE2E6;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .anatomy-header {
+      padding: 16px 24px;
+      border-bottom: 1px solid #EBEDF0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .anatomy-header-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #091E42;
+      font-family: var(--font-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .layer-count {
+      background: #F5F6F7;
+      color: #42526D;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-family: var(--font-primary);
+    }
+    .anatomy-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .anatomy-table thead tr {
+      background: #F8FAFC;
+    }
+    .anatomy-table th {
+      padding: 10px 20px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #6B788E;
+      text-align: left;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border-bottom: 1px solid #EBEDF0;
+      font-family: var(--font-primary);
+      white-space: nowrap;
+    }
+    .anatomy-table td {
+      padding: 14px 20px;
+      font-size: 13px;
+      color: #354764;
+      border-bottom: 1px solid #F5F6F7;
+      font-family: var(--font-primary);
+    }
+    .anatomy-table tr:last-child td { border-bottom: none; }
+    .anatomy-table td:first-child {
+      font-weight: 700;
+      color: #091E42;
+    }
+    .layer-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .layer-num-1 { background: #EBF5FF; color: #1E7FD6; border: 1px solid #A3CBEE; }
+    .layer-num-2 { background: #091E42; color: #fff; }
+    .layer-cell { display: flex; align-items: center; gap: 8px; }
+    .layer-role {
+      font-size: 11px;
+      color: #6B788E;
+      font-weight: 500;
+      font-family: var(--font-primary);
+    }
+    .layer-mono {
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: #354764;
+    }
+    .color-swatch-inline {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      border: 1px solid rgba(0,0,0,0.12);
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 4px;
+      background: #091E42;
+    }
+
+    /* ── Full CSS String ─────────────────────────────────────── */
+    .full-css-card {
+      background: #0D1F3C;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .full-css-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #7DB5E7;
+      font-family: var(--font-primary);
+      margin-bottom: 10px;
+    }
+    .full-css-code {
+      font-size: 13px;
+      font-family: var(--font-mono);
+      color: #E8F0F8;
+      line-height: 1.7;
+      word-break: break-all;
+    }
+    .full-css-code .tok-prop { color: #7DB5E7; }
+    .full-css-code .tok-val  { color: #ABD7FF; }
+    .full-css-code .tok-comment { color: #4D6A8C; }
+    .copy-css-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      padding: 5px 14px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.08);
+      color: #ABD7FF;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--font-primary);
+      transition: all 0.15s ease;
+      letter-spacing: 0.03em;
+    }
+    .copy-css-btn:hover { background: rgba(255,255,255,0.15); color: #fff; }
+    .copy-css-btn.copied { background: rgba(30,127,214,0.3); color: #7DB5E7; }
+
+    /* ── Usage Info Cards ────────────────────────────────────── */
+    .info-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    @media (max-width: 860px) { .info-cards { grid-template-columns: 1fr; } }
+
+    .info-card {
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+    .info-card-usage { background: #EBF5FF; border: 1px solid #A3CBEE; }
+    .info-card-best  { background: #E6F7EF; border: 1px solid #6BCEA0; }
+    .info-card-avoid { background: #FDE8E9; border: 1px solid #F7A2A5; }
+
+    .info-card-head {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      font-family: var(--font-primary);
+    }
+    .info-card-usage .info-card-head { color: #155996; }
+    .info-card-best  .info-card-head { color: #007740; }
+    .info-card-avoid .info-card-head { color: #A51419; }
+
+    .info-card ul { margin: 0; padding-left: 16px; list-style: disc; }
+    .info-card li {
+      font-size: 13px;
+      color: #243757;
+      margin-bottom: 6px;
+      line-height: 1.5;
+      font-family: var(--font-primary);
+    }
+    .info-card li:last-child { margin-bottom: 0; }
+
+    /* ── Section Divider ─────────────────────────────────────── */
+    .section-divider {
+      height: 1px;
+      background: #EBEDF0;
+      margin: 0 0 40px;
+    }
+
+    /* ── Implementation Code Section ─────────────────────────── */
+    .impl-section {
+      background: #fff;
+      border: 1px solid #DFE2E6;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    .impl-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid #EBEDF0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .impl-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #091E42;
+      font-family: var(--font-primary);
+      margin: 0;
+    }
+    .impl-toggle {
+      display: flex;
+      gap: 4px;
+      background: #F5F6F7;
+      padding: 4px;
+      border-radius: 8px;
+    }
+    .impl-tab-btn {
+      padding: 6px 18px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      color: #6B788E;
+      font-family: var(--font-primary);
+      transition: all 0.15s ease;
+    }
+    .impl-tab-btn.active { background: #091E42; color: #fff; }
+
+    /* Tailwind impl */
+    .impl-body { padding: 4px 0; }
+
+    .impl-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 24px;
+      border-bottom: 1px solid #F5F6F7;
+      transition: background 0.1s;
+      flex-wrap: wrap;
+    }
+    .impl-row:last-child { border-bottom: none; }
+    .impl-row:hover { background: #F8FAFC; }
+
+    .impl-token-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #091E42;
+      width: 110px;
+      flex-shrink: 0;
+      font-family: var(--font-primary);
+    }
+    .impl-code-text {
+      flex: 1;
+      font-size: 12.5px;
+      color: #354764;
+      font-family: var(--font-mono);
+      min-width: 0;
+    }
+    .impl-copy {
+      padding: 5px 14px;
+      border-radius: 6px;
+      border: 1px solid #DFE2E6;
+      background: #fff;
+      cursor: pointer;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #505F79;
+      font-family: var(--font-primary);
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+    .impl-copy:hover  { border-color: #1E7FD6; color: #1E7FD6; background: #E9F2FB; }
+    .impl-copy.copied { background: #E9F2FB; color: #1E7FD6; border-color: #1E7FD6; }
+
+    /* Config block inside impl */
+    .impl-config-wrap {
+      padding: 20px 24px;
+    }
+    .impl-config-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #6B788E;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-family: var(--font-primary);
+      margin-bottom: 10px;
+    }
+    .impl-code-block {
+      background: #0D1F3C;
+      border-radius: 10px;
+      padding: 18px 20px;
+      position: relative;
+    }
+    .impl-code-block pre {
+      margin: 0;
+      font-size: 12.5px;
+      font-family: var(--font-mono);
+      color: #E8F0F8;
+      line-height: 1.75;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .impl-code-block .tok-comment { color: #4D6A8C; }
+    .impl-code-block .tok-key     { color: #7DB5E7; }
+    .impl-code-block .tok-val     { color: #ABD7FF; }
+    .impl-code-block .tok-str     { color: #A8E6CF; }
+    .impl-code-block .tok-prop    { color: #FFD580; }
+    .copy-block-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      padding: 4px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.08);
+      color: #ABD7FF;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: var(--font-primary);
+      transition: all 0.15s ease;
+    }
+    .copy-block-btn:hover  { background: rgba(255,255,255,0.15); color: #fff; }
+    .copy-block-btn.copied { background: rgba(30,127,214,0.3); color: #7DB5E7; }
+
+    /* ── Page header font ────────────────────────────────────── */
+    .page-header h1, .page-header .subtitle {
+      font-family: var(--font-primary);
+    }
+
+    @media (max-width: 640px) {
+      .shadow-preview-wrap { padding: 40px 16px; }
+      .anatomy-table th, .anatomy-table td { padding: 10px 12px; font-size: 12px; }
+      .anatomy-table .layer-role { display: none; }
+      .full-css-card { padding: 16px; }
+      .copy-css-btn { position: static; margin-top: 14px; display: block; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
+<div class="container">
 
   <!-- Mobile overlay -->
   <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
-    <!-- ===================== SIDEBAR ===================== -->
-    <aside class="sidebar" id="sidebar">
-
-      <div class="sidebar-header">
-        <div class="sidebar-brand">
-          <div class="sidebar-logo-icon">GL</div>
-          <div class="sidebar-brand-text">
-            <div class="logo">GPOS Lite</div>
-            <div class="version">Design System V2.0</div>
-          </div>
-        </div>
-        <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">&#x2715;</button>
-      </div>
-
-      <div class="sidebar-search">
-        <input type="search" class="search-input" placeholder="&#x1F50D;  Cari token, component...">
-      </div>
-
-      <div class="nav-scroll">
-        <nav class="nav-menu">
-
-          <div class="nav-section">
-            <h3 class="nav-title">Overview</h3>
-            <ul class="nav-list">
-              <li>
-                <a href="../index.html" class="nav-link">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
-                  Home
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="nav-section">
-            <h3 class="nav-title">Foundations</h3>
-            <ul class="nav-list">
-              <li><a href="colors.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg>Colors</a></li>
-              <li><a href="typography.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Typography</a></li>
-              <li><a href="spacing.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>Spacing</a></li>
-              <li><a href="shadows.html" class="nav-link  active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h12a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V7z" opacity="0.4"/></svg>Shadows</a></li>
-              <li><a href="borders.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>Borders &amp; Radius</a></li>
-              <li><a href="grid.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Grid &amp; Layout</a></li>
-            </ul>
-          </div>
-
-          <div class="nav-section">
-            <h3 class="nav-title">Components</h3>
-            <ul class="nav-list">
-              <li>
-                <a href="components.html" class="nav-link">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                  Component Library
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="nav-section">
-            <h3 class="nav-title">Resources</h3>
-            <ul class="nav-list">
-              <li>
-                <a href="../tailwind.config.js" class="nav-link" target="_blank">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16,18 22,12 16,6"/><polyline points="8,6 2,12 8,18"/></svg>
-                  Tailwind Config
-                </a>
-              </li>
-              <li>
-                <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="nav-link" target="_blank">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-                  GitHub Repo
-                </a>
-              </li>
-            </ul>
-          </div>
-
-        </nav>
-      </div>
-
-      <div class="sidebar-footer">
-        <div class="tailwind-badge">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 6C9.33 6 7.67 7.33 7 10c1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35.98 1 2.09 2.15 4.59 2.15C19.67 12 21.33 10.67 22 8c-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C15.61 7.15 14.5 6 12 6zm-7 6c-2.67 0-4.33 1.33-5 4 1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35C6.39 17.15 7.5 18 10 18c2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C8.61 12.85 7.5 12 5 12z"/></svg>
-          Built with Tailwind CSS
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo-icon">GL</div>
+        <div class="sidebar-brand-text">
+          <div class="logo">GPOS Lite</div>
+          <div class="version">Design System V2.0</div>
         </div>
       </div>
-
-    </aside>
-
-        
-
-        <main class="main-content">
-
-      <!-- Topbar -->
-      <div class="topbar">
-        <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        </button>
-        <div class="breadcrumb">
-          <a href="../index.html">Home</a><span class="breadcrumb-sep">/</span><a href="#">Foundations</a><span class="breadcrumb-sep">/</span><span class="current">Shadows</span>
-        </div>
-        <div class="topbar-actions">
-          <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="topbar-link" target="_blank">GitHub</a>
-          <span class="version-badge">v2.0</span>
-        </div>
-      </div>
-      <div class="content-inner">
-            <header class="page-header">
-                <h1>Shadow System</h1>
-                <p class="subtitle">6-level elevation system untuk depth, hierarchy, dan visual layering</p>
-            </header>
-
-            <section>
-                <h2>Shadow Levels</h2>
-                <p>Gunakan shadows untuk menunjukkan elevasi dan create visual hierarchy dalam design.</p>
-
-                <div style="display: grid; gap: var(--spacing-6); margin-bottom: var(--spacing-8);">
-                    <!-- Shadow None -->
-                    <div style="padding: var(--spacing-6); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md); box-shadow: none;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-3);">
-                            <div>
-                                <p style="margin: 0; font-weight: 500;">None (No Shadow)</p>
-                                <code style="font-size: var(--font-size-xs);">shadow-none</code>
-                            </div>
-                        </div>
-                        <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm); margin: 0;">Gunakan untuk flat design atau elemen tanpa depth</p>
-                    </div>
-
-                    <!-- Shadow SM -->
-                    <div style="padding: var(--spacing-6); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md); box-shadow: var(--shadow-sm);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-3);">
-                            <div>
-                                <p style="margin: 0; font-weight: 500;">Small Shadow</p>
-                                <code style="font-size: var(--font-size-xs);">shadow-sm / 0 1px 2px rgba(0,0,0,0.05)</code>
-                            </div>
-                        </div>
-                        <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm); margin: 0;">Subtle shadow untuk light elevation</p>
-                    </div>
-
-                    <!-- Shadow MD -->
-                    <div style="padding: var(--spacing-6); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md); box-shadow: var(--shadow-md);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-3);">
-                            <div>
-                                <p style="margin: 0; font-weight: 500;">Medium Shadow (Default)</p>
-                                <code style="font-size: var(--font-size-xs);">shadow-md</code>
-                            </div>
-                        </div>
-                        <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm); margin: 0;">Default shadow untuk cards dan components</p>
-                    </div>
-
-                    <!-- Shadow LG -->
-                    <div style="padding: var(--spacing-6); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md); box-shadow: var(--shadow-lg);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-3);">
-                            <div>
-                                <p style="margin: 0; font-weight: 500;">Large Shadow</p>
-                                <code style="font-size: var(--font-size-xs);">shadow-lg</code>
-                            </div>
-                        </div>
-                        <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm); margin: 0;">Untuk floating elements dan popovers</p>
-                    </div>
-
-                    <!-- Shadow XL -->
-                    <div style="padding: var(--spacing-6); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md); box-shadow: var(--shadow-xl);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-3);">
-                            <div>
-                                <p style="margin: 0; font-weight: 500;">Extra Large Shadow</p>
-                                <code style="font-size: var(--font-size-xs);">shadow-xl</code>
-                            </div>
-                        </div>
-                        <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm); margin: 0;">Untuk modals dan dropdowns</p>
-                    </div>
-
-                    <!-- Shadow 2XL -->
-                    <div style="padding: var(--spacing-6); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md); box-shadow: var(--shadow-2xl);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-3);">
-                            <div>
-                                <p style="margin: 0; font-weight: 500;">2XL Shadow</p>
-                                <code style="font-size: var(--font-size-xs);">shadow-2xl</code>
-                            </div>
-                        </div>
-                        <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm); margin: 0;">Maximum depth untuk page overlays</p>
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h2>Usage Guidelines</h2>
-
-                <div class="guide-section">
-                    <h3>✅ Usage Chart</h3>
-                    <table style="width: 100%; border-collapse: collapse; margin-bottom: var(--spacing-4);">
-                        <tr style="border-bottom: 1px solid var(--color-border-light);">
-                            <td style="padding: var(--spacing-3); font-weight: 500;">Shadow</td>
-                            <td style="padding: var(--spacing-3); font-weight: 500;">Use Case</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--color-border-light);">
-                            <td style="padding: var(--spacing-3);">shadow-sm</td>
-                            <td style="padding: var(--spacing-3);">Hover state, subtle lift</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--color-border-light);">
-                            <td style="padding: var(--spacing-3);">shadow-md</td>
-                            <td style="padding: var(--spacing-3);">Cards, buttons on hover</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--color-border-light);">
-                            <td style="padding: var(--spacing-3);">shadow-lg</td>
-                            <td style="padding: var(--spacing-3);">Floating panels, tooltips</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--color-border-light);">
-                            <td style="padding: var(--spacing-3);">shadow-xl</td>
-                            <td style="padding: var(--spacing-3);">Modals, dropdowns</td>
-                        </tr>
-                        <tr>
-                            <td style="padding: var(--spacing-3);">shadow-2xl</td>
-                            <td style="padding: var(--spacing-3);">Full page overlays, dialogs</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="guide-section">
-                    <h3>Code Examples</h3>
-                    <pre><code>&lt;!-- Card with default shadow --&gt;
-&lt;div class="shadow-md p-4 rounded-lg"&gt;
-  Card with medium shadow
-&lt;/div&gt;
-
-&lt;!-- Hover effect --&gt;
-&lt;div class="shadow-sm hover:shadow-md transition-shadow"&gt;
-  Elevate on hover
-&lt;/div&gt;
-
-&lt;!-- Modal --&gt;
-&lt;div class="fixed inset-0 shadow-2xl"&gt;
-  Full page modal
-&lt;/div&gt;</code></pre>
-                </div>
-            </section>
-
-                    <footer class="page-footer">
-          <div class="footer-left">
-            &copy; 2026 <strong>GPOS Lite Design System V2.0</strong> &mdash; Maintained with &#x2764;&#xFE0F;
-          </div>
-          <div class="footer-right">
-            GitHub Pages
-          </div>
-        </footer>
-              </div><!-- /content-inner -->
-    </main>
+      <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">&#x2715;</button>
     </div>
+
+    <div class="sidebar-search">
+      <input type="search" class="search-input" placeholder="&#x1F50D;  Cari token, component...">
+    </div>
+
+    <div class="nav-scroll">
+      <nav class="nav-menu">
+
+        <div class="nav-section">
+          <h3 class="nav-title">Overview</h3>
+          <ul class="nav-list">
+            <li>
+              <a href="../index.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+                Home
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="nav-title">Foundations</h3>
+          <ul class="nav-list">
+            <li><a href="colors.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg>Colors</a></li>
+            <li><a href="typography.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Typography</a></li>
+            <li><a href="spacing.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>Spacing</a></li>
+            <li><a href="shadows.html" class="nav-link active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h12a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V7z" opacity="0.4"/></svg>Shadows</a></li>
+            <li><a href="borders.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>Borders &amp; Radius</a></li>
+            <li><a href="grid.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Grid &amp; Layout</a></li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="nav-title">Components</h3>
+          <ul class="nav-list">
+            <li>
+              <a href="components.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                Component Library
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="nav-title">Resources</h3>
+          <ul class="nav-list">
+            <li>
+              <a href="../tailwind.config.js" class="nav-link" target="_blank">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16,18 22,12 16,6"/><polyline points="8,6 2,12 8,18"/></svg>
+                Tailwind Config
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="nav-link" target="_blank">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                GitHub Repo
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </nav>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="tailwind-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 6C9.33 6 7.67 7.33 7 10c1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35.98 1 2.09 2.15 4.59 2.15C19.67 12 21.33 10.67 22 8c-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C15.61 7.15 14.5 6 12 6zm-7 6c-2.67 0-4.33 1.33-5 4 1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35C6.39 17.15 7.5 18 10 18c2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C8.61 12.85 7.5 12 5 12z"/></svg>
+        Built with Tailwind CSS
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===================== MAIN ===================== -->
+  <main class="main-content">
+
+    <!-- Topbar -->
+    <div class="topbar">
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a><span class="breadcrumb-sep">/</span><a href="#">Foundations</a><span class="breadcrumb-sep">/</span><span class="current">Shadows</span>
+      </div>
+      <div class="topbar-actions">
+        <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="topbar-link" target="_blank">GitHub</a>
+        <span class="version-badge">v2.0</span>
+      </div>
+    </div>
+
+    <div class="content-inner">
+
+      <!-- ── Page Header ──────────────────────────────────────── -->
+      <header class="page-header">
+        <h1>Shadow System</h1>
+        <p class="subtitle">1 shadow token multi-layer untuk depth dan elevation yang konsisten — dirancang dengan warna brand <strong>#091E42</strong> untuk visual hierarchy yang subtil dan profesional.</p>
+      </header>
+
+      <!-- ══════════════════════════════════════════════════════
+           SECTION 1 — SHADOW PREVIEW
+           ══════════════════════════════════════════════════════ -->
+      <section style="margin-bottom: 40px;">
+        <h2 style="font-family: var(--font-primary); font-size: 18px; font-weight: 700; color: #091E42; margin-bottom: 16px;">Shadow Preview</h2>
+
+        <!-- Hero Preview -->
+        <div class="shadow-preview-wrap">
+          <div class="shadow-card-demo">
+            <div class="shadow-card-demo-label">Token</div>
+            <div class="shadow-card-demo-name">Shadow 1</div>
+          </div>
+        </div>
+
+        <!-- Token Header Card -->
+        <div class="token-header-card">
+          <div class="token-header-left">
+            <span class="token-chip">1 TOKEN</span>
+            <div>
+              <div class="token-name-big">Shadow 1</div>
+              <div class="token-sub">--shadow-1 &nbsp;·&nbsp; Drop shadow</div>
+            </div>
+          </div>
+          <div class="multilayer-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="7" width="20" height="14" rx="2"/>
+              <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+              <line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/>
+            </svg>
+            Multi-layer · 2 Drop Shadow
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           SECTION 2 — LAYER ANATOMY
+           ══════════════════════════════════════════════════════ -->
+      <section style="margin-bottom: 40px;">
+        <h2 style="font-family: var(--font-primary); font-size: 18px; font-weight: 700; color: #091E42; margin-bottom: 16px;">Layer Anatomy</h2>
+
+        <div class="anatomy-section">
+          <div class="anatomy-header">
+            <span class="anatomy-header-title">Drop Shadow Layers</span>
+            <span class="layer-count">2 layers</span>
+          </div>
+          <table class="anatomy-table">
+            <thead>
+              <tr>
+                <th>Layer</th>
+                <th>X</th>
+                <th>Y</th>
+                <th>Blur</th>
+                <th>Spread</th>
+                <th>Color</th>
+                <th>Opacity</th>
+                <th>Fungsi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="layer-cell">
+                    <span class="layer-num layer-num-1">1</span>
+                    <span class="layer-role">Edge</span>
+                  </div>
+                </td>
+                <td><span class="layer-mono">0px</span></td>
+                <td><span class="layer-mono">0px</span></td>
+                <td><span class="layer-mono">1px</span></td>
+                <td><span class="layer-mono">0px</span></td>
+                <td>
+                  <span class="color-swatch-inline"></span>
+                  <span class="layer-mono">#091E42</span>
+                </td>
+                <td><span class="layer-mono">31%</span></td>
+                <td style="color: #6B788E; font-size: 12px;">Definisi tepi / border halus</td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="layer-cell">
+                    <span class="layer-num layer-num-2">2</span>
+                    <span class="layer-role">Depth</span>
+                  </div>
+                </td>
+                <td><span class="layer-mono">0px</span></td>
+                <td><span class="layer-mono">8px</span></td>
+                <td><span class="layer-mono">12px</span></td>
+                <td><span class="layer-mono">0px</span></td>
+                <td>
+                  <span class="color-swatch-inline"></span>
+                  <span class="layer-mono">#091E42</span>
+                </td>
+                <td><span class="layer-mono">15%</span></td>
+                <td style="color: #6B788E; font-size: 12px;">Elevasi utama / kedalaman</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Full CSS value -->
+        <div class="full-css-card">
+          <div class="full-css-label">Full CSS Value — Shadow 1</div>
+          <div class="full-css-code" id="shadow-full-css">
+            <span class="tok-comment">/* Layer 1 — subtle edge definition */</span><br>
+            <span class="tok-val">0px 0px 1px 0px rgba(9, 30, 66, 0.31),</span><br>
+            <span class="tok-comment">/* Layer 2 — main elevation */</span><br>
+            <span class="tok-val">0px 8px 12px 0px rgba(9, 30, 66, 0.15)</span>
+          </div>
+          <button class="copy-css-btn" id="copy-full-css">COPY</button>
+        </div>
+
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ══════════════════════════════════════════════════════
+           SECTION 3 — USAGE GUIDELINES
+           ══════════════════════════════════════════════════════ -->
+      <section style="margin-bottom: 40px;">
+        <h2 style="font-family: var(--font-primary); font-size: 18px; font-weight: 700; color: #091E42; margin-bottom: 16px;">Usage Guidelines</h2>
+
+        <div class="info-cards">
+          <div class="info-card info-card-usage">
+            <div class="info-card-head">📌 Kapan Dipakai</div>
+            <ul>
+              <li>Card produk &amp; informasi</li>
+              <li>Button elevasi (CTA utama)</li>
+              <li>Panel &amp; sidebar floating</li>
+              <li>Dropdown &amp; popover menu</li>
+              <li>Modal &amp; dialog overlay</li>
+              <li>Input field saat fokus</li>
+            </ul>
+          </div>
+          <div class="info-card info-card-best">
+            <div class="info-card-head">✅ Best Practice</div>
+            <ul>
+              <li>Gunakan satu shadow token konsisten di seluruh UI</li>
+              <li>Shadow memperkuat hierarchy, bukan dekorasi</li>
+              <li>Pastikan background putih atau terang agar shadow terlihat</li>
+              <li>Kombinasikan dengan border-radius untuk estetika modern</li>
+            </ul>
+          </div>
+          <div class="info-card info-card-avoid">
+            <div class="info-card-head">✖ Hindari</div>
+            <ul>
+              <li>Jangan tumpuk shadow di atas shadow</li>
+              <li>Jangan pakai shadow pada background gelap</li>
+              <li>Jangan custom shadow di luar token ini</li>
+              <li>Hindari di elemen yang tidak perlu elevasi</li>
+            </ul>
+          </div>
+        </div>
+
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ══════════════════════════════════════════════════════
+           SECTION 4 — IMPLEMENTATION CODE
+           ══════════════════════════════════════════════════════ -->
+      <section>
+        <div class="impl-section">
+          <div class="impl-header">
+            <h3 class="impl-title">Implementation Code</h3>
+            <div class="impl-toggle" id="impl-toggle">
+              <button class="impl-tab-btn active" data-impl="tailwind">Tailwind</button>
+              <button class="impl-tab-btn" data-impl="css">CSS Variable</button>
+            </div>
+          </div>
+
+          <!-- ── TAILWIND VIEW ────────────────────────────────── -->
+          <div id="view-tailwind">
+            <div class="impl-body">
+              <div class="impl-row">
+                <span class="impl-token-name">Shadow 1</span>
+                <span class="impl-code-text">shadow-1</span>
+                <button class="impl-copy" data-copy="shadow-1">COPY</button>
+              </div>
+            </div>
+
+            <!-- Tailwind Config -->
+            <div class="impl-config-wrap">
+              <div class="impl-config-label">Tailwind Config — tailwind.config.js</div>
+              <div class="impl-code-block" id="block-tailwind">
+                <pre><span class="tok-comment">// tailwind.config.js</span>
+<span class="tok-key">module</span>.<span class="tok-key">exports</span> = {
+  <span class="tok-key">theme</span>: {
+    <span class="tok-key">extend</span>: {
+      <span class="tok-key">boxShadow</span>: {
+        <span class="tok-comment">// Shadow 1 — Multi-layer GPOS Lite</span>
+        <span class="tok-str">'1'</span>: <span class="tok-str">'0px 0px 1px 0px rgba(9,30,66,0.31), 0px 8px 12px 0px rgba(9,30,66,0.15)'</span>,
+      },
+    },
+  },
+};</pre>
+                <button class="copy-block-btn" data-block="block-tailwind">COPY</button>
+              </div>
+
+              <div style="margin-top: 16px;">
+                <div class="impl-config-label">Cara Pakai di HTML</div>
+                <div class="impl-code-block" id="block-tailwind-usage">
+                  <pre><span class="tok-comment">&lt;!-- Gunakan class shadow-1 di element --&gt;</span>
+<span class="tok-key">&lt;div</span> <span class="tok-prop">class</span>=<span class="tok-str">"shadow-1 rounded-xl bg-white p-6"</span><span class="tok-key">&gt;</span>
+  Card dengan Shadow 1
+<span class="tok-key">&lt;/div&gt;</span>
+
+<span class="tok-comment">&lt;!-- Hover state --&gt;</span>
+<span class="tok-key">&lt;div</span> <span class="tok-prop">class</span>=<span class="tok-str">"shadow-1 hover:shadow-1 transition-shadow rounded-xl"</span><span class="tok-key">&gt;</span>
+  Card dengan hover effect
+<span class="tok-key">&lt;/div&gt;</span></pre>
+                  <button class="copy-block-btn" data-block="block-tailwind-usage">COPY</button>
+                </div>
+              </div>
+            </div>
+          </div><!-- /view-tailwind -->
+
+          <!-- ── CSS VARIABLE VIEW ────────────────────────────── -->
+          <div id="view-css" style="display:none;">
+            <div class="impl-body">
+              <div class="impl-row">
+                <span class="impl-token-name">Shadow 1</span>
+                <span class="impl-code-text">var(--shadow-1)</span>
+                <button class="impl-copy" data-copy="var(--shadow-1)">COPY</button>
+              </div>
+            </div>
+
+            <!-- CSS Variable Definition -->
+            <div class="impl-config-wrap">
+              <div class="impl-config-label">CSS Variable — styles.css / :root</div>
+              <div class="impl-code-block" id="block-css-var">
+                <pre><span class="tok-key">:root</span> {
+  <span class="tok-comment">/* Shadow 1 — Multi-layer GPOS Lite */</span>
+  <span class="tok-prop">--shadow-1</span>:
+    <span class="tok-val">0px 0px 1px 0px rgba(9, 30, 66, 0.31)</span>,  <span class="tok-comment">/* Layer 1 — edge */</span>
+    <span class="tok-val">0px 8px 12px 0px rgba(9, 30, 66, 0.15)</span>;  <span class="tok-comment">/* Layer 2 — depth */</span>
+}</pre>
+                <button class="copy-block-btn" data-block="block-css-var">COPY</button>
+              </div>
+
+              <div style="margin-top: 16px;">
+                <div class="impl-config-label">Cara Pakai di CSS / HTML Style</div>
+                <div class="impl-code-block" id="block-css-usage">
+                  <pre><span class="tok-comment">/* Di file CSS kamu */</span>
+<span class="tok-key">.card</span> {
+  <span class="tok-prop">box-shadow</span>: <span class="tok-val">var(--shadow-1)</span>;
+  <span class="tok-prop">border-radius</span>: <span class="tok-val">12px</span>;
+  <span class="tok-prop">background</span>: <span class="tok-val">#ffffff</span>;
+}
+
+<span class="tok-comment">/* Atau langsung di atribut style HTML */</span>
+<span class="tok-key">&lt;div</span> <span class="tok-prop">style</span>=<span class="tok-str">"box-shadow: var(--shadow-1); border-radius: 12px;"</span><span class="tok-key">&gt;</span>
+  Card dengan Shadow 1
+<span class="tok-key">&lt;/div&gt;</span></pre>
+                  <button class="copy-block-btn" data-block="block-css-usage">COPY</button>
+                </div>
+              </div>
+            </div>
+          </div><!-- /view-css -->
+
+        </div><!-- /impl-section -->
+      </section>
+
+      <!-- Footer -->
+      <footer class="page-footer">
+        <div class="footer-left">
+          &copy; 2026 <strong>GPOS Lite Design System V2.0</strong> &mdash; Maintained with &#x2764;&#xFE0F;
+        </div>
+        <div class="footer-right">GitHub Pages</div>
+      </footer>
+
+    </div><!-- /content-inner -->
+  </main>
+</div><!-- /container -->
+
+<script src="../js/script.js"></script>
+<script>
+/* ============================================================
+   Shadows Page — Impl Toggle & Copy Buttons
+   ============================================================ */
+
+// ── Implementation Code Toggle ────────────────────────────────
+const implToggle  = document.getElementById('impl-toggle');
+const viewTailwind = document.getElementById('view-tailwind');
+const viewCss      = document.getElementById('view-css');
+
+implToggle.addEventListener('click', function(e) {
+  const btn = e.target.closest('.impl-tab-btn');
+  if (!btn) return;
+  document.querySelectorAll('.impl-tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const tab = btn.dataset.impl;
+  viewTailwind.style.display = tab === 'tailwind' ? '' : 'none';
+  viewCss.style.display      = tab === 'css'      ? '' : 'none';
+});
+
+// ── Inline Copy Buttons (single token row) ────────────────────
+document.querySelectorAll('.impl-copy').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    const val = btn.dataset.copy;
+    navigator.clipboard.writeText(val).then(function() {
+      btn.textContent = 'COPIED!';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.textContent = 'COPY';
+        btn.classList.remove('copied');
+      }, 1800);
+    }).catch(function() {
+      btn.textContent = 'ERROR';
+      setTimeout(function() { btn.textContent = 'COPY'; }, 1500);
+    });
+  });
+});
+
+// ── Block Copy Buttons (code blocks) ─────────────────────────
+document.querySelectorAll('.copy-block-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    const blockId  = btn.dataset.block;
+    const blockEl  = document.getElementById(blockId);
+    const preEl    = blockEl ? blockEl.querySelector('pre') : null;
+    if (!preEl) return;
+    // Extract plain text from pre (strip HTML tags)
+    const text = preEl.innerText || preEl.textContent;
+    navigator.clipboard.writeText(text.trim()).then(function() {
+      btn.textContent = 'COPIED!';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.textContent = 'COPY';
+        btn.classList.remove('copied');
+      }, 1800);
+    }).catch(function() {
+      btn.textContent = 'ERROR';
+      setTimeout(function() { btn.textContent = 'COPY'; }, 1500);
+    });
+  });
+});
+
+// ── Copy Full CSS Value ───────────────────────────────────────
+const copyFullCssBtn = document.getElementById('copy-full-css');
+if (copyFullCssBtn) {
+  copyFullCssBtn.addEventListener('click', function() {
+    const val = '0px 0px 1px 0px rgba(9, 30, 66, 0.31), 0px 8px 12px 0px rgba(9, 30, 66, 0.15)';
+    navigator.clipboard.writeText(val).then(function() {
+      copyFullCssBtn.textContent = 'COPIED!';
+      copyFullCssBtn.classList.add('copied');
+      setTimeout(function() {
+        copyFullCssBtn.textContent = 'COPY';
+        copyFullCssBtn.classList.remove('copied');
+      }, 1800);
+    }).catch(function() {
+      copyFullCssBtn.textContent = 'ERROR';
+      setTimeout(function() { copyFullCssBtn.textContent = 'COPY'; }, 1500);
+    });
+  });
+}
+</script>
 </body>
 </html>
