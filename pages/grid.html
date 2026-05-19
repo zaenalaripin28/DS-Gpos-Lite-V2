@@ -1,286 +1,1333 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grid & Layout - Design System GPOS Lite V 2.0</title>
-    <link rel="stylesheet" href="../css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grid & Layout - Design System GPOS Lite V 2.0</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    /* ============================================================
+       GRID PAGE — Local CSS
+       Source: DS GPOS Lite Figma → Grid & Layout Tokens
+       Breakpoints: SM 320-600 | MD 601-1024 | LG 1025-1440 | XL 1400+
+       ============================================================ */
+
+    :root {
+      --grid-columns-sm:  4;
+      --grid-columns-md:  8;
+      --grid-columns-lg:  12;
+      --grid-columns-xl:  12;
+      --grid-margin:      24px;
+      --grid-margin-xl:   auto;
+      --grid-gutter:      16px;
+      --grid-col-xl-w:    100px;
+      --grid-bp-sm:       320px;
+      --grid-bp-md:       601px;
+      --grid-bp-lg:       1025px;
+      --grid-bp-xl:       1400px;
+    }
+
+    /* ── Filter Tabs ─────────────────────────────────────────── */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .filter-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      border: 1.5px solid #DFE2E6;
+      background: #fff;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      color: #505F79;
+      font-family: var(--font-primary);
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .filter-tab:hover { border-color: #1E7FD6; color: #1E7FD6; }
+    .filter-tab.active {
+      background: #1E7FD6;
+      border-color: #1E7FD6;
+      color: #fff;
+    }
+    .tab-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .dot-sm  { background: #7DB5E7; }
+    .dot-md  { background: #1E7FD6; }
+    .dot-lg  { background: #155996; }
+    .dot-xl  { background: #124D83; }
+
+    /* ── Section ─────────────────────────────────────────────── */
+    .grid-section { margin-bottom: 48px; }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #091E42;
+      font-family: var(--font-primary);
+      margin: 0;
+    }
+    .token-count {
+      background: #F5F6F7;
+      color: #42526D;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-family: var(--font-primary);
+    }
+    .cat-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 4px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      font-family: var(--font-primary);
+    }
+    .badge-sm  { background: #E9F2FB; color: #155996; border: 1px solid #7DB5E7; }
+    .badge-md  { background: #E9F2FB; color: #1E7FD6; border: 1px solid #A3CBEE; }
+    .badge-lg  { background: #EEF7FF; color: #115188; border: 1px solid #155996; }
+    .badge-xl  { background: #E9F0FA; color: #124D83; border: 1px solid #124D83; }
+
+    .section-desc {
+      font-size: 14px;
+      color: #42526D;
+      margin-bottom: 24px;
+      line-height: 1.6;
+      font-family: var(--font-primary);
+    }
+
+    /* ── Spec Card ───────────────────────────────────────────── */
+    .spec-card {
+      background: #fff;
+      border: 1px solid #DFE2E6;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .spec-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      border-bottom: 1px solid #EBEDF0;
+      background: #FAFBFC;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .spec-card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #091E42;
+      font-family: var(--font-primary);
+      margin: 0;
+    }
+    .spec-type-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-family: var(--font-primary);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .badge-fluid {
+      background: #E6F7EF;
+      color: #007740;
+      border: 1px solid #6BCEA0;
+    }
+    .badge-fixed {
+      background: #EEF7FF;
+      color: #124D83;
+      border: 1px solid #A3CBEE;
+    }
+
+    /* Spec meta row */
+    .spec-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid #EBEDF0;
+    }
+    .spec-meta-item {
+      padding: 12px 20px;
+      border-right: 1px solid #F0F1F3;
+    }
+    .spec-meta-item:last-child { border-right: none; }
+    .spec-meta-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #6B788E;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      font-family: var(--font-primary);
+      margin-bottom: 3px;
+    }
+    .spec-meta-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: #091E42;
+      font-family: var(--font-primary);
+      line-height: 1.2;
+    }
+    .spec-meta-sub {
+      font-size: 11px;
+      color: #8590A2;
+      font-family: var(--font-primary);
+      margin-top: 2px;
+    }
+
+    /* Grid Visual Preview */
+    .grid-preview-wrap {
+      background: #E8E8E8;
+      padding: 20px 20px 16px;
+      overflow-x: auto;
+    }
+    .grid-devices {
+      display: flex;
+      gap: 14px;
+      align-items: flex-end;
+      min-width: fit-content;
+    }
+    .device-frame { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .device-label {
+      font-size: 10.5px;
+      color: #505F79;
+      font-family: var(--font-primary);
+      font-weight: 500;
+      text-align: center;
+      line-height: 1.3;
+    }
+    .device-screen {
+      background: #fff;
+      border: 1.5px solid #B8BFC9;
+      border-radius: 3px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .device-cols {
+      flex: 1;
+      display: flex;
+      gap: 3px;
+      padding: 4px;
+      box-sizing: border-box;
+      align-items: stretch;
+    }
+    .col-block {
+      flex: 1;
+      background: #C8DBEF;
+      border-radius: 1px;
+      min-width: 0;
+    }
+    .device-size {
+      font-size: 9px;
+      color: #8590A2;
+      font-family: var(--font-primary);
+      text-align: center;
+      padding: 3px 0 4px;
+      border-top: 1px solid #EBEDF0;
+    }
+
+    /* ── Info Cards ──────────────────────────────────────────── */
+    .info-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 860px) { .info-cards { grid-template-columns: 1fr; } }
+    .info-card { border-radius: 12px; padding: 18px 20px; }
+    .info-card-usage { background: #EBF5FF; border: 1px solid #A3CBEE; }
+    .info-card-best  { background: #E6F7EF; border: 1px solid #6BCEA0; }
+    .info-card-avoid { background: #FDE8E9; border: 1px solid #F7A2A5; }
+    .info-card-head {
+      font-size: 11.5px; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      margin-bottom: 12px; font-family: var(--font-primary);
+    }
+    .info-card-usage .info-card-head { color: #155996; }
+    .info-card-best  .info-card-head { color: #007740; }
+    .info-card-avoid .info-card-head { color: #A51419; }
+    .info-card ul { margin: 0; padding-left: 16px; list-style: disc; }
+    .info-card li {
+      font-size: 13px; color: #243757;
+      margin-bottom: 6px; line-height: 1.5;
+      font-family: var(--font-primary);
+    }
+    .info-card li:last-child { margin-bottom: 0; }
+
+    /* ── Section Divider ─────────────────────────────────────── */
+    .section-divider { height: 1px; background: #EBEDF0; margin: 0 0 40px; }
+
+    /* ── Breakpoint Reference Table ──────────────────────────── */
+    .bp-table-card {
+      background: #fff;
+      border: 1px solid #DFE2E6;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+    .bp-table-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid #EBEDF0;
+      background: #FAFBFC;
+    }
+    .bp-table-header h3 {
+      font-size: 15px; font-weight: 700;
+      color: #091E42; font-family: var(--font-primary); margin: 0;
+    }
+    .bp-table { width: 100%; border-collapse: collapse; }
+    .bp-table th {
+      font-size: 11px; font-weight: 700; color: #6B788E;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 10px 16px; background: #F8FAFC;
+      border-bottom: 1px solid #EBEDF0;
+      text-align: left; font-family: var(--font-primary);
+    }
+    .bp-table td {
+      font-size: 13px; color: #243757;
+      padding: 11px 16px;
+      border-bottom: 1px solid #F5F6F7;
+      font-family: var(--font-primary);
+      vertical-align: middle;
+    }
+    .bp-table tr:last-child td { border-bottom: none; }
+    .bp-table tr:hover td { background: #F8FAFC; }
+    .bp-table .mono {
+      font-family: var(--font-mono);
+      font-size: 12px; color: #1E7FD6;
+      background: #EEF7FF;
+      padding: 2px 6px; border-radius: 4px;
+    }
+    .bp-dot {
+      display: inline-block;
+      width: 9px; height: 9px;
+      border-radius: 50%; margin-right: 7px;
+      vertical-align: middle;
+    }
+    .bp-tier-badge {
+      font-size: 11px; font-weight: 700;
+      padding: 2px 8px; border-radius: 4px;
+      font-family: var(--font-primary);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Implementation Code Section ────────────────────────── */
+    .impl-section {
+      background: #fff;
+      border: 1px solid #DFE2E6;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    .impl-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid #EBEDF0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .impl-title {
+      font-size: 15px; font-weight: 600;
+      color: #091E42; font-family: var(--font-primary); margin: 0;
+    }
+    .impl-toggle {
+      display: flex; gap: 4px;
+      background: #F5F6F7;
+      padding: 4px; border-radius: 8px;
+    }
+    .impl-tab-btn {
+      padding: 6px 18px; border-radius: 6px;
+      border: none; background: transparent;
+      cursor: pointer; font-size: 13px; font-weight: 500;
+      color: #6B788E; font-family: var(--font-primary);
+      transition: all 0.15s ease;
+    }
+    .impl-tab-btn.active { background: #091E42; color: #fff; }
+    .impl-body { padding: 0; }
+    .impl-panel { display: none; }
+    .impl-panel.active { display: block; }
+    .impl-code-block {
+      margin: 0;
+      padding: 24px 24px;
+      background: #0F172A;
+      overflow-x: auto;
+      border: none;
+      border-radius: 0;
+    }
+    .impl-code-block code {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: #94A3B8;
+      line-height: 1.75;
+      white-space: pre;
+    }
+
+    /* Page header font */
+    .page-header h1     { font-family: var(--font-primary); }
+    .page-header .subtitle { font-family: var(--font-primary); }
+
+    @media (max-width: 640px) {
+      .spec-meta-grid { grid-template-columns: repeat(2, 1fr); }
+      .spec-meta-item:nth-child(2) { border-right: none; }
+      .spec-meta-item:nth-child(3) { grid-column: span 2; border-top: 1px solid #F0F1F3; }
+      .bp-table th:nth-child(5),
+      .bp-table td:nth-child(5) { display: none; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
+<div class="container">
 
   <!-- Mobile overlay -->
   <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
-    <!-- ===================== SIDEBAR ===================== -->
-    <aside class="sidebar" id="sidebar">
-
-      <div class="sidebar-header">
-        <div class="sidebar-brand">
-          <div class="sidebar-logo-icon">GL</div>
-          <div class="sidebar-brand-text">
-            <div class="logo">GPOS Lite</div>
-            <div class="version">Design System V2.0</div>
-          </div>
-        </div>
-        <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">&#x2715;</button>
-      </div>
-
-      <div class="sidebar-search">
-        <input type="search" class="search-input" placeholder="&#x1F50D;  Cari token, component...">
-      </div>
-
-      <div class="nav-scroll">
-        <nav class="nav-menu">
-
-          <div class="nav-section">
-            <h3 class="nav-title">Overview</h3>
-            <ul class="nav-list">
-              <li>
-                <a href="../index.html" class="nav-link">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
-                  Home
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="nav-section">
-            <h3 class="nav-title">Foundations</h3>
-            <ul class="nav-list">
-              <li><a href="colors.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg>Colors</a></li>
-              <li><a href="typography.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Typography</a></li>
-              <li><a href="spacing.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>Spacing</a></li>
-              <li><a href="shadows.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h12a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V7z" opacity="0.4"/></svg>Shadows</a></li>
-              <li><a href="borders.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>Borders &amp; Radius</a></li>
-              <li><a href="grid.html" class="nav-link  active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Grid &amp; Layout</a></li>
-            </ul>
-          </div>
-
-          <div class="nav-section">
-            <h3 class="nav-title">Components</h3>
-            <ul class="nav-list">
-              <li>
-                <a href="components.html" class="nav-link">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                  Component Library
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="nav-section">
-            <h3 class="nav-title">Resources</h3>
-            <ul class="nav-list">
-              <li>
-                <a href="../tailwind.config.js" class="nav-link" target="_blank">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16,18 22,12 16,6"/><polyline points="8,6 2,12 8,18"/></svg>
-                  Tailwind Config
-                </a>
-              </li>
-              <li>
-                <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="nav-link" target="_blank">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-                  GitHub Repo
-                </a>
-              </li>
-            </ul>
-          </div>
-
-        </nav>
-      </div>
-
-      <div class="sidebar-footer">
-        <div class="tailwind-badge">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 6C9.33 6 7.67 7.33 7 10c1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35.98 1 2.09 2.15 4.59 2.15C19.67 12 21.33 10.67 22 8c-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C15.61 7.15 14.5 6 12 6zm-7 6c-2.67 0-4.33 1.33-5 4 1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35C6.39 17.15 7.5 18 10 18c2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C8.61 12.85 7.5 12 5 12z"/></svg>
-          Built with Tailwind CSS
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo-icon">GL</div>
+        <div class="sidebar-brand-text">
+          <div class="logo">GPOS Lite</div>
+          <div class="version">Design System V2.0</div>
         </div>
       </div>
-
-    </aside>
-
-        
-
-        <main class="main-content">
-
-      <!-- Topbar -->
-      <div class="topbar">
-        <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-        </button>
-        <div class="breadcrumb">
-          <a href="../index.html">Home</a><span class="breadcrumb-sep">/</span><a href="#">Foundations</a><span class="breadcrumb-sep">/</span><span class="current">Grid & Layout</span>
-        </div>
-        <div class="topbar-actions">
-          <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="topbar-link" target="_blank">GitHub</a>
-          <span class="version-badge">v2.0</span>
-        </div>
-      </div>
-      <div class="content-inner">
-            <header class="page-header">
-                <h1>Grid & Layout System</h1>
-                <p class="subtitle">Responsive 12-column grid dengan breakpoints untuk flexible layouts</p>
-            </header>
-
-            <section>
-                <h2>Responsive Breakpoints</h2>
-                <p>Breakpoints untuk responsive design di berbagai ukuran layar.</p>
-
-                <div style="display: grid; gap: var(--spacing-4); margin-bottom: var(--spacing-8);">
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <p style="margin: 0 0 var(--spacing-2) 0; font-weight: 500;">XS (Extra Small)</p>
-                        <code>--breakpoint-xs: 0</code>
-                        <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm); margin-top: var(--spacing-2); margin-bottom: 0;">Mobile default</p>
-                    </div>
-
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <p style="margin: 0 0 var(--spacing-2) 0; font-weight: 500;">SM (Small)</p>
-                        <code>--breakpoint-sm: 640px</code>
-                        <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm); margin-top: var(--spacing-2); margin-bottom: 0;">Landscape mobile</p>
-                    </div>
-
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <p style="margin: 0 0 var(--spacing-2) 0; font-weight: 500;">MD (Medium)</p>
-                        <code>--breakpoint-md: 768px</code>
-                        <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm); margin-top: var(--spacing-2); margin-bottom: 0;">Tablet</p>
-                    </div>
-
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <p style="margin: 0 0 var(--spacing-2) 0; font-weight: 500;">LG (Large)</p>
-                        <code>--breakpoint-lg: 1024px</code>
-                        <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm); margin-top: var(--spacing-2); margin-bottom: 0;">Desktop</p>
-                    </div>
-
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <p style="margin: 0 0 var(--spacing-2) 0; font-weight: 500;">XL (Extra Large)</p>
-                        <code>--breakpoint-xl: 1280px</code>
-                        <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm); margin-top: var(--spacing-2); margin-bottom: 0;">Wide desktop</p>
-                    </div>
-
-                    <div style="padding: var(--spacing-4); background-color: white; border: 1px solid var(--color-border-light); border-radius: var(--border-radius-md);">
-                        <p style="margin: 0 0 var(--spacing-2) 0; font-weight: 500;">2XL (2XL)</p>
-                        <code>--breakpoint-2xl: 1536px</code>
-                        <p style="color: var(--color-text-secondary); font-size: var(--font-size-sm); margin-top: var(--spacing-2); margin-bottom: 0;">Ultra wide desktop</p>
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h2>Grid System</h2>
-
-                <div class="guide-section">
-                    <h3>12-Column Grid</h3>
-                    <p>Gunakan Tailwind CSS grid utilities untuk layout yang flexible.</p>
-
-                    <pre><code>&lt;!-- 2-column grid responsive --&gt;
-&lt;div class="grid grid-cols-1 md:grid-cols-2 gap-4"&gt;
-  &lt;div&gt;Column 1&lt;/div&gt;
-  &lt;div&gt;Column 2&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- 3-column grid --&gt;
-&lt;div class="grid grid-cols-1 md:grid-cols-3 gap-6"&gt;
-  &lt;div&gt;Column 1&lt;/div&gt;
-  &lt;div&gt;Column 2&lt;/div&gt;
-  &lt;div&gt;Column 3&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- Custom span --&gt;
-&lt;div class="grid grid-cols-12 gap-4"&gt;
-  &lt;div class="col-span-8"&gt;8 columns&lt;/div&gt;
-  &lt;div class="col-span-4"&gt;4 columns&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                </div>
-
-                <div class="guide-section">
-                    <h3>Flex Layout</h3>
-                    <pre><code>&lt;!-- Flex row with gap --&gt;
-&lt;div class="flex gap-4"&gt;
-  &lt;div&gt;Item 1&lt;/div&gt;
-  &lt;div&gt;Item 2&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- Flex column --&gt;
-&lt;div class="flex flex-col gap-4"&gt;
-  &lt;div&gt;Item 1&lt;/div&gt;
-  &lt;div&gt;Item 2&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;!-- Flex with justify content --&gt;
-&lt;div class="flex justify-between items-center"&gt;
-  &lt;div&gt;Left&lt;/div&gt;
-  &lt;div&gt;Right&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-                </div>
-            </section>
-
-            <section>
-                <h2>Layout Patterns</h2>
-
-                <div class="guide-section">
-                    <h3>Mobile-First Approach</h3>
-                    <p>Mulai dari mobile design, tambahkan breakpoint untuk desktop:</p>
-                    <pre><code>&lt;!-- Start mobile (1 column), then 2 cols on tablet, 3 cols on desktop --&gt;
-&lt;div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"&gt;
-  &lt;!-- Grid items --&gt;
-&lt;/div&gt;</code></pre>
-                </div>
-
-                <div class="guide-section">
-                    <h3>Container & Content Width</h3>
-                    <pre><code>&lt;!-- Max width container --&gt;
-&lt;div class="max-w-6xl mx-auto px-4"&gt;
-  &lt;!-- Content --&gt;
-&lt;/div&gt;
-
-/* Max-width values */
---max-w-sm: 24rem (384px)
---max-w-md: 28rem (448px)
---max-w-lg: 32rem (512px)
---max-w-xl: 36rem (576px)
---max-w-2xl: 42rem (672px)
---max-w-3xl: 48rem (768px)
---max-w-4xl: 56rem (896px)
---max-w-5xl: 64rem (1024px)
---max-w-6xl: 72rem (1152px)</code></pre>
-                </div>
-            </section>
-
-            <section>
-                <h2>Best Practices</h2>
-
-                <div class="guide-section">
-                    <h3>✅ Do</h3>
-                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
-                        <li>Design mobile-first, enhance untuk larger screens</li>
-                        <li>Gunakan responsive prefixes (sm:, md:, lg:, xl:)</li>
-                        <li>Test layout pada semua breakpoints</li>
-                        <li>Maintain consistent spacing dengan design system</li>
-                        <li>Use semantic grid/flex utilities</li>
-                    </ul>
-                </div>
-
-                <div class="guide-section">
-                    <h3>❌ Don't</h3>
-                    <ul style="margin: var(--spacing-4) 0; padding-left: var(--spacing-6);">
-                        <li>Jangan buat custom breakpoints</li>
-                        <li>Jangan hardcode widths/heights</li>
-                        <li>Jangan skip responsive testing</li>
-                        <li>Jangan neglect touch targets (minimum 44x44px)</li>
-                    </ul>
-                </div>
-            </section>
-
-                    <footer class="page-footer">
-          <div class="footer-left">
-            &copy; 2026 <strong>GPOS Lite Design System V2.0</strong> &mdash; Maintained with &#x2764;&#xFE0F;
-          </div>
-          <div class="footer-right">
-            GitHub Pages
-          </div>
-        </footer>
-              </div><!-- /content-inner -->
-    </main>
+      <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">&#x2715;</button>
     </div>
+
+    <div class="sidebar-search">
+      <input type="search" class="search-input" placeholder="&#x1F50D;  Cari token, component...">
+    </div>
+
+    <div class="nav-scroll">
+      <nav class="nav-menu">
+
+        <div class="nav-section">
+          <h3 class="nav-title">Overview</h3>
+          <ul class="nav-list">
+            <li>
+              <a href="../index.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+                Home
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="nav-title">Foundations</h3>
+          <ul class="nav-list">
+            <li><a href="colors.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg>Colors</a></li>
+            <li><a href="typography.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Typography</a></li>
+            <li><a href="spacing.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>Spacing</a></li>
+            <li><a href="shadows.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h12a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V7z" opacity="0.4"/></svg>Shadows</a></li>
+            <li><a href="borders.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>Borders &amp; Radius</a></li>
+            <li><a href="grid.html" class="nav-link active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Grid &amp; Layout</a></li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="nav-title">Components</h3>
+          <ul class="nav-list">
+            <li>
+              <a href="components.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                Component Library
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="nav-title">Resources</h3>
+          <ul class="nav-list">
+            <li>
+              <a href="../tailwind.config.js" class="nav-link" target="_blank">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16,18 22,12 16,6"/><polyline points="8,6 2,12 8,18"/></svg>
+                Tailwind Config
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="nav-link" target="_blank">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                GitHub Repo
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </nav>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="tailwind-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 6C9.33 6 7.67 7.33 7 10c1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35.98 1 2.09 2.15 4.59 2.15C19.67 12 21.33 10.67 22 8c-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C15.61 7.15 14.5 6 12 6zm-7 6c-2.67 0-4.33 1.33-5 4 1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35C6.39 17.15 7.5 18 10 18c2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C8.61 12.85 7.5 12 5 12z"/></svg>
+        Built with Tailwind CSS
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===================== MAIN ===================== -->
+  <main class="main-content">
+
+    <!-- Topbar -->
+    <div class="topbar">
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="breadcrumb">
+        <a href="../index.html">Home</a><span class="breadcrumb-sep">/</span><a href="#">Foundations</a><span class="breadcrumb-sep">/</span><span class="current">Grid &amp; Layout</span>
+      </div>
+      <div class="topbar-actions">
+        <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="topbar-link" target="_blank">GitHub</a>
+        <span class="version-badge">v2.0</span>
+      </div>
+    </div>
+
+    <div class="content-inner">
+
+      <!-- ═══ PAGE HEADER ════════════════════════════════════════ -->
+      <header class="page-header">
+        <h1>Grid &amp; Layout System</h1>
+        <p class="subtitle">4 breakpoint responsif — Small (4 col) · Medium (8 col) · Large (12 col) · XLarge (12 col fixed) — dengan margin 24px, gutter 16px, untuk layout konsisten di semua ukuran layar.</p>
+      </header>
+
+      <!-- ═══ FILTER TABS ════════════════════════════════════════ -->
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-tab active" data-filter="all">Semua</button>
+        <button class="filter-tab" data-filter="sm">
+          <span class="tab-dot dot-sm"></span>Small
+        </button>
+        <button class="filter-tab" data-filter="md">
+          <span class="tab-dot dot-md"></span>Medium
+        </button>
+        <button class="filter-tab" data-filter="lg">
+          <span class="tab-dot dot-lg"></span>Large
+        </button>
+        <button class="filter-tab" data-filter="xl">
+          <span class="tab-dot dot-xl"></span>XLarge
+        </button>
+      </div>
+
+      <!-- ═══ BREAKPOINT REFERENCE TABLE ════════════════════════ -->
+      <div class="bp-table-card">
+        <div class="bp-table-header">
+          <h3>Ringkasan Breakpoint</h3>
+        </div>
+        <table class="bp-table">
+          <thead>
+            <tr>
+              <th>Tier</th>
+              <th>Breakpoint</th>
+              <th>Kolom</th>
+              <th>Margin</th>
+              <th>Gutter</th>
+              <th>Tipe</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <span class="bp-dot" style="background:#7DB5E7;"></span>
+                <span class="bp-tier-badge badge-sm">Small</span>
+              </td>
+              <td><code class="mono">320 – 600px</code></td>
+              <td><strong>4</strong></td>
+              <td>24px</td>
+              <td>16px</td>
+              <td>Fluid / Stretched</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="bp-dot" style="background:#1E7FD6;"></span>
+                <span class="bp-tier-badge badge-md">Medium</span>
+              </td>
+              <td><code class="mono">601 – 1024px</code></td>
+              <td><strong>8</strong></td>
+              <td>24px</td>
+              <td>16px</td>
+              <td>Fluid / Stretched</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="bp-dot" style="background:#155996;"></span>
+                <span class="bp-tier-badge badge-lg">Large</span>
+              </td>
+              <td><code class="mono">1025 – 1440px</code></td>
+              <td><strong>12</strong></td>
+              <td>24px</td>
+              <td>16px</td>
+              <td>Fluid / Stretched</td>
+            </tr>
+            <tr>
+              <td>
+                <span class="bp-dot" style="background:#124D83;"></span>
+                <span class="bp-tier-badge badge-xl">XLarge</span>
+              </td>
+              <td><code class="mono">1400px+</code></td>
+              <td><strong>12</strong></td>
+              <td>Auto</td>
+              <td>16px</td>
+              <td>Fixed / Centre</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ═══ SMALL GRID ════════════════════════════════════════ -->
+      <div class="grid-section" data-tier="sm">
+
+        <div class="section-head">
+          <h2 class="section-title">Small Grid</h2>
+          <span class="token-count">4 columns</span>
+          <span class="cat-badge badge-sm">SM</span>
+        </div>
+        <p class="section-desc">
+          Grid untuk mobile devices (320–600px). Terdiri dari 4 kolom fluid dengan margin 24px dan gutter 16px. Digunakan untuk layout utama smartphone portrait.
+        </p>
+
+        <!-- Spec Card -->
+        <div class="spec-card">
+          <div class="spec-card-header">
+            <span class="spec-card-title">Small Grid</span>
+            <span class="spec-type-badge badge-fluid">Fluid · Stretched</span>
+          </div>
+          <div class="spec-meta-grid">
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">Breakpoint</div>
+              <div class="spec-meta-value" style="font-size:15px;">320 – 600px</div>
+            </div>
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">No. of Columns</div>
+              <div class="spec-meta-value">4</div>
+            </div>
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">Margin</div>
+              <div class="spec-meta-value">24</div>
+              <div class="spec-meta-sub">px — kiri &amp; kanan</div>
+            </div>
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">Gutter</div>
+              <div class="spec-meta-value">16</div>
+              <div class="spec-meta-sub">px — antar kolom</div>
+            </div>
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">Column Width</div>
+              <div class="spec-meta-value">Auto</div>
+              <div class="spec-meta-sub">fluid, mengisi sisa ruang</div>
+            </div>
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">Tailwind Prefix</div>
+              <div class="spec-meta-value" style="font-size:14px;font-family:var(--font-mono);color:#1E7FD6;">default</div>
+            </div>
+          </div>
+
+          <!-- Visual Preview -->
+          <div class="grid-preview-wrap">
+            <div class="grid-devices">
+              <!-- iPhone SE -->
+              <div class="device-frame">
+                <div class="device-label">iPhone SE</div>
+                <div class="device-screen" style="width:82px; height:145px;">
+                  <div class="device-cols">
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                  </div>
+                  <div class="device-size">320 × 568</div>
+                </div>
+              </div>
+              <!-- Android -->
+              <div class="device-frame">
+                <div class="device-label">Android</div>
+                <div class="device-screen" style="width:92px; height:163px;">
+                  <div class="device-cols">
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                  </div>
+                  <div class="device-size">360 × 640</div>
+                </div>
+              </div>
+              <!-- iPhone 8 Plus -->
+              <div class="device-frame">
+                <div class="device-label">iPhone 8 Plus</div>
+                <div class="device-screen" style="width:106px; height:188px;">
+                  <div class="device-cols">
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                  </div>
+                  <div class="device-size">414 × 736</div>
+                </div>
+              </div>
+              <!-- iPhone 13 Pro Max -->
+              <div class="device-frame">
+                <div class="device-label">iPhone 13 Pro Max</div>
+                <div class="device-screen" style="width:110px; height:236px;">
+                  <div class="device-cols">
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                  </div>
+                  <div class="device-size">428 × 926</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Info Cards -->
+        <div class="info-cards">
+          <div class="info-card info-card-usage">
+            <div class="info-card-head">📌 Kapan Dipakai</div>
+            <ul>
+              <li>Layout utama smartphone portrait</li>
+              <li>Card list vertikal satu kolom</li>
+              <li>Form input full-width</li>
+              <li>Bottom navigation bar content</li>
+              <li>Modals &amp; drawer mobile</li>
+            </ul>
+          </div>
+          <div class="info-card info-card-best">
+            <div class="info-card-head">✅ Best Practice</div>
+            <ul>
+              <li>Mulai selalu dari 4 kolom (mobile-first)</li>
+              <li>Gunakan padding 24px kiri-kanan konsisten</li>
+              <li>2-column span untuk card medium (col-span-2)</li>
+              <li>Touch target minimal 44×44px</li>
+            </ul>
+          </div>
+          <div class="info-card info-card-avoid">
+            <div class="info-card-head">✖ Hindari</div>
+            <ul>
+              <li>Jangan skip ke 8/12 kolom langsung di mobile</li>
+              <li>Jangan kurangi margin di bawah 16px</li>
+              <li>Hindari teks terlalu panjang satu baris</li>
+              <li>Jangan pakai fixed width pada elemen</li>
+            </ul>
+          </div>
+        </div>
+
+      </div><!-- /grid-section SM -->
+
+      <div class="section-divider"></div>
+
+      <!-- ═══ MEDIUM GRID ══════════════════════════════════════ -->
+      <div class="grid-section" data-tier="md">
+
+        <div class="section-head">
+          <h2 class="section-title">Medium Grid</h2>
+          <span class="token-count">8 columns</span>
+          <span class="cat-badge badge-md">MD</span>
+        </div>
+        <p class="section-desc">
+          Grid untuk tablet (601–1024px). 8 kolom fluid memberikan fleksibilitas pembagian 2, 4, atau 8 kolom. Cocok untuk tablet portrait &amp; landscape, dan desktop dengan sidebar.
+        </p>
+
+        <!-- Spec Card -->
+        <div class="spec-card">
+          <div class="spec-card-header">
+            <span class="spec-card-title">Medium Grid</span>
+            <span class="spec-type-badge badge-fluid">Fluid · Stretched</span>
+          </div>
+          <div class="spec-meta-grid">
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">Breakpoint</div>
+              <div class="spec-meta-value" style="font-size:15px;">601 – 1024px</div>
+            </div>
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">No. of Columns</div>
+              <div class="spec-meta-value">8</div>
+            </div>
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">Margin</div>
+              <div class="spec-meta-value">24</div>
+              <div class="spec-meta-sub">px — kiri &amp; kanan</div>
+            </div>
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">Gutter</div>
+              <div class="spec-meta-value">16</div>
+              <div class="spec-meta-sub">px — antar kolom</div>
+            </div>
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">Column Width</div>
+              <div class="spec-meta-value">Auto</div>
+              <div class="spec-meta-sub">fluid, mengisi sisa ruang</div>
+            </div>
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">Tailwind Prefix</div>
+              <div class="spec-meta-value" style="font-size:14px;font-family:var(--font-mono);color:#1E7FD6;">sm:</div>
+            </div>
+          </div>
+
+          <!-- Visual Preview -->
+          <div class="grid-preview-wrap">
+            <div class="grid-devices">
+              <!-- iPad mini -->
+              <div class="device-frame">
+                <div class="device-label">iPad mini</div>
+                <div class="device-screen" style="width:148px; height:190px;">
+                  <div class="device-cols">
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                  </div>
+                  <div class="device-size">768 × 1024</div>
+                </div>
+              </div>
+              <!-- iPad Pro 11 -->
+              <div class="device-frame">
+                <div class="device-label">iPad Pro 11"</div>
+                <div class="device-screen" style="width:162px; height:215px;">
+                  <div class="device-cols">
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                  </div>
+                  <div class="device-size">834 × 1194</div>
+                </div>
+              </div>
+              <!-- Surface Pro 3 -->
+              <div class="device-frame">
+                <div class="device-label">Surface Pro 3</div>
+                <div class="device-screen" style="width:182px; height:228px;">
+                  <div class="device-cols">
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                  </div>
+                  <div class="device-size">940 × 1560</div>
+                </div>
+              </div>
+              <!-- iPad Pro 12.9 -->
+              <div class="device-frame">
+                <div class="device-label">iPad Pro 12.9"</div>
+                <div class="device-screen" style="width:198px; height:240px;">
+                  <div class="device-cols">
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                    <div class="col-block"></div>
+                  </div>
+                  <div class="device-size">1024 × 1366</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Info Cards -->
+        <div class="info-cards">
+          <div class="info-card info-card-usage">
+            <div class="info-card-head">📌 Kapan Dipakai</div>
+            <ul>
+              <li>Tablet portrait &amp; landscape</li>
+              <li>Sidebar nav + area konten</li>
+              <li>Card grid 2 atau 4 kolom</li>
+              <li>Dashboard dengan panel ganda</li>
+              <li>Desktop dengan side drawer</li>
+            </ul>
+          </div>
+          <div class="info-card info-card-best">
+            <div class="info-card-head">✅ Best Practice</div>
+            <ul>
+              <li>8 kolom → bagi 2 (4+4) atau 3 (3+5)</li>
+              <li>Tetap pertahankan margin 24px</li>
+              <li>Pertimbangkan side nav untuk tablet</li>
+              <li>Gunakan gutter 16px antar kolom</li>
+            </ul>
+          </div>
+          <div class="info-card info-card-avoid">
+            <div class="info-card-head">✖ Hindari</div>
+            <ul>
+              <li>Jangan loncat langsung ke 12 kolom</li>
+              <li>Hindari terlalu banyak kolom sempit</li>
+              <li>Jangan abaikan orientasi landscape</li>
+              <li>Hindari touch target di bawah 44px</li>
+            </ul>
+          </div>
+        </div>
+
+      </div><!-- /grid-section MD -->
+
+      <div class="section-divider"></div>
+
+      <!-- ═══ LARGE GRID ════════════════════════════════════════ -->
+      <div class="grid-section" data-tier="lg">
+
+        <div class="section-head">
+          <h2 class="section-title">Large Grid</h2>
+          <span class="token-count">12 columns</span>
+          <span class="cat-badge badge-lg">LG</span>
+        </div>
+        <p class="section-desc">
+          Grid 12 kolom untuk desktop (1025–1440px). Pilihan paling fleksibel — bisa dibagi menjadi 2, 3, 4, atau 6 grup kolom. Ideal untuk dashboard kompleks dan layout multi-panel.
+        </p>
+
+        <!-- Spec Card -->
+        <div class="spec-card">
+          <div class="spec-card-header">
+            <span class="spec-card-title">Large Grid</span>
+            <span class="spec-type-badge badge-fluid">Fluid · Stretched</span>
+          </div>
+          <div class="spec-meta-grid">
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">Breakpoint</div>
+              <div class="spec-meta-value" style="font-size:15px;">1025 – 1440px</div>
+            </div>
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">No. of Columns</div>
+              <div class="spec-meta-value">12</div>
+            </div>
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">Margin</div>
+              <div class="spec-meta-value">24</div>
+              <div class="spec-meta-sub">px — kiri &amp; kanan</div>
+            </div>
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">Gutter</div>
+              <div class="spec-meta-value">16</div>
+              <div class="spec-meta-sub">px — antar kolom</div>
+            </div>
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">Column Width</div>
+              <div class="spec-meta-value">Auto</div>
+              <div class="spec-meta-sub">fluid, mengisi sisa ruang</div>
+            </div>
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">Tailwind Prefix</div>
+              <div class="spec-meta-value" style="font-size:14px;font-family:var(--font-mono);color:#1E7FD6;">lg:</div>
+            </div>
+          </div>
+
+          <!-- Visual Preview -->
+          <div class="grid-preview-wrap">
+            <div class="grid-devices">
+              <!-- MacBook -->
+              <div class="device-frame">
+                <div class="device-label">MacBook</div>
+                <div class="device-screen" style="width:222px; height:138px;">
+                  <div class="device-cols">
+                    <div class="col-block"></div><div class="col-block"></div>
+                    <div class="col-block"></div><div class="col-block"></div>
+                    <div class="col-block"></div><div class="col-block"></div>
+                    <div class="col-block"></div><div class="col-block"></div>
+                    <div class="col-block"></div><div class="col-block"></div>
+                    <div class="col-block"></div><div class="col-block"></div>
+                  </div>
+                  <div class="device-size">1152 × 700</div>
+                </div>
+              </div>
+              <!-- iMac -->
+              <div class="device-frame">
+                <div class="device-label">iMac</div>
+                <div class="device-screen" style="width:244px; height:148px;">
+                  <div class="device-cols">
+                    <div class="col-block"></div><div class="col-block"></div>
+                    <div class="col-block"></div><div class="col-block"></div>
+                    <div class="col-block"></div><div class="col-block"></div>
+                    <div class="col-block"></div><div class="col-block"></div>
+                    <div class="col-block"></div><div class="col-block"></div>
+                    <div class="col-block"></div><div class="col-block"></div>
+                  </div>
+                  <div class="device-size">1280 × 720</div>
+                </div>
+              </div>
+              <!-- MacBook Pro -->
+              <div class="device-frame">
+                <div class="device-label">MacBook Pro</div>
+                <div class="device-screen" style="width:278px; height:160px;">
+                  <div class="device-cols">
+                    <div class="col-block"></div><div class="col-block"></div>
+                    <div class="col-block"></div><div class="col-block"></div>
+                    <div class="col-block"></div><div class="col-block"></div>
+                    <div class="col-block"></div><div class="col-block"></div>
+                    <div class="col-block"></div><div class="col-block"></div>
+                    <div class="col-block"></div><div class="col-block"></div>
+                  </div>
+                  <div class="device-size">1440 × 900</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Info Cards -->
+        <div class="info-cards">
+          <div class="info-card info-card-usage">
+            <div class="info-card-head">📌 Kapan Dipakai</div>
+            <ul>
+              <li>Desktop standard &amp; laptop</li>
+              <li>Dashboard dengan banyak panel</li>
+              <li>Sidebar nav + main content area</li>
+              <li>Card grid 3–4 kolom</li>
+              <li>Layout 8+4 (konten + sidebar)</li>
+            </ul>
+          </div>
+          <div class="info-card info-card-best">
+            <div class="info-card-head">✅ Best Practice</div>
+            <ul>
+              <li>12 kolom → bagi 2 (6+6), 3 (4+4+4), 4 (3+3+3+3)</li>
+              <li>8+4 untuk content area + sidebar</li>
+              <li>Test hover, focus, dan keyboard state</li>
+              <li>Pertahankan margin 24px di tepi</li>
+            </ul>
+          </div>
+          <div class="info-card info-card-avoid">
+            <div class="info-card-head">✖ Hindari</div>
+            <ul>
+              <li>Jangan biarkan konten terlalu lebar tanpa max-width</li>
+              <li>Hindari lebih dari 12 kolom dalam satu baris</li>
+              <li>Jangan skip breakpoint MD ke LG langsung</li>
+              <li>Hindari fixed width pada kolom fluid</li>
+            </ul>
+          </div>
+        </div>
+
+      </div><!-- /grid-section LG -->
+
+      <div class="section-divider"></div>
+
+      <!-- ═══ EXTRA LARGE GRID ══════════════════════════════════ -->
+      <div class="grid-section" data-tier="xl">
+
+        <div class="section-head">
+          <h2 class="section-title">Extra Large Grid</h2>
+          <span class="token-count">12 columns · fixed</span>
+          <span class="cat-badge badge-xl">XL</span>
+        </div>
+        <p class="section-desc">
+          Grid fixed-centre untuk layar ultrawide (1400px+). Konten dikunci di tengah dengan lebar kolom 100px dan margin auto, agar mudah dibaca tanpa konten meregang terlalu jauh.
+        </p>
+
+        <!-- Spec Card -->
+        <div class="spec-card">
+          <div class="spec-card-header">
+            <span class="spec-card-title">Extra Large Grid</span>
+            <span class="spec-type-badge badge-fixed">Fixed · Centre</span>
+          </div>
+          <div class="spec-meta-grid">
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">Breakpoint</div>
+              <div class="spec-meta-value" style="font-size:15px;">1400px+</div>
+            </div>
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">No. of Columns</div>
+              <div class="spec-meta-value">12</div>
+            </div>
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">Margin</div>
+              <div class="spec-meta-value">Auto</div>
+              <div class="spec-meta-sub">terpusat, kiri &amp; kanan</div>
+            </div>
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">Gutter</div>
+              <div class="spec-meta-value">16</div>
+              <div class="spec-meta-sub">px — antar kolom</div>
+            </div>
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">Column Width</div>
+              <div class="spec-meta-value">100px</div>
+              <div class="spec-meta-sub">fixed per kolom</div>
+            </div>
+            <div class="spec-meta-item">
+              <div class="spec-meta-label">Tailwind Prefix</div>
+              <div class="spec-meta-value" style="font-size:14px;font-family:var(--font-mono);color:#1E7FD6;">xl:</div>
+            </div>
+          </div>
+
+          <!-- Visual Preview -->
+          <div class="grid-preview-wrap">
+            <div class="grid-devices">
+              <!-- Surface Book -->
+              <div class="device-frame">
+                <div class="device-label">Surface Book</div>
+                <div class="device-screen" style="width:340px; height:200px; background: #f4f4f4;">
+                  <!-- Centered fixed grid inside -->
+                  <div style="display:flex; align-items:center; justify-content:center; height:calc(100% - 20px); padding: 6px 10px;">
+                    <div style="display:flex; gap:3px; width:100%; justify-content:center;">
+                      <div class="col-block" style="width:20px; flex:none; height:140px; background:#A8C6E8;"></div>
+                      <div class="col-block" style="width:20px; flex:none; height:140px; background:#A8C6E8;"></div>
+                      <div class="col-block" style="width:20px; flex:none; height:140px; background:#A8C6E8;"></div>
+                      <div class="col-block" style="width:20px; flex:none; height:140px; background:#A8C6E8;"></div>
+                      <div class="col-block" style="width:20px; flex:none; height:140px; background:#A8C6E8;"></div>
+                      <div class="col-block" style="width:20px; flex:none; height:140px; background:#A8C6E8;"></div>
+                      <div class="col-block" style="width:20px; flex:none; height:140px; background:#A8C6E8;"></div>
+                      <div class="col-block" style="width:20px; flex:none; height:140px; background:#A8C6E8;"></div>
+                      <div class="col-block" style="width:20px; flex:none; height:140px; background:#A8C6E8;"></div>
+                      <div class="col-block" style="width:20px; flex:none; height:140px; background:#A8C6E8;"></div>
+                      <div class="col-block" style="width:20px; flex:none; height:140px; background:#A8C6E8;"></div>
+                      <div class="col-block" style="width:20px; flex:none; height:140px; background:#A8C6E8;"></div>
+                    </div>
+                  </div>
+                  <div class="device-size">1500 × 1000</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Info Cards -->
+        <div class="info-cards">
+          <div class="info-card info-card-usage">
+            <div class="info-card-head">📌 Kapan Dipakai</div>
+            <ul>
+              <li>Monitor ultrawide &amp; large display</li>
+              <li>Konten fixed-width agar mudah dibaca</li>
+              <li>Landing page premium &amp; marketing</li>
+              <li>Dashboard data-heavy dengan banyak kolom</li>
+              <li>Layout yang mengutamakan white space</li>
+            </ul>
+          </div>
+          <div class="info-card info-card-best">
+            <div class="info-card-head">✅ Best Practice</div>
+            <ul>
+              <li>12 kolom × 100px + 11 gutter = max ±1376px konten</li>
+              <li>Selalu centering dengan margin-inline: auto</li>
+              <li>Manfaatkan white space di kiri &amp; kanan</li>
+              <li>Pertahankan konsistensi 16px gutter</li>
+            </ul>
+          </div>
+          <div class="info-card info-card-avoid">
+            <div class="info-card-head">✖ Hindari</div>
+            <ul>
+              <li>Jangan stretch konten full-width di atas 1400px</li>
+              <li>Hindari fluid grid di breakpoint XL</li>
+              <li>Jangan abaikan white space samping</li>
+              <li>Hindari fixed margin angka di XL (gunakan auto)</li>
+            </ul>
+          </div>
+        </div>
+
+      </div><!-- /grid-section XL -->
+
+      <div class="section-divider"></div>
+
+      <!-- ═══ IMPLEMENTATION CODE ═══════════════════════════════ -->
+      <div class="impl-section" id="implementation">
+        <div class="impl-header">
+          <span class="impl-title">Implementation Code</span>
+          <div class="impl-toggle" role="tablist">
+            <button class="impl-tab-btn active" data-impl="tailwind" role="tab">Tailwind CSS</button>
+            <button class="impl-tab-btn" data-impl="css" role="tab">CSS Variable</button>
+          </div>
+        </div>
+        <div class="impl-body">
+
+          <!-- ── Tailwind Panel ── -->
+          <div class="impl-panel active" data-panel="tailwind">
+            <div class="impl-code-block">
+              <code><span style="color:#475569;">/* ── Mobile-First Responsive Grid ─────────────────────── */</span>
+
+<span style="color:#475569;">/* Small (default) — 4 kolom fluid */</span>
+<span style="color:#7CC5FF;">&lt;div</span> <span style="color:#FCD34D;">class</span>=<span style="color:#86EFAC;">"grid grid-cols-4 gap-4 px-6"</span><span style="color:#7CC5FF;">&gt;</span>
+  <span style="color:#7CC5FF;">&lt;div</span> <span style="color:#FCD34D;">class</span>=<span style="color:#86EFAC;">"col-span-4"</span><span style="color:#7CC5FF;">&gt;</span>Full width<span style="color:#7CC5FF;">&lt;/div&gt;</span>
+  <span style="color:#7CC5FF;">&lt;div</span> <span style="color:#FCD34D;">class</span>=<span style="color:#86EFAC;">"col-span-2"</span><span style="color:#7CC5FF;">&gt;</span>Half<span style="color:#7CC5FF;">&lt;/div&gt;</span>
+  <span style="color:#7CC5FF;">&lt;div</span> <span style="color:#FCD34D;">class</span>=<span style="color:#86EFAC;">"col-span-2"</span><span style="color:#7CC5FF;">&gt;</span>Half<span style="color:#7CC5FF;">&lt;/div&gt;</span>
+<span style="color:#7CC5FF;">&lt;/div&gt;</span>
+
+<span style="color:#475569;">/* Medium (sm:) — 8 kolom fluid, tablet */</span>
+<span style="color:#7CC5FF;">&lt;div</span> <span style="color:#FCD34D;">class</span>=<span style="color:#86EFAC;">"grid grid-cols-4 sm:grid-cols-8 gap-4 px-6"</span><span style="color:#7CC5FF;">&gt;</span>
+  <span style="color:#7CC5FF;">&lt;div</span> <span style="color:#FCD34D;">class</span>=<span style="color:#86EFAC;">"col-span-4 sm:col-span-4"</span><span style="color:#7CC5FF;">&gt;</span>Main<span style="color:#7CC5FF;">&lt;/div&gt;</span>
+  <span style="color:#7CC5FF;">&lt;div</span> <span style="color:#FCD34D;">class</span>=<span style="color:#86EFAC;">"col-span-4 sm:col-span-4"</span><span style="color:#7CC5FF;">&gt;</span>Sidebar<span style="color:#7CC5FF;">&lt;/div&gt;</span>
+<span style="color:#7CC5FF;">&lt;/div&gt;</span>
+
+<span style="color:#475569;">/* Large (lg:) — 12 kolom fluid, desktop */</span>
+<span style="color:#7CC5FF;">&lt;div</span> <span style="color:#FCD34D;">class</span>=<span style="color:#86EFAC;">"grid grid-cols-4 sm:grid-cols-8 lg:grid-cols-12 gap-4 px-6"</span><span style="color:#7CC5FF;">&gt;</span>
+  <span style="color:#7CC5FF;">&lt;div</span> <span style="color:#FCD34D;">class</span>=<span style="color:#86EFAC;">"col-span-4 sm:col-span-8 lg:col-span-8"</span><span style="color:#7CC5FF;">&gt;</span>Content<span style="color:#7CC5FF;">&lt;/div&gt;</span>
+  <span style="color:#7CC5FF;">&lt;div</span> <span style="color:#FCD34D;">class</span>=<span style="color:#86EFAC;">"col-span-4 sm:col-span-8 lg:col-span-4"</span><span style="color:#7CC5FF;">&gt;</span>Sidebar<span style="color:#7CC5FF;">&lt;/div&gt;</span>
+<span style="color:#7CC5FF;">&lt;/div&gt;</span>
+
+<span style="color:#475569;">/* XLarge (xl:) — 12 kolom fixed, centred */</span>
+<span style="color:#7CC5FF;">&lt;div</span> <span style="color:#FCD34D;">class</span>=<span style="color:#86EFAC;">"max-w-screen-xl mx-auto grid grid-cols-12 gap-4"</span><span style="color:#7CC5FF;">&gt;</span>
+  <span style="color:#7CC5FF;">&lt;div</span> <span style="color:#FCD34D;">class</span>=<span style="color:#86EFAC;">"col-span-8"</span><span style="color:#7CC5FF;">&gt;</span>Main Content<span style="color:#7CC5FF;">&lt;/div&gt;</span>
+  <span style="color:#7CC5FF;">&lt;div</span> <span style="color:#FCD34D;">class</span>=<span style="color:#86EFAC;">"col-span-4"</span><span style="color:#7CC5FF;">&gt;</span>Sidebar<span style="color:#7CC5FF;">&lt;/div&gt;</span>
+<span style="color:#7CC5FF;">&lt;/div&gt;</span>
+
+<span style="color:#475569;">/* ── Common Column Span Patterns ─────────────────────── */</span>
+
+<span style="color:#475569;">/* Full width    */</span> <span style="color:#86EFAC;">"col-span-12"</span>
+<span style="color:#475569;">/* Half (6+6)   */</span> <span style="color:#86EFAC;">"col-span-6"</span>
+<span style="color:#475569;">/* 8+4 pattern  */</span> <span style="color:#86EFAC;">"col-span-8"</span> <span style="color:#94A3B8;">+</span> <span style="color:#86EFAC;">"col-span-4"</span>
+<span style="color:#475569;">/* 3 columns    */</span> <span style="color:#86EFAC;">"col-span-4"</span>
+<span style="color:#475569;">/* 4 columns    */</span> <span style="color:#86EFAC;">"col-span-3"</span></code>
+            </div>
+          </div>
+
+          <!-- ── CSS Variable Panel ── -->
+          <div class="impl-panel" data-panel="css">
+            <div class="impl-code-block">
+              <code><span style="color:#475569;">/* ── Grid Token Definitions ──────────────────────────── */</span>
+<span style="color:#7CC5FF;">:root</span> {
+  <span style="color:#475569;">/* Breakpoints */</span>
+  <span style="color:#F9A8D4;">--grid-bp-sm</span>:         <span style="color:#86EFAC;">320px</span>;   <span style="color:#475569;">/* Small start */</span>
+  <span style="color:#F9A8D4;">--grid-bp-md</span>:         <span style="color:#86EFAC;">601px</span>;   <span style="color:#475569;">/* Medium start */</span>
+  <span style="color:#F9A8D4;">--grid-bp-lg</span>:         <span style="color:#86EFAC;">1025px</span>;  <span style="color:#475569;">/* Large start */</span>
+  <span style="color:#F9A8D4;">--grid-bp-xl</span>:         <span style="color:#86EFAC;">1400px</span>;  <span style="color:#475569;">/* XLarge start */</span>
+
+  <span style="color:#475569;">/* Column counts */</span>
+  <span style="color:#F9A8D4;">--grid-columns-sm</span>:    <span style="color:#86EFAC;">4</span>;
+  <span style="color:#F9A8D4;">--grid-columns-md</span>:    <span style="color:#86EFAC;">8</span>;
+  <span style="color:#F9A8D4;">--grid-columns-lg</span>:    <span style="color:#86EFAC;">12</span>;
+  <span style="color:#F9A8D4;">--grid-columns-xl</span>:    <span style="color:#86EFAC;">12</span>;
+
+  <span style="color:#475569;">/* Spacing */</span>
+  <span style="color:#F9A8D4;">--grid-gutter</span>:        <span style="color:#86EFAC;">16px</span>;    <span style="color:#475569;">/* Antar kolom */</span>
+  <span style="color:#F9A8D4;">--grid-margin</span>:        <span style="color:#86EFAC;">24px</span>;    <span style="color:#475569;">/* SM / MD / LG */</span>
+  <span style="color:#F9A8D4;">--grid-margin-xl</span>:     <span style="color:#86EFAC;">auto</span>;    <span style="color:#475569;">/* XL auto-centre */</span>
+  <span style="color:#F9A8D4;">--grid-col-xl-width</span>:  <span style="color:#86EFAC;">100px</span>;   <span style="color:#475569;">/* Fixed per kolom XL */</span>
+}
+
+<span style="color:#475569;">/* ── Grid Container Utilities ─────────────────────────── */</span>
+
+<span style="color:#475569;">/* Small — 4 col fluid */</span>
+<span style="color:#FCD34D;">.grid-sm</span> {
+  <span style="color:#F9A8D4;">display</span>: <span style="color:#86EFAC;">grid</span>;
+  <span style="color:#F9A8D4;">grid-template-columns</span>: <span style="color:#86EFAC;">repeat</span>(var(<span style="color:#F9A8D4;">--grid-columns-sm</span>), <span style="color:#86EFAC;">1fr</span>);
+  <span style="color:#F9A8D4;">gap</span>: var(<span style="color:#F9A8D4;">--grid-gutter</span>);
+  <span style="color:#F9A8D4;">padding-inline</span>: var(<span style="color:#F9A8D4;">--grid-margin</span>);
+}
+
+<span style="color:#475569;">/* Medium — 8 col fluid */</span>
+<span style="color:#FCD34D;">@media (min-width: 601px)</span> {
+  <span style="color:#FCD34D;">.grid-responsive</span> {
+    <span style="color:#F9A8D4;">grid-template-columns</span>: <span style="color:#86EFAC;">repeat</span>(var(<span style="color:#F9A8D4;">--grid-columns-md</span>), <span style="color:#86EFAC;">1fr</span>);
+  }
+}
+
+<span style="color:#475569;">/* Large — 12 col fluid */</span>
+<span style="color:#FCD34D;">@media (min-width: 1025px)</span> {
+  <span style="color:#FCD34D;">.grid-responsive</span> {
+    <span style="color:#F9A8D4;">grid-template-columns</span>: <span style="color:#86EFAC;">repeat</span>(var(<span style="color:#F9A8D4;">--grid-columns-lg</span>), <span style="color:#86EFAC;">1fr</span>);
+  }
+}
+
+<span style="color:#475569;">/* XLarge — 12 col fixed, centred */</span>
+<span style="color:#FCD34D;">@media (min-width: 1400px)</span> {
+  <span style="color:#FCD34D;">.grid-xl</span> {
+    <span style="color:#F9A8D4;">display</span>: <span style="color:#86EFAC;">grid</span>;
+    <span style="color:#F9A8D4;">grid-template-columns</span>: <span style="color:#86EFAC;">repeat</span>(var(<span style="color:#F9A8D4;">--grid-columns-xl</span>), var(<span style="color:#F9A8D4;">--grid-col-xl-width</span>));
+    <span style="color:#F9A8D4;">gap</span>: var(<span style="color:#F9A8D4;">--grid-gutter</span>);
+    <span style="color:#F9A8D4;">margin-inline</span>: var(<span style="color:#F9A8D4;">--grid-margin-xl</span>);
+  }
+}</code>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /impl-section -->
+
+      <!-- ═══ FOOTER ════════════════════════════════════════════ -->
+      <footer class="page-footer">
+        <div class="footer-left">
+          &copy; 2026 <strong>GPOS Lite Design System V2.0</strong> &mdash; Maintained with &#x2764;&#xFE0F;
+        </div>
+        <div class="footer-right">
+          GitHub Pages
+        </div>
+      </footer>
+
+    </div><!-- /content-inner -->
+  </main>
+</div><!-- /container -->
+
+<script src="../js/script.js"></script>
+<script>
+  /* ── Filter Tabs ─────────────────────────────────────── */
+  (function () {
+    var bar = document.getElementById('filter-bar');
+    if (!bar) return;
+
+    bar.addEventListener('click', function (e) {
+      var btn = e.target.closest('.filter-tab');
+      if (!btn) return;
+
+      bar.querySelectorAll('.filter-tab').forEach(function (t) { t.classList.remove('active'); });
+      btn.classList.add('active');
+
+      var filter = btn.dataset.filter;
+      document.querySelectorAll('.grid-section').forEach(function (sec) {
+        if (filter === 'all' || sec.dataset.tier === filter) {
+          sec.style.display = '';
+        } else {
+          sec.style.display = 'none';
+        }
+      });
+
+      // Also show/hide dividers
+      var sections = document.querySelectorAll('.grid-section');
+      var dividers = document.querySelectorAll('.section-divider');
+      dividers.forEach(function (d) {
+        d.style.display = filter === 'all' ? '' : 'none';
+      });
+    });
+  })();
+
+  /* ── Implementation Code Tabs ────────────────────────── */
+  (function () {
+    var toggle = document.querySelector('.impl-toggle');
+    if (!toggle) return;
+
+    toggle.addEventListener('click', function (e) {
+      var btn = e.target.closest('.impl-tab-btn');
+      if (!btn) return;
+
+      toggle.querySelectorAll('.impl-tab-btn').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+
+      var target = btn.dataset.impl;
+      document.querySelectorAll('.impl-panel').forEach(function (p) {
+        p.classList.toggle('active', p.dataset.panel === target);
+      });
+    });
+  })();
+</script>
 </body>
 </html>
