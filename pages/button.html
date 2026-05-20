@@ -1,0 +1,1382 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Button — Design System GPOS Lite V2.0</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+
+    /* ══════════════════════════════════════════
+       BUTTON PAGE — LOCAL STYLES
+       ══════════════════════════════════════════ */
+
+    /* ── Page Tabs ── */
+    .page-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 32px;
+      border-bottom: 2px solid #EBEDF0;
+    }
+    .page-tab {
+      padding: 10px 20px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      font-size: .875rem;
+      font-weight: 500;
+      color: #5D6B82;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -2px;
+      transition: all .15s;
+      font-family: var(--font-primary);
+    }
+    .page-tab.active { color: #1E7FD6; border-bottom-color: #1E7FD6; }
+    .page-tab:hover:not(.active) { color: #091E42; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── Section Labels ── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #94A3B8;
+      margin-bottom: 14px;
+    }
+
+    /* ── Preview Canvas ── */
+    .preview-canvas {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 40px;
+      margin-bottom: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+    .preview-canvas.dark-bg {
+      background: linear-gradient(135deg, #0B1526 0%, #115188 100%);
+    }
+    .preview-canvas-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #94A3B8;
+      margin-bottom: 10px;
+    }
+
+    /* ── Variant Cards ── */
+    .variant-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .variant-card {
+      background: #fff;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: box-shadow .2s;
+    }
+    .variant-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+    .variant-card-preview {
+      padding: 32px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100px;
+    }
+    .variant-card-preview.light  { background: #F8FAFC; }
+    .variant-card-preview.dark   { background: linear-gradient(135deg, #0B1526, #115188); }
+    .variant-card-meta {
+      padding: 16px 20px;
+      border-top: 1px solid #F1F5F9;
+    }
+    .variant-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0F172A;
+      margin-bottom: 2px;
+    }
+    .variant-desc {
+      font-size: 12px;
+      color: #64748B;
+      line-height: 1.5;
+    }
+
+    /* ── States Table ── */
+    .states-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-bottom: 32px;
+    }
+    .states-table th {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      padding: 10px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #64748B;
+      text-align: left;
+    }
+    .states-table td {
+      border: 1px solid #E2E8F0;
+      padding: 14px 16px;
+      vertical-align: middle;
+      background: #fff;
+    }
+    .states-table tr:hover td { background: #F8FAFC; }
+
+    .state-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+    }
+    .state-badge.default  { background: #EEF7FF; color: #1668B0; }
+    .state-badge.hover    { background: #E0F2FE; color: #0369A1; }
+    .state-badge.focus    { background: #F0FDF4; color: #15803D; }
+    .state-badge.active   { background: #FEF3C7; color: #B45309; }
+    .state-badge.disabled { background: #F1F5F9; color: #94A3B8; }
+    .state-badge.loading  { background: #F5F3FF; color: #7C3AED; }
+
+    .state-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+    }
+    .dot-default  { background: #1E7FD6; }
+    .dot-hover    { background: #0EA5E9; }
+    .dot-focus    { background: #22C55E; }
+    .dot-active   { background: #F59E0B; }
+    .dot-disabled { background: #CBD5E1; }
+    .dot-loading  { background: #8B5CF6; }
+
+    /* ── Live State Preview ── */
+    .state-preview-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .state-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .state-item-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: #94A3B8;
+    }
+
+    /* ── Disabled State Button ── */
+    .btn-disabled {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: var(--border-radius-md);
+      font-family: var(--font-primary);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      border: 1.5px solid transparent;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      line-height: 1;
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+      background-color: var(--color-primary-500);
+      color: white;
+      border-color: var(--color-primary-500);
+    }
+
+    /* Loading Spinner */
+    .btn-loading {
+      position: relative;
+      color: transparent !important;
+      pointer-events: none;
+    }
+    .btn-loading::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255,255,255,0.35);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: btn-spin .65s linear infinite;
+    }
+    @keyframes btn-spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Focus ring simulation */
+    .btn-focus-demo {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(30,127,214,0.35), var(--shadow-brand);
+    }
+    .btn-active-demo {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    /* ── Code Block ── */
+    .code-block {
+      background: #0F172A;
+      border: 1px solid #1E2D45;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .code-block-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      border-bottom: 1px solid #1E2D45;
+      background: #07101D;
+    }
+    .code-lang {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: #475569;
+    }
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 12px;
+      background: #1A2E48;
+      border: 1px solid #2D4A6A;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #94A3B8;
+      cursor: pointer;
+      transition: all .15s;
+      font-family: var(--font-primary);
+    }
+    .copy-btn:hover { background: #1E7FD6; border-color: #1E7FD6; color: white; }
+    .copy-btn.copied { background: #16A34A; border-color: #16A34A; color: white; }
+    .code-block pre {
+      margin: 0;
+      padding: 18px 20px;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      overflow-x: auto;
+    }
+    .code-block code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: #CBD5E1;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    .code-hl-tag    { color: #7DD3FC; }
+    .code-hl-attr   { color: #93C5FD; }
+    .code-hl-string { color: #86EFAC; }
+    .code-hl-comment{ color: #475569; font-style: italic; }
+
+    /* ── Token Table ── */
+    .token-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-bottom: 16px;
+    }
+    .token-table th {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      padding: 8px 14px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #64748B;
+      text-align: left;
+    }
+    .token-table td {
+      border: 1px solid #E2E8F0;
+      padding: 10px 14px;
+      vertical-align: middle;
+      background: #fff;
+    }
+    .token-table tr:hover td { background: #F8FAFC; }
+    .token-pill {
+      display: inline-block;
+      background: #0F172A;
+      color: #7DD3FC;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 5px;
+      border: 1px solid #1E2D45;
+    }
+    .token-value-pill {
+      display: inline-block;
+      background: #F0FDF4;
+      color: #166534;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 5px;
+      border: 1px solid #BBF7D0;
+    }
+    .color-dot {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      border: 1px solid rgba(0,0,0,.1);
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    /* ── Tailwind Class Table ── */
+    .tw-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .tw-item {
+      background: #fff;
+      border: 1px solid #E2E8F0;
+      border-left: 3px solid #1E7FD6;
+      border-radius: 8px;
+      padding: 14px 16px;
+      transition: all .15s;
+    }
+    .tw-item:hover {
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+      border-color: #BAD8FD;
+    }
+    .tw-purpose {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: #94A3B8;
+      margin-bottom: 6px;
+    }
+    .tw-class {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: #1E7FD6;
+      font-weight: 600;
+    }
+    .tw-desc {
+      font-size: 12px;
+      color: #64748B;
+      margin-top: 4px;
+    }
+
+    /* ── Usage Grid ── */
+    .usage-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 640px) { .usage-grid { grid-template-columns: 1fr; } }
+    .usage-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 14px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1.55;
+      border: 1px solid;
+    }
+    .usage-item.do   { background: #F0FDF4; border-color: #BBF7D0; color: #15803D; }
+    .usage-item.dont { background: #FEF2F2; border-color: #FECACA; color: #B91C1C; }
+    .usage-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+
+    /* ── Anatomy Diagram ── */
+    .anatomy-wrap {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 48px 40px;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+    .anatomy-btn-wrap {
+      position: relative;
+      display: inline-block;
+    }
+    .anatomy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: var(--color-primary-500);
+      color: white;
+      border-radius: var(--border-radius-md);
+      font-family: var(--font-primary);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      border: 1.5px solid var(--color-primary-500);
+      box-shadow: var(--shadow-brand);
+      position: relative;
+    }
+    .anatomy-label {
+      position: absolute;
+      font-size: 11px;
+      font-weight: 600;
+      color: #475569;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .anatomy-line {
+      width: 20px;
+      height: 1px;
+      background: #94A3B8;
+    }
+    .anatomy-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #1E7FD6;
+      border: 1.5px solid white;
+      box-shadow: 0 0 0 1.5px #1E7FD6;
+    }
+    .anatomy-note {
+      font-size: 12px;
+      color: #64748B;
+      text-align: center;
+      margin-top: 16px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Mobile Overlay -->
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+  <div class="container">
+
+    <!-- ══════════════════ SIDEBAR ══════════════════ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-brand">
+          <div class="sidebar-logo-icon">GL</div>
+          <div class="sidebar-brand-text">
+            <div class="logo">GPOS Lite</div>
+            <div class="version">Design System V2.0</div>
+          </div>
+        </div>
+        <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">✕</button>
+      </div>
+
+      <div class="sidebar-search">
+        <input type="search" class="search-input" placeholder="🔍  Cari token, component...">
+      </div>
+
+      <div class="nav-scroll">
+        <nav class="nav-menu">
+
+          <div class="nav-section">
+            <h3 class="nav-title">Overview</h3>
+            <ul class="nav-list">
+              <li>
+                <a href="../index.html" class="nav-link">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+                  Home
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="nav-section">
+            <h3 class="nav-title">Foundations</h3>
+            <ul class="nav-list">
+              <li><a href="colors.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg>
+                Colors
+              </a></li>
+              <li><a href="typography.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+                Typography
+              </a></li>
+              <li><a href="spacing.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>
+                Spacing
+              </a></li>
+              <li><a href="shadows.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h12a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V7z" opacity="0.4"/></svg>
+                Shadows
+              </a></li>
+              <li><a href="borders.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
+                Borders &amp; Radius
+              </a></li>
+              <li><a href="grid.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                Grid &amp; Layout
+              </a></li>
+              <li><a href="icons.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="5" height="5" rx="1"/><rect x="10" y="3" width="5" height="5" rx="1"/><rect x="17" y="3" width="4" height="5" rx="1"/><rect x="3" y="10" width="5" height="5" rx="1"/><rect x="10" y="10" width="5" height="5" rx="1"/><rect x="17" y="10" width="4" height="5" rx="1"/><rect x="3" y="17" width="5" height="4" rx="1"/><rect x="10" y="17" width="5" height="4" rx="1"/><rect x="17" y="17" width="4" height="4" rx="1"/></svg>
+                Icons
+              </a></li>
+            </ul>
+          </div>
+
+          <!-- ★ NEW: Komponen Section ★ -->
+          <div class="nav-section">
+            <h3 class="nav-title">Komponen</h3>
+            <ul class="nav-list">
+              <li>
+                <a href="button.html" class="nav-link active">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="3"/><line x1="7" y1="12" x2="17" y2="12" opacity="0.5"/></svg>
+                  Button
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="nav-section">
+            <h3 class="nav-title">Resources</h3>
+            <ul class="nav-list">
+              <li>
+                <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="nav-link" target="_blank">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                  GitHub Repo
+                </a>
+              </li>
+            </ul>
+          </div>
+
+        </nav>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="tailwind-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 6C9.33 6 7.67 7.33 7 10c1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35.98 1 2.09 2.15 4.59 2.15C19.67 12 21.33 10.67 22 8c-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C15.61 7.15 14.5 6 12 6zm-7 6c-2.67 0-4.33 1.33-5 4 1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35C6.39 17.15 7.5 18 10 18c2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C8.61 12.85 7.5 12 5 12z"/></svg>
+          Built with Tailwind CSS
+        </div>
+      </div>
+    </aside>
+
+    <!-- ══════════════════ MAIN CONTENT ══════════════════ -->
+    <main class="main-content">
+
+      <!-- Topbar -->
+      <div class="topbar">
+        <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <div class="breadcrumb">
+          <a href="../index.html">Home</a>
+          <span class="breadcrumb-sep"> / </span>
+          <span style="color:#94A3B8;">Komponen</span>
+          <span class="breadcrumb-sep"> / </span>
+          <span class="current">Button</span>
+        </div>
+        <div class="topbar-actions">
+          <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="topbar-link" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            GitHub
+          </a>
+          <span class="version-badge">v2.0</span>
+        </div>
+      </div>
+
+      <!-- Content Inner -->
+      <div class="content-inner">
+
+        <!-- Page Header -->
+        <header class="page-header">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px;">
+            <div style="width:36px;height:36px;background:linear-gradient(135deg,var(--color-primary-500),var(--color-primary-400));border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="3"/></svg>
+            </div>
+            <div>
+              <h1 style="margin:0;font-size:1.75rem;">Button</h1>
+              <p style="margin:0;font-size:.875rem;color:#64748B;">Komponen interaktif untuk aksi utama, sekunder, dan tertier dalam interface.</p>
+            </div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--color-border);">
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 10px;border-radius:9999px;background:#F0FDF4;color:#15803D;border:1px solid #BBF7D0;">
+              <span style="width:6px;height:6px;border-radius:50%;background:#22C55E;"></span>Stable
+            </span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 10px;border-radius:9999px;background:#EEF7FF;color:#1668B0;border:1px solid #BADDFD;">
+              4 Variants
+            </span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 10px;border-radius:9999px;background:#F1F5F9;color:#475569;border:1px solid #E2E8F0;">
+              WCAG AA
+            </span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 10px;border-radius:9999px;background:#F5F3FF;color:#7C3AED;border:1px solid #DDD6FE;">
+              Tailwind Ready
+            </span>
+          </div>
+        </header>
+
+        <!-- ══ PAGE TABS ══ -->
+        <div class="page-tabs">
+          <button class="page-tab active" data-tab="overview">Overview</button>
+          <button class="page-tab" data-tab="variants">Variants</button>
+          <button class="page-tab" data-tab="states">States</button>
+          <button class="page-tab" data-tab="code">HTML &amp; Code</button>
+          <button class="page-tab" data-tab="tokens">Design Tokens</button>
+        </div>
+
+        <!-- ═══════════════════════════════════════ TAB: OVERVIEW ═══ -->
+        <div class="tab-panel active" id="tab-overview">
+
+          <!-- Live Preview -->
+          <div class="section-label">Preview — Semua Variant</div>
+          <div class="preview-canvas" style="background:#F8FAFC;">
+            <button class="btn btn-primary">Primary</button>
+            <button class="btn btn-ghost">Ghost</button>
+            <button class="btn btn-primary">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+              With Icon
+            </button>
+            <button class="btn btn-ghost">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+              With Icon
+            </button>
+          </div>
+          <div class="preview-canvas dark-bg">
+            <a href="#" class="btn btn-white">White Button</a>
+            <a href="#" class="btn btn-secondary">Secondary</a>
+          </div>
+
+          <!-- Anatomy -->
+          <div class="section-label" style="margin-top:32px;">Anatomy</div>
+          <div class="anatomy-wrap">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:16px;">
+              <div class="anatomy-btn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" style="flex-shrink:0;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                Button Label
+              </div>
+              <div style="display:flex;flex-wrap:wrap;gap:24px;justify-content:center;margin-top:8px;">
+                <div style="display:flex;align-items:center;gap:6px;">
+                  <div style="width:8px;height:8px;border-radius:50%;background:#1E7FD6;"></div>
+                  <span style="font-size:12px;color:#475569;font-weight:500;">Leading Icon (opsional)</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;">
+                  <div style="width:8px;height:8px;border-radius:50%;background:#1E7FD6;"></div>
+                  <span style="font-size:12px;color:#475569;font-weight:500;">Label — wajib ada</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;">
+                  <div style="width:8px;height:8px;border-radius:50%;background:#1E7FD6;"></div>
+                  <span style="font-size:12px;color:#475569;font-weight:500;">Trailing Icon (opsional)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="anatomy-note" style="font-size:12px;color:#64748B;margin-bottom:32px;">Button terdiri dari container + label. Icon bersifat opsional dan bisa di kiri atau kanan label.</p>
+
+          <!-- Usage Guidelines -->
+          <div class="section-label">Usage Guidelines</div>
+          <div class="usage-grid">
+            <div class="usage-item do">
+              <span class="usage-icon">✅</span>
+              Gunakan <strong>Primary</strong> untuk satu aksi utama per halaman — simpan, submit, confirm.
+            </div>
+            <div class="usage-item dont">
+              <span class="usage-icon">❌</span>
+              Jangan gunakan lebih dari satu <strong>Primary</strong> button dalam satu area yang sama.
+            </div>
+            <div class="usage-item do">
+              <span class="usage-icon">✅</span>
+              Gunakan <strong>Ghost</strong> untuk aksi sekunder atau aksi yang kurang penting seperti Cancel atau Back.
+            </div>
+            <div class="usage-item dont">
+              <span class="usage-icon">❌</span>
+              Jangan gunakan <strong>Secondary</strong> (border putih) pada background terang — dirancang khusus untuk dark background.
+            </div>
+            <div class="usage-item do">
+              <span class="usage-icon">✅</span>
+              Gunakan label yang jelas dan actionable: "Simpan", "Kirim", "Hapus". Bukan hanya "OK" atau "Ya".
+            </div>
+            <div class="usage-item dont">
+              <span class="usage-icon">❌</span>
+              Jangan nonaktifkan button tanpa memberikan feedback kenapa ia disabled.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ═══════════════════════════════════════ TAB: VARIANTS ═══ -->
+        <div class="tab-panel" id="tab-variants">
+
+          <div class="section-label">4 Variants — dari CSS Design System</div>
+          <div class="variant-grid">
+
+            <!-- Primary -->
+            <div class="variant-card">
+              <div class="variant-card-preview light">
+                <button class="btn btn-primary">Primary Button</button>
+              </div>
+              <div class="variant-card-meta">
+                <div class="variant-name">Primary</div>
+                <div class="variant-desc">Aksi utama. Background solid brand color <code style="font-size:11px;padding:1px 5px;">#1E7FD6</code>, teks putih, shadow brand. Gunakan untuk satu aksi paling penting.</div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;">
+                  <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;background:#EEF7FF;color:#1668B0;border:1px solid #BADDFD;">.btn-primary</span>
+                  <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;background:#F1F5F9;color:#475569;border:1px solid #E2E8F0;">Dark bg: No</span>
+                  <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;background:#F1F5F9;color:#475569;border:1px solid #E2E8F0;">Light bg: Yes</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Ghost -->
+            <div class="variant-card">
+              <div class="variant-card-preview light">
+                <button class="btn btn-ghost">Ghost Button</button>
+              </div>
+              <div class="variant-card-meta">
+                <div class="variant-name">Ghost</div>
+                <div class="variant-desc">Aksi sekunder atau tersier. Background transparan, border abu, teks secondary. Dipakai untuk Cancel, Back, atau aksi kurang prioritas.</div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;">
+                  <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;background:#EEF7FF;color:#1668B0;border:1px solid #BADDFD;">.btn-ghost</span>
+                  <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;background:#F1F5F9;color:#475569;border:1px solid #E2E8F0;">Dark bg: No</span>
+                  <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;background:#F1F5F9;color:#475569;border:1px solid #E2E8F0;">Light bg: Yes</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- White -->
+            <div class="variant-card">
+              <div class="variant-card-preview dark">
+                <a href="#" class="btn btn-white">White Button</a>
+              </div>
+              <div class="variant-card-meta">
+                <div class="variant-name">White</div>
+                <div class="variant-desc">CTA utama di atas dark background — hero section, banner, card gelap. Background putih, teks primary-600. Hover: background primary-50.</div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;">
+                  <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;background:#EEF7FF;color:#1668B0;border:1px solid #BADDFD;">.btn-white</span>
+                  <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;background:#F0FDF4;color:#15803D;border:1px solid #BBF7D0;">Dark bg: Yes</span>
+                  <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;background:#FEF2F2;color:#B91C1C;border:1px solid #FECACA;">Light bg: No</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Secondary -->
+            <div class="variant-card">
+              <div class="variant-card-preview dark">
+                <a href="#" class="btn btn-secondary">Secondary</a>
+              </div>
+              <div class="variant-card-meta">
+                <div class="variant-name">Secondary</div>
+                <div class="variant-desc">Aksi sekunder di atas dark background. Outline transparan, border putih redup, teks putih. Hover: background semi-transparan putih.</div>
+                <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;">
+                  <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;background:#EEF7FF;color:#1668B0;border:1px solid #BADDFD;">.btn-secondary</span>
+                  <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;background:#F0FDF4;color:#15803D;border:1px solid #BBF7D0;">Dark bg: Yes</span>
+                  <span style="font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;background:#FEF2F2;color:#B91C1C;border:1px solid #FECACA;">Light bg: No</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Pairing Guide -->
+          <div class="section-label">Pairing Guide</div>
+          <div style="background:#fff;border:1px solid #E2E8F0;border-radius:12px;overflow:hidden;margin-bottom:32px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid #E2E8F0;">
+              <div style="padding:20px 24px;border-right:1px solid #E2E8F0;">
+                <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#94A3B8;margin-bottom:12px;">Light Background</div>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                  <button class="btn btn-primary">Simpan</button>
+                  <button class="btn btn-ghost">Batal</button>
+                </div>
+              </div>
+              <div style="padding:20px 24px;background:linear-gradient(135deg,#0B1526,#115188);">
+                <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,0.4);margin-bottom:12px;">Dark Background</div>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                  <a href="#" class="btn btn-white">Mulai Explore</a>
+                  <a href="#" class="btn btn-secondary">View GitHub</a>
+                </div>
+              </div>
+            </div>
+            <div style="padding:14px 24px;background:#F8FAFC;">
+              <p style="font-size:12px;color:#64748B;margin:0;line-height:1.5;">
+                <strong style="color:#0F172A;">Primary + Ghost</strong> — pasangan standar untuk aksi utama & sekunder di background terang. &nbsp;|&nbsp;
+                <strong style="color:#0F172A;">White + Secondary</strong> — pasangan untuk hero section atau card gelap.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ═══════════════════════════════════════ TAB: STATES ═══ -->
+        <div class="tab-panel" id="tab-states">
+
+          <!-- Live State Demo -->
+          <div class="section-label">Live State Preview — Primary Variant</div>
+          <div class="preview-canvas">
+            <div class="state-item">
+              <button class="btn btn-primary">Default</button>
+              <span class="state-item-label">Default</span>
+            </div>
+            <div class="state-item">
+              <button class="btn btn-primary" style="background-color:var(--color-primary-600);border-color:var(--color-primary-600);box-shadow:0 6px 20px rgba(30,127,214,0.5);transform:translateY(-1px);">Hover</button>
+              <span class="state-item-label">Hover</span>
+            </div>
+            <div class="state-item">
+              <button class="btn btn-primary btn-focus-demo">Focus</button>
+              <span class="state-item-label">Focus</span>
+            </div>
+            <div class="state-item">
+              <button class="btn btn-primary btn-active-demo" style="background-color:var(--color-primary-700);border-color:var(--color-primary-700);box-shadow:none;">Active</button>
+              <span class="state-item-label">Active</span>
+            </div>
+            <div class="state-item">
+              <button class="btn btn-disabled">Disabled</button>
+              <span class="state-item-label">Disabled</span>
+            </div>
+            <div class="state-item">
+              <button class="btn btn-primary btn-loading">Loading</button>
+              <span class="state-item-label">Loading</span>
+            </div>
+          </div>
+
+          <!-- States Table -->
+          <div class="section-label" style="margin-top:8px;">State Reference Table</div>
+          <div style="overflow-x:auto;">
+            <table class="states-table">
+              <thead>
+                <tr>
+                  <th>State</th>
+                  <th>Trigger</th>
+                  <th>Visual Change</th>
+                  <th>CSS Property</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="state-badge default"><span class="state-dot dot-default"></span>Default</span></td>
+                  <td style="color:#475569;">Idle — tidak ada interaksi</td>
+                  <td style="color:#475569;">Background <code style="font-size:11px">#1E7FD6</code>, shadow brand</td>
+                  <td><span class="token-pill" style="font-size:11px;">--color-primary-500</span></td>
+                </tr>
+                <tr>
+                  <td><span class="state-badge hover"><span class="state-dot dot-hover"></span>Hover</span></td>
+                  <td style="color:#475569;"><code style="font-size:11px">:hover</code> — mouse over</td>
+                  <td style="color:#475569;">Background lebih gelap <code style="font-size:11px">#1668B0</code>, naik 1px, shadow kuat</td>
+                  <td><span class="token-pill" style="font-size:11px;">translateY(-1px)</span></td>
+                </tr>
+                <tr>
+                  <td><span class="state-badge focus"><span class="state-dot dot-focus"></span>Focus</span></td>
+                  <td style="color:#475569;"><code style="font-size:11px">:focus-visible</code> — keyboard / tab</td>
+                  <td style="color:#475569;">Focus ring biru 3px transparan di luar border</td>
+                  <td><span class="token-pill" style="font-size:11px;">box-shadow ring</span></td>
+                </tr>
+                <tr>
+                  <td><span class="state-badge active"><span class="state-dot dot-active"></span>Active</span></td>
+                  <td style="color:#475569;"><code style="font-size:11px">:active</code> — saat diklik</td>
+                  <td style="color:#475569;">Turun 1px, scale 98%, background primary-700</td>
+                  <td><span class="token-pill" style="font-size:11px;">translateY(1px) scale(.98)</span></td>
+                </tr>
+                <tr>
+                  <td><span class="state-badge disabled"><span class="state-dot dot-disabled"></span>Disabled</span></td>
+                  <td style="color:#475569;"><code style="font-size:11px">disabled</code> attr atau <code style="font-size:11px">.btn-disabled</code></td>
+                  <td style="color:#475569;">Opacity 40%, cursor not-allowed, no pointer events</td>
+                  <td><span class="token-pill" style="font-size:11px;">opacity: 0.4</span></td>
+                </tr>
+                <tr>
+                  <td><span class="state-badge loading"><span class="state-dot dot-loading"></span>Loading</span></td>
+                  <td style="color:#475569;">Ditambahkan class <code style="font-size:11px">.btn-loading</code></td>
+                  <td style="color:#475569;">Teks hilang, spinner putih muncul di tengah via ::after</td>
+                  <td><span class="token-pill" style="font-size:11px;">::after + animation</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Focus & Accessibility Note -->
+          <div style="background:#F0FDF4;border:1px solid #BBF7D0;border-left:4px solid #22C55E;border-radius:8px;padding:16px 20px;margin-bottom:32px;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <span style="font-size:14px;">♿</span>
+              <strong style="font-size:13px;color:#15803D;">Accessibility — Keyboard Navigation</strong>
+            </div>
+            <p style="font-size:13px;color:#166534;margin:0;line-height:1.6;">
+              Button harus selalu memiliki <strong>focus ring yang visible</strong> saat navigasi keyboard (Tab). Gunakan <code style="background:#DCFCE7;border:none;color:#14532D;padding:1px 5px;">:focus-visible</code> agar focus ring hanya tampil saat keyboard, bukan saat klik mouse. Contrast ratio teks pada state default memenuhi WCAG AA (≥ 4.5:1).
+            </p>
+          </div>
+
+        </div>
+
+        <!-- ═══════════════════════════════════════ TAB: CODE ═══ -->
+        <div class="tab-panel" id="tab-code">
+
+          <!-- HTML Snippets -->
+          <div class="section-label">HTML — Siap Copy Paste</div>
+
+          <!-- Primary -->
+          <div style="margin-bottom:6px;font-size:13px;font-weight:600;color:#0F172A;">Primary Button</div>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-lang">HTML</span>
+              <button class="copy-btn" onclick="copyCode(this)">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code>&lt;<span class="code-hl-tag">button</span> <span class="code-hl-attr">class</span>=<span class="code-hl-string">"btn btn-primary"</span> <span class="code-hl-attr">type</span>=<span class="code-hl-string">"button"</span>&gt;
+  Primary Button
+&lt;/<span class="code-hl-tag">button</span>&gt;
+
+<span class="code-hl-comment">&lt;!-- Dengan icon kiri --&gt;</span>
+&lt;<span class="code-hl-tag">button</span> <span class="code-hl-attr">class</span>=<span class="code-hl-string">"btn btn-primary"</span> <span class="code-hl-attr">type</span>=<span class="code-hl-string">"button"</span>&gt;
+  &lt;<span class="code-hl-tag">svg</span> <span class="code-hl-attr">width</span>=<span class="code-hl-string">"14"</span> <span class="code-hl-attr">height</span>=<span class="code-hl-string">"14"</span> <span class="code-hl-attr">viewBox</span>=<span class="code-hl-string">"0 0 24 24"</span> <span class="code-hl-attr">fill</span>=<span class="code-hl-string">"none"</span> <span class="code-hl-attr">stroke</span>=<span class="code-hl-string">"currentColor"</span> <span class="code-hl-attr">stroke-width</span>=<span class="code-hl-string">"2"</span>&gt;
+    &lt;<span class="code-hl-tag">path</span> <span class="code-hl-attr">d</span>=<span class="code-hl-string">"M5 12h14M12 5l7 7-7 7"</span>/&gt;
+  &lt;/<span class="code-hl-tag">svg</span>&gt;
+  Simpan Data
+&lt;/<span class="code-hl-tag">button</span>&gt;
+
+<span class="code-hl-comment">&lt;!-- Disabled state --&gt;</span>
+&lt;<span class="code-hl-tag">button</span> <span class="code-hl-attr">class</span>=<span class="code-hl-string">"btn btn-primary"</span> <span class="code-hl-attr">disabled</span>&gt;
+  Tidak Aktif
+&lt;/<span class="code-hl-tag">button</span>&gt;</code></pre>
+          </div>
+
+          <!-- Ghost -->
+          <div style="margin-bottom:6px;margin-top:20px;font-size:13px;font-weight:600;color:#0F172A;">Ghost Button</div>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-lang">HTML</span>
+              <button class="copy-btn" onclick="copyCode(this)">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code>&lt;<span class="code-hl-tag">button</span> <span class="code-hl-attr">class</span>=<span class="code-hl-string">"btn btn-ghost"</span> <span class="code-hl-attr">type</span>=<span class="code-hl-string">"button"</span>&gt;
+  Batal
+&lt;/<span class="code-hl-tag">button</span>&gt;</code></pre>
+          </div>
+
+          <!-- White + Secondary (dark bg) -->
+          <div style="margin-bottom:6px;margin-top:20px;font-size:13px;font-weight:600;color:#0F172A;">White &amp; Secondary (untuk dark background)</div>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-lang">HTML</span>
+              <button class="copy-btn" onclick="copyCode(this)">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code><span class="code-hl-comment">&lt;!-- Di dalam hero section / dark card --&gt;</span>
+&lt;<span class="code-hl-tag">div</span> <span class="code-hl-attr">class</span>=<span class="code-hl-string">"hero-section"</span>&gt;
+  &lt;<span class="code-hl-tag">a</span> <span class="code-hl-attr">href</span>=<span class="code-hl-string">"#"</span> <span class="code-hl-attr">class</span>=<span class="code-hl-string">"btn btn-white"</span>&gt;Mulai Explore&lt;/<span class="code-hl-tag">a</span>&gt;
+  &lt;<span class="code-hl-tag">a</span> <span class="code-hl-attr">href</span>=<span class="code-hl-string">"#"</span> <span class="code-hl-attr">class</span>=<span class="code-hl-string">"btn btn-secondary"</span>&gt;Lihat GitHub&lt;/<span class="code-hl-tag">a</span>&gt;
+&lt;/<span class="code-hl-tag">div</span>&gt;</code></pre>
+          </div>
+
+          <!-- Loading State -->
+          <div style="margin-bottom:6px;margin-top:20px;font-size:13px;font-weight:600;color:#0F172A;">Loading State</div>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-lang">HTML + CSS</span>
+              <button class="copy-btn" onclick="copyCode(this)">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code><span class="code-hl-comment">&lt;!-- Tambahkan class .btn-loading saat proses berlangsung --&gt;</span>
+&lt;<span class="code-hl-tag">button</span> <span class="code-hl-attr">class</span>=<span class="code-hl-string">"btn btn-primary btn-loading"</span>&gt;Menyimpan...&lt;/<span class="code-hl-tag">button</span>&gt;
+
+<span class="code-hl-comment">/* CSS untuk loading state */</span>
+.btn-loading {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+}
+.btn-loading::after {
+  content: '';
+  position: absolute;
+  width: 14px; height: 14px;
+  border: 2px solid rgba(255,255,255,0.35);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: btn-spin .65s linear infinite;
+}
+@keyframes btn-spin { to { transform: rotate(360deg); } }</code></pre>
+          </div>
+
+          <!-- Focus Ring -->
+          <div style="margin-bottom:6px;margin-top:20px;font-size:13px;font-weight:600;color:#0F172A;">Focus Ring (Accessibility)</div>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-lang">CSS</span>
+              <button class="copy-btn" onclick="copyCode(this)">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code><span class="code-hl-comment">/* Tambahkan ke styles.css — focus ring untuk keyboard nav */</span>
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(30,127,214,0.35), var(--shadow-brand);
+}
+.btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+.btn:disabled,
+.btn[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}</code></pre>
+          </div>
+
+        </div>
+
+        <!-- ═══════════════════════════════════════ TAB: TOKENS ═══ -->
+        <div class="tab-panel" id="tab-tokens">
+
+          <!-- Base Tokens -->
+          <div class="section-label">Base Button Tokens</div>
+          <div style="overflow-x:auto;margin-bottom:32px;">
+            <table class="token-table">
+              <thead>
+                <tr>
+                  <th>Properti</th>
+                  <th>Token</th>
+                  <th>Nilai</th>
+                  <th>Keterangan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-weight:600;color:#0F172A;">Padding</td>
+                  <td><span class="token-pill">10px var(--spacing-5)</span></td>
+                  <td><span class="token-value-pill">10px 20px</span></td>
+                  <td style="color:#64748B;font-size:12px;">Top/Bottom 10px, Left/Right 20px</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:600;color:#0F172A;">Border Radius</td>
+                  <td><span class="token-pill">--border-radius-md</span></td>
+                  <td><span class="token-value-pill">0.5rem / 8px</span></td>
+                  <td style="color:#64748B;font-size:12px;">Sudut membulat sedang</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:600;color:#0F172A;">Font Family</td>
+                  <td><span class="token-pill">--font-primary</span></td>
+                  <td><span class="token-value-pill">Poppins, sans-serif</span></td>
+                  <td style="color:#64748B;font-size:12px;">Font utama design system</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:600;color:#0F172A;">Font Size</td>
+                  <td><span class="token-pill">--font-size-sm</span></td>
+                  <td><span class="token-value-pill">0.875rem / 14px</span></td>
+                  <td style="color:#64748B;font-size:12px;">Label button</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:600;color:#0F172A;">Font Weight</td>
+                  <td><span class="token-pill">--font-weight-semibold</span></td>
+                  <td><span class="token-value-pill">600</span></td>
+                  <td style="color:#64748B;font-size:12px;">SemiBold untuk emphasis</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:600;color:#0F172A;">Border Width</td>
+                  <td><span class="token-pill">1.5px solid</span></td>
+                  <td><span class="token-value-pill">1.5px</span></td>
+                  <td style="color:#64748B;font-size:12px;">Border sedikit lebih tebal dari default</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:600;color:#0F172A;">Gap (icon)</td>
+                  <td><span class="token-pill">--spacing-2</span></td>
+                  <td><span class="token-value-pill">0.5rem / 8px</span></td>
+                  <td style="color:#64748B;font-size:12px;">Jarak antara icon dan label</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:600;color:#0F172A;">Transition</td>
+                  <td><span class="token-pill">--transition-base</span></td>
+                  <td><span class="token-value-pill">200ms ease-in-out</span></td>
+                  <td style="color:#64748B;font-size:12px;">Transisi semua properti</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:600;color:#0F172A;">Letter Spacing</td>
+                  <td><span class="token-pill">0.01em</span></td>
+                  <td><span class="token-value-pill">0.01em</span></td>
+                  <td style="color:#64748B;font-size:12px;">Sedikit tracking untuk readability</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Color Tokens per Variant -->
+          <div class="section-label">Color Tokens per Variant</div>
+          <div style="overflow-x:auto;margin-bottom:32px;">
+            <table class="token-table">
+              <thead>
+                <tr>
+                  <th>Variant</th>
+                  <th>Background</th>
+                  <th>Text Color</th>
+                  <th>Border</th>
+                  <th>Shadow</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="font-weight:700;color:#0F172A;">
+                    <span style="display:inline-flex;align-items:center;gap:6px;">
+                      <span class="color-dot" style="background:#1E7FD6;"></span>Primary
+                    </span>
+                  </td>
+                  <td><span class="token-pill">--color-primary-500</span></td>
+                  <td><span class="token-pill">white</span></td>
+                  <td><span class="token-pill">--color-primary-500</span></td>
+                  <td><span class="token-pill">--shadow-brand</span></td>
+                </tr>
+                <tr>
+                  <td style="font-weight:700;color:#0F172A;">
+                    <span style="display:inline-flex;align-items:center;gap:6px;">
+                      <span class="color-dot" style="background:transparent;border:1.5px solid #94A3B8;"></span>Ghost
+                    </span>
+                  </td>
+                  <td><span class="token-pill">transparent</span></td>
+                  <td><span class="token-pill">--color-text-secondary</span></td>
+                  <td><span class="token-pill">--color-border</span></td>
+                  <td style="color:#94A3B8;font-size:12px;">—</td>
+                </tr>
+                <tr>
+                  <td style="font-weight:700;color:#0F172A;">
+                    <span style="display:inline-flex;align-items:center;gap:6px;">
+                      <span class="color-dot" style="background:#fff;"></span>White
+                    </span>
+                  </td>
+                  <td><span class="token-pill">white</span></td>
+                  <td><span class="token-pill">--color-primary-600</span></td>
+                  <td><span class="token-pill">white</span></td>
+                  <td><span class="token-pill">--shadow-sm</span></td>
+                </tr>
+                <tr>
+                  <td style="font-weight:700;color:#0F172A;">
+                    <span style="display:inline-flex;align-items:center;gap:6px;">
+                      <span class="color-dot" style="background:transparent;border:1.5px solid rgba(255,255,255,0.4);"></span>Secondary
+                    </span>
+                  </td>
+                  <td><span class="token-pill">transparent</span></td>
+                  <td style="color:#64748B;font-size:12px;">white</td>
+                  <td style="color:#64748B;font-size:12px;">rgba(255,255,255,0.4)</td>
+                  <td style="color:#94A3B8;font-size:12px;">—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Tailwind Classes -->
+          <div class="section-label">Tailwind Utility Classes</div>
+          <div class="tw-grid">
+            <div class="tw-item">
+              <div class="tw-purpose">Layout</div>
+              <div class="tw-class">inline-flex items-center justify-center</div>
+              <div class="tw-desc">Flex layout terpusat untuk icon + label</div>
+            </div>
+            <div class="tw-item">
+              <div class="tw-purpose">Spacing</div>
+              <div class="tw-class">px-5 py-[10px] gap-2</div>
+              <div class="tw-desc">Padding horizontal 20px, vertikal 10px, gap 8px</div>
+            </div>
+            <div class="tw-item">
+              <div class="tw-purpose">Typography</div>
+              <div class="tw-class">font-semibold text-sm tracking-[0.01em]</div>
+              <div class="tw-desc">600 weight, 14px, letter spacing halus</div>
+            </div>
+            <div class="tw-item">
+              <div class="tw-purpose">Shape</div>
+              <div class="tw-class">rounded-md border border-[1.5px]</div>
+              <div class="tw-desc">Border radius 8px, border 1.5px</div>
+            </div>
+            <div class="tw-item">
+              <div class="tw-purpose">Transition</div>
+              <div class="tw-class">transition-all duration-200 ease-in-out</div>
+              <div class="tw-desc">Semua properti, 200ms, ease-in-out</div>
+            </div>
+            <div class="tw-item">
+              <div class="tw-purpose">Hover Effect</div>
+              <div class="tw-class">hover:-translate-y-px hover:shadow-lg</div>
+              <div class="tw-desc">Naik 1px, shadow lebih kuat saat hover</div>
+            </div>
+            <div class="tw-item">
+              <div class="tw-purpose">Primary Fill</div>
+              <div class="tw-class">bg-[#1E7FD6] text-white border-[#1E7FD6]</div>
+              <div class="tw-desc">Background, teks, dan border brand color</div>
+            </div>
+            <div class="tw-item">
+              <div class="tw-purpose">Disabled</div>
+              <div class="tw-class">disabled:opacity-40 disabled:cursor-not-allowed</div>
+              <div class="tw-desc">Opacity 40%, cursor berubah</div>
+            </div>
+          </div>
+
+          <!-- CSS Variable Full Snippet -->
+          <div class="section-label" style="margin-top:8px;">Full CSS Snippet</div>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span class="code-lang">CSS</span>
+              <button class="copy-btn" onclick="copyCode(this)">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                Copy
+              </button>
+            </div>
+            <pre><code><span class="code-hl-comment">/* ── Base Button ── */</span>
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);            <span class="code-hl-comment">/* 8px */</span>
+  padding: 10px var(--spacing-5);   <span class="code-hl-comment">/* 10px 20px */</span>
+  border-radius: var(--border-radius-md); <span class="code-hl-comment">/* 8px */</span>
+  font-family: var(--font-primary); <span class="code-hl-comment">/* Poppins */</span>
+  font-size: var(--font-size-sm);   <span class="code-hl-comment">/* 14px */</span>
+  font-weight: var(--font-weight-semibold); <span class="code-hl-comment">/* 600 */</span>
+  border: 1.5px solid transparent;
+  transition: all var(--transition-base); <span class="code-hl-comment">/* 200ms ease-in-out */</span>
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  line-height: 1;
+  text-decoration: none;
+}
+
+<span class="code-hl-comment">/* ── Primary ── */</span>
+.btn-primary {
+  background-color: var(--color-primary-500); <span class="code-hl-comment">/* #1E7FD6 */</span>
+  color: white;
+  border-color: var(--color-primary-500);
+  box-shadow: var(--shadow-brand);
+}
+.btn-primary:hover {
+  background-color: var(--color-primary-600); <span class="code-hl-comment">/* #1668B0 */</span>
+  border-color: var(--color-primary-600);
+  box-shadow: 0 6px 20px rgba(30,127,214,0.5);
+  transform: translateY(-1px);
+  color: white; text-decoration: none;
+}
+
+<span class="code-hl-comment">/* ── Ghost ── */</span>
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-text-secondary);
+  border-color: var(--color-border);
+}
+.btn-ghost:hover {
+  background-color: var(--color-gray-100);
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+<span class="code-hl-comment">/* ── White (dark background) ── */</span>
+.btn-white {
+  background-color: white;
+  color: var(--color-primary-600);
+  border-color: white;
+  box-shadow: var(--shadow-sm);
+}
+.btn-white:hover {
+  background-color: var(--color-primary-50);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+  color: var(--color-primary-700);
+  text-decoration: none;
+}
+
+<span class="code-hl-comment">/* ── Secondary (dark background) ── */</span>
+.btn-secondary {
+  background-color: transparent;
+  color: white;
+  border-color: rgba(255,255,255,0.4);
+}
+.btn-secondary:hover {
+  background-color: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.65);
+  transform: translateY(-1px);
+  color: white; text-decoration: none;
+}
+
+<span class="code-hl-comment">/* ── States ── */</span>
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(30,127,214,0.35), var(--shadow-brand);
+}
+.btn:active { transform: translateY(1px) scale(0.98); }
+.btn:disabled, .btn[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}</code></pre>
+          </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="page-footer">
+          <div class="footer-left">
+            &copy; 2026 <strong>GPOS Lite Design System V2.0</strong> — Maintained with ❤️
+          </div>
+          <div class="footer-right">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="opacity:0.5"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            GitHub Pages
+          </div>
+        </footer>
+
+      </div><!-- /content-inner -->
+    </main>
+
+  </div><!-- /container -->
+
+  <script src="../js/script.js"></script>
+  <script>
+    // ── Tab System ──
+    const tabs = document.querySelectorAll('.page-tab');
+    const panels = document.querySelectorAll('.tab-panel');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.tab;
+        tabs.forEach(t => t.classList.remove('active'));
+        panels.forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('tab-' + target)?.classList.add('active');
+      });
+    });
+
+    // ── Copy Code ──
+    function copyCode(btn) {
+      const pre = btn.closest('.code-block').querySelector('pre');
+      const text = pre.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        btn.textContent = '✓ Copied!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
