@@ -254,9 +254,9 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-top: 32px;
-      margin-bottom: 16px;
-      padding-bottom: 10px;
+      margin-top: 40px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
       border-bottom: 1px solid #EBEDF0;
     }
     .sub-section-head:first-of-type { margin-top: 0; }
@@ -272,7 +272,7 @@
     .icon-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 12px;
+      gap: 16px;
     }
     @media (max-width: 860px) { .icon-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); } }
     @media (max-width: 480px) { .icon-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -281,16 +281,16 @@
     .icon-card {
       background: #fff;
       border: 1px solid #DFE2E6;
-      border-radius: 10px;
-      padding: 20px 12px 14px;
+      border-radius: 12px;
+      padding: 24px 14px 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 9px;
+      gap: 10px;
       cursor: pointer;
       user-select: none;
       transition: border-color 0.15s, background 0.15s, box-shadow 0.15s, transform 0.12s;
-      min-height: 96px;
+      min-height: 108px;
       position: relative;
       overflow: hidden;
     }
@@ -303,16 +303,18 @@
     .icon-card:active { transform: translateY(0); }
 
     .icon-thumb {
-      width: 32px;
-      height: 32px;
+      width: 48px;
+      height: 48px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      background: #F5F7FA;
+      border-radius: 10px;
     }
     .icon-thumb img {
-      width: 24px;
-      height: 24px;
+      width: 32px;
+      height: 32px;
       object-fit: contain;
       display: block;
     }
@@ -348,16 +350,16 @@
     .sidebar-card {
       background: #fff;
       border: 1px solid #DFE2E6;
-      border-radius: 10px;
-      padding: 16px 12px 14px;
+      border-radius: 12px;
+      padding: 20px 14px 16px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       cursor: pointer;
       user-select: none;
       transition: border-color 0.15s, background 0.15s, box-shadow 0.15s, transform 0.12s;
-      min-height: 96px;
+      min-height: 120px;
     }
     .sidebar-card:hover {
       border-color: #1E7FD6;
@@ -367,9 +369,9 @@
     }
     .sidebar-card:active { transform: translateY(0); }
 
-    .icon-states-wrap { display: flex; align-items: flex-end; gap: 12px; }
-    .icon-state-item  { display: flex; flex-direction: column; align-items: center; gap: 5px; }
-    .icon-state-item img { width: 24px; height: 24px; object-fit: contain; display: block; }
+    .icon-states-wrap { display: flex; align-items: flex-end; gap: 16px; }
+    .icon-state-item  { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .icon-state-item img { width: 32px; height: 32px; object-fit: contain; display: block; }
 
     .state-pill {
       font-size: 9px;
@@ -750,7 +752,7 @@
             <div class="size-showcase">
               <div class="size-item">
                 <div class="size-box sm">
-                  <img src="../assets/icons/Icon:home.svg" alt="icon small" style="width:16px;height:16px;">
+                  <img src="assets/icons/Icon:home.svg" alt="icon small" style="width:16px;height:16px;">
                 </div>
                 <div>
                   <div class="size-info-label">size=small</div>
@@ -760,7 +762,7 @@
               </div>
               <div class="size-item">
                 <div class="size-box md">
-                  <img src="../assets/icons/Icon:home.svg" alt="icon medium" style="width:24px;height:24px;">
+                  <img src="assets/icons/Icon:home.svg" alt="icon medium" style="width:24px;height:24px;">
                 </div>
                 <div>
                   <div class="size-info-label">size=medium</div>
@@ -770,7 +772,7 @@
               </div>
               <div class="size-item">
                 <div class="size-box lg">
-                  <img src="../assets/icons/Icon:home.svg" alt="icon large" style="width:32px;height:32px;">
+                  <img src="assets/icons/Icon:home.svg" alt="icon large" style="width:32px;height:32px;">
                 </div>
                 <div>
                   <div class="size-info-label">size=large</div>
@@ -780,7 +782,7 @@
               </div>
               <div class="size-item">
                 <div class="size-box xl">
-                  <img src="../assets/icons/Icon:home.svg" alt="icon xlarge" style="width:48px;height:48px;">
+                  <img src="assets/icons/Icon:home.svg" alt="icon xlarge" style="width:48px;height:48px;">
                 </div>
                 <div>
                   <div class="size-info-label">size=xlarge</div>
@@ -907,15 +909,15 @@
             <div class="usage-card-hd">🔘 Icon in Button</div>
             <div class="usage-card-body">
               <div class="demo-btn">
-                <img src="../assets/icons/Icon:EllipsisVertical.svg" alt="more">
+                <img src="assets/icons/Icon:EllipsisVertical.svg" alt="more">
                 Button
               </div>
               <div class="demo-btn">
-                <img src="../assets/icons/Icon:square-2-stack.svg" alt="copy">
+                <img src="assets/icons/Icon:square-2-stack.svg" alt="copy">
                 Button
               </div>
               <div class="demo-btn">
-                <img src="../assets/icons/Icon:plus.svg" alt="add">
+                <img src="assets/icons/Icon:plus.svg" alt="add">
                 Button
               </div>
             </div>
@@ -927,16 +929,16 @@
             <div class="usage-card-body">
               <div class="demo-input focused">
                 <span class="placeholder-text">Value</span>
-                <img src="../assets/icons/Icon:chevron-down.svg" alt="dropdown" style="margin-left:auto;opacity:.5;">
+                <img src="assets/icons/Icon:chevron-down.svg" alt="dropdown" style="margin-left:auto;opacity:.5;">
               </div>
               <div class="demo-input normal">
-                <img src="../assets/icons/Icon:magnifying-glass.svg" alt="search">
+                <img src="assets/icons/Icon:magnifying-glass.svg" alt="search">
                 <input type="text" placeholder="Search...">
               </div>
               <div class="demo-input normal">
-                <img src="../assets/icons/Icon:lock-closed.svg" alt="password">
+                <img src="assets/icons/Icon:lock-closed.svg" alt="password">
                 <input type="password" placeholder="Password">
-                <img src="../assets/icons/Icon:EyeSlash.svg" alt="toggle" style="margin-left:auto;">
+                <img src="assets/icons/Icon:EyeSlash.svg" alt="toggle" style="margin-left:auto;">
               </div>
             </div>
           </div>
@@ -947,21 +949,21 @@
             <div class="usage-card-body" style="background:#fff;">
               <div class="demo-nav">
                 <div class="demo-nav-item active">
-                  <img src="../assets/icons/icon:sidebar offline:News:On.svg" alt="berita">
+                  <img src="assets/icons/icon:sidebar offline:News:On.svg" alt="berita">
                   Berita
                 </div>
                 <div class="demo-nav-item">
-                  <img src="../assets/icons/icon:sidebar offline:dashboard:Off.svg" alt="dashboard">
+                  <img src="assets/icons/icon:sidebar offline:dashboard:Off.svg" alt="dashboard">
                   Dashboard
                 </div>
                 <div class="demo-nav-item">
-                  <img src="../assets/icons/icon:sidebar offline:POS:Off.svg" alt="pos">
+                  <img src="assets/icons/icon:sidebar offline:POS:Off.svg" alt="pos">
                   Point Of Sale
-                  <img src="../assets/icons/Icon:chevron-down.svg" alt="expand" class="nav-arrow">
+                  <img src="assets/icons/Icon:chevron-down.svg" alt="expand" class="nav-arrow">
                 </div>
                 <div class="demo-sub-item">
                   Online
-                  <img src="../assets/icons/Icon:arrow-right.svg" alt="go" class="nav-arrow">
+                  <img src="assets/icons/Icon:arrow-right.svg" alt="go" class="nav-arrow">
                 </div>
               </div>
             </div>
@@ -1000,25 +1002,25 @@
                 <button class="copy-code-btn" data-target="html">Copy</button>
               </div>
 <pre class="code-body"><span class="c-comment">&lt;!-- Icon dasar (medium = 24px default) --&gt;</span>
-<span class="c-tag">&lt;img</span> <span class="c-attr">src</span>=<span class="c-val">"../assets/icons/Icon:home.svg"</span>
+<span class="c-tag">&lt;img</span> <span class="c-attr">src</span>=<span class="c-val">"assets/icons/Icon:home.svg"</span>
      <span class="c-attr">alt</span>=<span class="c-val">"home"</span>
      <span class="c-attr">width</span>=<span class="c-val">"24"</span> <span class="c-attr">height</span>=<span class="c-val">"24"</span><span class="c-tag">&gt;</span>
 
 <span class="c-comment">&lt;!-- Button dengan icon --&gt;</span>
 <span class="c-tag">&lt;button</span> <span class="c-attr">class</span>=<span class="c-val">"btn btn-primary"</span><span class="c-tag">&gt;</span>
-  <span class="c-tag">&lt;img</span> <span class="c-attr">src</span>=<span class="c-val">"../assets/icons/Icon:plus.svg"</span>
+  <span class="c-tag">&lt;img</span> <span class="c-attr">src</span>=<span class="c-val">"assets/icons/Icon:plus.svg"</span>
        <span class="c-attr">alt</span>=<span class="c-val">"tambah"</span>
        <span class="c-attr">width</span>=<span class="c-val">"20"</span> <span class="c-attr">height</span>=<span class="c-val">"20"</span><span class="c-tag">&gt;</span>
   Tambah Item
 <span class="c-tag">&lt;/button&gt;</span>
 
 <span class="c-comment">&lt;!-- Sidebar icon — state Off (tidak aktif) --&gt;</span>
-<span class="c-tag">&lt;img</span> <span class="c-attr">src</span>=<span class="c-val">"../assets/icons/icon:sidebar offline:News:Off.svg"</span>
+<span class="c-tag">&lt;img</span> <span class="c-attr">src</span>=<span class="c-val">"assets/icons/icon:sidebar offline:News:Off.svg"</span>
      <span class="c-attr">alt</span>=<span class="c-val">"berita"</span>
      <span class="c-attr">width</span>=<span class="c-val">"24"</span> <span class="c-attr">height</span>=<span class="c-val">"24"</span><span class="c-tag">&gt;</span>
 
 <span class="c-comment">&lt;!-- Sidebar icon — state On (aktif) --&gt;</span>
-<span class="c-tag">&lt;img</span> <span class="c-attr">src</span>=<span class="c-val">"../assets/icons/icon:sidebar offline:News:On.svg"</span>
+<span class="c-tag">&lt;img</span> <span class="c-attr">src</span>=<span class="c-val">"assets/icons/icon:sidebar offline:News:On.svg"</span>
      <span class="c-attr">alt</span>=<span class="c-val">"berita"</span>
      <span class="c-attr">width</span>=<span class="c-val">"24"</span> <span class="c-attr">height</span>=<span class="c-val">"24"</span><span class="c-tag">&gt;</span></pre>
             </div>
@@ -1055,18 +1057,18 @@
                 <button class="copy-code-btn" data-target="tailwind">Copy</button>
               </div>
 <pre class="code-body"><span class="c-comment">&lt;!-- small 16px --&gt;</span>
-<span class="c-tag">&lt;img</span> <span class="c-attr">src</span>=<span class="c-val">"../assets/icons/Icon:home.svg"</span> <span class="c-attr">alt</span>=<span class="c-val">"home"</span> <span class="c-attr">class</span>=<span class="c-val">"w-4 h-4"</span><span class="c-tag">&gt;</span>
+<span class="c-tag">&lt;img</span> <span class="c-attr">src</span>=<span class="c-val">"assets/icons/Icon:home.svg"</span> <span class="c-attr">alt</span>=<span class="c-val">"home"</span> <span class="c-attr">class</span>=<span class="c-val">"w-4 h-4"</span><span class="c-tag">&gt;</span>
 <span class="c-comment">&lt;!-- medium 24px (default) --&gt;</span>
-<span class="c-tag">&lt;img</span> <span class="c-attr">src</span>=<span class="c-val">"../assets/icons/Icon:home.svg"</span> <span class="c-attr">alt</span>=<span class="c-val">"home"</span> <span class="c-attr">class</span>=<span class="c-val">"w-6 h-6"</span><span class="c-tag">&gt;</span>
+<span class="c-tag">&lt;img</span> <span class="c-attr">src</span>=<span class="c-val">"assets/icons/Icon:home.svg"</span> <span class="c-attr">alt</span>=<span class="c-val">"home"</span> <span class="c-attr">class</span>=<span class="c-val">"w-6 h-6"</span><span class="c-tag">&gt;</span>
 <span class="c-comment">&lt;!-- large 32px --&gt;</span>
-<span class="c-tag">&lt;img</span> <span class="c-attr">src</span>=<span class="c-val">"../assets/icons/Icon:home.svg"</span> <span class="c-attr">alt</span>=<span class="c-val">"home"</span> <span class="c-attr">class</span>=<span class="c-val">"w-8 h-8"</span><span class="c-tag">&gt;</span>
+<span class="c-tag">&lt;img</span> <span class="c-attr">src</span>=<span class="c-val">"assets/icons/Icon:home.svg"</span> <span class="c-attr">alt</span>=<span class="c-val">"home"</span> <span class="c-attr">class</span>=<span class="c-val">"w-8 h-8"</span><span class="c-tag">&gt;</span>
 <span class="c-comment">&lt;!-- xlarge 48px --&gt;</span>
-<span class="c-tag">&lt;img</span> <span class="c-attr">src</span>=<span class="c-val">"../assets/icons/Icon:home.svg"</span> <span class="c-attr">alt</span>=<span class="c-val">"home"</span> <span class="c-attr">class</span>=<span class="c-val">"w-12 h-12"</span><span class="c-tag">&gt;</span>
+<span class="c-tag">&lt;img</span> <span class="c-attr">src</span>=<span class="c-val">"assets/icons/Icon:home.svg"</span> <span class="c-attr">alt</span>=<span class="c-val">"home"</span> <span class="c-attr">class</span>=<span class="c-val">"w-12 h-12"</span><span class="c-tag">&gt;</span>
 
 <span class="c-comment">&lt;!-- Button dengan icon --&gt;</span>
 <span class="c-tag">&lt;button</span> <span class="c-attr">class</span>=<span class="c-val">"flex items-center gap-2 px-4 py-2
          bg-blue-600 text-white rounded-lg font-medium"</span><span class="c-tag">&gt;</span>
-  <span class="c-tag">&lt;img</span> <span class="c-attr">src</span>=<span class="c-val">"../assets/icons/Icon:plus.svg"</span>
+  <span class="c-tag">&lt;img</span> <span class="c-attr">src</span>=<span class="c-val">"assets/icons/Icon:plus.svg"</span>
        <span class="c-attr">alt</span>=<span class="c-val">"tambah"</span> <span class="c-attr">class</span>=<span class="c-val">"w-5 h-5"</span><span class="c-tag">&gt;</span>
   Tambah Produk
 <span class="c-tag">&lt;/button&gt;</span></pre>
@@ -1095,7 +1097,7 @@
    - Use data-copy attribute + event delegation
    ================================================================ */
 
-const BASE = '../assets/icons/';
+const BASE = 'assets/icons/';
 
 /* ── General Icons ────────────────────────────────────────────── */
 const GENERAL = [
@@ -1307,7 +1309,7 @@ function renderGeneral(list) {
     var ic  = list[i];
     var src = BASE + encodePath(ic.file);
     /* copy text is built here — safe because stored in data attribute, not onclick */
-    var copyVal = '<img src="../assets/icons/' + ic.file + '" alt="' + ic.name.toLowerCase() + '" width="24" height="24">';
+    var copyVal = '<img src="assets/icons/' + ic.file + '" alt="' + ic.name.toLowerCase() + '" width="24" height="24">';
     html +=
       '<div class="icon-card" data-copy="' + copyVal.replace(/"/g, '&quot;') + '">' +
         '<div class="icon-thumb">' +
@@ -1334,7 +1336,7 @@ function renderSidebar(list, gridId, cntId) {
     var ic     = list[i];
     var offSrc = BASE + encodePath(ic.off);
     var onSrc  = BASE + encodePath(ic.on);
-    var copyVal = '<img src="../assets/icons/' + ic.off + '" alt="' + ic.name.toLowerCase() + '" width="24" height="24">';
+    var copyVal = '<img src="assets/icons/' + ic.off + '" alt="' + ic.name.toLowerCase() + '" width="24" height="24">';
     html +=
       '<div class="sidebar-card" data-copy="' + copyVal.replace(/"/g, '&quot;') + '">' +
         '<div class="icon-states-wrap">' +
@@ -1440,15 +1442,15 @@ document.querySelectorAll('.impl-tab-btn').forEach(function(btn) {
 var CODE_SNIPPETS = {
   html:
     '<!-- Icon dasar (medium 24px) -->\n' +
-    '<img src="../assets/icons/Icon:home.svg" alt="home" width="24" height="24">\n\n' +
+    '<img src="assets/icons/Icon:home.svg" alt="home" width="24" height="24">\n\n' +
     '<!-- Button dengan icon -->\n' +
     '<button class="btn btn-primary">\n' +
-    '  <img src="../assets/icons/Icon:plus.svg" alt="tambah" width="20" height="20">\n' +
+    '  <img src="assets/icons/Icon:plus.svg" alt="tambah" width="20" height="20">\n' +
     '  Tambah Item\n' +
     '</button>\n\n' +
     '<!-- Sidebar icon Off/On -->\n' +
-    '<img src="../assets/icons/icon:sidebar offline:News:Off.svg" alt="berita" width="24" height="24">\n' +
-    '<img src="../assets/icons/icon:sidebar offline:News:On.svg"  alt="berita" width="24" height="24">',
+    '<img src="assets/icons/icon:sidebar offline:News:Off.svg" alt="berita" width="24" height="24">\n' +
+    '<img src="assets/icons/icon:sidebar offline:News:On.svg"  alt="berita" width="24" height="24">',
 
   css:
     ':root {\n' +
@@ -1464,16 +1466,16 @@ var CODE_SNIPPETS = {
 
   tailwind:
     '<!-- small 16px -->\n' +
-    '<img src="../assets/icons/Icon:home.svg" alt="home" class="w-4 h-4">\n' +
+    '<img src="assets/icons/Icon:home.svg" alt="home" class="w-4 h-4">\n' +
     '<!-- medium 24px (default) -->\n' +
-    '<img src="../assets/icons/Icon:home.svg" alt="home" class="w-6 h-6">\n' +
+    '<img src="assets/icons/Icon:home.svg" alt="home" class="w-6 h-6">\n' +
     '<!-- large 32px -->\n' +
-    '<img src="../assets/icons/Icon:home.svg" alt="home" class="w-8 h-8">\n' +
+    '<img src="assets/icons/Icon:home.svg" alt="home" class="w-8 h-8">\n' +
     '<!-- xlarge 48px -->\n' +
-    '<img src="../assets/icons/Icon:home.svg" alt="home" class="w-12 h-12">\n\n' +
+    '<img src="assets/icons/Icon:home.svg" alt="home" class="w-12 h-12">\n\n' +
     '<!-- Button dengan icon -->\n' +
     '<button class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg font-medium">\n' +
-    '  <img src="../assets/icons/Icon:plus.svg" alt="tambah" class="w-5 h-5">\n' +
+    '  <img src="assets/icons/Icon:plus.svg" alt="tambah" class="w-5 h-5">\n' +
     '  Tambah Produk\n' +
     '</button>'
 };
