@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "npx tailwindcss -i ./styles/styles.css -o ./dist/output.css --watch",
     "build": "npx tailwindcss -i ./styles/styles.css -o ./dist/output.css --minify",
-    "watch": "npx tailwindcss -i ./styles/styles.css -o ./dist/output.css --watch"
+    "watch": "npx tailwindcss -i ./styles/styles.css -o ./dist/output.css --watch",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "keywords": [
     "design-system",
@@ -19,14 +21,25 @@
   "author": "GPOS Team",
   "license": "INTERNAL",
   "devDependencies": {
-    "tailwindcss": "^3.3.0"
+    "tailwindcss": "^3.3.0",
+    "storybook": "^10.4.0",
+    "@storybook/html-vite": "^10.4.0",
+    "@chromatic-com/storybook": "^5.2.1",
+    "@storybook/addon-vitest": "^10.4.0",
+    "@storybook/addon-a11y": "^10.4.0",
+    "@storybook/addon-docs": "^10.4.0",
+    "vitest": "^4.1.7",
+    "playwright": "^1.60.0",
+    "@vitest/browser-playwright": "^4.1.7",
+    "@vitest/coverage-v8": "^4.1.7"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/zaenalaripin28/gpos-lite-design-system.git"
+    "url": "git+https://github.com/zaenalaripin28/gpos-lite-design-system.git"
   },
   "bugs": {
     "url": "https://github.com/zaenalaripin28/gpos-lite-design-system/issues"
   },
-  "homepage": "https://zaenalaripin28.github.io/gpos-lite-design-system"
+  "homepage": "https://zaenalaripin28.github.io/gpos-lite-design-system",
+  "type": "commonjs"
 }
