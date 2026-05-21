@@ -4,7 +4,8 @@
 const config = {
   "stories": [
     "../stories/**/*.mdx",
-    "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)"
+    "../components/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    "../components/**/*.mdx"
   ],
   "addons": [
     "@chromatic-com/storybook",
