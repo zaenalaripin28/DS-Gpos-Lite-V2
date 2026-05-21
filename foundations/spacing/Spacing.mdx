@@ -1,123 +1,252 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 
-export const baseScale = [
-  { token: '--spacing-0',  value: '0',        px: '0px'  },
-  { token: '--spacing-1',  value: '0.25rem',  px: '4px'  },
-  { token: '--spacing-2',  value: '0.5rem',   px: '8px'  },
-  { token: '--spacing-3',  value: '0.75rem',  px: '12px' },
-  { token: '--spacing-4',  value: '1rem',     px: '16px' },
-  { token: '--spacing-5',  value: '1.25rem',  px: '20px' },
-  { token: '--spacing-6',  value: '1.5rem',   px: '24px' },
-  { token: '--spacing-8',  value: '2rem',     px: '32px' },
-  { token: '--spacing-10', value: '2.5rem',   px: '40px' },
-  { token: '--spacing-12', value: '3rem',     px: '48px' },
-  { token: '--spacing-16', value: '4rem',     px: '64px' },
-  { token: '--spacing-20', value: '5rem',     px: '80px' },
-  { token: '--spacing-24', value: '6rem',     px: '96px' },
+export const spaceTokens = [
+  { name: 'Space.025', token: '--space-025', px: '2px',  tw: 'p-[2px]',  cat: 'micro'  },
+  { name: 'Space.050', token: '--space-050', px: '4px',  tw: 'p-1',      cat: 'micro'  },
+  { name: 'Space.075', token: '--space-075', px: '6px',  tw: 'p-1.5',    cat: 'micro'  },
+  { name: 'Space.100', token: '--space-100', px: '8px',  tw: 'p-2',      cat: 'small'  },
+  { name: 'Space.150', token: '--space-150', px: '12px', tw: 'p-3',      cat: 'small'  },
+  { name: 'Space.200', token: '--space-200', px: '16px', tw: 'p-4',      cat: 'base', default: true },
+  { name: 'Space.250', token: '--space-250', px: '20px', tw: 'p-5',      cat: 'base'   },
+  { name: 'Space.300', token: '--space-300', px: '24px', tw: 'p-6',      cat: 'base'   },
+  { name: 'Space.400', token: '--space-400', px: '32px', tw: 'p-8',      cat: 'large'  },
+  { name: 'Space.500', token: '--space-500', px: '40px', tw: 'p-10',     cat: 'large'  },
+  { name: 'Space.600', token: '--space-600', px: '48px', tw: 'p-12',     cat: 'xlarge' },
+  { name: 'Space.800', token: '--space-800', px: '64px', tw: 'p-16',     cat: 'xlarge' },
+  { name: 'Space.1000',token: '--space-1000',px: '80px', tw: 'p-20',     cat: 'xlarge' },
 ];
 
-export const gpLiteScale = [
-  { token: '--space-0',    px: '0px'  },
-  { token: '--space-025',  px: '2px'  },
-  { token: '--space-050',  px: '4px'  },
-  { token: '--space-075',  px: '6px'  },
-  { token: '--space-100',  px: '8px'  },
-  { token: '--space-150',  px: '12px' },
-  { token: '--space-200',  px: '16px' },
-  { token: '--space-250',  px: '20px' },
-  { token: '--space-300',  px: '24px' },
-  { token: '--space-400',  px: '32px' },
-  { token: '--space-500',  px: '40px' },
-  { token: '--space-600',  px: '48px' },
-  { token: '--space-800',  px: '64px' },
-  { token: '--space-1000', px: '80px' },
+export const categories = [
+  {
+    key: 'micro',
+    title: 'Micro',
+    badge: 'MICRO',
+    badgeColor: '#4D2BAC',
+    badgeBg: '#F1ECFE',
+    badgeBorder: '#C4B0FB',
+    barColor: '#AB8FFA',
+    desc: 'Token terkecil dalam skala spacing. Digunakan untuk detail halus seperti border offset, nudge antar icon, dan hairline separator. Jangan gunakan untuk padding container.',
+    usage: ['Focus ring offset & outline', 'Gap antar icon kecil (<16px)', 'Hairline separator / divider', 'Nudge posisi inline element'],
+    best: ['025 hanya untuk border / outline offset', '050 untuk gap icon dalam badge atau chip', '075 untuk subtle vertical nudge'],
+    avoid: ['Jangan pakai Micro untuk padding container', 'Jangan untuk section / page spacing', 'Hindari sebagai margin utama komponen'],
+  },
+  {
+    key: 'small',
+    title: 'Small',
+    badge: 'SMALL',
+    badgeColor: '#155996',
+    badgeBg: '#E9F2FB',
+    badgeBorder: '#7DB5E7',
+    barColor: '#7DB5E7',
+    desc: 'Spacing untuk elemen kompak seperti badge, tag, chip, dan icon button. Memberikan padding yang tight tanpa mengorbankan keterbacaan.',
+    usage: ['Padding badge, tag & chip', 'Padding button ukuran small', 'Gap antar item dalam list kompak', 'Padding input inline'],
+    best: ['100 (8px) untuk padding horizontal badge', '150 (12px) untuk padding vertical button small', 'Kombinasikan 100+150 untuk padding asimetris'],
+    avoid: ['Jangan untuk section spacing', 'Jangan untuk page margin / outer layout', 'Hindari sebagai gap antar card besar'],
+  },
+  {
+    key: 'base',
+    title: 'Base ★',
+    badge: 'BASE ★',
+    badgeColor: '#1E7FD6',
+    badgeBg: '#E9F2FB',
+    badgeBorder: '#A3CBEE',
+    barColor: '#1E7FD6',
+    desc: 'Range default untuk sebagian besar kebutuhan UI — padding card, form spacing, dan gap antar elemen konten. Space.200 (16px) adalah nilai default yang direkomendasikan.',
+    usage: ['Padding card & container utama', 'Padding button default (medium/large)', 'Gap antar form field', 'Spacing antara elemen konten'],
+    best: ['200 (16px) sebagai padding default', '300 (24px) untuk padding card internal', 'Gunakan secara konsisten untuk semua form'],
+    avoid: ['Jangan campur Base dengan Micro dalam satu komponen', 'Jangan gunakan 300 sebagai page margin pada mobile', 'Hindari Base untuk section-level spacing'],
+  },
+  {
+    key: 'large',
+    title: 'Large',
+    badge: 'LARGE',
+    badgeColor: '#155996',
+    badgeBg: '#E9F2FB',
+    badgeBorder: '#155996',
+    barColor: '#155996',
+    desc: 'Digunakan untuk memisahkan blok konten, section header, dan modal padding. Memberikan breathing room yang cukup antar area utama halaman.',
+    usage: ['Gap antar section konten', 'Padding modal / dialog', 'Spacing antara content block', 'Margin bawah heading utama'],
+    best: ['400 (32px) untuk gap antar section kecil', '500 (40px) untuk padding modal & panel', 'Gunakan konsisten untuk semua section separator'],
+    avoid: ['Jangan gunakan di dalam komponen kecil', 'Jangan untuk padding teks inline', 'Hindari di konteks mobile yang ruang terbatas'],
+  },
+  {
+    key: 'xlarge',
+    title: 'XLarge',
+    badge: 'XLARGE',
+    badgeColor: '#124D83',
+    badgeBg: '#E9F2FB',
+    badgeBorder: '#124D83',
+    barColor: '#124D83',
+    desc: 'Token untuk layout-level spacing: page margin, hero section padding, dan jarak antar blok utama. Digunakan pada level halaman, bukan di dalam komponen.',
+    usage: ['Page margin & outer container', 'Hero section padding', 'Jarak antar major page section', 'Footer top padding'],
+    best: ['600 untuk page-level section spacing', '800-1000 hanya di layout / container level', 'Responsive: turunkan ke Large di layar mobile'],
+    avoid: ['Jangan gunakan di dalam komponen apapun', 'Jangan untuk gap antar row dalam list', 'Hindari di konteks compact / dense UI'],
+  },
 ];
 
 <Meta title="Foundation/Spacing" />
 
 <style>{`
   .ds-section { margin-bottom: 48px; }
-  .ds-section h2 { font-size: 20px; font-weight: 600; margin: 0 0 8px; color: #0F172A; }
-  .ds-section p  { font-size: 14px; color: #64748B; margin: 0 0 20px; }
-  .ds-sp-table   { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; overflow: hidden; }
-  .ds-sp-row     { display: flex; align-items: center; gap: 16px; padding: 10px 20px; border-bottom: 1px solid #F1F5F9; }
-  .ds-sp-row:last-child { border-bottom: none; }
-  .ds-sp-token   { width: 160px; font-size: 12px; font-family: monospace; color: #64748B; flex-shrink: 0; }
-  .ds-sp-val     { width: 64px; font-size: 12px; color: #94A3B8; flex-shrink: 0; }
-  .ds-sp-bar-wrap{ flex: 1; display: flex; align-items: center; }
-  .ds-sp-bar     { height: 20px; background: #1E7FD6; border-radius: 4px; min-width: 2px; }
-  .ds-sp-px      { font-size: 12px; font-weight: 600; color: #0F172A; margin-left: 10px; white-space: nowrap; }
+  .ds-section h2 { font-size: 22px; font-weight: 700; margin: 0 0 6px; color: #091E42; }
+  .ds-section-desc { font-size: 14px; color: #42526D; margin: 0 0 24px; line-height: 1.6; }
+
+  .ds-cat-badge {
+    display: inline-block;
+    font-size: 11px; font-weight: 700;
+    padding: 3px 9px; border-radius: 4px;
+    letter-spacing: 0.07em; text-transform: uppercase;
+    margin-left: 8px; vertical-align: middle;
+  }
+  .ds-token-count {
+    display: inline-block;
+    background: #F5F6F7; color: #42526D;
+    font-size: 12px; font-weight: 600;
+    padding: 2px 10px; border-radius: 999px;
+    margin-left: 8px; vertical-align: middle;
+  }
+
+  .ds-scale-card { background: #fff; border: 1px solid #DFE2E6; border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+  .ds-scale-row {
+    display: flex; align-items: center; gap: 16px;
+    padding: 12px 20px; border-bottom: 1px solid #F5F6F7;
+  }
+  .ds-scale-row:last-child { border-bottom: none; }
+  .ds-scale-row:hover { background: #F8FAFC; }
+  .ds-scale-name { width: 110px; font-size: 13px; font-weight: 700; color: #091E42; flex-shrink: 0; }
+  .ds-scale-bar-wrap { flex: 1; display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .ds-scale-bar { height: 14px; border-radius: 3px; flex-shrink: 0; }
+  .ds-scale-px { font-size: 13px; font-weight: 600; color: #354764; white-space: nowrap; width: 34px; flex-shrink: 0; }
+  .ds-scale-var { font-size: 11.5px; color: #6B788E; font-family: monospace; flex-shrink: 0; width: 140px; text-align: right; }
+
+  .ds-info-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin-bottom: 0; }
+  .ds-info-card { border-radius: 12px; padding: 18px 20px; }
+  .ds-info-usage { background: #EBF5FF; border: 1px solid #A3CBEE; }
+  .ds-info-best  { background: #E6F7EF; border: 1px solid #6BCEA0; }
+  .ds-info-avoid { background: #FDE8E9; border: 1px solid #F7A2A5; }
+  .ds-info-head { font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px; }
+  .ds-info-usage .ds-info-head { color: #155996; }
+  .ds-info-best  .ds-info-head { color: #007740; }
+  .ds-info-avoid .ds-info-head { color: #A51419; }
+  .ds-info-card ul { margin: 0; padding-left: 16px; list-style: disc; }
+  .ds-info-card li { font-size: 13px; color: #243757; margin-bottom: 6px; line-height: 1.5; }
+  .ds-info-card li:last-child { margin-bottom: 0; }
+
+  .ds-divider { height: 1px; background: #EBEDF0; margin: 0 0 40px; }
+
+  .ds-impl-section { background: #fff; border: 1px solid #DFE2E6; border-radius: 12px; overflow: hidden; margin-bottom: 40px; }
+  .ds-impl-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; border-bottom: 1px solid #EBEDF0; flex-wrap: wrap; gap: 12px; }
+  .ds-impl-title { font-size: 15px; font-weight: 600; color: #091E42; margin: 0; }
+  .ds-impl-row { display: flex; align-items: center; gap: 16px; padding: 10px 24px; border-bottom: 1px solid #F5F6F7; }
+  .ds-impl-row:last-child { border-bottom: none; }
+  .ds-impl-row:hover { background: #F8FAFC; }
+  .ds-impl-swatch { width: 20px; height: 20px; border-radius: 4px; border: 1px solid rgba(0,0,0,0.08); flex-shrink: 0; }
+  .ds-impl-name { font-size: 13px; font-weight: 700; color: #091E42; width: 110px; flex-shrink: 0; }
+  .ds-impl-code { flex: 1; font-size: 13px; color: #354764; font-family: monospace; }
 `}</style>
 
-# Spacing
+# Spacing System
 
-Sistem spacing GPOS Lite V2.0 berbasis unit **4px**. Terdapat dua set token: base scale (rem) dan GP Lite space tokens (px).
+13 spacing token berbasis 4px base unit — dari Micro (2px) hingga XLarge (80px) — untuk rhythm dan alignment yang konsisten di seluruh UI.
 
 ---
 
-<div className="ds-section">
-  <h2>Base Scale</h2>
-  <p>Token spacing generik dalam rem, cocok untuk margin, padding, dan gap.</p>
-  <div className="ds-sp-table">
-    {baseScale.map(s => (
-      <div key={s.token} className="ds-sp-row">
-        <div className="ds-sp-token">{s.token}</div>
-        <div className="ds-sp-val">{s.value}</div>
-        <div className="ds-sp-bar-wrap">
-          <div className="ds-sp-bar" style={{ width: s.px === '0px' ? '2px' : s.px, opacity: s.px === '0px' ? 0.2 : 1 }} />
-          <span className="ds-sp-px">{s.px}</span>
+{categories.map(cat => (
+  <div key={cat.key}>
+    <div className="ds-section">
+      <h2>
+        {cat.title}
+        <span className="ds-token-count">{spaceTokens.filter(t => t.cat === cat.key).length} tokens</span>
+        <span className="ds-cat-badge" style={{ background: cat.badgeBg, color: cat.badgeColor, border: `1px solid ${cat.badgeBorder}` }}>{cat.badge}</span>
+      </h2>
+      <p className="ds-section-desc">{cat.desc}</p>
+
+      <div className="ds-scale-card">
+        {spaceTokens.filter(t => t.cat === cat.key).map(tok => (
+          <div key={tok.token} className="ds-scale-row">
+            <span className="ds-scale-name">{tok.name}{tok.default ? ' ★' : ''}</span>
+            <div className="ds-scale-bar-wrap">
+              <div className="ds-scale-bar" style={{ background: cat.barColor, width: Math.max(16, parseInt(tok.px) * 4) + 'px', maxWidth: '80%' }}></div>
+            </div>
+            <span className="ds-scale-px">{tok.px}</span>
+            <span className="ds-scale-var">{tok.token}</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="ds-info-cards">
+        <div className="ds-info-card ds-info-usage">
+          <div className="ds-info-head">📌 Kapan Dipakai</div>
+          <ul>{cat.usage.map(u => <li key={u}>{u}</li>)}</ul>
         </div>
+        <div className="ds-info-card ds-info-best">
+          <div className="ds-info-head">✅ Best Practice</div>
+          <ul>{cat.best.map(b => <li key={b}>{b}</li>)}</ul>
+        </div>
+        <div className="ds-info-card ds-info-avoid">
+          <div className="ds-info-head">✖ Hindari</div>
+          <ul>{cat.avoid.map(a => <li key={a}>{a}</li>)}</ul>
+        </div>
+      </div>
+    </div>
+    <div className="ds-divider"></div>
+  </div>
+))}
+
+<div className="ds-section">
+  <h2>Implementation Code</h2>
+
+  <div className="ds-impl-section">
+    <div className="ds-impl-header">
+      <h3 className="ds-impl-title">Tailwind CSS — semua 13 token</h3>
+    </div>
+    {[
+      { name: 'Space.025',   color: '#C4B0FB', code: 'p-[2px] / m-[2px] / gap-[2px]' },
+      { name: 'Space.050',   color: '#C4B0FB', code: 'p-1 / m-1 / gap-1' },
+      { name: 'Space.075',   color: '#AB8FFA', code: 'p-1.5 / m-1.5 / gap-1.5' },
+      { name: 'Space.100',   color: '#7DB5E7', code: 'p-2 / m-2 / gap-2' },
+      { name: 'Space.150',   color: '#7DB5E7', code: 'p-3 / m-3 / gap-3' },
+      { name: 'Space.200 ★', color: '#4495DD', code: 'p-4 / m-4 / gap-4' },
+      { name: 'Space.250',   color: '#1E7FD6', code: 'p-5 / m-5 / gap-5' },
+      { name: 'Space.300',   color: '#1E7FD6', code: 'p-6 / m-6 / gap-6' },
+      { name: 'Space.400',   color: '#155996', code: 'p-8 / m-8 / gap-8' },
+      { name: 'Space.500',   color: '#155996', code: 'p-10 / m-10 / gap-10' },
+      { name: 'Space.600',   color: '#124D83', code: 'p-12 / m-12 / gap-12' },
+      { name: 'Space.800',   color: '#124D83', code: 'p-16 / m-16 / gap-16' },
+      { name: 'Space.1000',  color: '#091E42', code: 'p-20 / m-20 / gap-20' },
+    ].map(row => (
+      <div key={row.name} className="ds-impl-row">
+        <div className="ds-impl-swatch" style={{ background: row.color }}></div>
+        <span className="ds-impl-name">{row.name}</span>
+        <span className="ds-impl-code">{row.code}</span>
       </div>
     ))}
   </div>
-</div>
 
-<div className="ds-section">
-  <h2>GP Lite Space Tokens</h2>
-  <p>Token spacing dari GP Lite design tokens JSON — penamaan berbasis nilai px.</p>
-  <div className="ds-sp-table">
-    {gpLiteScale.map(s => (
-      <div key={s.token} className="ds-sp-row">
-        <div className="ds-sp-token">{s.token}</div>
-        <div className="ds-sp-val">{s.px}</div>
-        <div className="ds-sp-bar-wrap">
-          <div className="ds-sp-bar" style={{ width: s.px === '0px' ? '2px' : s.px, opacity: s.px === '0px' ? 0.2 : 1 }} />
-          <span className="ds-sp-px">{s.px}</span>
-        </div>
+  <div className="ds-impl-section">
+    <div className="ds-impl-header">
+      <h3 className="ds-impl-title">CSS Variable — semua 13 token</h3>
+    </div>
+    {[
+      { name: 'Space.025',       color: '#C4B0FB', code: 'var(--space-025)   /* 2px */' },
+      { name: 'Space.050',       color: '#C4B0FB', code: 'var(--space-050)   /* 4px */' },
+      { name: 'Space.075',       color: '#AB8FFA', code: 'var(--space-075)   /* 6px */' },
+      { name: 'Space.100',       color: '#7DB5E7', code: 'var(--space-100)   /* 8px */' },
+      { name: 'Space.150',       color: '#7DB5E7', code: 'var(--space-150)   /* 12px */' },
+      { name: 'Space.200 ★',color: '#4495DD', code: 'var(--space-200)   /* 16px — default */' },
+      { name: 'Space.250',       color: '#1E7FD6', code: 'var(--space-250)   /* 20px */' },
+      { name: 'Space.300',       color: '#1E7FD6', code: 'var(--space-300)   /* 24px */' },
+      { name: 'Space.400',       color: '#155996', code: 'var(--space-400)   /* 32px */' },
+      { name: 'Space.500',       color: '#155996', code: 'var(--space-500)   /* 40px */' },
+      { name: 'Space.600',       color: '#124D83', code: 'var(--space-600)   /* 48px */' },
+      { name: 'Space.800',       color: '#124D83', code: 'var(--space-800)   /* 64px */' },
+      { name: 'Space.1000',      color: '#091E42', code: 'var(--space-1000)  /* 80px */' },
+    ].map(row => (
+      <div key={row.name} className="ds-impl-row">
+        <div className="ds-impl-swatch" style={{ background: row.color }}></div>
+        <span className="ds-impl-name">{row.name}</span>
+        <span className="ds-impl-code">{row.code}</span>
       </div>
     ))}
-  </div>
-</div>
-
-<div className="ds-section">
-  <h2>Cara Penggunaan</h2>
-  <p>Gunakan CSS custom properties ini di stylesheet kamu:</p>
-
-  <div style={{
-    background: '#0F172A',
-    borderRadius: '10px',
-    padding: '20px 24px',
-    fontFamily: "'JetBrains Mono', monospace",
-    fontSize: '13px',
-    color: '#E2E8F0',
-    lineHeight: '1.8',
-  }}>
-    <div><span style={{ color: '#94A3B8' }}>/* Menggunakan base spacing token */</span></div>
-    <div><span style={{ color: '#7DD3FC' }}>.card</span> {'{'}</div>
-    <div style={{ paddingLeft: '16px' }}>
-      <span style={{ color: '#86EFAC' }}>padding</span>
-      <span style={{ color: '#E2E8F0' }}>: </span>
-      <span style={{ color: '#FCD34D' }}>var(--spacing-6)</span>
-      <span style={{ color: '#E2E8F0' }}>; </span>
-      <span style={{ color: '#94A3B8' }}>/* 24px */</span>
-    </div>
-    <div style={{ paddingLeft: '16px' }}>
-      <span style={{ color: '#86EFAC' }}>gap</span>
-      <span style={{ color: '#E2E8F0' }}>: </span>
-      <span style={{ color: '#FCD34D' }}>var(--space-200)</span>
-      <span style={{ color: '#E2E8F0' }}>; </span>
-      <span style={{ color: '#94A3B8' }}>/* 16px */</span>
-    </div>
-    <div>{'}'}</div>
   </div>
 </div>

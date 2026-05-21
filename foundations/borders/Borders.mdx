@@ -1,116 +1,212 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 
 export const radii = [
-  { token: '--border-radius-none', value: '0',      label: 'None', px: '0px'    },
-  { token: '--border-radius-sm',   value: '0.25rem', label: 'SM',   px: '4px'   },
-  { token: '--border-radius-md',   value: '0.5rem',  label: 'MD',   px: '8px'   },
-  { token: '--border-radius-lg',   value: '0.75rem', label: 'LG',   px: '12px'  },
-  { token: '--border-radius-xl',   value: '1rem',    label: 'XL',   px: '16px'  },
-  { token: '--border-radius-2xl',  value: '1.5rem',  label: '2XL',  px: '24px'  },
-  { token: '--border-radius-3xl',  value: '2rem',    label: '3XL',  px: '32px'  },
-  { token: '--border-radius-full', value: '9999px',  label: 'Full', px: '9999px', desc: 'Pill / Circle' },
+  { token: 'Corner.0',    cssVar: '--radius-0',    tw: 'rounded-none', px: '0px'    },
+  { token: 'Corner.025',  cssVar: '--radius-025',  tw: 'rounded-sm',   px: '2px'    },
+  { token: 'Corner.050',  cssVar: '--radius-050',  tw: 'rounded',      px: '4px'    },
+  { token: 'Corner.075',  cssVar: '--radius-075',  tw: 'rounded-md',   px: '6px'    },
+  { token: 'Corner.100',  cssVar: '--radius-100',  tw: 'rounded-lg',   px: '8px',  default: true },
+  { token: 'Corner.150',  cssVar: '--radius-150',  tw: 'rounded-xl',   px: '12px'   },
+  { token: 'Corner.200',  cssVar: '--radius-200',  tw: 'rounded-2xl',  px: '16px'   },
+  { token: 'Corner.Full', cssVar: '--radius-full', tw: 'rounded-full', px: '9999px' },
 ];
 
-export const widths = [
-  { token: '--border-width-0', value: '0',   label: 'None',    desc: 'Tanpa border' },
-  { token: '--border-width-1', value: '1px', label: 'Thin',    desc: 'Border standar untuk card dan input' },
-  { token: '--border-width-2', value: '2px', label: 'Medium',  desc: 'Untuk focus ring dan highlight' },
-  { token: '--border-width-4', value: '4px', label: 'Thick',   desc: 'Untuk accent bar atau border khusus' },
-];
-
-export const usageExamples = [
-  { name: 'Tag / Chip',     radius: '9999px',  bg: '#EEF7FF', border: '1px solid #BADDFD', color: '#1E7FD6',  text: 'Tag' },
-  { name: 'Button',         radius: '8px',     bg: '#1E7FD6', border: '1px solid #1E7FD6', color: '#FFFFFF',  text: 'Button' },
-  { name: 'Input',          radius: '8px',     bg: '#FFFFFF', border: '1px solid #D1D5DB', color: '#0F172A',  text: 'Input field' },
-  { name: 'Card',           radius: '12px',    bg: '#FFFFFF', border: '1px solid #E2E8F0', color: '#0F172A',  text: 'Card' },
-  { name: 'Modal',          radius: '16px',    bg: '#FFFFFF', border: '1px solid #E2E8F0', color: '#0F172A',  text: 'Modal' },
-  { name: 'Avatar',         radius: '9999px',  bg: '#1E7FD6', border: '2px solid #BADDFD', color: '#FFFFFF',  text: 'AV' },
+export const usageTable = [
+  { component: 'Checkbox & Radio',     token: 'Corner.025', px: '2px',    tw: 'rounded-sm'   },
+  { component: 'Badge & Status Tag',   token: 'Corner.050', px: '4px',    tw: 'rounded'      },
+  { component: 'Tooltip & Icon Button',token: 'Corner.075', px: '6px',    tw: 'rounded-md'   },
+  { component: 'Button (semua ukuran)',  token: 'Corner.100', px: '8px',    tw: 'rounded-lg'   },
+  { component: 'Input Field & Select', token: 'Corner.100', px: '8px',    tw: 'rounded-lg'   },
+  { component: 'Card & Content Box',   token: 'Corner.150', px: '12px',   tw: 'rounded-xl'   },
+  { component: 'Dropdown & Menu Panel',token: 'Corner.150', px: '12px',   tw: 'rounded-xl'   },
+  { component: 'Modal & Dialog',       token: 'Corner.200', px: '16px',   tw: 'rounded-2xl'  },
+  { component: 'Bottom Sheet & Drawer',token: 'Corner.200', px: '16px',   tw: 'rounded-2xl'  },
+  { component: 'Avatar & User Image',  token: 'Corner.Full',px: '9999px', tw: 'rounded-full' },
+  { component: 'Pill Button & Chip',   token: 'Corner.Full',px: '9999px', tw: 'rounded-full' },
 ];
 
 <Meta title="Foundation/Borders" />
 
 <style>{`
-  .ds-section { margin-bottom: 48px; }
-  .ds-section h2 { font-size: 20px; font-weight: 600; margin: 0 0 8px; color: #0F172A; }
-  .ds-section p  { font-size: 14px; color: #64748B; margin: 0 0 24px; }
-  .ds-radius-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; }
-  .ds-radius-card { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 16px; text-align: center; }
-  .ds-radius-box  { width: 72px; height: 72px; background: #1E7FD6; margin: 0 auto 12px; }
-  .ds-radius-label{ font-size: 13px; font-weight: 600; color: #0F172A; }
-  .ds-radius-token{ font-size: 10px; font-family: monospace; color: #64748B; margin-top: 2px; }
-  .ds-radius-val  { font-size: 11px; color: #94A3B8; }
-  .ds-width-row   { display: flex; align-items: center; gap: 20px; padding: 16px 20px; border-bottom: 1px solid #F1F5F9; }
-  .ds-width-row:last-child { border-bottom: none; }
-  .ds-width-demo  { width: 120px; height: 40px; background: #F8FAFC; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .ds-width-inner { width: 80px; height: 24px; background: #EEF7FF; }
-  .ds-width-meta  { }
-  .ds-width-name  { font-size: 14px; font-weight: 600; color: #0F172A; }
-  .ds-width-token { font-size: 11px; font-family: monospace; color: #1E7FD6; }
-  .ds-width-desc  { font-size: 12px; color: #64748B; margin-top: 2px; }
-  .ds-usage-grid  { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; }
-  .ds-usage-item  { text-align: center; }
-  .ds-usage-demo  { display: flex; align-items: center; justify-content: center; min-width: 80px; min-height: 40px; font-size: 13px; font-weight: 500; padding: 8px 16px; margin-bottom: 8px; }
-  .ds-usage-name  { font-size: 11px; color: #64748B; }
+  .ds-section      { margin-bottom: 48px; }
+  .ds-section h2   { font-size: 18px; font-weight: 700; margin: 0 0 4px; color: #091E42; display: flex; align-items: center; gap: 8px; }
+  .ds-section p    { font-size: 14px; color: #42526D; margin: 0 0 16px; line-height: 1.6; }
+  .ds-badge        { font-size: 11px; font-weight: 600; background: #F5F6F7; color: #42526D; padding: 2px 10px; border-radius: 9999px; }
+  .ds-default-badge{ font-size: 11px; font-weight: 700; background: #E9F2FB; color: #1E7FD6; padding: 2px 10px; border-radius: 9999px; }
+  .ds-table-wrap   { background: #fff; border: 1px solid #DFE2E6; border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+  .ds-row          { display: flex; align-items: center; gap: 16px; padding: 12px 20px; border-bottom: 1px solid #F5F6F7; }
+  .ds-row:last-child { border-bottom: none; }
+  .ds-row-name     { width: 120px; font-size: 13px; font-weight: 700; color: #091E42; flex-shrink: 0; }
+  .ds-row-preview  { flex: 1; display: flex; align-items: center; gap: 12px; }
+  .ds-box          { width: 56px; height: 36px; background: linear-gradient(135deg, #4495DD, #1E7FD6); flex-shrink: 0; }
+  .ds-row-px       { font-size: 13px; font-weight: 600; color: #354764; width: 52px; flex-shrink: 0; }
+  .ds-row-var      { font-size: 11px; color: #6B788E; font-family: monospace; width: 130px; flex-shrink: 0; }
+  .ds-row-tw       { font-size: 11px; color: #6B788E; font-family: monospace; width: 110px; flex-shrink: 0; }
+  .ds-info-grid    { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+  .ds-info-card    { border-radius: 12px; padding: 18px 20px; }
+  .ds-info-usage   { background: #EBF5FF; border: 1px solid #A3CBEE; }
+  .ds-info-best    { background: #E6F7EF; border: 1px solid #6BCEA0; }
+  .ds-info-avoid   { background: #FDE8E9; border: 1px solid #F7A2A5; }
+  .ds-info-head    { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+  .ds-info-usage .ds-info-head { color: #155996; }
+  .ds-info-best  .ds-info-head { color: #007740; }
+  .ds-info-avoid .ds-info-head { color: #A51419; }
+  .ds-info-card ul { margin: 0; padding-left: 16px; }
+  .ds-info-card li { font-size: 13px; color: #243757; margin-bottom: 6px; line-height: 1.5; }
+  .ds-border-demo  { background: #fff; border: 1px solid #DFE2E6; border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+  .ds-border-grid  { display: grid; grid-template-columns: 1fr 1fr; }
+  .ds-border-cell  { padding: 28px 24px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .ds-border-cell:first-child { border-right: 1px solid #F5F6F7; }
+  .ds-border-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #6B788E; margin: 0; text-align: center; }
+  .ds-demo-el      { width: 140px; height: 52px; background: #F5F6F7; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; color: #6B788E; }
+  .ds-demo-el-in   { box-shadow: inset 0 0 0 2px #1E7FD6; background: #fff; color: #1E7FD6; }
+  .ds-demo-code    { font-size: 11px; font-family: monospace; color: #354764; background: #F5F6F7; padding: 8px 12px; border-radius: 6px; text-align: center; line-height: 1.6; width: 100%; box-sizing: border-box; }
+  .ds-spec-row     { display: flex; align-items: center; gap: 16px; padding: 10px 24px; border-top: 1px solid #EBEDF0; }
+  .ds-spec-label   { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #6B788E; width: 80px; flex-shrink: 0; }
+  .ds-spec-value   { font-size: 13px; font-family: monospace; color: #354764; }
+  .ds-usage-table  { width: 100%; border-collapse: collapse; }
+  .ds-usage-table th { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #6B788E; padding: 10px 20px; text-align: left; background: #F8FAFC; border-bottom: 1px solid #DFE2E6; }
+  .ds-usage-table td { padding: 11px 20px; font-size: 13px; color: #243757; border-bottom: 1px solid #F5F6F7; }
+  .ds-usage-table tr:last-child td { border-bottom: none; }
+  .ds-token-chip   { display: inline-flex; font-size: 11px; font-weight: 600; font-family: monospace; padding: 2px 8px; border-radius: 4px; background: #F1ECFE; color: #4D2BAC; }
+  .ds-tw-chip      { display: inline-flex; font-size: 11px; font-family: monospace; padding: 2px 8px; border-radius: 4px; background: #E9F2FB; color: #155996; }
 `}</style>
 
-# Borders
+# Borders & Border Radius
 
-Token border radius dan border width untuk konsistensi shape di seluruh komponen GPOS Lite V2.0.
+8 corner radius token dari Corner.0 (0px) hingga Corner.Full (9999px) — beserta Border Width 2px style Inside untuk konsistensi visual di seluruh komponen GPOS Lite.
 
 ---
 
+## Corner Radius Tokens
+
 <div className="ds-section">
-  <h2>Border Radius</h2>
-  <p>Dari sudut kotak <code>none (0px)</code> hingga lingkaran penuh <code>full (9999px)</code>.</p>
-  <div className="ds-radius-grid">
+  <h2>Token Scale <span className="ds-badge">8 tokens</span></h2>
+  <p>Seluruh token radius yang tersedia, dari sudut persegi hingga pill penuh.</p>
+  <div className="ds-table-wrap">
     {radii.map(r => (
-      <div key={r.label} className="ds-radius-card">
-        <div className="ds-radius-box" style={{ borderRadius: r.value }} />
-        <div className="ds-radius-label">{r.label}</div>
-        <div className="ds-radius-val">{r.px}</div>
-        <div className="ds-radius-token">{r.token}</div>
-        {r.desc && <div style={{ fontSize: '11px', color: '#94A3B8', marginTop: '2px' }}>{r.desc}</div>}
+      <div key={r.token} className="ds-row">
+        <span className="ds-row-name">{r.token}{r.default ? ' ★' : ''}</span>
+        <div className="ds-row-preview">
+          <div className="ds-box" style={{ borderRadius: r.px }} />
+        </div>
+        <span className="ds-row-px">{r.px}</span>
+        <span className="ds-row-var">{r.cssVar}</span>
+        <span className="ds-row-tw">{r.tw}</span>
       </div>
     ))}
   </div>
 </div>
 
+---
+
+## Usage Guidelines per Kategori
+
 <div className="ds-section">
-  <h2>Border Width</h2>
-  <p>Empat tingkat ketebalan border yang tersedia.</p>
-  <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '10px', overflow: 'hidden' }}>
-    {widths.map(w => (
-      <div key={w.label} className="ds-width-row">
-        <div className="ds-width-demo">
-          <div className="ds-width-inner" style={{ border: `${w.value} solid #1E7FD6` }} />
-        </div>
-        <div className="ds-width-meta">
-          <div className="ds-width-name">{w.label} — {w.value}</div>
-          <div className="ds-width-token">{w.token}</div>
-          <div className="ds-width-desc">{w.desc}</div>
-        </div>
-      </div>
-    ))}
+  <h2>None <span className="ds-badge">1 token</span></h2>
+  <p>Tanpa rounding — sudut persegi penuh. Digunakan untuk layout container, tabel, divider, dan komponen yang membutuhkan kesan tegas dan struktural.</p>
+  <div className="ds-info-grid">
+    <div className="ds-info-card ds-info-usage"><div className="ds-info-head">📌 Kapan Dipakai</div><ul><li>Tabel & data grid row</li><li>Divider & separator horizontal</li><li>Layout container full-bleed</li><li>Komponen edge-to-edge</li></ul></div>
+    <div className="ds-info-card ds-info-best"><div className="ds-info-head">✅ Best Practice</div><ul><li>Gunakan konsisten untuk semua tabel row</li><li>Cocok untuk section background full-width</li><li>Pasangkan dengan border divider untuk struktur</li></ul></div>
+    <div className="ds-info-card ds-info-avoid"><div className="ds-info-head">✖ Hindari</div><ul><li>Jangan untuk button & interactive element</li><li>Jangan sebagai card dalam layout modern</li><li>Hindari untuk modal & overlay component</li></ul></div>
   </div>
 </div>
 
 <div className="ds-section">
-  <h2>Contoh Penggunaan di Komponen</h2>
-  <p>Border radius yang direkomendasikan untuk tiap jenis komponen.</p>
-  <div className="ds-usage-grid">
-    {usageExamples.map(ex => (
-      <div key={ex.name} className="ds-usage-item">
-        <div className="ds-usage-demo" style={{
-          borderRadius: ex.radius,
-          backgroundColor: ex.bg,
-          border: ex.border,
-          color: ex.color,
-        }}>
-          {ex.text}
-        </div>
-        <div className="ds-usage-name">{ex.name}</div>
-        <div style={{ fontSize: '10px', color: '#94A3B8', fontFamily: 'monospace' }}>{ex.radius}</div>
-      </div>
-    ))}
+  <h2>Small <span className="ds-badge">3 tokens</span></h2>
+  <p>Radius terkecil untuk komponen kompak — memberikan subtle softening tanpa terlihat terlalu rounded. Cocok untuk elemen inline seperti badge, tag, dan checkbox.</p>
+  <div className="ds-info-grid">
+    <div className="ds-info-card ds-info-usage"><div className="ds-info-head">📌 Kapan Dipakai</div><ul><li>Badge & status tag teks</li><li>Checkbox & radio button</li><li>Icon button ukuran kecil</li><li>Tooltip & inline label</li></ul></div>
+    <div className="ds-info-card ds-info-best"><div className="ds-info-head">✅ Best Practice</div><ul><li>025 (2px) untuk checkbox & form element kecil</li><li>050 (4px) untuk badge & status chip</li><li>075 (6px) untuk icon button & tooltip</li></ul></div>
+    <div className="ds-info-card ds-info-avoid"><div className="ds-info-head">✖ Hindari</div><ul><li>Jangan untuk card besar atau modal</li><li>Jangan untuk primary button utama</li><li>Hindari pada hero section element</li></ul></div>
   </div>
+</div>
+
+<div className="ds-section">
+  <h2>Medium <span className="ds-badge">2 tokens</span> <span className="ds-default-badge">DEFAULT ★</span></h2>
+  <p>Range default untuk sebagian besar komponen UI — buttons, input fields, dan content card. Corner.100 (8px) adalah nilai default yang direkomendasikan untuk semua button dan form.</p>
+  <div className="ds-info-grid">
+    <div className="ds-info-card ds-info-usage"><div className="ds-info-head">📌 Kapan Dipakai</div><ul><li>Button primary & secondary</li><li>Input field & textarea</li><li>Card konten & informasi</li><li>Dropdown & select menu</li></ul></div>
+    <div className="ds-info-card ds-info-best"><div className="ds-info-head">✅ Best Practice</div><ul><li>100 (8px) sebagai default untuk semua button</li><li>150 (12px) untuk card & content container</li><li>Gunakan secara konsisten di seluruh form</li></ul></div>
+    <div className="ds-info-card ds-info-avoid"><div className="ds-info-head">✖ Hindari</div><ul><li>Jangan campur 100 dan 150 dalam satu komponen</li><li>Jangan gunakan 150 untuk icon button kecil</li><li>Hindari untuk elemen yang butuh radius full</li></ul></div>
+  </div>
+</div>
+
+<div className="ds-section">
+  <h2>Large <span className="ds-badge">1 token</span></h2>
+  <p>Untuk komponen prominent seperti modal, dialog, dan bottom sheet. Memberikan kesan yang friendly, approachable, dan modern pada overlay element.</p>
+  <div className="ds-info-grid">
+    <div className="ds-info-card ds-info-usage"><div className="ds-info-head">📌 Kapan Dipakai</div><ul><li>Modal & dialog box</li><li>Bottom sheet & drawer</li><li>Side panel & flyout</li><li>Popover rich content</li></ul></div>
+    <div className="ds-info-card ds-info-best"><div className="ds-info-head">✅ Best Practice</div><ul><li>Gunakan konsisten untuk semua overlay & modal</li><li>Pasangkan dengan backdrop untuk efek modern</li><li>Terapkan hanya pada corner yang terekspos</li></ul></div>
+    <div className="ds-info-card ds-info-avoid"><div className="ds-info-head">✖ Hindari</div><ul><li>Jangan untuk button atau elemen inline</li><li>Jangan untuk komponen terlalu kecil (&lt;48px)</li><li>Hindari pada elemen nested dalam komponen</li></ul></div>
+  </div>
+</div>
+
+<div className="ds-section">
+  <h2>Pill <span className="ds-badge">1 token</span></h2>
+  <p>Radius penuh (9999px) untuk pill-shaped element. Memberikan kesan yang friendly dan modern. Digunakan untuk badge, status indicator, dan avatar circle.</p>
+  <div className="ds-info-grid">
+    <div className="ds-info-card ds-info-usage"><div className="ds-info-head">📌 Kapan Dipakai</div><ul><li>Badge & status chip</li><li>Pill button & toggle switch</li><li>Avatar & user image circle</li><li>Progress bar & step indicator</li></ul></div>
+    <div className="ds-info-card ds-info-best"><div className="ds-info-head">✅ Best Practice</div><ul><li>Selalu gunakan untuk semua badge status</li><li>Konsisten untuk semua avatar (circle shape)</li><li>Gunakan dengan padding proporsional</li></ul></div>
+    <div className="ds-info-card ds-info-avoid"><div className="ds-info-head">✖ Hindari</div><ul><li>Jangan untuk card atau container besar</li><li>Jangan untuk modal & dialog</li><li>Hindari untuk input field utama</li></ul></div>
+  </div>
+</div>
+
+---
+
+## Border Width
+
+<div className="ds-section">
+  <h2>2px Inside <span className="ds-badge">1 style</span></h2>
+  <p>GPOS Lite hanya menggunakan Border Width <strong>2px</strong> dengan style <strong>Inside</strong> — border digambar di dalam bounds element sehingga tidak menambah ukuran atau mengganggu layout. Diimplementasikan dengan <code>box-shadow: inset</code>.</p>
+  <div className="ds-border-demo">
+    <div className="ds-border-grid">
+      <div className="ds-border-cell">
+        <p className="ds-border-label">Tanpa Border</p>
+        <div className="ds-demo-el">Element</div>
+        <div className="ds-demo-code">background: #F5F6F7;<br/>border-radius: 8px;</div>
+      </div>
+      <div className="ds-border-cell">
+        <p className="ds-border-label">✓ 2px Inside Border</p>
+        <div className="ds-demo-el ds-demo-el-in">Element</div>
+        <div className="ds-demo-code">box-shadow: inset 0 0 0 2px #1E7FD6;<br/>border-radius: 8px;</div>
+      </div>
+    </div>
+    <div className="ds-spec-row"><span className="ds-spec-label">Width</span><span className="ds-spec-value">2px</span></div>
+    <div className="ds-spec-row"><span className="ds-spec-label">Style</span><span className="ds-spec-value">Inside — tidak mengubah ukuran element (inset)</span></div>
+    <div className="ds-spec-row"><span className="ds-spec-label">CSS</span><span className="ds-spec-value">box-shadow: inset 0 0 0 2px var(--color-border);</span></div>
+    <div className="ds-spec-row"><span className="ds-spec-label">Tailwind</span><span className="ds-spec-value">ring-2 ring-inset ring-[#DFE2E6]</span></div>
+  </div>
+  <div className="ds-info-grid">
+    <div className="ds-info-card ds-info-usage"><div className="ds-info-head">📌 Kapan Dipakai</div><ul><li>Input field state (default, focus, error)</li><li>Button outlined & ghost variant</li><li>Card border & selection state</li><li>Focus ring indicator</li></ul></div>
+    <div className="ds-info-card ds-info-best"><div className="ds-info-head">✅ Best Practice</div><ul><li>Selalu gunakan inset — tidak mengganggu layout</li><li>Kombinasikan dengan border-radius yang sesuai</li><li>Ganti warna sesuai state: default / focus / error</li></ul></div>
+    <div className="ds-info-card ds-info-avoid"><div className="ds-info-head">✖ Hindari</div><ul><li>Jangan pakai <code>border: 2px solid</code> — menambah ukuran</li><li>Jangan campur dengan box-shadow dekorasi</li><li>Hindari border width lain (1px, 4px) di komponen</li></ul></div>
+  </div>
+</div>
+
+---
+
+## Usage per Component
+
+<div className="ds-table-wrap">
+  <table className="ds-usage-table">
+    <thead>
+      <tr>
+        <th>Component</th>
+        <th>Token</th>
+        <th>Nilai</th>
+        <th>Tailwind Class</th>
+      </tr>
+    </thead>
+    <tbody>
+      {usageTable.map(row => (
+        <tr key={row.component}>
+          <td>{row.component}</td>
+          <td><span className="ds-token-chip">{row.token}</span></td>
+          <td>{row.px}</td>
+          <td><span className="ds-tw-chip">{row.tw}</span></td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
 </div>

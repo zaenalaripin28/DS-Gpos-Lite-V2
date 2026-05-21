@@ -1,236 +1,469 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 
-export const iconGroups = [
-  {
-    group: 'Navigation',
-    icons: [
-      { name: 'Home',          file: 'Icon:home.svg' },
-      { name: 'Arrow Left',    file: 'Icon:ArrowLeft.svg' },
-      { name: 'Arrow Right',   file: 'Icon:arrow-right.svg' },
-      { name: 'Chevron Down',  file: 'Icon:chevron-down.svg' },
-      { name: 'Chevron Up',    file: 'Icon:chevron-up.svg' },
-      { name: 'Chevron Left',  file: 'Icon:chevron-left.svg' },
-      { name: 'Chevron Right', file: 'Icon:chevron-right.svg' },
-      { name: 'Menu',          file: 'Icon:Menu.svg' },
-    ],
-  },
-  {
-    group: 'Actions',
-    icons: [
-      { name: 'Plus',           file: 'Icon:plus.svg' },
-      { name: 'Minus',          file: 'Icon:minus.svg' },
-      { name: 'Trash',          file: 'Icon:trash.svg' },
-      { name: 'Pencil',         file: 'Icon:pencil.svg' },
-      { name: 'Pencil Square',  file: 'Icon:pencil-square.svg' },
-      { name: 'Share',          file: 'Icon:share.svg' },
-      { name: 'Download',       file: 'Icon:ArrowDownTray.svg' },
-      { name: 'Upload',         file: 'Icon:ArrowUpTray.svg' },
-      { name: 'Search',         file: 'Icon:magnifying-glass.svg' },
-      { name: 'Filter',         file: 'Icon:funnel.svg' },
-      { name: 'Copy',           file: 'Icon:square-2-stack.svg' },
-      { name: 'Print',          file: 'Icon:printer.svg' },
-    ],
-  },
-  {
-    group: 'Communication',
-    icons: [
-      { name: 'Bell',             file: 'Icon:Bell.svg' },
-      { name: 'Bell Alert',       file: 'Icon:BellAlert.svg' },
-      { name: 'Envelope',         file: 'Icon:Envelope.svg' },
-      { name: 'Chat Bubble',      file: 'Icon:ChatBubbleLeft.svg' },
-      { name: 'Chat Bubble Dual', file: 'Icon:ChatBubbleLeftRight.svg' },
-      { name: 'Phone',            file: 'Icon:phone.svg' },
-    ],
-  },
-  {
-    group: 'Data & Documents',
-    icons: [
-      { name: 'Document',       file: 'Icon:Document.svg' },
-      { name: 'Document Text',  file: 'Icon:DocumentText.svg' },
-      { name: 'Doc Check',      file: 'Icon:DocumentCheck.svg' },
-      { name: 'Clipboard',      file: 'Icon:Clipboard.svg' },
-      { name: 'Clipboard List', file: 'Icon:ClipboardDocumentList.svg' },
-      { name: 'Folder',         file: 'Icon:folder.svg' },
-      { name: 'Folder Open',    file: 'Icon:folder-open.svg' },
-      { name: 'Table',          file: 'Icon:table-cells.svg' },
-      { name: 'Chart Pie',      file: 'Icon:ChartPie.svg' },
-      { name: 'PDF',            file: 'Icon:PDF.svg' },
-    ],
-  },
-  {
-    group: 'Finance',
-    icons: [
-      { name: 'Banknotes',       file: 'Icon:Banknotes.svg' },
-      { name: 'Credit Card',     file: 'Icon:CreditCard.svg' },
-      { name: 'Wallet',          file: 'Icon:wallet.svg' },
-      { name: 'Money',           file: 'Icon:money.svg' },
-      { name: 'Rupiah',          file: 'Icon:rupiah.svg' },
-      { name: 'Receipt %',       file: 'Icon:receipt-percent.svg' },
-      { name: 'Receipt Refund',  file: 'Icon:receipt-refund.svg' },
-      { name: 'Percent',         file: 'Icon:percent.svg' },
-      { name: 'Shopping Cart',   file: 'Icon:shopping-cart.svg' },
-      { name: 'Shopping Bag',    file: 'Icon:shopping-bag.svg' },
-      { name: 'Tag',             file: 'Icon:tag.svg' },
-    ],
-  },
-  {
-    group: 'System & Security',
-    icons: [
-      { name: 'Settings',       file: 'Icon:Cog6Tooth.svg' },
-      { name: 'Lock',           file: 'Icon:lock-closed.svg' },
-      { name: 'Key',            file: 'Icon:key.svg' },
-      { name: 'Eye',            file: 'Icon:Eye.svg' },
-      { name: 'Eye Slash',      file: 'Icon:EyeSlash.svg' },
-      { name: 'User',           file: 'Icon:user.svg' },
-      { name: 'User Group',     file: 'Icon:user-group.svg' },
-      { name: 'ID Card',        file: 'Icon:identification.svg' },
-      { name: 'Check',          file: 'Icon:Check.svg' },
-      { name: 'X Mark',         file: 'Icon:x-mark.svg' },
-      { name: 'No Symbol',      file: 'Icon:no-symbol.svg' },
-      { name: 'Calendar',       file: 'Icon:CalendarDays.svg' },
-      { name: 'Clock',          file: 'Icon:Clock.svg' },
-    ],
-  },
+export const GENERAL = [
+  { file: 'Icon:AdjustmentsHorizontal.svg',        name: 'AdjustmentsHorizontal'      },
+  { file: 'Icon:ArchiveBox.svg',                   name: 'ArchiveBox'                  },
+  { file: 'Icon:ArrowDownOnSquare.svg',            name: 'ArrowDownOnSquare'           },
+  { file: 'Icon:ArrowDownTray.svg',                name: 'ArrowDownTray'               },
+  { file: 'Icon:ArrowLeft.svg',                    name: 'ArrowLeft'                   },
+  { file: 'Icon:ArrowLeftOnRectangle.svg',         name: 'ArrowLeftOnRectangle'        },
+  { file: 'Icon:ArrowPath.svg',                    name: 'ArrowPath'                   },
+  { file: 'Icon:ArrowRightOnRectangle.svg',        name: 'ArrowRightOnRectangle'       },
+  { file: 'Icon:ArrowUpTray.svg',                  name: 'ArrowUpTray'                 },
+  { file: 'Icon:ArrowsRightLeft.svg',              name: 'ArrowsRightLeft'             },
+  { file: 'Icon:ArrowsUpDown.svg',                 name: 'ArrowsUpDown'                },
+  { file: 'Icon:AtSymbol.svg',                     name: 'AtSymbol'                    },
+  { file: 'Icon:Banknotes.svg',                    name: 'Banknotes'                   },
+  { file: 'Icon:Bars3BottomLeft.svg',              name: 'Bars3BottomLeft'             },
+  { file: 'Icon:Beaker.svg',                       name: 'Beaker'                      },
+  { file: 'Icon:Bell.svg',                         name: 'Bell'                        },
+  { file: 'Icon:BellAlert.svg',                    name: 'BellAlert'                   },
+  { file: 'Icon:Bolt.svg',                         name: 'Bolt'                        },
+  { file: 'Icon:BookOpen.svg',                     name: 'BookOpen'                    },
+  { file: 'Icon:Calculator.svg',                   name: 'Calculator'                  },
+  { file: 'Icon:CalendarDays.svg',                 name: 'CalendarDays'                },
+  { file: 'Icon:Camera.svg',                       name: 'Camera'                      },
+  { file: 'Icon:ChartPie.svg',                     name: 'ChartPie'                    },
+  { file: 'Icon:ChatBubbleLeft.svg',               name: 'ChatBubbleLeft'              },
+  { file: 'Icon:ChatBubbleLeftRight.svg',          name: 'ChatBubbleLeftRight'         },
+  { file: 'Icon:Check.svg',                        name: 'Check'                       },
+  { file: 'Icon:Clipboard.svg',                    name: 'Clipboard'                   },
+  { file: 'Icon:ClipboardDocumentList.svg',        name: 'ClipboardDocumentList'       },
+  { file: 'Icon:Clock.svg',                        name: 'Clock'                       },
+  { file: 'Icon:Cog6Tooth.svg',                    name: 'Cog6Tooth'                   },
+  { file: 'Icon:CreditCard.svg',                   name: 'CreditCard'                  },
+  { file: 'Icon:Document.svg',                     name: 'Document'                    },
+  { file: 'Icon:DocumentCheck.svg',                name: 'DocumentCheck'               },
+  { file: 'Icon:DocumentText.svg',                 name: 'DocumentText'                },
+  { file: 'Icon:EllipsisVertical.svg',             name: 'EllipsisVertical'            },
+  { file: 'Icon:Envelope.svg',                     name: 'Envelope'                    },
+  { file: 'Icon:Eye.svg',                          name: 'Eye'                         },
+  { file: 'Icon:EyeSlash.svg',                     name: 'EyeSlash'                    },
+  { file: 'Icon:Menu.svg',                         name: 'Menu'                        },
+  { file: 'Icon:PDF.svg',                          name: 'PDF'                         },
+  { file: 'Icon:SolidCheckBadge.svg',              name: 'SolidCheckBadge'             },
+  { file: 'Icon:SolidCheckCircle.svg',             name: 'SolidCheckCircle'            },
+  { file: 'Icon:arrow-down-on-square-stack.svg',   name: 'ArrowDownOnSquareStack'      },
+  { file: 'Icon:arrow-right.svg',                  name: 'ArrowRight'                  },
+  { file: 'Icon:arrow-trending-down.svg',          name: 'ArrowTrendingDown'           },
+  { file: 'Icon:arrow-trending-up.svg',            name: 'ArrowTrendingUp'             },
+  { file: 'Icon:arrow-up-on-square-stack.svg',     name: 'ArrowUpOnSquareStack'        },
+  { file: 'Icon:arrow-up-on-square.svg',           name: 'ArrowUpOnSquare'             },
+  { file: 'Icon:arrow-uturn-left.svg',             name: 'ArrowUturnLeft'              },
+  { file: 'Icon:arrowTopTightOnSquare.svg',        name: 'ArrowTopTightOnSquare'       },
+  { file: 'Icon:chevron-down.svg',                 name: 'ChevronDown'                 },
+  { file: 'Icon:chevron-left.svg',                 name: 'ChevronLeft'                 },
+  { file: 'Icon:chevron-mini-down.svg',            name: 'ChevronMiniDown'             },
+  { file: 'Icon:chevron-mini-left.svg',            name: 'ChevronMiniLeft'             },
+  { file: 'Icon:chevron-mini-right.svg',           name: 'ChevronMiniRight'            },
+  { file: 'Icon:chevron-mini-up.svg',              name: 'ChevronMiniUp'               },
+  { file: 'Icon:chevron-right.svg',                name: 'ChevronRight'                },
+  { file: 'Icon:chevron-up.svg',                   name: 'ChevronUp'                   },
+  { file: 'Icon:folder-open.svg',                  name: 'FolderOpen'                  },
+  { file: 'Icon:folder.svg',                       name: 'Folder'                      },
+  { file: 'Icon:funnel.svg',                       name: 'Funnel'                      },
+  { file: 'Icon:home.svg',                         name: 'Home'                        },
+  { file: 'Icon:identification.svg',               name: 'Identification'              },
+  { file: 'Icon:key.svg',                          name: 'Key'                         },
+  { file: 'Icon:lifebuoy.svg',                     name: 'Lifebuoy'                    },
+  { file: 'Icon:light-bulb.svg',                   name: 'LightBulb'                   },
+  { file: 'Icon:link.svg',                         name: 'Link'                        },
+  { file: 'Icon:lock-closed.svg',                  name: 'LockClosed'                  },
+  { file: 'Icon:magnifying-glass.svg',             name: 'MagnifyingGlass'             },
+  { file: 'Icon:map-pin.svg',                      name: 'MapPin'                      },
+  { file: 'Icon:miniArrowTopRightOnSquare.svg',    name: 'MiniArrowTopRightOnSquare'   },
+  { file: 'Icon:minus-circle-outline.svg',         name: 'MinusCircleOutline'          },
+  { file: 'Icon:minus.svg',                        name: 'Minus'                       },
+  { file: 'Icon:money.svg',                        name: 'Money'                       },
+  { file: 'Icon:newspaper.svg',                    name: 'Newspaper'                   },
+  { file: 'Icon:no-symbol.svg',                    name: 'NoSymbol'                    },
+  { file: 'Icon:paper-airplane.svg',               name: 'PaperAirplane'               },
+  { file: 'Icon:paper-clip.svg',                   name: 'PaperClip'                   },
+  { file: 'Icon:pencil-square.svg',                name: 'PencilSquare'                },
+  { file: 'Icon:pencil.svg',                       name: 'Pencil'                      },
+  { file: 'Icon:percent.svg',                      name: 'Percent'                     },
+  { file: 'Icon:phone.svg',                        name: 'Phone'                       },
+  { file: 'Icon:photo.svg',                        name: 'Photo'                       },
+  { file: 'Icon:plus-circle-filled.svg',           name: 'PlusCircleFilled'            },
+  { file: 'Icon:plus-circle-outline.svg',          name: 'PlusCircleOutline'           },
+  { file: 'Icon:plus.svg',                         name: 'Plus'                        },
+  { file: 'Icon:point.svg',                        name: 'Point'                       },
+  { file: 'Icon:printer.svg',                      name: 'Printer'                     },
+  { file: 'Icon:receipt-percent.svg',              name: 'ReceiptPercent'              },
+  { file: 'Icon:receipt-refund.svg',               name: 'ReceiptRefund'               },
+  { file: 'Icon:rupiah.svg',                       name: 'Rupiah'                      },
+  { file: 'Icon:share.svg',                        name: 'Share'                       },
+  { file: 'Icon:shopping-bag.svg',                 name: 'ShoppingBag'                 },
+  { file: 'Icon:shopping-cart.svg',                name: 'ShoppingCart'                },
+  { file: 'Icon:solid-adjustments-horizontal.svg', name: 'SolidAdjustmentsHorizontal'  },
+  { file: 'Icon:solid-exclamation-triangle.svg',   name: 'SolidExclamationTriangle'    },
+  { file: 'Icon:solid-information-circle.svg',     name: 'SolidInformationCircle'      },
+  { file: 'Icon:solid-question-mark-circle.svg',   name: 'SolidQuestionMarkCircle'     },
+  { file: 'Icon:solid-shield-check.svg',           name: 'SolidShieldCheck'            },
+  { file: 'Icon:solid-sparkles.svg',               name: 'SolidSparkles'               },
+  { file: 'Icon:square-2-stack.svg',               name: 'Square2Stack'                },
+  { file: 'Icon:squares-plus.svg',                 name: 'SquaresPlus'                 },
+  { file: 'Icon:table-cells.svg',                  name: 'TableCells'                  },
+  { file: 'Icon:tag.svg',                          name: 'Tag'                         },
+  { file: 'Icon:trash.svg',                        name: 'Trash'                       },
+  { file: 'Icon:user-group.svg',                   name: 'UserGroup'                   },
+  { file: 'Icon:user.svg',                         name: 'User'                        },
+  { file: 'Icon:wallet.svg',                       name: 'Wallet'                      },
+  { file: 'Icon:x-circle-outline.svg',             name: 'XCircleOutline'              },
+  { file: 'Icon:x-mark.svg',                       name: 'XMark'                       },
+];
+
+export const OFFLINE = [
+  { name: 'App',               off: 'icon:sidebar offline:App:Off.svg',                 on: 'icon:sidebar offline:App:On.svg'                 },
+  { name: 'Belanja',           off: 'icon:sidebar offline:Belanja:Off.svg',             on: 'icon:sidebar offline:Belanja:On.svg'             },
+  { name: 'Customer',          off: 'icon:sidebar offline:Customer:Off.svg',            on: 'icon:sidebar offline:Customer:On.svg'            },
+  { name: 'Guide',             off: 'icon:sidebar offline:Guide:Off.svg',               on: 'icon:sidebar offline:Guide:On.svg'               },
+  { name: 'Inventory',         off: 'icon:sidebar offline:Inventory:Off.svg',           on: 'icon:sidebar offline:Inventory:On.svg'           },
+  { name: 'Invoice',           off: 'icon:sidebar offline:Invoice:Off.svg',             on: 'icon:sidebar offline:Invoice:On.svg'             },
+  { name: 'Kas & Bank',        off: 'icon:sidebar offline:Kas & bank:Off.svg',          on: 'icon:sidebar offline:Kas & bank:On.svg'          },
+  { name: 'News',              off: 'icon:sidebar offline:News:Off.svg',                on: 'icon:sidebar offline:News:On.svg'                },
+  { name: 'Online',            off: 'icon:sidebar offline:Online:Off.svg',              on: 'icon:sidebar offline:Online:On.svg'              },
+  { name: 'POS',               off: 'icon:sidebar offline:POS:Off.svg',                 on: 'icon:sidebar offline:POS:On.svg'                 },
+  { name: 'Product',           off: 'icon:sidebar offline:Product:Off.svg',             on: 'icon:sidebar offline:Product:On.svg'             },
+  { name: 'Report',            off: 'icon:sidebar offline:Report:Off.svg',              on: 'icon:sidebar offline:Report:On.svg'              },
+  { name: 'Setting',           off: 'icon:sidebar offline:Setting:Off.svg',             on: 'icon:sidebar offline:Setting:On.svg'             },
+  { name: 'Tebus Murah',       off: 'icon:sidebar offline:Tebus Murah:Off.svg',         on: 'icon:sidebar offline:Tebus Murah:On.svg'         },
+  { name: 'Company',           off: 'icon:sidebar offline:company:Off.svg',             on: 'icon:sidebar offline:company:On.svg'             },
+  { name: 'Dashboard',         off: 'icon:sidebar offline:dashboard:Off.svg',           on: 'icon:sidebar offline:dashboard:On.svg'           },
+  { name: 'Finance',           off: 'icon:sidebar offline:finance:Off.svg',             on: 'icon:sidebar offline:finance:On.svg'             },
+  { name: 'Jejaring Pesan',    off: 'icon:sidebar offline:jejaring pesan:Off.svg',      on: 'icon:sidebar offline:jejaring pesan:On.svg'      },
+  { name: 'Ledger',            off: 'icon:sidebar offline:ledger:Off.svg',              on: 'icon:sidebar offline:ledger:On.svg'              },
+  { name: 'Master',            off: 'icon:sidebar offline:master:Off.svg',              on: 'icon:sidebar offline:master:On.svg'              },
+  { name: 'Medikal',           off: 'icon:sidebar offline:medikal:Off.svg',             on: 'icon:sidebar offline:medikal:On.svg'             },
+  { name: 'Megaphone',         off: 'icon:sidebar offline:megaphone:Off.svg',           on: 'icon:sidebar offline:megaphone:On.svg'           },
+  { name: 'Payable',           off: 'icon:sidebar offline:payable:Off.svg',             on: 'icon:sidebar offline:payable,:On.svg'            },
+  { name: 'Principal',         off: 'icon:sidebar offline:principal:Off.svg',           on: 'icon:sidebar offline:principal:On.svg'           },
+  { name: 'Smart Forecasting', off: 'icon:sidebar offline:smart Forecasrting:Off.svg', on: 'icon:sidebar offline:smart Forecasrting:On.svg'  },
+];
+
+export const ONLINE = [
+  { name: 'Chat',         off: 'icon:sidebar online:chat:off.svg',         on: 'icon:sidebar online:chat:on.svg'         },
+  { name: 'Dashboard',    off: 'icon:sidebar online:dashboard:off.svg',    on: 'icon:sidebar online:dashboard:on.svg'    },
+  { name: 'Dekorasi',     off: 'icon:sidebar online:dekorasi:off.svg',     on: 'icon:sidebar online:dekorasi:on.svg'     },
+  { name: 'Help',         off: 'icon:sidebar online:help:off.svg',         on: 'icon:sidebar online:help:on.svg'         },
+  { name: 'Laporan',      off: 'icon:sidebar online:laporan:off.svg',      on: 'icon:sidebar online:laporan:on.svg'      },
+  { name: 'Notification', off: 'icon:sidebar online:notification:off.svg', on: 'icon:sidebar online:notification:on.svg' },
+  { name: 'Pesanan',      off: 'icon:sidebar online:pesanan:off.svg',      on: 'icon:sidebar online:pesanan:on.svg'      },
+  { name: 'Produk',       off: 'icon:sidebar online:produk:off.svg',       on: 'icon:sidebar online:produk:on.svg'       },
+  { name: 'Promo',        off: 'icon:sidebar online:promo:off.svg',        on: 'icon:sidebar online:promo:on.svg'        },
+  { name: 'Resep',        off: 'icon:sidebar online:resep:off.svg',        on: 'icon:sidebar online:resep:on.svg'        },
+  { name: 'User',         off: 'icon:sidebar online:user:off.svg',         on: 'icon:sidebar online:user:on.svg'         },
+];
+
+export const sizes = [
+  { token: 'small',  px: '16px', tw: 'w-4 h-4',   cssVar: '--icon-size-small',  ctx: 'Badge, chip, inline icon' },
+  { token: 'medium', px: '24px', tw: 'w-6 h-6',   cssVar: '--icon-size-medium', ctx: 'Button, input, nav item' },
+  { token: 'large',  px: '32px', tw: 'w-8 h-8',   cssVar: '--icon-size-large',  ctx: 'Card header, empty state' },
+  { token: 'xlarge', px: '48px', tw: 'w-12 h-12', cssVar: '--icon-size-xlarge', ctx: 'Hero, error page, onboarding' },
 ];
 
 <Meta title="Foundation/Icons" />
 
 <style>{`
   .ds-section { margin-bottom: 48px; }
-  .ds-section h2 { font-size: 20px; font-weight: 600; margin: 0 0 8px; color: #0F172A; }
-  .ds-section p  { font-size: 14px; color: #64748B; margin: 0 0 20px; }
-  .ds-icon-group-title { font-size: 13px; font-weight: 600; color: #475569; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 12px; }
-  .ds-icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(88px, 1fr)); gap: 8px; }
-  .ds-icon-item { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 12px 8px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; cursor: default; transition: background 0.15s; }
-  .ds-icon-item:hover { background: #EEF7FF; border-color: #BADDFD; }
-  .ds-icon-name { font-size: 10px; color: #64748B; text-align: center; line-height: 1.3; }
-  .ds-info-box  { background: #F0F9FF; border: 1px solid #BAE6FD; border-radius: 10px; padding: 16px 20px; margin-bottom: 20px; }
-  .ds-info-box p { color: #0369A1; margin: 0; font-size: 13px; }
-  .ds-code-box  { background: #0F172A; border-radius: 10px; padding: 16px 20px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #E2E8F0; line-height: 1.8; }
-  .ds-sizes     { display: flex; gap: 20px; align-items: flex-end; padding: 20px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; }
-  .ds-size-demo { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-  .ds-size-label{ font-size: 11px; color: #64748B; }
+  .ds-section h2 { font-size: 22px; font-weight: 700; margin: 0 0 6px; color: #091E42; }
+  .ds-section-desc { font-size: 14px; color: #42526D; margin: 0 0 24px; line-height: 1.6; }
+
+  .ds-cat-badge {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    padding: 3px 9px; border-radius: 4px; letter-spacing: 0.07em; text-transform: uppercase;
+    margin-left: 8px; vertical-align: middle;
+  }
+  .ds-token-count { display: inline-block; background: #F5F6F7; color: #42526D; font-size: 12px; font-weight: 600; padding: 2px 10px; border-radius: 999px; margin-left: 8px; vertical-align: middle; }
+
+  .ds-info-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin-bottom: 0; }
+  .ds-info-card { border-radius: 12px; padding: 18px 20px; }
+  .ds-info-usage { background: #EBF5FF; border: 1px solid #A3CBEE; }
+  .ds-info-best  { background: #E6F7EF; border: 1px solid #6BCEA0; }
+  .ds-info-avoid { background: #FDE8E9; border: 1px solid #F7A2A5; }
+  .ds-info-head { font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px; }
+  .ds-info-usage .ds-info-head { color: #155996; }
+  .ds-info-best  .ds-info-head { color: #007740; }
+  .ds-info-avoid .ds-info-head { color: #A51419; }
+  .ds-info-card ul { margin: 0; padding-left: 16px; list-style: disc; }
+  .ds-info-card li { font-size: 13px; color: #243757; margin-bottom: 6px; line-height: 1.5; }
+  .ds-info-card li:last-child { margin-bottom: 0; }
+  .ds-info-card code { background: rgba(0,0,0,0.06); padding: 1px 5px; border-radius: 3px; font-family: monospace; font-size: 11px; }
+
+  .ds-divider { height: 1px; background: #EBEDF0; margin: 0 0 40px; }
+
+  .ds-size-card { background: #fff; border: 1px solid #DFE2E6; border-radius: 12px; overflow: hidden; margin-bottom: 20px; }
+  .ds-size-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .ds-size-table th { text-align: left; padding: 10px 16px; color: #42526D; font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; border-bottom: 2px solid #EBEDF0; }
+  .ds-size-table td { padding: 12px 16px; border-bottom: 1px solid #F0F1F3; color: #42526D; }
+  .ds-size-table tr:last-child td { border-bottom: none; }
+  .ds-size-table .td-bold { font-weight: 700; color: #091E42; }
+  .ds-size-table code { background: #F5F6F7; padding: 2px 7px; border-radius: 4px; font-size: 11.5px; color: #1E7FD6; font-family: monospace; }
+
+  .ds-sub-head { font-size: 15px; font-weight: 700; color: #091E42; margin: 32px 0 16px; padding-bottom: 10px; border-bottom: 1px solid #EBEDF0; }
+  .ds-sub-head:first-of-type { margin-top: 0; }
+
+  .ds-icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 12px; margin-bottom: 32px; }
+  .ds-icon-card { background: #fff; border: 1px solid #DFE2E6; border-radius: 12px; padding: 20px 12px 14px; display: flex; flex-direction: column; align-items: center; gap: 8px; min-height: 96px; }
+  .ds-icon-card:hover { border-color: #1E7FD6; background: #EEF7FF; }
+  .ds-icon-thumb { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: #F5F7FA; border-radius: 8px; flex-shrink: 0; }
+  .ds-icon-thumb img { width: 24px; height: 24px; object-fit: contain; display: block; }
+  .ds-icon-name { font-size: 10px; font-weight: 500; color: #505F79; text-align: center; line-height: 1.35; word-break: break-word; }
+
+  .ds-sidebar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-bottom: 32px; }
+  .ds-sidebar-card { background: #fff; border: 1px solid #DFE2E6; border-radius: 12px; padding: 18px 12px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .ds-sidebar-card:hover { border-color: #1E7FD6; background: #EEF7FF; }
+  .ds-states-wrap { display: flex; align-items: flex-end; gap: 14px; }
+  .ds-state-item { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .ds-state-item img { width: 28px; height: 28px; object-fit: contain; display: block; }
+  .ds-state-pill { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 2px 6px; border-radius: 999px; }
+  .ds-state-off { background: #F5F6F7; color: #6B788E; border: 1px solid #DFE2E6; }
+  .ds-state-on  { background: #E6F7EF; color: #007740; border: 1px solid #6BCEA0; }
+  .ds-sidebar-name { font-size: 10.5px; font-weight: 500; color: #505F79; text-align: center; line-height: 1.35; }
+
+  .ds-code-section { background: #fff; border: 1px solid #DFE2E6; border-radius: 12px; overflow: hidden; margin-bottom: 40px; }
+  .ds-code-header { padding: 18px 24px; border-bottom: 1px solid #EBEDF0; }
+  .ds-code-title { font-size: 15px; font-weight: 600; color: #091E42; margin: 0; }
+  .ds-code-wrap { padding: 20px 24px; }
+  .ds-code-block { background: #0F172A; border-radius: 10px; padding: 18px 20px; }
+  .ds-code-block pre { margin: 0; font-size: 12.5px; font-family: monospace; color: #E2E8F0; line-height: 1.75; overflow-x: auto; }
 `}</style>
 
-# Icons
+# Icon System
 
-Library icon GPOS Lite V2.0 berisi **184 ikon SVG** dalam 3 kategori: utility icons, sidebar icons, dan brand icons. Semua ikon menggunakan Heroicons style.
+**146 icon SVG** tersedia dalam 3 kategori — General, Sidebar Offline, dan Sidebar Online. Semua icon dipanggil via file path `<img src>`, tanpa inline SVG.
 
 ---
 
-<div className="ds-info-box">
-  <p>
-    <strong>Path format:</strong> Icon tersimpan di <code>assets/icons/</code>. 
-    Gunakan <code>/assets/icons/Icon:nama.svg</code> saat Storybook berjalan, 
-    atau <code>../../assets/icons/Icon:nama.svg</code> di HTML pages.
-  </p>
-</div>
-
 <div className="ds-section">
-  <h2>Ukuran Icon</h2>
-  <p>Gunakan ukuran standar 16px, 20px, 24px, dan 32px.</p>
-  <div className="ds-sizes">
-    {[
-      { size: '16px', label: 'XS — 16px' },
-      { size: '20px', label: 'SM — 20px' },
-      { size: '24px', label: 'MD — 24px' },
-      { size: '32px', label: 'LG — 32px' },
-      { size: '48px', label: 'XL — 48px' },
-    ].map(s => (
-      <div key={s.size} className="ds-size-demo">
-        <img src="/assets/icons/Icon:home.svg" width={s.size} height={s.size} alt="icon" style={{ display: 'block' }} />
-        <span className="ds-size-label">{s.label}</span>
-      </div>
-    ))}
+  <h2>Icon Guidelines
+    <span className="ds-cat-badge" style={{ background: '#FFF7E6', color: '#B45309', border: '1px solid #FCD34D' }}>RULES</span>
+  </h2>
+  <p className="ds-section-desc">Aturan penggunaan icon untuk menjaga konsistensi, performa, dan kemudahan maintenance di seluruh produk GPOS Lite.</p>
+
+  <div className="ds-info-cards">
+    <div className="ds-info-card ds-info-usage">
+      <div className="ds-info-head">📌 Kapan Dipakai</div>
+      <ul>
+        <li>Gunakan icon untuk <strong>memperkuat label</strong>, bukan menggantikannya</li>
+        <li>Cocok di button, input, navigasi, dan status indicator</li>
+        <li>Panggil via <code>&lt;img src&gt;</code> dengan path yang benar</li>
+        <li>Gunakan ukuran sesuai konteks: small/medium/large/xlarge</li>
+        <li>Sidebar icon: gunakan state <strong>Off</strong> dan <strong>On</strong> sesuai kondisi aktif</li>
+      </ul>
+    </div>
+    <div className="ds-info-card ds-info-best">
+      <div className="ds-info-head">✅ Best Practice</div>
+      <ul>
+        <li>Semua file icon tersimpan di <code>assets/icons/</code></li>
+        <li>Jangan duplikasi icon ke folder lain</li>
+        <li>Selalu sertakan <code>alt</code> yang deskriptif untuk aksesibilitas</li>
+        <li>Tambahkan <code>width</code> dan <code>height</code> untuk mencegah layout shift</li>
+        <li>Ikuti naming convention yang sudah ada</li>
+      </ul>
+    </div>
+    <div className="ds-info-card ds-info-avoid">
+      <div className="ds-info-head">✖ Hindari</div>
+      <ul>
+        <li>Jangan embed SVG path langsung di HTML</li>
+        <li>Jangan gunakan icon tanpa <code>alt</code> text</li>
+        <li>Jangan ubah ukuran di luar token yang tersedia</li>
+        <li>Jangan letakkan icon baru di luar folder <code>assets/icons/</code></li>
+        <li>Jangan gunakan icon sebagai pengganti teks pada area penting</li>
+      </ul>
+    </div>
   </div>
 </div>
 
-<div className="ds-section">
-  <h2>Cara Penggunaan</h2>
-  <div className="ds-code-box">
-    <div><span style={{ color: '#94A3B8' }}>{`<!-- Di HTML pages -->`}</span></div>
-    <div>{`<img src="../../assets/icons/Icon:home.svg" width="24" height="24" alt="home" />`}</div>
-    <div style={{ marginTop: '12px' }}><span style={{ color: '#94A3B8' }}>{`<!-- Di Storybook (setelah staticDirs aktif) -->`}</span></div>
-    <div>{`<img src="/assets/icons/Icon:home.svg" width="24" height="24" alt="home" />`}</div>
-    <div style={{ marginTop: '12px' }}><span style={{ color: '#94A3B8' }}>{`/* Inline sebagai CSS mask (untuk custom color) */`}</span></div>
-    <div><span style={{ color: '#86EFAC' }}>.icon-home</span> {'{'}</div>
-    <div style={{ paddingLeft: '16px' }}>
-      <span style={{ color: '#86EFAC' }}>mask-image</span>
-      <span>: </span>
-      <span style={{ color: '#FCD34D' }}>url('/assets/icons/Icon:home.svg')</span>
-      <span>;</span>
-    </div>
-    <div style={{ paddingLeft: '16px' }}>
-      <span style={{ color: '#86EFAC' }}>background-color</span>
-      <span>: </span>
-      <span style={{ color: '#FCD34D' }}>currentColor</span>
-      <span>;</span>
-    </div>
-    <div>{'}'}</div>
-  </div>
-</div>
+<div className="ds-divider"></div>
 
 <div className="ds-section">
-  <h2>Icon Catalog</h2>
-  <p>Hover icon untuk melihat nama. Semua icon tersedia di <code>assets/icons/</code>.</p>
+  <h2>Icon Size Rules
+    <span className="ds-token-count">4 ukuran</span>
+    <span className="ds-cat-badge" style={{ background: '#EEF7FF', color: '#115188', border: '1px solid #A3CBEE' }}>TOKENS</span>
+  </h2>
+  <p className="ds-section-desc">Gunakan token ukuran yang konsisten. Jangan menggunakan nilai di luar daftar ini agar visual tetap harmonis di seluruh UI.</p>
 
-  {iconGroups.map(group => (
-    <div key={group.group}>
-      <div className="ds-icon-group-title">{group.group}</div>
-      <div className="ds-icon-grid">
-        {group.icons.map(icon => (
-          <div key={icon.file} className="ds-icon-item" title={icon.file}>
-            <img
-              src={`/assets/icons/${icon.file}`}
-              width="24"
-              height="24"
-              alt={icon.name}
-              style={{ display: 'block', opacity: 0.7 }}
-            />
-            <span className="ds-icon-name">{icon.name}</span>
-          </div>
+  <div className="ds-size-card">
+    <table className="ds-size-table">
+      <thead>
+        <tr>
+          <th>Token</th>
+          <th>CSS Variable</th>
+          <th>Px</th>
+          <th>Tailwind</th>
+          <th>Konteks</th>
+        </tr>
+      </thead>
+      <tbody>
+        {sizes.map(s => (
+          <tr key={s.token}>
+            <td><code>{s.token}</code></td>
+            <td><code>{s.cssVar}</code></td>
+            <td className="td-bold">{s.px}</td>
+            <td><code>{s.tw}</code></td>
+            <td>{s.ctx}</td>
+          </tr>
         ))}
-      </div>
-    </div>
-  ))}
+      </tbody>
+    </table>
+  </div>
 </div>
 
+<div className="ds-divider"></div>
+
 <div className="ds-section">
-  <h2>Daftar Semua Icon</h2>
-  <p>Total 184 icon tersedia. Berikut daftar lengkap nama file:</p>
-  <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '10px', padding: '16px 20px', maxHeight: '300px', overflowY: 'auto' }}>
-    {[
-      'Icon:AdjustmentsHorizontal', 'Icon:ArchiveBox', 'Icon:ArrowDownOnSquare',
-      'Icon:ArrowDownTray', 'Icon:ArrowLeft', 'Icon:ArrowLeftOnRectangle',
-      'Icon:ArrowPath', 'Icon:ArrowRightOnRectangle', 'Icon:ArrowUpTray',
-      'Icon:ArrowsRightLeft', 'Icon:ArrowsUpDown', 'Icon:AtSymbol',
-      'Icon:Banknotes', 'Icon:Bars3BottomLeft', 'Icon:Bell', 'Icon:BellAlert',
-      'Icon:Bolt', 'Icon:BookOpen', 'Icon:Calculator', 'Icon:CalendarDays',
-      'Icon:Camera', 'Icon:ChartPie', 'Icon:ChatBubbleLeft', 'Icon:ChatBubbleLeftRight',
-      'Icon:Check', 'Icon:Clipboard', 'Icon:ClipboardDocumentList', 'Icon:Clock',
-      'Icon:Cog6Tooth', 'Icon:CreditCard', 'Icon:Document', 'Icon:DocumentCheck',
-      'Icon:DocumentText', 'Icon:EllipsisVertical', 'Icon:Envelope', 'Icon:Eye',
-      'Icon:EyeSlash', 'Icon:Menu', 'Icon:PDF', 'Icon:SolidCheckBadge',
-      'Icon:SolidCheckCircle', 'Icon:arrow-down-on-square-stack', 'Icon:arrow-right',
-      'Icon:arrow-trending-down', 'Icon:arrow-trending-up', 'Icon:arrow-up-on-square-stack',
-      'Icon:arrow-up-on-square', 'Icon:arrow-uturn-left', 'Icon:chevron-down',
-      'Icon:chevron-left', 'Icon:chevron-right', 'Icon:chevron-up',
-      'Icon:chevron-mini-down', 'Icon:chevron-mini-left', 'Icon:chevron-mini-right',
-      'Icon:chevron-mini-up', 'Icon:folder', 'Icon:folder-open', 'Icon:funnel',
-      'Icon:home', 'Icon:identification', 'Icon:key', 'Icon:lifebuoy',
-      'Icon:light-bulb', 'Icon:link', 'Icon:lock-closed', 'Icon:magnifying-glass',
-      'Icon:map-pin', 'Icon:minus', 'Icon:minus-circle-outline', 'Icon:money',
-      'Icon:newspaper', 'Icon:no-symbol', 'Icon:paper-airplane', 'Icon:paper-clip',
-      'Icon:pencil', 'Icon:pencil-square', 'Icon:percent', 'Icon:phone',
-      'Icon:photo', 'Icon:plus', 'Icon:plus-circle-filled', 'Icon:plus-circle-outline',
-      'Icon:printer', 'Icon:receipt-percent', 'Icon:receipt-refund', 'Icon:rupiah',
-      'Icon:share', 'Icon:shopping-bag', 'Icon:shopping-cart', 'Icon:square-2-stack',
-      'Icon:squares-plus', 'Icon:table-cells', 'Icon:tag', 'Icon:trash',
-      'Icon:user', 'Icon:user-group', 'Icon:wallet', 'Icon:x-circle-outline', 'Icon:x-mark',
-    ].map(name => (
-      <div key={name} style={{ fontSize: '12px', fontFamily: 'monospace', color: '#475569', padding: '2px 0', borderBottom: '1px solid #F1F5F9' }}>
-        {name}.svg
+  <h2>Icon Library
+    <span className="ds-token-count">146 icons</span>
+  </h2>
+  <p className="ds-section-desc">Klik icon untuk menyalin path. Semua icon tersedia di <code>assets/icons/</code>.</p>
+
+  <div className="ds-sub-head">
+    General
+    <span className="ds-cat-badge" style={{ background: '#E9F2FB', color: '#1E7FD6', border: '1px solid #A3CBEE' }}>OUTLINE & SOLID</span>
+    <span className="ds-token-count">110 icons</span>
+  </div>
+  <div className="ds-icon-grid">
+    {GENERAL.map(ic => (
+      <div key={ic.file} className="ds-icon-card" title={ic.file}>
+        <div className="ds-icon-thumb">
+          <img src={`/assets/icons/${ic.file}`} alt={ic.name} width="24" height="24" style={{ display: 'block', opacity: 0.75 }} />
+        </div>
+        <span className="ds-icon-name">{ic.name}</span>
       </div>
     ))}
+  </div>
+
+  <div className="ds-sub-head">
+    Sidebar Offline
+    <span className="ds-cat-badge" style={{ background: '#F1ECFE', color: '#4D2BAC', border: '1px solid #C4B0FB' }}>OFF / ON</span>
+    <span className="ds-token-count">25 icons</span>
+  </div>
+  <div className="ds-sidebar-grid">
+    {OFFLINE.map(ic => (
+      <div key={ic.name} className="ds-sidebar-card">
+        <div className="ds-states-wrap">
+          <div className="ds-state-item">
+            <img src={`/assets/icons/${ic.off}`} alt={`${ic.name} off`} width="28" height="28" style={{ display: 'block', opacity: 0.7 }} />
+            <span className="ds-state-pill ds-state-off">Off</span>
+          </div>
+          <div className="ds-state-item">
+            <img src={`/assets/icons/${ic.on}`} alt={`${ic.name} on`} width="28" height="28" style={{ display: 'block' }} />
+            <span className="ds-state-pill ds-state-on">On</span>
+          </div>
+        </div>
+        <span className="ds-sidebar-name">{ic.name}</span>
+      </div>
+    ))}
+  </div>
+
+  <div className="ds-sub-head">
+    Sidebar Online
+    <span className="ds-cat-badge" style={{ background: '#E6F7EF', color: '#007740', border: '1px solid #6BCEA0' }}>OFF / ON</span>
+    <span className="ds-token-count">11 icons</span>
+  </div>
+  <div className="ds-sidebar-grid">
+    {ONLINE.map(ic => (
+      <div key={ic.name} className="ds-sidebar-card">
+        <div className="ds-states-wrap">
+          <div className="ds-state-item">
+            <img src={`/assets/icons/${ic.off}`} alt={`${ic.name} off`} width="28" height="28" style={{ display: 'block', opacity: 0.7 }} />
+            <span className="ds-state-pill ds-state-off">Off</span>
+          </div>
+          <div className="ds-state-item">
+            <img src={`/assets/icons/${ic.on}`} alt={`${ic.name} on`} width="28" height="28" style={{ display: 'block' }} />
+            <span className="ds-state-pill ds-state-on">On</span>
+          </div>
+        </div>
+        <span className="ds-sidebar-name">{ic.name}</span>
+      </div>
+    ))}
+  </div>
+</div>
+
+<div className="ds-divider"></div>
+
+<div className="ds-section">
+  <h2>Implementation Code</h2>
+  <p className="ds-section-desc">Contoh implementasi icon dalam HTML standar, CSS Variable, dan Tailwind CSS.</p>
+
+  <div className="ds-code-section">
+    <div className="ds-code-header">
+      <h3 className="ds-code-title">HTML — cara panggil icon</h3>
+    </div>
+    <div className="ds-code-wrap">
+      <div className="ds-code-block">
+        <pre>{`<!-- Icon dasar (medium = 24px default) -->
+<img src="assets/icons/Icon:home.svg"
+     alt="home"
+     width="24" height="24">
+
+<!-- Button dengan icon -->
+<button class="btn btn-primary">
+  <img src="assets/icons/Icon:plus.svg"
+       alt="tambah"
+       width="24" height="24">
+  Tambah Item
+</button>
+
+<!-- Sidebar icon — state Off (tidak aktif) -->
+<img src="assets/icons/icon:sidebar offline:News:Off.svg"
+     alt="berita"
+     width="24" height="24">
+
+<!-- Sidebar icon — state On (aktif) -->
+<img src="assets/icons/icon:sidebar offline:News:On.svg"
+     alt="berita"
+     width="24" height="24">`}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div className="ds-code-section">
+    <div className="ds-code-header">
+      <h3 className="ds-code-title">CSS Variables — icon size tokens</h3>
+    </div>
+    <div className="ds-code-wrap">
+      <div className="ds-code-block">
+        <pre>{`:root {
+  --icon-size-small:  16px;
+  --icon-size-medium: 24px;  /* default */
+  --icon-size-large:  32px;
+  --icon-size-xlarge: 48px;
+}
+
+/* Utility classes */
+.icon    { width: var(--icon-size-medium); height: var(--icon-size-medium); }
+.icon-sm { width: var(--icon-size-small);  height: var(--icon-size-small);  }
+.icon-lg { width: var(--icon-size-large);  height: var(--icon-size-large);  }
+.icon-xl { width: var(--icon-size-xlarge); height: var(--icon-size-xlarge); }`}</pre>
+      </div>
+    </div>
+  </div>
+
+  <div className="ds-code-section">
+    <div className="ds-code-header">
+      <h3 className="ds-code-title">Tailwind CSS — ukuran icon</h3>
+    </div>
+    <div className="ds-code-wrap">
+      <div className="ds-code-block">
+        <pre>{`<!-- small 16px -->
+<img src="assets/icons/Icon:home.svg" alt="home" class="w-4 h-4">
+<!-- medium 24px (default) -->
+<img src="assets/icons/Icon:home.svg" alt="home" class="w-6 h-6">
+<!-- large 32px -->
+<img src="assets/icons/Icon:home.svg" alt="home" class="w-8 h-8">
+<!-- xlarge 48px -->
+<img src="assets/icons/Icon:home.svg" alt="home" class="w-12 h-12">
+
+<!-- Button dengan icon -->
+<button class="flex items-center gap-2 px-4 py-2
+       bg-blue-600 text-white rounded-lg font-medium">
+  <img src="assets/icons/Icon:plus.svg"
+       alt="tambah" class="w-6 h-6">
+  Tambah Produk
+</button>`}</pre>
+      </div>
+    </div>
   </div>
 </div>

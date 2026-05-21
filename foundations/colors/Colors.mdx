@@ -1,170 +1,327 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 
-export const primary = [
-  { scale: '50',  hex: '#EEF7FF' },
-  { scale: '100', hex: '#D9EFFE' },
-  { scale: '200', hex: '#BADDFD' },
-  { scale: '300', hex: '#86C3FA' },
-  { scale: '400', hex: '#4FA6F5' },
-  { scale: '500', hex: '#1E7FD6', brand: true },
-  { scale: '600', hex: '#1668B0' },
-  { scale: '700', hex: '#115188' },
-  { scale: '800', hex: '#0D3C63' },
-  { scale: '900', hex: '#09293F' },
+export const colorFamilies = [
+  {
+    id: 'blue', name: 'Blue', brand: true,
+    desc: 'Warna brand utama GPOS. Digunakan untuk primary action, link, focus state, dan elemen interaktif utama.',
+    tokens: [
+      { name: 'B50',  hex: '#E9F2FB' },
+      { name: 'B75',  hex: '#A3CBEE' },
+      { name: 'B100', hex: '#7DB5E7' },
+      { name: 'B200', hex: '#4495DD' },
+      { name: 'B300', hex: '#1E7FD6', brand: true },
+      { name: 'B400', hex: '#155996' },
+      { name: 'B500', hex: '#124D83' },
+    ]
+  },
+  {
+    id: 'orange', name: 'Orange', brand: false,
+    desc: 'Warna peringatan & warning. Gunakan untuk alert, badge notifikasi, dan status yang perlu perhatian.',
+    tokens: [
+      { name: 'O50',  hex: '#FFF4E8' },
+      { name: 'O75',  hex: '#FFD19F' },
+      { name: 'O100', hex: '#FFBF77' },
+      { name: 'O200', hex: '#FFA33D' },
+      { name: 'O300', hex: '#FF9015' },
+      { name: 'O400', hex: '#B3650F' },
+      { name: 'O500', hex: '#9C580D' },
+    ]
+  },
+  {
+    id: 'red', name: 'Red', brand: false,
+    desc: 'Warna error & danger. Digunakan untuk pesan kesalahan, validasi gagal, dan aksi destruktif.',
+    tokens: [
+      { name: 'R50',  hex: '#FDE8E9' },
+      { name: 'R75',  hex: '#F7A2A5' },
+      { name: 'R100', hex: '#F47B80' },
+      { name: 'R200', hex: '#EF4349' },
+      { name: 'R300', hex: '#EC1C24' },
+      { name: 'R400', hex: '#A51419' },
+      { name: 'R500', hex: '#901116' },
+    ]
+  },
+  {
+    id: 'green', name: 'Green', brand: false,
+    desc: 'Warna sukses & konfirmasi. Digunakan untuk status berhasil, konfirmasi aksi, dan indikator positif.',
+    tokens: [
+      { name: 'G50',  hex: '#E6F7EF' },
+      { name: 'G75',  hex: '#96DCBC' },
+      { name: 'G100', hex: '#6BCEA0' },
+      { name: 'G200', hex: '#2BB877' },
+      { name: 'G300', hex: '#00AA5B' },
+      { name: 'G400', hex: '#007740' },
+      { name: 'G500', hex: '#006838' },
+    ]
+  },
+  {
+    id: 'purple', name: 'Purple', brand: false,
+    desc: 'Warna discovery & premium. Digunakan untuk fitur baru, badge discovery, dan elemen premium.',
+    tokens: [
+      { name: 'P50',  hex: '#F1ECFE' },
+      { name: 'P75',  hex: '#C4B0FB' },
+      { name: 'P100', hex: '#AB8FFA' },
+      { name: 'P200', hex: '#875FF8' },
+      { name: 'P300', hex: '#6E3EF6' },
+      { name: 'P400', hex: '#4D2BAC' },
+      { name: 'P500', hex: '#432696' },
+    ]
+  },
+  {
+    id: 'neutral', name: 'Neutral', brand: false,
+    desc: 'Skala abu-abu untuk teks, border, background, dan elemen UI struktural. Backbone dari setiap layout.',
+    tokens: [
+      { name: 'N0',   hex: '#FFFFFF' },
+      { name: 'N10',  hex: '#FAFBFB' },
+      { name: 'N20',  hex: '#F5F6F7' },
+      { name: 'N30',  hex: '#EBEDF0' },
+      { name: 'N40',  hex: '#DFE2E6' },
+      { name: 'N50',  hex: '#C2C7D0' },
+      { name: 'N60',  hex: '#B3B9C4' },
+      { name: 'N70',  hex: '#A6AEBB' },
+      { name: 'N80',  hex: '#98A1B0' },
+      { name: 'N90',  hex: '#8993A4' },
+      { name: 'N100', hex: '#7A8699' },
+      { name: 'N200', hex: '#6B788E' },
+      { name: 'N300', hex: '#5D6B82' },
+      { name: 'N400', hex: '#505F79' },
+      { name: 'N500', hex: '#42526D' },
+      { name: 'N600', hex: '#354764' },
+      { name: 'N700', hex: '#243757' },
+      { name: 'N800', hex: '#15294B' },
+      { name: 'N900', hex: '#091E42' },
+    ]
+  },
 ];
 
-export const secondary = [
-  { scale: '50',  hex: '#ECFEFF' },
-  { scale: '100', hex: '#CFFAFE' },
-  { scale: '200', hex: '#A5F3FC' },
-  { scale: '300', hex: '#67E8F9' },
-  { scale: '400', hex: '#22D3EE' },
-  { scale: '500', hex: '#06B6D4', brand: true },
-  { scale: '600', hex: '#0891B2' },
-  { scale: '700', hex: '#0E7490' },
-  { scale: '800', hex: '#155E75' },
-  { scale: '900', hex: '#164E63' },
-];
+export const semanticHex = {
+  'Color.Blue.B50':'#E9F2FB','Color.Blue.B75':'#A3CBEE','Color.Blue.B100':'#7DB5E7',
+  'Color.Blue.B200':'#4495DD','Color.Blue.B300':'#1E7FD6','Color.Blue.B400':'#155996','Color.Blue.B500':'#124D83',
+  'Color.Orange.O50':'#FFF4E8','Color.Orange.O75':'#FFD19F','Color.Orange.O100':'#FFBF77',
+  'Color.Orange.O200':'#FFA33D','Color.Orange.O300':'#FF9015','Color.Orange.O400':'#B3650F','Color.Orange.O500':'#9C580D',
+  'Color.Red.R50':'#FDE8E9','Color.Red.R75':'#F7A2A5','Color.Red.R100':'#F47B80',
+  'Color.Red.R200':'#EF4349','Color.Red.R300':'#EC1C24','Color.Red.R400':'#A51419','Color.Red.R500':'#901116',
+  'Color.Green.G50':'#E6F7EF','Color.Green.G75':'#96DCBC','Color.Green.G100':'#6BCEA0',
+  'Color.Green.G200':'#2BB877','Color.Green.G300':'#00AA5B','Color.Green.G400':'#007740','Color.Green.G500':'#006838',
+  'Color.Purple.P50':'#F1ECFE','Color.Purple.P75':'#C4B0FB','Color.Purple.P100':'#AB8FFA',
+  'Color.Purple.P200':'#875FF8','Color.Purple.P300':'#6E3EF6','Color.Purple.P400':'#4D2BAC','Color.Purple.P500':'#432696',
+  'Color.Neutral.N0':'#FFFFFF','Color.Neutral.N10':'#FAFBFB','Color.Neutral.N20':'#F5F6F7',
+  'Color.Neutral.N30':'#EBEDF0','Color.Neutral.N40':'#DFE2E6','Color.Neutral.N50':'#C2C7D0',
+  'Color.Neutral.N60':'#B3B9C4','Color.Neutral.N70':'#A6AEBB','Color.Neutral.N80':'#98A1B0',
+  'Color.Neutral.N90':'#8993A4','Color.Neutral.N100':'#7A8699','Color.Neutral.N200':'#6B788E',
+  'Color.Neutral.N300':'#5D6B82','Color.Neutral.N400':'#505F79','Color.Neutral.N500':'#42526D',
+  'Color.Neutral.N600':'#354764','Color.Neutral.N700':'#243757','Color.Neutral.N800':'#15294B','Color.Neutral.N900':'#091E42',
+};
 
-export const semantic = [
-  { name: 'Success', token: '--color-success', colors: ['#F0FDF4','#DCFCE7','#BBF7D0','#86EFAC','#4ADE80','#22C55E','#16A34A','#15803D','#166534','#145231'] },
-  { name: 'Warning', token: '--color-warning', colors: ['#FFFBEB','#FEF3C7','#FDE68A','#FCD34D','#FBBF24','#F59E0B','#D97706','#B45309','#92400E','#78350F'] },
-  { name: 'Error',   token: '--color-error',   colors: ['#FEF2F2','#FEE2E2','#FECACA','#FCA5A5','#F87171','#EF4444','#DC2626','#B91C1C','#991B1B','#7F1D1D'] },
-  { name: 'Info',    token: '--color-info',     colors: ['#F0F9FF','#E0F2FE','#BAE6FD','#7DD3FC','#38BDF8','#0EA5E9','#0284C7','#0369A1','#075985','#0C4A6E'] },
-];
-
-export const brand = [
-  { name: 'Blue',    token: '--color-blue',    scales: ['b50','b75','b100','b200','b300','b400','b500'], colors: ['#E9F2FB','#A3CBEE','#7DB5E7','#4495DD','#1E7FD6','#155996','#124D83'] },
-  { name: 'Orange',  token: '--color-orange',  scales: ['o50','o75','o100','o200','o300','o400','o500'], colors: ['#FFF4E8','#FFD19F','#FFBF77','#FFA33D','#FF9015','#B3650F','#9C580D'] },
-  { name: 'Red',     token: '--color-red',     scales: ['r50','r75','r100','r200','r300','r400','r500'], colors: ['#FDE8E9','#F7A2A5','#F47B80','#EF4349','#EC1C24','#A51419','#901116'] },
-  { name: 'Green',   token: '--color-green',   scales: ['g50','g75','g100','g200','g300','g400','g500'], colors: ['#E6F7EF','#96DCBC','#6BCEA0','#2BB877','#00AA5B','#007740','#006838'] },
-  { name: 'Purple',  token: '--color-purple',  scales: ['p50','p75','p100','p200','p300','p400','p500'], colors: ['#F1ECFE','#C4B0FB','#AB8FFA','#875FF8','#6E3EF6','#4D2BAC','#432696'] },
-];
-
-export const neutral = [
-  { scale: 'n0',   hex: '#FFFFFF' }, { scale: 'n10',  hex: '#FAFBFB' },
-  { scale: 'n20',  hex: '#F5F6F7' }, { scale: 'n30',  hex: '#EBEDF0' },
-  { scale: 'n40',  hex: '#DFE2E6' }, { scale: 'n50',  hex: '#C2C7D0' },
-  { scale: 'n60',  hex: '#B3B9C4' }, { scale: 'n70',  hex: '#A6AEBB' },
-  { scale: 'n100', hex: '#7A8699' }, { scale: 'n200', hex: '#6B788E' },
-  { scale: 'n300', hex: '#5D6B82' }, { scale: 'n400', hex: '#505F79' },
-  { scale: 'n500', hex: '#42526D' }, { scale: 'n600', hex: '#354764' },
-  { scale: 'n700', hex: '#243757' }, { scale: 'n800', hex: '#15294B' },
-  { scale: 'n900', hex: '#091E42' },
-];
+export const semanticTokens = {
+  background: [
+    { name: 'Background.Neutral',          ref: 'Color.Neutral.N20'  },
+    { name: 'Background.Neutral.Subtle',   ref: 'Color.Neutral.N10'  },
+    { name: 'Background.Neutral.Hover',    ref: 'Color.Neutral.N20'  },
+    { name: 'Background.Neutral.Pressed',  ref: 'Color.Neutral.N40'  },
+    { name: 'Background.Neutral.Bold',     ref: 'Color.Neutral.N500' },
+    { name: 'Background.Brand.Bold',       ref: 'Color.Blue.B300'    },
+    { name: 'Background.Brand.Hover',      ref: 'Color.Blue.B400'    },
+    { name: 'Background.Brand.Pressed',    ref: 'Color.Blue.B500'    },
+    { name: 'Background.Selected',         ref: 'Color.Blue.B50'     },
+    { name: 'Background.Selected.Hover',   ref: 'Color.Blue.B400'    },
+    { name: 'Background.Information',      ref: 'Color.Blue.B50'     },
+    { name: 'Background.Success',          ref: 'Color.Green.G50'    },
+    { name: 'Background.Success.Bold',     ref: 'Color.Green.G300'   },
+    { name: 'Background.Warning',          ref: 'Color.Orange.O50'   },
+    { name: 'Background.Warning.Bold',     ref: 'Color.Orange.O200'  },
+    { name: 'Background.Danger.Inverse',   ref: 'Color.Red.R50'      },
+    { name: 'Background.Danger.Bold',      ref: 'Color.Red.R300'     },
+    { name: 'Background.Disable',          ref: 'Color.Neutral.N40'  },
+    { name: 'Background.Discovery',        ref: 'Color.Purple.P50'   },
+    { name: 'Background.Discovery.Bold',   ref: 'Color.Purple.P300'  },
+    { name: 'Background.Input',            ref: 'Color.Neutral.N0'   },
+    { name: 'Background.Input.Hover',      ref: 'Color.Neutral.N20'  },
+    { name: 'Elevation.Surface',           ref: 'Color.Neutral.N10'  },
+    { name: 'Elevation.Surface.Sunken',    ref: 'Color.Neutral.N20'  },
+  ],
+  text: [
+    { name: 'Text.Bold',           ref: 'Color.Neutral.N900' },
+    { name: 'Text.Subtle',         ref: 'Color.Neutral.N300' },
+    { name: 'Text.Disabled',       ref: 'Color.Neutral.N60'  },
+    { name: 'Text.Inverse',        ref: 'Color.Neutral.N0'   },
+    { name: 'Text.Brand',          ref: 'Color.Blue.B300'    },
+    { name: 'Text.Selected',       ref: 'Color.Blue.B300'    },
+    { name: 'Text.Link',           ref: 'Color.Blue.B300'    },
+    { name: 'Text.Link.Pressed',   ref: 'Color.Blue.B400'    },
+    { name: 'Text.Success',        ref: 'Color.Green.G300'   },
+    { name: 'Text.Danger',         ref: 'Color.Red.R300'     },
+    { name: 'Text.Warning',        ref: 'Color.Orange.O300'  },
+    { name: 'Text.Discovery',      ref: 'Color.Purple.P300'  },
+    { name: 'Text.Accent.Green',   ref: 'Color.Green.G500'   },
+    { name: 'Text.Accent.Red',     ref: 'Color.Red.R500'     },
+    { name: 'Text.Accent.Purple',  ref: 'Color.Purple.P500'  },
+    { name: 'Text.Accent.Yellow',  ref: 'Color.Orange.O500'  },
+  ],
+  border: [
+    { name: 'Border',          ref: 'Color.Neutral.N40' },
+    { name: 'Border.Input',    ref: 'Color.Neutral.N40' },
+    { name: 'Border.Focused',  ref: 'Color.Blue.B200'   },
+    { name: 'Border.Danger',   ref: 'Color.Red.R200'    },
+  ],
+  icon: [
+    { name: 'Icon.Bold',       ref: 'Color.Neutral.N900' },
+    { name: 'Icon.Subtle',     ref: 'Color.Neutral.N200' },
+    { name: 'Icon.Disable',    ref: 'Color.Neutral.N70'  },
+    { name: 'Icon.Inverse',    ref: 'Color.Neutral.N0'   },
+    { name: 'Icon.Brand',      ref: 'Color.Blue.B300'    },
+    { name: 'Icon.selected',   ref: 'Color.Blue.B400'    },
+    { name: 'Icon.Link',       ref: 'Color.Blue.B300'    },
+    { name: 'Icon.Success',    ref: 'Color.Green.G300'   },
+    { name: 'Icon.Danger',     ref: 'Color.Red.R300'     },
+    { name: 'Icon.Warning',    ref: 'Color.Orange.O300'  },
+    { name: 'Icon.Discovery',  ref: 'Color.Purple.P300'  },
+  ],
+};
 
 export const isDark = hex => {
   const r = parseInt(hex.slice(1,3),16);
   const g = parseInt(hex.slice(3,5),16);
   const b = parseInt(hex.slice(5,7),16);
-  return (r * 299 + g * 587 + b * 114) / 1000 < 128;
+  return (r * 299 + g * 587 + b * 114) / 1000 < 140;
 };
 
 <Meta title="Foundation/Colors" />
 
 <style>{`
-  .ds-section { margin-bottom: 48px; }
-  .ds-section h2 { font-size: 20px; font-weight: 600; margin: 0 0 8px; color: #0F172A; }
-  .ds-section p  { font-size: 14px; color: #64748B; margin: 0 0 20px; }
-  .ds-swatches   { display: flex; flex-wrap: wrap; gap: 8px; }
-  .ds-swatch     { width: 80px; }
-  .ds-swatch-box { height: 64px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.08); }
-  .ds-swatch-scale { font-size: 13px; font-weight: 600; margin-top: 6px; color: #1E293B; }
-  .ds-swatch-hex   { font-size: 11px; color: #64748B; font-family: monospace; }
-  .ds-swatch-var   { font-size: 10px; color: #94A3B8; font-family: monospace; margin-top: 2px; }
-  .ds-brand-row    { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
-  .ds-brand-label  { width: 60px; font-size: 13px; font-weight: 500; color: #475569; flex-shrink: 0; }
-  .ds-brand-chip   { flex: 1; height: 36px; border-radius: 6px; border: 1px solid rgba(0,0,0,0.06); min-width: 40px; }
-  .ds-semantic-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
-  .ds-sem-label    { width: 64px; font-size: 13px; font-weight: 500; color: #475569; }
-  .ds-sem-chip     { flex: 1; height: 36px; border-radius: 6px; border: 1px solid rgba(0,0,0,0.06); }
+  .ds-section       { margin-bottom: 48px; }
+  .ds-section h2    { font-size: 18px; font-weight: 700; margin: 0 0 4px; color: #091E42; display: flex; align-items: center; gap: 8px; }
+  .ds-section p     { font-size: 14px; color: #5D6B82; margin: 0 0 16px; }
+  .ds-badge         { font-size: 11px; font-weight: 600; background: #F5F6F7; color: #5D6B82; padding: 2px 10px; border-radius: 9999px; }
+  .ds-brand-badge   { font-size: 11px; font-weight: 700; background: #E9F2FB; color: #1E7FD6; padding: 2px 10px; border-radius: 9999px; }
+  .ds-swatches      { display: flex; gap: 0; border-radius: 10px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+  .ds-swatch        { flex: 1; min-width: 60px; }
+  .ds-swatch-box    { height: 72px; width: 100%; }
+  .ds-swatch-info   { padding: 6px 8px 8px; background: #fff; border-top: 1px solid #EBEDF0; }
+  .ds-swatch-name   { font-size: 11px; font-weight: 700; color: #091E42; display: block; }
+  .ds-swatch-hex    { font-size: 11px; color: #5D6B82; font-family: monospace; display: block; margin-top: 1px; }
+  .ds-sem-section   { margin-bottom: 40px; }
+  .ds-sem-title     { font-size: 16px; font-weight: 700; color: #091E42; margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
+  .ds-sem-grid      { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+  .ds-sem-card      { border-radius: 10px; overflow: hidden; border: 1px solid #EBEDF0; background: #fff; }
+  .ds-sem-preview   { height: 48px; }
+  .ds-sem-body      { padding: 8px 10px 10px; }
+  .ds-sem-name      { font-size: 12px; font-weight: 700; color: #091E42; }
+  .ds-sem-ref       { font-size: 11px; color: #5D6B82; margin-top: 2px; }
+  .ds-sem-hex       { font-size: 11px; font-family: monospace; color: #8993A4; margin-top: 2px; }
 `}</style>
 
-# Colors
+# Color System
 
-Sistem warna GPOS Lite V2.0. Brand color utama adalah **GPOS Blue `#1E7FD6`** — warna di skala 500 pada setiap palette.
+Token warna GPOS Lite — 6 palette inti & semantic tokens untuk konsistensi visual di seluruh produk.
 
 ---
 
-<div className="ds-section">
-  <h2>Primary — GPOS Blue</h2>
-  <p>Digunakan untuk tombol utama, link, highlight, dan elemen interaktif.</p>
-  <div className="ds-swatches">
-    {primary.map(c => (
-      <div key={c.scale} className="ds-swatch">
-        <div className="ds-swatch-box" style={{
-          backgroundColor: c.hex,
-          outline: c.brand ? '2px solid #1E7FD6' : 'none',
-          outlineOffset: '2px',
-        }} />
-        <div className="ds-swatch-scale">{c.scale}</div>
-        <div className="ds-swatch-hex">{c.hex}</div>
-        <div className="ds-swatch-var">{`--color-primary-${c.scale}`}</div>
-      </div>
-    ))}
+## Color Palette
+
+{colorFamilies.map(fam => (
+  <div key={fam.id} className="ds-section">
+    <h2>
+      {fam.name}
+      <span className="ds-badge">{fam.tokens.length} tokens</span>
+      {fam.brand && <span className="ds-brand-badge">BRAND</span>}
+    </h2>
+    <p>{fam.desc}</p>
+    <div className="ds-swatches">
+      {fam.tokens.map(t => (
+        <div key={t.name} className="ds-swatch">
+          <div className="ds-swatch-box" style={{
+            backgroundColor: t.hex,
+            outline: t.brand ? '2px solid #1E7FD6' : 'none',
+            outlineOffset: '-2px',
+          }} />
+          <div className="ds-swatch-info">
+            <span className="ds-swatch-name">{fam.name.charAt(0)}.{t.name}</span>
+            <span className="ds-swatch-hex">{t.hex}</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+))}
+
+---
+
+## Semantic Tokens
+
+Semantic tokens memetakan color primitives ke makna fungsional. Gunakan token ini — bukan nilai hex langsung — agar UI tetap konsisten saat theme berubah.
+
+<div className="ds-sem-section">
+  <div className="ds-sem-title">Background <span className="ds-badge">{semanticTokens.background.length} tokens</span></div>
+  <div className="ds-sem-grid">
+    {semanticTokens.background.map(t => {
+      const hex = semanticHex[t.ref] || '#CCCCCC';
+      return (
+        <div key={t.name} className="ds-sem-card">
+          <div className="ds-sem-preview" style={{ backgroundColor: hex }} />
+          <div className="ds-sem-body">
+            <div className="ds-sem-name">{t.name}</div>
+            <div className="ds-sem-ref">→ {t.ref.replace('Color.','')}</div>
+            <div className="ds-sem-hex">{hex}</div>
+          </div>
+        </div>
+      );
+    })}
   </div>
 </div>
 
-<div className="ds-section">
-  <h2>Secondary — Cyan</h2>
-  <p>Warna komplementer untuk aksen, badge, dan status indicators.</p>
-  <div className="ds-swatches">
-    {secondary.map(c => (
-      <div key={c.scale} className="ds-swatch">
-        <div className="ds-swatch-box" style={{
-          backgroundColor: c.hex,
-          outline: c.brand ? '2px solid #06B6D4' : 'none',
-          outlineOffset: '2px',
-        }} />
-        <div className="ds-swatch-scale">{c.scale}</div>
-        <div className="ds-swatch-hex">{c.hex}</div>
-        <div className="ds-swatch-var">{`--color-secondary-${c.scale}`}</div>
-      </div>
-    ))}
+<div className="ds-sem-section">
+  <div className="ds-sem-title">Text <span className="ds-badge">{semanticTokens.text.length} tokens</span></div>
+  <div className="ds-sem-grid">
+    {semanticTokens.text.map(t => {
+      const hex = semanticHex[t.ref] || '#CCCCCC';
+      return (
+        <div key={t.name} className="ds-sem-card">
+          <div className="ds-sem-preview" style={{ backgroundColor: hex }} />
+          <div className="ds-sem-body">
+            <div className="ds-sem-name">{t.name}</div>
+            <div className="ds-sem-ref">→ {t.ref.replace('Color.','')}</div>
+            <div className="ds-sem-hex">{hex}</div>
+          </div>
+        </div>
+      );
+    })}
   </div>
 </div>
 
-<div className="ds-section">
-  <h2>Semantic Colors</h2>
-  <p>Digunakan untuk feedback state: success, warning, error, dan info.</p>
-  {semantic.map(group => (
-    <div key={group.name} className="ds-semantic-row">
-      <span className="ds-sem-label">{group.name}</span>
-      {group.colors.map((hex, i) => (
-        <div key={i} className="ds-sem-chip" style={{ backgroundColor: hex }} title={hex} />
-      ))}
-    </div>
-  ))}
-  <p style={{ marginTop: '8px' }}>Token: <code>--color-success-500</code>, <code>--color-warning-500</code>, <code>--color-error-500</code>, <code>--color-info-500</code></p>
+<div className="ds-sem-section">
+  <div className="ds-sem-title">Border <span className="ds-badge">{semanticTokens.border.length} tokens</span></div>
+  <div className="ds-sem-grid">
+    {semanticTokens.border.map(t => {
+      const hex = semanticHex[t.ref] || '#CCCCCC';
+      return (
+        <div key={t.name} className="ds-sem-card">
+          <div className="ds-sem-preview" style={{ backgroundColor: hex }} />
+          <div className="ds-sem-body">
+            <div className="ds-sem-name">{t.name}</div>
+            <div className="ds-sem-ref">→ {t.ref.replace('Color.','')}</div>
+            <div className="ds-sem-hex">{hex}</div>
+          </div>
+        </div>
+      );
+    })}
+  </div>
 </div>
 
-<div className="ds-section">
-  <h2>GP Lite Brand Palette</h2>
-  <p>Palette warna khusus GPOS Lite dari design tokens JSON — Blue, Orange, Red, Green, Purple.</p>
-  {brand.map(group => (
-    <div key={group.name} className="ds-brand-row">
-      <span className="ds-brand-label">{group.name}</span>
-      {group.colors.map((hex, i) => (
-        <div key={i} className="ds-brand-chip" style={{ backgroundColor: hex }} title={`${group.token}-${group.scales[i]}: ${hex}`} />
-      ))}
-    </div>
-  ))}
-</div>
-
-<div className="ds-section">
-  <h2>Neutral Scale</h2>
-  <p>Dari putih <code>n0</code> hingga navy gelap <code>n900</code>. Digunakan untuk teks, border, dan background.</p>
-  <div className="ds-swatches">
-    {neutral.map(c => (
-      <div key={c.scale} className="ds-swatch">
-        <div className="ds-swatch-box" style={{
-          backgroundColor: c.hex,
-          border: c.hex === '#FFFFFF' ? '1px solid #E2E8F0' : '1px solid rgba(0,0,0,0.08)',
-        }} />
-        <div className="ds-swatch-scale">{c.scale}</div>
-        <div className="ds-swatch-hex">{c.hex}</div>
-        <div className="ds-swatch-var">{`--color-neutral-${c.scale}`}</div>
-      </div>
-    ))}
+<div className="ds-sem-section">
+  <div className="ds-sem-title">Icon <span className="ds-badge">{semanticTokens.icon.length} tokens</span></div>
+  <div className="ds-sem-grid">
+    {semanticTokens.icon.map(t => {
+      const hex = semanticHex[t.ref] || '#CCCCCC';
+      return (
+        <div key={t.name} className="ds-sem-card">
+          <div className="ds-sem-preview" style={{ backgroundColor: hex }} />
+          <div className="ds-sem-body">
+            <div className="ds-sem-name">{t.name}</div>
+            <div className="ds-sem-ref">→ {t.ref.replace('Color.','')}</div>
+            <div className="ds-sem-hex">{hex}</div>
+          </div>
+        </div>
+      );
+    })}
   </div>
 </div>

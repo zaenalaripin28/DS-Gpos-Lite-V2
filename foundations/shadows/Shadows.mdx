@@ -1,148 +1,310 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 
-export const shadows = [
-  {
-    name: 'Shadow 1',
-    token: '--shadow-1',
-    value: '0px 0px 1px rgba(9,30,66,0.31), 0px 8px 12px rgba(9,30,66,0.15)',
-    desc: 'Primary token multi-layer — edge + depth. Digunakan untuk card utama.',
-    shadow: '0px 0px 1px 0px rgba(9,30,66,0.31), 0px 8px 12px 0px rgba(9,30,66,0.15)',
-  },
-  {
-    name: 'None',
-    token: '--shadow-none',
-    value: 'none',
-    desc: 'Tanpa shadow. Default state atau flat element.',
-    shadow: 'none',
-  },
-  {
-    name: 'XS',
-    token: '--shadow-xs',
-    value: '0 1px 2px rgba(0,0,0,0.04)',
-    desc: 'Shadow sangat kecil. Untuk elemen seperti chip atau tag.',
-    shadow: '0 1px 2px 0 rgba(0,0,0,0.04)',
-  },
-  {
-    name: 'SM',
-    token: '--shadow-sm',
-    value: '0 1px 3px rgba(0,0,0,0.08)',
-    desc: 'Shadow kecil. Untuk button, input, dan elemen ringan.',
-    shadow: '0 1px 3px 0 rgba(0,0,0,0.08), 0 1px 2px -1px rgba(0,0,0,0.06)',
-  },
-  {
-    name: 'MD',
-    token: '--shadow-md',
-    value: '0 4px 8px rgba(0,0,0,0.10)',
-    desc: 'Shadow medium. Untuk card, dropdown, dan popup kecil.',
-    shadow: '0 4px 8px -2px rgba(0,0,0,0.10), 0 2px 4px -2px rgba(0,0,0,0.06)',
-  },
-  {
-    name: 'LG',
-    token: '--shadow-lg',
-    value: '0 12px 24px rgba(0,0,0,0.12)',
-    desc: 'Shadow besar. Untuk modal dan panel.',
-    shadow: '0 12px 24px -6px rgba(0,0,0,0.12), 0 4px 8px -4px rgba(0,0,0,0.06)',
-  },
-  {
-    name: 'XL',
-    token: '--shadow-xl',
-    value: '0 20px 40px rgba(0,0,0,0.15)',
-    desc: 'Shadow ekstra besar. Untuk overlay penting.',
-    shadow: '0 20px 40px -8px rgba(0,0,0,0.15), 0 8px 16px -4px rgba(0,0,0,0.06)',
-  },
-  {
-    name: '2XL',
-    token: '--shadow-2xl',
-    value: '0 32px 64px rgba(0,0,0,0.20)',
-    desc: 'Shadow maksimum. Untuk dialog full-screen.',
-    shadow: '0 32px 64px -16px rgba(0,0,0,0.20)',
-  },
-  {
-    name: 'Brand',
-    token: '--shadow-brand',
-    value: '0 4px 14px rgba(30,127,214,0.35)',
-    desc: 'Shadow berwarna brand blue. Untuk CTA button aktif.',
-    shadow: '0 4px 14px 0 rgba(30,127,214,0.35)',
-    accent: true,
-  },
-  {
-    name: 'Inner',
-    token: '--shadow-inner',
-    value: 'inset 0 2px 4px rgba(0,0,0,0.06)',
-    desc: 'Shadow ke dalam. Untuk input focused atau pressed state.',
-    shadow: 'inset 0 2px 4px 0 rgba(0,0,0,0.06)',
-    inner: true,
-  },
-];
-
 <Meta title="Foundation/Shadows" />
 
 <style>{`
   .ds-section { margin-bottom: 48px; }
-  .ds-section h2 { font-size: 20px; font-weight: 600; margin: 0 0 8px; color: #0F172A; }
-  .ds-section p  { font-size: 14px; color: #64748B; margin: 0 0 24px; }
-  .ds-shadow-grid{ display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
-  .ds-shadow-card{ background: #FFFFFF; border-radius: 12px; padding: 24px 20px 16px; border: 1px solid #F1F5F9; }
-  .ds-shadow-demo{ width: 72px; height: 72px; background: #FFFFFF; border-radius: 10px; margin: 0 auto 20px; border: 1px solid #F1F5F9; }
-  .ds-shadow-name{ font-size: 14px; font-weight: 600; color: #0F172A; margin-bottom: 4px; }
-  .ds-shadow-token{ font-size: 11px; font-family: monospace; color: #1E7FD6; margin-bottom: 6px; }
-  .ds-shadow-desc { font-size: 12px; color: #64748B; line-height: 1.5; margin-bottom: 8px; }
-  .ds-shadow-val  { font-size: 10px; font-family: monospace; color: #94A3B8; word-break: break-all; }
+  .ds-section h2 { font-size: 20px; font-weight: 700; margin: 0 0 16px; color: #091E42; }
+  .ds-section p { font-size: 14px; color: #42526D; margin: 0 0 24px; }
+
+  .ds-shadow-preview-wrap {
+    background: #F5F6F7;
+    background-image:
+      linear-gradient(45deg, #E0E4EA 25%, transparent 25%),
+      linear-gradient(-45deg, #E0E4EA 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #E0E4EA 75%),
+      linear-gradient(-45deg, transparent 75%, #E0E4EA 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    border-radius: 16px;
+    padding: 60px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    border: 1px solid #DFE2E6;
+  }
+  .ds-shadow-card-demo {
+    width: 200px;
+    height: 120px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 0px 1px 0px rgba(9,30,66,0.31), 0px 8px 12px 0px rgba(9,30,66,0.15);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .ds-shadow-card-label { font-size: 11px; font-weight: 700; color: #6B788E; letter-spacing: 0.06em; text-transform: uppercase; }
+  .ds-shadow-card-name { font-size: 15px; font-weight: 700; color: #091E42; }
+
+  .ds-token-header {
+    background: #fff;
+    border: 1px solid #DFE2E6;
+    border-radius: 12px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .ds-token-left { display: flex; align-items: center; gap: 14px; }
+  .ds-token-chip { background: #091E42; color: #fff; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 999px; }
+  .ds-token-name-big { font-size: 18px; font-weight: 700; color: #091E42; }
+  .ds-token-sub { font-size: 12px; color: #6B788E; }
+  .ds-multilayer-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #EBF5FF; border: 1px solid #A3CBEE; color: #155996;
+    font-size: 11.5px; font-weight: 600; padding: 4px 12px; border-radius: 999px;
+  }
+
+  .ds-anatomy-section { background: #fff; border: 1px solid #DFE2E6; border-radius: 12px; overflow: hidden; margin-bottom: 24px; }
+  .ds-anatomy-header { padding: 16px 24px; border-bottom: 1px solid #EBEDF0; display: flex; align-items: center; gap: 10px; }
+  .ds-anatomy-title { font-size: 13px; font-weight: 700; color: #091E42; text-transform: uppercase; letter-spacing: 0.06em; }
+  .ds-layer-count { background: #F5F6F7; color: #42526D; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+
+  .ds-anatomy-table { width: 100%; border-collapse: collapse; }
+  .ds-anatomy-table thead tr { background: #F8FAFC; }
+  .ds-anatomy-table th { padding: 10px 20px; font-size: 11px; font-weight: 700; color: #6B788E; text-align: left; letter-spacing: 0.06em; text-transform: uppercase; border-bottom: 1px solid #EBEDF0; white-space: nowrap; }
+  .ds-anatomy-table td { padding: 14px 20px; font-size: 13px; color: #354764; border-bottom: 1px solid #F5F6F7; }
+  .ds-anatomy-table tr:last-child td { border-bottom: none; }
+  .ds-anatomy-table td:first-child { font-weight: 700; color: #091E42; }
+  .ds-layer-cell { display: flex; align-items: center; gap: 8px; }
+  .ds-layer-num { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+  .ds-layer-1 { background: #EBF5FF; color: #1E7FD6; border: 1px solid #A3CBEE; }
+  .ds-layer-2 { background: #091E42; color: #fff; }
+  .ds-layer-role { font-size: 11px; color: #6B788E; font-weight: 500; }
+  .ds-mono { font-family: monospace; font-size: 12px; }
+  .ds-color-swatch { width: 14px; height: 14px; border-radius: 3px; border: 1px solid rgba(0,0,0,0.12); display: inline-block; vertical-align: middle; margin-right: 4px; background: #091E42; }
+
+  .ds-full-css {
+    background: #0D1F3C; border-radius: 12px; padding: 20px 24px; margin-bottom: 32px;
+  }
+  .ds-full-css-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #7DB5E7; margin-bottom: 10px; }
+  .ds-full-css-code { font-size: 13px; font-family: monospace; color: #E8F0F8; line-height: 1.7; word-break: break-all; }
+  .tok-comment { color: #4D6A8C; }
+  .tok-val-s { color: #ABD7FF; }
+
+  .ds-info-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .ds-info-card { border-radius: 12px; padding: 18px 20px; }
+  .ds-info-usage { background: #EBF5FF; border: 1px solid #A3CBEE; }
+  .ds-info-best  { background: #E6F7EF; border: 1px solid #6BCEA0; }
+  .ds-info-avoid { background: #FDE8E9; border: 1px solid #F7A2A5; }
+  .ds-info-head { font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 12px; }
+  .ds-info-usage .ds-info-head { color: #155996; }
+  .ds-info-best  .ds-info-head { color: #007740; }
+  .ds-info-avoid .ds-info-head { color: #A51419; }
+  .ds-info-card ul { margin: 0; padding-left: 16px; list-style: disc; }
+  .ds-info-card li { font-size: 13px; color: #243757; margin-bottom: 6px; line-height: 1.5; }
+  .ds-info-card li:last-child { margin-bottom: 0; }
+
+  .ds-code-section { background: #fff; border: 1px solid #DFE2E6; border-radius: 12px; overflow: hidden; margin-bottom: 40px; }
+  .ds-code-header { padding: 18px 24px; border-bottom: 1px solid #EBEDF0; }
+  .ds-code-title { font-size: 15px; font-weight: 600; color: #091E42; margin: 0; }
+  .ds-code-wrap { padding: 20px 24px; }
+  .ds-code-label { font-size: 11px; font-weight: 700; color: #6B788E; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
+  .ds-code-block { background: #0D1F3C; border-radius: 10px; padding: 18px 20px; }
+  .ds-code-block pre { margin: 0; font-size: 12.5px; font-family: monospace; color: #E8F0F8; line-height: 1.75; overflow-x: auto; }
+  .tok-key { color: #7DB5E7; }
+  .tok-str-s { color: #A8E6CF; }
+  .tok-prop-s { color: #FFD580; }
 `}</style>
 
 # Shadows
 
-Sistem elevasi GPOS Lite V2.0. Shadow 1 adalah token utama multi-layer — digunakan sebagai standar card di seluruh produk.
+1 shadow token multi-layer untuk depth dan elevation yang konsisten — dirancang dengan warna brand **#091E42** untuk visual hierarchy yang subtil dan profesional.
 
 ---
 
 <div className="ds-section">
-  <h2>Elevation System</h2>
-  <p>Dari flat (none) hingga dialog (2xl), plus token khusus brand dan inner.</p>
-  <div className="ds-shadow-grid">
-    {shadows.map(s => (
-      <div key={s.name} className="ds-shadow-card">
-        <div className="ds-shadow-demo" style={{
-          boxShadow: s.shadow,
-          background: s.accent ? 'linear-gradient(135deg, #1E7FD6, #4FA6F5)' : '#FFFFFF',
-          border: s.inner ? '1px solid #E2E8F0' : '1px solid #F1F5F9',
-        }} />
-        <div className="ds-shadow-name">{s.name}</div>
-        <div className="ds-shadow-token">{s.token}</div>
-        <div className="ds-shadow-desc">{s.desc}</div>
-        <div className="ds-shadow-val">{s.value}</div>
+  <h2>Shadow Preview</h2>
+
+  <div className="ds-shadow-preview-wrap">
+    <div className="ds-shadow-card-demo">
+      <span className="ds-shadow-card-label">Token</span>
+      <span className="ds-shadow-card-name">Shadow 1</span>
+    </div>
+  </div>
+
+  <div className="ds-token-header">
+    <div className="ds-token-left">
+      <span className="ds-token-chip">1 TOKEN</span>
+      <div>
+        <div className="ds-token-name-big">Shadow 1</div>
+        <div className="ds-token-sub">--shadow-1 · Drop shadow</div>
       </div>
-    ))}
+    </div>
+    <div className="ds-multilayer-badge">
+      Multi-layer · 2 Drop Shadow
+    </div>
   </div>
 </div>
 
 <div className="ds-section">
-  <h2>Cara Penggunaan</h2>
-  <p>Gunakan token shadow untuk konsistensi elevasi di seluruh komponen.</p>
-  <div style={{
-    background: '#0F172A',
-    borderRadius: '10px',
-    padding: '20px 24px',
-    fontFamily: "'JetBrains Mono', monospace",
-    fontSize: '13px',
-    color: '#E2E8F0',
-    lineHeight: '1.8',
-  }}>
-    <div><span style={{ color: '#7DD3FC' }}>.card</span> {'{'}</div>
-    <div style={{ paddingLeft: '16px' }}>
-      <span style={{ color: '#86EFAC' }}>box-shadow</span>
-      <span>: </span>
-      <span style={{ color: '#FCD34D' }}>var(--shadow-1)</span>
-      <span>;</span>
+  <h2>Layer Anatomy</h2>
+
+  <div className="ds-anatomy-section">
+    <div className="ds-anatomy-header">
+      <span className="ds-anatomy-title">Drop Shadow Layers</span>
+      <span className="ds-layer-count">2 layers</span>
     </div>
-    <div>{'}'}</div>
-    <div style={{ marginTop: '8px' }}><span style={{ color: '#7DD3FC' }}>.btn-primary:hover</span> {'{'}</div>
-    <div style={{ paddingLeft: '16px' }}>
-      <span style={{ color: '#86EFAC' }}>box-shadow</span>
-      <span>: </span>
-      <span style={{ color: '#FCD34D' }}>var(--shadow-brand)</span>
-      <span>;</span>
+    <table className="ds-anatomy-table">
+      <thead>
+        <tr>
+          <th>Layer</th>
+          <th>X</th>
+          <th>Y</th>
+          <th>Blur</th>
+          <th>Spread</th>
+          <th>Color</th>
+          <th>Opacity</th>
+          <th>Fungsi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div className="ds-layer-cell">
+              <span className="ds-layer-num ds-layer-1">1</span>
+              <span className="ds-layer-role">Edge</span>
+            </div>
+          </td>
+          <td><span className="ds-mono">0px</span></td>
+          <td><span className="ds-mono">0px</span></td>
+          <td><span className="ds-mono">1px</span></td>
+          <td><span className="ds-mono">0px</span></td>
+          <td><span className="ds-color-swatch"></span><span className="ds-mono">#091E42</span></td>
+          <td><span className="ds-mono">31%</span></td>
+          <td style={{ color: '#6B788E', fontSize: '12px' }}>Definisi tepi / border halus</td>
+        </tr>
+        <tr>
+          <td>
+            <div className="ds-layer-cell">
+              <span className="ds-layer-num ds-layer-2">2</span>
+              <span className="ds-layer-role">Depth</span>
+            </div>
+          </td>
+          <td><span className="ds-mono">0px</span></td>
+          <td><span className="ds-mono">8px</span></td>
+          <td><span className="ds-mono">12px</span></td>
+          <td><span className="ds-mono">0px</span></td>
+          <td><span className="ds-color-swatch"></span><span className="ds-mono">#091E42</span></td>
+          <td><span className="ds-mono">15%</span></td>
+          <td style={{ color: '#6B788E', fontSize: '12px' }}>Elevasi utama / kedalaman</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div className="ds-full-css">
+    <div className="ds-full-css-label">Full CSS Value — Shadow 1</div>
+    <div className="ds-full-css-code">
+      <span className="tok-comment">{'/* Layer 1 — subtle edge definition */'}</span><br/>
+      <span className="tok-val-s">0px 0px 1px 0px rgba(9, 30, 66, 0.31),</span><br/>
+      <span className="tok-comment">{'/* Layer 2 — main elevation */'}</span><br/>
+      <span className="tok-val-s">0px 8px 12px 0px rgba(9, 30, 66, 0.15)</span>
     </div>
-    <div>{'}'}</div>
+  </div>
+</div>
+
+<div className="ds-section">
+  <h2>Usage Guidelines</h2>
+
+  <div className="ds-info-cards">
+    <div className="ds-info-card ds-info-usage">
+      <div className="ds-info-head">📌 Kapan Dipakai</div>
+      <ul>
+        <li>Card produk &amp; informasi</li>
+        <li>Button elevasi (CTA utama)</li>
+        <li>Panel &amp; sidebar floating</li>
+        <li>Dropdown &amp; popover menu</li>
+        <li>Modal &amp; dialog overlay</li>
+        <li>Input field saat fokus</li>
+      </ul>
+    </div>
+    <div className="ds-info-card ds-info-best">
+      <div className="ds-info-head">✅ Best Practice</div>
+      <ul>
+        <li>Gunakan satu shadow token konsisten di seluruh UI</li>
+        <li>Shadow memperkuat hierarchy, bukan dekorasi</li>
+        <li>Pastikan background putih atau terang agar shadow terlihat</li>
+        <li>Kombinasikan dengan border-radius untuk estetika modern</li>
+      </ul>
+    </div>
+    <div className="ds-info-card ds-info-avoid">
+      <div className="ds-info-head">✖ Hindari</div>
+      <ul>
+        <li>Jangan tumpuk shadow di atas shadow</li>
+        <li>Jangan pakai shadow pada background gelap</li>
+        <li>Jangan custom shadow di luar token ini</li>
+        <li>Hindari di elemen yang tidak perlu elevasi</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div className="ds-section">
+  <h2>Implementation Code</h2>
+
+  <div className="ds-code-section">
+    <div className="ds-code-header">
+      <h3 className="ds-code-title">Tailwind CSS</h3>
+    </div>
+    <div className="ds-code-wrap">
+      <div className="ds-code-label">Token — shadow-1</div>
+      <div className="ds-code-block">
+        <pre>{`// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      boxShadow: {
+        // Shadow 1 — Multi-layer GPOS Lite
+        '1': '0px 0px 1px 0px rgba(9,30,66,0.31), 0px 8px 12px 0px rgba(9,30,66,0.15)',
+      },
+    },
+  },
+};`}</pre>
+      </div>
+      <div style={{ marginTop: '16px' }}>
+        <div className="ds-code-label">Cara Pakai di HTML</div>
+        <div className="ds-code-block">
+          <pre>{`<!-- Gunakan class shadow-1 di element -->
+<div class="shadow-1 rounded-xl bg-white p-6">
+  Card dengan Shadow 1
+</div>`}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div className="ds-code-section">
+    <div className="ds-code-header">
+      <h3 className="ds-code-title">CSS Variable</h3>
+    </div>
+    <div className="ds-code-wrap">
+      <div className="ds-code-label">CSS Variable — styles.css / :root</div>
+      <div className="ds-code-block">
+        <pre>{`:root {
+  /* Shadow 1 — Multi-layer GPOS Lite */
+  --shadow-1:
+    0px 0px 1px 0px rgba(9, 30, 66, 0.31),  /* Layer 1 — edge */
+    0px 8px 12px 0px rgba(9, 30, 66, 0.15); /* Layer 2 — depth */
+}`}</pre>
+      </div>
+      <div style={{ marginTop: '16px' }}>
+        <div className="ds-code-label">Cara Pakai di CSS</div>
+        <div className="ds-code-block">
+          <pre>{`/* Di file CSS kamu */
+.card {
+  box-shadow: var(--shadow-1);
+  border-radius: 12px;
+  background: #ffffff;
+}`}</pre>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
