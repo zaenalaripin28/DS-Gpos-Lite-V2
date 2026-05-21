@@ -1,0 +1,123 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+export const baseScale = [
+  { token: '--spacing-0',  value: '0',        px: '0px'  },
+  { token: '--spacing-1',  value: '0.25rem',  px: '4px'  },
+  { token: '--spacing-2',  value: '0.5rem',   px: '8px'  },
+  { token: '--spacing-3',  value: '0.75rem',  px: '12px' },
+  { token: '--spacing-4',  value: '1rem',     px: '16px' },
+  { token: '--spacing-5',  value: '1.25rem',  px: '20px' },
+  { token: '--spacing-6',  value: '1.5rem',   px: '24px' },
+  { token: '--spacing-8',  value: '2rem',     px: '32px' },
+  { token: '--spacing-10', value: '2.5rem',   px: '40px' },
+  { token: '--spacing-12', value: '3rem',     px: '48px' },
+  { token: '--spacing-16', value: '4rem',     px: '64px' },
+  { token: '--spacing-20', value: '5rem',     px: '80px' },
+  { token: '--spacing-24', value: '6rem',     px: '96px' },
+];
+
+export const gpLiteScale = [
+  { token: '--space-0',    px: '0px'  },
+  { token: '--space-025',  px: '2px'  },
+  { token: '--space-050',  px: '4px'  },
+  { token: '--space-075',  px: '6px'  },
+  { token: '--space-100',  px: '8px'  },
+  { token: '--space-150',  px: '12px' },
+  { token: '--space-200',  px: '16px' },
+  { token: '--space-250',  px: '20px' },
+  { token: '--space-300',  px: '24px' },
+  { token: '--space-400',  px: '32px' },
+  { token: '--space-500',  px: '40px' },
+  { token: '--space-600',  px: '48px' },
+  { token: '--space-800',  px: '64px' },
+  { token: '--space-1000', px: '80px' },
+];
+
+<Meta title="Foundation/Spacing" />
+
+<style>{`
+  .ds-section { margin-bottom: 48px; }
+  .ds-section h2 { font-size: 20px; font-weight: 600; margin: 0 0 8px; color: #0F172A; }
+  .ds-section p  { font-size: 14px; color: #64748B; margin: 0 0 20px; }
+  .ds-sp-table   { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; overflow: hidden; }
+  .ds-sp-row     { display: flex; align-items: center; gap: 16px; padding: 10px 20px; border-bottom: 1px solid #F1F5F9; }
+  .ds-sp-row:last-child { border-bottom: none; }
+  .ds-sp-token   { width: 160px; font-size: 12px; font-family: monospace; color: #64748B; flex-shrink: 0; }
+  .ds-sp-val     { width: 64px; font-size: 12px; color: #94A3B8; flex-shrink: 0; }
+  .ds-sp-bar-wrap{ flex: 1; display: flex; align-items: center; }
+  .ds-sp-bar     { height: 20px; background: #1E7FD6; border-radius: 4px; min-width: 2px; }
+  .ds-sp-px      { font-size: 12px; font-weight: 600; color: #0F172A; margin-left: 10px; white-space: nowrap; }
+`}</style>
+
+# Spacing
+
+Sistem spacing GPOS Lite V2.0 berbasis unit **4px**. Terdapat dua set token: base scale (rem) dan GP Lite space tokens (px).
+
+---
+
+<div className="ds-section">
+  <h2>Base Scale</h2>
+  <p>Token spacing generik dalam rem, cocok untuk margin, padding, dan gap.</p>
+  <div className="ds-sp-table">
+    {baseScale.map(s => (
+      <div key={s.token} className="ds-sp-row">
+        <div className="ds-sp-token">{s.token}</div>
+        <div className="ds-sp-val">{s.value}</div>
+        <div className="ds-sp-bar-wrap">
+          <div className="ds-sp-bar" style={{ width: s.px === '0px' ? '2px' : s.px, opacity: s.px === '0px' ? 0.2 : 1 }} />
+          <span className="ds-sp-px">{s.px}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<div className="ds-section">
+  <h2>GP Lite Space Tokens</h2>
+  <p>Token spacing dari GP Lite design tokens JSON — penamaan berbasis nilai px.</p>
+  <div className="ds-sp-table">
+    {gpLiteScale.map(s => (
+      <div key={s.token} className="ds-sp-row">
+        <div className="ds-sp-token">{s.token}</div>
+        <div className="ds-sp-val">{s.px}</div>
+        <div className="ds-sp-bar-wrap">
+          <div className="ds-sp-bar" style={{ width: s.px === '0px' ? '2px' : s.px, opacity: s.px === '0px' ? 0.2 : 1 }} />
+          <span className="ds-sp-px">{s.px}</span>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<div className="ds-section">
+  <h2>Cara Penggunaan</h2>
+  <p>Gunakan CSS custom properties ini di stylesheet kamu:</p>
+
+  <div style={{
+    background: '#0F172A',
+    borderRadius: '10px',
+    padding: '20px 24px',
+    fontFamily: "'JetBrains Mono', monospace",
+    fontSize: '13px',
+    color: '#E2E8F0',
+    lineHeight: '1.8',
+  }}>
+    <div><span style={{ color: '#94A3B8' }}>/* Menggunakan base spacing token */</span></div>
+    <div><span style={{ color: '#7DD3FC' }}>.card</span> {'{'}</div>
+    <div style={{ paddingLeft: '16px' }}>
+      <span style={{ color: '#86EFAC' }}>padding</span>
+      <span style={{ color: '#E2E8F0' }}>: </span>
+      <span style={{ color: '#FCD34D' }}>var(--spacing-6)</span>
+      <span style={{ color: '#E2E8F0' }}>; </span>
+      <span style={{ color: '#94A3B8' }}>/* 24px */</span>
+    </div>
+    <div style={{ paddingLeft: '16px' }}>
+      <span style={{ color: '#86EFAC' }}>gap</span>
+      <span style={{ color: '#E2E8F0' }}>: </span>
+      <span style={{ color: '#FCD34D' }}>var(--space-200)</span>
+      <span style={{ color: '#E2E8F0' }}>; </span>
+      <span style={{ color: '#94A3B8' }}>/* 16px */</span>
+    </div>
+    <div>{'}'}</div>
+  </div>
+</div>

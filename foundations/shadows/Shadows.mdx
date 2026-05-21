@@ -1,0 +1,148 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+export const shadows = [
+  {
+    name: 'Shadow 1',
+    token: '--shadow-1',
+    value: '0px 0px 1px rgba(9,30,66,0.31), 0px 8px 12px rgba(9,30,66,0.15)',
+    desc: 'Primary token multi-layer — edge + depth. Digunakan untuk card utama.',
+    shadow: '0px 0px 1px 0px rgba(9,30,66,0.31), 0px 8px 12px 0px rgba(9,30,66,0.15)',
+  },
+  {
+    name: 'None',
+    token: '--shadow-none',
+    value: 'none',
+    desc: 'Tanpa shadow. Default state atau flat element.',
+    shadow: 'none',
+  },
+  {
+    name: 'XS',
+    token: '--shadow-xs',
+    value: '0 1px 2px rgba(0,0,0,0.04)',
+    desc: 'Shadow sangat kecil. Untuk elemen seperti chip atau tag.',
+    shadow: '0 1px 2px 0 rgba(0,0,0,0.04)',
+  },
+  {
+    name: 'SM',
+    token: '--shadow-sm',
+    value: '0 1px 3px rgba(0,0,0,0.08)',
+    desc: 'Shadow kecil. Untuk button, input, dan elemen ringan.',
+    shadow: '0 1px 3px 0 rgba(0,0,0,0.08), 0 1px 2px -1px rgba(0,0,0,0.06)',
+  },
+  {
+    name: 'MD',
+    token: '--shadow-md',
+    value: '0 4px 8px rgba(0,0,0,0.10)',
+    desc: 'Shadow medium. Untuk card, dropdown, dan popup kecil.',
+    shadow: '0 4px 8px -2px rgba(0,0,0,0.10), 0 2px 4px -2px rgba(0,0,0,0.06)',
+  },
+  {
+    name: 'LG',
+    token: '--shadow-lg',
+    value: '0 12px 24px rgba(0,0,0,0.12)',
+    desc: 'Shadow besar. Untuk modal dan panel.',
+    shadow: '0 12px 24px -6px rgba(0,0,0,0.12), 0 4px 8px -4px rgba(0,0,0,0.06)',
+  },
+  {
+    name: 'XL',
+    token: '--shadow-xl',
+    value: '0 20px 40px rgba(0,0,0,0.15)',
+    desc: 'Shadow ekstra besar. Untuk overlay penting.',
+    shadow: '0 20px 40px -8px rgba(0,0,0,0.15), 0 8px 16px -4px rgba(0,0,0,0.06)',
+  },
+  {
+    name: '2XL',
+    token: '--shadow-2xl',
+    value: '0 32px 64px rgba(0,0,0,0.20)',
+    desc: 'Shadow maksimum. Untuk dialog full-screen.',
+    shadow: '0 32px 64px -16px rgba(0,0,0,0.20)',
+  },
+  {
+    name: 'Brand',
+    token: '--shadow-brand',
+    value: '0 4px 14px rgba(30,127,214,0.35)',
+    desc: 'Shadow berwarna brand blue. Untuk CTA button aktif.',
+    shadow: '0 4px 14px 0 rgba(30,127,214,0.35)',
+    accent: true,
+  },
+  {
+    name: 'Inner',
+    token: '--shadow-inner',
+    value: 'inset 0 2px 4px rgba(0,0,0,0.06)',
+    desc: 'Shadow ke dalam. Untuk input focused atau pressed state.',
+    shadow: 'inset 0 2px 4px 0 rgba(0,0,0,0.06)',
+    inner: true,
+  },
+];
+
+<Meta title="Foundation/Shadows" />
+
+<style>{`
+  .ds-section { margin-bottom: 48px; }
+  .ds-section h2 { font-size: 20px; font-weight: 600; margin: 0 0 8px; color: #0F172A; }
+  .ds-section p  { font-size: 14px; color: #64748B; margin: 0 0 24px; }
+  .ds-shadow-grid{ display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+  .ds-shadow-card{ background: #FFFFFF; border-radius: 12px; padding: 24px 20px 16px; border: 1px solid #F1F5F9; }
+  .ds-shadow-demo{ width: 72px; height: 72px; background: #FFFFFF; border-radius: 10px; margin: 0 auto 20px; border: 1px solid #F1F5F9; }
+  .ds-shadow-name{ font-size: 14px; font-weight: 600; color: #0F172A; margin-bottom: 4px; }
+  .ds-shadow-token{ font-size: 11px; font-family: monospace; color: #1E7FD6; margin-bottom: 6px; }
+  .ds-shadow-desc { font-size: 12px; color: #64748B; line-height: 1.5; margin-bottom: 8px; }
+  .ds-shadow-val  { font-size: 10px; font-family: monospace; color: #94A3B8; word-break: break-all; }
+`}</style>
+
+# Shadows
+
+Sistem elevasi GPOS Lite V2.0. Shadow 1 adalah token utama multi-layer — digunakan sebagai standar card di seluruh produk.
+
+---
+
+<div className="ds-section">
+  <h2>Elevation System</h2>
+  <p>Dari flat (none) hingga dialog (2xl), plus token khusus brand dan inner.</p>
+  <div className="ds-shadow-grid">
+    {shadows.map(s => (
+      <div key={s.name} className="ds-shadow-card">
+        <div className="ds-shadow-demo" style={{
+          boxShadow: s.shadow,
+          background: s.accent ? 'linear-gradient(135deg, #1E7FD6, #4FA6F5)' : '#FFFFFF',
+          border: s.inner ? '1px solid #E2E8F0' : '1px solid #F1F5F9',
+        }} />
+        <div className="ds-shadow-name">{s.name}</div>
+        <div className="ds-shadow-token">{s.token}</div>
+        <div className="ds-shadow-desc">{s.desc}</div>
+        <div className="ds-shadow-val">{s.value}</div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<div className="ds-section">
+  <h2>Cara Penggunaan</h2>
+  <p>Gunakan token shadow untuk konsistensi elevasi di seluruh komponen.</p>
+  <div style={{
+    background: '#0F172A',
+    borderRadius: '10px',
+    padding: '20px 24px',
+    fontFamily: "'JetBrains Mono', monospace",
+    fontSize: '13px',
+    color: '#E2E8F0',
+    lineHeight: '1.8',
+  }}>
+    <div><span style={{ color: '#7DD3FC' }}>.card</span> {'{'}</div>
+    <div style={{ paddingLeft: '16px' }}>
+      <span style={{ color: '#86EFAC' }}>box-shadow</span>
+      <span>: </span>
+      <span style={{ color: '#FCD34D' }}>var(--shadow-1)</span>
+      <span>;</span>
+    </div>
+    <div>{'}'}</div>
+    <div style={{ marginTop: '8px' }}><span style={{ color: '#7DD3FC' }}>.btn-primary:hover</span> {'{'}</div>
+    <div style={{ paddingLeft: '16px' }}>
+      <span style={{ color: '#86EFAC' }}>box-shadow</span>
+      <span>: </span>
+      <span style={{ color: '#FCD34D' }}>var(--shadow-brand)</span>
+      <span>;</span>
+    </div>
+    <div>{'}'}</div>
+  </div>
+</div>

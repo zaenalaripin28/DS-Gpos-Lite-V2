@@ -1,0 +1,154 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+export const sizes = [
+  { token: '--font-size-xs',   value: '12px',  label: 'xs'   },
+  { token: '--font-size-sm',   value: '14px',  label: 'sm'   },
+  { token: '--font-size-base', value: '16px',  label: 'base' },
+  { token: '--font-size-lg',   value: '18px',  label: 'lg'   },
+  { token: '--font-size-xl',   value: '20px',  label: 'xl'   },
+  { token: '--font-size-2xl',  value: '24px',  label: '2xl'  },
+  { token: '--font-size-3xl',  value: '30px',  label: '3xl'  },
+  { token: '--font-size-4xl',  value: '36px',  label: '4xl'  },
+  { token: '--font-size-5xl',  value: '48px',  label: '5xl'  },
+];
+
+export const weights = [
+  { token: '--font-weight-light',    value: '300', label: 'Light'    },
+  { token: '--font-weight-normal',   value: '400', label: 'Normal'   },
+  { token: '--font-weight-medium',   value: '500', label: 'Medium'   },
+  { token: '--font-weight-semibold', value: '600', label: 'Semibold' },
+  { token: '--font-weight-bold',     value: '700', label: 'Bold'     },
+];
+
+export const textStyles = [
+  { category: 'Overline',       size: '12px', weight: '500', lh: '20px', ls: '0.1em', text: 'OVERLINE MEDIUM',      transform: 'uppercase' },
+  { category: 'Caption Regular',size: '12px', weight: '400', lh: '14px', ls: 'normal',text: 'Caption Regular'       },
+  { category: 'Caption Medium', size: '12px', weight: '500', lh: '20px', ls: 'normal',text: 'Caption Medium'        },
+  { category: 'Body Small',     size: '14px', weight: '400', lh: '20px', ls: 'normal',text: 'Body Small Regular'    },
+  { category: 'Body Medium',    size: '16px', weight: '400', lh: '24px', ls: 'normal',text: 'Body Medium Regular'   },
+  { category: 'Body Large',     size: '18px', weight: '400', lh: '28px', ls: 'normal',text: 'Body Large Regular'    },
+  { category: 'Title Medium',   size: '20px', weight: '500', lh: '24px', ls: 'normal',text: 'Title Medium'          },
+  { category: 'Header Small',   size: '24px', weight: '500', lh: '32px', ls: 'normal',text: 'Header Small'          },
+  { category: 'Header Medium',  size: '36px', weight: '500', lh: '44px', ls: 'normal',text: 'Header Medium'         },
+  { category: 'Header Large',   size: '44px', weight: '500', lh: '52px', ls: 'normal',text: 'Header Large'          },
+  { category: 'Display',        size: '64px', weight: '600', lh: '68px', ls: 'normal',text: 'Display'               },
+];
+
+<Meta title="Foundation/Typography" />
+
+<style>{`
+  .ds-section { margin-bottom: 48px; }
+  .ds-section h2 { font-size: 20px; font-weight: 600; margin: 0 0 8px; color: #0F172A; }
+  .ds-section p  { font-size: 14px; color: #64748B; margin: 0 0 20px; }
+  .ds-font-card  { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 10px; padding: 20px 24px; margin-bottom: 12px; }
+  .ds-font-name  { font-size: 13px; font-weight: 600; color: #64748B; margin-bottom: 8px; font-family: monospace; }
+  .ds-font-sample{ font-size: 28px; color: #0F172A; line-height: 1.3; }
+  .ds-size-row   { display: flex; align-items: baseline; gap: 16px; padding: 10px 0; border-bottom: 1px solid #F1F5F9; }
+  .ds-size-row:last-child { border-bottom: none; }
+  .ds-size-meta  { width: 140px; flex-shrink: 0; }
+  .ds-size-token { font-size: 11px; color: #94A3B8; font-family: monospace; }
+  .ds-size-val   { font-size: 12px; color: #64748B; font-weight: 500; }
+  .ds-size-text  { color: #0F172A; }
+  .ds-weight-row { display: flex; align-items: center; gap: 16px; padding: 10px 0; border-bottom: 1px solid #F1F5F9; }
+  .ds-weight-row:last-child { border-bottom: none; }
+  .ds-weight-meta{ width: 160px; flex-shrink: 0; }
+  .ds-style-row  { display: flex; align-items: flex-start; gap: 20px; padding: 14px 0; border-bottom: 1px solid #F1F5F9; }
+  .ds-style-row:last-child { border-bottom: none; }
+  .ds-style-meta { width: 220px; flex-shrink: 0; }
+  .ds-style-cat  { font-size: 13px; font-weight: 500; color: #475569; margin-bottom: 4px; }
+  .ds-style-spec { font-size: 11px; color: #94A3B8; font-family: monospace; }
+  .ds-style-sample { color: #0F172A; overflow: hidden; }
+`}</style>
+
+# Typography
+
+Sistem tipografi GPOS Lite V2.0 berbasis font **Poppins** sebagai font utama dan **JetBrains Mono** untuk kode.
+
+---
+
+<div className="ds-section">
+  <h2>Font Families</h2>
+  <p>Dua font utama yang digunakan di seluruh design system.</p>
+
+  <div className="ds-font-card">
+    <div className="ds-font-name">--font-primary · Poppins</div>
+    <div className="ds-font-sample" style={{ fontFamily: 'Poppins, sans-serif' }}>
+      The quick brown fox jumps over the lazy dog
+    </div>
+    <div style={{ fontFamily: 'Poppins, sans-serif', fontSize: '14px', color: '#475569', marginTop: '8px' }}>
+      ABCDEFGHIJKLMNOPQRSTUVWXYZ · abcdefghijklmnopqrstuvwxyz · 0123456789
+    </div>
+  </div>
+
+  <div className="ds-font-card">
+    <div className="ds-font-name">--font-mono · JetBrains Mono</div>
+    <div className="ds-font-sample" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+      const color = '#1E7FD6';
+    </div>
+    <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '14px', color: '#475569', marginTop: '8px' }}>
+      var(--color-primary-500) · 0123456789 · {}[]()
+    </div>
+  </div>
+</div>
+
+<div className="ds-section">
+  <h2>Font Size Scale</h2>
+  <p>Skala ukuran dari <code>xs (12px)</code> hingga <code>5xl (48px)</code>.</p>
+  <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '10px', padding: '0 20px' }}>
+    {sizes.map(s => (
+      <div key={s.label} className="ds-size-row">
+        <div className="ds-size-meta">
+          <div className="ds-size-val">{s.label} — {s.value}</div>
+          <div className="ds-size-token">{s.token}</div>
+        </div>
+        <div className="ds-size-text" style={{ fontSize: s.value, lineHeight: 1.3, fontFamily: 'Poppins, sans-serif' }}>
+          Poppins {s.label}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<div className="ds-section">
+  <h2>Font Weights</h2>
+  <p>Lima tingkat ketebalan font yang tersedia.</p>
+  <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '10px', padding: '0 20px' }}>
+    {weights.map(w => (
+      <div key={w.label} className="ds-weight-row">
+        <div className="ds-weight-meta">
+          <div style={{ fontSize: '13px', fontWeight: '500', color: '#475569' }}>{w.label} — {w.value}</div>
+          <div className="ds-size-token">{w.token}</div>
+        </div>
+        <div style={{ fontSize: '24px', fontWeight: w.value, fontFamily: 'Poppins, sans-serif', color: '#0F172A' }}>
+          {w.label} — The quick brown fox
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<div className="ds-section">
+  <h2>Text Style Catalog</h2>
+  <p>Semua text style yang terdefinisi di design tokens, dari Caption hingga Display.</p>
+  <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '10px', padding: '0 20px' }}>
+    {textStyles.map(s => (
+      <div key={s.category} className="ds-style-row">
+        <div className="ds-style-meta">
+          <div className="ds-style-cat">{s.category}</div>
+          <div className="ds-style-spec">{s.size} / {s.weight} / lh {s.lh}</div>
+        </div>
+        <div className="ds-style-sample" style={{
+          fontSize: s.size,
+          fontWeight: s.weight,
+          lineHeight: s.lh,
+          letterSpacing: s.ls || 'normal',
+          textTransform: s.transform || 'none',
+          fontFamily: 'Poppins, sans-serif',
+          maxWidth: '500px',
+        }}>
+          {s.text}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

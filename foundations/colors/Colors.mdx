@@ -1,0 +1,170 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+export const primary = [
+  { scale: '50',  hex: '#EEF7FF' },
+  { scale: '100', hex: '#D9EFFE' },
+  { scale: '200', hex: '#BADDFD' },
+  { scale: '300', hex: '#86C3FA' },
+  { scale: '400', hex: '#4FA6F5' },
+  { scale: '500', hex: '#1E7FD6', brand: true },
+  { scale: '600', hex: '#1668B0' },
+  { scale: '700', hex: '#115188' },
+  { scale: '800', hex: '#0D3C63' },
+  { scale: '900', hex: '#09293F' },
+];
+
+export const secondary = [
+  { scale: '50',  hex: '#ECFEFF' },
+  { scale: '100', hex: '#CFFAFE' },
+  { scale: '200', hex: '#A5F3FC' },
+  { scale: '300', hex: '#67E8F9' },
+  { scale: '400', hex: '#22D3EE' },
+  { scale: '500', hex: '#06B6D4', brand: true },
+  { scale: '600', hex: '#0891B2' },
+  { scale: '700', hex: '#0E7490' },
+  { scale: '800', hex: '#155E75' },
+  { scale: '900', hex: '#164E63' },
+];
+
+export const semantic = [
+  { name: 'Success', token: '--color-success', colors: ['#F0FDF4','#DCFCE7','#BBF7D0','#86EFAC','#4ADE80','#22C55E','#16A34A','#15803D','#166534','#145231'] },
+  { name: 'Warning', token: '--color-warning', colors: ['#FFFBEB','#FEF3C7','#FDE68A','#FCD34D','#FBBF24','#F59E0B','#D97706','#B45309','#92400E','#78350F'] },
+  { name: 'Error',   token: '--color-error',   colors: ['#FEF2F2','#FEE2E2','#FECACA','#FCA5A5','#F87171','#EF4444','#DC2626','#B91C1C','#991B1B','#7F1D1D'] },
+  { name: 'Info',    token: '--color-info',     colors: ['#F0F9FF','#E0F2FE','#BAE6FD','#7DD3FC','#38BDF8','#0EA5E9','#0284C7','#0369A1','#075985','#0C4A6E'] },
+];
+
+export const brand = [
+  { name: 'Blue',    token: '--color-blue',    scales: ['b50','b75','b100','b200','b300','b400','b500'], colors: ['#E9F2FB','#A3CBEE','#7DB5E7','#4495DD','#1E7FD6','#155996','#124D83'] },
+  { name: 'Orange',  token: '--color-orange',  scales: ['o50','o75','o100','o200','o300','o400','o500'], colors: ['#FFF4E8','#FFD19F','#FFBF77','#FFA33D','#FF9015','#B3650F','#9C580D'] },
+  { name: 'Red',     token: '--color-red',     scales: ['r50','r75','r100','r200','r300','r400','r500'], colors: ['#FDE8E9','#F7A2A5','#F47B80','#EF4349','#EC1C24','#A51419','#901116'] },
+  { name: 'Green',   token: '--color-green',   scales: ['g50','g75','g100','g200','g300','g400','g500'], colors: ['#E6F7EF','#96DCBC','#6BCEA0','#2BB877','#00AA5B','#007740','#006838'] },
+  { name: 'Purple',  token: '--color-purple',  scales: ['p50','p75','p100','p200','p300','p400','p500'], colors: ['#F1ECFE','#C4B0FB','#AB8FFA','#875FF8','#6E3EF6','#4D2BAC','#432696'] },
+];
+
+export const neutral = [
+  { scale: 'n0',   hex: '#FFFFFF' }, { scale: 'n10',  hex: '#FAFBFB' },
+  { scale: 'n20',  hex: '#F5F6F7' }, { scale: 'n30',  hex: '#EBEDF0' },
+  { scale: 'n40',  hex: '#DFE2E6' }, { scale: 'n50',  hex: '#C2C7D0' },
+  { scale: 'n60',  hex: '#B3B9C4' }, { scale: 'n70',  hex: '#A6AEBB' },
+  { scale: 'n100', hex: '#7A8699' }, { scale: 'n200', hex: '#6B788E' },
+  { scale: 'n300', hex: '#5D6B82' }, { scale: 'n400', hex: '#505F79' },
+  { scale: 'n500', hex: '#42526D' }, { scale: 'n600', hex: '#354764' },
+  { scale: 'n700', hex: '#243757' }, { scale: 'n800', hex: '#15294B' },
+  { scale: 'n900', hex: '#091E42' },
+];
+
+export const isDark = hex => {
+  const r = parseInt(hex.slice(1,3),16);
+  const g = parseInt(hex.slice(3,5),16);
+  const b = parseInt(hex.slice(5,7),16);
+  return (r * 299 + g * 587 + b * 114) / 1000 < 128;
+};
+
+<Meta title="Foundation/Colors" />
+
+<style>{`
+  .ds-section { margin-bottom: 48px; }
+  .ds-section h2 { font-size: 20px; font-weight: 600; margin: 0 0 8px; color: #0F172A; }
+  .ds-section p  { font-size: 14px; color: #64748B; margin: 0 0 20px; }
+  .ds-swatches   { display: flex; flex-wrap: wrap; gap: 8px; }
+  .ds-swatch     { width: 80px; }
+  .ds-swatch-box { height: 64px; border-radius: 8px; border: 1px solid rgba(0,0,0,0.08); }
+  .ds-swatch-scale { font-size: 13px; font-weight: 600; margin-top: 6px; color: #1E293B; }
+  .ds-swatch-hex   { font-size: 11px; color: #64748B; font-family: monospace; }
+  .ds-swatch-var   { font-size: 10px; color: #94A3B8; font-family: monospace; margin-top: 2px; }
+  .ds-brand-row    { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .ds-brand-label  { width: 60px; font-size: 13px; font-weight: 500; color: #475569; flex-shrink: 0; }
+  .ds-brand-chip   { flex: 1; height: 36px; border-radius: 6px; border: 1px solid rgba(0,0,0,0.06); min-width: 40px; }
+  .ds-semantic-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+  .ds-sem-label    { width: 64px; font-size: 13px; font-weight: 500; color: #475569; }
+  .ds-sem-chip     { flex: 1; height: 36px; border-radius: 6px; border: 1px solid rgba(0,0,0,0.06); }
+`}</style>
+
+# Colors
+
+Sistem warna GPOS Lite V2.0. Brand color utama adalah **GPOS Blue `#1E7FD6`** — warna di skala 500 pada setiap palette.
+
+---
+
+<div className="ds-section">
+  <h2>Primary — GPOS Blue</h2>
+  <p>Digunakan untuk tombol utama, link, highlight, dan elemen interaktif.</p>
+  <div className="ds-swatches">
+    {primary.map(c => (
+      <div key={c.scale} className="ds-swatch">
+        <div className="ds-swatch-box" style={{
+          backgroundColor: c.hex,
+          outline: c.brand ? '2px solid #1E7FD6' : 'none',
+          outlineOffset: '2px',
+        }} />
+        <div className="ds-swatch-scale">{c.scale}</div>
+        <div className="ds-swatch-hex">{c.hex}</div>
+        <div className="ds-swatch-var">{`--color-primary-${c.scale}`}</div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<div className="ds-section">
+  <h2>Secondary — Cyan</h2>
+  <p>Warna komplementer untuk aksen, badge, dan status indicators.</p>
+  <div className="ds-swatches">
+    {secondary.map(c => (
+      <div key={c.scale} className="ds-swatch">
+        <div className="ds-swatch-box" style={{
+          backgroundColor: c.hex,
+          outline: c.brand ? '2px solid #06B6D4' : 'none',
+          outlineOffset: '2px',
+        }} />
+        <div className="ds-swatch-scale">{c.scale}</div>
+        <div className="ds-swatch-hex">{c.hex}</div>
+        <div className="ds-swatch-var">{`--color-secondary-${c.scale}`}</div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<div className="ds-section">
+  <h2>Semantic Colors</h2>
+  <p>Digunakan untuk feedback state: success, warning, error, dan info.</p>
+  {semantic.map(group => (
+    <div key={group.name} className="ds-semantic-row">
+      <span className="ds-sem-label">{group.name}</span>
+      {group.colors.map((hex, i) => (
+        <div key={i} className="ds-sem-chip" style={{ backgroundColor: hex }} title={hex} />
+      ))}
+    </div>
+  ))}
+  <p style={{ marginTop: '8px' }}>Token: <code>--color-success-500</code>, <code>--color-warning-500</code>, <code>--color-error-500</code>, <code>--color-info-500</code></p>
+</div>
+
+<div className="ds-section">
+  <h2>GP Lite Brand Palette</h2>
+  <p>Palette warna khusus GPOS Lite dari design tokens JSON — Blue, Orange, Red, Green, Purple.</p>
+  {brand.map(group => (
+    <div key={group.name} className="ds-brand-row">
+      <span className="ds-brand-label">{group.name}</span>
+      {group.colors.map((hex, i) => (
+        <div key={i} className="ds-brand-chip" style={{ backgroundColor: hex }} title={`${group.token}-${group.scales[i]}: ${hex}`} />
+      ))}
+    </div>
+  ))}
+</div>
+
+<div className="ds-section">
+  <h2>Neutral Scale</h2>
+  <p>Dari putih <code>n0</code> hingga navy gelap <code>n900</code>. Digunakan untuk teks, border, dan background.</p>
+  <div className="ds-swatches">
+    {neutral.map(c => (
+      <div key={c.scale} className="ds-swatch">
+        <div className="ds-swatch-box" style={{
+          backgroundColor: c.hex,
+          border: c.hex === '#FFFFFF' ? '1px solid #E2E8F0' : '1px solid rgba(0,0,0,0.08)',
+        }} />
+        <div className="ds-swatch-scale">{c.scale}</div>
+        <div className="ds-swatch-hex">{c.hex}</div>
+        <div className="ds-swatch-var">{`--color-neutral-${c.scale}`}</div>
+      </div>
+    ))}
+  </div>
+</div>

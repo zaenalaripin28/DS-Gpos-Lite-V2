@@ -4,8 +4,12 @@
 const config = {
   "stories": [
     "../stories/**/*.mdx",
+    "../foundations/**/*.mdx",
     "../components/**/*.stories.@(js|jsx|mjs|ts|tsx)",
     "../components/**/*.mdx"
+  ],
+  "staticDirs": [
+    { from: "../assets", to: "/assets" }
   ],
   "addons": [
     "@chromatic-com/storybook",

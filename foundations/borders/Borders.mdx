@@ -1,0 +1,116 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+export const radii = [
+  { token: '--border-radius-none', value: '0',      label: 'None', px: '0px'    },
+  { token: '--border-radius-sm',   value: '0.25rem', label: 'SM',   px: '4px'   },
+  { token: '--border-radius-md',   value: '0.5rem',  label: 'MD',   px: '8px'   },
+  { token: '--border-radius-lg',   value: '0.75rem', label: 'LG',   px: '12px'  },
+  { token: '--border-radius-xl',   value: '1rem',    label: 'XL',   px: '16px'  },
+  { token: '--border-radius-2xl',  value: '1.5rem',  label: '2XL',  px: '24px'  },
+  { token: '--border-radius-3xl',  value: '2rem',    label: '3XL',  px: '32px'  },
+  { token: '--border-radius-full', value: '9999px',  label: 'Full', px: '9999px', desc: 'Pill / Circle' },
+];
+
+export const widths = [
+  { token: '--border-width-0', value: '0',   label: 'None',    desc: 'Tanpa border' },
+  { token: '--border-width-1', value: '1px', label: 'Thin',    desc: 'Border standar untuk card dan input' },
+  { token: '--border-width-2', value: '2px', label: 'Medium',  desc: 'Untuk focus ring dan highlight' },
+  { token: '--border-width-4', value: '4px', label: 'Thick',   desc: 'Untuk accent bar atau border khusus' },
+];
+
+export const usageExamples = [
+  { name: 'Tag / Chip',     radius: '9999px',  bg: '#EEF7FF', border: '1px solid #BADDFD', color: '#1E7FD6',  text: 'Tag' },
+  { name: 'Button',         radius: '8px',     bg: '#1E7FD6', border: '1px solid #1E7FD6', color: '#FFFFFF',  text: 'Button' },
+  { name: 'Input',          radius: '8px',     bg: '#FFFFFF', border: '1px solid #D1D5DB', color: '#0F172A',  text: 'Input field' },
+  { name: 'Card',           radius: '12px',    bg: '#FFFFFF', border: '1px solid #E2E8F0', color: '#0F172A',  text: 'Card' },
+  { name: 'Modal',          radius: '16px',    bg: '#FFFFFF', border: '1px solid #E2E8F0', color: '#0F172A',  text: 'Modal' },
+  { name: 'Avatar',         radius: '9999px',  bg: '#1E7FD6', border: '2px solid #BADDFD', color: '#FFFFFF',  text: 'AV' },
+];
+
+<Meta title="Foundation/Borders" />
+
+<style>{`
+  .ds-section { margin-bottom: 48px; }
+  .ds-section h2 { font-size: 20px; font-weight: 600; margin: 0 0 8px; color: #0F172A; }
+  .ds-section p  { font-size: 14px; color: #64748B; margin: 0 0 24px; }
+  .ds-radius-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 16px; }
+  .ds-radius-card { background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 8px; padding: 16px; text-align: center; }
+  .ds-radius-box  { width: 72px; height: 72px; background: #1E7FD6; margin: 0 auto 12px; }
+  .ds-radius-label{ font-size: 13px; font-weight: 600; color: #0F172A; }
+  .ds-radius-token{ font-size: 10px; font-family: monospace; color: #64748B; margin-top: 2px; }
+  .ds-radius-val  { font-size: 11px; color: #94A3B8; }
+  .ds-width-row   { display: flex; align-items: center; gap: 20px; padding: 16px 20px; border-bottom: 1px solid #F1F5F9; }
+  .ds-width-row:last-child { border-bottom: none; }
+  .ds-width-demo  { width: 120px; height: 40px; background: #F8FAFC; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .ds-width-inner { width: 80px; height: 24px; background: #EEF7FF; }
+  .ds-width-meta  { }
+  .ds-width-name  { font-size: 14px; font-weight: 600; color: #0F172A; }
+  .ds-width-token { font-size: 11px; font-family: monospace; color: #1E7FD6; }
+  .ds-width-desc  { font-size: 12px; color: #64748B; margin-top: 2px; }
+  .ds-usage-grid  { display: flex; flex-wrap: wrap; gap: 20px; align-items: center; }
+  .ds-usage-item  { text-align: center; }
+  .ds-usage-demo  { display: flex; align-items: center; justify-content: center; min-width: 80px; min-height: 40px; font-size: 13px; font-weight: 500; padding: 8px 16px; margin-bottom: 8px; }
+  .ds-usage-name  { font-size: 11px; color: #64748B; }
+`}</style>
+
+# Borders
+
+Token border radius dan border width untuk konsistensi shape di seluruh komponen GPOS Lite V2.0.
+
+---
+
+<div className="ds-section">
+  <h2>Border Radius</h2>
+  <p>Dari sudut kotak <code>none (0px)</code> hingga lingkaran penuh <code>full (9999px)</code>.</p>
+  <div className="ds-radius-grid">
+    {radii.map(r => (
+      <div key={r.label} className="ds-radius-card">
+        <div className="ds-radius-box" style={{ borderRadius: r.value }} />
+        <div className="ds-radius-label">{r.label}</div>
+        <div className="ds-radius-val">{r.px}</div>
+        <div className="ds-radius-token">{r.token}</div>
+        {r.desc && <div style={{ fontSize: '11px', color: '#94A3B8', marginTop: '2px' }}>{r.desc}</div>}
+      </div>
+    ))}
+  </div>
+</div>
+
+<div className="ds-section">
+  <h2>Border Width</h2>
+  <p>Empat tingkat ketebalan border yang tersedia.</p>
+  <div style={{ background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '10px', overflow: 'hidden' }}>
+    {widths.map(w => (
+      <div key={w.label} className="ds-width-row">
+        <div className="ds-width-demo">
+          <div className="ds-width-inner" style={{ border: `${w.value} solid #1E7FD6` }} />
+        </div>
+        <div className="ds-width-meta">
+          <div className="ds-width-name">{w.label} — {w.value}</div>
+          <div className="ds-width-token">{w.token}</div>
+          <div className="ds-width-desc">{w.desc}</div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<div className="ds-section">
+  <h2>Contoh Penggunaan di Komponen</h2>
+  <p>Border radius yang direkomendasikan untuk tiap jenis komponen.</p>
+  <div className="ds-usage-grid">
+    {usageExamples.map(ex => (
+      <div key={ex.name} className="ds-usage-item">
+        <div className="ds-usage-demo" style={{
+          borderRadius: ex.radius,
+          backgroundColor: ex.bg,
+          border: ex.border,
+          color: ex.color,
+        }}>
+          {ex.text}
+        </div>
+        <div className="ds-usage-name">{ex.name}</div>
+        <div style={{ fontSize: '10px', color: '#94A3B8', fontFamily: 'monospace' }}>{ex.radius}</div>
+      </div>
+    ))}
+  </div>
+</div>
