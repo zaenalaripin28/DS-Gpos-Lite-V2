@@ -1,5 +1,4 @@
 import { createHeader } from '../Header/Header';
-import './Page.css';
 
 export const createPage = () => {
   const article = document.createElement('article');

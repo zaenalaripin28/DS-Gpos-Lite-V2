@@ -2,9 +2,9 @@
 module.exports = {
   content: [
     './index.html',
-    './foundations/**/*.html',
-    './components/**/*.html',
-    './scripts/**/*.js',
+    './components/**/*.js',
+    './foundations/**/*.mdx',
+    './styles/**/*.css',
   ],
   theme: {
     extend: {

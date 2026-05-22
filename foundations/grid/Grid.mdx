@@ -1,0 +1,64 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Grid" />
+
+# Grid System
+
+Sistem grid DS-GPOS-LITE-V2 berbasis **12 kolom** dengan breakpoint yang selaras dengan Tailwind CSS.
+
+---
+
+## Breakpoints
+
+| Token       | Nilai   | Tailwind Prefix | Penggunaan              |
+|-------------|---------|-----------------|-------------------------|
+| `xs`        | 0px     | (default)       | Mobile portrait         |
+| `sm`        | 640px   | `sm:`           | Mobile landscape        |
+| `md`        | 768px   | `md:`           | Tablet                  |
+| `lg`        | 1024px  | `lg:`           | Desktop                 |
+| `xl`        | 1280px  | `xl:`           | Desktop lebar           |
+| `2xl`       | 1536px  | `2xl:`          | Wide screen             |
+
+---
+
+## Penggunaan Grid
+
+```html
+<!-- Grid 12 kolom — 3 kolom di mobile, 6 di tablet, 12 di desktop -->
+<div class="grid grid-cols-3 md:grid-cols-6 lg:grid-cols-12 gap-4">
+  <div class="col-span-1">...</div>
+</div>
+
+<!-- Layout umum: sidebar + konten -->
+<div class="grid grid-cols-1 lg:grid-cols-[270px_1fr] gap-0">
+  <aside>Sidebar</aside>
+  <main>Content</main>
+</div>
+
+<!-- Card grid responsive -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+  <div>Card</div>
+</div>
+```
+
+---
+
+## Spacing Kolom (Gap)
+
+| Token       | Nilai | Tailwind Class |
+|-------------|-------|----------------|
+| `Space.100` | 8px   | `gap-2`        |
+| `Space.200` | 16px  | `gap-4`        |
+| `Space.300` | 24px  | `gap-6`        |
+| `Space.400` | 32px  | `gap-8`        |
+
+Gap default yang direkomendasikan: **`gap-5`** (20px / Space.250).
+
+---
+
+## Aturan Penggunaan
+
+- Gunakan `grid` Tailwind, bukan CSS grid manual.
+- Hindari fixed width dalam kolom — selalu gunakan `col-span-*` yang responsif.
+- Gunakan `max-w-[1000px]` untuk membatasi lebar konten utama.
+- Container padding: `px-4` (mobile) → `px-8` (desktop).
