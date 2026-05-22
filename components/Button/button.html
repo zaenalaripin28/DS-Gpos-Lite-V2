@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Button — DS GPOS Lite V2</title>
   <link rel="stylesheet" href="../../styles/globals.css">
+  <link rel="stylesheet" href="../../styles/enhancements.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -12,10 +13,35 @@
         extend: {
           colors: {
             neutral: {
+              n0:   '#FFFFFF',
+              n10:  '#FAFBFB',
               n20:  '#F5F6F7',
               n30:  '#EBEDF0',
               n40:  '#DFE2E6',
+              n50:  '#C2C7D0',
+              n60:  '#B3B9C4',
+              n70:  '#A6AEBB',
+              n80:  '#98A1B0',
+              n90:  '#8993A4',
+              n100: '#7A8699',
+              n200: '#6B788E',
+              n300: '#5D6B82',
+              n400: '#505F79',
+              n500: '#42526D',
+              n600: '#354764',
+              n700: '#243757',
+              n800: '#15294B',
               n900: '#091E42',
+            },
+            primary: {
+              50:  '#EEF7FF',
+              100: '#D9EFFE',
+              200: '#BADDFD',
+              300: '#86C3FA',
+              400: '#4FA6F5',
+              500: '#1E7FD6',
+              600: '#1668B0',
+              700: '#115188',
             },
           },
           fontFamily: {
@@ -32,14 +58,473 @@
     };
   </script>
 </head>
-<body class="min-h-screen flex items-center justify-center bg-[var(--color-background)]">
+<body class="bg-[#F8FAFC] text-[#0F172A]">
 
-  <button
-    type="button"
-    class="inline-flex items-center justify-center gap-1 px-3 py-2 rounded-component bg-neutral-n20 text-neutral-n900 font-primary text-sm font-medium leading-5 border-0 cursor-pointer whitespace-nowrap transition-all duration-200 hover:bg-neutral-n30 active:bg-neutral-n40 active:translate-y-px active:scale-[.98] focus-visible:outline-none focus-visible:shadow-focus disabled:opacity-40 disabled:cursor-not-allowed disabled:pointer-events-none"
-  >
-    Button
-  </button>
+  <!-- ============================================================
+       PAGE SHELL — sidebar + main (mirrors DS foundation pages)
+  ============================================================ -->
+  <div style="display:flex; min-height:100vh;">
+
+    <!-- SIDEBAR -->
+    <aside style="width:270px; background:#0B1526; display:flex; flex-direction:column; position:fixed; height:100vh; top:0; left:0; z-index:1030; border-right:1px solid #1A2E48;">
+
+      <div style="padding:16px 20px; background:#07101D; border-bottom:1px solid #1A2E48; display:flex; align-items:center; gap:12px; flex-shrink:0;">
+        <div style="width:34px; height:34px; background:linear-gradient(135deg,#1E7FD6,#4FA6F5); border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px; color:white; flex-shrink:0; box-shadow:0 2px 8px rgba(30,127,214,0.4); font-family:'Poppins',sans-serif;">GL</div>
+        <div>
+          <div style="font-size:14px; font-weight:700; color:#FFFFFF; font-family:'Poppins',sans-serif;">GPOS Lite</div>
+          <div style="font-size:11px; color:#64748B; font-family:'Poppins',sans-serif;">Design System V2.0</div>
+        </div>
+      </div>
+
+      <div style="flex:1; overflow-y:auto; padding:16px 0 8px;">
+        <nav>
+          <div style="padding:0 12px; margin-bottom:20px;">
+            <div style="font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:0.09em; color:#475569; padding:0 8px; margin-bottom:8px; font-family:'Poppins',sans-serif;">Overview</div>
+            <ul style="list-style:none;">
+              <li>
+                <a href="../../index.html" style="display:flex; align-items:center; gap:8px; color:#94A3B8; font-size:14px; font-weight:400; padding:8px 12px; border-radius:8px; text-decoration:none; border-left:2px solid transparent; transition:all 150ms; font-family:'Poppins',sans-serif;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+                  Home
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div style="padding:0 12px; margin-bottom:20px;">
+            <div style="font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:0.09em; color:#475569; padding:0 8px; margin-bottom:8px; font-family:'Poppins',sans-serif;">Foundations</div>
+            <ul style="list-style:none; display:flex; flex-direction:column; gap:1px;">
+              <li><a href="../../foundations/colors/colors.html" style="display:flex; align-items:center; gap:8px; color:#94A3B8; font-size:14px; padding:8px 12px; border-radius:8px; text-decoration:none; border-left:2px solid transparent; font-family:'Poppins',sans-serif;">Colors</a></li>
+              <li><a href="../../foundations/typography/typography.html" style="display:flex; align-items:center; gap:8px; color:#94A3B8; font-size:14px; padding:8px 12px; border-radius:8px; text-decoration:none; border-left:2px solid transparent; font-family:'Poppins',sans-serif;">Typography</a></li>
+              <li><a href="../../foundations/spacing/spacing.html" style="display:flex; align-items:center; gap:8px; color:#94A3B8; font-size:14px; padding:8px 12px; border-radius:8px; text-decoration:none; border-left:2px solid transparent; font-family:'Poppins',sans-serif;">Spacing</a></li>
+            </ul>
+          </div>
+
+          <div style="padding:0 12px; margin-bottom:20px;">
+            <div style="font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:0.09em; color:#475569; padding:0 8px; margin-bottom:8px; font-family:'Poppins',sans-serif;">Komponen</div>
+            <ul style="list-style:none;">
+              <li>
+                <a href="button.html" style="display:flex; align-items:center; gap:8px; color:#7CC5FF; font-size:14px; font-weight:500; padding:8px 12px; border-radius:8px; text-decoration:none; background:rgba(30,127,214,0.15); border-left:2px solid #1E7FD6; font-family:'Poppins',sans-serif;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="3"/><line x1="7" y1="12" x2="17" y2="12" opacity="0.5"/></svg>
+                  Button
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <div style="padding:12px 16px; border-top:1px solid #1A2E48; background:#07101D; flex-shrink:0;">
+        <div style="display:flex; align-items:center; gap:8px; padding:6px 12px; background:rgba(6,182,212,0.08); border:1px solid rgba(6,182,212,0.2); border-radius:8px; font-size:11px; color:#67E8F9; font-weight:500; font-family:'Poppins',sans-serif;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20,12 20,22 4,22 4,12"/><polyline points="22,7 12,2 2,7"/><line x1="12" y1="22" x2="12" y2="7"/><polyline points="7,12 12,7 17,12"/></svg>
+          Tailwind CSS
+        </div>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main style="margin-left:270px; flex:1; background:#F8FAFC; min-height:100vh;">
+      <div class="content-inner" style="padding:40px; max-width:1100px;">
+
+        <!-- PAGE HEADER -->
+        <header style="margin-bottom:32px; padding-bottom:24px; border-bottom:1px solid #E2E8F0;">
+          <div style="display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:#1668B0; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:12px; font-family:'Poppins',sans-serif;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="7" width="20" height="10" rx="3"/></svg>
+            Components
+          </div>
+          <h1 style="font-size:clamp(1.75rem,3vw,2.5rem); font-weight:700; line-height:1.08; letter-spacing:-0.03em; margin-bottom:12px; color:#0F172A; font-family:'Poppins',sans-serif;">Button</h1>
+          <p style="font-size:16px; color:#475569; margin:0; line-height:1.6; max-width:600px; font-family:'Poppins',sans-serif;">Triggers an action or event. Follows the Figma variant architecture with appearance, state, spacing, and boolean properties.</p>
+        </header>
+
+        <!-- =====================================================
+             SECTION 1: INTERACTIVE DEMO
+        ====================================================== -->
+        <section style="margin-bottom:48px;">
+          <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid #E2E8F0; display:flex; align-items:center; gap:12px; color:#0F172A; letter-spacing:-0.01em; font-family:'Poppins',sans-serif;">
+            <span style="width:3px; height:18px; background:linear-gradient(to bottom,#1E7FD6,#86C3FA); border-radius:3px; flex-shrink:0; display:block;"></span>
+            Interactive States
+          </h2>
+          <p style="font-size:14px; color:#94A3B8; margin-top:-12px; margin-bottom:28px; font-family:'Poppins',sans-serif;">Live interactive button — hover, click, and tab to observe each state.</p>
+
+          <!-- Demo card -->
+          <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:40px 32px; display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap;">
+            <button
+              type="button"
+              class="
+                inline-flex items-center justify-center gap-1
+                px-3 min-h-[32px]
+                bg-neutral-n20 text-neutral-n900
+                font-primary text-sm font-medium leading-5
+                rounded-component
+                border-0 cursor-pointer whitespace-nowrap
+                transition-all duration-[150ms] ease-in-out
+                hover:bg-neutral-n30
+                active:bg-neutral-n40
+                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1
+                disabled:bg-neutral-n20 disabled:text-neutral-n50 disabled:cursor-not-allowed disabled:pointer-events-none
+              "
+            >
+              Try me
+            </button>
+          </div>
+        </section>
+
+        <!-- =====================================================
+             SECTION 2: APPEARANCE=DEFAULT — ALL STATES
+        ====================================================== -->
+        <section style="margin-bottom:48px;">
+          <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid #E2E8F0; display:flex; align-items:center; gap:12px; color:#0F172A; letter-spacing:-0.01em; font-family:'Poppins',sans-serif;">
+            <span style="width:3px; height:18px; background:linear-gradient(to bottom,#1E7FD6,#86C3FA); border-radius:3px; flex-shrink:0; display:block;"></span>
+            Variants — appearance=default
+          </h2>
+          <p style="font-size:14px; color:#94A3B8; margin-top:-12px; margin-bottom:28px; font-family:'Poppins',sans-serif;">All states: default, hover, press, focus, disabled, and selected.</p>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px;">
+
+            <!-- ── Default ── -->
+            <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; overflow:hidden;">
+              <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:#F8FAFC; border-bottom:1px solid #E2E8F0; min-height:96px;">
+                <!-- state=default -->
+                <button
+                  type="button"
+                  class="
+                    inline-flex items-center justify-center gap-1
+                    px-3 min-h-[32px]
+                    bg-neutral-n20 text-neutral-n900
+                    font-primary text-sm font-medium leading-5
+                    rounded-component
+                    border-0 cursor-default whitespace-nowrap
+                  "
+                  tabindex="-1"
+                >
+                  Button
+                </button>
+              </div>
+              <div style="padding:14px 20px;">
+                <div style="font-size:12px; font-weight:600; color:#0F172A; margin-bottom:2px; font-family:'Poppins',sans-serif;">Default</div>
+                <div style="font-size:11px; color:#94A3B8; font-family:'Poppins',monospace; letter-spacing:0.01em;">state=default · isDisabled=false</div>
+              </div>
+            </div>
+
+            <!-- ── Hover ── -->
+            <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; overflow:hidden;">
+              <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:#F8FAFC; border-bottom:1px solid #E2E8F0; min-height:96px;">
+                <!-- state=hover — bg-neutral-n30 is the hover token -->
+                <button
+                  type="button"
+                  class="
+                    inline-flex items-center justify-center gap-1
+                    px-3 min-h-[32px]
+                    bg-neutral-n30 text-neutral-n900
+                    font-primary text-sm font-medium leading-5
+                    rounded-component
+                    border-0 cursor-default whitespace-nowrap
+                  "
+                  tabindex="-1"
+                >
+                  Button
+                </button>
+              </div>
+              <div style="padding:14px 20px;">
+                <div style="font-size:12px; font-weight:600; color:#0F172A; margin-bottom:2px; font-family:'Poppins',sans-serif;">Hover</div>
+                <div style="font-size:11px; color:#94A3B8; font-family:'Poppins',monospace; letter-spacing:0.01em;">state=hover · bg-neutral-n30</div>
+              </div>
+            </div>
+
+            <!-- ── Press ── -->
+            <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; overflow:hidden;">
+              <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:#F8FAFC; border-bottom:1px solid #E2E8F0; min-height:96px;">
+                <!-- state=press — bg-neutral-n40 is the pressed token -->
+                <button
+                  type="button"
+                  class="
+                    inline-flex items-center justify-center gap-1
+                    px-3 min-h-[32px]
+                    bg-neutral-n40 text-neutral-n900
+                    font-primary text-sm font-medium leading-5
+                    rounded-component
+                    border-0 cursor-default whitespace-nowrap
+                  "
+                  tabindex="-1"
+                >
+                  Button
+                </button>
+              </div>
+              <div style="padding:14px 20px;">
+                <div style="font-size:12px; font-weight:600; color:#0F172A; margin-bottom:2px; font-family:'Poppins',sans-serif;">Press</div>
+                <div style="font-size:11px; color:#94A3B8; font-family:'Poppins',monospace; letter-spacing:0.01em;">state=press · bg-neutral-n40</div>
+              </div>
+            </div>
+
+            <!-- ── Focus ── -->
+            <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; overflow:hidden;">
+              <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:#F8FAFC; border-bottom:1px solid #E2E8F0; min-height:96px;">
+                <!-- state=focus — ring renders focus ring overlay from Figma -->
+                <button
+                  type="button"
+                  class="
+                    relative
+                    inline-flex items-center justify-center gap-1
+                    px-3 min-h-[32px]
+                    bg-neutral-n20 text-neutral-n900
+                    font-primary text-sm font-medium leading-5
+                    rounded-component
+                    border-0 cursor-default whitespace-nowrap
+                    outline-none ring-2 ring-primary-500 ring-offset-1
+                  "
+                  tabindex="-1"
+                >
+                  Button
+                </button>
+              </div>
+              <div style="padding:14px 20px;">
+                <div style="font-size:12px; font-weight:600; color:#0F172A; margin-bottom:2px; font-family:'Poppins',sans-serif;">Focus</div>
+                <div style="font-size:11px; color:#94A3B8; font-family:'Poppins',monospace; letter-spacing:0.01em;">state=focus · ring-primary-500</div>
+              </div>
+            </div>
+
+            <!-- ── Disabled ── -->
+            <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; overflow:hidden;">
+              <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:#F8FAFC; border-bottom:1px solid #E2E8F0; min-height:96px;">
+                <!-- isDisabled=true -->
+                <button
+                  type="button"
+                  disabled
+                  class="
+                    inline-flex items-center justify-center gap-1
+                    px-3 min-h-[32px]
+                    bg-neutral-n20 text-neutral-n50
+                    font-primary text-sm font-medium leading-5
+                    rounded-component
+                    border-0 cursor-not-allowed pointer-events-none whitespace-nowrap
+                  "
+                  tabindex="-1"
+                >
+                  Button
+                </button>
+              </div>
+              <div style="padding:14px 20px;">
+                <div style="font-size:12px; font-weight:600; color:#0F172A; margin-bottom:2px; font-family:'Poppins',sans-serif;">Disabled</div>
+                <div style="font-size:11px; color:#94A3B8; font-family:'Poppins',monospace; letter-spacing:0.01em;">isDisabled=true · text-neutral-n50</div>
+              </div>
+            </div>
+
+            <!-- ── Selected ── -->
+            <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; overflow:hidden;">
+              <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:#F8FAFC; border-bottom:1px solid #E2E8F0; min-height:96px;">
+                <!-- isSelected=true — uses primary-50 bg + primary-700 text -->
+                <button
+                  type="button"
+                  aria-pressed="true"
+                  class="
+                    inline-flex items-center justify-center gap-1
+                    px-3 min-h-[32px]
+                    bg-primary-100 text-primary-700
+                    font-primary text-sm font-medium leading-5
+                    rounded-component
+                    border-0 cursor-default whitespace-nowrap
+                  "
+                  tabindex="-1"
+                >
+                  Button
+                </button>
+              </div>
+              <div style="padding:14px 20px;">
+                <div style="font-size:12px; font-weight:600; color:#0F172A; margin-bottom:2px; font-family:'Poppins',sans-serif;">Selected</div>
+                <div style="font-size:11px; color:#94A3B8; font-family:'Poppins',monospace; letter-spacing:0.01em;">isSelected=true · bg-primary-100</div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- =====================================================
+             SECTION 3: FULL INTERACTIVE SHOWCASE (single button)
+        ====================================================== -->
+        <section style="margin-bottom:48px;">
+          <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid #E2E8F0; display:flex; align-items:center; gap:12px; color:#0F172A; letter-spacing:-0.01em; font-family:'Poppins',sans-serif;">
+            <span style="width:3px; height:18px; background:linear-gradient(to bottom,#1E7FD6,#86C3FA); border-radius:3px; flex-shrink:0; display:block;"></span>
+            Production-ready Component
+          </h2>
+          <p style="font-size:14px; color:#94A3B8; margin-top:-12px; margin-bottom:28px; font-family:'Poppins',sans-serif;">Copy-ready button with all interactive states wired via Tailwind utilities.</p>
+
+          <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:12px; padding:40px 32px; display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap; min-height:120px;">
+
+            <!-- THE CANONICAL BUTTON — all states via Tailwind -->
+            <button
+              type="button"
+              class="
+                inline-flex items-center justify-center gap-1
+                px-3 min-h-[32px]
+                bg-neutral-n20 text-neutral-n900
+                font-primary text-sm font-medium leading-5
+                rounded-component
+                border-0 cursor-pointer whitespace-nowrap
+                transition-all duration-[150ms] ease-in-out
+                hover:bg-neutral-n30
+                active:bg-neutral-n40
+                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1
+                disabled:bg-neutral-n20 disabled:text-neutral-n50 disabled:cursor-not-allowed disabled:pointer-events-none
+              "
+            >
+              Button
+            </button>
+
+            <!-- Selected state variant (aria-pressed toggled via JS would flip this) -->
+            <button
+              type="button"
+              aria-pressed="true"
+              class="
+                inline-flex items-center justify-center gap-1
+                px-3 min-h-[32px]
+                bg-primary-100 text-primary-700
+                font-primary text-sm font-medium leading-5
+                rounded-component
+                border-0 cursor-pointer whitespace-nowrap
+                transition-all duration-[150ms] ease-in-out
+                hover:bg-primary-200
+                active:bg-primary-200
+                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-1
+              "
+            >
+              Selected
+            </button>
+
+            <!-- Disabled state variant -->
+            <button
+              type="button"
+              disabled
+              class="
+                inline-flex items-center justify-center gap-1
+                px-3 min-h-[32px]
+                bg-neutral-n20 text-neutral-n50
+                font-primary text-sm font-medium leading-5
+                rounded-component
+                border-0 cursor-not-allowed pointer-events-none whitespace-nowrap
+              "
+            >
+              Disabled
+            </button>
+
+          </div>
+
+          <!-- Code snippet -->
+          <div style="margin-top:16px; background:#0F172A; border-radius:10px; border:1px solid #1E2D45; padding:20px 24px; overflow-x:auto;">
+            <pre style="margin:0; padding:0; background:none; border:none; font-size:12px; line-height:1.7; color:#CBD5E1; font-family:'JetBrains Mono','Courier New',monospace;"><code><span style="color:#7DD3FC;">&lt;button</span>
+  <span style="color:#86C3FA;">type</span>=<span style="color:#BBF7D0;">"button"</span>
+  <span style="color:#86C3FA;">class</span>=<span style="color:#BBF7D0;">"inline-flex items-center justify-center gap-1
+         px-3 min-h-[32px] rounded-component border-0 cursor-pointer
+         bg-neutral-n20 text-neutral-n900
+         font-primary text-sm font-medium leading-5
+         transition-all duration-[150ms] ease-in-out
+         hover:bg-neutral-n30 active:bg-neutral-n40
+         focus-visible:outline-none focus-visible:ring-2
+         focus-visible:ring-primary-500 focus-visible:ring-offset-1
+         disabled:bg-neutral-n20 disabled:text-neutral-n50
+         disabled:cursor-not-allowed disabled:pointer-events-none"</span>
+<span style="color:#7DD3FC;">&gt;</span>
+  Button
+<span style="color:#7DD3FC;">&lt;/button&gt;</span></code></pre>
+          </div>
+        </section>
+
+        <!-- =====================================================
+             SECTION 4: ANATOMY
+        ====================================================== -->
+        <section style="margin-bottom:48px;">
+          <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid #E2E8F0; display:flex; align-items:center; gap:12px; color:#0F172A; letter-spacing:-0.01em; font-family:'Poppins',sans-serif;">
+            <span style="width:3px; height:18px; background:linear-gradient(to bottom,#1E7FD6,#86C3FA); border-radius:3px; flex-shrink:0; display:block;"></span>
+            Anatomy &amp; Tokens
+          </h2>
+
+          <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px;">
+
+            <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-left:3px solid #4FA6F5; border-radius:10px; padding:20px;">
+              <div style="font-size:11px; font-weight:600; color:#94A3B8; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; font-family:'Poppins',sans-serif;">Background</div>
+              <div style="font-family:'JetBrains Mono','Courier New',monospace; font-size:12px; color:#1E7FD6; margin-bottom:4px;">neutral-n20 → n30 → n40</div>
+              <div style="font-size:12px; color:#475569; font-family:'Poppins',sans-serif;">Default → Hover → Press</div>
+            </div>
+
+            <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-left:3px solid #4FA6F5; border-radius:10px; padding:20px;">
+              <div style="font-size:11px; font-weight:600; color:#94A3B8; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; font-family:'Poppins',sans-serif;">Text</div>
+              <div style="font-family:'JetBrains Mono','Courier New',monospace; font-size:12px; color:#1E7FD6; margin-bottom:4px;">neutral-n900</div>
+              <div style="font-size:12px; color:#475569; font-family:'Poppins',sans-serif;">Poppins · 14px · medium</div>
+            </div>
+
+            <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-left:3px solid #4FA6F5; border-radius:10px; padding:20px;">
+              <div style="font-size:11px; font-weight:600; color:#94A3B8; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; font-family:'Poppins',sans-serif;">Spacing</div>
+              <div style="font-family:'JetBrains Mono','Courier New',monospace; font-size:12px; color:#1E7FD6; margin-bottom:4px;">px-3 · min-h-[32px]</div>
+              <div style="font-size:12px; color:#475569; font-family:'Poppins',sans-serif;">12px H-pad · 32px min-height</div>
+            </div>
+
+            <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-left:3px solid #4FA6F5; border-radius:10px; padding:20px;">
+              <div style="font-size:11px; font-weight:600; color:#94A3B8; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; font-family:'Poppins',sans-serif;">Radius</div>
+              <div style="font-family:'JetBrains Mono','Courier New',monospace; font-size:12px; color:#1E7FD6; margin-bottom:4px;">rounded-component (6px)</div>
+              <div style="font-size:12px; color:#475569; font-family:'Poppins',sans-serif;">DS radius token</div>
+            </div>
+
+            <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-left:3px solid #4FA6F5; border-radius:10px; padding:20px;">
+              <div style="font-size:11px; font-weight:600; color:#94A3B8; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; font-family:'Poppins',sans-serif;">Focus Ring</div>
+              <div style="font-family:'JetBrains Mono','Courier New',monospace; font-size:12px; color:#1E7FD6; margin-bottom:4px;">ring-2 ring-primary-500</div>
+              <div style="font-size:12px; color:#475569; font-family:'Poppins',sans-serif;">2px · WCAG AA accessible</div>
+            </div>
+
+            <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-left:3px solid #4FA6F5; border-radius:10px; padding:20px;">
+              <div style="font-size:11px; font-weight:600; color:#94A3B8; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; font-family:'Poppins',sans-serif;">Selected</div>
+              <div style="font-family:'JetBrains Mono','Courier New',monospace; font-size:12px; color:#1E7FD6; margin-bottom:4px;">bg-primary-100 · text-primary-700</div>
+              <div style="font-size:12px; color:#475569; font-family:'Poppins',sans-serif;">aria-pressed="true"</div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- =====================================================
+             SECTION 5: USAGE GUIDANCE
+        ====================================================== -->
+        <section style="margin-bottom:48px;">
+          <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid #E2E8F0; display:flex; align-items:center; gap:12px; color:#0F172A; letter-spacing:-0.01em; font-family:'Poppins',sans-serif;">
+            <span style="width:3px; height:18px; background:linear-gradient(to bottom,#1E7FD6,#86C3FA); border-radius:3px; flex-shrink:0; display:block;"></span>
+            Usage Guidance
+          </h2>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+
+            <div style="padding:16px; border-radius:10px; border:1px solid #BBF7D0; border-left:3px solid #22C55E; background:#F0FDF4; font-size:14px; line-height:1.6; color:#475569; font-family:'Poppins',sans-serif;">
+              <div style="font-size:12px; font-weight:600; color:#16A34A; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Do</div>
+              Use <code style="font-family:'JetBrains Mono',monospace; font-size:12px; background:#DCFCE7; color:#15803D; padding:1px 5px; border-radius:4px; border:1px solid #BBF7D0;">disabled</code> attribute on the <code style="font-family:'JetBrains Mono',monospace; font-size:12px; background:#DCFCE7; color:#15803D; padding:1px 5px; border-radius:4px; border:1px solid #BBF7D0;">&lt;button&gt;</code> element so screen readers announce the disabled state natively.
+            </div>
+
+            <div style="padding:16px; border-radius:10px; border:1px solid #FECACA; border-left:3px solid #EF4444; background:#FEF2F2; font-size:14px; line-height:1.6; color:#475569; font-family:'Poppins',sans-serif;">
+              <div style="font-size:12px; font-weight:600; color:#DC2626; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Don't</div>
+              Never use <code style="font-family:'JetBrains Mono',monospace; font-size:12px; background:#FEE2E2; color:#B91C1C; padding:1px 5px; border-radius:4px; border:1px solid #FECACA;">&lt;div&gt;</code> or <code style="font-family:'JetBrains Mono',monospace; font-size:12px; background:#FEE2E2; color:#B91C1C; padding:1px 5px; border-radius:4px; border:1px solid #FECACA;">&lt;a&gt;</code> for action triggers — use a semantic <code style="font-family:'JetBrains Mono',monospace; font-size:12px; background:#FEE2E2; color:#B91C1C; padding:1px 5px; border-radius:4px; border:1px solid #FECACA;">&lt;button&gt;</code>.
+            </div>
+
+            <div style="padding:16px; border-radius:10px; border:1px solid #BBF7D0; border-left:3px solid #22C55E; background:#F0FDF4; font-size:14px; line-height:1.6; color:#475569; font-family:'Poppins',sans-serif;">
+              <div style="font-size:12px; font-weight:600; color:#16A34A; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Do</div>
+              Add <code style="font-family:'JetBrains Mono',monospace; font-size:12px; background:#DCFCE7; color:#15803D; padding:1px 5px; border-radius:4px; border:1px solid #BBF7D0;">aria-pressed="true"</code> when <code style="font-family:'JetBrains Mono',monospace; font-size:12px; background:#DCFCE7; color:#15803D; padding:1px 5px; border-radius:4px; border:1px solid #BBF7D0;">isSelected=true</code> to communicate toggle state to assistive technology.
+            </div>
+
+            <div style="padding:16px; border-radius:10px; border:1px solid #FECACA; border-left:3px solid #EF4444; background:#FEF2F2; font-size:14px; line-height:1.6; color:#475569; font-family:'Poppins',sans-serif;">
+              <div style="font-size:12px; font-weight:600; color:#DC2626; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Don't</div>
+              Don't suppress focus with <code style="font-family:'JetBrains Mono',monospace; font-size:12px; background:#FEE2E2; color:#B91C1C; padding:1px 5px; border-radius:4px; border:1px solid #FECACA;">outline:none</code> without providing a custom focus indicator.
+            </div>
+
+          </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer style="margin-top:64px; padding:24px 0 32px; border-top:1px solid #E2E8F0; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
+          <div style="font-size:14px; color:#94A3B8; font-family:'Poppins',sans-serif;">
+            <strong style="color:#1668B0;">DS GPOS Lite V2.0</strong> — Button Component
+          </div>
+          <div style="font-size:12px; color:#CBD5E1; font-family:'Poppins',sans-serif;">
+            appearance=default · spacing=default · Tailwind CSS
+          </div>
+        </footer>
+
+      </div>
+    </main>
+
+  </div>
 
 </body>
 </html>
