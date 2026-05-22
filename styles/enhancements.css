@@ -1,0 +1,458 @@
+/* ============================================================
+   Design System GPOS Lite V2.0
+   Presentation Enhancements — Visual Polish Layer
+   ============================================================
+   PURPOSE  : Premium documentation UI improvements
+   SCOPE    : HTML presentation layer ONLY
+   PRESERVES: tokens.css — ALL design tokens untouched
+              globals.css — ALL component styles untouched
+   INSPIRED : tiket.design · Stripe Docs · Linear · Shopify Polaris
+   ============================================================ */
+
+/* ============================================================
+   1. CONTENT LAYOUT — CENTERING & PADDING
+   ============================================================ */
+
+.content-inner {
+  padding: var(--spacing-10) var(--spacing-10) var(--spacing-8);
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+/* ============================================================
+   2. PAGE HEADER — PREMIUM HIERARCHY
+   ============================================================ */
+
+.page-header {
+  margin-bottom: var(--spacing-8);
+  padding-bottom: var(--spacing-6);
+}
+
+/* Kicker label above h1 */
+.page-header-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary-600);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--spacing-3);
+}
+
+.page-header-kicker svg {
+  opacity: 0.75;
+}
+
+/* Refined h1 */
+.page-header h1 {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  margin-bottom: var(--spacing-3);
+  color: var(--color-text-primary);
+}
+
+/* ============================================================
+   3. SECTION HEADINGS — INTRO SUBTITLES
+   ============================================================ */
+
+/* Section intro text that sits beneath section h2 */
+.section-intro {
+  margin-top: calc(-1 * var(--spacing-3));
+  margin-bottom: var(--spacing-7);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  line-height: var(--line-height-relaxed);
+  max-width: 620px;
+}
+
+/* Tighten bottom margin on section h2 when intro follows */
+.has-intro > h2 {
+  margin-bottom: var(--spacing-3);
+}
+
+/* ============================================================
+   4. HERO SECTION — TWO-COLUMN SPLIT LAYOUT
+   ============================================================ */
+
+/* Two-column grid inside hero */
+.hero-split {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--spacing-12);
+  align-items: center;
+}
+
+/* ---- Hero Visual Panel (right column) ---- */
+
+.hero-visual-panel {
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  flex-shrink: 0;
+}
+
+/* Panel section label */
+.hvp-label {
+  font-size: 10px;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Horizontal color palette strip */
+.hvp-palette {
+  display: flex;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  height: 32px;
+  gap: 1px;
+}
+
+.hvp-swatch {
+  flex: 1;
+  transition: flex var(--transition-base);
+}
+
+.hvp-swatch:hover {
+  flex: 2.5;
+}
+
+/* Token rows */
+.hvp-tokens {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hvp-token-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+  padding: 7px var(--spacing-3);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--border-radius-md);
+  transition: background var(--transition-fast);
+}
+
+.hvp-token-row:hover {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+.hvp-token-name {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.hvp-token-value {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: var(--font-weight-medium);
+  flex-shrink: 0;
+}
+
+/* Color dot next to hex value */
+.hvp-token-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1.5px solid rgba(255,255,255,0.25);
+}
+
+/* Divider */
+.hvp-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0;
+}
+
+/* Spacing scale bar preview */
+.hvp-spacer-preview {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 24px;
+}
+
+.hvp-spacer-bar {
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 2px;
+  flex-shrink: 0;
+  transition: background var(--transition-fast);
+}
+
+.hvp-spacer-bar:hover {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+/* ============================================================
+   5. FOUNDATION CARDS — ICON REFINEMENT
+   ============================================================ */
+
+/* SVG icons inside card-icon-wrap */
+.card-icon-wrap svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.card-icon-wrap.blue svg   { color: var(--color-primary-600); }
+.card-icon-wrap.cyan svg   { color: var(--color-secondary-600); }
+.card-icon-wrap.green svg  { color: var(--color-success-600); }
+.card-icon-wrap.amber svg  { color: var(--color-warning-600); }
+.card-icon-wrap.red svg    { color: var(--color-error-600); }
+.card-icon-wrap.gray svg   { color: var(--color-gray-500); }
+
+/* Card link arrow transition */
+.card-link::after {
+  content: '→';
+  display: inline-block;
+  margin-left: 4px;
+  transition: transform var(--transition-fast);
+}
+
+.card-link:hover::after {
+  transform: translateX(4px);
+}
+
+/* Override card-link existing arrow text */
+.card-link {
+  /* Remove the inline → from HTML, use pseudo-element */
+}
+
+/* ============================================================
+   6. DESIGN TOKENS OVERVIEW — CATEGORY BADGES
+   ============================================================ */
+
+.tokens-section-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-6);
+}
+
+.tokens-section-meta p {
+  margin-bottom: 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+}
+
+.token-count-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary-600);
+  background: var(--color-primary-50);
+  border: 1px solid var(--color-primary-100);
+  padding: 4px 12px;
+  border-radius: var(--border-radius-full);
+  white-space: nowrap;
+}
+
+/* Token item — category label */
+.token-category {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font-size: 10px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--spacing-2);
+}
+
+.token-category-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   7. IMPLEMENTATION GUIDE — TIMELINE THREAD
+   ============================================================ */
+
+.guide-timeline {
+  position: relative;
+}
+
+.guide-timeline::before {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 28px;
+  bottom: 28px;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-primary-200) 0%,
+    var(--color-primary-100) 60%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* ============================================================
+   8. BEST PRACTICES — COLUMN LABELS
+   ============================================================ */
+
+.practices-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-3);
+  margin-bottom: var(--spacing-3);
+}
+
+.practices-col-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.practices-col-label.do-label   { color: var(--color-success-600); }
+.practices-col-label.dont-label { color: var(--color-error-500); }
+
+/* ============================================================
+   9. SIDEBAR FOOTER — SYSTEM STATUS
+   ============================================================ */
+
+.system-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: 5px var(--spacing-3);
+  margin-bottom: var(--spacing-2);
+  font-size: 11px;
+  color: var(--color-success-400, #4ADE80);
+  font-weight: var(--font-weight-medium);
+}
+
+.status-dot-live {
+  width: 6px;
+  height: 6px;
+  background: #4ADE80;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.25);
+  animation: status-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes status-pulse {
+  0%, 100% { box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.25); }
+  50%       { box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.12); }
+}
+
+/* ============================================================
+   10. FOOTER — REFINED
+   ============================================================ */
+
+.page-footer {
+  margin-top: var(--spacing-16);
+}
+
+.footer-divider {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-border),
+    transparent
+  );
+  margin-bottom: var(--spacing-6);
+}
+
+/* ============================================================
+   11. TOPBAR — REFINED HEIGHT & SEARCH HINT
+   ============================================================ */
+
+/* Subtle breadcrumb separator style */
+.breadcrumb-sep-slash {
+  color: var(--color-text-disabled);
+  margin: 0 var(--spacing-1);
+  font-weight: var(--font-weight-light);
+  font-size: var(--font-size-base);
+  line-height: 1;
+}
+
+/* Topbar docs label */
+.topbar-section-label {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-tertiary);
+  letter-spacing: 0.01em;
+}
+
+/* ============================================================
+   12. RESPONSIVE OVERRIDES
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .hero-split {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-8);
+  }
+
+  .hero-visual-panel {
+    display: none; /* hide panel on narrower viewports */
+  }
+
+  .content-inner {
+    padding: var(--spacing-8);
+  }
+}
+
+@media (max-width: 768px) {
+  .content-inner {
+    padding: var(--spacing-5) var(--spacing-4);
+  }
+
+  .page-header h1 {
+    font-size: 1.625rem;
+  }
+
+  .practices-header {
+    display: none;
+  }
+
+  .guide-timeline::before {
+    display: none;
+  }
+
+  .tokens-section-meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-inner {
+    padding: var(--spacing-4) var(--spacing-4);
+  }
+}

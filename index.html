@@ -7,6 +7,7 @@
   <meta name="description" content="Design System GPOS Lite V2.0 — Comprehensive design tokens, components, dan guidelines untuk membangun interface yang konsisten.">
   <title>GPOS Lite — Design System V2.0</title>
   <link rel="stylesheet" href="styles/globals.css">
+  <link rel="stylesheet" href="styles/enhancements.css">
 </head>
 <body>
 
@@ -112,7 +113,7 @@
             <h3 class="nav-title">Resources</h3>
             <ul class="nav-list">
               <li>
-                <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="nav-link" target="_blank">
+                <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="nav-link" target="_blank" rel="noopener">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
                   GitHub Repo
                 </a>
@@ -124,6 +125,12 @@
       </div>
 
       <div class="sidebar-footer">
+        <!-- System status indicator -->
+        <div class="system-status-indicator">
+          <div class="status-dot-live"></div>
+          <span>v2.0 — All Systems Active</span>
+        </div>
+        <!-- Tailwind badge -->
         <div class="tailwind-badge">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 6C9.33 6 7.67 7.33 7 10c1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35.98 1 2.09 2.15 4.59 2.15C19.67 12 21.33 10.67 22 8c-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C15.61 7.15 14.5 6 12 6zm-7 6c-2.67 0-4.33 1.33-5 4 1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35C6.39 17.15 7.5 18 10 18c2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C8.61 12.85 7.5 12 5 12z"/></svg>
           Built with Tailwind CSS
@@ -141,10 +148,12 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
         </button>
         <div class="breadcrumb">
+          <span class="topbar-section-label">Design System</span>
+          <span class="breadcrumb-sep-slash">/</span>
           <span class="current">Home</span>
         </div>
         <div class="topbar-actions">
-          <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="topbar-link" target="_blank">
+          <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="topbar-link" target="_blank" rel="noopener">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
             GitHub
           </a>
@@ -155,158 +164,321 @@
       <!-- Inner content wrapper -->
       <div class="content-inner">
 
-        <!-- Page Header -->
+        <!-- ===== PAGE HEADER ===== -->
         <header class="page-header">
-          <h1>Design System GPOS Lite V2.0</h1>
+          <div class="page-header-kicker">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+            Documentation
+          </div>
+          <h1>Design System<br>GPOS Lite V2.0</h1>
           <p class="subtitle">Dokumentasi lengkap design tokens, components, dan guidelines untuk membangun interface yang konsisten dan scalable.</p>
         </header>
 
         <!-- ===== HERO ===== -->
         <section class="hero-section" style="margin-bottom: var(--spacing-12);">
-          <div class="hero-badge">
-            <span class="hero-badge-dot"></span>
-            Enterprise Design System
-          </div>
-          <div class="hero-content">
-            <h2>Welcome to GPOS Lite<br>Design System</h2>
-            <p>Semua design tokens, component guidelines, dan Tailwind utilities yang kamu butuhkan — terdokumentasi dalam satu tempat dan siap dipakai langsung.</p>
-            <div class="cta-buttons">
-              <a href="foundations/colors/colors.html" class="btn btn-white">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg>
-                Mulai Explore
-              </a>
-              <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="btn btn-secondary" target="_blank">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-                View on GitHub
-              </a>
+
+          <div class="hero-split">
+
+            <!-- LEFT: Content -->
+            <div class="hero-left">
+              <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                Enterprise Design System
+              </div>
+              <div class="hero-content">
+                <h2>Welcome to GPOS Lite<br>Design System</h2>
+                <p>Semua design tokens, component guidelines, dan Tailwind utilities yang kamu butuhkan — terdokumentasi dalam satu tempat dan siap dipakai langsung.</p>
+                <div class="cta-buttons">
+                  <a href="foundations/colors/colors.html" class="btn btn-white">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                    Mulai Explore
+                  </a>
+                  <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="btn btn-secondary" target="_blank" rel="noopener">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                    View on GitHub
+                  </a>
+                </div>
+                <div class="hero-stats">
+                  <div class="hero-stat">
+                    <span class="hero-stat-value">120+</span>
+                    <span class="hero-stat-label">Design Tokens</span>
+                  </div>
+                  <div class="hero-stat">
+                    <span class="hero-stat-value">6</span>
+                    <span class="hero-stat-label">Color Palettes</span>
+                  </div>
+                  <div class="hero-stat">
+                    <span class="hero-stat-value">7</span>
+                    <span class="hero-stat-label">Foundations</span>
+                  </div>
+                  <div class="hero-stat">
+                    <span class="hero-stat-value">100%</span>
+                    <span class="hero-stat-label">Tailwind Ready</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="hero-stats">
-              <div class="hero-stat">
-                <span class="hero-stat-value">120+</span>
-                <span class="hero-stat-label">Design Tokens</span>
+
+            <!-- RIGHT: Visual Token Preview Panel -->
+            <div class="hero-visual-panel" aria-hidden="true">
+
+              <!-- Primary color palette strip -->
+              <div class="hvp-label">Color Tokens — Primary</div>
+              <div class="hvp-palette">
+                <div class="hvp-swatch" style="background:#EEF7FF;" title="primary-50"></div>
+                <div class="hvp-swatch" style="background:#D9EFFE;" title="primary-100"></div>
+                <div class="hvp-swatch" style="background:#BADDFD;" title="primary-200"></div>
+                <div class="hvp-swatch" style="background:#86C3FA;" title="primary-300"></div>
+                <div class="hvp-swatch" style="background:#4FA6F5;" title="primary-400"></div>
+                <div class="hvp-swatch" style="background:#1E7FD6;" title="primary-500 (brand)"></div>
+                <div class="hvp-swatch" style="background:#1668B0;" title="primary-600"></div>
+                <div class="hvp-swatch" style="background:#115188;" title="primary-700"></div>
+                <div class="hvp-swatch" style="background:#0D3C63;" title="primary-800"></div>
+                <div class="hvp-swatch" style="background:#09293F;" title="primary-900"></div>
               </div>
-              <div class="hero-stat">
-                <span class="hero-stat-value">6</span>
-                <span class="hero-stat-label">Color Palettes</span>
+
+              <div class="hvp-divider"></div>
+
+              <!-- Key design tokens preview -->
+              <div class="hvp-label">Design Tokens</div>
+              <div class="hvp-tokens">
+                <div class="hvp-token-row">
+                  <span class="hvp-token-dot" style="background:#1E7FD6;"></span>
+                  <span class="hvp-token-name">--color-primary-500</span>
+                  <span class="hvp-token-value">#1E7FD6</span>
+                </div>
+                <div class="hvp-token-row">
+                  <span class="hvp-token-dot" style="background:transparent;border-color:rgba(255,255,255,0.2);"></span>
+                  <span class="hvp-token-name">--spacing-4</span>
+                  <span class="hvp-token-value">1rem / 16px</span>
+                </div>
+                <div class="hvp-token-row">
+                  <span class="hvp-token-dot" style="background:transparent;border-color:rgba(255,255,255,0.2);border-radius:4px;"></span>
+                  <span class="hvp-token-name">--border-radius-md</span>
+                  <span class="hvp-token-value">8px</span>
+                </div>
+                <div class="hvp-token-row">
+                  <span class="hvp-token-dot" style="background:transparent;border-color:rgba(255,255,255,0.2);"></span>
+                  <span class="hvp-token-name">--font-size-base</span>
+                  <span class="hvp-token-value">1rem / 16px</span>
+                </div>
               </div>
-              <div class="hero-stat">
-                <span class="hero-stat-value">7</span>
-                <span class="hero-stat-label">Foundations</span>
+
+              <div class="hvp-divider"></div>
+
+              <!-- Spacing scale visualization -->
+              <div class="hvp-label">Spacing Scale — 4px base unit</div>
+              <div class="hvp-spacer-preview">
+                <div class="hvp-spacer-bar" style="width:4px;  height:4px; " title="4px"></div>
+                <div class="hvp-spacer-bar" style="width:8px;  height:8px; " title="8px"></div>
+                <div class="hvp-spacer-bar" style="width:12px; height:12px;" title="12px"></div>
+                <div class="hvp-spacer-bar" style="width:16px; height:16px;" title="16px"></div>
+                <div class="hvp-spacer-bar" style="width:20px; height:20px;" title="20px"></div>
+                <div class="hvp-spacer-bar" style="width:24px; height:24px;" title="24px"></div>
+                <div class="hvp-spacer-bar" style="width:32px; height:24px;" title="32px"></div>
+                <div class="hvp-spacer-bar" style="width:40px; height:24px;" title="40px"></div>
               </div>
-              <div class="hero-stat">
-                <span class="hero-stat-value">100%</span>
-                <span class="hero-stat-label">Tailwind Ready</span>
-              </div>
+
             </div>
+            <!-- /hero-visual-panel -->
+
           </div>
+          <!-- /hero-split -->
+
         </section>
 
-        <!-- ===== QUICK START ===== -->
-        <section class="quick-start">
+        <!-- ===== QUICK START — FOUNDATIONS ===== -->
+        <section class="quick-start has-intro">
           <h2>Quick Start — Foundations</h2>
+          <p class="section-intro">Semua building blocks utama design system — dari token warna hingga grid system — terdokumentasi lengkap dan siap dipakai.</p>
           <div class="grid grid-3">
 
+            <!-- Colors -->
             <div class="card">
               <div class="card-top-bar"></div>
-              <div class="card-icon-wrap blue">🎨</div>
+              <div class="card-icon-wrap blue">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <circle cx="12" cy="12" r="9"/>
+                  <path d="M12 3v9l6 3" stroke-width="1.5" opacity="0.5"/>
+                  <circle cx="12" cy="12" r="3" fill="currentColor" opacity="0.25"/>
+                  <path d="M12 3a9 9 0 010 18V3z" fill="currentColor" opacity="0.12"/>
+                </svg>
+              </div>
               <h3>Colors</h3>
               <p>Palette warna lengkap berbasis brand <strong style="color:var(--color-primary-600)">#1E7FD6</strong>, semantic colors, dan panduan penggunaannya.</p>
-              <a href="foundations/colors/colors.html" class="card-link">Lihat Color System →</a>
+              <a href="foundations/colors/colors.html" class="card-link">Lihat Color System</a>
             </div>
 
+            <!-- Typography -->
             <div class="card">
               <div class="card-top-bar"></div>
-              <div class="card-icon-wrap gray">✏️</div>
+              <div class="card-icon-wrap gray">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <polyline points="4,7 4,4 20,4 20,7"/>
+                  <line x1="9" y1="20" x2="15" y2="20"/>
+                  <line x1="12" y1="4" x2="12" y2="20"/>
+                </svg>
+              </div>
               <h3>Typography</h3>
               <p>Font families Inter &amp; JetBrains Mono, type scale, weights, dan line height guidelines.</p>
-              <a href="foundations/typography/typography.html" class="card-link">Lihat Typography →</a>
+              <a href="foundations/typography/typography.html" class="card-link">Lihat Typography</a>
             </div>
 
+            <!-- Spacing -->
             <div class="card">
               <div class="card-top-bar"></div>
-              <div class="card-icon-wrap cyan">📐</div>
+              <div class="card-icon-wrap cyan">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <line x1="3" y1="5" x2="3" y2="19"/>
+                  <line x1="21" y1="5" x2="21" y2="19"/>
+                  <line x1="3" y1="12" x2="21" y2="12"/>
+                  <line x1="3" y1="7" x2="7" y2="7" stroke-width="1"/>
+                  <line x1="3" y1="10" x2="5" y2="10" stroke-width="1" opacity="0.5"/>
+                  <line x1="17" y1="7" x2="21" y2="7" stroke-width="1"/>
+                </svg>
+              </div>
               <h3>Spacing</h3>
               <p>Spacing scale berbasis 4px base unit — dari 4px hingga 96px untuk layout yang konsisten.</p>
-              <a href="foundations/spacing/spacing.html" class="card-link">Lihat Spacing →</a>
+              <a href="foundations/spacing/spacing.html" class="card-link">Lihat Spacing</a>
             </div>
 
+            <!-- Shadows -->
             <div class="card">
               <div class="card-top-bar"></div>
-              <div class="card-icon-wrap amber">💡</div>
+              <div class="card-icon-wrap amber">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <rect x="2" y="2" width="13" height="13" rx="2"/>
+                  <rect x="9" y="9" width="13" height="13" rx="2" opacity="0.35" fill="currentColor"/>
+                </svg>
+              </div>
               <h3>Shadows</h3>
               <p>6 elevation levels dari xs hingga 2xl untuk membangun visual hierarchy yang jelas.</p>
-              <a href="foundations/shadows/shadows.html" class="card-link">Lihat Shadows →</a>
+              <a href="foundations/shadows/shadows.html" class="card-link">Lihat Shadows</a>
             </div>
 
+            <!-- Borders -->
             <div class="card">
               <div class="card-top-bar"></div>
-              <div class="card-icon-wrap green">⬛</div>
+              <div class="card-icon-wrap green">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <rect x="3" y="3" width="18" height="18" rx="5"/>
+                  <rect x="7" y="7" width="10" height="10" rx="2" opacity="0.3" fill="currentColor"/>
+                </svg>
+              </div>
               <h3>Borders &amp; Radius</h3>
               <p>Border width tokens dan radius scale dari 4px hingga full rounded untuk setiap kebutuhan.</p>
-              <a href="foundations/borders/borders.html" class="card-link">Lihat Borders →</a>
+              <a href="foundations/borders/borders.html" class="card-link">Lihat Borders</a>
             </div>
 
+            <!-- Grid -->
             <div class="card">
               <div class="card-top-bar"></div>
-              <div class="card-icon-wrap red">🔲</div>
+              <div class="card-icon-wrap red">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                  <rect x="3" y="3" width="7" height="7" rx="1"/>
+                  <rect x="14" y="3" width="7" height="7" rx="1"/>
+                  <rect x="3" y="14" width="7" height="7" rx="1"/>
+                  <rect x="14" y="14" width="7" height="7" rx="1"/>
+                </svg>
+              </div>
               <h3>Grid &amp; Layout</h3>
               <p>12-column grid system, breakpoints responsif, dan container tokens siap pakai.</p>
-              <a href="foundations/grid/grid.html" class="card-link">Lihat Grid →</a>
+              <a href="foundations/grid/grid.html" class="card-link">Lihat Grid</a>
             </div>
 
           </div>
         </section>
 
         <!-- ===== DESIGN TOKENS OVERVIEW ===== -->
-        <section class="tokens-overview">
+        <section class="tokens-overview has-intro">
           <h2>Design Tokens Overview</h2>
-          <p style="margin-bottom:var(--spacing-6);">Semua tokens terdefinisi sebagai CSS Custom Properties dan siap dipakai sebagai Tailwind utilities.</p>
+          <div class="tokens-section-meta">
+            <p class="section-intro" style="margin-top:0; margin-bottom:0;">Semua tokens terdefinisi sebagai CSS Custom Properties dan siap dipakai sebagai Tailwind utilities.</p>
+            <span class="token-count-badge">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg>
+              120+ Tokens
+            </span>
+          </div>
 
           <div class="tokens-grid">
+
             <div class="token-item">
+              <div class="token-category">
+                <div class="token-category-dot" style="background:var(--color-primary-400);"></div>
+                Colors
+              </div>
               <h4>Color System</h4>
               <p>7 palettes × 10 shades — Primary, Secondary, Success, Warning, Error, Info, Gray</p>
               <code class="token-code">--color-primary-500: #1E7FD6</code>
             </div>
+
             <div class="token-item">
+              <div class="token-category">
+                <div class="token-category-dot" style="background:var(--color-gray-400);"></div>
+                Typography
+              </div>
               <h4>Typography</h4>
               <p>2 font families, 9 size scales, 5 weight options, 5 line-height values</p>
               <code class="token-code">--font-size-base: 1rem (16px)</code>
             </div>
+
             <div class="token-item">
+              <div class="token-category">
+                <div class="token-category-dot" style="background:var(--color-secondary-400);"></div>
+                Spacing
+              </div>
               <h4>Spacing</h4>
               <p>12-step scale berbasis 4px — spacing-1 (4px) hingga spacing-24 (96px)</p>
               <code class="token-code">--spacing-4: 1rem (16px)</code>
             </div>
+
             <div class="token-item">
+              <div class="token-category">
+                <div class="token-category-dot" style="background:var(--color-warning-400);"></div>
+                Elevation
+              </div>
               <h4>Shadows</h4>
               <p>7 elevation levels termasuk brand shadow untuk interactive elements</p>
               <code class="token-code">--shadow-brand: 0 4px 14px rgba(30,127,214,0.35)</code>
             </div>
+
             <div class="token-item">
+              <div class="token-category">
+                <div class="token-category-dot" style="background:var(--color-success-400);"></div>
+                Shape
+              </div>
               <h4>Borders</h4>
               <p>4 border widths, 8 radius tokens dari none hingga full rounded</p>
               <code class="token-code">--border-radius-md: 0.5rem (8px)</code>
             </div>
+
             <div class="token-item">
+              <div class="token-category">
+                <div class="token-category-dot" style="background:var(--color-error-400);"></div>
+                Layout
+              </div>
               <h4>Grid &amp; Layout</h4>
               <p>6 responsive breakpoints dan sidebar/content width tokens</p>
               <code class="token-code">--breakpoint-md: 768px</code>
             </div>
+
           </div>
         </section>
 
         <!-- ===== IMPLEMENTATION GUIDE ===== -->
-        <section class="implementation">
+        <section class="implementation has-intro">
           <h2>Implementation Guide</h2>
+          <p class="section-intro">Tiga langkah untuk mulai menggunakan design system ini di project kamu.</p>
 
-          <div class="guide-section">
-            <h3>
-              <span class="step-badge">1</span>
-              Copy Tailwind Config
-            </h3>
-            <p>Copy file <code>tailwind.config.js</code> ke projectmu. Semua design tokens sudah terdefinisi sebagai Tailwind theme extensions.</p>
-            <pre><code>// tailwind.config.js
+          <div class="guide-timeline">
+
+            <div class="guide-section">
+              <h3>
+                <span class="step-badge">1</span>
+                Copy Tailwind Config
+              </h3>
+              <p>Copy file <code>tailwind.config.js</code> ke projectmu. Semua design tokens sudah terdefinisi sebagai Tailwind theme extensions.</p>
+              <pre><code>// tailwind.config.js
 module.exports = {
   theme: {
     extend: {
@@ -320,15 +492,15 @@ module.exports = {
     }
   }
 }</code></pre>
-          </div>
+            </div>
 
-          <div class="guide-section">
-            <h3>
-              <span class="step-badge">2</span>
-              Gunakan Tailwind Classes
-            </h3>
-            <p>Semua tokens otomatis jadi Tailwind utilities. Copy class langsung dari dokumentasi:</p>
-            <pre><code>&lt;!-- Primary Button --&gt;
+            <div class="guide-section">
+              <h3>
+                <span class="step-badge">2</span>
+                Gunakan Tailwind Classes
+              </h3>
+              <p>Semua tokens otomatis jadi Tailwind utilities. Copy class langsung dari dokumentasi:</p>
+              <pre><code>&lt;!-- Primary Button --&gt;
 &lt;button class="px-5 py-2.5 bg-primary-500 text-white font-semibold
                rounded-md shadow-brand hover:bg-primary-600 transition-all"&gt;
   Primary Button
@@ -339,15 +511,15 @@ module.exports = {
             hover:shadow-md hover:-translate-y-0.5 transition-all"&gt;
   Card content
 &lt;/div&gt;</code></pre>
-          </div>
+            </div>
 
-          <div class="guide-section">
-            <h3>
-              <span class="step-badge">3</span>
-              Gunakan CSS Variables
-            </h3>
-            <p>Atau akses token langsung via CSS custom properties untuk custom styling:</p>
-            <pre><code>.my-component {
+            <div class="guide-section">
+              <h3>
+                <span class="step-badge">3</span>
+                Gunakan CSS Variables
+              </h3>
+              <p>Atau akses token langsung via CSS custom properties untuk custom styling:</p>
+              <pre><code>.my-component {
   background-color: var(--color-primary-500);
   padding: var(--spacing-4) var(--spacing-6);
   border-radius: var(--border-radius-md);
@@ -355,13 +527,28 @@ module.exports = {
   font-family: var(--font-primary);
   transition: all var(--transition-base);
 }</code></pre>
-          </div>
+            </div>
 
+          </div>
         </section>
 
         <!-- ===== BEST PRACTICES ===== -->
-        <section class="best-practices">
+        <section class="best-practices has-intro">
           <h2>Best Practices</h2>
+          <p class="section-intro">Panduan singkat untuk menjaga konsistensi dan kualitas implementasi di seluruh project.</p>
+
+          <!-- Column labels -->
+          <div class="practices-header">
+            <div class="practices-col-label do-label">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg>
+              Do — Yang harus dilakukan
+            </div>
+            <div class="practices-col-label dont-label">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              Don't — Yang harus dihindari
+            </div>
+          </div>
+
           <div class="practices-grid">
             <div class="practice-item do">
               <span class="practice-icon">✅</span>
@@ -398,13 +585,14 @@ module.exports = {
           </div>
         </section>
 
-        <!-- Footer -->
+        <!-- ===== FOOTER ===== -->
         <footer class="page-footer">
+          <div class="footer-divider"></div>
           <div class="footer-left">
             &copy; 2026 <strong>GPOS Lite Design System V2.0</strong> — Maintained with ❤️
           </div>
           <div class="footer-right">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="opacity:0.5"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="opacity:0.4"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
             GitHub Pages
           </div>
         </footer>
