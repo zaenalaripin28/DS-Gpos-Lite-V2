@@ -12,45 +12,78 @@
     ══════════════════════════════════════ */
 
     /* Tabs */
-    .page-tabs { display:flex; gap:2px; margin-bottom:32px; border-bottom:2px solid #E2E8F0; }
-    .page-tab  { padding:10px 18px; border:none; background:none; cursor:pointer; font-size:.8125rem; font-weight:500; color:#64748B; border-bottom:2px solid transparent; margin-bottom:-2px; transition:all .15s; font-family:var(--font-primary); }
-    .page-tab.active { color:#1E7FD6; border-bottom-color:#1E7FD6; font-weight:600; }
-    .page-tab:hover:not(.active) { color:#0F172A; }
+    .page-tabs { display:flex; gap:2px; margin-bottom:32px; border-bottom:2px solid var(--color-border); }
+    .page-tab  { padding:10px 18px; border:none; background:none; cursor:pointer; font-size:.8125rem; font-weight:500; color:var(--color-text-secondary); border-bottom:2px solid transparent; margin-bottom:-2px; transition:all .15s; font-family:var(--font-primary); }
+    .page-tab.active { color:var(--color-primary-500); border-bottom-color:var(--color-primary-500); font-weight:600; }
+    .page-tab:hover:not(.active) { color:var(--color-text-primary); }
     .tab-panel { display:none; }
     .tab-panel.active { display:block; }
 
     /* Section Label */
-    .sec-label { font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#94A3B8; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
-    .sec-label::after { content:''; flex:1; height:1px; background:#F1F5F9; }
+    .sec-label { font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--color-text-tertiary); margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+    .sec-label::after { content:''; flex:1; height:1px; background:var(--color-border-light); }
 
     /* Canvas */
-    .canvas { background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:36px 32px; margin-bottom:8px; display:flex; flex-wrap:wrap; align-items:center; gap:12px; }
+    .canvas { background:var(--color-background); border:1px solid var(--color-border); border-radius:12px; padding:36px 32px; margin-bottom:8px; display:flex; flex-wrap:wrap; align-items:center; gap:12px; }
     .canvas.dark { background:linear-gradient(135deg,#0B1526 0%,#115188 100%); }
 
-    /* Ghost fix — NO border */
+    /* ── Ghost / Neutral Button — Figma Parity ────────────────────────
+       Source of truth: Figma component
+       Color-Background-Neutral → --color-neutral-n20  (#F5F6F7)
+       Color-Text-Bold          → --color-neutral-n900 (#091E42)
+       border-radius: 6px · padding: 8px 12px · weight: 500
+       line-height: 20px · gap: 4px · border: none
+    ──────────────────────────────────────────────────────────────────── */
     .btn-ghost-fixed {
-      display:inline-flex; align-items:center; justify-content:center; gap:8px;
-      padding:10px 20px; border-radius:8px;
-      font-family:var(--font-primary); font-size:14px; font-weight:600;
-      border:1.5px solid transparent;  /* transparent — no visible border */
-      background-color:transparent;
-      color:var(--color-text-secondary);
-      transition:all 200ms ease-in-out;
-      cursor:pointer; letter-spacing:.01em; white-space:nowrap; line-height:1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-family: var(--font-primary);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      line-height: 20px;
+      border: none;
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n900);
+      transition: all var(--transition-base);
+      cursor: pointer;
+      white-space: nowrap;
+      text-decoration: none;
     }
-    .btn-ghost-fixed:hover { background-color:var(--color-gray-100); color:var(--color-text-primary); text-decoration:none; }
+    .btn-ghost-fixed:hover {
+      background-color: var(--color-neutral-n30);
+      color: var(--color-neutral-n900);
+      text-decoration: none;
+    }
+    .btn-ghost-fixed:active {
+      background-color: var(--color-neutral-n40);
+      transform: translateY(1px) scale(.98);
+    }
+    .btn-ghost-fixed:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(30, 127, 214, .25);
+    }
+    .btn-ghost-fixed:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
 
-    /* State simulation classes */
+    /* ── State simulation classes (documentation only) ── */
     .sim-hover    { background-color:var(--color-primary-600)!important; border-color:var(--color-primary-600)!important; box-shadow:0 6px 20px rgba(30,127,214,.5)!important; transform:translateY(-1px)!important; }
     .sim-pressed  { background-color:var(--color-primary-700)!important; border-color:var(--color-primary-700)!important; box-shadow:none!important; transform:translateY(1px) scale(.98)!important; }
     .sim-focus    { outline:none!important; box-shadow:0 0 0 3px rgba(30,127,214,.35), 0 4px 14px rgba(30,127,214,.35)!important; }
     .sim-selected { background-color:var(--color-primary-800)!important; border-color:var(--color-primary-800)!important; box-shadow:inset 0 2px 4px rgba(0,0,0,.2)!important; }
     .sim-disabled { opacity:.4!important; cursor:not-allowed!important; pointer-events:none!important; }
 
-    .sim-ghost-hover    { background-color:var(--color-gray-100)!important; color:var(--color-text-primary)!important; }
-    .sim-ghost-pressed  { background-color:var(--color-gray-200)!important; color:var(--color-text-primary)!important; transform:translateY(1px) scale(.98)!important; }
+    /* Ghost neutral states */
+    .sim-ghost-hover    { background-color:var(--color-neutral-n30)!important; color:var(--color-neutral-n900)!important; }
+    .sim-ghost-pressed  { background-color:var(--color-neutral-n40)!important; color:var(--color-neutral-n900)!important; transform:translateY(1px) scale(.98)!important; }
     .sim-ghost-focus    { box-shadow:0 0 0 3px rgba(30,127,214,.25)!important; outline:none!important; }
-    .sim-ghost-selected { background-color:var(--color-primary-50)!important; color:var(--color-primary-700)!important; }
+    .sim-ghost-selected { background-color:var(--color-neutral-n50)!important; color:var(--color-neutral-n900)!important; }
     .sim-ghost-disabled { opacity:.4!important; cursor:not-allowed!important; pointer-events:none!important; }
 
     .sim-white-hover    { background-color:var(--color-primary-50)!important; box-shadow:0 4px 12px rgba(0,0,0,.12)!important; transform:translateY(-1px)!important; color:var(--color-primary-700)!important; }
@@ -73,81 +106,84 @@
     /* State matrix grid */
     .state-matrix { width:100%; margin-bottom:32px; }
     .state-matrix-head { display:grid; grid-template-columns:120px repeat(6,1fr); gap:0; margin-bottom:4px; }
-    .state-matrix-row  { display:grid; grid-template-columns:120px repeat(6,1fr); gap:0; margin-bottom:2px; border:1px solid #E2E8F0; border-radius:10px; overflow:hidden; background:#fff; }
-    .state-col-head { font-size:10px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#94A3B8; text-align:center; padding:6px 4px; }
+    .state-matrix-row  { display:grid; grid-template-columns:120px repeat(6,1fr); gap:0; margin-bottom:2px; border:1px solid var(--color-border); border-radius:10px; overflow:hidden; background:#fff; }
+    .state-col-head { font-size:10px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--color-text-tertiary); text-align:center; padding:6px 4px; }
     .state-col-head.first { text-align:left; padding-left:16px; }
-    .state-matrix-label { display:flex; align-items:center; padding:20px 16px; background:#F8FAFC; border-right:1px solid #E2E8F0; font-size:12px; font-weight:600; color:#475569; gap:6px; }
-    .state-matrix-cell  { display:flex; align-items:center; justify-content:center; padding:16px 8px; border-right:1px solid #F1F5F9; }
+    .state-matrix-label { display:flex; align-items:center; padding:20px 16px; background:var(--color-background); border-right:1px solid var(--color-border); font-size:12px; font-weight:600; color:var(--color-text-secondary); gap:6px; }
+    .state-matrix-cell  { display:flex; align-items:center; justify-content:center; padding:16px 8px; border-right:1px solid var(--color-border-light); }
     .state-matrix-cell:last-child { border-right:none; }
 
     /* Variant cards */
     .variant-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px; margin-bottom:32px; }
-    .variant-card { background:#fff; border:1px solid #E2E8F0; border-radius:12px; overflow:hidden; }
+    .variant-card { background:#fff; border:1px solid var(--color-border); border-radius:12px; overflow:hidden; }
     .variant-preview { padding:36px 24px; display:flex; align-items:center; justify-content:center; }
-    .variant-preview.light { background:#F8FAFC; }
+    .variant-preview.light { background:var(--color-background); }
     .variant-preview.dark  { background:linear-gradient(135deg,#0B1526,#115188); }
-    .variant-meta { padding:14px 18px; border-top:1px solid #F1F5F9; }
-    .variant-name { font-size:13px; font-weight:700; color:#0F172A; margin-bottom:3px; }
-    .variant-desc { font-size:12px; color:#64748B; line-height:1.5; margin-bottom:8px; }
+    .variant-meta { padding:14px 18px; border-top:1px solid var(--color-border-light); }
+    .variant-name { font-size:13px; font-weight:700; color:var(--color-text-primary); margin-bottom:3px; }
+    .variant-desc { font-size:12px; color:var(--color-text-secondary); line-height:1.5; margin-bottom:8px; }
     .variant-class { display:inline-block; font-family:var(--font-mono); font-size:11px; background:#0F172A; color:#7DD3FC; padding:2px 8px; border-radius:4px; border:1px solid #1E2D45; }
 
     /* Anatomy */
-    .anatomy-wrap { background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:48px 24px 40px; display:flex; flex-direction:column; align-items:center; gap:24px; margin-bottom:32px; }
-    .anatomy-diagram { position:relative; display:inline-flex; align-items:center; justify-content:center; }
+    .anatomy-wrap { background:var(--color-background); border:1px solid var(--color-border); border-radius:12px; padding:48px 24px 40px; display:flex; flex-direction:column; align-items:center; gap:24px; margin-bottom:32px; }
+    /* Anatomy live button — reflects Figma neutral button */
     .anatomy-btn-live {
-      display:inline-flex; align-items:center; gap:8px;
-      padding:10px 20px; background:var(--color-primary-500); color:white;
-      border-radius:8px; font-family:var(--font-primary); font-size:14px; font-weight:600;
-      border:1.5px solid var(--color-primary-500); box-shadow:var(--shadow-brand);
-      letter-spacing:.01em; line-height:1; white-space:nowrap; position:relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 12px;
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n900);
+      border-radius: 6px;
+      font-family: var(--font-primary);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      line-height: 20px;
+      border: none;
+      white-space: nowrap;
+      position: relative;
     }
     .anatomy-specs { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:4px; }
-    .spec-chip { display:inline-flex; align-items:center; gap:5px; padding:5px 12px; background:#fff; border:1px solid #E2E8F0; border-radius:9999px; font-size:11px; font-weight:600; color:#475569; }
+    .spec-chip { display:inline-flex; align-items:center; gap:5px; padding:5px 12px; background:#fff; border:1px solid var(--color-border); border-radius:9999px; font-size:11px; font-weight:600; color:var(--color-text-secondary); }
     .spec-chip .chip-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
 
     /* Measurements overlay */
     .m-wrap { position:relative; display:inline-block; }
-    /* Top label */
-    .m-top { position:absolute; top:-28px; left:50%; transform:translateX(-50%); }
-    /* Bottom label */
-    .m-bot { position:absolute; bottom:-28px; left:50%; transform:translateX(-50%); }
-    /* Left label */
-    .m-left { position:absolute; left:-40px; top:50%; transform:translateY(-50%); }
-    /* Right label */
+    .m-top   { position:absolute; top:-28px; left:50%; transform:translateX(-50%); }
+    .m-bot   { position:absolute; bottom:-28px; left:50%; transform:translateX(-50%); }
+    .m-left  { position:absolute; left:-40px; top:50%; transform:translateY(-50%); }
     .m-right { position:absolute; right:-40px; top:50%; transform:translateY(-50%); }
-    .m-label { font-size:10px; font-weight:700; color:#1E7FD6; background:#EEF7FF; border:1px solid #BADDFD; border-radius:4px; padding:1px 6px; white-space:nowrap; }
-    .m-line-h { position:absolute; height:1px; background:#BADDFD; }
-    .m-line-v { position:absolute; width:1px; background:#BADDFD; }
+    .m-label { font-size:10px; font-weight:700; color:var(--color-primary-500); background:var(--color-primary-50); border:1px solid var(--color-primary-200); border-radius:4px; padding:1px 6px; white-space:nowrap; }
 
     /* Code block */
     .code-block { background:#0F172A; border:1px solid #1E2D45; border-radius:10px; overflow:hidden; margin-bottom:14px; }
-    .code-head { display:flex; align-items:center; justify-content:space-between; padding:8px 14px; background:#07101D; border-bottom:1px solid #1E2D45; }
-    .code-lang { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:#475569; }
-    .copy-btn { display:inline-flex; align-items:center; gap:4px; padding:3px 10px; background:#1A2E48; border:1px solid #2D4A6A; border-radius:5px; font-size:11px; font-weight:600; color:#94A3B8; cursor:pointer; transition:all .15s; font-family:var(--font-primary); }
-    .copy-btn:hover { background:#1E7FD6; border-color:#1E7FD6; color:white; }
+    .code-head  { display:flex; align-items:center; justify-content:space-between; padding:8px 14px; background:#07101D; border-bottom:1px solid #1E2D45; }
+    .code-lang  { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:#475569; }
+    .copy-btn   { display:inline-flex; align-items:center; gap:4px; padding:3px 10px; background:#1A2E48; border:1px solid #2D4A6A; border-radius:5px; font-size:11px; font-weight:600; color:#94A3B8; cursor:pointer; transition:all .15s; font-family:var(--font-primary); }
+    .copy-btn:hover  { background:var(--color-primary-500); border-color:var(--color-primary-500); color:white; }
     .copy-btn.copied { background:#16A34A; border-color:#16A34A; color:white; }
-    .code-block pre { margin:0; padding:16px 18px; background:transparent; border:none; border-radius:0; overflow-x:auto; }
+    .code-block pre  { margin:0; padding:16px 18px; background:transparent; border:none; border-radius:0; overflow-x:auto; }
     .code-block code { background:none; border:none; padding:0; color:#CBD5E1; font-size:12.5px; line-height:1.7; }
     .hl-t { color:#7DD3FC; } .hl-a { color:#93C5FD; } .hl-s { color:#86EFAC; } .hl-c { color:#475569; font-style:italic; }
 
     /* Token table */
     .tok-table { width:100%; border-collapse:collapse; font-size:12.5px; margin-bottom:24px; }
-    .tok-table th { background:#F8FAFC; border:1px solid #E2E8F0; padding:8px 12px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:#64748B; text-align:left; }
-    .tok-table td { border:1px solid #E2E8F0; padding:9px 12px; background:#fff; vertical-align:middle; }
-    .tok-table tr:hover td { background:#F8FAFC; }
-    .tp { display:inline-block; background:#0F172A; color:#7DD3FC; font-family:var(--font-mono); font-size:11px; padding:1px 7px; border-radius:4px; border:1px solid #1E2D45; }
-    .tv { display:inline-block; background:#F0FDF4; color:#166534; font-family:var(--font-mono); font-size:11px; padding:1px 7px; border-radius:4px; border:1px solid #BBF7D0; }
+    .tok-table th { background:var(--color-background); border:1px solid var(--color-border); padding:8px 12px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--color-text-secondary); text-align:left; }
+    .tok-table td { border:1px solid var(--color-border); padding:9px 12px; background:#fff; vertical-align:middle; }
+    .tok-table tr:hover td { background:var(--color-background); }
+    .tp  { display:inline-block; background:#0F172A; color:#7DD3FC; font-family:var(--font-mono); font-size:11px; padding:1px 7px; border-radius:4px; border:1px solid #1E2D45; }
+    .tv  { display:inline-block; background:#F0FDF4; color:#166534; font-family:var(--font-mono); font-size:11px; padding:1px 7px; border-radius:4px; border:1px solid #BBF7D0; }
     .cdot { display:inline-block; width:12px; height:12px; border-radius:3px; border:1px solid rgba(0,0,0,.1); vertical-align:middle; margin-right:5px; }
 
-    /* Tw grid */
-    .tw-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:10px; margin-bottom:24px; }
-    .tw-item { background:#fff; border:1px solid #E2E8F0; border-left:3px solid #1E7FD6; border-radius:7px; padding:12px 14px; }
-    .tw-purpose { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:#94A3B8; margin-bottom:4px; }
-    .tw-class { font-family:var(--font-mono); font-size:12px; color:#1E7FD6; font-weight:600; }
-    .tw-desc { font-size:11px; color:#64748B; margin-top:3px; }
+    /* Tailwind reference grid */
+    .tw-grid  { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:10px; margin-bottom:24px; }
+    .tw-item  { background:#fff; border:1px solid var(--color-border); border-left:3px solid var(--color-primary-500); border-radius:7px; padding:12px 14px; }
+    .tw-purpose { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--color-text-tertiary); margin-bottom:4px; }
+    .tw-class   { font-family:var(--font-mono); font-size:12px; color:var(--color-primary-500); font-weight:600; }
+    .tw-desc    { font-size:11px; color:var(--color-text-secondary); margin-top:3px; }
 
-    /* Usage */
-    .usage-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:24px; }
+    /* Usage do/don't */
+    .usage-row  { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:24px; }
     @media(max-width:600px){ .usage-row{ grid-template-columns:1fr; } }
     .usage-item { display:flex; align-items:flex-start; gap:8px; padding:12px 14px; border-radius:8px; font-size:12.5px; line-height:1.55; border:1px solid; }
     .usage-item.do   { background:#F0FDF4; border-color:#BBF7D0; color:#15803D; }
@@ -159,7 +195,7 @@
     .a11y-box p { font-size:12.5px; color:#1E40AF; margin:0; line-height:1.55; }
 
     /* Figma note */
-    .figma-note { background:#FFF7ED; border:1px solid #FDE68A; border-left:4px solid #F59E0B; border-radius:8px; padding:12px 16px; margin-bottom:24px; font-size:12px; color:#92400E; line-height:1.5; }
+    .figma-note { background:#FFFBEB; border:1px solid var(--color-warning-200); border-left:4px solid var(--color-warning-500); border-radius:8px; padding:12px 16px; margin-bottom:24px; font-size:12px; color:var(--color-warning-800); line-height:1.5; }
 
     @media(max-width:768px){
       .state-matrix-head, .state-matrix-row { grid-template-columns:100px repeat(6,1fr); }
@@ -188,7 +224,7 @@
           <div class="version">Design System V2.0</div>
         </div>
       </div>
-      <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">✕</button>
+      <button type="button" class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">✕</button>
     </div>
     <div class="sidebar-search">
       <input type="search" class="search-input" placeholder="🔍  Cari token, component...">
@@ -247,13 +283,13 @@
   <!-- ══ MAIN ══ -->
   <main class="main-content">
     <div class="topbar">
-      <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">
+      <button type="button" class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
       <div class="breadcrumb">
         <a href="../../index.html">Home</a>
         <span class="breadcrumb-sep"> / </span>
-        <span style="color:#94A3B8">Komponen</span>
+        <span style="color:var(--color-text-tertiary)">Komponen</span>
         <span class="breadcrumb-sep"> / </span>
         <span class="current">Button</span>
       </div>
@@ -276,53 +312,57 @@
           </div>
           <div>
             <h1 style="margin:0;font-size:1.625rem;letter-spacing:-.02em;">Button</h1>
-            <p style="margin:0;font-size:.875rem;color:#64748B;">Komponen interaktif untuk aksi utama, sekunder, dan tersier dalam interface.</p>
+            <p style="margin:0;font-size:.875rem;color:var(--color-text-secondary);">Komponen interaktif untuk aksi utama, sekunder, dan tersier dalam interface.</p>
           </div>
         </div>
         <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;padding-top:14px;border-top:1px solid var(--color-border);">
           <span style="display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:3px 10px;border-radius:9999px;background:#F0FDF4;color:#15803D;border:1px solid #BBF7D0;letter-spacing:.04em;text-transform:uppercase;"><span style="width:5px;height:5px;border-radius:50%;background:#22C55E;"></span>Stable</span>
-          <span style="display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:3px 10px;border-radius:9999px;background:#EEF7FF;color:#1668B0;border:1px solid #BADDFD;letter-spacing:.04em;text-transform:uppercase;">4 Variants</span>
-          <span style="display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:3px 10px;border-radius:9999px;background:#F1F5F9;color:#475569;border:1px solid #E2E8F0;letter-spacing:.04em;text-transform:uppercase;">6 States</span>
+          <span style="display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:3px 10px;border-radius:9999px;background:var(--color-primary-50);color:var(--color-primary-700);border:1px solid var(--color-primary-200);letter-spacing:.04em;text-transform:uppercase;">4 Variants</span>
+          <span style="display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:3px 10px;border-radius:9999px;background:var(--color-background);color:var(--color-text-secondary);border:1px solid var(--color-border);letter-spacing:.04em;text-transform:uppercase;">6 States</span>
           <span style="display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:3px 10px;border-radius:9999px;background:#F5F3FF;color:#6D28D9;border:1px solid #DDD6FE;letter-spacing:.04em;text-transform:uppercase;">WCAG AA</span>
         </div>
       </header>
 
       <!-- TABS -->
-      <div class="page-tabs">
-        <button class="page-tab active" data-tab="overview">Overview</button>
-        <button class="page-tab" data-tab="variants">Variants</button>
-        <button class="page-tab" data-tab="states">States</button>
-        <button class="page-tab" data-tab="anatomy">Anatomy</button>
-        <button class="page-tab" data-tab="code">Code</button>
-        <button class="page-tab" data-tab="tokens">Tokens</button>
+      <div class="page-tabs" role="tablist">
+        <button type="button" class="page-tab active" data-tab="overview" role="tab" aria-selected="true">Overview</button>
+        <button type="button" class="page-tab" data-tab="variants" role="tab" aria-selected="false">Variants</button>
+        <button type="button" class="page-tab" data-tab="states" role="tab" aria-selected="false">States</button>
+        <button type="button" class="page-tab" data-tab="anatomy" role="tab" aria-selected="false">Anatomy</button>
+        <button type="button" class="page-tab" data-tab="code" role="tab" aria-selected="false">Code</button>
+        <button type="button" class="page-tab" data-tab="tokens" role="tab" aria-selected="false">Tokens</button>
       </div>
 
       <!-- ═══ TAB: OVERVIEW ═══ -->
-      <div class="tab-panel active" id="tab-overview">
+      <div class="tab-panel active" id="tab-overview" role="tabpanel">
 
         <div class="figma-note">
-          ⚠️ <strong>Figma Rate Limit:</strong> Nilai token diambil dari CSS project (styles.css). State yang terdokumentasi: <strong>Default · Hover · Pressed · Focus · Selected · Disabled</strong> — sesuai Figma component.
+          🎨 <strong>Figma Source:</strong> Ghost/Neutral button telah diupdate mengikuti Figma component — <code>Color-Background-Neutral</code> (#F5F6F7) · <code>Color-Text-Bold</code> (#091E42) · radius 6px · weight Medium 500. States terdokumentasi: <strong>Default · Hover · Pressed · Focus · Selected · Disabled</strong>.
         </div>
 
         <div class="sec-label">Live Preview</div>
-        <div class="canvas">
-          <button class="btn btn-primary">Primary</button>
-          <button class="btn-ghost-fixed">Ghost</button>
-          <button class="btn btn-primary">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+
+        <!-- Light canvas -->
+        <div class="canvas" role="region" aria-label="Preview light background">
+          <button type="button" class="btn btn-primary">Primary</button>
+          <button type="button" class="btn-ghost-fixed">Ghost</button>
+          <button type="button" class="btn btn-primary">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             Dengan Icon
           </button>
-          <button class="btn-ghost-fixed">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <button type="button" class="btn-ghost-fixed">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             Dengan Icon
           </button>
-          <button class="btn btn-primary btn-loading">Loading</button>
+          <button type="button" class="btn btn-primary btn-loading" aria-label="Memuat…">Loading</button>
         </div>
-        <div class="canvas dark">
+
+        <!-- Dark canvas -->
+        <div class="canvas dark" role="region" aria-label="Preview dark background">
           <a href="#" class="btn btn-white">White</a>
           <a href="#" class="btn btn-secondary">Secondary</a>
           <a href="#" class="btn btn-white">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             Dengan Icon
           </a>
         </div>
@@ -332,7 +372,7 @@
         <div class="usage-row">
           <div class="usage-item do"><span style="font-size:14px;flex-shrink:0;">✅</span><span>Gunakan <strong>Primary</strong> untuk satu aksi utama per halaman: Simpan, Submit, Konfirmasi.</span></div>
           <div class="usage-item dont"><span style="font-size:14px;flex-shrink:0;">❌</span><span>Jangan gunakan lebih dari satu <strong>Primary</strong> button dalam satu area yang sama.</span></div>
-          <div class="usage-item do"><span style="font-size:14px;flex-shrink:0;">✅</span><span>Gunakan <strong>Ghost</strong> untuk aksi sekunder atau tersier. Border tidak ditampilkan — tampak seperti teks biasa.</span></div>
+          <div class="usage-item do"><span style="font-size:14px;flex-shrink:0;">✅</span><span>Gunakan <strong>Ghost</strong> untuk aksi sekunder/tersier. Background neutral ringan — tidak mendominasi.</span></div>
           <div class="usage-item dont"><span style="font-size:14px;flex-shrink:0;">❌</span><span>Jangan gunakan <strong>White</strong> atau <strong>Secondary</strong> di atas background terang — dirancang khusus untuk dark background.</span></div>
           <div class="usage-item do"><span style="font-size:14px;flex-shrink:0;">✅</span><span>Gunakan label yang jelas &amp; actionable: "Simpan Data", "Hapus", "Kirim" — bukan hanya "OK".</span></div>
           <div class="usage-item dont"><span style="font-size:14px;flex-shrink:0;">❌</span><span>Jangan disable button tanpa memberikan tooltip atau pesan kenapa ia tidak bisa diklik.</span></div>
@@ -340,43 +380,44 @@
 
         <!-- Pairing Guide -->
         <div class="sec-label">Button Pairing</div>
-        <div style="background:#fff;border:1px solid #E2E8F0;border-radius:12px;overflow:hidden;margin-bottom:32px;">
+        <div style="background:#fff;border:1px solid var(--color-border);border-radius:12px;overflow:hidden;margin-bottom:32px;">
           <div style="display:grid;grid-template-columns:1fr 1fr;">
-            <div style="padding:20px 24px;border-right:1px solid #E2E8F0;">
-              <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#94A3B8;margin-bottom:12px;">Light Background</div>
-              <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                <button class="btn btn-primary">Simpan</button>
-                <button class="btn-ghost-fixed">Batal</button>
+            <div style="padding:20px 24px;border-right:1px solid var(--color-border);">
+              <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--color-text-tertiary);margin-bottom:12px;">Light Background</div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+                <button type="button" class="btn btn-primary">Simpan</button>
+                <button type="button" class="btn-ghost-fixed">Batal</button>
               </div>
             </div>
             <div style="padding:20px 24px;background:linear-gradient(135deg,#0B1526,#115188);">
               <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:rgba(255,255,255,.4);margin-bottom:12px;">Dark Background</div>
-              <div style="display:flex;gap:10px;flex-wrap:wrap;">
+              <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
                 <a href="#" class="btn btn-white">Explore</a>
                 <a href="#" class="btn btn-secondary">GitHub</a>
               </div>
             </div>
           </div>
-          <div style="padding:10px 20px;background:#F8FAFC;border-top:1px solid #E2E8F0;">
-            <p style="font-size:11.5px;color:#64748B;margin:0;line-height:1.5;"><strong style="color:#0F172A;">Primary + Ghost</strong> — untuk light bg. &nbsp;|&nbsp; <strong style="color:#0F172A;">White + Secondary</strong> — untuk dark bg / hero section.</p>
+          <div style="padding:10px 20px;background:var(--color-background);border-top:1px solid var(--color-border);">
+            <p style="font-size:11.5px;color:var(--color-text-secondary);margin:0;line-height:1.5;"><strong style="color:var(--color-text-primary);">Primary + Ghost</strong> — untuk light bg. &nbsp;|&nbsp; <strong style="color:var(--color-text-primary);">White + Secondary</strong> — untuk dark bg / hero section.</p>
           </div>
         </div>
 
-      </div>
+      </div><!-- /tab-overview -->
 
       <!-- ═══ TAB: VARIANTS ═══ -->
-      <div class="tab-panel" id="tab-variants">
+      <div class="tab-panel" id="tab-variants" role="tabpanel">
 
         <div class="sec-label">4 Variants — dari Figma</div>
         <div class="variant-grid">
 
+          <!-- Primary -->
           <div class="variant-card">
             <div class="variant-preview light">
-              <button class="btn btn-primary">Primary</button>
+              <button type="button" class="btn btn-primary">Primary</button>
             </div>
             <div class="variant-meta">
               <div class="variant-name">Primary</div>
-              <div class="variant-desc">Aksi utama. Background solid brand blue <code style="font-size:11px;padding:1px 5px">#1E7FD6</code>, teks putih, shadow brand. Satu per halaman.</div>
+              <div class="variant-desc">Aksi utama. Background solid brand blue <code style="font-size:11px;padding:1px 5px">var(--color-primary-500)</code>, teks putih, shadow brand. Satu per halaman.</div>
               <span class="variant-class">.btn .btn-primary</span>
               <div style="display:flex;gap:5px;margin-top:8px;">
                 <span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:#F0FDF4;color:#15803D;border:1px solid #BBF7D0;">Light bg ✓</span>
@@ -385,13 +426,14 @@
             </div>
           </div>
 
+          <!-- Ghost / Neutral -->
           <div class="variant-card">
             <div class="variant-preview light">
-              <button class="btn-ghost-fixed">Ghost</button>
+              <button type="button" class="btn-ghost-fixed">Ghost</button>
             </div>
             <div class="variant-meta">
-              <div class="variant-name">Ghost</div>
-              <div class="variant-desc">Aksi sekunder / tersier. Background transparan, <strong>tanpa border</strong>, teks abu. Hover menampilkan subtle background.</div>
+              <div class="variant-name">Ghost / Neutral</div>
+              <div class="variant-desc">Aksi sekunder / tersier. Background <code style="font-size:11px;padding:1px 5px">neutral-n20</code> (#F5F6F7), teks <code style="font-size:11px;padding:1px 5px">neutral-n900</code> (#091E42). Font Medium 500, radius 6px. Hover: neutral-n30.</div>
               <span class="variant-class">.btn-ghost-fixed</span>
               <div style="display:flex;gap:5px;margin-top:8px;">
                 <span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:#F0FDF4;color:#15803D;border:1px solid #BBF7D0;">Light bg ✓</span>
@@ -400,6 +442,7 @@
             </div>
           </div>
 
+          <!-- White -->
           <div class="variant-card">
             <div class="variant-preview dark">
               <a href="#" class="btn btn-white">White</a>
@@ -415,6 +458,7 @@
             </div>
           </div>
 
+          <!-- Secondary -->
           <div class="variant-card">
             <div class="variant-preview dark">
               <a href="#" class="btn btn-secondary">Secondary</a>
@@ -432,186 +476,221 @@
 
         </div>
 
-      </div>
+      </div><!-- /tab-variants -->
 
       <!-- ═══ TAB: STATES ═══ -->
-      <div class="tab-panel" id="tab-states">
+      <div class="tab-panel" id="tab-states" role="tabpanel">
 
         <div class="sec-label">6 States — Default · Hover · Pressed · Focus · Selected · Disabled</div>
 
         <!-- State Matrix -->
-        <div class="state-matrix">
-          <div class="state-matrix-head">
-            <div class="state-col-head first">Variant</div>
-            <div class="state-col-head">Default</div>
-            <div class="state-col-head">Hover</div>
-            <div class="state-col-head">Pressed</div>
-            <div class="state-col-head">Focus</div>
-            <div class="state-col-head">Selected</div>
-            <div class="state-col-head">Disabled</div>
+        <div class="state-matrix" role="table" aria-label="State matrix semua variant">
+          <div class="state-matrix-head" role="row">
+            <div class="state-col-head first" role="columnheader">Variant</div>
+            <div class="state-col-head" role="columnheader">Default</div>
+            <div class="state-col-head" role="columnheader">Hover</div>
+            <div class="state-col-head" role="columnheader">Pressed</div>
+            <div class="state-col-head" role="columnheader">Focus</div>
+            <div class="state-col-head" role="columnheader">Selected</div>
+            <div class="state-col-head" role="columnheader">Disabled</div>
           </div>
 
           <!-- Primary row -->
-          <div class="state-matrix-row">
-            <div class="state-matrix-label">
-              <span style="width:8px;height:8px;border-radius:50%;background:#1E7FD6;flex-shrink:0;"></span>
+          <div class="state-matrix-row" role="row">
+            <div class="state-matrix-label" role="rowheader">
+              <span style="width:8px;height:8px;border-radius:50%;background:var(--color-primary-500);flex-shrink:0;"></span>
               Primary
             </div>
-            <div class="state-matrix-cell"><button class="btn btn-primary" style="font-size:12px;padding:7px 14px;">Button</button></div>
-            <div class="state-matrix-cell"><button class="btn btn-primary sim-hover" style="font-size:12px;padding:7px 14px;">Button</button></div>
-            <div class="state-matrix-cell"><button class="btn btn-primary sim-pressed" style="font-size:12px;padding:7px 14px;">Button</button></div>
-            <div class="state-matrix-cell"><button class="btn btn-primary sim-focus" style="font-size:12px;padding:7px 14px;">Button</button></div>
-            <div class="state-matrix-cell"><button class="btn btn-primary sim-selected" style="font-size:12px;padding:7px 14px;">Button</button></div>
-            <div class="state-matrix-cell"><button class="btn btn-primary sim-disabled" style="font-size:12px;padding:7px 14px;">Button</button></div>
+            <div class="state-matrix-cell"><button type="button" class="btn btn-primary">Button</button></div>
+            <div class="state-matrix-cell"><button type="button" class="btn btn-primary sim-hover">Button</button></div>
+            <div class="state-matrix-cell"><button type="button" class="btn btn-primary sim-pressed">Button</button></div>
+            <div class="state-matrix-cell"><button type="button" class="btn btn-primary sim-focus">Button</button></div>
+            <div class="state-matrix-cell"><button type="button" class="btn btn-primary sim-selected" aria-pressed="true">Button</button></div>
+            <div class="state-matrix-cell"><button type="button" class="btn btn-primary sim-disabled" disabled aria-disabled="true">Button</button></div>
           </div>
 
           <!-- Ghost row -->
-          <div class="state-matrix-row">
-            <div class="state-matrix-label">
-              <span style="width:8px;height:8px;border-radius:50%;background:#94A3B8;flex-shrink:0;"></span>
+          <div class="state-matrix-row" role="row">
+            <div class="state-matrix-label" role="rowheader">
+              <span style="width:8px;height:8px;border-radius:50%;background:var(--color-neutral-n50);flex-shrink:0;"></span>
               Ghost
             </div>
-            <div class="state-matrix-cell"><button class="btn-ghost-fixed" style="font-size:12px;padding:7px 14px;">Button</button></div>
-            <div class="state-matrix-cell"><button class="btn-ghost-fixed sim-ghost-hover" style="font-size:12px;padding:7px 14px;">Button</button></div>
-            <div class="state-matrix-cell"><button class="btn-ghost-fixed sim-ghost-pressed" style="font-size:12px;padding:7px 14px;">Button</button></div>
-            <div class="state-matrix-cell"><button class="btn-ghost-fixed sim-ghost-focus" style="font-size:12px;padding:7px 14px;">Button</button></div>
-            <div class="state-matrix-cell"><button class="btn-ghost-fixed sim-ghost-selected" style="font-size:12px;padding:7px 14px;">Button</button></div>
-            <div class="state-matrix-cell"><button class="btn-ghost-fixed sim-ghost-disabled" style="font-size:12px;padding:7px 14px;">Button</button></div>
+            <div class="state-matrix-cell"><button type="button" class="btn-ghost-fixed">Button</button></div>
+            <div class="state-matrix-cell"><button type="button" class="btn-ghost-fixed sim-ghost-hover">Button</button></div>
+            <div class="state-matrix-cell"><button type="button" class="btn-ghost-fixed sim-ghost-pressed">Button</button></div>
+            <div class="state-matrix-cell"><button type="button" class="btn-ghost-fixed sim-ghost-focus">Button</button></div>
+            <div class="state-matrix-cell"><button type="button" class="btn-ghost-fixed sim-ghost-selected" aria-pressed="true">Button</button></div>
+            <div class="state-matrix-cell"><button type="button" class="btn-ghost-fixed sim-ghost-disabled" disabled aria-disabled="true">Button</button></div>
           </div>
 
-          <!-- White row — on dark bg chip -->
-          <div class="state-matrix-row" style="background:linear-gradient(135deg,#0B1526,#115188);">
-            <div class="state-matrix-label" style="background:rgba(255,255,255,.05);border-right-color:rgba(255,255,255,.1);">
+          <!-- White row — dark bg -->
+          <div class="state-matrix-row" style="background:linear-gradient(135deg,#0B1526,#115188);" role="row">
+            <div class="state-matrix-label" style="background:rgba(255,255,255,.05);border-right-color:rgba(255,255,255,.1);" role="rowheader">
               <span style="width:8px;height:8px;border-radius:50%;background:#fff;border:1.5px solid rgba(255,255,255,.3);flex-shrink:0;"></span>
               <span style="color:rgba(255,255,255,.6);">White</span>
             </div>
-            <div class="state-matrix-cell" style="border-right-color:rgba(255,255,255,.05);"><button class="btn btn-white" style="font-size:12px;padding:7px 14px;">Button</button></div>
-            <div class="state-matrix-cell" style="border-right-color:rgba(255,255,255,.05);"><button class="btn btn-white sim-white-hover" style="font-size:12px;padding:7px 14px;">Button</button></div>
-            <div class="state-matrix-cell" style="border-right-color:rgba(255,255,255,.05);"><button class="btn btn-white sim-white-pressed" style="font-size:12px;padding:7px 14px;">Button</button></div>
-            <div class="state-matrix-cell" style="border-right-color:rgba(255,255,255,.05);"><button class="btn btn-white sim-white-focus" style="font-size:12px;padding:7px 14px;">Button</button></div>
-            <div class="state-matrix-cell" style="border-right-color:rgba(255,255,255,.05);"><button class="btn btn-white sim-white-selected" style="font-size:12px;padding:7px 14px;">Button</button></div>
-            <div class="state-matrix-cell"><button class="btn btn-white sim-white-disabled" style="font-size:12px;padding:7px 14px;">Button</button></div>
+            <div class="state-matrix-cell" style="border-right-color:rgba(255,255,255,.05);"><button type="button" class="btn btn-white">Button</button></div>
+            <div class="state-matrix-cell" style="border-right-color:rgba(255,255,255,.05);"><button type="button" class="btn btn-white sim-white-hover">Button</button></div>
+            <div class="state-matrix-cell" style="border-right-color:rgba(255,255,255,.05);"><button type="button" class="btn btn-white sim-white-pressed">Button</button></div>
+            <div class="state-matrix-cell" style="border-right-color:rgba(255,255,255,.05);"><button type="button" class="btn btn-white sim-white-focus">Button</button></div>
+            <div class="state-matrix-cell" style="border-right-color:rgba(255,255,255,.05);"><button type="button" class="btn btn-white sim-white-selected" aria-pressed="true">Button</button></div>
+            <div class="state-matrix-cell"><button type="button" class="btn btn-white sim-white-disabled" disabled aria-disabled="true">Button</button></div>
           </div>
 
-          <!-- Secondary row — on dark bg chip -->
-          <div class="state-matrix-row" style="background:linear-gradient(135deg,#0B1526,#115188);">
-            <div class="state-matrix-label" style="background:rgba(255,255,255,.05);border-right-color:rgba(255,255,255,.1);">
+          <!-- Secondary row — dark bg -->
+          <div class="state-matrix-row" style="background:linear-gradient(135deg,#0B1526,#115188);" role="row">
+            <div class="state-matrix-label" style="background:rgba(255,255,255,.05);border-right-color:rgba(255,255,255,.1);" role="rowheader">
               <span style="width:8px;height:8px;border-radius:50%;background:transparent;border:1.5px solid rgba(255,255,255,.4);flex-shrink:0;"></span>
               <span style="color:rgba(255,255,255,.6);">Secondary</span>
             </div>
-            <div class="state-matrix-cell" style="border-right-color:rgba(255,255,255,.05);"><button class="btn btn-secondary" style="font-size:12px;padding:7px 14px;">Button</button></div>
-            <div class="state-matrix-cell" style="border-right-color:rgba(255,255,255,.05);"><button class="btn btn-secondary sim-sec-hover" style="font-size:12px;padding:7px 14px;">Button</button></div>
-            <div class="state-matrix-cell" style="border-right-color:rgba(255,255,255,.05);"><button class="btn btn-secondary sim-sec-pressed" style="font-size:12px;padding:7px 14px;">Button</button></div>
-            <div class="state-matrix-cell" style="border-right-color:rgba(255,255,255,.05);"><button class="btn btn-secondary sim-sec-focus" style="font-size:12px;padding:7px 14px;">Button</button></div>
-            <div class="state-matrix-cell" style="border-right-color:rgba(255,255,255,.05);"><button class="btn btn-secondary sim-sec-selected" style="font-size:12px;padding:7px 14px;">Button</button></div>
-            <div class="state-matrix-cell"><button class="btn btn-secondary sim-sec-disabled" style="font-size:12px;padding:7px 14px;">Button</button></div>
+            <div class="state-matrix-cell" style="border-right-color:rgba(255,255,255,.05);"><button type="button" class="btn btn-secondary">Button</button></div>
+            <div class="state-matrix-cell" style="border-right-color:rgba(255,255,255,.05);"><button type="button" class="btn btn-secondary sim-sec-hover">Button</button></div>
+            <div class="state-matrix-cell" style="border-right-color:rgba(255,255,255,.05);"><button type="button" class="btn btn-secondary sim-sec-pressed">Button</button></div>
+            <div class="state-matrix-cell" style="border-right-color:rgba(255,255,255,.05);"><button type="button" class="btn btn-secondary sim-sec-focus">Button</button></div>
+            <div class="state-matrix-cell" style="border-right-color:rgba(255,255,255,.05);"><button type="button" class="btn btn-secondary sim-sec-selected" aria-pressed="true">Button</button></div>
+            <div class="state-matrix-cell"><button type="button" class="btn btn-secondary sim-sec-disabled" disabled aria-disabled="true">Button</button></div>
           </div>
 
-        </div>
+        </div><!-- /state-matrix -->
 
         <!-- State Descriptions -->
-        <div class="sec-label">State Descriptions</div>
-        <div style="background:#fff;border:1px solid #E2E8F0;border-radius:10px;overflow:hidden;margin-bottom:32px;">
-          <div style="display:grid;grid-template-columns:90px 1fr 1fr;background:#F8FAFC;border-bottom:1px solid #E2E8F0;padding:8px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#64748B;gap:16px;">
+        <div class="sec-label">State Descriptions — Primary</div>
+        <div style="background:#fff;border:1px solid var(--color-border);border-radius:10px;overflow:hidden;margin-bottom:24px;">
+          <div style="display:grid;grid-template-columns:90px 1fr 1fr;background:var(--color-background);border-bottom:1px solid var(--color-border);padding:8px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--color-text-secondary);gap:16px;">
             <span>State</span><span>Trigger</span><span>Visual Change</span>
           </div>
-          <!-- rows -->
-          <div style="display:grid;grid-template-columns:90px 1fr 1fr;padding:10px 14px;border-bottom:1px solid #F1F5F9;gap:16px;font-size:12px;align-items:start;">
-            <span style="display:inline-flex;align-items:center;gap:5px;font-weight:700;color:#0F172A;"><span style="width:7px;height:7px;border-radius:50%;background:#1E7FD6;"></span>Default</span>
-            <span style="color:#475569;">Idle — tidak ada interaksi</span>
-            <span style="color:#475569;">Background #1E7FD6, shadow brand</span>
+          <div style="display:grid;grid-template-columns:90px 1fr 1fr;padding:10px 14px;border-bottom:1px solid var(--color-border-light);gap:16px;font-size:12px;align-items:start;">
+            <span style="display:inline-flex;align-items:center;gap:5px;font-weight:700;color:var(--color-text-primary);"><span style="width:7px;height:7px;border-radius:50%;background:var(--color-primary-500);"></span>Default</span>
+            <span style="color:var(--color-text-secondary);">Idle — tidak ada interaksi</span>
+            <span style="color:var(--color-text-secondary);">Background #1E7FD6, shadow brand</span>
           </div>
-          <div style="display:grid;grid-template-columns:90px 1fr 1fr;padding:10px 14px;border-bottom:1px solid #F1F5F9;gap:16px;font-size:12px;align-items:start;background:#FAFAFA;">
-            <span style="display:inline-flex;align-items:center;gap:5px;font-weight:700;color:#0F172A;"><span style="width:7px;height:7px;border-radius:50%;background:#0EA5E9;"></span>Hover</span>
-            <span style="color:#475569;"><code style="font-size:11px">:hover</code> — mouse over</span>
-            <span style="color:#475569;">Lebih gelap #1668B0, naik 1px, shadow kuat</span>
+          <div style="display:grid;grid-template-columns:90px 1fr 1fr;padding:10px 14px;border-bottom:1px solid var(--color-border-light);gap:16px;font-size:12px;align-items:start;background:#FAFAFA;">
+            <span style="display:inline-flex;align-items:center;gap:5px;font-weight:700;color:var(--color-text-primary);"><span style="width:7px;height:7px;border-radius:50%;background:#0EA5E9;"></span>Hover</span>
+            <span style="color:var(--color-text-secondary);"><code style="font-size:11px">:hover</code> — mouse over</span>
+            <span style="color:var(--color-text-secondary);">Lebih gelap #1668B0, naik 1px, shadow kuat</span>
           </div>
-          <div style="display:grid;grid-template-columns:90px 1fr 1fr;padding:10px 14px;border-bottom:1px solid #F1F5F9;gap:16px;font-size:12px;align-items:start;">
-            <span style="display:inline-flex;align-items:center;gap:5px;font-weight:700;color:#0F172A;"><span style="width:7px;height:7px;border-radius:50%;background:#F59E0B;"></span>Pressed</span>
-            <span style="color:#475569;"><code style="font-size:11px">:active</code> — saat diklik/tap</span>
-            <span style="color:#475569;">Turun 1px, scale 98%, bg primary-700 #115188</span>
+          <div style="display:grid;grid-template-columns:90px 1fr 1fr;padding:10px 14px;border-bottom:1px solid var(--color-border-light);gap:16px;font-size:12px;align-items:start;">
+            <span style="display:inline-flex;align-items:center;gap:5px;font-weight:700;color:var(--color-text-primary);"><span style="width:7px;height:7px;border-radius:50%;background:#F59E0B;"></span>Pressed</span>
+            <span style="color:var(--color-text-secondary);"><code style="font-size:11px">:active</code> — saat diklik/tap</span>
+            <span style="color:var(--color-text-secondary);">Turun 1px, scale 98%, bg primary-700 #115188</span>
           </div>
-          <div style="display:grid;grid-template-columns:90px 1fr 1fr;padding:10px 14px;border-bottom:1px solid #F1F5F9;gap:16px;font-size:12px;align-items:start;background:#FAFAFA;">
-            <span style="display:inline-flex;align-items:center;gap:5px;font-weight:700;color:#0F172A;"><span style="width:7px;height:7px;border-radius:50%;background:#22C55E;"></span>Focus</span>
-            <span style="color:#475569;"><code style="font-size:11px">:focus-visible</code> — Tab keyboard</span>
-            <span style="color:#475569;">Focus ring 3px biru transparan di luar button</span>
+          <div style="display:grid;grid-template-columns:90px 1fr 1fr;padding:10px 14px;border-bottom:1px solid var(--color-border-light);gap:16px;font-size:12px;align-items:start;background:#FAFAFA;">
+            <span style="display:inline-flex;align-items:center;gap:5px;font-weight:700;color:var(--color-text-primary);"><span style="width:7px;height:7px;border-radius:50%;background:#22C55E;"></span>Focus</span>
+            <span style="color:var(--color-text-secondary);"><code style="font-size:11px">:focus-visible</code> — Tab keyboard</span>
+            <span style="color:var(--color-text-secondary);">Focus ring 3px biru transparan di luar button</span>
           </div>
-          <div style="display:grid;grid-template-columns:90px 1fr 1fr;padding:10px 14px;border-bottom:1px solid #F1F5F9;gap:16px;font-size:12px;align-items:start;">
-            <span style="display:inline-flex;align-items:center;gap:5px;font-weight:700;color:#0F172A;"><span style="width:7px;height:7px;border-radius:50%;background:#8B5CF6;"></span>Selected</span>
-            <span style="color:#475569;">Class <code style="font-size:11px">.selected</code> atau <code style="font-size:11px">aria-pressed</code></span>
-            <span style="color:#475569;">Primary-800 #0D3C63, inset shadow, tanpa elevation</span>
+          <div style="display:grid;grid-template-columns:90px 1fr 1fr;padding:10px 14px;border-bottom:1px solid var(--color-border-light);gap:16px;font-size:12px;align-items:start;">
+            <span style="display:inline-flex;align-items:center;gap:5px;font-weight:700;color:var(--color-text-primary);"><span style="width:7px;height:7px;border-radius:50%;background:#8B5CF6;"></span>Selected</span>
+            <span style="color:var(--color-text-secondary);">Class <code style="font-size:11px">.selected</code> atau <code style="font-size:11px">aria-pressed</code></span>
+            <span style="color:var(--color-text-secondary);">Primary-800 #0D3C63, inset shadow, tanpa elevation</span>
           </div>
           <div style="display:grid;grid-template-columns:90px 1fr 1fr;padding:10px 14px;gap:16px;font-size:12px;align-items:start;background:#FAFAFA;">
-            <span style="display:inline-flex;align-items:center;gap:5px;font-weight:700;color:#0F172A;"><span style="width:7px;height:7px;border-radius:50%;background:#CBD5E1;"></span>Disabled</span>
-            <span style="color:#475569;"><code style="font-size:11px">disabled</code> attr atau <code style="font-size:11px">[disabled]</code></span>
-            <span style="color:#475569;">Opacity 40%, cursor not-allowed, no pointer events</span>
+            <span style="display:inline-flex;align-items:center;gap:5px;font-weight:700;color:var(--color-text-primary);"><span style="width:7px;height:7px;border-radius:50%;background:var(--color-neutral-n50);"></span>Disabled</span>
+            <span style="color:var(--color-text-secondary);"><code style="font-size:11px">disabled</code> attr atau <code style="font-size:11px">aria-disabled</code></span>
+            <span style="color:var(--color-text-secondary);">Opacity 40%, cursor not-allowed, no pointer events</span>
           </div>
         </div>
 
-      </div>
+        <!-- Ghost State Descriptions -->
+        <div class="sec-label">State Descriptions — Ghost / Neutral</div>
+        <div style="background:#fff;border:1px solid var(--color-border);border-radius:10px;overflow:hidden;margin-bottom:32px;">
+          <div style="display:grid;grid-template-columns:90px 1fr 1fr;background:var(--color-background);border-bottom:1px solid var(--color-border);padding:8px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--color-text-secondary);gap:16px;">
+            <span>State</span><span>Trigger</span><span>Visual Change</span>
+          </div>
+          <div style="display:grid;grid-template-columns:90px 1fr 1fr;padding:10px 14px;border-bottom:1px solid var(--color-border-light);gap:16px;font-size:12px;align-items:start;">
+            <span style="display:inline-flex;align-items:center;gap:5px;font-weight:700;color:var(--color-text-primary);"><span style="width:7px;height:7px;border-radius:50%;background:var(--color-neutral-n50);"></span>Default</span>
+            <span style="color:var(--color-text-secondary);">Idle — tidak ada interaksi</span>
+            <span style="color:var(--color-text-secondary);">Background neutral-n20 #F5F6F7, teks neutral-n900 #091E42</span>
+          </div>
+          <div style="display:grid;grid-template-columns:90px 1fr 1fr;padding:10px 14px;border-bottom:1px solid var(--color-border-light);gap:16px;font-size:12px;align-items:start;background:#FAFAFA;">
+            <span style="display:inline-flex;align-items:center;gap:5px;font-weight:700;color:var(--color-text-primary);"><span style="width:7px;height:7px;border-radius:50%;background:#0EA5E9;"></span>Hover</span>
+            <span style="color:var(--color-text-secondary);"><code style="font-size:11px">:hover</code> — mouse over</span>
+            <span style="color:var(--color-text-secondary);">Background neutral-n30 #EBEDF0, teks tetap</span>
+          </div>
+          <div style="display:grid;grid-template-columns:90px 1fr 1fr;padding:10px 14px;border-bottom:1px solid var(--color-border-light);gap:16px;font-size:12px;align-items:start;">
+            <span style="display:inline-flex;align-items:center;gap:5px;font-weight:700;color:var(--color-text-primary);"><span style="width:7px;height:7px;border-radius:50%;background:#F59E0B;"></span>Pressed</span>
+            <span style="color:var(--color-text-secondary);"><code style="font-size:11px">:active</code> — saat diklik/tap</span>
+            <span style="color:var(--color-text-secondary);">Background neutral-n40 #DFE2E6, turun 1px, scale 98%</span>
+          </div>
+          <div style="display:grid;grid-template-columns:90px 1fr 1fr;padding:10px 14px;border-bottom:1px solid var(--color-border-light);gap:16px;font-size:12px;align-items:start;background:#FAFAFA;">
+            <span style="display:inline-flex;align-items:center;gap:5px;font-weight:700;color:var(--color-text-primary);"><span style="width:7px;height:7px;border-radius:50%;background:#22C55E;"></span>Focus</span>
+            <span style="color:var(--color-text-secondary);"><code style="font-size:11px">:focus-visible</code> — Tab keyboard</span>
+            <span style="color:var(--color-text-secondary);">Focus ring 3px rgba(30,127,214,.25) di luar button</span>
+          </div>
+          <div style="display:grid;grid-template-columns:90px 1fr 1fr;padding:10px 14px;border-bottom:1px solid var(--color-border-light);gap:16px;font-size:12px;align-items:start;">
+            <span style="display:inline-flex;align-items:center;gap:5px;font-weight:700;color:var(--color-text-primary);"><span style="width:7px;height:7px;border-radius:50%;background:#8B5CF6;"></span>Selected</span>
+            <span style="color:var(--color-text-secondary);"><code style="font-size:11px">aria-pressed="true"</code></span>
+            <span style="color:var(--color-text-secondary);">Background neutral-n50 #C2C7D0, teks tetap neutral-n900</span>
+          </div>
+          <div style="display:grid;grid-template-columns:90px 1fr 1fr;padding:10px 14px;gap:16px;font-size:12px;align-items:start;background:#FAFAFA;">
+            <span style="display:inline-flex;align-items:center;gap:5px;font-weight:700;color:var(--color-text-primary);"><span style="width:7px;height:7px;border-radius:50%;background:var(--color-neutral-n50);"></span>Disabled</span>
+            <span style="color:var(--color-text-secondary);"><code style="font-size:11px">disabled</code> attr</span>
+            <span style="color:var(--color-text-secondary);">Opacity 40%, cursor not-allowed, no pointer events</span>
+          </div>
+        </div>
+
+      </div><!-- /tab-states -->
 
       <!-- ═══ TAB: ANATOMY ═══ -->
-      <div class="tab-panel" id="tab-anatomy">
+      <div class="tab-panel" id="tab-anatomy" role="tabpanel">
 
-        <div class="sec-label">Anatomy — Ukuran &amp; Spacing</div>
+        <div class="sec-label">Anatomy — Figma Neutral Button</div>
 
-        <!-- Main Anatomy -->
         <div class="anatomy-wrap">
 
           <!-- Diagram with measurements -->
           <div style="position:relative;padding:40px 60px;">
 
-            <!-- Top dimension arrow -->
+            <!-- Top dimension label -->
             <div style="position:absolute;top:10px;left:60px;right:60px;display:flex;flex-direction:column;align-items:center;gap:2px;">
-              <span style="font-size:10px;font-weight:700;color:#1E7FD6;background:#EEF7FF;border:1px solid #BADDFD;border-radius:4px;padding:1px 7px;">lebar menyesuaikan konten</span>
-              <div style="width:100%;height:1px;background:#BADDFD;position:relative;">
-                <span style="position:absolute;left:0;top:-3px;font-size:10px;color:#BADDFD;">◄</span>
-                <span style="position:absolute;right:0;top:-3px;font-size:10px;color:#BADDFD;">►</span>
+              <span style="font-size:10px;font-weight:700;color:var(--color-primary-500);background:var(--color-primary-50);border:1px solid var(--color-primary-200);border-radius:4px;padding:1px 7px;">lebar menyesuaikan konten</span>
+              <div style="width:100%;height:1px;background:var(--color-primary-200);position:relative;">
+                <span style="position:absolute;left:0;top:-3px;font-size:10px;color:var(--color-primary-200);">◄</span>
+                <span style="position:absolute;right:0;top:-3px;font-size:10px;color:var(--color-primary-200);">►</span>
               </div>
             </div>
 
-            <!-- Left padding arrow -->
+            <!-- Left height arrow -->
             <div style="position:absolute;left:8px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:2px;">
-              <div style="height:36px;width:1px;background:#BADDFD;position:relative;">
-                <span style="position:absolute;top:-4px;left:-3px;font-size:8px;color:#BADDFD;">▲</span>
-                <span style="position:absolute;bottom:-4px;left:-3px;font-size:8px;color:#BADDFD;">▼</span>
+              <div style="height:36px;width:1px;background:var(--color-primary-200);position:relative;">
+                <span style="position:absolute;top:-4px;left:-3px;font-size:8px;color:var(--color-primary-200);">▲</span>
+                <span style="position:absolute;bottom:-4px;left:-3px;font-size:8px;color:var(--color-primary-200);">▼</span>
               </div>
-              <span style="font-size:10px;font-weight:700;color:#1E7FD6;background:#EEF7FF;border:1px solid #BADDFD;border-radius:4px;padding:1px 6px;white-space:nowrap;">36px</span>
+              <span style="font-size:10px;font-weight:700;color:var(--color-primary-500);background:var(--color-primary-50);border:1px solid var(--color-primary-200);border-radius:4px;padding:1px 6px;white-space:nowrap;">36px</span>
             </div>
 
-            <!-- Button with labels -->
+            <!-- Button with padding annotations -->
             <div style="position:relative;display:inline-flex;flex-direction:column;align-items:center;gap:0;">
 
               <!-- Top padding label -->
               <div style="width:100%;text-align:center;padding-bottom:4px;">
-                <span style="font-size:10px;font-weight:700;color:#F59E0B;background:#FFFBEB;border:1px solid #FDE68A;border-radius:4px;padding:1px 7px;">10px</span>
+                <span style="font-size:10px;font-weight:700;color:#D97706;background:#FFFBEB;border:1px solid #FDE68A;border-radius:4px;padding:1px 7px;">8px</span>
               </div>
 
               <div style="display:flex;align-items:center;gap:0;">
                 <!-- Left padding -->
-                <div style="display:flex;flex-direction:column;align-items:center;gap:2px;padding-right:4px;">
-                  <span style="font-size:10px;font-weight:700;color:#F59E0B;background:#FFFBEB;border:1px solid #FDE68A;border-radius:4px;padding:1px 7px;">20px</span>
+                <div style="padding-right:4px;">
+                  <span style="font-size:10px;font-weight:700;color:#D97706;background:#FFFBEB;border:1px solid #FDE68A;border-radius:4px;padding:1px 7px;">12px</span>
                 </div>
 
-                <!-- The actual button -->
+                <!-- The actual anatomy button -->
                 <div class="anatomy-btn-live">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                   <span style="position:relative;">
                     Button Label
-                    <!-- gap indicator -->
-                    <span style="position:absolute;top:-18px;left:-11px;font-size:9px;font-weight:700;color:#8B5CF6;background:#F5F3FF;border:1px solid #DDD6FE;border-radius:3px;padding:0px 4px;white-space:nowrap;">8px gap</span>
+                    <span style="position:absolute;top:-18px;left:-11px;font-size:9px;font-weight:700;color:#6D28D9;background:#F5F3FF;border:1px solid #DDD6FE;border-radius:3px;padding:0px 4px;white-space:nowrap;">4px gap</span>
                   </span>
                 </div>
 
                 <!-- Right padding -->
-                <div style="display:flex;flex-direction:column;align-items:center;gap:2px;padding-left:4px;">
-                  <span style="font-size:10px;font-weight:700;color:#F59E0B;background:#FFFBEB;border:1px solid #FDE68A;border-radius:4px;padding:1px 7px;">20px</span>
+                <div style="padding-left:4px;">
+                  <span style="font-size:10px;font-weight:700;color:#D97706;background:#FFFBEB;border:1px solid #FDE68A;border-radius:4px;padding:1px 7px;">12px</span>
                 </div>
               </div>
 
               <!-- Bottom padding label -->
               <div style="width:100%;text-align:center;padding-top:4px;">
-                <span style="font-size:10px;font-weight:700;color:#F59E0B;background:#FFFBEB;border:1px solid #FDE68A;border-radius:4px;padding:1px 7px;">10px</span>
+                <span style="font-size:10px;font-weight:700;color:#D97706;background:#FFFBEB;border:1px solid #FDE68A;border-radius:4px;padding:1px 7px;">8px</span>
               </div>
 
             </div>
@@ -620,44 +699,45 @@
 
           <!-- Spec chips -->
           <div class="anatomy-specs">
-            <div class="spec-chip"><span class="chip-dot" style="background:#1E7FD6;"></span>Border Radius: <strong>8px</strong></div>
-            <div class="spec-chip"><span class="chip-dot" style="background:#F59E0B;"></span>Padding V: <strong>10px</strong></div>
-            <div class="spec-chip"><span class="chip-dot" style="background:#F59E0B;"></span>Padding H: <strong>20px</strong></div>
-            <div class="spec-chip"><span class="chip-dot" style="background:#8B5CF6;"></span>Gap icon-label: <strong>8px</strong></div>
-            <div class="spec-chip"><span class="chip-dot" style="background:#22C55E;"></span>Height: <strong>36px</strong></div>
+            <div class="spec-chip"><span class="chip-dot" style="background:var(--color-primary-500);"></span>Border Radius: <strong>6px</strong></div>
+            <div class="spec-chip"><span class="chip-dot" style="background:#D97706;"></span>Padding V: <strong>8px</strong></div>
+            <div class="spec-chip"><span class="chip-dot" style="background:#D97706;"></span>Padding H: <strong>12px</strong></div>
+            <div class="spec-chip"><span class="chip-dot" style="background:#6D28D9;"></span>Gap icon-label: <strong>4px</strong></div>
+            <div class="spec-chip"><span class="chip-dot" style="background:#22C55E;"></span>Height: <strong>~36px</strong></div>
             <div class="spec-chip"><span class="chip-dot" style="background:#EF4444;"></span>Font Size: <strong>14px</strong></div>
-            <div class="spec-chip"><span class="chip-dot" style="background:#64748B;"></span>Font Weight: <strong>600 SemiBold</strong></div>
-            <div class="spec-chip"><span class="chip-dot" style="background:#0F172A;"></span>Border Width: <strong>1.5px</strong></div>
-            <div class="spec-chip"><span class="chip-dot" style="background:#0EA5E9;"></span>Letter Spacing: <strong>0.01em</strong></div>
-            <div class="spec-chip"><span class="chip-dot" style="background:#D97706;"></span>Transition: <strong>200ms ease-in-out</strong></div>
+            <div class="spec-chip"><span class="chip-dot" style="background:var(--color-neutral-n600);"></span>Font Weight: <strong>500 Medium</strong></div>
+            <div class="spec-chip"><span class="chip-dot" style="background:var(--color-neutral-n400);"></span>Line Height: <strong>20px</strong></div>
+            <div class="spec-chip"><span class="chip-dot" style="background:var(--color-neutral-n20);border:1px solid var(--color-neutral-n50);"></span>Background: <strong>neutral-n20</strong></div>
+            <div class="spec-chip"><span class="chip-dot" style="background:var(--color-neutral-n900);"></span>Text: <strong>neutral-n900</strong></div>
+            <div class="spec-chip"><span class="chip-dot" style="background:#0EA5E9;"></span>Transition: <strong>200ms ease-in-out</strong></div>
           </div>
         </div>
 
         <!-- Anatomy Notes -->
         <div class="sec-label">Elemen Anatomy</div>
-        <div style="background:#fff;border:1px solid #E2E8F0;border-radius:10px;overflow:hidden;margin-bottom:32px;">
-          <div style="display:grid;grid-template-columns:36px 120px 1fr;background:#F8FAFC;border-bottom:1px solid #E2E8F0;padding:8px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#64748B;gap:12px;">
+        <div style="background:#fff;border:1px solid var(--color-border);border-radius:10px;overflow:hidden;margin-bottom:32px;">
+          <div style="display:grid;grid-template-columns:36px 120px 1fr;background:var(--color-background);border-bottom:1px solid var(--color-border);padding:8px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--color-text-secondary);gap:12px;">
             <span>#</span><span>Elemen</span><span>Keterangan</span>
           </div>
-          <div style="display:grid;grid-template-columns:36px 120px 1fr;padding:10px 14px;border-bottom:1px solid #F1F5F9;gap:12px;font-size:12px;align-items:center;">
-            <span style="width:20px;height:20px;border-radius:50%;background:#1E7FD6;color:white;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">1</span>
-            <span style="font-weight:600;color:#0F172A;">Container</span>
-            <span style="color:#475569;">Frame dengan border-radius 8px. Ukuran otomatis menyesuaikan konten (hug). Min-height 36px.</span>
+          <div style="display:grid;grid-template-columns:36px 120px 1fr;padding:10px 14px;border-bottom:1px solid var(--color-border-light);gap:12px;font-size:12px;align-items:center;">
+            <span style="width:20px;height:20px;border-radius:50%;background:var(--color-primary-500);color:white;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">1</span>
+            <span style="font-weight:600;color:var(--color-text-primary);">Container</span>
+            <span style="color:var(--color-text-secondary);">Frame dengan border-radius 6px, background neutral-n20 (#F5F6F7). Ukuran otomatis menyesuaikan konten (hug). Min-height ~36px.</span>
           </div>
-          <div style="display:grid;grid-template-columns:36px 120px 1fr;padding:10px 14px;border-bottom:1px solid #F1F5F9;gap:12px;font-size:12px;align-items:center;background:#FAFAFA;">
-            <span style="width:20px;height:20px;border-radius:50%;background:#8B5CF6;color:white;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">2</span>
-            <span style="font-weight:600;color:#0F172A;">Leading Icon</span>
-            <span style="color:#475569;">Opsional. Ukuran 14×14px. Gap ke label: 8px. Stroke 2–2.5px. Gunakan SVG atau icon system.</span>
+          <div style="display:grid;grid-template-columns:36px 120px 1fr;padding:10px 14px;border-bottom:1px solid var(--color-border-light);gap:12px;font-size:12px;align-items:center;background:#FAFAFA;">
+            <span style="width:20px;height:20px;border-radius:50%;background:#6D28D9;color:white;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">2</span>
+            <span style="font-weight:600;color:var(--color-text-primary);">Leading Icon</span>
+            <span style="color:var(--color-text-secondary);">Opsional. Ukuran 14×14px. Gap ke label: <strong>4px</strong>. Stroke 2–2.5px. Gunakan SVG atau icon system.</span>
           </div>
-          <div style="display:grid;grid-template-columns:36px 120px 1fr;padding:10px 14px;border-bottom:1px solid #F1F5F9;gap:12px;font-size:12px;align-items:center;">
-            <span style="width:20px;height:20px;border-radius:50%;background:#F59E0B;color:white;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">3</span>
-            <span style="font-weight:600;color:#0F172A;">Label</span>
-            <span style="color:#475569;"><strong>Wajib ada</strong>. Font Poppins SemiBold 14px, line-height 1, letter-spacing 0.01em. Gunakan kalimat actionable.</span>
+          <div style="display:grid;grid-template-columns:36px 120px 1fr;padding:10px 14px;border-bottom:1px solid var(--color-border-light);gap:12px;font-size:12px;align-items:center;">
+            <span style="width:20px;height:20px;border-radius:50%;background:#D97706;color:white;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">3</span>
+            <span style="font-weight:600;color:var(--color-text-primary);">Label</span>
+            <span style="color:var(--color-text-secondary);"><strong>Wajib ada</strong>. Font Poppins Medium 14px, line-height 20px. Color neutral-n900 (#091E42). Gunakan kalimat actionable.</span>
           </div>
           <div style="display:grid;grid-template-columns:36px 120px 1fr;padding:10px 14px;gap:12px;font-size:12px;align-items:center;background:#FAFAFA;">
-            <span style="width:20px;height:20px;border-radius:50%;background:#64748B;color:white;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">4</span>
-            <span style="font-weight:600;color:#0F172A;">Trailing Icon</span>
-            <span style="color:#475569;">Opsional. Sama seperti Leading Icon. Gunakan untuk direktional (arrow, chevron) atau status.</span>
+            <span style="width:20px;height:20px;border-radius:50%;background:var(--color-neutral-n500);color:white;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;">4</span>
+            <span style="font-weight:600;color:var(--color-text-primary);">Trailing Icon</span>
+            <span style="color:var(--color-text-secondary);">Opsional. Sama seperti Leading Icon. Gunakan untuk direktional (arrow, chevron) atau status.</span>
           </div>
         </div>
 
@@ -665,59 +745,67 @@
         <div class="sec-label">Accessibility</div>
         <div class="a11y-box">
           <strong>♿ Keyboard Navigation — :focus-visible</strong>
-          <p>Gunakan <code>:focus-visible</code> agar focus ring hanya tampil saat navigasi keyboard (Tab), tidak saat klik mouse. Focus ring: <code>box-shadow: 0 0 0 3px rgba(30,127,214,0.35)</code></p>
+          <p>Gunakan <code>:focus-visible</code> agar focus ring hanya tampil saat navigasi keyboard (Tab), tidak saat klik mouse. Focus ring Ghost: <code>box-shadow: 0 0 0 3px rgba(30,127,214,0.25)</code></p>
         </div>
         <div class="a11y-box" style="background:#F0FDF4;border-color:#BBF7D0;border-left-color:#22C55E;">
           <strong style="color:#15803D;">✅ Contrast Ratio — WCAG AA</strong>
-          <p style="color:#166534;">White text pada #1E7FD6 memiliki contrast ratio <strong>4.6:1</strong> — memenuhi WCAG AA (min 4.5:1). Primary-600 #1668B0 pada white: <strong>5.7:1</strong>.</p>
+          <p style="color:#166534;">neutral-n900 (#091E42) pada neutral-n20 (#F5F6F7) — contrast ratio <strong>11.8:1</strong>, jauh di atas WCAG AA (min 4.5:1). Primary white text pada #1E7FD6: <strong>4.6:1</strong> — memenuhi WCAG AA.</p>
         </div>
-        <div class="a11y-box" style="background:#FFF7ED;border-color:#FDE68A;border-left-color:#F59E0B;">
+        <div class="a11y-box" style="background:#FFFBEB;border-color:#FDE68A;border-left-color:#F59E0B;">
           <strong style="color:#92400E;">⚠️ Disabled State</strong>
           <p style="color:#78350F;">Gunakan <code>aria-disabled="true"</code> + <code>tabindex="-1"</code> jika ingin button tetap focusable dengan screen reader. Jangan hanya mengandalkan opacity visual.</p>
         </div>
 
-      </div>
+      </div><!-- /tab-anatomy -->
 
       <!-- ═══ TAB: CODE ═══ -->
-      <div class="tab-panel" id="tab-code">
+      <div class="tab-panel" id="tab-code" role="tabpanel">
 
         <div class="sec-label">HTML Snippets — Siap Copy Paste</div>
 
-        <p style="font-size:13px;color:#475569;margin-bottom:16px;">Semua class <code>.btn</code> membutuhkan base class + variant class. Ghost button menggunakan class berbeda (<code>.btn-ghost-fixed</code>) karena tidak memiliki border.</p>
+        <p style="font-size:13px;color:var(--color-text-secondary);margin-bottom:16px;">Semua class <code>.btn</code> membutuhkan base class + variant class. Ghost/Neutral button menggunakan class <code>.btn-ghost-fixed</code> dengan Figma neutral values.</p>
 
         <!-- Primary -->
-        <div style="font-size:12.5px;font-weight:600;color:#0F172A;margin-bottom:6px;display:flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:#1E7FD6;"></span>Primary</div>
+        <div style="font-size:12.5px;font-weight:600;color:var(--color-text-primary);margin-bottom:6px;display:flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:var(--color-primary-500);"></span>Primary</div>
         <div class="code-block">
-          <div class="code-head"><span class="code-lang">HTML</span><button class="copy-btn" onclick="copyCode(this)"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
-          <pre><code>&lt;<span class="hl-t">button</span> <span class="hl-a">class</span>=<span class="hl-s">"btn btn-primary"</span> <span class="hl-a">type</span>=<span class="hl-s">"button"</span>&gt;Primary Button&lt;/<span class="hl-t">button</span>&gt;
+          <div class="code-head"><span class="code-lang">HTML</span><button type="button" class="copy-btn" onclick="copyCode(this)"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
+          <pre><code>&lt;<span class="hl-t">button</span> <span class="hl-a">type</span>=<span class="hl-s">"button"</span> <span class="hl-a">class</span>=<span class="hl-s">"btn btn-primary"</span>&gt;Primary Button&lt;/<span class="hl-t">button</span>&gt;
 
 <span class="hl-c">&lt;!-- Dengan icon --&gt;</span>
-&lt;<span class="hl-t">button</span> <span class="hl-a">class</span>=<span class="hl-s">"btn btn-primary"</span> <span class="hl-a">type</span>=<span class="hl-s">"button"</span>&gt;
-  &lt;<span class="hl-t">svg</span> <span class="hl-a">width</span>=<span class="hl-s">"14"</span> <span class="hl-a">height</span>=<span class="hl-s">"14"</span> <span class="hl-a">viewBox</span>=<span class="hl-s">"0 0 24 24"</span> <span class="hl-a">fill</span>=<span class="hl-s">"none"</span> <span class="hl-a">stroke</span>=<span class="hl-s">"currentColor"</span> <span class="hl-a">stroke-width</span>=<span class="hl-s">"2.5"</span>&gt;
+&lt;<span class="hl-t">button</span> <span class="hl-a">type</span>=<span class="hl-s">"button"</span> <span class="hl-a">class</span>=<span class="hl-s">"btn btn-primary"</span>&gt;
+  &lt;<span class="hl-t">svg</span> <span class="hl-a">width</span>=<span class="hl-s">"14"</span> <span class="hl-a">height</span>=<span class="hl-s">"14"</span> <span class="hl-a">viewBox</span>=<span class="hl-s">"0 0 24 24"</span> <span class="hl-a">fill</span>=<span class="hl-s">"none"</span> <span class="hl-a">stroke</span>=<span class="hl-s">"currentColor"</span> <span class="hl-a">stroke-width</span>=<span class="hl-s">"2.5"</span> <span class="hl-a">aria-hidden</span>=<span class="hl-s">"true"</span>&gt;
     &lt;<span class="hl-t">path</span> <span class="hl-a">d</span>=<span class="hl-s">"M5 12h14M12 5l7 7-7 7"</span>/&gt;
   &lt;/<span class="hl-t">svg</span>&gt;
   Simpan Data
 &lt;/<span class="hl-t">button</span>&gt;
 
 <span class="hl-c">&lt;!-- Disabled --&gt;</span>
-&lt;<span class="hl-t">button</span> <span class="hl-a">class</span>=<span class="hl-s">"btn btn-primary"</span> <span class="hl-a">disabled</span>&gt;Tidak Aktif&lt;/<span class="hl-t">button</span>&gt;
+&lt;<span class="hl-t">button</span> <span class="hl-a">type</span>=<span class="hl-s">"button"</span> <span class="hl-a">class</span>=<span class="hl-s">"btn btn-primary"</span> <span class="hl-a">disabled</span>&gt;Tidak Aktif&lt;/<span class="hl-t">button</span>&gt;
 
 <span class="hl-c">&lt;!-- Selected / aria-pressed --&gt;</span>
-&lt;<span class="hl-t">button</span> <span class="hl-a">class</span>=<span class="hl-s">"btn btn-primary"</span> <span class="hl-a">aria-pressed</span>=<span class="hl-s">"true"</span>&gt;Dipilih&lt;/<span class="hl-t">button</span>&gt;</code></pre>
+&lt;<span class="hl-t">button</span> <span class="hl-a">type</span>=<span class="hl-s">"button"</span> <span class="hl-a">class</span>=<span class="hl-s">"btn btn-primary"</span> <span class="hl-a">aria-pressed</span>=<span class="hl-s">"true"</span>&gt;Dipilih&lt;/<span class="hl-t">button</span>&gt;</code></pre>
         </div>
 
-        <!-- Ghost -->
-        <div style="font-size:12.5px;font-weight:600;color:#0F172A;margin:16px 0 6px;display:flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:#94A3B8;"></span>Ghost — tanpa border</div>
+        <!-- Ghost / Neutral -->
+        <div style="font-size:12.5px;font-weight:600;color:var(--color-text-primary);margin:16px 0 6px;display:flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:var(--color-neutral-n50);"></span>Ghost / Neutral — Figma neutral-n20</div>
         <div class="code-block">
-          <div class="code-head"><span class="code-lang">HTML</span><button class="copy-btn" onclick="copyCode(this)"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
-          <pre><code><span class="hl-c">&lt;!-- Ghost: border transparent — tidak ada border visible --&gt;</span>
-&lt;<span class="hl-t">button</span> <span class="hl-a">class</span>=<span class="hl-s">"btn-ghost-fixed"</span> <span class="hl-a">type</span>=<span class="hl-s">"button"</span>&gt;Batal&lt;/<span class="hl-t">button</span>&gt;</code></pre>
+          <div class="code-head"><span class="code-lang">HTML</span><button type="button" class="copy-btn" onclick="copyCode(this)"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
+          <pre><code><span class="hl-c">&lt;!-- Ghost Neutral: bg neutral-n20 · text neutral-n900 · radius 6px --&gt;</span>
+&lt;<span class="hl-t">button</span> <span class="hl-a">type</span>=<span class="hl-s">"button"</span> <span class="hl-a">class</span>=<span class="hl-s">"btn-ghost-fixed"</span>&gt;Batal&lt;/<span class="hl-t">button</span>&gt;
+
+<span class="hl-c">&lt;!-- Dengan icon --&gt;</span>
+&lt;<span class="hl-t">button</span> <span class="hl-a">type</span>=<span class="hl-s">"button"</span> <span class="hl-a">class</span>=<span class="hl-s">"btn-ghost-fixed"</span>&gt;
+  &lt;<span class="hl-t">svg</span> <span class="hl-a">width</span>=<span class="hl-s">"14"</span> <span class="hl-a">height</span>=<span class="hl-s">"14"</span> <span class="hl-a">viewBox</span>=<span class="hl-s">"0 0 24 24"</span> <span class="hl-a">fill</span>=<span class="hl-s">"none"</span> <span class="hl-a">stroke</span>=<span class="hl-s">"currentColor"</span> <span class="hl-a">stroke-width</span>=<span class="hl-s">"2.5"</span> <span class="hl-a">aria-hidden</span>=<span class="hl-s">"true"</span>&gt;
+    &lt;<span class="hl-t">path</span> <span class="hl-a">d</span>=<span class="hl-s">"M5 12h14M12 5l7 7-7 7"</span>/&gt;
+  &lt;/<span class="hl-t">svg</span>&gt;
+  Batal
+&lt;/<span class="hl-t">button</span>&gt;</code></pre>
         </div>
 
         <!-- White + Secondary -->
-        <div style="font-size:12.5px;font-weight:600;color:#0F172A;margin:16px 0 6px;display:flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:#1E7FD6;border:2px solid white;box-shadow:0 0 0 1px #1E7FD6;"></span>White &amp; Secondary (dark background)</div>
+        <div style="font-size:12.5px;font-weight:600;color:var(--color-text-primary);margin:16px 0 6px;display:flex;align-items:center;gap:6px;"><span style="width:8px;height:8px;border-radius:50%;background:var(--color-primary-500);border:2px solid white;box-shadow:0 0 0 1px var(--color-primary-500);"></span>White &amp; Secondary (dark background)</div>
         <div class="code-block">
-          <div class="code-head"><span class="code-lang">HTML</span><button class="copy-btn" onclick="copyCode(this)"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
+          <div class="code-head"><span class="code-lang">HTML</span><button type="button" class="copy-btn" onclick="copyCode(this)"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
           <pre><code><span class="hl-c">&lt;!-- Di dalam hero / card gelap --&gt;</span>
 &lt;<span class="hl-t">section</span> <span class="hl-a">class</span>=<span class="hl-s">"hero-section"</span>&gt;
   &lt;<span class="hl-t">a</span> <span class="hl-a">href</span>=<span class="hl-s">"#"</span> <span class="hl-a">class</span>=<span class="hl-s">"btn btn-white"</span>&gt;Mulai Explore&lt;/<span class="hl-t">a</span>&gt;
@@ -725,81 +813,69 @@
 &lt;/<span class="hl-t">section</span>&gt;</code></pre>
         </div>
 
-        <!-- States CSS -->
-        <div style="font-size:12.5px;font-weight:600;color:#0F172A;margin:16px 0 6px;">CSS States — Lengkap</div>
+        <!-- CSS states for Ghost -->
+        <div style="font-size:12.5px;font-weight:600;color:var(--color-text-primary);margin:16px 0 6px;">CSS — Ghost / Neutral Button (Figma Parity)</div>
         <div class="code-block">
-          <div class="code-head"><span class="code-lang">CSS</span><button class="copy-btn" onclick="copyCode(this)"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
-          <pre><code><span class="hl-c">/* Ghost — NO border */</span>
+          <div class="code-head"><span class="code-lang">CSS</span><button type="button" class="copy-btn" onclick="copyCode(this)"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>Copy</button></div>
+          <pre><code><span class="hl-c">/* Ghost Neutral — Figma: Color-Background-Neutral · Color-Text-Bold */</span>
 .btn-ghost-fixed {
-  display: inline-flex; align-items: center; justify-content: center;
-  gap: 8px; padding: 10px 20px; border-radius: 8px;
-  font-family: var(--font-primary); font-size: 14px; font-weight: 600;
-  border: 1.5px solid transparent; <span class="hl-c">/* transparent — no visible border */</span>
-  background-color: transparent; color: var(--color-text-secondary);
-  transition: all 200ms ease-in-out; cursor: pointer;
-  letter-spacing: .01em; white-space: nowrap; line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;                          <span class="hl-c">/* Figma: gap 4px */</span>
+  padding: 8px 12px;                 <span class="hl-c">/* Figma: px 12px, py auto */</span>
+  border-radius: 6px;                <span class="hl-c">/* Figma: border-radius 6px */</span>
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);    <span class="hl-c">/* 14px */</span>
+  font-weight: var(--font-weight-medium); <span class="hl-c">/* 500 */</span>
+  line-height: 20px;                 <span class="hl-c">/* Figma: line-height 20px */</span>
+  border: none;
+  background-color: var(--color-neutral-n20);  <span class="hl-c">/* #F5F6F7 */</span>
+  color: var(--color-neutral-n900);            <span class="hl-c">/* #091E42 */</span>
+  transition: all var(--transition-base);
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
 }
-.btn-ghost-fixed:hover { background-color: var(--color-gray-100); color: var(--color-text-primary); }
 
-<span class="hl-c">/* Hover */</span>
-.btn-primary:hover {
-  background-color: var(--color-primary-600); <span class="hl-c">/* #1668B0 */</span>
-  border-color: var(--color-primary-600);
-  box-shadow: 0 6px 20px rgba(30,127,214,.5);
-  transform: translateY(-1px);
+.btn-ghost-fixed:hover {
+  background-color: var(--color-neutral-n30);  <span class="hl-c">/* #EBEDF0 */</span>
 }
-
-<span class="hl-c">/* Pressed */</span>
-.btn-primary:active {
-  background-color: var(--color-primary-700); <span class="hl-c">/* #115188 */</span>
-  border-color: var(--color-primary-700);
-  box-shadow: none;
+.btn-ghost-fixed:active {
+  background-color: var(--color-neutral-n40);  <span class="hl-c">/* #DFE2E6 */</span>
   transform: translateY(1px) scale(.98);
 }
-
-<span class="hl-c">/* Focus — keyboard nav only */</span>
-.btn:focus-visible, .btn-ghost-fixed:focus-visible {
+.btn-ghost-fixed:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(30,127,214,.35);
+  box-shadow: 0 0 0 3px rgba(30, 127, 214, .25);
 }
-
-<span class="hl-c">/* Selected */</span>
-.btn-primary[aria-pressed="true"],
-.btn-primary.selected {
-  background-color: var(--color-primary-800); <span class="hl-c">/* #0D3C63 */</span>
-  border-color: var(--color-primary-800);
-  box-shadow: inset 0 2px 4px rgba(0,0,0,.2);
-}
-
-<span class="hl-c">/* Disabled */</span>
-.btn:disabled, .btn[disabled],
 .btn-ghost-fixed:disabled {
-  opacity: 0.4;
+  opacity: .4;
   cursor: not-allowed;
   pointer-events: none;
 }</code></pre>
         </div>
 
-      </div>
+      </div><!-- /tab-code -->
 
       <!-- ═══ TAB: TOKENS ═══ -->
-      <div class="tab-panel" id="tab-tokens">
+      <div class="tab-panel" id="tab-tokens" role="tabpanel">
 
-        <div class="sec-label">Base Tokens</div>
+        <div class="sec-label">Base Tokens — Ghost / Neutral (Figma Reference)</div>
         <div style="overflow-x:auto;margin-bottom:24px;">
           <table class="tok-table">
-            <thead><tr><th>Properti</th><th>Token / Nilai</th><th>Resolved</th><th>Keterangan</th></tr></thead>
+            <thead><tr><th>Properti</th><th>Token</th><th>Resolved</th><th>Keterangan</th></tr></thead>
             <tbody>
-              <tr><td style="font-weight:600;color:#0F172A;">Padding</td><td><span class="tp">10px var(--spacing-5)</span></td><td><span class="tv">10px 20px</span></td><td style="color:#64748B;font-size:11.5px;">V: 10px · H: 20px</td></tr>
-              <tr><td style="font-weight:600;color:#0F172A;">Height</td><td><span class="tp">auto (content)</span></td><td><span class="tv">~36px</span></td><td style="color:#64748B;font-size:11.5px;">10+14+10+2px border = 36px</td></tr>
-              <tr><td style="font-weight:600;color:#0F172A;">Border Radius</td><td><span class="tp">--border-radius-md</span></td><td><span class="tv">8px</span></td><td style="color:#64748B;font-size:11.5px;">0.5rem</td></tr>
-              <tr><td style="font-weight:600;color:#0F172A;">Font Family</td><td><span class="tp">--font-primary</span></td><td><span class="tv">Poppins</span></td><td style="color:#64748B;font-size:11.5px;">sans-serif</td></tr>
-              <tr><td style="font-weight:600;color:#0F172A;">Font Size</td><td><span class="tp">--font-size-sm</span></td><td><span class="tv">14px</span></td><td style="color:#64748B;font-size:11.5px;">0.875rem</td></tr>
-              <tr><td style="font-weight:600;color:#0F172A;">Font Weight</td><td><span class="tp">--font-weight-semibold</span></td><td><span class="tv">600</span></td><td style="color:#64748B;font-size:11.5px;">SemiBold</td></tr>
-              <tr><td style="font-weight:600;color:#0F172A;">Border</td><td><span class="tp">1.5px solid</span></td><td><span class="tv">1.5px</span></td><td style="color:#64748B;font-size:11.5px;">Sedikit lebih tebal dari 1px</td></tr>
-              <tr><td style="font-weight:600;color:#0F172A;">Gap (icon)</td><td><span class="tp">--spacing-2</span></td><td><span class="tv">8px</span></td><td style="color:#64748B;font-size:11.5px;">Jarak icon–label</td></tr>
-              <tr><td style="font-weight:600;color:#0F172A;">Letter Spacing</td><td><span class="tp">0.01em</span></td><td><span class="tv">~0.14px</span></td><td style="color:#64748B;font-size:11.5px;">Pada 14px font-size</td></tr>
-              <tr><td style="font-weight:600;color:#0F172A;">Transition</td><td><span class="tp">--transition-base</span></td><td><span class="tv">200ms ease-in-out</span></td><td style="color:#64748B;font-size:11.5px;">all properties</td></tr>
+              <tr><td style="font-weight:600;color:var(--color-text-primary);">Padding</td><td><span class="tp">8px 12px</span></td><td><span class="tv">8px top/bot · 12px left/right</span></td><td style="color:var(--color-text-secondary);font-size:11.5px;">Figma: px 12px · py auto (lh 20px)</td></tr>
+              <tr><td style="font-weight:600;color:var(--color-text-primary);">Height</td><td><span class="tp">auto (content)</span></td><td><span class="tv">~36px</span></td><td style="color:var(--color-text-secondary);font-size:11.5px;">8+20+8 = 36px</td></tr>
+              <tr><td style="font-weight:600;color:var(--color-text-primary);">Border Radius</td><td><span class="tp">6px</span></td><td><span class="tv">6px</span></td><td style="color:var(--color-text-secondary);font-size:11.5px;">Figma: border-radius 6px</td></tr>
+              <tr><td style="font-weight:600;color:var(--color-text-primary);">Font Family</td><td><span class="tp">--font-primary</span></td><td><span class="tv">Poppins</span></td><td style="color:var(--color-text-secondary);font-size:11.5px;">sans-serif</td></tr>
+              <tr><td style="font-weight:600;color:var(--color-text-primary);">Font Size</td><td><span class="tp">--font-size-sm</span></td><td><span class="tv">14px</span></td><td style="color:var(--color-text-secondary);font-size:11.5px;">Figma: 14px</td></tr>
+              <tr><td style="font-weight:600;color:var(--color-text-primary);">Font Weight</td><td><span class="tp">--font-weight-medium</span></td><td><span class="tv">500</span></td><td style="color:var(--color-text-secondary);font-size:11.5px;">Figma: Medium 500</td></tr>
+              <tr><td style="font-weight:600;color:var(--color-text-primary);">Line Height</td><td><span class="tp">20px</span></td><td><span class="tv">20px</span></td><td style="color:var(--color-text-secondary);font-size:11.5px;">Figma: line-height 20px</td></tr>
+              <tr><td style="font-weight:600;color:var(--color-text-primary);">Gap (icon)</td><td><span class="tp">4px</span></td><td><span class="tv">4px</span></td><td style="color:var(--color-text-secondary);font-size:11.5px;">Figma: gap 4px</td></tr>
+              <tr><td style="font-weight:600;color:var(--color-text-primary);">Border</td><td><span class="tp">none</span></td><td><span class="tv">—</span></td><td style="color:var(--color-text-secondary);font-size:11.5px;">Figma: no border</td></tr>
+              <tr><td style="font-weight:600;color:var(--color-text-primary);">Transition</td><td><span class="tp">--transition-base</span></td><td><span class="tv">200ms ease-in-out</span></td><td style="color:var(--color-text-secondary);font-size:11.5px;">all properties</td></tr>
             </tbody>
           </table>
         </div>
@@ -810,52 +886,52 @@
             <thead><tr><th>Variant</th><th>Background</th><th>Text</th><th>Border</th><th>Shadow</th></tr></thead>
             <tbody>
               <tr>
-                <td style="font-weight:700;"><span class="cdot" style="background:#1E7FD6;"></span>Primary</td>
-                <td><span class="tp">--color-primary-500</span> <span style="font-size:11px;color:#94A3B8;">#1E7FD6</span></td>
+                <td style="font-weight:700;"><span class="cdot" style="background:var(--color-primary-500);"></span>Primary</td>
+                <td><span class="tp">--color-primary-500</span> <span style="font-size:11px;color:var(--color-text-tertiary);">#1E7FD6</span></td>
                 <td><span class="tp">white</span></td>
                 <td><span class="tp">--color-primary-500</span></td>
                 <td><span class="tp">--shadow-brand</span></td>
               </tr>
               <tr>
-                <td style="font-weight:700;"><span class="cdot" style="background:transparent;border:1.5px solid #94A3B8;"></span>Ghost</td>
-                <td><span class="tp">transparent</span></td>
-                <td><span class="tp">--color-text-secondary</span> <span style="font-size:11px;color:#94A3B8;">#475569</span></td>
-                <td><span class="tv" style="background:#F1F5F9;color:#475569;border-color:#E2E8F0;">transparent</span></td>
-                <td style="color:#94A3B8;font-size:12px;">—</td>
+                <td style="font-weight:700;"><span class="cdot" style="background:var(--color-neutral-n20);border:1px solid var(--color-neutral-n50);"></span>Ghost</td>
+                <td><span class="tp">--color-neutral-n20</span> <span style="font-size:11px;color:var(--color-text-tertiary);">#F5F6F7</span></td>
+                <td><span class="tp">--color-neutral-n900</span> <span style="font-size:11px;color:var(--color-text-tertiary);">#091E42</span></td>
+                <td><span class="tv" style="background:var(--color-background);color:var(--color-text-secondary);border-color:var(--color-border);">none</span></td>
+                <td style="color:var(--color-text-tertiary);font-size:12px;">—</td>
               </tr>
               <tr>
                 <td style="font-weight:700;"><span class="cdot" style="background:#fff;"></span>White</td>
                 <td><span class="tp">white</span></td>
-                <td><span class="tp">--color-primary-600</span> <span style="font-size:11px;color:#94A3B8;">#1668B0</span></td>
+                <td><span class="tp">--color-primary-600</span> <span style="font-size:11px;color:var(--color-text-tertiary);">#1668B0</span></td>
                 <td><span class="tp">white</span></td>
                 <td><span class="tp">--shadow-sm</span></td>
               </tr>
               <tr>
                 <td style="font-weight:700;"><span class="cdot" style="background:transparent;border:1.5px solid rgba(255,255,255,.4);"></span>Secondary</td>
-                <td><span class="tp">transparent</span></td>
-                <td style="color:#64748B;font-size:12px;">white</td>
-                <td style="color:#64748B;font-size:12px;">rgba(255,255,255, 0.4)</td>
-                <td style="color:#94A3B8;font-size:12px;">—</td>
+                <td style="color:var(--color-text-secondary);font-size:12px;">transparent</td>
+                <td style="color:var(--color-text-secondary);font-size:12px;">white</td>
+                <td style="color:var(--color-text-secondary);font-size:12px;">rgba(255,255,255, 0.4)</td>
+                <td style="color:var(--color-text-tertiary);font-size:12px;">—</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="sec-label">Tailwind Classes</div>
+        <div class="sec-label">Tailwind Reference — Ghost / Neutral</div>
         <div class="tw-grid">
           <div class="tw-item"><div class="tw-purpose">Layout</div><div class="tw-class">inline-flex items-center justify-center</div><div class="tw-desc">Flex layout terpusat icon+label</div></div>
-          <div class="tw-item"><div class="tw-purpose">Spacing</div><div class="tw-class">px-5 py-[10px] gap-2</div><div class="tw-desc">H: 20px · V: 10px · Gap: 8px</div></div>
-          <div class="tw-item"><div class="tw-purpose">Typography</div><div class="tw-class">font-semibold text-sm tracking-[0.01em]</div><div class="tw-desc">600 weight, 14px, letter spacing</div></div>
-          <div class="tw-item"><div class="tw-purpose">Shape</div><div class="tw-class">rounded-md border-[1.5px]</div><div class="tw-desc">Radius 8px, border 1.5px</div></div>
-          <div class="tw-item"><div class="tw-purpose">Primary fill</div><div class="tw-class">bg-[#1E7FD6] text-white</div><div class="tw-desc">Brand color fill + white text</div></div>
-          <div class="tw-item"><div class="tw-purpose">Hover</div><div class="tw-class">hover:-translate-y-px hover:bg-[#1668B0]</div><div class="tw-desc">Naik 1px, warna lebih gelap</div></div>
+          <div class="tw-item"><div class="tw-purpose">Spacing</div><div class="tw-class">px-[12px] py-[8px] gap-[4px]</div><div class="tw-desc">H: 12px · V: 8px · Gap: 4px (Figma)</div></div>
+          <div class="tw-item"><div class="tw-purpose">Typography</div><div class="tw-class">font-medium text-sm leading-5</div><div class="tw-desc">500 weight, 14px, 20px line-height</div></div>
+          <div class="tw-item"><div class="tw-purpose">Shape</div><div class="tw-class">rounded-[6px] border-0</div><div class="tw-desc">Radius 6px (Figma), no border</div></div>
+          <div class="tw-item"><div class="tw-purpose">Neutral fill</div><div class="tw-class">bg-neutral-n20 text-neutral-n900</div><div class="tw-desc">#F5F6F7 background · #091E42 teks</div></div>
+          <div class="tw-item"><div class="tw-purpose">Hover</div><div class="tw-class">hover:bg-neutral-n30</div><div class="tw-desc">Lebih gelap #EBEDF0</div></div>
           <div class="tw-item"><div class="tw-purpose">Pressed</div><div class="tw-class">active:translate-y-px active:scale-[.98]</div><div class="tw-desc">Turun 1px, scale 98%</div></div>
-          <div class="tw-item"><div class="tw-purpose">Focus</div><div class="tw-class">focus-visible:ring-3 focus-visible:ring-blue-500/35</div><div class="tw-desc">Focus ring keyboard nav</div></div>
+          <div class="tw-item"><div class="tw-purpose">Focus</div><div class="tw-class">focus-visible:ring-[3px] focus-visible:ring-primary-500/25</div><div class="tw-desc">Focus ring keyboard nav</div></div>
           <div class="tw-item"><div class="tw-purpose">Disabled</div><div class="tw-class">disabled:opacity-40 disabled:cursor-not-allowed</div><div class="tw-desc">Opacity 40%, cursor berubah</div></div>
           <div class="tw-item"><div class="tw-purpose">Transition</div><div class="tw-class">transition-all duration-200 ease-in-out</div><div class="tw-desc">Smooth pada semua properti</div></div>
         </div>
 
-      </div>
+      </div><!-- /tab-tokens -->
 
       <!-- Footer -->
       <footer class="page-footer">
@@ -876,9 +952,13 @@
   document.querySelectorAll('.page-tab').forEach(tab => {
     tab.addEventListener('click', () => {
       const t = tab.dataset.tab;
-      document.querySelectorAll('.page-tab').forEach(x => x.classList.remove('active'));
+      document.querySelectorAll('.page-tab').forEach(x => {
+        x.classList.remove('active');
+        x.setAttribute('aria-selected', 'false');
+      });
       document.querySelectorAll('.tab-panel').forEach(x => x.classList.remove('active'));
       tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
       document.getElementById('tab-' + t)?.classList.add('active');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
