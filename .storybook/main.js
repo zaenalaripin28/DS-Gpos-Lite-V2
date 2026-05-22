@@ -6,6 +6,8 @@ const config = {
     '../foundations/**/*.mdx',
     '../components/**/*.stories.@(js|jsx|mjs|ts|tsx)',
     '../components/**/*.mdx',
+    '../src/stories/**/*.stories.@(js|jsx|mjs|ts|tsx)',
+    '../src/stories/**/*.mdx',
   ],
   staticDirs: [
     { from: '../assets', to: '/assets' },
