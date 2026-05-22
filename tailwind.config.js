@@ -5,6 +5,7 @@ module.exports = {
     './components/**/*.js',
     './foundations/**/*.mdx',
     './styles/**/*.css',
+    './src/stories/**/*.js',
   ],
   theme: {
     extend: {
