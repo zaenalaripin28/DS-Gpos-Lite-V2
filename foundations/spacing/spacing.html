@@ -34,29 +34,32 @@
       align-items: center;
       gap: 8px;
       flex-wrap: wrap;
-      margin-bottom: 32px;
+      margin-bottom: 36px;
     }
     .filter-tab {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 6px 16px;
+      gap: 7px;
+      padding: 7px 18px;
       border-radius: 999px;
       border: 1.5px solid #DFE2E6;
       background: #fff;
       cursor: pointer;
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 500;
       color: #505F79;
       font-family: var(--font-primary);
       transition: all 0.15s ease;
       white-space: nowrap;
+      box-shadow: 0 1px 2px rgba(0,0,0,.04);
+      letter-spacing: -0.005em;
     }
-    .filter-tab:hover { border-color: #1E7FD6; color: #1E7FD6; }
+    .filter-tab:hover { border-color: #1E7FD6; color: #1E7FD6; background: #F0F7FD; box-shadow: 0 1px 3px rgba(30,127,214,.12); }
     .filter-tab.active {
       background: #1E7FD6;
       border-color: #1E7FD6;
       color: #fff;
+      box-shadow: 0 2px 6px rgba(30,127,214,.3);
     }
     .tab-dot {
       width: 8px; height: 8px;
@@ -71,13 +74,13 @@
     .dot-xlarge { background: #124D83; }
 
     /* ── Section ─────────────────────────────────────────────── */
-    .space-section { margin-bottom: 48px; }
+    .space-section { margin-bottom: 56px; }
 
     .section-head {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
       flex-wrap: wrap;
     }
     .section-title {
@@ -86,21 +89,23 @@
       color: #091E42;
       font-family: var(--font-primary);
       margin: 0;
+      letter-spacing: -0.02em;
     }
     .token-count {
-      background: #F5F6F7;
+      background: #F0F1F4;
       color: #42526D;
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 600;
-      padding: 2px 10px;
+      padding: 3px 11px;
       border-radius: 999px;
       font-family: var(--font-primary);
+      border: 1px solid #E4E6EA;
     }
     .cat-badge {
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 700;
-      padding: 3px 9px;
-      border-radius: 4px;
+      padding: 3px 10px;
+      border-radius: 5px;
       letter-spacing: 0.07em;
       text-transform: uppercase;
       font-family: var(--font-primary);
@@ -115,29 +120,31 @@
       font-size: 14px;
       color: #42526D;
       margin-bottom: 24px;
-      line-height: 1.6;
+      line-height: 1.65;
       font-family: var(--font-primary);
+      max-width: 660px;
     }
 
     /* ── Spacing Scale Card ──────────────────────────────────── */
     .scale-card {
       background: #fff;
-      border: 1px solid #DFE2E6;
-      border-radius: 12px;
+      border: 1px solid #EBEDF0;
+      border-radius: 14px;
       overflow: hidden;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.04);
     }
 
     .scale-row {
       display: flex;
       align-items: center;
       gap: 16px;
-      padding: 12px 20px;
+      padding: 13px 22px;
       border-bottom: 1px solid #F5F6F7;
       transition: background 0.1s;
     }
     .scale-row:last-child { border-bottom: none; }
-    .scale-row:hover { background: #F8FAFC; }
+    .scale-row:hover { background: #FAFBFB; }
 
     .scale-name {
       width: 110px;
@@ -157,12 +164,12 @@
       min-width: 0;
     }
     .scale-bar {
-      height: 14px;
-      border-radius: 3px;
+      height: 16px;
+      border-radius: 4px;
       flex-shrink: 0;
-      transition: opacity 0.1s;
+      transition: opacity 0.12s, transform 0.12s;
     }
-    .scale-row:hover .scale-bar { opacity: 0.85; }
+    .scale-row:hover .scale-bar { opacity: 0.85; transform: scaleX(0.97); }
 
     /* Bar colors per category */
     .bar-micro  { background: #AB8FFA; }
@@ -189,8 +196,8 @@
       text-align: right;
     }
     .copy-hex-btn {
-      padding: 4px 12px;
-      border-radius: 5px;
+      padding: 5px 14px;
+      border-radius: 6px;
       border: 1px solid #DFE2E6;
       background: #fff;
       cursor: pointer;
@@ -203,8 +210,8 @@
       transition: all 0.15s ease;
       flex-shrink: 0;
     }
-    .copy-hex-btn:hover  { border-color: #1E7FD6; color: #1E7FD6; background: #E9F2FB; }
-    .copy-hex-btn.copied { background: #E9F2FB; color: #1E7FD6; border-color: #1E7FD6; }
+    .copy-hex-btn:hover  { border-color: #1E7FD6; color: #1E7FD6; background: #EBF5FF; }
+    .copy-hex-btn.copied { background: #EBF5FF; color: #1E7FD6; border-color: #1E7FD6; }
 
     @media (max-width: 640px) {
       .scale-var { display: none; }
@@ -221,20 +228,23 @@
     @media (max-width: 860px) { .info-cards { grid-template-columns: 1fr; } }
 
     .info-card {
-      border-radius: 12px;
-      padding: 18px 20px;
+      border-radius: 13px;
+      padding: 20px 22px;
     }
     .info-card-usage { background: #EBF5FF; border: 1px solid #A3CBEE; }
     .info-card-best  { background: #E6F7EF; border: 1px solid #6BCEA0; }
     .info-card-avoid { background: #FDE8E9; border: 1px solid #F7A2A5; }
 
     .info-card-head {
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.07em;
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
       font-family: var(--font-primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
     .info-card-usage .info-card-head { color: #155996; }
     .info-card-best  .info-card-head { color: #007740; }
@@ -242,23 +252,32 @@
 
     .info-card ul {
       margin: 0;
-      padding-left: 16px;
-      list-style: disc;
+      padding-left: 0;
+      list-style: none;
     }
     .info-card li {
       font-size: 13px;
       color: #243757;
       margin-bottom: 6px;
-      line-height: 1.5;
+      line-height: 1.55;
       font-family: var(--font-primary);
+      padding-left: 14px;
+      position: relative;
+    }
+    .info-card li::before {
+      content: '·';
+      position: absolute;
+      left: 2px;
+      font-weight: 700;
+      color: #8993A4;
     }
     .info-card li:last-child { margin-bottom: 0; }
 
     /* ── Implementation Code Section ────────────────────────── */
     .impl-section {
       background: #fff;
-      border: 1px solid #DFE2E6;
-      border-radius: 12px;
+      border: 1px solid #EBEDF0;
+      border-radius: 14px;
       overflow: hidden;
       margin-bottom: 40px;
     }
@@ -268,20 +287,22 @@
       justify-content: space-between;
       padding: 18px 24px;
       border-bottom: 1px solid #EBEDF0;
+      background: #FAFBFB;
       flex-wrap: wrap;
       gap: 12px;
     }
     .impl-title {
-      font-size: 15px;
-      font-weight: 600;
+      font-size: 14px;
+      font-weight: 700;
       color: #091E42;
       font-family: var(--font-primary);
       margin: 0;
+      letter-spacing: -0.01em;
     }
     .impl-toggle {
       display: flex;
-      gap: 4px;
-      background: #F5F6F7;
+      gap: 3px;
+      background: #F0F1F4;
       padding: 4px;
       border-radius: 8px;
     }
@@ -293,11 +314,11 @@
       cursor: pointer;
       font-size: 13px;
       font-weight: 500;
-      color: #6B788E;
+      color: #5D6B82;
       font-family: var(--font-primary);
       transition: all 0.15s ease;
     }
-    .impl-tab-btn.active { background: #091E42; color: #fff; }
+    .impl-tab-btn.active { background: #091E42; color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
 
     .impl-body { padding: 4px 0; }
 
@@ -305,12 +326,12 @@
       display: flex;
       align-items: center;
       gap: 16px;
-      padding: 10px 24px;
+      padding: 11px 24px;
       border-bottom: 1px solid #F5F6F7;
       transition: background 0.1s;
     }
     .impl-row:last-child { border-bottom: none; }
-    .impl-row:hover { background: #F8FAFC; }
+    .impl-row:hover { background: #FAFBFB; }
 
     .impl-swatch {
       width: 20px;
@@ -348,8 +369,8 @@
       transition: all 0.15s ease;
       flex-shrink: 0;
     }
-    .impl-copy:hover  { border-color: #1E7FD6; color: #1E7FD6; background: #E9F2FB; }
-    .impl-copy.copied { background: #E9F2FB; color: #1E7FD6; border-color: #1E7FD6; }
+    .impl-copy:hover  { border-color: #1E7FD6; color: #fff; background: #1E7FD6; }
+    .impl-copy.copied { background: #00AA5B; color: #fff; border-color: #00AA5B; }
 
     /* ── Divider ─────────────────────────────────────────────── */
     .section-divider {

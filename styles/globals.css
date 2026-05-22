@@ -249,13 +249,13 @@ pre code {
 }
 
 .nav-title {
-  font-size: 10px;
+  font-size: 10.5px;
   font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.09em;
   color: var(--sidebar-section-title);
   padding: 0 var(--spacing-2);
-  margin-bottom: var(--spacing-1);
+  margin-bottom: var(--spacing-2);
   display: flex;
   align-items: center;
   gap: var(--spacing-2);
@@ -275,12 +275,12 @@ pre code {
   color: var(--sidebar-link-color);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-normal);
-  padding: 7px var(--spacing-3);
+  padding: 8px var(--spacing-3);
   border-radius: var(--border-radius-md);
   transition: all var(--transition-fast);
   text-decoration: none;
   border-left: 2px solid transparent;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
 }
 
 .nav-link:hover {
@@ -335,8 +335,9 @@ pre code {
   display: flex;
   align-items: center;
   gap: var(--spacing-4);
-  padding: 0 var(--spacing-8);
-  margin: 0 calc(-1 * var(--spacing-8));
+  padding: 0 var(--spacing-10);
+  margin: 0 calc(-1 * var(--spacing-10));
+  backdrop-filter: blur(8px);
 }
 
 .hamburger-btn {
@@ -432,8 +433,8 @@ pre code {
 }
 
 .content-inner {
-  padding: var(--spacing-8);
-  max-width: 1000px;
+  padding: var(--spacing-8) var(--spacing-10);
+  max-width: 1100px;
 }
 
 /* ============================================================
@@ -456,15 +457,17 @@ pre code {
    ============================================================ */
 
 .page-header {
-  margin-bottom: var(--spacing-8);
-  padding-bottom: var(--spacing-6);
+  margin-bottom: var(--spacing-10);
+  padding-bottom: var(--spacing-7);
   border-bottom: 1px solid var(--color-border);
 }
 
 .page-header h1 {
-  font-size: var(--font-size-3xl);
+  font-size: var(--font-size-4xl);
   font-weight: var(--font-weight-bold);
-  margin-bottom: var(--spacing-2);
+  margin-bottom: var(--spacing-3);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
 }
 
 .subtitle {
@@ -472,6 +475,7 @@ pre code {
   color: var(--color-text-secondary);
   margin: 0;
   line-height: var(--line-height-relaxed);
+  max-width: 640px;
 }
 
 /* ============================================================
@@ -484,20 +488,21 @@ section > h2 {
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-semibold);
   margin-bottom: var(--spacing-6);
-  padding-bottom: var(--spacing-3);
-  border-bottom: 2px solid var(--color-primary-100);
+  padding-bottom: var(--spacing-4);
+  border-bottom: 1px solid var(--color-border);
   display: flex;
   align-items: center;
   gap: var(--spacing-3);
   color: var(--color-text-primary);
+  letter-spacing: -0.01em;
 }
 
 section > h2::before {
   content: '';
-  width: 4px;
-  height: 20px;
+  width: 3px;
+  height: 18px;
   background: linear-gradient(to bottom, var(--color-primary-500), var(--color-primary-300));
-  border-radius: 2px;
+  border-radius: 3px;
   flex-shrink: 0;
 }
 
@@ -1036,7 +1041,7 @@ section > h2::before {
     padding: 0 var(--spacing-4);
   }
 
-  .content-inner { padding: var(--spacing-4); }
+  .content-inner { padding: var(--spacing-5) var(--spacing-4); }
 
   .hero-section {
     padding: var(--spacing-8) var(--spacing-6);

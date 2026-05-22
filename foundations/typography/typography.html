@@ -13,151 +13,163 @@
     .typo-section-title {
       font-family: 'Poppins', sans-serif;
       font-size: 22px;
-      font-weight: 600;
-      color: #111827;
-      margin: 0 0 4px 0;
+      font-weight: 700;
+      color: #091E42;
+      margin: 0 0 6px 0;
+      letter-spacing: -0.02em;
     }
     .typo-section-desc {
       font-family: 'Poppins', sans-serif;
       font-size: 14px;
-      color: #6B7280;
-      margin: 0 0 20px 0;
+      color: #42526D;
+      margin: 0 0 24px 0;
+      line-height: 1.65;
+      max-width: 640px;
     }
 
     /* ── Font Preview Card ── */
     .font-preview-card {
       background: #fff;
-      border: 1px solid #E5E7EB;
-      border-radius: 12px;
-      padding: 28px 32px;
-      margin-bottom: 16px;
+      border: 1px solid #EBEDF0;
+      border-radius: 14px;
+      padding: 32px 36px;
+      margin-bottom: 20px;
+      transition: box-shadow 0.15s, border-color 0.15s;
+    }
+    .font-preview-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+      border-color: #C2C7D0;
     }
     .font-preview-label {
       font-family: 'Poppins', sans-serif;
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
-      color: #9CA3AF;
-      margin-bottom: 8px;
+      color: #8993A4;
+      margin-bottom: 10px;
     }
     .font-preview-name {
       font-family: 'Poppins', sans-serif;
       font-size: 18px;
-      font-weight: 600;
-      color: #111827;
+      font-weight: 700;
+      color: #091E42;
       margin-bottom: 4px;
+      letter-spacing: -0.02em;
     }
     .font-preview-meta {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
-      color: #6B7280;
-      margin-bottom: 16px;
+      color: #6B788E;
+      margin-bottom: 20px;
     }
     .font-preview-sample {
       font-family: 'Poppins', sans-serif;
       font-size: 24px;
       font-weight: 400;
-      color: #374151;
-      line-height: 1.5;
-      border-top: 1px solid #F3F4F6;
-      padding-top: 16px;
+      color: #243757;
+      line-height: 1.55;
+      border-top: 1px solid #F0F1F4;
+      padding-top: 20px;
       word-break: break-word;
     }
     .font-badges {
       display: flex;
       gap: 6px;
       flex-wrap: wrap;
-      margin-top: 12px;
+      margin-top: 16px;
     }
     .font-badge {
-      background: #F3F4F6;
-      color: #374151;
+      background: #F0F1F4;
+      color: #354764;
       border-radius: 6px;
-      padding: 3px 10px;
+      padding: 4px 12px;
       font-family: 'Poppins', sans-serif;
       font-size: 12px;
       font-weight: 500;
+      border: 1px solid #E4E6EA;
     }
     .font-badge.primary {
-      background: #EEF7FF;
+      background: #EBF5FF;
       color: #1E7FD6;
+      border-color: #A3CBEE;
     }
 
     /* ── Type Scale Table ── */
     .type-table-wrap {
       background: #fff;
-      border: 1px solid #E5E7EB;
-      border-radius: 12px;
+      border: 1px solid #EBEDF0;
+      border-radius: 14px;
       overflow: hidden;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
     .type-table {
       width: 100%;
       border-collapse: collapse;
     }
     .type-table thead tr {
-      background: #F9FAFB;
-      border-bottom: 1px solid #E5E7EB;
+      background: #FAFBFB;
+      border-bottom: 1px solid #EBEDF0;
     }
     .type-table thead th {
-      padding: 12px 20px;
+      padding: 13px 20px;
       font-family: 'Poppins', sans-serif;
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 600;
-      letter-spacing: 0.07em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #9CA3AF;
+      color: #8993A4;
       text-align: left;
     }
     .type-table tbody tr {
-      border-bottom: 1px solid #F3F4F6;
-      transition: background 0.15s;
+      border-bottom: 1px solid #F5F6F7;
+      transition: background 0.12s;
     }
     .type-table tbody tr:last-child {
       border-bottom: none;
     }
     .type-table tbody tr:hover {
-      background: #F9FAFB;
+      background: #FAFBFB;
     }
     .type-table td {
-      padding: 14px 20px;
+      padding: 15px 20px;
       vertical-align: middle;
     }
     .td-style-name {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
-      color: #374151;
+      color: #354764;
       white-space: nowrap;
     }
     .td-style-name .style-group {
       display: inline-block;
-      background: #EEF7FF;
+      background: #EBF5FF;
       color: #1E7FD6;
       border-radius: 4px;
-      padding: 2px 6px;
-      font-size: 10px;
-      font-weight: 600;
-      margin-right: 6px;
+      padding: 2px 7px;
+      font-size: 9.5px;
+      font-weight: 700;
+      margin-right: 7px;
       vertical-align: middle;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
+      border: 1px solid #A3CBEE;
     }
     .td-size {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
-      color: #374151;
+      color: #354764;
       white-space: nowrap;
     }
     .td-lh {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
-      color: #374151;
+      color: #6B788E;
       white-space: nowrap;
     }
     .td-sample {
       font-family: 'Poppins', sans-serif;
-      color: #111827;
+      color: #091E42;
       line-height: 1.3;
     }
     .td-sample.is-link {
@@ -174,41 +186,41 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
     @media (max-width: 768px) {
       .usage-grid { grid-template-columns: 1fr; }
     }
     .usage-card {
-      border-radius: 12px;
-      padding: 20px;
+      border-radius: 13px;
+      padding: 20px 22px;
     }
     .usage-card.when {
-      background: #EFF6FF;
-      border: 1px solid #BFDBFE;
+      background: #EBF5FF;
+      border: 1px solid #A3CBEE;
     }
     .usage-card.best {
-      background: #F0FDF4;
-      border: 1px solid #BBF7D0;
+      background: #E6F7EF;
+      border: 1px solid #6BCEA0;
     }
     .usage-card.avoid {
-      background: #FEF2F2;
-      border: 1px solid #FECACA;
+      background: #FDE8E9;
+      border: 1px solid #F7A2A5;
     }
     .usage-card-header {
       display: flex;
       align-items: center;
       gap: 8px;
       font-family: 'Poppins', sans-serif;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.07em;
       text-transform: uppercase;
       margin-bottom: 14px;
     }
-    .usage-card.when .usage-card-header { color: #1D4ED8; }
-    .usage-card.best .usage-card-header { color: #15803D; }
-    .usage-card.avoid .usage-card-header { color: #B91C1C; }
+    .usage-card.when .usage-card-header { color: #155996; }
+    .usage-card.best .usage-card-header { color: #007740; }
+    .usage-card.avoid .usage-card-header { color: #A51419; }
     .usage-card ul {
       list-style: none;
       padding: 0;
@@ -217,81 +229,87 @@
     .usage-card ul li {
       font-family: 'Poppins', sans-serif;
       font-size: 13px;
-      color: #374151;
+      color: #243757;
       padding: 4px 0;
-      padding-left: 16px;
+      padding-left: 14px;
       position: relative;
-      line-height: 1.5;
+      line-height: 1.55;
     }
     .usage-card ul li::before {
-      content: '•';
+      content: '·';
       position: absolute;
-      left: 0;
-      color: #9CA3AF;
+      left: 2px;
+      font-weight: 700;
+      color: #8993A4;
     }
 
     /* ── Implementation Code Section ── */
     .impl-section {
       background: #fff;
-      border: 1px solid #E5E7EB;
-      border-radius: 12px;
+      border: 1px solid #EBEDF0;
+      border-radius: 14px;
       overflow: hidden;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
     .impl-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 20px;
-      border-bottom: 1px solid #E5E7EB;
+      padding: 16px 22px;
+      border-bottom: 1px solid #EBEDF0;
+      background: #FAFBFB;
       flex-wrap: wrap;
       gap: 10px;
     }
     .impl-title {
       font-family: 'Poppins', sans-serif;
       font-size: 14px;
-      font-weight: 600;
-      color: #111827;
+      font-weight: 700;
+      color: #091E42;
+      letter-spacing: -0.01em;
     }
     .tab-group {
       display: flex;
-      background: #F3F4F6;
+      background: #F0F1F4;
       border-radius: 8px;
       padding: 3px;
       gap: 2px;
     }
     .tab-btn {
-      padding: 5px 14px;
+      padding: 5px 16px;
       border-radius: 6px;
       border: none;
       background: transparent;
       font-family: 'Poppins', sans-serif;
       font-size: 12px;
       font-weight: 500;
-      color: #6B7280;
+      color: #5D6B82;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: all 0.15s;
     }
     .tab-btn.active {
-      background: #111827;
+      background: #091E42;
       color: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
     }
     .impl-rows {
-      padding: 4px 0;
+      padding: 6px 0;
     }
     .impl-row {
       display: flex;
       align-items: center;
-      padding: 10px 20px;
-      border-bottom: 1px solid #F9FAFB;
+      padding: 11px 22px;
+      border-bottom: 1px solid #F5F6F7;
       gap: 16px;
+      transition: background 0.1s;
     }
     .impl-row:last-child { border-bottom: none; }
+    .impl-row:hover { background: #FAFBFB; }
     .impl-style-label {
       min-width: 200px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
-      color: #374151;
+      color: #354764;
       font-weight: 500;
     }
     .impl-code {
@@ -299,33 +317,35 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
       color: #1E7FD6;
-      background: #EEF7FF;
+      background: #EBF5FF;
       padding: 4px 10px;
       border-radius: 5px;
+      border: 1px solid #A3CBEE;
     }
     .impl-copy-btn {
-      padding: 4px 12px;
-      border: 1px solid #E5E7EB;
+      padding: 5px 14px;
+      border: 1px solid #DFE2E6;
       border-radius: 6px;
       background: #fff;
       font-family: 'Poppins', sans-serif;
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 600;
-      color: #374151;
+      color: #505F79;
       cursor: pointer;
       transition: all 0.15s;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
       white-space: nowrap;
     }
     .impl-copy-btn:hover {
-      background: #F3F4F6;
-      border-color: #9CA3AF;
+      background: #1E7FD6;
+      border-color: #1E7FD6;
+      color: #fff;
     }
     .impl-copy-btn.copied {
-      background: #D1FAE5;
-      border-color: #6EE7B7;
-      color: #065F46;
+      background: #00AA5B;
+      border-color: #00AA5B;
+      color: #fff;
     }
 
     /* Tab content switching */
@@ -336,22 +356,27 @@
     .weight-grid {
       display: grid;
       gap: 12px;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
     .weight-row {
       background: #fff;
-      border: 1px solid #E5E7EB;
-      border-radius: 10px;
-      padding: 16px 20px;
+      border: 1px solid #EBEDF0;
+      border-radius: 12px;
+      padding: 20px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 12px;
+      transition: box-shadow 0.15s, border-color 0.15s;
+    }
+    .weight-row:hover {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border-color: #C2C7D0;
     }
     .weight-sample {
       font-family: 'Poppins', sans-serif;
       font-size: 18px;
-      color: #111827;
+      color: #091E42;
       flex: 1;
     }
     .weight-meta {
@@ -360,18 +385,20 @@
     .weight-name {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
-      color: #6B7280;
+      color: #6B788E;
       display: block;
+      letter-spacing: 0.01em;
     }
     .weight-class {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       color: #1E7FD6;
-      background: #EEF7FF;
-      padding: 2px 7px;
-      border-radius: 4px;
+      background: #EBF5FF;
+      padding: 3px 8px;
+      border-radius: 5px;
       display: inline-block;
-      margin-top: 4px;
+      margin-top: 5px;
+      border: 1px solid #A3CBEE;
     }
 
     /* Responsive table scroll */
