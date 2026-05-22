@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Borders & Radius - Design System GPOS Lite V 2.0</title>
+  <link rel="stylesheet" href="../../styles/globals.css">
+  <style>
+    /* ============================================================
+       BORDERS & RADIUS PAGE — Design Tokens
+       Source: GP Lite Design tokens.json → "Corner Radius"
+       Naming: Corner Radius.XXX → --radius-XXX
+       Border Width: 2px Inside = box-shadow: inset 0 0 0 2px
+       ============================================================ */
+    :root {
+      --radius-0:    0px;
+      --radius-025:  2px;
+      --radius-050:  4px;
+      --radius-075:  6px;
+      --radius-100:  8px;
+      --radius-150:  12px;
+      --radius-200:  16px;
+      --radius-full: 9999px;
+    }
+
+    /* ── Filter Tabs ─────────────────────────────────────────── */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .filter-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      border: 1.5px solid #DFE2E6;
+      background: #fff;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      color: #505F79;
+      font-family: var(--font-primary);
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .filter-tab:hover  { border-color: #1E7FD6; color: #1E7FD6; }
+    .filter-tab.active { background: #1E7FD6; border-color: #1E7FD6; color: #fff; }
+    .tab-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .dot-none   { background: #B3B9C4; }
+    .dot-small  { background: #AB8FFA; }
+    .dot-medium { background: #1E7FD6; }
+    .dot-large  { background: #155996; }
+    .dot-pill   { background: #124D83; }
+
+    /* ── Section ─────────────────────────────────────────────── */
+    .radius-section { margin-bottom: 48px; }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #091E42;
+      font-family: var(--font-primary);
+      margin: 0;
+    }
+    .token-count {
+      background: #F5F6F7;
+      color: #42526D;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: 999px;
+      font-family: var(--font-primary);
+    }
+    .cat-badge {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 4px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      font-family: var(--font-primary);
+    }
+    .cat-badge-none   { background: #F5F6F7; color: #42526D;  border: 1px solid #DFE2E6; }
+    .cat-badge-small  { background: #F1ECFE; color: #4D2BAC;  border: 1px solid #C4B0FB; }
+    .cat-badge-medium { background: #E9F2FB; color: #1E7FD6;  border: 1px solid #A3CBEE; }
+    .cat-badge-large  { background: #E9F2FB; color: #155996;  border: 1px solid #155996; }
+    .cat-badge-pill   { background: #E9F2FB; color: #124D83;  border: 1px solid #124D83; }
+    .cat-badge-border { background: #E6F7EF; color: #007740;  border: 1px solid #6BCEA0; }
+
+    .section-desc {
+      font-size: 14px;
+      color: #42526D;
+      margin-bottom: 24px;
+      line-height: 1.6;
+      font-family: var(--font-primary);
+    }
+
+    /* ── Scale Card ──────────────────────────────────────────── */
+    .scale-card {
+      background: #fff;
+      border: 1px solid #DFE2E6;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .scale-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 20px;
+      border-bottom: 1px solid #F5F6F7;
+      transition: background 0.1s;
+    }
+    .scale-row:last-child { border-bottom: none; }
+    .scale-row:hover { background: #F8FAFC; }
+
+    .scale-name {
+      width: 130px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #091E42;
+      font-family: var(--font-primary);
+      flex-shrink: 0;
+    }
+    .scale-name .star { color: #1E7FD6; }
+
+    .radius-preview-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+    .radius-box {
+      width: 56px;
+      height: 36px;
+      flex-shrink: 0;
+      transition: opacity 0.1s;
+    }
+    .scale-row:hover .radius-box { opacity: 0.8; }
+
+    .radius-box-none   { background: #EBEDF0; }
+    .radius-box-small  { background: linear-gradient(135deg, #C4B0FB, #875FF8); }
+    .radius-box-medium { background: linear-gradient(135deg, #4495DD, #1E7FD6); }
+    .radius-box-large  { background: linear-gradient(135deg, #1E7FD6, #155996); }
+    .radius-box-pill   { background: linear-gradient(135deg, #155996, #124D83); }
+
+    .scale-px {
+      font-size: 13px;
+      font-weight: 600;
+      color: #354764;
+      white-space: nowrap;
+      font-family: var(--font-primary);
+      width: 46px;
+      flex-shrink: 0;
+    }
+    .scale-var {
+      font-size: 11.5px;
+      color: #6B788E;
+      font-family: var(--font-mono);
+      flex-shrink: 0;
+      width: 130px;
+      text-align: right;
+    }
+    .scale-tw {
+      font-size: 11.5px;
+      color: #6B788E;
+      font-family: var(--font-mono);
+      flex-shrink: 0;
+      width: 110px;
+      text-align: right;
+    }
+    .copy-hex-btn {
+      padding: 4px 12px;
+      border-radius: 5px;
+      border: 1px solid #DFE2E6;
+      background: #fff;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 600;
+      color: #505F79;
+      font-family: var(--font-primary);
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+    .copy-hex-btn:hover  { border-color: #1E7FD6; color: #1E7FD6; background: #E9F2FB; }
+    .copy-hex-btn.copied { background: #E9F2FB; color: #1E7FD6; border-color: #1E7FD6; }
+
+    @media (max-width: 640px) {
+      .scale-var, .scale-tw { display: none; }
+      .scale-name { width: 100px; }
+    }
+
+    /* ── Info Cards ──────────────────────────────────────────── */
+    .info-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 860px) { .info-cards { grid-template-columns: 1fr; } }
+
+    .info-card { border-radius: 12px; padding: 18px 20px; }
+    .info-card-usage { background: #EBF5FF; border: 1px solid #A3CBEE; }
+    .info-card-best  { background: #E6F7EF; border: 1px solid #6BCEA0; }
+    .info-card-avoid { background: #FDE8E9; border: 1px solid #F7A2A5; }
+
+    .info-card-head {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      font-family: var(--font-primary);
+    }
+    .info-card-usage .info-card-head { color: #155996; }
+    .info-card-best  .info-card-head { color: #007740; }
+    .info-card-avoid .info-card-head { color: #A51419; }
+
+    .info-card ul { margin: 0; padding-left: 16px; list-style: disc; }
+    .info-card li {
+      font-size: 13px;
+      color: #243757;
+      margin-bottom: 6px;
+      line-height: 1.5;
+      font-family: var(--font-primary);
+    }
+    .info-card li:last-child { margin-bottom: 0; }
+
+    /* ── Border Width Demo ───────────────────────────────────── */
+    .border-demo-card {
+      background: #fff;
+      border: 1px solid #DFE2E6;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .border-demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    @media (max-width: 640px) { .border-demo-grid { grid-template-columns: 1fr; } }
+
+    .border-demo-cell {
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .border-demo-cell:first-child { border-right: 1px solid #F5F6F7; }
+    @media (max-width: 640px) {
+      .border-demo-cell:first-child { border-right: none; border-bottom: 1px solid #F5F6F7; }
+    }
+
+    .border-demo-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #6B788E;
+      font-family: var(--font-primary);
+      margin: 0;
+      text-align: center;
+    }
+    .demo-element {
+      width: 140px;
+      height: 52px;
+      background: #F5F6F7;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: #6B788E;
+      font-family: var(--font-primary);
+    }
+    .demo-element-inside {
+      box-shadow: inset 0 0 0 2px #1E7FD6;
+      background: #fff;
+      color: #1E7FD6;
+    }
+    .demo-code {
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: #354764;
+      background: #F5F6F7;
+      padding: 8px 12px;
+      border-radius: 6px;
+      text-align: center;
+      line-height: 1.6;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .border-spec-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 24px;
+      border-top: 1px solid #EBEDF0;
+    }
+    .spec-label {
+      font-size: 11.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #6B788E;
+      width: 90px;
+      font-family: var(--font-primary);
+      flex-shrink: 0;
+    }
+    .spec-value {
+      font-size: 13px;
+      font-family: var(--font-mono);
+      color: #354764;
+    }
+
+    /* ── Usage Table ─────────────────────────────────────────── */
+    .usage-table-card {
+      background: #fff;
+      border: 1px solid #DFE2E6;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .usage-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-primary);
+    }
+    .usage-table th {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #6B788E;
+      padding: 10px 20px;
+      text-align: left;
+      background: #F8FAFC;
+      border-bottom: 1px solid #DFE2E6;
+    }
+    .usage-table td {
+      padding: 11px 20px;
+      font-size: 13px;
+      color: #243757;
+      border-bottom: 1px solid #F5F6F7;
+      vertical-align: middle;
+    }
+    .usage-table tr:last-child td { border-bottom: none; }
+    .usage-table tr:hover td { background: #F8FAFC; }
+
+    .token-chip {
+      display: inline-flex;
+      align-items: center;
+      font-size: 11.5px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: #F1ECFE;
+      color: #4D2BAC;
+    }
+    .tw-chip {
+      display: inline-flex;
+      align-items: center;
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: #E9F2FB;
+      color: #155996;
+    }
+
+    /* ── Implementation Code Section ────────────────────────── */
+    .impl-section {
+      background: #fff;
+      border: 1px solid #DFE2E6;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    .impl-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      border-bottom: 1px solid #EBEDF0;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .impl-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #091E42;
+      font-family: var(--font-primary);
+      margin: 0;
+    }
+    .impl-toggle {
+      display: flex;
+      gap: 4px;
+      background: #F5F6F7;
+      padding: 4px;
+      border-radius: 8px;
+    }
+    .impl-tab-btn {
+      padding: 6px 18px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      color: #6B788E;
+      font-family: var(--font-primary);
+      transition: all 0.15s ease;
+    }
+    .impl-tab-btn.active { background: #091E42; color: #fff; }
+
+    .impl-body { padding: 4px 0; }
+    .impl-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 10px 24px;
+      border-bottom: 1px solid #F5F6F7;
+      transition: background 0.1s;
+    }
+    .impl-row:last-child { border-bottom: none; }
+    .impl-row:hover { background: #F8FAFC; }
+
+    .impl-swatch {
+      width: 20px;
+      height: 20px;
+      border: 1px solid rgba(0,0,0,0.08);
+      flex-shrink: 0;
+    }
+    .impl-token-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #091E42;
+      width: 120px;
+      flex-shrink: 0;
+      font-family: var(--font-primary);
+    }
+    .impl-code-text {
+      flex: 1;
+      font-size: 13px;
+      color: #354764;
+      font-family: var(--font-mono);
+    }
+    .impl-copy {
+      padding: 5px 14px;
+      border-radius: 6px;
+      border: 1px solid #DFE2E6;
+      background: #fff;
+      cursor: pointer;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #505F79;
+      font-family: var(--font-primary);
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+      flex-shrink: 0;
+    }
+    .impl-copy:hover  { border-color: #1E7FD6; color: #1E7FD6; background: #E9F2FB; }
+    .impl-copy.copied { background: #E9F2FB; color: #1E7FD6; border-color: #1E7FD6; }
+
+    /* ── Divider & misc ─────────────────────────────────────── */
+    .section-divider { height: 1px; background: #EBEDF0; margin: 0 0 40px; }
+    .page-header h1, .page-header .subtitle { font-family: var(--font-primary); }
+    .inline-code {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      background: #F5F6F7;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #354764;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Mobile overlay -->
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo-icon">GL</div>
+        <div class="sidebar-brand-text">
+          <div class="logo">GPOS Lite</div>
+          <div class="version">Design System V2.0</div>
+        </div>
+      </div>
+      <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">&#x2715;</button>
+    </div>
+
+    <div class="sidebar-search">
+      <input type="search" class="search-input" placeholder="&#x1F50D;  Cari token, component...">
+    </div>
+
+    <div class="nav-scroll">
+      <nav class="nav-menu">
+
+        <div class="nav-section">
+          <h3 class="nav-title">Overview</h3>
+          <ul class="nav-list">
+            <li>
+              <a href="../../index.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+                Home
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="nav-title">Foundations</h3>
+          <ul class="nav-list">
+            <li><a href="../colors/colors.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg>Colors</a></li>
+            <li><a href="../typography/typography.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Typography</a></li>
+            <li><a href="../spacing/spacing.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>Spacing</a></li>
+            <li><a href="../shadows/shadows.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h12a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V7z" opacity="0.4"/></svg>Shadows</a></li>
+            <li><a href="../borders/borders.html" class="nav-link active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>Borders &amp; Radius</a></li>
+            <li><a href="../grid/grid.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Grid &amp; Layout</a></li>
+            <li><a href="../icons/icons.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="5" height="5" rx="1"/><rect x="10" y="3" width="5" height="5" rx="1"/><rect x="17" y="3" width="4" height="5" rx="1"/><rect x="3" y="10" width="5" height="5" rx="1"/><rect x="10" y="10" width="5" height="5" rx="1"/><rect x="17" y="10" width="4" height="5" rx="1"/><rect x="3" y="17" width="5" height="4" rx="1"/><rect x="10" y="17" width="5" height="4" rx="1"/><rect x="17" y="17" width="4" height="4" rx="1"/></svg>Icons</a></li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+            <h3 class="nav-title">Komponen</h3>
+            <ul class="nav-list">
+              <li>
+                <a href="../../components/Button/button.html" class="nav-link">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="3"/><line x1="7" y1="12" x2="17" y2="12" opacity="0.5"/></svg>
+                  Button
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="nav-section">
+            <h3 class="nav-title">Resources</h3>
+          <ul class="nav-list">
+            <li>
+              <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="nav-link" target="_blank">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                GitHub Repo
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </nav>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="tailwind-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 6C9.33 6 7.67 7.33 7 10c1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35.98 1 2.09 2.15 4.59 2.15C19.67 12 21.33 10.67 22 8c-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C15.61 7.15 14.5 6 12 6zm-7 6c-2.67 0-4.33 1.33-5 4 1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35C6.39 17.15 7.5 18 10 18c2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C8.61 12.85 7.5 12 5 12z"/></svg>
+        Built with Tailwind CSS
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===================== MAIN ===================== -->
+  <main class="main-content">
+
+    <!-- Topbar -->
+    <div class="topbar">
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="breadcrumb">
+        <a href="../../index.html">Home</a><span class="breadcrumb-sep">/</span><a href="#">Foundations</a><span class="breadcrumb-sep">/</span><span class="current">Borders &amp; Radius</span>
+      </div>
+      <div class="topbar-actions">
+        <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="topbar-link" target="_blank">GitHub</a>
+        <span class="version-badge">v2.0</span>
+      </div>
+    </div>
+
+    <div class="content-inner">
+
+      <!-- Page Header -->
+      <header class="page-header">
+        <h1>Borders &amp; Border Radius</h1>
+        <p class="subtitle">8 corner radius token dari Corner.0 (0px) hingga Corner.Full (9999px) — beserta Border Width 2px style Inside untuk konsistensi visual di seluruh komponen GPOS Lite.</p>
+      </header>
+
+      <!-- Filter Tabs -->
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-tab active" data-filter="all">Semua</button>
+        <button class="filter-tab" data-filter="none">
+          <span class="tab-dot dot-none"></span>None
+        </button>
+        <button class="filter-tab" data-filter="small">
+          <span class="tab-dot dot-small"></span>Small
+        </button>
+        <button class="filter-tab" data-filter="medium">
+          <span class="tab-dot dot-medium"></span>Medium
+        </button>
+        <button class="filter-tab" data-filter="large">
+          <span class="tab-dot dot-large"></span>Large
+        </button>
+        <button class="filter-tab" data-filter="pill">
+          <span class="tab-dot dot-pill"></span>Pill
+        </button>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════
+           NONE — Corner.0 (0px)
+           ═══════════════════════════════════════════════════ -->
+      <section class="radius-section" data-category="none">
+        <div class="section-head">
+          <h2 class="section-title">None</h2>
+          <span class="token-count">1 token</span>
+          <span class="cat-badge cat-badge-none">NONE</span>
+        </div>
+        <p class="section-desc">
+          Tanpa rounding — sudut persegi penuh. Digunakan untuk layout container, tabel, divider, dan komponen yang membutuhkan kesan tegas dan struktural.
+        </p>
+
+        <div class="scale-card">
+          <div class="scale-row">
+            <span class="scale-name">Corner.0</span>
+            <div class="radius-preview-wrap">
+              <div class="radius-box radius-box-none" style="border-radius: var(--radius-0);"></div>
+            </div>
+            <span class="scale-px">0px</span>
+            <span class="scale-var">--radius-0</span>
+            <span class="scale-tw">rounded-none</span>
+            <button class="copy-hex-btn" data-copy="0px">COPY PX</button>
+          </div>
+        </div>
+
+        <div class="info-cards">
+          <div class="info-card info-card-usage">
+            <div class="info-card-head">📌 Kapan Dipakai</div>
+            <ul>
+              <li>Tabel &amp; data grid row</li>
+              <li>Divider &amp; separator horizontal</li>
+              <li>Layout container full-bleed</li>
+              <li>Komponen edge-to-edge</li>
+            </ul>
+          </div>
+          <div class="info-card info-card-best">
+            <div class="info-card-head">✅ Best Practice</div>
+            <ul>
+              <li>Gunakan konsisten untuk semua tabel row</li>
+              <li>Cocok untuk section background full-width</li>
+              <li>Pasangkan dengan border divider untuk struktur</li>
+            </ul>
+          </div>
+          <div class="info-card info-card-avoid">
+            <div class="info-card-head">✖ Hindari</div>
+            <ul>
+              <li>Jangan untuk button &amp; interactive element</li>
+              <li>Jangan sebagai card dalam layout modern</li>
+              <li>Hindari untuk modal &amp; overlay component</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ═══════════════════════════════════════════════════
+           SMALL — Corner.025 · 050 · 075
+           ═══════════════════════════════════════════════════ -->
+      <section class="radius-section" data-category="small">
+        <div class="section-head">
+          <h2 class="section-title">Small</h2>
+          <span class="token-count">3 tokens</span>
+          <span class="cat-badge cat-badge-small">SMALL</span>
+        </div>
+        <p class="section-desc">
+          Radius terkecil untuk komponen kompak — memberikan subtle softening tanpa terlihat terlalu rounded. Cocok untuk elemen inline seperti badge, tag, dan checkbox.
+        </p>
+
+        <div class="scale-card">
+          <!-- Corner.025 — 2px -->
+          <div class="scale-row">
+            <span class="scale-name">Corner.025</span>
+            <div class="radius-preview-wrap">
+              <div class="radius-box radius-box-small" style="border-radius: var(--radius-025);"></div>
+            </div>
+            <span class="scale-px">2px</span>
+            <span class="scale-var">--radius-025</span>
+            <span class="scale-tw">rounded-sm</span>
+            <button class="copy-hex-btn" data-copy="2px">COPY PX</button>
+          </div>
+          <!-- Corner.050 — 4px -->
+          <div class="scale-row">
+            <span class="scale-name">Corner.050</span>
+            <div class="radius-preview-wrap">
+              <div class="radius-box radius-box-small" style="border-radius: var(--radius-050);"></div>
+            </div>
+            <span class="scale-px">4px</span>
+            <span class="scale-var">--radius-050</span>
+            <span class="scale-tw">rounded</span>
+            <button class="copy-hex-btn" data-copy="4px">COPY PX</button>
+          </div>
+          <!-- Corner.075 — 6px -->
+          <div class="scale-row">
+            <span class="scale-name">Corner.075</span>
+            <div class="radius-preview-wrap">
+              <div class="radius-box radius-box-small" style="border-radius: var(--radius-075);"></div>
+            </div>
+            <span class="scale-px">6px</span>
+            <span class="scale-var">--radius-075</span>
+            <span class="scale-tw">rounded-md</span>
+            <button class="copy-hex-btn" data-copy="6px">COPY PX</button>
+          </div>
+        </div>
+
+        <div class="info-cards">
+          <div class="info-card info-card-usage">
+            <div class="info-card-head">📌 Kapan Dipakai</div>
+            <ul>
+              <li>Badge &amp; status tag teks</li>
+              <li>Checkbox &amp; radio button</li>
+              <li>Icon button ukuran kecil</li>
+              <li>Tooltip &amp; inline label</li>
+            </ul>
+          </div>
+          <div class="info-card info-card-best">
+            <div class="info-card-head">✅ Best Practice</div>
+            <ul>
+              <li>025 (2px) untuk checkbox &amp; form element kecil</li>
+              <li>050 (4px) untuk badge &amp; status chip</li>
+              <li>075 (6px) untuk icon button &amp; tooltip</li>
+            </ul>
+          </div>
+          <div class="info-card info-card-avoid">
+            <div class="info-card-head">✖ Hindari</div>
+            <ul>
+              <li>Jangan untuk card besar atau modal</li>
+              <li>Jangan untuk primary button utama</li>
+              <li>Hindari pada hero section element</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ═══════════════════════════════════════════════════
+           MEDIUM — Corner.100 · 150
+           ═══════════════════════════════════════════════════ -->
+      <section class="radius-section" data-category="medium">
+        <div class="section-head">
+          <h2 class="section-title">Medium</h2>
+          <span class="token-count">2 tokens</span>
+          <span class="cat-badge cat-badge-medium">MEDIUM ★</span>
+        </div>
+        <p class="section-desc">
+          Range default untuk sebagian besar komponen UI — buttons, input fields, dan content card. Corner.100 (8px) adalah nilai default yang direkomendasikan untuk semua button dan form.
+        </p>
+
+        <div class="scale-card">
+          <!-- Corner.100 — 8px (★ Default) -->
+          <div class="scale-row">
+            <span class="scale-name">Corner.100 <span class="star">★</span></span>
+            <div class="radius-preview-wrap">
+              <div class="radius-box radius-box-medium" style="border-radius: var(--radius-100);"></div>
+            </div>
+            <span class="scale-px">8px</span>
+            <span class="scale-var">--radius-100</span>
+            <span class="scale-tw">rounded-lg</span>
+            <button class="copy-hex-btn" data-copy="8px">COPY PX</button>
+          </div>
+          <!-- Corner.150 — 12px -->
+          <div class="scale-row">
+            <span class="scale-name">Corner.150</span>
+            <div class="radius-preview-wrap">
+              <div class="radius-box radius-box-medium" style="border-radius: var(--radius-150);"></div>
+            </div>
+            <span class="scale-px">12px</span>
+            <span class="scale-var">--radius-150</span>
+            <span class="scale-tw">rounded-xl</span>
+            <button class="copy-hex-btn" data-copy="12px">COPY PX</button>
+          </div>
+        </div>
+
+        <div class="info-cards">
+          <div class="info-card info-card-usage">
+            <div class="info-card-head">📌 Kapan Dipakai</div>
+            <ul>
+              <li>Button primary &amp; secondary</li>
+              <li>Input field &amp; textarea</li>
+              <li>Card konten &amp; informasi</li>
+              <li>Dropdown &amp; select menu</li>
+            </ul>
+          </div>
+          <div class="info-card info-card-best">
+            <div class="info-card-head">✅ Best Practice</div>
+            <ul>
+              <li>100 (8px) sebagai default untuk semua button</li>
+              <li>150 (12px) untuk card &amp; content container</li>
+              <li>Gunakan secara konsisten di seluruh form</li>
+            </ul>
+          </div>
+          <div class="info-card info-card-avoid">
+            <div class="info-card-head">✖ Hindari</div>
+            <ul>
+              <li>Jangan campur 100 dan 150 dalam satu komponen</li>
+              <li>Jangan gunakan 150 untuk icon button kecil</li>
+              <li>Hindari untuk elemen yang butuh radius full</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ═══════════════════════════════════════════════════
+           LARGE — Corner.200
+           ═══════════════════════════════════════════════════ -->
+      <section class="radius-section" data-category="large">
+        <div class="section-head">
+          <h2 class="section-title">Large</h2>
+          <span class="token-count">1 token</span>
+          <span class="cat-badge cat-badge-large">LARGE</span>
+        </div>
+        <p class="section-desc">
+          Untuk komponen prominent seperti modal, dialog, dan bottom sheet. Memberikan kesan yang friendly, approachable, dan modern pada overlay element.
+        </p>
+
+        <div class="scale-card">
+          <!-- Corner.200 — 16px -->
+          <div class="scale-row">
+            <span class="scale-name">Corner.200</span>
+            <div class="radius-preview-wrap">
+              <div class="radius-box radius-box-large" style="border-radius: var(--radius-200);"></div>
+            </div>
+            <span class="scale-px">16px</span>
+            <span class="scale-var">--radius-200</span>
+            <span class="scale-tw">rounded-2xl</span>
+            <button class="copy-hex-btn" data-copy="16px">COPY PX</button>
+          </div>
+        </div>
+
+        <div class="info-cards">
+          <div class="info-card info-card-usage">
+            <div class="info-card-head">📌 Kapan Dipakai</div>
+            <ul>
+              <li>Modal &amp; dialog box</li>
+              <li>Bottom sheet &amp; drawer</li>
+              <li>Side panel &amp; flyout</li>
+              <li>Popover rich content</li>
+            </ul>
+          </div>
+          <div class="info-card info-card-best">
+            <div class="info-card-head">✅ Best Practice</div>
+            <ul>
+              <li>Gunakan konsisten untuk semua overlay &amp; modal</li>
+              <li>Pasangkan dengan backdrop untuk efek modern</li>
+              <li>Terapkan hanya pada corner yang terekspos</li>
+            </ul>
+          </div>
+          <div class="info-card info-card-avoid">
+            <div class="info-card-head">✖ Hindari</div>
+            <ul>
+              <li>Jangan untuk button atau elemen inline</li>
+              <li>Jangan untuk komponen terlalu kecil (&lt;48px)</li>
+              <li>Hindari pada elemen nested dalam komponen</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ═══════════════════════════════════════════════════
+           PILL — Corner.Full (9999px)
+           ═══════════════════════════════════════════════════ -->
+      <section class="radius-section" data-category="pill">
+        <div class="section-head">
+          <h2 class="section-title">Pill</h2>
+          <span class="token-count">1 token</span>
+          <span class="cat-badge cat-badge-pill">PILL</span>
+        </div>
+        <p class="section-desc">
+          Radius penuh (9999px) untuk pill-shaped element. Memberikan kesan yang friendly dan modern. Digunakan untuk badge, status indicator, dan avatar circle.
+        </p>
+
+        <div class="scale-card">
+          <!-- Corner.Full — 9999px -->
+          <div class="scale-row">
+            <span class="scale-name">Corner.Full</span>
+            <div class="radius-preview-wrap">
+              <div class="radius-box radius-box-pill" style="border-radius: var(--radius-full);"></div>
+            </div>
+            <span class="scale-px">9999px</span>
+            <span class="scale-var">--radius-full</span>
+            <span class="scale-tw">rounded-full</span>
+            <button class="copy-hex-btn" data-copy="9999px">COPY PX</button>
+          </div>
+        </div>
+
+        <div class="info-cards">
+          <div class="info-card info-card-usage">
+            <div class="info-card-head">📌 Kapan Dipakai</div>
+            <ul>
+              <li>Badge &amp; status chip</li>
+              <li>Pill button &amp; toggle switch</li>
+              <li>Avatar &amp; user image circle</li>
+              <li>Progress bar &amp; step indicator</li>
+            </ul>
+          </div>
+          <div class="info-card info-card-best">
+            <div class="info-card-head">✅ Best Practice</div>
+            <ul>
+              <li>Selalu gunakan untuk semua badge status</li>
+              <li>Konsisten untuk semua avatar (circle shape)</li>
+              <li>Gunakan dengan padding proporsional</li>
+            </ul>
+          </div>
+          <div class="info-card info-card-avoid">
+            <div class="info-card-head">✖ Hindari</div>
+            <ul>
+              <li>Jangan untuk card atau container besar</li>
+              <li>Jangan untuk modal &amp; dialog</li>
+              <li>Hindari untuk input field utama</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ═══════════════════════════════════════════════════
+           BORDER WIDTH — 2px Inside
+           ═══════════════════════════════════════════════════ -->
+      <section class="radius-section" data-category="border" style="margin-bottom: 48px;">
+        <div class="section-head">
+          <h2 class="section-title">Border Width</h2>
+          <span class="token-count">1 style</span>
+          <span class="cat-badge cat-badge-border">2px INSIDE</span>
+        </div>
+        <p class="section-desc">
+          GPOS Lite hanya menggunakan Border Width <strong>2px</strong> dengan style <strong>Inside</strong> — border digambar di dalam bounds element sehingga tidak menambah ukuran atau mengganggu layout. Diimplementasikan dengan <span class="inline-code">box-shadow: inset</span>.
+        </p>
+
+        <div class="border-demo-card">
+          <!-- Side by side comparison -->
+          <div class="border-demo-grid">
+            <div class="border-demo-cell">
+              <p class="border-demo-label">Tanpa Border</p>
+              <div class="demo-element">Element</div>
+              <div class="demo-code">background: #F5F6F7;<br>border-radius: 8px;</div>
+            </div>
+            <div class="border-demo-cell">
+              <p class="border-demo-label">✓ 2px Inside Border</p>
+              <div class="demo-element demo-element-inside">Element</div>
+              <div class="demo-code">box-shadow: inset 0 0 0 2px #1E7FD6;<br>border-radius: 8px;</div>
+            </div>
+          </div>
+          <!-- Specification rows -->
+          <div class="border-spec-row">
+            <span class="spec-label">Width</span>
+            <span class="spec-value">2px</span>
+          </div>
+          <div class="border-spec-row">
+            <span class="spec-label">Style</span>
+            <span class="spec-value">Inside — tidak mengubah ukuran element (inset)</span>
+          </div>
+          <div class="border-spec-row">
+            <span class="spec-label">CSS</span>
+            <span class="spec-value">box-shadow: inset 0 0 0 2px var(--color-border);</span>
+          </div>
+          <div class="border-spec-row">
+            <span class="spec-label">Tailwind</span>
+            <span class="spec-value">ring-2 ring-inset ring-[#DFE2E6]</span>
+          </div>
+        </div>
+
+        <div class="info-cards">
+          <div class="info-card info-card-usage">
+            <div class="info-card-head">📌 Kapan Dipakai</div>
+            <ul>
+              <li>Input field state (default, focus, error)</li>
+              <li>Button outlined &amp; ghost variant</li>
+              <li>Card border &amp; selection state</li>
+              <li>Focus ring indicator</li>
+            </ul>
+          </div>
+          <div class="info-card info-card-best">
+            <div class="info-card-head">✅ Best Practice</div>
+            <ul>
+              <li>Selalu gunakan inset — tidak mengganggu layout</li>
+              <li>Kombinasikan dengan border-radius yang sesuai</li>
+              <li>Ganti warna sesuai state: default / focus / error</li>
+            </ul>
+          </div>
+          <div class="info-card info-card-avoid">
+            <div class="info-card-head">✖ Hindari</div>
+            <ul>
+              <li>Jangan pakai <span class="inline-code">border: 2px solid</span> — menambah ukuran</li>
+              <li>Jangan campur dengan box-shadow dekorasi</li>
+              <li>Hindari border width lain (1px, 4px) di komponen</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ═══════════════════════════════════════════════════
+           USAGE PER COMPONENT
+           ═══════════════════════════════════════════════════ -->
+      <section style="margin-bottom: 48px;">
+        <div class="section-head" style="margin-bottom: 16px;">
+          <h2 class="section-title">Usage per Component</h2>
+        </div>
+        <div class="usage-table-card">
+          <table class="usage-table">
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Token</th>
+                <th>Nilai</th>
+                <th>Tailwind Class</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Checkbox &amp; Radio</td>
+                <td><span class="token-chip">Corner.025</span></td>
+                <td>2px</td>
+                <td><span class="tw-chip">rounded-sm</span></td>
+              </tr>
+              <tr>
+                <td>Badge &amp; Status Tag</td>
+                <td><span class="token-chip">Corner.050</span></td>
+                <td>4px</td>
+                <td><span class="tw-chip">rounded</span></td>
+              </tr>
+              <tr>
+                <td>Tooltip &amp; Icon Button</td>
+                <td><span class="token-chip">Corner.075</span></td>
+                <td>6px</td>
+                <td><span class="tw-chip">rounded-md</span></td>
+              </tr>
+              <tr>
+                <td>Button (semua ukuran)</td>
+                <td><span class="token-chip">Corner.100</span></td>
+                <td>8px</td>
+                <td><span class="tw-chip">rounded-lg</span></td>
+              </tr>
+              <tr>
+                <td>Input Field &amp; Select</td>
+                <td><span class="token-chip">Corner.100</span></td>
+                <td>8px</td>
+                <td><span class="tw-chip">rounded-lg</span></td>
+              </tr>
+              <tr>
+                <td>Card &amp; Content Box</td>
+                <td><span class="token-chip">Corner.150</span></td>
+                <td>12px</td>
+                <td><span class="tw-chip">rounded-xl</span></td>
+              </tr>
+              <tr>
+                <td>Dropdown &amp; Menu Panel</td>
+                <td><span class="token-chip">Corner.150</span></td>
+                <td>12px</td>
+                <td><span class="tw-chip">rounded-xl</span></td>
+              </tr>
+              <tr>
+                <td>Modal &amp; Dialog</td>
+                <td><span class="token-chip">Corner.200</span></td>
+                <td>16px</td>
+                <td><span class="tw-chip">rounded-2xl</span></td>
+              </tr>
+              <tr>
+                <td>Bottom Sheet &amp; Drawer</td>
+                <td><span class="token-chip">Corner.200</span></td>
+                <td>16px</td>
+                <td><span class="tw-chip">rounded-2xl</span></td>
+              </tr>
+              <tr>
+                <td>Avatar &amp; User Image</td>
+                <td><span class="token-chip">Corner.Full</span></td>
+                <td>9999px</td>
+                <td><span class="tw-chip">rounded-full</span></td>
+              </tr>
+              <tr>
+                <td>Pill Button &amp; Chip</td>
+                <td><span class="token-chip">Corner.Full</span></td>
+                <td>9999px</td>
+                <td><span class="tw-chip">rounded-full</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- ═══════════════════════════════════════════════════
+           IMPLEMENTATION CODE
+           ═══════════════════════════════════════════════════ -->
+      <section>
+        <div class="impl-section">
+          <div class="impl-header">
+            <h3 class="impl-title">Implementation Code</h3>
+            <div class="impl-toggle" id="impl-toggle">
+              <button class="impl-tab-btn active" data-impl="tailwind">Tailwind</button>
+              <button class="impl-tab-btn" data-impl="css">CSS Variable</button>
+            </div>
+          </div>
+
+          <!-- TAILWIND VIEW -->
+          <div class="impl-body" id="view-tailwind">
+            <div class="impl-row">
+              <div class="impl-swatch" style="background:#EBEDF0; border-radius:0px;"></div>
+              <span class="impl-token-name">Corner.0</span>
+              <span class="impl-code-text">rounded-none</span>
+              <button class="impl-copy" data-copy="rounded-none">COPY</button>
+            </div>
+            <div class="impl-row">
+              <div class="impl-swatch" style="background:#C4B0FB; border-radius:2px;"></div>
+              <span class="impl-token-name">Corner.025</span>
+              <span class="impl-code-text">rounded-sm</span>
+              <button class="impl-copy" data-copy="rounded-sm">COPY</button>
+            </div>
+            <div class="impl-row">
+              <div class="impl-swatch" style="background:#AB8FFA; border-radius:4px;"></div>
+              <span class="impl-token-name">Corner.050</span>
+              <span class="impl-code-text">rounded</span>
+              <button class="impl-copy" data-copy="rounded">COPY</button>
+            </div>
+            <div class="impl-row">
+              <div class="impl-swatch" style="background:#875FF8; border-radius:6px;"></div>
+              <span class="impl-token-name">Corner.075</span>
+              <span class="impl-code-text">rounded-md</span>
+              <button class="impl-copy" data-copy="rounded-md">COPY</button>
+            </div>
+            <div class="impl-row">
+              <div class="impl-swatch" style="background:#4495DD; border-radius:8px;"></div>
+              <span class="impl-token-name">Corner.100 ★</span>
+              <span class="impl-code-text">rounded-lg</span>
+              <button class="impl-copy" data-copy="rounded-lg">COPY</button>
+            </div>
+            <div class="impl-row">
+              <div class="impl-swatch" style="background:#1E7FD6; border-radius:12px;"></div>
+              <span class="impl-token-name">Corner.150</span>
+              <span class="impl-code-text">rounded-xl</span>
+              <button class="impl-copy" data-copy="rounded-xl">COPY</button>
+            </div>
+            <div class="impl-row">
+              <div class="impl-swatch" style="background:#155996; border-radius:16px;"></div>
+              <span class="impl-token-name">Corner.200</span>
+              <span class="impl-code-text">rounded-2xl</span>
+              <button class="impl-copy" data-copy="rounded-2xl">COPY</button>
+            </div>
+            <div class="impl-row">
+              <div class="impl-swatch" style="background:#124D83; border-radius:9999px;"></div>
+              <span class="impl-token-name">Corner.Full</span>
+              <span class="impl-code-text">rounded-full</span>
+              <button class="impl-copy" data-copy="rounded-full">COPY</button>
+            </div>
+            <div class="impl-row" style="background:#F0F7FF;">
+              <div class="impl-swatch" style="background:#fff; box-shadow: inset 0 0 0 2px #1E7FD6; border-radius:4px;"></div>
+              <span class="impl-token-name">Border 2px</span>
+              <span class="impl-code-text">ring-2 ring-inset ring-[#DFE2E6]</span>
+              <button class="impl-copy" data-copy="ring-2 ring-inset ring-[#DFE2E6]">COPY</button>
+            </div>
+          </div><!-- /view-tailwind -->
+
+          <!-- CSS VARIABLE VIEW -->
+          <div class="impl-body" id="view-css" style="display:none;">
+            <div class="impl-row">
+              <div class="impl-swatch" style="background:#EBEDF0; border-radius:0px;"></div>
+              <span class="impl-token-name">Corner.0</span>
+              <span class="impl-code-text">var(--radius-0)  /* 0px */</span>
+              <button class="impl-copy" data-copy="var(--radius-0)">COPY</button>
+            </div>
+            <div class="impl-row">
+              <div class="impl-swatch" style="background:#C4B0FB; border-radius:2px;"></div>
+              <span class="impl-token-name">Corner.025</span>
+              <span class="impl-code-text">var(--radius-025)  /* 2px */</span>
+              <button class="impl-copy" data-copy="var(--radius-025)">COPY</button>
+            </div>
+            <div class="impl-row">
+              <div class="impl-swatch" style="background:#AB8FFA; border-radius:4px;"></div>
+              <span class="impl-token-name">Corner.050</span>
+              <span class="impl-code-text">var(--radius-050)  /* 4px */</span>
+              <button class="impl-copy" data-copy="var(--radius-050)">COPY</button>
+            </div>
+            <div class="impl-row">
+              <div class="impl-swatch" style="background:#875FF8; border-radius:6px;"></div>
+              <span class="impl-token-name">Corner.075</span>
+              <span class="impl-code-text">var(--radius-075)  /* 6px */</span>
+              <button class="impl-copy" data-copy="var(--radius-075)">COPY</button>
+            </div>
+            <div class="impl-row">
+              <div class="impl-swatch" style="background:#4495DD; border-radius:8px;"></div>
+              <span class="impl-token-name">Corner.100 ★</span>
+              <span class="impl-code-text">var(--radius-100)  /* 8px — default button & input */</span>
+              <button class="impl-copy" data-copy="var(--radius-100)">COPY</button>
+            </div>
+            <div class="impl-row">
+              <div class="impl-swatch" style="background:#1E7FD6; border-radius:12px;"></div>
+              <span class="impl-token-name">Corner.150</span>
+              <span class="impl-code-text">var(--radius-150)  /* 12px */</span>
+              <button class="impl-copy" data-copy="var(--radius-150)">COPY</button>
+            </div>
+            <div class="impl-row">
+              <div class="impl-swatch" style="background:#155996; border-radius:16px;"></div>
+              <span class="impl-token-name">Corner.200</span>
+              <span class="impl-code-text">var(--radius-200)  /* 16px */</span>
+              <button class="impl-copy" data-copy="var(--radius-200)">COPY</button>
+            </div>
+            <div class="impl-row">
+              <div class="impl-swatch" style="background:#124D83; border-radius:9999px;"></div>
+              <span class="impl-token-name">Corner.Full</span>
+              <span class="impl-code-text">var(--radius-full)  /* 9999px */</span>
+              <button class="impl-copy" data-copy="var(--radius-full)">COPY</button>
+            </div>
+            <div class="impl-row" style="background:#F0F7FF;">
+              <div class="impl-swatch" style="background:#fff; box-shadow: inset 0 0 0 2px #1E7FD6; border-radius:4px;"></div>
+              <span class="impl-token-name">Border 2px</span>
+              <span class="impl-code-text">box-shadow: inset 0 0 0 2px var(--color-border);</span>
+              <button class="impl-copy" data-copy="box-shadow: inset 0 0 0 2px var(--color-border);">COPY</button>
+            </div>
+          </div><!-- /view-css -->
+
+        </div><!-- /impl-section -->
+      </section>
+
+      <!-- Footer -->
+      <footer class="page-footer">
+        <div class="footer-left">
+          &copy; 2026 <strong>GPOS Lite Design System V2.0</strong> &mdash; Maintained with &#x2764;&#xFE0F;
+        </div>
+        <div class="footer-right">GitHub Pages</div>
+      </footer>
+
+    </div><!-- /content-inner -->
+  </main>
+</div><!-- /container -->
+
+<script src="../../scripts/script.js"></script>
+<script>
+/* ============================================================
+   Borders Page — Filter Tabs, Copy Buttons, Impl Toggle
+   ============================================================ */
+
+// ── Filter Tabs ──────────────────────────────────────────────
+const filterBar = document.getElementById('filter-bar');
+const allSections = document.querySelectorAll('.radius-section');
+const allDividers = document.querySelectorAll('.section-divider');
+
+filterBar.addEventListener('click', function(e) {
+  const btn = e.target.closest('.filter-tab');
+  if (!btn) return;
+
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+
+  const filter = btn.dataset.filter;
+  allSections.forEach(function(sec) {
+    const cat = sec.dataset.category;
+    sec.style.display = (filter === 'all' || filter === cat) ? '' : 'none';
+  });
+  allDividers.forEach(function(d) {
+    d.style.display = (filter === 'all') ? '' : 'none';
+  });
+});
+
+// ── Implementation Code Toggle ────────────────────────────────
+const implToggle = document.getElementById('impl-toggle');
+const viewTailwind = document.getElementById('view-tailwind');
+const viewCss = document.getElementById('view-css');
+
+implToggle.addEventListener('click', function(e) {
+  const btn = e.target.closest('.impl-tab-btn');
+  if (!btn) return;
+  document.querySelectorAll('.impl-tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const tab = btn.dataset.impl;
+  viewTailwind.style.display = tab === 'tailwind' ? '' : 'none';
+  viewCss.style.display      = tab === 'css'      ? '' : 'none';
+});
+
+// ── Copy PX Buttons (scale card) ─────────────────────────────
+document.querySelectorAll('.copy-hex-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    const val = btn.dataset.copy;
+    navigator.clipboard.writeText(val).then(function() {
+      const orig = btn.textContent;
+      btn.textContent = 'COPIED!';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.textContent = orig;
+        btn.classList.remove('copied');
+      }, 1800);
+    }).catch(function() {
+      btn.textContent = 'ERROR';
+      setTimeout(function() { btn.textContent = 'COPY PX'; }, 1500);
+    });
+  });
+});
+
+// ── Copy Buttons (implementation table) ──────────────────────
+document.querySelectorAll('.impl-copy').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    const val = btn.dataset.copy;
+    navigator.clipboard.writeText(val).then(function() {
+      btn.textContent = 'COPIED!';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.textContent = 'COPY';
+        btn.classList.remove('copied');
+      }, 1800);
+    }).catch(function() {
+      btn.textContent = 'ERROR';
+      setTimeout(function() { btn.textContent = 'COPY'; }, 1500);
+    });
+  });
+});
+</script>
+</body>
+</html>

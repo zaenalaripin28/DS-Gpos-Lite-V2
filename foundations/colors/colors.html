@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colors - Design System GPOS Lite V 2.0</title>
+    <link rel="stylesheet" href="../../styles/globals.css">
+    <style>
+      /* ── Page Tabs ── */
+      .page-tabs { display:flex; gap:4px; margin-bottom:32px; border-bottom:2px solid #EBEDF0; }
+      .page-tab  { padding:10px 20px; border:none; background:none; cursor:pointer; font-size:.875rem; font-weight:500; color:#5D6B82; border-bottom:2px solid transparent; margin-bottom:-2px; transition:all .15s; }
+      .page-tab.active { color:#1E7FD6; border-bottom-color:#1E7FD6; }
+      .page-tab:hover:not(.active) { color:#091E42; }
+      .tab-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; }
+
+      /* ── Family Filter ── */
+      .family-filter { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:28px; }
+      .fam-btn { padding:6px 16px; border-radius:9999px; border:1.5px solid #DFE2E6; background:#fff; font-size:.8125rem; font-weight:500; cursor:pointer; color:#5D6B82; transition:all .15s; }
+      .fam-btn:hover { border-color:#1E7FD6; color:#1E7FD6; }
+      .fam-btn.active { background:#1E7FD6; border-color:#1E7FD6; color:#fff; }
+
+      /* ── Family Section ── */
+      .family-section { margin-bottom:48px; }
+      .family-header { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+      .family-title { font-size:1.125rem; font-weight:700; color:#091E42; }
+      .family-badge { font-size:.75rem; font-weight:600; color:#5D6B82; background:#F5F6F7; padding:2px 10px; border-radius:9999px; }
+      .family-desc  { font-size:.875rem; color:#5D6B82; margin-bottom:20px; }
+
+      /* ── Swatch Row ── */
+      .swatch-row { display:flex; gap:0; border-radius:12px; overflow:hidden; margin-bottom:20px; box-shadow:0 1px 3px rgba(0,0,0,.08); }
+      .swatch-item { flex:1; min-width:80px; }
+      .swatch-color { height:80px; width:100%; }
+      .swatch-info  { padding:8px 8px 10px; background:#fff; border-top:1px solid #EBEDF0; }
+      .swatch-token { font-size:.6875rem; font-weight:700; color:#091E42; display:block; }
+      .swatch-hex   { font-size:.6875rem; color:#5D6B82; display:block; margin-top:1px; }
+      .swatch-copy  { display:block; width:100%; margin-top:5px; padding:3px 0; background:#F5F6F7; border:none; border-radius:4px; font-size:.625rem; font-weight:600; color:#5D6B82; cursor:pointer; transition:all .12s; }
+      .swatch-copy:hover { background:#1E7FD6; color:#fff; }
+      .swatch-copy.copied { background:#00AA5B; color:#fff; }
+
+      /* ── Usage Guide ── */
+      .usage-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:20px; }
+      @media(max-width:640px){ .usage-grid{ grid-template-columns:1fr; } }
+      .usage-card { border-radius:10px; padding:14px; font-size:.8125rem; }
+      .usage-card h4 { font-size:.75rem; font-weight:700; margin:0 0 6px; text-transform:uppercase; letter-spacing:.04em; }
+      .usage-card ul { margin:0; padding-left:16px; color:#5D6B82; line-height:1.6; }
+      .usage-when  { background:#E9F2FB; } .usage-when h4  { color:#1E7FD6; }
+      .usage-best  { background:#E6F7EF; } .usage-best h4  { color:#007740; }
+      .usage-avoid { background:#FDE8E9; } .usage-avoid h4 { color:#A51419; }
+
+      /* ── Implementation ── */
+      .impl-section { background:#F5F6F7; border-radius:12px; padding:16px 20px; }
+      .impl-header  { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+      .impl-title   { font-size:.8125rem; font-weight:700; color:#091E42; }
+      .impl-tabs    { display:flex; gap:4px; }
+      .impl-tab     { padding:4px 12px; border-radius:6px; border:1.5px solid #DFE2E6; background:#fff; font-size:.75rem; font-weight:600; cursor:pointer; color:#5D6B82; transition:all .12s; }
+      .impl-tab.active { background:#091E42; border-color:#091E42; color:#fff; }
+      .impl-pane    { display:none; }
+      .impl-pane.active { display:block; }
+      .code-row     { display:flex; align-items:center; justify-content:space-between; padding:7px 12px; background:#fff; border-radius:8px; margin-bottom:6px; border:1px solid #EBEDF0; }
+      .code-swatch  { width:20px; height:20px; border-radius:4px; flex-shrink:0; border:1px solid rgba(0,0,0,.08); }
+      .code-token-name { font-size:.75rem; font-weight:600; color:#5D6B82; flex:0 0 90px; }
+      .code-snippet { font-size:.75rem; font-family:'JetBrains Mono','Courier New',monospace; color:#091E42; flex:1; padding:0 8px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+      .code-copy    { padding:3px 10px; background:#F5F6F7; border:none; border-radius:5px; font-size:.6875rem; font-weight:600; color:#5D6B82; cursor:pointer; flex-shrink:0; transition:all .12s; }
+      .code-copy:hover { background:#1E7FD6; color:#fff; }
+      .code-copy.copied { background:#00AA5B; color:#fff; }
+
+      /* ── Semantic Tokens ── */
+      .sem-group-title { font-size:1rem; font-weight:700; color:#091E42; margin:32px 0 16px; display:flex; align-items:center; gap:8px; }
+      .sem-group-title span { font-size:.75rem; font-weight:500; color:#5D6B82; background:#F5F6F7; padding:2px 10px; border-radius:9999px; }
+      .sem-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; margin-bottom:32px; }
+      .sem-card { border-radius:10px; overflow:hidden; border:1px solid #EBEDF0; background:#fff; }
+      .sem-preview { height:56px; }
+      .sem-body  { padding:10px 12px; }
+      .sem-name  { font-size:.75rem; font-weight:700; color:#091E42; }
+      .sem-ref   { font-size:.6875rem; color:#5D6B82; margin-top:2px; }
+      .sem-hex   { font-size:.6875rem; font-family:monospace; color:#8993A4; margin-top:2px; }
+      .sem-copy-btn { display:block; width:100%; margin-top:8px; padding:4px 0; background:#F5F6F7; border:none; border-radius:5px; font-size:.6875rem; font-weight:600; color:#5D6B82; cursor:pointer; transition:all .12s; }
+      .sem-copy-btn:hover { background:#1E7FD6; color:#fff; }
+      .sem-copy-btn.copied { background:#00AA5B; color:#fff; }
+
+      /* ── Tab panes ── */
+      .tab-pane { display:none; }
+      .tab-pane.active { display:block; }
+    </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Mobile overlay -->
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo-icon">GL</div>
+        <div class="sidebar-brand-text">
+          <div class="logo">GPOS Lite</div>
+          <div class="version">Design System V2.0</div>
+        </div>
+      </div>
+      <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">&#x2715;</button>
+    </div>
+    <div class="sidebar-search">
+      <input type="search" class="search-input" placeholder="&#x1F50D;  Cari token, component...">
+    </div>
+    <div class="nav-scroll">
+      <nav class="nav-menu">
+        <div class="nav-section">
+          <h3 class="nav-title">Overview</h3>
+          <ul class="nav-list">
+            <li><a href="../../index.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>Home</a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <h3 class="nav-title">Foundations</h3>
+          <ul class="nav-list">
+            <li><a href="../colors/colors.html" class="nav-link active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg>Colors</a></li>
+            <li><a href="../typography/typography.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Typography</a></li>
+            <li><a href="../spacing/spacing.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>Spacing</a></li>
+            <li><a href="../shadows/shadows.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h12a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V7z" opacity="0.4"/></svg>Shadows</a></li>
+            <li><a href="../borders/borders.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>Borders &amp; Radius</a></li>
+            <li><a href="../grid/grid.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Grid &amp; Layout</a></li>
+            <li><a href="../icons/icons.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="5" height="5" rx="1"/><rect x="10" y="3" width="5" height="5" rx="1"/><rect x="17" y="3" width="4" height="5" rx="1"/><rect x="3" y="10" width="5" height="5" rx="1"/><rect x="10" y="10" width="5" height="5" rx="1"/><rect x="17" y="10" width="4" height="5" rx="1"/><rect x="3" y="17" width="5" height="4" rx="1"/><rect x="10" y="17" width="5" height="4" rx="1"/><rect x="17" y="17" width="4" height="4" rx="1"/></svg>Icons</a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+            <h3 class="nav-title">Komponen</h3>
+            <ul class="nav-list">
+              <li>
+                <a href="../../components/Button/button.html" class="nav-link">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="3"/><line x1="7" y1="12" x2="17" y2="12" opacity="0.5"/></svg>
+                  Button
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="nav-section">
+            <h3 class="nav-title">Resources</h3>
+          <ul class="nav-list">
+            <li><a href="https://github.com/zaenalaripin28/DS-Gpos-Lite-V2" class="nav-link" target="_blank"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>GitHub Repo</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="sidebar-footer">
+      <div class="tailwind-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 6C9.33 6 7.67 7.33 7 10c1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35.98 1 2.09 2.15 4.59 2.15C19.67 12 21.33 10.67 22 8c-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C15.61 7.15 14.5 6 12 6zm-7 6c-2.67 0-4.33 1.33-5 4 1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35C6.39 17.15 7.5 18 10 18c2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C8.61 12.85 7.5 12 5 12z"/></svg>
+        Built with Tailwind CSS
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===================== MAIN ===================== -->
+  <main class="main-content">
+
+    <!-- Topbar -->
+    <div class="topbar">
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="breadcrumb">
+        <a href="../../index.html">Home</a><span class="breadcrumb-sep">/</span><a href="#">Foundations</a><span class="breadcrumb-sep">/</span><span class="current">Colors</span>
+      </div>
+      <div class="topbar-actions">
+        <a href="https://github.com/zaenalaripin28/DS-Gpos-Lite-V2" class="topbar-link" target="_blank">GitHub</a>
+        <span class="version-badge">v2.0</span>
+      </div>
+    </div>
+
+    <div class="content-inner">
+
+      <!-- Page Header -->
+      <header class="page-header">
+        <h1>Color System</h1>
+        <p class="subtitle">Token warna GP Lite — 6 palette inti &amp; semantic tokens untuk konsistensi visual di seluruh produk</p>
+      </header>
+
+      <!-- Page Tab Navigation -->
+      <div class="page-tabs">
+        <button class="page-tab active" data-tab="palette">
+          <span class="tab-dot" style="background:#1E7FD6;"></span>Color Palette
+        </button>
+        <button class="page-tab" data-tab="semantic">
+          <span class="tab-dot" style="background:#6E3EF6;"></span>Semantic Tokens
+        </button>
+      </div>
+
+      <!-- ═══════════ TAB: COLOR PALETTE ═══════════ -->
+      <div class="tab-pane active" id="tab-palette">
+
+        <!-- Family Filter -->
+        <div class="family-filter">
+          <button class="fam-btn active" data-fam="all">Semua</button>
+          <button class="fam-btn" data-fam="blue">🔵 Blue</button>
+          <button class="fam-btn" data-fam="orange">🟠 Orange</button>
+          <button class="fam-btn" data-fam="red">🔴 Red</button>
+          <button class="fam-btn" data-fam="green">🟢 Green</button>
+          <button class="fam-btn" data-fam="purple">🟣 Purple</button>
+          <button class="fam-btn" data-fam="neutral">⚪ Neutral</button>
+        </div>
+
+        <!-- Color families rendered by JS -->
+        <div id="color-families"></div>
+
+      </div>
+
+      <!-- ═══════════ TAB: SEMANTIC TOKENS ═══════════ -->
+      <div class="tab-pane" id="tab-semantic">
+
+        <p style="color:#5D6B82; font-size:.875rem; margin-bottom:8px;">
+          Semantic tokens memetakan color primitives ke makna fungsional. Gunakan token ini — bukan nilai hex langsung — agar UI tetap konsisten saat theme berubah.
+        </p>
+
+        <!-- Background group -->
+        <div class="sem-group-title">Background <span id="bg-count"></span></div>
+        <div class="sem-grid" id="sem-background"></div>
+
+        <!-- Text group -->
+        <div class="sem-group-title">Text <span id="text-count"></span></div>
+        <div class="sem-grid" id="sem-text"></div>
+
+        <!-- Border group -->
+        <div class="sem-group-title">Border <span id="border-count"></span></div>
+        <div class="sem-grid" id="sem-border"></div>
+
+        <!-- Icon group -->
+        <div class="sem-group-title">Icon <span id="icon-count"></span></div>
+        <div class="sem-grid" id="sem-icon"></div>
+
+      </div>
+
+      <!-- Footer -->
+      <footer class="page-footer">
+        <div class="footer-left">&copy; 2026 <strong>GPOS Lite Design System V2.0</strong> &mdash; Maintained with &#x2764;&#xFE0F;</div>
+        <div class="footer-right">GitHub Pages</div>
+      </footer>
+
+    </div><!-- /content-inner -->
+  </main>
+</div>
+
+<script src="../../scripts/script.js"></script>
+<script>
+// ═══════════════════════════════════════════════
+// GP Lite Design Token Data (source: GP Lite Design tokens.json)
+// ═══════════════════════════════════════════════
+const COLOR_FAMILIES = [
+  {
+    id: 'blue', name: 'Blue', brand: true,
+    desc: 'Warna brand utama GPOS. Digunakan untuk primary action, link, focus state, dan elemen interaktif utama.',
+    tailwindPrefix: 'blue',
+    usage: {
+      when:  ['Primary button & CTA', 'Hyperlink & text link', 'Focus ring & selected state', 'Brand accent & highlight'],
+      best:  ['B300 untuk elemen interaktif utama', 'B50 untuk background highlight subtle', 'B400/B500 untuk hover/pressed state'],
+      avoid: ['Jangan pakai B50–B75 untuk teks (kontras rendah)', 'Jangan campur dengan Purple tanpa alasan', 'Hindari B300 sebagai background luas']
+    },
+    tokens: [
+      { name:'B50',  hex:'#E9F2FB' },
+      { name:'B75',  hex:'#A3CBEE' },
+      { name:'B100', hex:'#7DB5E7' },
+      { name:'B200', hex:'#4495DD' },
+      { name:'B300', hex:'#1E7FD6', brand:true },
+      { name:'B400', hex:'#155996' },
+      { name:'B500', hex:'#124D83' },
+    ]
+  },
+  {
+    id: 'orange', name: 'Orange',
+    desc: 'Warna peringatan & warning. Gunakan untuk alert, badge notifikasi, dan status yang perlu perhatian.',
+    tailwindPrefix: 'orange',
+    usage: {
+      when:  ['Warning alert & banner', 'Badge notifikasi', 'Status "in progress"', 'Highlight perhatian'],
+      best:  ['O300 sebagai warna warning utama', 'O50 untuk background warning subtle', 'O400/O500 untuk teks warning di bg terang'],
+      avoid: ['Jangan gunakan sebagai brand color', 'Hindari O50–O75 untuk teks', 'Jangan mix dengan Red tanpa konteks berbeda']
+    },
+    tokens: [
+      { name:'O50',  hex:'#FFF4E8' },
+      { name:'O75',  hex:'#FFD19F' },
+      { name:'O100', hex:'#FFBF77' },
+      { name:'O200', hex:'#FFA33D' },
+      { name:'O300', hex:'#FF9015' },
+      { name:'O400', hex:'#B3650F' },
+      { name:'O500', hex:'#9C580D' },
+    ]
+  },
+  {
+    id: 'red', name: 'Red',
+    desc: 'Warna error & danger. Digunakan untuk pesan kesalahan, validasi gagal, dan aksi destruktif.',
+    tailwindPrefix: 'red',
+    usage: {
+      when:  ['Error message & validation', 'Destructive action (hapus, batalkan)', 'Status "failed" atau "critical"', 'Badge alert kritis'],
+      best:  ['R300 sebagai warna danger utama', 'R50 untuk background error subtle', 'R400/R500 untuk teks error di bg terang'],
+      avoid: ['Jangan gunakan untuk UI dekoratif', 'Hindari di elemen non-error tanpa konteks', 'Jangan gunakan R50–R75 untuk teks']
+    },
+    tokens: [
+      { name:'R50',  hex:'#FDE8E9' },
+      { name:'R75',  hex:'#F7A2A5' },
+      { name:'R100', hex:'#F47B80' },
+      { name:'R200', hex:'#EF4349' },
+      { name:'R300', hex:'#EC1C24' },
+      { name:'R400', hex:'#A51419' },
+      { name:'R500', hex:'#901116' },
+    ]
+  },
+  {
+    id: 'green', name: 'Green',
+    desc: 'Warna sukses & konfirmasi. Digunakan untuk status berhasil, konfirmasi aksi, dan indikator positif.',
+    tailwindPrefix: 'green',
+    usage: {
+      when:  ['Success message & toast', 'Konfirmasi & approval', 'Status "active" atau "online"', 'Badge positif'],
+      best:  ['G300 sebagai warna success utama', 'G50 untuk background success subtle', 'G400/G500 untuk teks success di bg terang'],
+      avoid: ['Jangan gunakan untuk aksi primary (itu biru)', 'Hindari G50–G75 untuk teks', 'Jangan mix dengan Blue tanpa konteks berbeda']
+    },
+    tokens: [
+      { name:'G50',  hex:'#E6F7EF' },
+      { name:'G75',  hex:'#96DCBC' },
+      { name:'G100', hex:'#6BCEA0' },
+      { name:'G200', hex:'#2BB877' },
+      { name:'G300', hex:'#00AA5B' },
+      { name:'G400', hex:'#007740' },
+      { name:'G500', hex:'#006838' },
+    ]
+  },
+  {
+    id: 'purple', name: 'Purple',
+    desc: 'Warna discovery & premium. Digunakan untuk fitur baru, badge discovery, dan elemen premium.',
+    tailwindPrefix: 'purple',
+    usage: {
+      when:  ['Discovery badge & "New" label', 'Fitur premium / upgrade prompt', 'Accent dekoratif sekunder', 'Tag & kategori khusus'],
+      best:  ['P300 sebagai warna discovery utama', 'P50 untuk background discovery subtle', 'P400/P500 untuk teks di bg terang'],
+      avoid: ['Jangan gunakan sebagai pengganti brand blue', 'Hindari di elemen fungsional utama', 'Jangan mix dengan Red tanpa konteks']
+    },
+    tokens: [
+      { name:'P50',  hex:'#F1ECFE' },
+      { name:'P75',  hex:'#C4B0FB' },
+      { name:'P100', hex:'#AB8FFA' },
+      { name:'P200', hex:'#875FF8' },
+      { name:'P300', hex:'#6E3EF6' },
+      { name:'P400', hex:'#4D2BAC' },
+      { name:'P500', hex:'#432696' },
+    ]
+  },
+  {
+    id: 'neutral', name: 'Neutral',
+    desc: 'Skala abu-abu untuk teks, border, background, dan elemen UI struktural. Backbone dari setiap layout.',
+    tailwindPrefix: 'neutral',
+    usage: {
+      when:  ['Teks body & heading', 'Border & divider', 'Background card & section', 'Disabled state & placeholder'],
+      best:  ['N900 untuk teks utama', 'N40–N50 untuk border default', 'N10–N20 untuk bg subtle', 'N60–N70 untuk teks disabled'],
+      avoid: ['Jangan gunakan N0–N30 untuk teks (kontras terlalu rendah)', 'Hindari N800–N900 sebagai background luas', 'Jangan skip level shade secara acak']
+    },
+    tokens: [
+      { name:'N0',   hex:'#FFFFFF' },
+      { name:'N10',  hex:'#FAFBFB' },
+      { name:'N20',  hex:'#F5F6F7' },
+      { name:'N30',  hex:'#EBEDF0' },
+      { name:'N40',  hex:'#DFE2E6' },
+      { name:'N50',  hex:'#C2C7D0' },
+      { name:'N60',  hex:'#B3B9C4' },
+      { name:'N70',  hex:'#A6AEBB' },
+      { name:'N80',  hex:'#98A1B0' },
+      { name:'N90',  hex:'#8993A4' },
+      { name:'N100', hex:'#7A8699' },
+      { name:'N200', hex:'#6B788E' },
+      { name:'N300', hex:'#5D6B82' },
+      { name:'N400', hex:'#505F79' },
+      { name:'N500', hex:'#42526D' },
+      { name:'N600', hex:'#354764' },
+      { name:'N700', hex:'#243757' },
+      { name:'N800', hex:'#15294B' },
+      { name:'N900', hex:'#091E42' },
+    ]
+  }
+];
+
+// ─── Semantic token maps ───
+const SEMANTIC_HEX = {
+  'Color.Blue.B50':'#E9F2FB','Color.Blue.B75':'#A3CBEE','Color.Blue.B100':'#7DB5E7',
+  'Color.Blue.B200':'#4495DD','Color.Blue.B300':'#1E7FD6','Color.Blue.B400':'#155996','Color.Blue.B500':'#124D83',
+  'Color.Orange.O50':'#FFF4E8','Color.Orange.O75':'#FFD19F','Color.Orange.O100':'#FFBF77',
+  'Color.Orange.O200':'#FFA33D','Color.Orange.O300':'#FF9015','Color.Orange.O400':'#B3650F','Color.Orange.O500':'#9C580D',
+  'Color.Red.R50':'#FDE8E9','Color.Red.R75':'#F7A2A5','Color.Red.R100':'#F47B80',
+  'Color.Red.R200':'#EF4349','Color.Red.R300':'#EC1C24','Color.Red.R400':'#A51419','Color.Red.R500':'#901116',
+  'Color.Green.G50':'#E6F7EF','Color.Green.G75':'#96DCBC','Color.Green.G100':'#6BCEA0',
+  'Color.Green.G200':'#2BB877','Color.Green.G300':'#00AA5B','Color.Green.G400':'#007740','Color.Green.G500':'#006838',
+  'Color.Purple.P50':'#F1ECFE','Color.Purple.P75':'#C4B0FB','Color.Purple.P100':'#AB8FFA',
+  'Color.Purple.P200':'#875FF8','Color.Purple.P300':'#6E3EF6','Color.Purple.P400':'#4D2BAC','Color.Purple.P500':'#432696',
+  'Color.Neutral.N0':'#FFFFFF','Color.Neutral.N10':'#FAFBFB','Color.Neutral.N20':'#F5F6F7',
+  'Color.Neutral.N30':'#EBEDF0','Color.Neutral.N40':'#DFE2E6','Color.Neutral.N50':'#C2C7D0',
+  'Color.Neutral.N60':'#B3B9C4','Color.Neutral.N70':'#A6AEBB','Color.Neutral.N80':'#98A1B0',
+  'Color.Neutral.N90':'#8993A4','Color.Neutral.N100':'#7A8699','Color.Neutral.N200':'#6B788E',
+  'Color.Neutral.N300':'#5D6B82','Color.Neutral.N400':'#505F79','Color.Neutral.N500':'#42526D',
+  'Color.Neutral.N600':'#354764','Color.Neutral.N700':'#243757','Color.Neutral.N800':'#15294B','Color.Neutral.N900':'#091E42',
+};
+
+const SEMANTIC_TOKENS = {
+  background: [
+    { name:'Background.Neutral',           ref:'Color.Neutral.N20' },
+    { name:'Background.Neutral.Subtle',    ref:'Color.Neutral.N10' },
+    { name:'Background.Neutral.Hover',     ref:'Color.Neutral.N20' },
+    { name:'Background.Neutral.Pressed',   ref:'Color.Neutral.N40' },
+    { name:'Background.Neutral.Bold',      ref:'Color.Neutral.N500' },
+    { name:'Background.Brand.Bold',        ref:'Color.Blue.B300' },
+    { name:'Background.Brand.Hover',       ref:'Color.Blue.B400' },
+    { name:'Background.Brand.Pressed',     ref:'Color.Blue.B500' },
+    { name:'Background.Selected',          ref:'Color.Blue.B50' },
+    { name:'Background.Selected.Hover',    ref:'Color.Blue.B400' },
+    { name:'Background.Information',       ref:'Color.Blue.B50' },
+    { name:'Background.Success',           ref:'Color.Green.G50' },
+    { name:'Background.Success.Bold',      ref:'Color.Green.G300' },
+    { name:'Background.Warning',           ref:'Color.Orange.O50' },
+    { name:'Background.Warning.Bold',      ref:'Color.Orange.O200' },
+    { name:'Background.Danger.Inverse',    ref:'Color.Red.R50' },
+    { name:'Background.Danger.Bold',       ref:'Color.Red.R300' },
+    { name:'Background.Disable',           ref:'Color.Neutral.N40' },
+    { name:'Background.Discovery',         ref:'Color.Purple.P50' },
+    { name:'Background.Discovery.Bold',    ref:'Color.Purple.P300' },
+    { name:'Background.Input',             ref:'Color.Neutral.N0' },
+    { name:'Background.Input.Hover',       ref:'Color.Neutral.N20' },
+    { name:'Elevation.Surface',            ref:'Color.Neutral.N10' },
+    { name:'Elevation.Surface.Sunken',     ref:'Color.Neutral.N20' },
+  ],
+  text: [
+    { name:'Text.Bold',             ref:'Color.Neutral.N900' },
+    { name:'Text.Subtle',           ref:'Color.Neutral.N300' },
+    { name:'Text.Disabled',         ref:'Color.Neutral.N60'  },
+    { name:'Text.Inverse',          ref:'Color.Neutral.N0'   },
+    { name:'Text.Brand',            ref:'Color.Blue.B300'    },
+    { name:'Text.Selected',         ref:'Color.Blue.B300'    },
+    { name:'Text.Link',             ref:'Color.Blue.B300'    },
+    { name:'Text.Link.Pressed',     ref:'Color.Blue.B400'    },
+    { name:'Text.Success',          ref:'Color.Green.G300'   },
+    { name:'Text.Danger',           ref:'Color.Red.R300'     },
+    { name:'Text.Warning',          ref:'Color.Orange.O300'  },
+    { name:'Text.Discovery',        ref:'Color.Purple.P300'  },
+    { name:'Text.Accent.Green',     ref:'Color.Green.G500'   },
+    { name:'Text.Accent.Red',       ref:'Color.Red.R500'     },
+    { name:'Text.Accent.Purple',    ref:'Color.Purple.P500'  },
+    { name:'Text.Accent.Yellow',    ref:'Color.Orange.O500'  },
+  ],
+  border: [
+    { name:'Border',           ref:'Color.Neutral.N40'  },
+    { name:'Border.Input',     ref:'Color.Neutral.N40'  },
+    { name:'Border.Focused',   ref:'Color.Blue.B200'    },
+    { name:'Border.Danger',    ref:'Color.Red.R200'     },
+  ],
+  icon: [
+    { name:'Icon.Bold',             ref:'Color.Neutral.N900' },
+    { name:'Icon.Subtle',           ref:'Color.Neutral.N200' },
+    { name:'Icon.Disable',          ref:'Color.Neutral.N70'  },
+    { name:'Icon.Inverse',          ref:'Color.Neutral.N0'   },
+    { name:'Icon.Brand',            ref:'Color.Blue.B300'    },
+    { name:'Icon.selected',         ref:'Color.Blue.B400'    },
+    { name:'Icon.Link',             ref:'Color.Blue.B300'    },
+    { name:'Icon.Success',          ref:'Color.Green.G300'   },
+    { name:'Icon.Danger',           ref:'Color.Red.R300'     },
+    { name:'Icon.Warning',          ref:'Color.Orange.O300'  },
+    { name:'Icon.Discovery',        ref:'Color.Purple.P300'  },
+  ]
+};
+
+// ═══════════════════════════════════════════════
+// Helpers
+// ═══════════════════════════════════════════════
+function copyText(text, btn) {
+  const orig = btn.textContent;
+  navigator.clipboard.writeText(text).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = text; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+  });
+  btn.textContent = 'COPIED!';
+  btn.classList.add('copied');
+  setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1500);
+}
+
+function isDark(hex) {
+  const r = parseInt(hex.slice(1,3),16),
+        g = parseInt(hex.slice(3,5),16),
+        b = parseInt(hex.slice(5,7),16);
+  return (0.299*r + 0.587*g + 0.114*b) < 140;
+}
+
+// ═══════════════════════════════════════════════
+// Render Color Families
+// ═══════════════════════════════════════════════
+function renderFamilies() {
+  const container = document.getElementById('color-families');
+  container.innerHTML = '';
+
+  COLOR_FAMILIES.forEach(fam => {
+    const section = document.createElement('div');
+    section.className = 'family-section';
+    section.dataset.fam = fam.id;
+
+    const brandBadge = fam.brand ? ' <span style="font-size:.7rem;background:#E9F2FB;color:#1E7FD6;padding:2px 8px;border-radius:9999px;font-weight:700;">BRAND</span>' : '';
+
+    // Swatch row
+    const swatchItems = fam.tokens.map(t => {
+      const dark = isDark(t.hex);
+      const textColor = dark ? '#fff' : '#091E42';
+      return `
+        <div class="swatch-item">
+          <div class="swatch-color" style="background:${t.hex};" title="${t.name} — ${t.hex}"></div>
+          <div class="swatch-info">
+            <span class="swatch-token">${fam.id.charAt(0).toUpperCase()+fam.id.slice(1)}.${t.name}${t.brand?'★':''}</span>
+            <span class="swatch-hex">${t.hex}</span>
+            <button class="swatch-copy" onclick="copyText('${t.hex}', this)">COPY HEX</button>
+          </div>
+        </div>`;
+    }).join('');
+
+    // Tailwind code rows
+    const twRows = fam.tokens.map(t => {
+      const num = t.name.replace(/[^\d]/g,'') || '300';
+      const prefix = fam.tailwindPrefix;
+      const snippet = `bg-${prefix}-${num}`;
+      return `
+        <div class="code-row">
+          <div class="code-swatch" style="background:${t.hex};"></div>
+          <span class="code-token-name">${t.name}</span>
+          <span class="code-snippet">${snippet}</span>
+          <button class="code-copy" onclick="copyText('${snippet}', this)">COPY</button>
+        </div>`;
+    }).join('');
+
+    // CSS Variable code rows
+    const cssRows = fam.tokens.map(t => {
+      const varName = `--color-${fam.id}-${t.name.toLowerCase()}`;
+      return `
+        <div class="code-row">
+          <div class="code-swatch" style="background:${t.hex};"></div>
+          <span class="code-token-name">${t.name}</span>
+          <span class="code-snippet">var(${varName})</span>
+          <button class="code-copy" onclick="copyText('var(${varName})', this)">COPY</button>
+        </div>`;
+    }).join('');
+
+    section.innerHTML = `
+      <div class="family-header">
+        <span class="family-title">${fam.name}</span>
+        <span class="family-badge">${fam.tokens.length} tokens</span>
+        ${brandBadge}
+      </div>
+      <p class="family-desc">${fam.desc}</p>
+
+      <div class="swatch-row">${swatchItems}</div>
+
+      <div class="usage-grid">
+        <div class="usage-card usage-when">
+          <h4>📌 Kapan Dipakai</h4>
+          <ul>${fam.usage.when.map(i=>`<li>${i}</li>`).join('')}</ul>
+        </div>
+        <div class="usage-card usage-best">
+          <h4>✅ Best Practice</h4>
+          <ul>${fam.usage.best.map(i=>`<li>${i}</li>`).join('')}</ul>
+        </div>
+        <div class="usage-card usage-avoid">
+          <h4>❌ Hindari</h4>
+          <ul>${fam.usage.avoid.map(i=>`<li>${i}</li>`).join('')}</ul>
+        </div>
+      </div>
+
+      <div class="impl-section">
+        <div class="impl-header">
+          <span class="impl-title">Implementation Code</span>
+          <div class="impl-tabs">
+            <button class="impl-tab active" data-impl="tw" onclick="switchImpl(this, 'tw-${fam.id}', 'css-${fam.id}')">Tailwind</button>
+            <button class="impl-tab" data-impl="css" onclick="switchImpl(this, 'css-${fam.id}', 'tw-${fam.id}')">CSS Variable</button>
+          </div>
+        </div>
+        <div class="impl-pane active" id="tw-${fam.id}">${twRows}</div>
+        <div class="impl-pane" id="css-${fam.id}">${cssRows}</div>
+      </div>
+    `;
+
+    container.appendChild(section);
+  });
+}
+
+// ═══════════════════════════════════════════════
+// Render Semantic Tokens
+// ═══════════════════════════════════════════════
+function renderSemantic(groupId, data, countId) {
+  const container = document.getElementById(groupId);
+  const countEl   = document.getElementById(countId);
+  if (countEl) countEl.textContent = data.length + ' tokens';
+
+  container.innerHTML = data.map(token => {
+    const hex = SEMANTIC_HEX[token.ref] || '#CCCCCC';
+    const refShort = token.ref.replace('Color.','');
+    const cssVar   = `--sem-${token.name.toLowerCase().replace(/\./g,'-')}`;
+    return `
+      <div class="sem-card">
+        <div class="sem-preview" style="background:${hex};"></div>
+        <div class="sem-body">
+          <div class="sem-name">${token.name}</div>
+          <div class="sem-ref">→ ${refShort}</div>
+          <div class="sem-hex">${hex}</div>
+          <button class="sem-copy-btn" onclick="copyText('${hex}', this)">COPY HEX</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// ═══════════════════════════════════════════════
+// Switch impl sub-tab
+// ═══════════════════════════════════════════════
+function switchImpl(btn, showId, hideId) {
+  document.getElementById(showId).classList.add('active');
+  document.getElementById(hideId).classList.remove('active');
+  const tabs = btn.closest('.impl-tabs').querySelectorAll('.impl-tab');
+  tabs.forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+// ═══════════════════════════════════════════════
+// Init
+// ═══════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', () => {
+  renderFamilies();
+  renderSemantic('sem-background', SEMANTIC_TOKENS.background, 'bg-count');
+  renderSemantic('sem-text',       SEMANTIC_TOKENS.text,       'text-count');
+  renderSemantic('sem-border',     SEMANTIC_TOKENS.border,     'border-count');
+  renderSemantic('sem-icon',       SEMANTIC_TOKENS.icon,       'icon-count');
+
+  // Page tabs
+  document.querySelectorAll('.page-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.page-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+    });
+  });
+
+  // Family filter
+  document.querySelectorAll('.fam-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.fam-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const fam = btn.dataset.fam;
+      document.querySelectorAll('.family-section').forEach(sec => {
+        sec.style.display = (fam === 'all' || sec.dataset.fam === fam) ? '' : 'none';
+      });
+    });
+  });
+});
+</script>
+</body>
+</html>
