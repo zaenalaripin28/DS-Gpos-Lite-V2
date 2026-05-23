@@ -1,6 +1,6 @@
 # Design System GPOS Lite V 2.0
 
-Comprehensive design system documentation untuk GPOS Lite dengan design tokens, components, dan implementation guidelines. Dibangun dengan CSS variables dan Tailwind CSS untuk easy scalability dan customization.
+Comprehensive design system documentation untuk GPOS Lite V2 dengan design tokens, components, dan implementation guidelines. Dibangun dengan CSS variables dan Tailwind CSS untuk easy scalability dan customization.
 
 ## 📁 Struktur File
 
