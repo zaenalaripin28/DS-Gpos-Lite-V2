@@ -203,6 +203,48 @@
     /* Subtle-link spacing=none has zero horizontal padding (no px class in Figma) */
     .ds-btn--subtle-link.ds-btn--none { padding: 0; }
 
+    /* ── Danger appearance ── */
+    .ds-btn--danger {
+      background-color: var(--color-red-r300);    /* Background.Danger.Bold */
+      color: var(--color-neutral-n0);             /* Text.Inverse */
+    }
+    .ds-btn--danger:hover  { background-color: var(--color-red-r400); }  /* Background.Danger.Button-Hover */
+    .ds-btn--danger:active { background-color: var(--color-red-r500); }  /* Background.Danger.Pressed */
+    .ds-btn--danger:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200);  /* Border.Focused */
+    }
+    .ds-btn--danger:disabled,
+    .ds-btn--danger.ds-btn--disabled {
+      background-color: var(--color-neutral-n40);   /* Background.Disable */
+      color: var(--color-neutral-n60);              /* Text.Disabled */
+    }
+    /* Static snapshots for danger */
+    .ds-btn--danger.ds-btn--hover { background-color: var(--color-red-r400); color: var(--color-neutral-n0); }
+    .ds-btn--danger.ds-btn--press { background-color: var(--color-red-r500); color: var(--color-neutral-n0); }
+    .ds-btn--danger.ds-btn--focus { box-shadow: 0 0 0 2px var(--color-blue-b200); }
+
+    /* ── Warning appearance ── */
+    .ds-btn--warning {
+      background-color: var(--color-orange-o200);   /* Background.Warning.Bold */
+      color: var(--color-neutral-n900);             /* Text.Warning-Inverse → Text.Bold */
+    }
+    .ds-btn--warning:hover  { background-color: var(--color-orange-o300); }  /* Background.Warning.Pressed */
+    .ds-btn--warning:active { background-color: var(--color-orange-o300); }  /* Background.Warning.Pressed */
+    .ds-btn--warning:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200);  /* Border.Focused */
+    }
+    .ds-btn--warning:disabled,
+    .ds-btn--warning.ds-btn--disabled {
+      background-color: var(--color-neutral-n40);   /* Background.Disable */
+      color: var(--color-neutral-n60);              /* Text.Disabled */
+    }
+    /* Static snapshots for warning */
+    .ds-btn--warning.ds-btn--hover { background-color: var(--color-orange-o300); color: var(--color-neutral-n900); }
+    .ds-btn--warning.ds-btn--press { background-color: var(--color-orange-o300); color: var(--color-neutral-n900); }
+    .ds-btn--warning.ds-btn--focus { box-shadow: 0 0 0 2px var(--color-blue-b200); }
+
     /* ================================================================
        Page-specific responsive overrides
     ================================================================ */
@@ -1433,6 +1475,286 @@
             <div style="padding:14px 20px;">
               <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Selected</div>
               <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isSelected=true · --color-blue-b50</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- =====================================================
+           SECTION 7A: DANGER — SPACING=DEFAULT
+      ====================================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Variants — appearance=danger, spacing=default
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">Red bold background with inverse text. Add <code>.ds-btn--danger</code> to the base <code>.ds-btn</code> class.</p>
+
+        <div class="state-grid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px;">
+
+          <!-- Default -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--danger" tabindex="-1" style="cursor:default;">Button</button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Default</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=default · --color-red-r300</div>
+            </div>
+          </div>
+
+          <!-- Hover -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--danger ds-btn--hover" tabindex="-1" style="cursor:default;">Button</button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Hover</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=hover · --color-red-r400</div>
+            </div>
+          </div>
+
+          <!-- Press -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--danger ds-btn--press" tabindex="-1" style="cursor:default;">Button</button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Press</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=press · --color-red-r500</div>
+            </div>
+          </div>
+
+          <!-- Focus -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--danger ds-btn--focus" tabindex="-1" style="cursor:default;">Button</button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Focus</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=focus · --color-blue-b200</div>
+            </div>
+          </div>
+
+          <!-- Disabled -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--danger" disabled tabindex="-1">Button</button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Disabled</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isDisabled=true · --color-neutral-n40</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- =====================================================
+           SECTION 7B: DANGER — SPACING=COMPACT
+      ====================================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Variants — appearance=danger, spacing=compact
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">Same danger tokens — min-height reduced to 24px via <code>.ds-btn--compact</code>.</p>
+
+        <div class="state-grid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px;">
+
+          <!-- Default -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--danger ds-btn--compact" tabindex="-1" style="cursor:default;">Button</button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Default</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">spacing=compact · min-height 24px</div>
+            </div>
+          </div>
+
+          <!-- Hover -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--danger ds-btn--compact ds-btn--hover" tabindex="-1" style="cursor:default;">Button</button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Hover</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=hover · --color-red-r400</div>
+            </div>
+          </div>
+
+          <!-- Press -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--danger ds-btn--compact ds-btn--press" tabindex="-1" style="cursor:default;">Button</button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Press</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=press · --color-red-r500</div>
+            </div>
+          </div>
+
+          <!-- Focus -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--danger ds-btn--compact ds-btn--focus" tabindex="-1" style="cursor:default;">Button</button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Focus</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=focus · --color-blue-b200</div>
+            </div>
+          </div>
+
+          <!-- Disabled -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--danger ds-btn--compact" disabled tabindex="-1">Button</button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Disabled</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isDisabled=true · --color-neutral-n40</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- =====================================================
+           SECTION 8A: WARNING — SPACING=DEFAULT
+      ====================================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Variants — appearance=warning, spacing=default
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">Orange bold background with bold text. Add <code>.ds-btn--warning</code> to the base <code>.ds-btn</code> class.</p>
+
+        <div class="state-grid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px;">
+
+          <!-- Default -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--warning" tabindex="-1" style="cursor:default;">Button</button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Default</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=default · --color-orange-o200</div>
+            </div>
+          </div>
+
+          <!-- Hover -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--warning ds-btn--hover" tabindex="-1" style="cursor:default;">Button</button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Hover</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=hover · --color-orange-o300</div>
+            </div>
+          </div>
+
+          <!-- Press -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--warning ds-btn--press" tabindex="-1" style="cursor:default;">Button</button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Press</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=press · --color-orange-o300</div>
+            </div>
+          </div>
+
+          <!-- Focus -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--warning ds-btn--focus" tabindex="-1" style="cursor:default;">Button</button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Focus</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=focus · --color-blue-b200</div>
+            </div>
+          </div>
+
+          <!-- Disabled -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--warning" disabled tabindex="-1">Button</button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Disabled</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isDisabled=true · --color-neutral-n40</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- =====================================================
+           SECTION 8B: WARNING — SPACING=COMPACT
+      ====================================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Variants — appearance=warning, spacing=compact
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">Same warning tokens — min-height reduced to 24px via <code>.ds-btn--compact</code>.</p>
+
+        <div class="state-grid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px;">
+
+          <!-- Default -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--warning ds-btn--compact" tabindex="-1" style="cursor:default;">Button</button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Default</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">spacing=compact · min-height 24px</div>
+            </div>
+          </div>
+
+          <!-- Hover -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--warning ds-btn--compact ds-btn--hover" tabindex="-1" style="cursor:default;">Button</button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Hover</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=hover · --color-orange-o300</div>
+            </div>
+          </div>
+
+          <!-- Press -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--warning ds-btn--compact ds-btn--press" tabindex="-1" style="cursor:default;">Button</button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Press</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=press · --color-orange-o300</div>
+            </div>
+          </div>
+
+          <!-- Focus -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--warning ds-btn--compact ds-btn--focus" tabindex="-1" style="cursor:default;">Button</button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Focus</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=focus · --color-blue-b200</div>
+            </div>
+          </div>
+
+          <!-- Disabled -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--warning ds-btn--compact" disabled tabindex="-1">Button</button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Disabled</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isDisabled=true · --color-neutral-n40</div>
             </div>
           </div>
 
