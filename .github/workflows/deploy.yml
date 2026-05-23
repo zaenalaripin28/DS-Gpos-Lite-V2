@@ -5,13 +5,11 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# Required permissions for OIDC-based GitHub Pages deployment
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -26,13 +24,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Create deployment folder
+        run: |
+          mkdir -p /tmp/site
+          rsync -av --exclude='node_modules' --exclude='.git' --exclude='.claude' --exclude='.agents' --exclude='*.log' . /tmp/site/
+          touch /tmp/site/.nojekyll
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'
+          path: '/tmp/site'
 
       - name: Deploy to GitHub Pages
         id: deployment
