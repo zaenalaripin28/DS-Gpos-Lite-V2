@@ -555,9 +555,224 @@
         animation: none !important;
       }
     }
+
+    /* ================================================================
+       REDESIGN v4 — Dark Mode, Scroll UX & Mobile Refinements
+       ui-mobile-web-design · 2026
+    ================================================================ */
+
+    /* ── Scroll progress indicator ── */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #1E7FD6 0%, #22D3EE 100%);
+      z-index: 99999;
+      transition: width 80ms linear;
+      pointer-events: none;
+      border-radius: 0 2px 2px 0;
+    }
+
+    /* ── Dark mode toggle ── */
+    .dark-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: none;
+      border: 1px solid var(--color-border);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      border-radius: var(--border-radius-md);
+      transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+      flex-shrink: 0;
+    }
+    .dark-toggle:hover {
+      background-color: var(--color-primary-50);
+      border-color: var(--color-primary-200);
+      color: var(--color-primary-600);
+    }
+    .dark-toggle .icon-sun  { display: none; }
+    .dark-toggle .icon-moon { display: block; }
+    [data-theme="dark"] .dark-toggle .icon-sun  { display: block; }
+    [data-theme="dark"] .dark-toggle .icon-moon { display: none; }
+    [data-theme="dark"] .dark-toggle {
+      border-color: #1A2E48;
+      color: #94A3B8;
+    }
+    [data-theme="dark"] .dark-toggle:hover {
+      background-color: rgba(30,127,214,0.14);
+      border-color: rgba(30,127,214,0.3);
+      color: #7DB5E7;
+    }
+
+    /* ── Scroll-to-top button ── */
+    .scroll-top-btn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 40px;
+      height: 40px;
+      background: var(--color-primary-500);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 14px rgba(30,127,214,0.38);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 200ms ease, transform 200ms ease, background-color 150ms ease;
+      z-index: 200;
+      pointer-events: none;
+    }
+    .scroll-top-btn.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .scroll-top-btn:hover { background-color: var(--color-primary-600); }
+
+    /* ── Topbar glass enhancement ── */
+    .topbar {
+      background-color: rgba(255,255,255,0.9) !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+    }
+
+    /* ================================================================
+       DARK MODE — Token + class overrides
+    ================================================================ */
+
+    [data-theme="dark"] {
+      --color-background:     #0B1526;
+      --color-surface:        #0F1D30;
+      --color-border:         #1A2E48;
+      --color-border-light:   #162440;
+      --color-text-primary:   #F1F5F9;
+      --color-text-secondary: #94A3B8;
+      --color-text-tertiary:  #4A6080;
+      --color-text-disabled:  #2A3F5C;
+      --topbar-bg:            rgba(7,16,29,0.95);
+      --topbar-border:        #1A2E48;
+    }
+
+    [data-theme="dark"] .main-content { background-color: #0B1526; }
+
+    [data-theme="dark"] .topbar {
+      background-color: rgba(7,16,29,0.95) !important;
+      border-bottom-color: #1A2E48;
+    }
+    [data-theme="dark"] .hamburger-btn {
+      border-color: #1A2E48;
+      color: #94A3B8;
+    }
+    [data-theme="dark"] .hamburger-btn:hover {
+      background-color: rgba(255,255,255,0.06);
+      color: #F1F5F9;
+    }
+    [data-theme="dark"] .version-badge {
+      background-color: rgba(30,127,214,0.15);
+      border-color: rgba(30,127,214,0.28);
+      color: #7DB5E7;
+    }
+    [data-theme="dark"] .breadcrumb a { color: #4A6080; }
+    [data-theme="dark"] .breadcrumb a:hover { color: #7DB5E7; }
+    [data-theme="dark"] .breadcrumb .current { color: #F1F5F9; }
+    [data-theme="dark"] .breadcrumb-sep { color: #2A3F5C; }
+
+    /* ── Hero feat cards (Tailwind bg-n0 / border-n30 override) ── */
+    [data-theme="dark"] .hero-feat-card {
+      background-color: #0F1D30 !important;
+      border-color: #1A2E48 !important;
+    }
+    [data-theme="dark"] .hero-feat-card:hover {
+      border-color: rgba(68,149,221,0.3) !important;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.28), 0 3px 8px rgba(0,0,0,0.16) !important;
+    }
+    [data-theme="dark"] .hero-feat-card .text-n900 { color: #F1F5F9 !important; }
+
+    /* ── Hero preview card inner ── */
+    [data-theme="dark"] .ds-hero-banner .rounded-2xl[style*="background: var(--color-neutral-n10)"],
+    [data-theme="dark"] .ds-hero-banner .rounded-2xl[style*="background:var(--color-neutral-n10)"] {
+      background: #0F1D30 !important;
+    }
+    [data-theme="dark"] .ds-hero-banner [style*="border-bottom: 1px solid var(--color-border)"],
+    [data-theme="dark"] .ds-hero-banner [style*="border-bottom:1px solid var(--color-border)"] {
+      border-bottom-color: #1A2E48 !important;
+    }
+
+    /* ── Code tag dark ── */
+    [data-theme="dark"] code {
+      background: rgba(30,127,214,0.13) !important;
+      border-color: rgba(30,127,214,0.22) !important;
+      color: #7DB5E7 !important;
+    }
+
+    /* ── State card preview area (bg-n10 override in Tailwind live card) ── */
+    [data-theme="dark"] [style*="background: var(--color-neutral-n10)"],
+    [data-theme="dark"] [style*="background:var(--color-neutral-n10)"] {
+      background: #0F1D30 !important;
+    }
+    [data-theme="dark"] [style*="background: rgba(255,255,255,0.03)"] {
+      background: rgba(255,255,255,0.02) !important;
+    }
+
+    /* ── State card footer text ── */
+    [data-theme="dark"] .state-grid > div > div:last-child > div:first-child,
+    [data-theme="dark"] .anatomy-grid > div > div:last-child > div:first-child {
+      color: #F1F5F9 !important;
+    }
+    [data-theme="dark"] .state-grid > div > div:last-child > div:last-child,
+    [data-theme="dark"] .anatomy-grid > div > div:last-child > div:last-child {
+      color: #4A6080 !important;
+    }
+
+    /* ── Group label dark ── */
+    [data-theme="dark"] .ds-group-label::before,
+    [data-theme="dark"] .ds-group-label::after { background: #1A2E48; }
+    [data-theme="dark"] .ds-group-label-pill {
+      background: #0F1D30;
+      border-color: #1A2E48;
+      color: #4A6080;
+    }
+
+    /* ── Footer dark ── */
+    [data-theme="dark"] .page-footer {
+      border-top-color: #1A2E48 !important;
+      color: #94A3B8 !important;
+    }
+
+    /* ── Page header divider dark ── */
+    [data-theme="dark"] header[style*="border-bottom"] {
+      border-bottom-color: #1A2E48 !important;
+    }
+
+    /* ── Topbar actions: usage grid cards dark ── */
+    [data-theme="dark"] .usage-grid-2 > div {
+      background-color: #0F1D30 !important;
+      border-color: #1A2E48 !important;
+    }
+
+    /* ── Mobile enhancements ── */
+    @media (max-width: 480px) {
+      .scroll-top-btn { bottom: 16px; right: 16px; }
+    }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      .scroll-progress,
+      .scroll-top-btn,
+      .dark-toggle { transition: none !important; }
+    }
   </style>
 </head>
 <body>
+<div class="scroll-progress" id="scroll-progress" style="width:0%" role="progressbar" aria-hidden="true"></div>
 <div class="container">
 
   <!-- Mobile overlay -->
@@ -694,6 +909,10 @@
         <span class="current">Button</span>
       </div>
       <div class="topbar-actions">
+        <button type="button" class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun"  width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
         <span class="version-badge">v2.0</span>
       </div>
     </div>
@@ -4074,24 +4293,53 @@
 
 </div><!-- /container -->
 
+<button type="button" class="scroll-top-btn" id="scroll-top-btn" aria-label="Scroll ke atas">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18,15 12,9 6,15"/></svg>
+</button>
+
 <script>
+  /* ── Sidebar ── */
   const sidebar   = document.getElementById('sidebar');
   const overlay   = document.getElementById('sidebar-overlay');
   const hamburger = document.getElementById('hamburger-btn');
   const closeBtn  = document.getElementById('sidebar-close');
 
-  function openSidebar() {
-    sidebar.classList.add('mobile-open');
-    overlay.classList.add('active');
-  }
-  function closeSidebar() {
-    sidebar.classList.remove('mobile-open');
-    overlay.classList.remove('active');
-  }
+  function openSidebar()  { sidebar.classList.add('mobile-open');    overlay.classList.add('active'); }
+  function closeSidebar() { sidebar.classList.remove('mobile-open'); overlay.classList.remove('active'); }
 
   hamburger.addEventListener('click', openSidebar);
   closeBtn.addEventListener('click', closeSidebar);
   overlay.addEventListener('click', closeSidebar);
+
+  /* ── Dark mode toggle ── */
+  const html       = document.documentElement;
+  const darkToggle = document.getElementById('dark-toggle');
+  const saved      = localStorage.getItem('ds-theme');
+
+  if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    html.dataset.theme = 'dark';
+  }
+
+  darkToggle.addEventListener('click', () => {
+    const isDark = html.dataset.theme === 'dark';
+    html.dataset.theme = isDark ? 'light' : 'dark';
+    localStorage.setItem('ds-theme', isDark ? 'light' : 'dark');
+  });
+
+  /* ── Scroll progress + scroll-to-top ── */
+  const progressBar  = document.getElementById('scroll-progress');
+  const scrollTopBtn = document.getElementById('scroll-top-btn');
+
+  window.addEventListener('scroll', () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    progressBar.style.width = pct + '%';
+    scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 </script>
 
 </body>
