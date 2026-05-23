@@ -483,6 +483,78 @@
     .ds-group-label + div + section {
       margin-top: 0;
     }
+
+    /* ================================================================
+       ENHANCEMENT LAYER v3 — State clarity, depth & entrance polish
+    ================================================================ */
+
+    /* ── State card preview: dot grid atmosphere (mirrors demo-wrap) ── */
+    .state-grid > div > div:first-child {
+      background-image: radial-gradient(circle, rgba(9,30,66,0.055) 1.5px, transparent 1.5px) !important;
+      background-size: 18px 18px !important;
+    }
+
+    /* ── Section h2: gradient-fade bottom accent replaces flat solid border ── */
+    section > h2 {
+      border-bottom: none !important;
+      background-image: linear-gradient(to right, var(--color-primary-500) 0%, rgba(30,127,214,0.18) 32%, transparent 68%) !important;
+      background-repeat: no-repeat !important;
+      background-size: 100% 1px !important;
+      background-position: left bottom !important;
+    }
+
+    /* ── State card footer: crisp 2px accent separator ── */
+    .state-grid > div > div:last-child,
+    .anatomy-grid > div > div:last-child {
+      border-top: 2px solid var(--color-neutral-n30) !important;
+    }
+
+    /* ── State card hover: brand-blue border tint ── */
+    .state-grid > div:hover,
+    .anatomy-grid > div:hover {
+      border-color: rgba(30, 127, 214, 0.22) !important;
+    }
+
+    /* ── Staggered card entrance ── */
+    @keyframes ds-card-rise {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .state-grid > div {
+      animation: ds-card-rise 260ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+    .state-grid > div:nth-child(1) { animation-delay:   0ms; }
+    .state-grid > div:nth-child(2) { animation-delay:  32ms; }
+    .state-grid > div:nth-child(3) { animation-delay:  64ms; }
+    .state-grid > div:nth-child(4) { animation-delay:  96ms; }
+    .state-grid > div:nth-child(5) { animation-delay: 128ms; }
+    .state-grid > div:nth-child(6) { animation-delay: 160ms; }
+
+    /* ── Page header + hero entrance ── */
+    @keyframes ds-reveal {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .content-inner > header {
+      animation: ds-reveal 360ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+    .content-inner > section.mb-12 {
+      animation: ds-reveal 400ms 60ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+    .grid > .hero-feat-card:nth-child(1) { animation: ds-card-rise 280ms 120ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .grid > .hero-feat-card:nth-child(2) { animation: ds-card-rise 280ms 152ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .grid > .hero-feat-card:nth-child(3) { animation: ds-card-rise 280ms 184ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .grid > .hero-feat-card:nth-child(4) { animation: ds-card-rise 280ms 216ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .state-grid > div,
+      .anatomy-grid > div,
+      .content-inner > header,
+      .content-inner > section.mb-12,
+      .grid > .hero-feat-card {
+        animation: none !important;
+      }
+    }
   </style>
 </head>
 <body>
