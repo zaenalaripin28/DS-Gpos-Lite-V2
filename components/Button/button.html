@@ -769,6 +769,21 @@
       .scroll-top-btn,
       .dark-toggle { transition: none !important; }
     }
+
+    /* ── Variant Tabs ── */
+    .vtab {
+      display: inline-flex; align-items: center;
+      padding: 6px 14px; border-radius: 20px;
+      font-size: 13px; font-weight: 500; white-space: nowrap;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      color: var(--color-text-secondary);
+      cursor: pointer; transition: all 150ms ease;
+      font-family: var(--font-primary);
+    }
+    .vtab:hover { background: var(--color-primary-50); border-color: var(--color-primary-300); color: var(--color-primary-500); }
+    .vtab--active { background: var(--color-primary-500) !important; border-color: var(--color-primary-500) !important; color: #fff !important; }
+    [data-theme="dark"] .vtab { background: var(--color-surface); border-color: var(--color-border); }
   </style>
 </head>
 <body>
@@ -1063,6 +1078,17 @@
 
       </section>
 
+      <!-- ── Variant Filter Tabs ── -->
+      <div class="variant-tabs" id="variant-tabs" style="position:sticky; top:56px; z-index:50; background:var(--color-background); border-bottom:1px solid var(--color-border); padding:0 0 0 0; margin-bottom:32px; overflow-x:auto; display:flex; gap:4px; padding:8px 0;">
+        <button type="button" class="vtab vtab--active" data-tab="default">Default</button>
+        <button type="button" class="vtab" data-tab="primary">Primary</button>
+        <button type="button" class="vtab" data-tab="subtle">Subtle</button>
+        <button type="button" class="vtab" data-tab="link">Link</button>
+        <button type="button" class="vtab" data-tab="subtle-link">Subtle Link</button>
+        <button type="button" class="vtab" data-tab="danger">Danger</button>
+        <button type="button" class="vtab" data-tab="warning">Warning</button>
+      </div>
+
       <!-- ── Appearance Group: default ── -->
       <div class="ds-group-label">
         <div class="ds-group-label-pill">
@@ -1081,9 +1107,18 @@
         </h2>
         <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">Live interactive button — hover, click, and tab to observe each state.</p>
 
-        <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; padding:40px 32px; display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap;" class="demo-wrap">
-          <button type="button" class="ds-btn">Try me</button>
+        <!-- Variant selector -->
+        <div style="margin-bottom:16px; display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
+          <button type="button" class="vtab vtab--active" data-variant="default" id="demo-tab-default">Default</button>
+          <button type="button" class="vtab" data-variant="primary" id="demo-tab-primary">Primary</button>
+          <button type="button" class="vtab" data-variant="subtle" id="demo-tab-subtle">Subtle</button>
+          <button type="button" class="vtab" data-variant="link" id="demo-tab-link">Link</button>
+          <button type="button" class="vtab" data-variant="danger" id="demo-tab-danger">Danger</button>
         </div>
+        <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; padding:40px 32px; display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap;" class="demo-wrap">
+          <button type="button" class="ds-btn" id="interactive-demo-btn">Try me</button>
+        </div>
+        <p style="text-align:center; font-size:12px; color:var(--color-text-tertiary); margin-top:12px; font-family:var(--font-primary);">Hover, click, focus, and tab through the button above</p>
       </section>
 
       <!-- =====================================================
@@ -1165,6 +1200,128 @@
           </div>
 
         </div>
+      <!-- State Table -->
+      <div style="margin-top:28px; overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-family:var(--font-primary); font-size:13px;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--color-border);">
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600; width:140px;">State</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600; width:80px;">Preview</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600;">Tailwind</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600;">CSS Variable</th>
+            </tr>
+          </thead>
+          <tbody>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Default</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">bg-n20 text-n900 rounded-md</code>
+            <button type="button" onclick="copyCode(this, 'bg-n20 text-n900 rounded-md')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-neutral-n20)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-neutral-n20)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Hover</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--hover" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">hover:bg-n30</code>
+            <button type="button" onclick="copyCode(this, 'hover:bg-n30')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-neutral-n30)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-neutral-n30)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Press</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--press" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">active:bg-n40</code>
+            <button type="button" onclick="copyCode(this, 'active:bg-n40')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-neutral-n40)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-neutral-n40)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Focus</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--focus" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">focus-visible:ring-2 focus-visible:ring-b300</code>
+            <button type="button" onclick="copyCode(this, 'focus-visible:ring-2 focus-visible:ring-b300')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">box-shadow: 0 0 0 2px var(--color-primary-500)</code>
+            <button type="button" onclick="copyCode(this, 'box-shadow: 0 0 0 2px var(--color-primary-500)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Disabled</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn" disabled tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">disabled:bg-n20 disabled:text-n50 disabled:cursor-not-allowed</code>
+            <button type="button" onclick="copyCode(this, 'disabled:bg-n20 disabled:text-n50 disabled:cursor-not-allowed')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-neutral-n20); color: var(--color-neutral-n50)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-neutral-n20); color: var(--color-neutral-n50)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Selected</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn" aria-pressed="true" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">aria-pressed:bg-b50 aria-pressed:text-b300</code>
+            <button type="button" onclick="copyCode(this, 'aria-pressed:bg-b50 aria-pressed:text-b300')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-blue-b50); color: var(--color-blue-b300)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-blue-b50); color: var(--color-blue-b300)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Usage Guidelines -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Do</div>
+          Use <code>appearance=default</code> for secondary or tertiary actions — e.g., Cancel, Back, or filter chip buttons.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Don't</div>
+          Don't use the default button as the primary CTA — use <code>appearance=primary</code> to draw attention to the main action.
+        </div>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -1246,6 +1403,644 @@
           </div>
 
         </div>
+      <!-- State Table -->
+      <div style="margin-top:28px; overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-family:var(--font-primary); font-size:13px;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--color-border);">
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600; width:140px;">State</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600; width:80px;">Preview</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600;">Tailwind</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600;">CSS Variable</th>
+            </tr>
+          </thead>
+          <tbody>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Default</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--compact" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">bg-n20 text-n900 rounded-md</code>
+            <button type="button" onclick="copyCode(this, 'bg-n20 text-n900 rounded-md')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-neutral-n20); min-height: 24px</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-neutral-n20); min-height: 24px')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Hover</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--compact ds-btn--hover" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">hover:bg-n30</code>
+            <button type="button" onclick="copyCode(this, 'hover:bg-n30')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-neutral-n30)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-neutral-n30)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Press</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--compact ds-btn--press" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">active:bg-n40</code>
+            <button type="button" onclick="copyCode(this, 'active:bg-n40')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-neutral-n40)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-neutral-n40)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Focus</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--compact ds-btn--focus" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">focus-visible:ring-2 focus-visible:ring-b300</code>
+            <button type="button" onclick="copyCode(this, 'focus-visible:ring-2 focus-visible:ring-b300')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">box-shadow: 0 0 0 2px var(--color-primary-500)</code>
+            <button type="button" onclick="copyCode(this, 'box-shadow: 0 0 0 2px var(--color-primary-500)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Disabled</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--compact" disabled tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">disabled:bg-n20 disabled:text-n50 disabled:cursor-not-allowed</code>
+            <button type="button" onclick="copyCode(this, 'disabled:bg-n20 disabled:text-n50 disabled:cursor-not-allowed')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-neutral-n20); color: var(--color-neutral-n50)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-neutral-n20); color: var(--color-neutral-n50)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Selected</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--compact" aria-pressed="true" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">aria-pressed:bg-b50 aria-pressed:text-b300</code>
+            <button type="button" onclick="copyCode(this, 'aria-pressed:bg-b50 aria-pressed:text-b300')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-blue-b50); color: var(--color-blue-b300)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-blue-b50); color: var(--color-blue-b300)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Usage Guidelines -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Do</div>
+          Use <code>spacing=compact</code> in dense UIs like toolbars, data tables, or tag inputs where vertical space is at a premium.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Don't</div>
+          Don't use compact spacing for primary CTAs or actions in large open layouts — the reduced min-height makes them harder to tap on touch devices.
+        </div>
+      </div>
+      </section>
+
+      <!-- =====================================================
+           SECTION 2C: DEFAULT — ICON ONLY, SPACING=DEFAULT
+      ====================================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Variants — appearance=default, spacing=default, iconOnly=true
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">Icon-only button — 4px horizontal padding via <code>.ds-btn--icon-only</code>. Min-height 32px.</p>
+
+        <div class="state-grid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px;">
+
+          <!-- Default -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--icon-only" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Default</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=default · --color-neutral-n20</div>
+            </div>
+          </div>
+
+          <!-- Hover -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--icon-only ds-btn--hover" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Hover</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=hover · --color-neutral-n30</div>
+            </div>
+          </div>
+
+          <!-- Press -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--icon-only ds-btn--press" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Press</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=press · --color-neutral-n40</div>
+            </div>
+          </div>
+
+          <!-- Focus -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--icon-only ds-btn--focus" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Focus</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=focus · --color-blue-b200 · Border.Focused</div>
+            </div>
+          </div>
+
+          <!-- Disabled -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--icon-only" disabled tabindex="-1" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Disabled</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isDisabled=true · --color-neutral-n40 · Icon.Disable N70</div>
+            </div>
+          </div>
+
+          <!-- Selected -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--icon-only" aria-pressed="true" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Selected</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isSelected=true · --color-blue-b50 · Background.Selected</div>
+            </div>
+          </div>
+
+        </div>
+      <!-- State Table -->
+      <div style="margin-top:28px; overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-family:var(--font-primary); font-size:13px;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--color-border);">
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600; width:140px;">State</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600; width:80px;">Preview</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600;">Tailwind</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600;">CSS Variable</th>
+            </tr>
+          </thead>
+          <tbody>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Default</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">bg-n20 rounded-md p-1</code>
+            <button type="button" onclick="copyCode(this, 'bg-n20 rounded-md p-1')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-neutral-n20); padding: 4px</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-neutral-n20); padding: 4px')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Hover</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only ds-btn--hover" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">hover:bg-n30</code>
+            <button type="button" onclick="copyCode(this, 'hover:bg-n30')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-neutral-n30)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-neutral-n30)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Press</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only ds-btn--press" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">active:bg-n40</code>
+            <button type="button" onclick="copyCode(this, 'active:bg-n40')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-neutral-n40)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-neutral-n40)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Focus</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only ds-btn--focus" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">focus-visible:ring-2 focus-visible:ring-b300</code>
+            <button type="button" onclick="copyCode(this, 'focus-visible:ring-2 focus-visible:ring-b300')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">box-shadow: 0 0 0 2px var(--color-primary-500)</code>
+            <button type="button" onclick="copyCode(this, 'box-shadow: 0 0 0 2px var(--color-primary-500)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Disabled</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" disabled tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">disabled:bg-n20 disabled:text-n50 disabled:cursor-not-allowed</code>
+            <button type="button" onclick="copyCode(this, 'disabled:bg-n20 disabled:text-n50 disabled:cursor-not-allowed')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-neutral-n20); color: var(--color-neutral-n50)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-neutral-n20); color: var(--color-neutral-n50)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Selected</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" aria-pressed="true" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">aria-pressed:bg-b50 aria-pressed:text-b300</code>
+            <button type="button" onclick="copyCode(this, 'aria-pressed:bg-b50 aria-pressed:text-b300')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-blue-b50); color: var(--color-blue-b300)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-blue-b50); color: var(--color-blue-b300)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+          </tbody>
+        </table>
+      </div>
+      </section>
+
+      <!-- =====================================================
+           SECTION 2D: DEFAULT — ICON ONLY, SPACING=COMPACT
+      ====================================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Variants — appearance=default, spacing=compact, iconOnly=true
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">Icon-only compact — 2px padding all sides via <code>.ds-btn--icon-only.ds-btn--compact</code>. Min-height 24px.</p>
+
+        <div class="state-grid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px;">
+
+          <!-- Default -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--compact ds-btn--icon-only" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Default</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">spacing=compact · --color-neutral-n20</div>
+            </div>
+          </div>
+
+          <!-- Hover -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--compact ds-btn--icon-only ds-btn--hover" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Hover</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=hover · --color-neutral-n30</div>
+            </div>
+          </div>
+
+          <!-- Press -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--compact ds-btn--icon-only ds-btn--press" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Press</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=press · --color-neutral-n40</div>
+            </div>
+          </div>
+
+          <!-- Focus -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--compact ds-btn--icon-only ds-btn--focus" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Focus</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=focus · --color-blue-b200 · Border.Focused</div>
+            </div>
+          </div>
+
+          <!-- Disabled -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--compact ds-btn--icon-only" disabled tabindex="-1" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Disabled</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isDisabled=true · --color-neutral-n40 · Icon.Disable N70</div>
+            </div>
+          </div>
+
+          <!-- Selected -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--compact ds-btn--icon-only" aria-pressed="true" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Selected</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isSelected=true · --color-blue-b50 · Background.Selected</div>
+            </div>
+          </div>
+
+        </div>
+      <!-- State Table -->
+      <div style="margin-top:28px; overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-family:var(--font-primary); font-size:13px;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--color-border);">
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600; width:140px;">State</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600; width:80px;">Preview</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600;">Tailwind</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600;">CSS Variable</th>
+            </tr>
+          </thead>
+          <tbody>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Default</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--compact ds-btn--icon-only" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">bg-n20 rounded-md p-0.5</code>
+            <button type="button" onclick="copyCode(this, 'bg-n20 rounded-md p-0.5')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-neutral-n20); padding: 2px; min-height: 24px</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-neutral-n20); padding: 2px; min-height: 24px')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Hover</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--compact ds-btn--icon-only ds-btn--hover" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">hover:bg-n30</code>
+            <button type="button" onclick="copyCode(this, 'hover:bg-n30')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-neutral-n30)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-neutral-n30)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Press</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--compact ds-btn--icon-only ds-btn--press" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">active:bg-n40</code>
+            <button type="button" onclick="copyCode(this, 'active:bg-n40')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-neutral-n40)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-neutral-n40)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Focus</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--compact ds-btn--icon-only ds-btn--focus" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">focus-visible:ring-2 focus-visible:ring-b300</code>
+            <button type="button" onclick="copyCode(this, 'focus-visible:ring-2 focus-visible:ring-b300')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">box-shadow: 0 0 0 2px var(--color-primary-500)</code>
+            <button type="button" onclick="copyCode(this, 'box-shadow: 0 0 0 2px var(--color-primary-500)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Disabled</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--compact ds-btn--icon-only" disabled tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">disabled:bg-n20 disabled:text-n50 disabled:cursor-not-allowed</code>
+            <button type="button" onclick="copyCode(this, 'disabled:bg-n20 disabled:text-n50 disabled:cursor-not-allowed')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-neutral-n20); color: var(--color-neutral-n50)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-neutral-n20); color: var(--color-neutral-n50)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Selected</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--compact ds-btn--icon-only" aria-pressed="true" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">aria-pressed:bg-b50 aria-pressed:text-b300</code>
+            <button type="button" onclick="copyCode(this, 'aria-pressed:bg-b50 aria-pressed:text-b300')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-blue-b50); color: var(--color-blue-b300)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-blue-b50); color: var(--color-blue-b300)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+          </tbody>
+        </table>
+      </div>
+      </section>
+
+      <!-- =====================================================
+           SECTION 2E: DEFAULT — LOADING, SPACING=DEFAULT & COMPACT
+      ====================================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Variants — appearance=default, isLoading=true
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">Loading state — spinner menggantikan label. Spinner 24px untuk spacing=default, 16px untuk spacing=compact. Gunakan <code>.ds-btn--loading</code> + <code>.ds-spinner</code>.</p>
+
+        <div class="state-grid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px;">
+
+          <!-- Loading — spacing=default -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--loading" tabindex="-1" aria-busy="true" aria-label="Memuat">
+                <span class="ds-spinner" style="width:24px; height:24px;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <mask id="sp-md-mask0" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24"><rect width="24" height="24" fill="var(--color-neutral-n500)"/></mask>
+                    <g mask="url(#sp-md-mask0)">
+                      <mask id="sp-md-mask1" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-1" y="0" width="25" height="24"><circle cx="11.9755" cy="12" r="12" fill="var(--color-neutral-n500)"/></mask>
+                      <g mask="url(#sp-md-mask1)">
+                        <path d="M10.0439 0.122256C10.2097 0.0885634 10.3729 0.0515927 10.5394 0.0215441C11.2304 -0.0961232 11.811 0.286753 11.9581 0.955075C12.1015 1.60518 11.7575 2.18358 11.0751 2.35263C9.91178 2.63842 8.75938 2.95044 7.73209 3.59183C4.55206 5.5777 2.74593 8.41513 2.55321 12.2395C2.5378 12.5329 2.53754 12.8271 2.52971 13.1208C2.50662 13.875 2.03913 14.3627 1.3371 14.3612C0.687746 14.3604 0.203516 13.8612 0.165392 13.1289C0.0854392 11.6463 0.272926 10.1871 0.741406 8.7903C2.28004 4.20287 5.42304 1.35175 10.0439 0.122256Z" fill="var(--color-neutral-n900)"/>
+                      </g>
+                    </g>
+                  </svg>
+                </span>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Loading — spacing=default</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isLoading=true · spinner 24px · --color-neutral-n20</div>
+            </div>
+          </div>
+
+          <!-- Loading — spacing=compact -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--compact ds-btn--loading" tabindex="-1" aria-busy="true" aria-label="Memuat">
+                <span class="ds-spinner" style="width:16px; height:16px;">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <mask id="sp-sm-mask0" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16"><rect width="16" height="16" fill="var(--color-neutral-n500)"/></mask>
+                    <g mask="url(#sp-sm-mask0)">
+                      <mask id="sp-sm-mask1" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-1" y="0" width="17" height="16"><circle cx="7.9837" cy="8" r="8" fill="var(--color-neutral-n500)"/></mask>
+                      <g mask="url(#sp-sm-mask1)">
+                        <path d="M6.69597 0.081494C6.80648 0.0590323 6.91529 0.0343852 7.0263 0.0143527C7.48693 -0.064092 7.87403 0.191159 7.9721 0.636707C8.06769 1.07011 7.83836 1.45571 7.38344 1.56841C6.60787 1.75894 5.83961 1.96695 5.15475 2.39454C3.03473 3.71845 1.83064 5.61008 1.70216 8.15965C1.69189 8.35526 1.69171 8.55136 1.68649 8.74721C1.6711 9.24997 1.35944 9.57515 0.891421 9.57414C0.458517 9.57359 0.135698 9.24076 0.110281 8.75262C0.0569798 7.76419 0.181971 6.79138 0.494291 5.86019C1.52004 2.8019 3.61538 0.901159 6.69597 0.081494Z" fill="var(--color-neutral-n900)"/>
+                      </g>
+                    </g>
+                  </svg>
+                </span>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Loading — spacing=compact</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isLoading=true · spinner 16px · --color-neutral-n20</div>
+            </div>
+          </div>
+
+        </div>
+      <!-- State Table -->
+      <div style="margin-top:28px; overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-family:var(--font-primary); font-size:13px;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--color-border);">
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600; width:140px;">State</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600; width:80px;">Preview</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600;">Tailwind</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600;">CSS Variable</th>
+            </tr>
+          </thead>
+          <tbody>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Loading (default)</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--loading" aria-busy="true" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">cursor-wait pointer-events-none</code>
+            <button type="button" onclick="copyCode(this, 'cursor-wait pointer-events-none')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">cursor: wait; pointer-events: none; background-color: var(--color-neutral-n20)</code>
+            <button type="button" onclick="copyCode(this, 'cursor: wait; pointer-events: none; background-color: var(--color-neutral-n20)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Loading (compact)</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--compact ds-btn--loading" aria-busy="true" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">cursor-wait pointer-events-none</code>
+            <button type="button" onclick="copyCode(this, 'cursor-wait pointer-events-none')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">cursor: wait; pointer-events: none; min-height: 24px; background-color: var(--color-neutral-n20)</code>
+            <button type="button" onclick="copyCode(this, 'cursor: wait; pointer-events: none; min-height: 24px; background-color: var(--color-neutral-n20)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+          </tbody>
+        </table>
+      </div>
       </section>
 
       <!-- ── Appearance Group: primary ── -->
@@ -1335,6 +2130,128 @@
           </div>
 
         </div>
+      <!-- State Table -->
+      <div style="margin-top:28px; overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-family:var(--font-primary); font-size:13px;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--color-border);">
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600; width:140px;">State</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600; width:80px;">Preview</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600;">Tailwind</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600;">CSS Variable</th>
+            </tr>
+          </thead>
+          <tbody>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Default</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--primary" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">bg-b300 text-n0 rounded-md</code>
+            <button type="button" onclick="copyCode(this, 'bg-b300 text-n0 rounded-md')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-blue-b300); color: var(--color-neutral-n0)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-blue-b300); color: var(--color-neutral-n0)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Hover</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--primary ds-btn--hover" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">hover:bg-b400</code>
+            <button type="button" onclick="copyCode(this, 'hover:bg-b400')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-blue-b400)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-blue-b400)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Press</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--primary ds-btn--press" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">active:bg-b400</code>
+            <button type="button" onclick="copyCode(this, 'active:bg-b400')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-blue-b400)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-blue-b400)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Focus</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--primary ds-btn--focus" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">focus-visible:ring-2 focus-visible:ring-b300</code>
+            <button type="button" onclick="copyCode(this, 'focus-visible:ring-2 focus-visible:ring-b300')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">box-shadow: 0 0 0 2px var(--color-primary-500)</code>
+            <button type="button" onclick="copyCode(this, 'box-shadow: 0 0 0 2px var(--color-primary-500)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Disabled</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--primary" disabled tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">disabled:bg-n20 disabled:text-n50 disabled:cursor-not-allowed</code>
+            <button type="button" onclick="copyCode(this, 'disabled:bg-n20 disabled:text-n50 disabled:cursor-not-allowed')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-neutral-n20); color: var(--color-neutral-n50)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-neutral-n20); color: var(--color-neutral-n50)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Selected</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--primary" aria-pressed="true" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">aria-pressed:bg-b400 aria-pressed:text-n0</code>
+            <button type="button" onclick="copyCode(this, 'aria-pressed:bg-b400 aria-pressed:text-n0')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-blue-b400); color: var(--color-neutral-n0)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-blue-b400); color: var(--color-neutral-n0)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Usage Guidelines -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Do</div>
+          Use <code>appearance=primary</code> for the single most important action on a page or in a form — e.g., Submit, Save, Confirm.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Don't</div>
+          Don't place multiple primary buttons side-by-side; having two competing CTAs dilutes emphasis and confuses users.
+        </div>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -1416,6 +2333,128 @@
           </div>
 
         </div>
+      <!-- State Table -->
+      <div style="margin-top:28px; overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-family:var(--font-primary); font-size:13px;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--color-border);">
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600; width:140px;">State</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600; width:80px;">Preview</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600;">Tailwind</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600;">CSS Variable</th>
+            </tr>
+          </thead>
+          <tbody>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Default</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--primary ds-btn--compact" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">bg-b300 text-n0 rounded-md</code>
+            <button type="button" onclick="copyCode(this, 'bg-b300 text-n0 rounded-md')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-blue-b300); color: var(--color-neutral-n0); min-height: 24px</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-blue-b300); color: var(--color-neutral-n0); min-height: 24px')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Hover</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--primary ds-btn--compact ds-btn--hover" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">hover:bg-b400</code>
+            <button type="button" onclick="copyCode(this, 'hover:bg-b400')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-blue-b400)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-blue-b400)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Press</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--primary ds-btn--compact ds-btn--press" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">active:bg-b400</code>
+            <button type="button" onclick="copyCode(this, 'active:bg-b400')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-blue-b400)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-blue-b400)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Focus</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--primary ds-btn--compact ds-btn--focus" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">focus-visible:ring-2 focus-visible:ring-b300</code>
+            <button type="button" onclick="copyCode(this, 'focus-visible:ring-2 focus-visible:ring-b300')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">box-shadow: 0 0 0 2px var(--color-primary-500)</code>
+            <button type="button" onclick="copyCode(this, 'box-shadow: 0 0 0 2px var(--color-primary-500)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Disabled</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--primary ds-btn--compact" disabled tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">disabled:bg-n20 disabled:text-n50 disabled:cursor-not-allowed</code>
+            <button type="button" onclick="copyCode(this, 'disabled:bg-n20 disabled:text-n50 disabled:cursor-not-allowed')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-neutral-n20); color: var(--color-neutral-n50)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-neutral-n20); color: var(--color-neutral-n50)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Selected</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--primary ds-btn--compact" aria-pressed="true" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">aria-pressed:bg-b400 aria-pressed:text-n0</code>
+            <button type="button" onclick="copyCode(this, 'aria-pressed:bg-b400 aria-pressed:text-n0')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-blue-b400); color: var(--color-neutral-n0)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-blue-b400); color: var(--color-neutral-n0)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Usage Guidelines -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Do</div>
+          Use compact primary buttons inside dialogs, popovers, or inline forms where vertical rhythm is constrained.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Don't</div>
+          Don't use compact primary spacing for the main page CTA — the standard size ensures sufficient tap target and visual weight.
+        </div>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -1509,6 +2548,117 @@
           </div>
 
         </div>
+      <!-- State Table -->
+      <div style="margin-top:28px; overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-family:var(--font-primary); font-size:13px;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--color-border);">
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600; width:140px;">State</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600; width:80px;">Preview</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600;">Tailwind</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600;">CSS Variable</th>
+            </tr>
+          </thead>
+          <tbody>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Default</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--primary ds-btn--icon-only" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">bg-b300 text-n0 rounded-md p-1</code>
+            <button type="button" onclick="copyCode(this, 'bg-b300 text-n0 rounded-md p-1')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-blue-b300); color: var(--color-neutral-n0); padding: 4px</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-blue-b300); color: var(--color-neutral-n0); padding: 4px')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Hover</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--primary ds-btn--icon-only ds-btn--hover" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">hover:bg-b400</code>
+            <button type="button" onclick="copyCode(this, 'hover:bg-b400')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-blue-b400)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-blue-b400)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Press</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--primary ds-btn--icon-only ds-btn--press" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">active:bg-b400</code>
+            <button type="button" onclick="copyCode(this, 'active:bg-b400')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-blue-b400)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-blue-b400)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Focus</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--primary ds-btn--icon-only ds-btn--focus" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">focus-visible:ring-2 focus-visible:ring-b300</code>
+            <button type="button" onclick="copyCode(this, 'focus-visible:ring-2 focus-visible:ring-b300')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">box-shadow: 0 0 0 2px var(--color-primary-500)</code>
+            <button type="button" onclick="copyCode(this, 'box-shadow: 0 0 0 2px var(--color-primary-500)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Disabled</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--primary ds-btn--icon-only" disabled tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">disabled:bg-n20 disabled:text-n50 disabled:cursor-not-allowed</code>
+            <button type="button" onclick="copyCode(this, 'disabled:bg-n20 disabled:text-n50 disabled:cursor-not-allowed')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-neutral-n20); color: var(--color-neutral-n50)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-neutral-n20); color: var(--color-neutral-n50)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Selected</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--primary ds-btn--icon-only" aria-pressed="true" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">aria-pressed:bg-b400 aria-pressed:text-n0</code>
+            <button type="button" onclick="copyCode(this, 'aria-pressed:bg-b400 aria-pressed:text-n0')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">background-color: var(--color-blue-b400); color: var(--color-neutral-n0)</code>
+            <button type="button" onclick="copyCode(this, 'background-color: var(--color-blue-b400); color: var(--color-neutral-n0)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+          </tbody>
+        </table>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -1663,6 +2813,53 @@
           </div>
 
         </div>
+      <!-- State Table -->
+      <div style="margin-top:28px; overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-family:var(--font-primary); font-size:13px;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--color-border);">
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600; width:140px;">State</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600; width:80px;">Preview</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600;">Tailwind</th>
+              <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600;">CSS Variable</th>
+            </tr>
+          </thead>
+          <tbody>
+      <tr style="border-bottom:1px solid var(--color-border);">
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Loading (default)</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--primary ds-btn--loading" aria-busy="true" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">cursor-wait pointer-events-none</code>
+            <button type="button" onclick="copyCode(this, 'cursor-wait pointer-events-none')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">cursor: wait; pointer-events: none; background-color: var(--color-blue-b300)</code>
+            <button type="button" onclick="copyCode(this, 'cursor: wait; pointer-events: none; background-color: var(--color-blue-b300)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Loading (compact)</td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--primary ds-btn--compact ds-btn--loading" aria-busy="true" tabindex="-1" style="pointer-events:none;">Btn</button></td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">cursor-wait pointer-events-none</code>
+            <button type="button" onclick="copyCode(this, 'cursor-wait pointer-events-none')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy Tailwind">Copy</button>
+          </div>
+        </td>
+        <td style="padding:12px 16px;">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <code style="font-size:11px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:4px; padding:3px 7px; color:var(--color-text-primary); font-family:var(--font-mono);">cursor: wait; pointer-events: none; min-height: 24px; background-color: var(--color-blue-b300)</code>
+            <button type="button" onclick="copyCode(this, 'cursor: wait; pointer-events: none; min-height: 24px; background-color: var(--color-blue-b300)')" style="flex-shrink:0; padding:4px 8px; font-size:11px; border-radius:4px; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text-secondary); cursor:pointer; font-family:var(--font-primary);" title="Copy CSS Var">Copy</button>
+          </div>
+        </td>
+      </tr>
+          </tbody>
+        </table>
+      </div>
       </section>
 
       <!-- ── Appearance Group: subtle ── -->
@@ -4031,252 +5228,6 @@
         </div>
       </section>
 
-      <!-- =====================================================
-           SECTION 2C: DEFAULT — ICON ONLY, SPACING=DEFAULT
-      ====================================================== -->
-      <section style="margin-bottom:48px;">
-        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
-          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
-          Variants — appearance=default, spacing=default, iconOnly=true
-        </h2>
-        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">Icon-only button — 4px horizontal padding via <code>.ds-btn--icon-only</code>. Min-height 32px.</p>
-
-        <div class="state-grid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px;">
-
-          <!-- Default -->
-          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
-            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
-              <button type="button" class="ds-btn ds-btn--icon-only" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
-              </button>
-            </div>
-            <div style="padding:14px 20px;">
-              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Default</div>
-              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=default · --color-neutral-n20</div>
-            </div>
-          </div>
-
-          <!-- Hover -->
-          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
-            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
-              <button type="button" class="ds-btn ds-btn--icon-only ds-btn--hover" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
-              </button>
-            </div>
-            <div style="padding:14px 20px;">
-              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Hover</div>
-              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=hover · --color-neutral-n30</div>
-            </div>
-          </div>
-
-          <!-- Press -->
-          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
-            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
-              <button type="button" class="ds-btn ds-btn--icon-only ds-btn--press" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
-              </button>
-            </div>
-            <div style="padding:14px 20px;">
-              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Press</div>
-              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=press · --color-neutral-n40</div>
-            </div>
-          </div>
-
-          <!-- Focus -->
-          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
-            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
-              <button type="button" class="ds-btn ds-btn--icon-only ds-btn--focus" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
-              </button>
-            </div>
-            <div style="padding:14px 20px;">
-              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Focus</div>
-              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=focus · --color-blue-b200 · Border.Focused</div>
-            </div>
-          </div>
-
-          <!-- Disabled -->
-          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
-            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
-              <button type="button" class="ds-btn ds-btn--icon-only" disabled tabindex="-1" aria-label="Pengaturan">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
-              </button>
-            </div>
-            <div style="padding:14px 20px;">
-              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Disabled</div>
-              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isDisabled=true · --color-neutral-n40 · Icon.Disable N70</div>
-            </div>
-          </div>
-
-          <!-- Selected -->
-          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
-            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
-              <button type="button" class="ds-btn ds-btn--icon-only" aria-pressed="true" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
-              </button>
-            </div>
-            <div style="padding:14px 20px;">
-              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Selected</div>
-              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isSelected=true · --color-blue-b50 · Background.Selected</div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- =====================================================
-           SECTION 2D: DEFAULT — ICON ONLY, SPACING=COMPACT
-      ====================================================== -->
-      <section style="margin-bottom:48px;">
-        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
-          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
-          Variants — appearance=default, spacing=compact, iconOnly=true
-        </h2>
-        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">Icon-only compact — 2px padding all sides via <code>.ds-btn--icon-only.ds-btn--compact</code>. Min-height 24px.</p>
-
-        <div class="state-grid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px;">
-
-          <!-- Default -->
-          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
-            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
-              <button type="button" class="ds-btn ds-btn--compact ds-btn--icon-only" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
-              </button>
-            </div>
-            <div style="padding:14px 20px;">
-              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Default</div>
-              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">spacing=compact · --color-neutral-n20</div>
-            </div>
-          </div>
-
-          <!-- Hover -->
-          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
-            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
-              <button type="button" class="ds-btn ds-btn--compact ds-btn--icon-only ds-btn--hover" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
-              </button>
-            </div>
-            <div style="padding:14px 20px;">
-              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Hover</div>
-              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=hover · --color-neutral-n30</div>
-            </div>
-          </div>
-
-          <!-- Press -->
-          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
-            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
-              <button type="button" class="ds-btn ds-btn--compact ds-btn--icon-only ds-btn--press" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
-              </button>
-            </div>
-            <div style="padding:14px 20px;">
-              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Press</div>
-              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=press · --color-neutral-n40</div>
-            </div>
-          </div>
-
-          <!-- Focus -->
-          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
-            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
-              <button type="button" class="ds-btn ds-btn--compact ds-btn--icon-only ds-btn--focus" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
-              </button>
-            </div>
-            <div style="padding:14px 20px;">
-              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Focus</div>
-              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=focus · --color-blue-b200 · Border.Focused</div>
-            </div>
-          </div>
-
-          <!-- Disabled -->
-          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
-            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
-              <button type="button" class="ds-btn ds-btn--compact ds-btn--icon-only" disabled tabindex="-1" aria-label="Pengaturan">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
-              </button>
-            </div>
-            <div style="padding:14px 20px;">
-              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Disabled</div>
-              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isDisabled=true · --color-neutral-n40 · Icon.Disable N70</div>
-            </div>
-          </div>
-
-          <!-- Selected -->
-          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
-            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
-              <button type="button" class="ds-btn ds-btn--compact ds-btn--icon-only" aria-pressed="true" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n900)"/></svg>
-              </button>
-            </div>
-            <div style="padding:14px 20px;">
-              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Selected</div>
-              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isSelected=true · --color-blue-b50 · Background.Selected</div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- =====================================================
-           SECTION 2E: DEFAULT — LOADING, SPACING=DEFAULT & COMPACT
-      ====================================================== -->
-      <section style="margin-bottom:48px;">
-        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
-          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
-          Variants — appearance=default, isLoading=true
-        </h2>
-        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">Loading state — spinner menggantikan label. Spinner 24px untuk spacing=default, 16px untuk spacing=compact. Gunakan <code>.ds-btn--loading</code> + <code>.ds-spinner</code>.</p>
-
-        <div class="state-grid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px;">
-
-          <!-- Loading — spacing=default -->
-          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
-            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
-              <button type="button" class="ds-btn ds-btn--loading" tabindex="-1" aria-busy="true" aria-label="Memuat">
-                <span class="ds-spinner" style="width:24px; height:24px;">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <mask id="sp-md-mask0" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24"><rect width="24" height="24" fill="var(--color-neutral-n500)"/></mask>
-                    <g mask="url(#sp-md-mask0)">
-                      <mask id="sp-md-mask1" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-1" y="0" width="25" height="24"><circle cx="11.9755" cy="12" r="12" fill="var(--color-neutral-n500)"/></mask>
-                      <g mask="url(#sp-md-mask1)">
-                        <path d="M10.0439 0.122256C10.2097 0.0885634 10.3729 0.0515927 10.5394 0.0215441C11.2304 -0.0961232 11.811 0.286753 11.9581 0.955075C12.1015 1.60518 11.7575 2.18358 11.0751 2.35263C9.91178 2.63842 8.75938 2.95044 7.73209 3.59183C4.55206 5.5777 2.74593 8.41513 2.55321 12.2395C2.5378 12.5329 2.53754 12.8271 2.52971 13.1208C2.50662 13.875 2.03913 14.3627 1.3371 14.3612C0.687746 14.3604 0.203516 13.8612 0.165392 13.1289C0.0854392 11.6463 0.272926 10.1871 0.741406 8.7903C2.28004 4.20287 5.42304 1.35175 10.0439 0.122256Z" fill="var(--color-neutral-n900)"/>
-                      </g>
-                    </g>
-                  </svg>
-                </span>
-              </button>
-            </div>
-            <div style="padding:14px 20px;">
-              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Loading — spacing=default</div>
-              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isLoading=true · spinner 24px · --color-neutral-n20</div>
-            </div>
-          </div>
-
-          <!-- Loading — spacing=compact -->
-          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
-            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
-              <button type="button" class="ds-btn ds-btn--compact ds-btn--loading" tabindex="-1" aria-busy="true" aria-label="Memuat">
-                <span class="ds-spinner" style="width:16px; height:16px;">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <mask id="sp-sm-mask0" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16"><rect width="16" height="16" fill="var(--color-neutral-n500)"/></mask>
-                    <g mask="url(#sp-sm-mask0)">
-                      <mask id="sp-sm-mask1" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-1" y="0" width="17" height="16"><circle cx="7.9837" cy="8" r="8" fill="var(--color-neutral-n500)"/></mask>
-                      <g mask="url(#sp-sm-mask1)">
-                        <path d="M6.69597 0.081494C6.80648 0.0590323 6.91529 0.0343852 7.0263 0.0143527C7.48693 -0.064092 7.87403 0.191159 7.9721 0.636707C8.06769 1.07011 7.83836 1.45571 7.38344 1.56841C6.60787 1.75894 5.83961 1.96695 5.15475 2.39454C3.03473 3.71845 1.83064 5.61008 1.70216 8.15965C1.69189 8.35526 1.69171 8.55136 1.68649 8.74721C1.6711 9.24997 1.35944 9.57515 0.891421 9.57414C0.458517 9.57359 0.135698 9.24076 0.110281 8.75262C0.0569798 7.76419 0.181971 6.79138 0.494291 5.86019C1.52004 2.8019 3.61538 0.901159 6.69597 0.081494Z" fill="var(--color-neutral-n900)"/>
-                      </g>
-                    </g>
-                  </svg>
-                </span>
-              </button>
-            </div>
-            <div style="padding:14px 20px;">
-              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Loading — spacing=compact</div>
-              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isLoading=true · spinner 16px · --color-neutral-n20</div>
-            </div>
-          </div>
-
-        </div>
-      </section>
 
       <!-- FOOTER -->
       <footer class="page-footer">
@@ -4340,6 +5291,78 @@
   scrollTopBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
+
+  /* ── Variant Tabs ── */
+  document.querySelectorAll('.vtab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.vtab').forEach(t => t.classList.remove('vtab--active'));
+      tab.classList.add('vtab--active');
+      const key = tab.dataset.tab;
+      if (!key) return;
+      // Find the ds-group-label-pill that contains the key text
+      const pills = document.querySelectorAll('.ds-group-label-pill');
+      for (const pill of pills) {
+        if (pill.textContent.toLowerCase().includes(key.replace('-', ' '))) {
+          pill.closest('.ds-group-label').scrollIntoView({ behavior: 'smooth', block: 'start' });
+          break;
+        }
+      }
+    });
+  });
+  // Highlight active tab on scroll
+  const groupLabels = document.querySelectorAll('.ds-group-label');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const text = e.target.querySelector('.ds-group-label-pill')?.textContent?.toLowerCase() || '';
+        document.querySelectorAll('[data-tab]').forEach(t => {
+          const key = t.dataset.tab.replace('-', ' ');
+          if (text.includes(key)) t.classList.add('vtab--active');
+          else t.classList.remove('vtab--active');
+        });
+      }
+    });
+  }, { threshold: 0.5 });
+  groupLabels.forEach(gl => observer.observe(gl));
+
+  /* ── Copy to Clipboard ── */
+  function copyCode(btn, text) {
+    navigator.clipboard.writeText(text).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = 'Copied!';
+      btn.style.background = 'var(--color-success-500)';
+      btn.style.color = '#fff';
+      btn.style.borderColor = 'var(--color-success-500)';
+      setTimeout(() => {
+        btn.textContent = orig;
+        btn.style.background = '';
+        btn.style.color = '';
+        btn.style.borderColor = '';
+      }, 1500);
+    });
+  }
+
+  /* ── Interactive Demo Variant Switcher ── */
+  const demoBtn = document.getElementById('interactive-demo-btn');
+  const demoVariantMap = {
+    default:  [],
+    primary:  ['ds-btn--primary'],
+    subtle:   ['ds-btn--subtle'],
+    link:     ['ds-btn--link'],
+    danger:   ['ds-btn--danger'],
+  };
+  document.querySelectorAll('[data-variant]').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('[data-variant]').forEach(t => t.classList.remove('vtab--active'));
+      tab.classList.add('vtab--active');
+      const v = tab.dataset.variant;
+      if (demoBtn) {
+        demoBtn.className = 'ds-btn';
+        (demoVariantMap[v] || []).forEach(cls => demoBtn.classList.add(cls));
+      }
+    });
+  });
+
 </script>
 
 </body>
