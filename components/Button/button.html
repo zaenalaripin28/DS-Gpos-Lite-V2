@@ -59,10 +59,13 @@
     .ds-btn--focus    { outline: none; box-shadow: 0 0 0 2px var(--color-primary-500); }
     .ds-btn--selected,
     .ds-btn[aria-pressed="true"] {
-      background-color: var(--color-primary-100);
-      color: var(--color-primary-700);
+      background-color: var(--color-blue-b50);   /* Background.Selected */
+      color: var(--color-blue-b300);             /* Text.Selected */
     }
-    .ds-btn[aria-pressed="true"]:hover { background-color: var(--color-primary-200); }
+    .ds-btn[aria-pressed="true"]:hover {
+      background-color: var(--color-blue-b400);  /* Background.Selected.Hover */
+      color: var(--color-neutral-n0);            /* Text.Inverse — bg gelap */
+    }
 
     /* ================================================================
        Page-specific responsive overrides
@@ -321,7 +324,7 @@
             </div>
             <div style="padding:14px 20px;">
               <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Selected</div>
-              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isSelected=true · --color-primary-100</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isSelected=true · --color-blue-b50</div>
             </div>
           </div>
 
@@ -422,8 +425,8 @@
 
           <div style="background:var(--color-surface); border:1px solid var(--color-border); border-left:3px solid var(--color-primary-400); border-radius:10px; padding:20px;">
             <div style="font-size:11px; font-weight:600; color:var(--color-text-tertiary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; font-family:var(--font-primary);">Selected</div>
-            <div style="font-family:var(--font-mono); font-size:12px; color:var(--color-primary-500); margin-bottom:4px;">--color-primary-100 · --primary-700</div>
-            <div style="font-size:12px; color:var(--color-text-secondary); font-family:var(--font-primary);">aria-pressed="true"</div>
+            <div style="font-family:var(--font-mono); font-size:12px; color:var(--color-primary-500); margin-bottom:4px;">--color-blue-b50 · --color-blue-b300</div>
+            <div style="font-size:12px; color:var(--color-text-secondary); font-family:var(--font-primary);">B50 bg · B300 text · aria-pressed="true"</div>
           </div>
 
         </div>
