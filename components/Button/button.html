@@ -788,6 +788,253 @@
       </section>
 
       <!-- =====================================================
+           SECTION 3C: PRIMARY — ICON ONLY, SPACING=DEFAULT
+      ====================================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Variants — appearance=primary, spacing=default, iconOnly=true
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">Icon-only primary — 4px horizontal padding via <code>.ds-btn--primary.ds-btn--icon-only</code>. Min-height 32px.</p>
+
+        <div class="state-grid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px;">
+
+          <!-- Default -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--primary ds-btn--icon-only" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n0)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Default</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=default · --color-blue-b300</div>
+            </div>
+          </div>
+
+          <!-- Hover -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--primary ds-btn--icon-only ds-btn--hover" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n0)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Hover</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=hover · --color-blue-b400</div>
+            </div>
+          </div>
+
+          <!-- Press -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--primary ds-btn--icon-only ds-btn--press" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n0)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Press</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=press · --color-blue-b500</div>
+            </div>
+          </div>
+
+          <!-- Focus -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--primary ds-btn--icon-only ds-btn--focus" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n0)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Focus</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=focus · --color-blue-b200 · Border.Focused</div>
+            </div>
+          </div>
+
+          <!-- Disabled -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--primary ds-btn--icon-only" disabled tabindex="-1" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n0)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Disabled</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isDisabled=true · --color-neutral-n40 · Icon.Disable N70</div>
+            </div>
+          </div>
+
+          <!-- Selected -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--primary ds-btn--icon-only" aria-pressed="true" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-blue-b300)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Selected</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isSelected=true · --color-blue-b50 · Icon.Link B300</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- =====================================================
+           SECTION 3D: PRIMARY — ICON ONLY, SPACING=COMPACT
+      ====================================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Variants — appearance=primary, spacing=compact, iconOnly=true
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">Icon-only primary compact — 2px padding all sides via <code>.ds-btn--primary.ds-btn--compact.ds-btn--icon-only</code>. Min-height 24px.</p>
+
+        <div class="state-grid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px;">
+
+          <!-- Default -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--primary ds-btn--compact ds-btn--icon-only" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n0)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Default</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">spacing=compact · --color-blue-b300</div>
+            </div>
+          </div>
+
+          <!-- Hover -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--primary ds-btn--compact ds-btn--icon-only ds-btn--hover" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n0)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Hover</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=hover · --color-blue-b400</div>
+            </div>
+          </div>
+
+          <!-- Press -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--primary ds-btn--compact ds-btn--icon-only ds-btn--press" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n0)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Press</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=press · --color-blue-b500</div>
+            </div>
+          </div>
+
+          <!-- Focus -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--primary ds-btn--compact ds-btn--icon-only ds-btn--focus" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n0)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Focus</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">state=focus · --color-blue-b200 · Border.Focused</div>
+            </div>
+          </div>
+
+          <!-- Disabled -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--primary ds-btn--compact ds-btn--icon-only" disabled tabindex="-1" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-neutral-n0)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Disabled</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isDisabled=true · --color-neutral-n40 · Icon.Disable N70</div>
+            </div>
+          </div>
+
+          <!-- Selected -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--primary ds-btn--compact ds-btn--icon-only" aria-pressed="true" tabindex="-1" style="cursor:default;" aria-label="Pengaturan">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9 5.25C8.58579 5.25 8.25 5.58579 8.25 6C8.25 6.41421 8.58579 6.75 9 6.75C9.41421 6.75 9.75 6.41421 9.75 6C9.75 5.58579 9.41421 5.25 9 5.25ZM6.87803 5.25C7.18691 4.3761 8.02034 3.75 9 3.75C9.97967 3.75 10.8131 4.37611 11.122 5.25L20.25 5.25C20.6642 5.25 21 5.58579 21 6C21 6.41421 20.6642 6.75 20.25 6.75H11.122C10.8131 7.62389 9.97966 8.25 9 8.25C8.02034 8.25 7.18691 7.62389 6.87803 6.75H3.75C3.33579 6.75 3 6.41421 3 6C3 5.58579 3.33579 5.25 3.75 5.25H6.87803ZM15 11.25C14.5858 11.25 14.25 11.5858 14.25 12C14.25 12.4142 14.5858 12.75 15 12.75C15.4142 12.75 15.75 12.4142 15.75 12C15.75 11.5858 15.4142 11.25 15 11.25ZM12.878 11.25C13.1869 10.3761 14.0203 9.75 15 9.75C15.9797 9.75 16.8131 10.3761 17.122 11.25L20.25 11.25C20.6642 11.25 21 11.5858 21 12C21 12.4142 20.6642 12.75 20.25 12.75L17.122 12.75C16.8131 13.6239 15.9797 14.25 15 14.25C14.0203 14.25 13.1869 13.6239 12.878 12.75H3.75C3.33579 12.75 3 12.4142 3 12C3 11.5858 3.33579 11.25 3.75 11.25H12.878ZM9 17.25C8.58579 17.25 8.25 17.5858 8.25 18C8.25 18.4142 8.58579 18.75 9 18.75C9.41421 18.75 9.75 18.4142 9.75 18C9.75 17.5858 9.41421 17.25 9 17.25ZM6.87803 17.25C7.18691 16.3761 8.02034 15.75 9 15.75C9.97966 15.75 10.8131 16.3761 11.122 17.25H20.25C20.6642 17.25 21 17.5858 21 18C21 18.4142 20.6642 18.75 20.25 18.75H11.122C10.8131 19.6239 9.97966 20.25 9 20.25C8.02034 20.25 7.18691 19.6239 6.87803 18.75L3.75 18.75C3.33579 18.75 3 18.4142 3 18C3 17.5858 3.33579 17.25 3.75 17.25L6.87803 17.25Z" fill="var(--color-blue-b300)"/></svg>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Selected</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isSelected=true · --color-blue-b50 · Icon.Link B300</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- =====================================================
+           SECTION 3E: PRIMARY — LOADING, SPACING=DEFAULT & COMPACT
+      ====================================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Variants — appearance=primary, isLoading=true
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">Loading state primary — spinner putih menggantikan label. Spinner 24px untuk spacing=default, 16px untuk spacing=compact. Gunakan <code>.ds-btn--primary.ds-btn--loading</code> + <code>.ds-spinner</code>.</p>
+
+        <div class="state-grid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:12px;">
+
+          <!-- Loading — spacing=default -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--primary ds-btn--loading" tabindex="-1" aria-busy="true" aria-label="Memuat">
+                <span class="ds-spinner" style="width:24px; height:24px;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <mask id="sp-pr-md-mask0" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24"><rect width="24" height="24" fill="var(--color-neutral-n500)"/></mask>
+                    <g mask="url(#sp-pr-md-mask0)">
+                      <mask id="sp-pr-md-mask1" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-1" y="0" width="25" height="24"><circle cx="11.9755" cy="12" r="12" fill="var(--color-neutral-n500)"/></mask>
+                      <g mask="url(#sp-pr-md-mask1)">
+                        <path d="M10.0439 0.122271C10.2097 0.0885786 10.3729 0.051608 10.5394 0.0215593C11.2304 -0.0961079 11.811 0.286768 11.9581 0.95509C12.1015 1.60519 11.7575 2.1836 11.0751 2.35265C9.91178 2.63843 8.75938 2.95045 7.73209 3.59184C4.55206 5.57771 2.74593 8.41515 2.55321 12.2395C2.5378 12.5329 2.53754 12.8271 2.52971 13.1208C2.50662 13.875 2.03913 14.3628 1.3371 14.3612C0.687746 14.3604 0.203516 13.8612 0.165392 13.129C0.0854392 11.6463 0.181971 6.79138 0.494291 5.86019C1.52004 2.8019 3.61538 0.901159 6.69597 0.081494Z" fill="var(--color-neutral-n0)"/>
+                      </g>
+                    </g>
+                  </svg>
+                </span>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Loading — spacing=default</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isLoading=true · spinner 24px · --color-blue-b300</div>
+            </div>
+          </div>
+
+          <!-- Loading — spacing=compact -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; align-items:center; justify-content:center; background:var(--color-background); border-bottom:1px solid var(--color-border); min-height:96px;">
+              <button type="button" class="ds-btn ds-btn--primary ds-btn--compact ds-btn--loading" tabindex="-1" aria-busy="true" aria-label="Memuat">
+                <span class="ds-spinner" style="width:16px; height:16px;">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <mask id="sp-pr-sm-mask0" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="16"><rect width="16" height="16" fill="var(--color-neutral-n500)"/></mask>
+                    <g mask="url(#sp-pr-sm-mask0)">
+                      <mask id="sp-pr-sm-mask1" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-1" y="0" width="17" height="16"><circle cx="7.9837" cy="8" r="8" fill="var(--color-neutral-n500)"/></mask>
+                      <g mask="url(#sp-pr-sm-mask1)">
+                        <path d="M6.69597 0.081494C6.80648 0.0590323 6.91529 0.0343852 7.0263 0.0143527C7.48693 -0.064092 7.87403 0.191159 7.9721 0.636707C8.06769 1.07011 7.83836 1.45571 7.38344 1.56841C6.60787 1.75894 5.83961 1.96695 5.15475 2.39454C3.03473 3.71845 1.83064 5.61008 1.70216 8.15965C1.69189 8.35526 1.69171 8.55136 1.68649 8.74721C1.6711 9.24997 1.35944 9.57515 0.891421 9.57414C0.458517 9.57359 0.135698 9.24076 0.110281 8.75262C0.0569798 7.76419 0.181971 6.79138 0.494291 5.86019C1.52004 2.8019 3.61538 0.901159 6.69597 0.081494Z" fill="var(--color-neutral-n0)"/>
+                      </g>
+                    </g>
+                  </svg>
+                </span>
+              </button>
+            </div>
+            <div style="padding:14px 20px;">
+              <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); margin-bottom:2px; font-family:var(--font-primary);">Loading — spacing=compact</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); letter-spacing:0.01em;">isLoading=true · spinner 16px · --color-blue-b300</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- =====================================================
            SECTION 4A: SUBTLE — SPACING=DEFAULT
       ====================================================== -->
       <section style="margin-bottom:48px;">
