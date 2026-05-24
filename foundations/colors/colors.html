@@ -232,6 +232,14 @@
         <div class="sem-group-title">Text <span id="text-count"></span></div>
         <div class="sem-grid" id="sem-text"></div>
 
+        <!-- Notification group -->
+        <div class="sem-group-title">Notification <span id="notification-count"></span></div>
+        <div class="sem-grid" id="sem-notification"></div>
+
+        <!-- Elevation group -->
+        <div class="sem-group-title">Elevation <span id="elevation-count"></span></div>
+        <div class="sem-grid" id="sem-elevation"></div>
+
         <!-- Border group -->
         <div class="sem-group-title">Border <span id="border-count"></span></div>
         <div class="sem-grid" id="sem-border"></div>
@@ -408,30 +416,58 @@ const SEMANTIC_HEX = {
 
 const SEMANTIC_TOKENS = {
   background: [
-    { name:'Background.Neutral',           ref:'Color.Neutral.N20' },
-    { name:'Background.Neutral.Subtle',    ref:'Color.Neutral.N10' },
-    { name:'Background.Neutral.Hover',     ref:'Color.Neutral.N20' },
-    { name:'Background.Neutral.Pressed',   ref:'Color.Neutral.N40' },
-    { name:'Background.Neutral.Bold',      ref:'Color.Neutral.N500' },
-    { name:'Background.Brand.Bold',        ref:'Color.Blue.B300' },
-    { name:'Background.Brand.Hover',       ref:'Color.Blue.B400' },
-    { name:'Background.Brand.Pressed',     ref:'Color.Blue.B500' },
-    { name:'Background.Selected',          ref:'Color.Blue.B50' },
-    { name:'Background.Selected.Hover',    ref:'Color.Blue.B400' },
-    { name:'Background.Information',       ref:'Color.Blue.B50' },
-    { name:'Background.Success',           ref:'Color.Green.G50' },
-    { name:'Background.Success.Bold',      ref:'Color.Green.G300' },
-    { name:'Background.Warning',           ref:'Color.Orange.O50' },
-    { name:'Background.Warning.Bold',      ref:'Color.Orange.O200' },
-    { name:'Background.Danger.Inverse',    ref:'Color.Red.R50' },
-    { name:'Background.Danger.Bold',       ref:'Color.Red.R300' },
-    { name:'Background.Disable',           ref:'Color.Neutral.N40' },
-    { name:'Background.Discovery',         ref:'Color.Purple.P50' },
-    { name:'Background.Discovery.Bold',    ref:'Color.Purple.P300' },
-    { name:'Background.Input',             ref:'Color.Neutral.N0' },
-    { name:'Background.Input.Hover',       ref:'Color.Neutral.N20' },
-    { name:'Elevation.Surface',            ref:'Color.Neutral.N10' },
-    { name:'Elevation.Surface.Sunken',     ref:'Color.Neutral.N20' },
+    { name:'Background.Neutral',                 ref:'Color.Neutral.N20'  },
+    { name:'Background.Neutral.Subtle',          ref:'Color.Neutral.N10'  },
+    { name:'Background.Neutral.Hover',           ref:'Color.Neutral.N20'  },
+    { name:'Background.Neutral.Pressed',         ref:'Color.Neutral.N40'  },
+    { name:'Background.Neutral.Bold',            ref:'Color.Neutral.N500' },
+    { name:'Background.Neutral.Bold.Hover',      ref:'Color.Neutral.N40'  },
+    { name:'Background.Neutral.Bold.Pressed',    ref:'Color.Neutral.N60'  },
+    { name:'Background.Brand.Bold',              ref:'Color.Blue.B300'    },
+    { name:'Background.Brand.Hover',             ref:'Color.Blue.B400'    },
+    { name:'Background.Brand.Pressed',           ref:'Color.Blue.B500'    },
+    { name:'Background.Selected',                ref:'Color.Blue.B50'     },
+    { name:'Background.Selected.Hover',          ref:'Color.Blue.B400'    },
+    { name:'Background.Information',             ref:'Color.Blue.B50'     },
+    { name:'Background.Input',                   ref:'Color.Neutral.N0'   },
+    { name:'Background.Input.Hover',             ref:'Color.Neutral.N20'  },
+    { name:'Background.Input.Pressed',           ref:'Color.Neutral.N0'   },
+    { name:'Background.Success',                 ref:'Color.Green.G50'    },
+    { name:'Background.Success.Bold',            ref:'Color.Green.G300'   },
+    { name:'Background.Success.Bold.Hovered',    ref:'Color.Green.G400'   },
+    { name:'Background.Warning',                 ref:'Color.Orange.O50'   },
+    { name:'Background.Warning.Bold',            ref:'Color.Orange.O200'  },
+    { name:'Background.Warning.Pressed',         ref:'Color.Orange.O400'  },
+    { name:'Background.Danger.Inverse',          ref:'Color.Red.R50'      },
+    { name:'Background.Danger.Bold',             ref:'Color.Red.R300'     },
+    { name:'Background.Danger.Pressed',          ref:'Color.Red.R500'     },
+    { name:'Background.Danger.Button.Hover',     ref:'Color.Red.R400'     },
+    { name:'Background.Danger.Tag',              ref:'Color.Red.R50'      },
+    { name:'Background.Danger.Tag.Hovered',      ref:'Color.Red.R75'      },
+    { name:'Background.Disable',                 ref:'Color.Neutral.N40'  },
+    { name:'Background.Discovery',               ref:'Color.Purple.P50'   },
+    { name:'Background.Discovery.Bold',          ref:'Color.Purple.P300'  },
+    { name:'Background.Bold.Hover',              ref:'Color.Neutral.N300' },
+    { name:'Background.Bold.Pressed',            ref:'Color.Neutral.N700' },
+    { name:'Background.Select.Pressedd',         ref:'Color.Blue.B100'    },
+    { name:'Background.Accent.Green.Subtle',     ref:'Color.Green.G100'   },
+    { name:'Background.Accent.Green.Subtler',    ref:'Color.Green.G75'    },
+    { name:'Background.Accent.Green.Subtlest',   ref:'Color.Green.G50'    },
+    { name:'Background.Accent.Blue.Subtle',      ref:'Color.Blue.B200'    },
+    { name:'Background.Accent.Blue.Subtler',     ref:'Color.Blue.B75'     },
+    { name:'Background.Accent.Blue.Subtlest',    ref:'Color.Blue.B50'     },
+    { name:'Background.Accent.Gray.Subtle',      ref:'Color.Neutral.N70'  },
+    { name:'Background.Accent.Gray.Subtler',     ref:'Color.Neutral.N40'  },
+    { name:'Background.Accent.Gray.Subtlest',    ref:'Color.Neutral.N20'  },
+    { name:'Background.Accent.Purple.Subtle',    ref:'Color.Purple.P100'  },
+    { name:'Background.Accent.Purple.Subtler',   ref:'Color.Purple.P75'   },
+    { name:'Background.Accent.Purple.Subtlest',  ref:'Color.Purple.P50'   },
+    { name:'Background.Accent.Yellow.Subtle',    ref:'Color.Orange.O100'  },
+    { name:'Background.Accent.Yellow.Subtler',   ref:'Color.Orange.O75'   },
+    { name:'Background.Accent.Yellow.Subtlest',  ref:'Color.Orange.O50'   },
+    { name:'Background.Accent.Red.Subtle',       ref:'Color.Red.R100'     },
+    { name:'Background.Accent.Red.Subtler',      ref:'Color.Red.R75'      },
+    { name:'Background.Accent.Red.Subtlest',     ref:'Color.Red.R50'      },
   ],
   text: [
     { name:'Text.Bold',             ref:'Color.Neutral.N900' },
@@ -445,11 +481,20 @@ const SEMANTIC_TOKENS = {
     { name:'Text.Success',          ref:'Color.Green.G300'   },
     { name:'Text.Danger',           ref:'Color.Red.R300'     },
     { name:'Text.Warning',          ref:'Color.Orange.O300'  },
+    { name:'Text.Warning.Inverse',  ref:'Color.Neutral.N900' },
     { name:'Text.Discovery',        ref:'Color.Purple.P300'  },
     { name:'Text.Accent.Green',     ref:'Color.Green.G500'   },
     { name:'Text.Accent.Red',       ref:'Color.Red.R500'     },
     { name:'Text.Accent.Purple',    ref:'Color.Purple.P500'  },
     { name:'Text.Accent.Yellow',    ref:'Color.Orange.O500'  },
+  ],
+  notification: [
+    { name:'Notification.Online',     ref:'Color.Green.G300'  },
+    { name:'Notification.Background', ref:'Color.Neutral.N0'  },
+  ],
+  elevation: [
+    { name:'Elevation.Surface',        ref:'Color.Neutral.N10' },
+    { name:'Elevation.Surface.Sunken', ref:'Color.Neutral.N20' },
   ],
   border: [
     { name:'Border',           ref:'Color.Neutral.N40'  },
@@ -468,6 +513,7 @@ const SEMANTIC_TOKENS = {
     { name:'Icon.Success',          ref:'Color.Green.G300'   },
     { name:'Icon.Danger',           ref:'Color.Red.R300'     },
     { name:'Icon.Warning',          ref:'Color.Orange.O300'  },
+    { name:'Icon.Warning.Inverse',  ref:'Color.Neutral.N800' },
     { name:'Icon.Discovery',        ref:'Color.Purple.P300'  },
   ]
 };
@@ -633,10 +679,12 @@ function switchImpl(btn, showId, hideId) {
 // ═══════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
   renderFamilies();
-  renderSemantic('sem-background', SEMANTIC_TOKENS.background, 'bg-count');
-  renderSemantic('sem-text',       SEMANTIC_TOKENS.text,       'text-count');
-  renderSemantic('sem-border',     SEMANTIC_TOKENS.border,     'border-count');
-  renderSemantic('sem-icon',       SEMANTIC_TOKENS.icon,       'icon-count');
+  renderSemantic('sem-background',   SEMANTIC_TOKENS.background,   'bg-count');
+  renderSemantic('sem-text',         SEMANTIC_TOKENS.text,         'text-count');
+  renderSemantic('sem-notification', SEMANTIC_TOKENS.notification, 'notification-count');
+  renderSemantic('sem-elevation',    SEMANTIC_TOKENS.elevation,    'elevation-count');
+  renderSemantic('sem-border',       SEMANTIC_TOKENS.border,       'border-count');
+  renderSemantic('sem-icon',         SEMANTIC_TOKENS.icon,         'icon-count');
 
   // Page tabs
   document.querySelectorAll('.page-tab').forEach(tab => {
