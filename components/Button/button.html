@@ -1115,6 +1115,196 @@
       </section>
 
       <!-- =====================================================
+           KOMPONEN SIAP PRODUKSI
+      ====================================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Komponen Siap Produksi
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">Copy-ready button menggunakan <code>.ds-btn</code> beserta semua state interaktif. Tambahkan modifier class untuk mengubah tampilan.</p>
+
+        <!-- Live Preview semua tampilan -->
+        <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; padding:28px 24px; display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; min-height:100px;" class="demo-wrap">
+          <button type="button" class="ds-btn">Default</button>
+          <button type="button" class="ds-btn ds-btn--primary">Primary</button>
+          <button type="button" class="ds-btn ds-btn--subtle">Subtle</button>
+          <button type="button" class="ds-btn ds-btn--link">Link</button>
+          <button type="button" class="ds-btn ds-btn--subtle-link">Subtle Link</button>
+          <button type="button" class="ds-btn ds-btn--danger">Danger</button>
+          <button type="button" class="ds-btn ds-btn--warning">Warning</button>
+        </div>
+
+        <!-- CSS snippet -->
+        <div style="margin-top:16px; background:#0F172A; border-radius:10px; border:1px solid #1E2D45; padding:20px 24px; overflow-x:auto;">
+          <div style="font-size:10px; font-weight:600; color:#475569; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:12px; font-family:var(--font-mono);">CSS — Kelas dasar &amp; modifier tampilan (tokens.css)</div>
+          <pre style="margin:0; padding:0; background:none; border:none; font-size:12px; line-height:1.7; color:#CBD5E1; font-family:'JetBrains Mono','Courier New',monospace; white-space:pre-wrap;"><code><span style="color:#94A3B8;">/* Kelas dasar */</span>
+<span style="color:#7DD3FC;">.ds-btn</span> {
+  <span style="color:#86C3FA;">background-color</span>: <span style="color:#BBF7D0;">var(--color-neutral-n20)</span>;
+  <span style="color:#86C3FA;">color</span>:            <span style="color:#BBF7D0;">var(--color-neutral-n900)</span>;
+  <span style="color:#86C3FA;">font-family</span>:      <span style="color:#BBF7D0;">var(--font-primary)</span>;       <span style="color:#475569;">/* Poppins */</span>
+  <span style="color:#86C3FA;">font-size</span>:        <span style="color:#BBF7D0;">var(--font-size-sm)</span>;       <span style="color:#475569;">/* 14px */</span>
+  <span style="color:#86C3FA;">font-weight</span>:      <span style="color:#BBF7D0;">var(--font-weight-medium)</span>; <span style="color:#475569;">/* 500 */</span>
+  <span style="color:#86C3FA;">padding</span>:          <span style="color:#BBF7D0;">0 var(--space-150)</span>;        <span style="color:#475569;">/* 0 12px */</span>
+  <span style="color:#86C3FA;">min-height</span>:       <span style="color:#BBF7D0;">32px</span>;
+  <span style="color:#86C3FA;">border-radius</span>:    <span style="color:#BBF7D0;">6px</span>;
+}
+<span style="color:#94A3B8;">/* Modifier tampilan */</span>
+<span style="color:#7DD3FC;">.ds-btn--primary</span>    { <span style="color:#86C3FA;">background-color</span>: <span style="color:#BBF7D0;">var(--color-blue-b300)</span>;    <span style="color:#86C3FA;">color</span>: <span style="color:#BBF7D0;">var(--color-neutral-n0)</span>; }
+<span style="color:#7DD3FC;">.ds-btn--subtle</span>     { <span style="color:#86C3FA;">background-color</span>: <span style="color:#BBF7D0;">transparent</span>; }
+<span style="color:#7DD3FC;">.ds-btn--link</span>       { <span style="color:#86C3FA;">background-color</span>: <span style="color:#BBF7D0;">transparent</span>; <span style="color:#86C3FA;">color</span>: <span style="color:#BBF7D0;">var(--color-blue-b300)</span>; }
+<span style="color:#7DD3FC;">.ds-btn--danger</span>     { <span style="color:#86C3FA;">background-color</span>: <span style="color:#BBF7D0;">var(--color-red-r300)</span>;     <span style="color:#86C3FA;">color</span>: <span style="color:#BBF7D0;">var(--color-neutral-n0)</span>; }
+<span style="color:#7DD3FC;">.ds-btn--warning</span>    { <span style="color:#86C3FA;">background-color</span>: <span style="color:#BBF7D0;">var(--color-orange-o200)</span>;  <span style="color:#86C3FA;">color</span>: <span style="color:#BBF7D0;">var(--color-neutral-n900)</span>; }
+<span style="color:#94A3B8;">/* Modifier ukuran &amp; bentuk */</span>
+<span style="color:#7DD3FC;">.ds-btn--compact</span>    { <span style="color:#86C3FA;">min-height</span>: <span style="color:#BBF7D0;">24px</span>; }
+<span style="color:#7DD3FC;">.ds-btn--icon-only</span>  { <span style="color:#86C3FA;">padding</span>: <span style="color:#BBF7D0;">0 var(--space-050)</span>; <span style="color:#86C3FA;">gap</span>: <span style="color:#BBF7D0;">0</span>; }
+<span style="color:#7DD3FC;">.ds-btn--loading</span>    { <span style="color:#86C3FA;">pointer-events</span>: <span style="color:#BBF7D0;">none</span>; <span style="color:#86C3FA;">cursor</span>: <span style="color:#BBF7D0;">default</span>; }</code></pre>
+        </div>
+
+        <!-- HTML snippet -->
+        <div style="margin-top:8px; background:#0F172A; border-radius:10px; border:1px solid #1E2D45; padding:20px 24px; overflow-x:auto;">
+          <div style="font-size:10px; font-weight:600; color:#475569; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:12px; font-family:var(--font-mono);">HTML — Pola penggunaan umum</div>
+          <pre style="margin:0; padding:0; background:none; border:none; font-size:12px; line-height:1.7; color:#CBD5E1; font-family:'JetBrains Mono','Courier New',monospace; white-space:pre-wrap;"><code><span style="color:#94A3B8;">&lt;!-- Default (aksi sekunder) --&gt;</span>
+<span style="color:#7DD3FC;">&lt;button</span> <span style="color:#86C3FA;">type</span>=<span style="color:#BBF7D0;">"button"</span> <span style="color:#86C3FA;">class</span>=<span style="color:#BBF7D0;">"ds-btn"</span><span style="color:#7DD3FC;">&gt;</span>Batal<span style="color:#7DD3FC;">&lt;/button&gt;</span>
+
+<span style="color:#94A3B8;">&lt;!-- Primary (aksi utama) --&gt;</span>
+<span style="color:#7DD3FC;">&lt;button</span> <span style="color:#86C3FA;">type</span>=<span style="color:#BBF7D0;">"button"</span> <span style="color:#86C3FA;">class</span>=<span style="color:#BBF7D0;">"ds-btn ds-btn--primary"</span><span style="color:#7DD3FC;">&gt;</span>Simpan<span style="color:#7DD3FC;">&lt;/button&gt;</span>
+
+<span style="color:#94A3B8;">&lt;!-- Kompak --&gt;</span>
+<span style="color:#7DD3FC;">&lt;button</span> <span style="color:#86C3FA;">type</span>=<span style="color:#BBF7D0;">"button"</span> <span style="color:#86C3FA;">class</span>=<span style="color:#BBF7D0;">"ds-btn ds-btn--compact"</span><span style="color:#7DD3FC;">&gt;</span>Filter<span style="color:#7DD3FC;">&lt;/button&gt;</span>
+
+<span style="color:#94A3B8;">&lt;!-- Dipilih / toggle --&gt;</span>
+<span style="color:#7DD3FC;">&lt;button</span> <span style="color:#86C3FA;">type</span>=<span style="color:#BBF7D0;">"button"</span> <span style="color:#86C3FA;">class</span>=<span style="color:#BBF7D0;">"ds-btn"</span> <span style="color:#86C3FA;">aria-pressed</span>=<span style="color:#BBF7D0;">"true"</span><span style="color:#7DD3FC;">&gt;</span>Dipilih<span style="color:#7DD3FC;">&lt;/button&gt;</span>
+
+<span style="color:#94A3B8;">&lt;!-- Nonaktif --&gt;</span>
+<span style="color:#7DD3FC;">&lt;button</span> <span style="color:#86C3FA;">type</span>=<span style="color:#BBF7D0;">"button"</span> <span style="color:#86C3FA;">class</span>=<span style="color:#BBF7D0;">"ds-btn ds-btn--primary"</span> <span style="color:#86C3FA;">disabled</span><span style="color:#7DD3FC;">&gt;</span>Nonaktif<span style="color:#7DD3FC;">&lt;/button&gt;</span>
+
+<span style="color:#94A3B8;">&lt;!-- Hanya Ikon --&gt;</span>
+<span style="color:#7DD3FC;">&lt;button</span> <span style="color:#86C3FA;">type</span>=<span style="color:#BBF7D0;">"button"</span> <span style="color:#86C3FA;">class</span>=<span style="color:#BBF7D0;">"ds-btn ds-btn--icon-only"</span> <span style="color:#86C3FA;">aria-label</span>=<span style="color:#BBF7D0;">"Hapus"</span><span style="color:#7DD3FC;">&gt;</span><span style="color:#94A3B8;">&lt;!-- svg --&gt;</span><span style="color:#7DD3FC;">&lt;/button&gt;</span>
+
+<span style="color:#94A3B8;">&lt;!-- Loading --&gt;</span>
+<span style="color:#7DD3FC;">&lt;button</span> <span style="color:#86C3FA;">type</span>=<span style="color:#BBF7D0;">"button"</span> <span style="color:#86C3FA;">class</span>=<span style="color:#BBF7D0;">"ds-btn ds-btn--primary ds-btn--loading"</span> <span style="color:#86C3FA;">aria-busy</span>=<span style="color:#BBF7D0;">"true"</span><span style="color:#7DD3FC;">&gt;</span>
+  <span style="color:#86C3FA;">&lt;span</span> <span style="color:#86C3FA;">class</span>=<span style="color:#BBF7D0;">"ds-spinner"</span><span style="color:#86C3FA;">&gt;</span><span style="color:#94A3B8;">&lt;!-- svg spinner --&gt;</span><span style="color:#86C3FA;">&lt;/span&gt;</span>
+<span style="color:#7DD3FC;">&lt;/button&gt;</span></code></pre>
+        </div>
+      </section>
+
+      <!-- =====================================================
+           ANATOMI & TOKEN
+      ====================================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Anatomi &amp; Token
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">Token CSS yang mengontrol tampilan, ukuran, dan status setiap varian button — semua bersumber dari tokens.css.</p>
+
+        <div class="anatomy-grid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px;">
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-left:3px solid var(--color-primary-400); border-radius:10px; padding:20px;">
+            <div style="font-size:11px; font-weight:600; color:var(--color-text-tertiary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; font-family:var(--font-primary);">Warna Teks</div>
+            <div style="font-family:var(--font-mono); font-size:12px; color:var(--color-primary-500); margin-bottom:4px;">--color-neutral-n900</div>
+            <div style="font-size:12px; color:var(--color-text-secondary); font-family:var(--font-primary);">#091E42 · Teks Bold / Default</div>
+          </div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-left:3px solid var(--color-primary-400); border-radius:10px; padding:20px;">
+            <div style="font-size:11px; font-weight:600; color:var(--color-text-tertiary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; font-family:var(--font-primary);">Tipografi</div>
+            <div style="font-family:var(--font-mono); font-size:12px; color:var(--color-primary-500); margin-bottom:4px;">--font-primary · --font-size-sm</div>
+            <div style="font-size:12px; color:var(--color-text-secondary); font-family:var(--font-primary);">Poppins · 14px · 500 · 20px lh</div>
+          </div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-left:3px solid var(--color-primary-400); border-radius:10px; padding:20px;">
+            <div style="font-size:11px; font-weight:600; color:var(--color-text-tertiary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; font-family:var(--font-primary);">Latar Default</div>
+            <div style="font-family:var(--font-mono); font-size:12px; color:var(--color-primary-500); margin-bottom:4px;">--color-neutral-n20 → n30 → n40</div>
+            <div style="font-size:12px; color:var(--color-text-secondary); font-family:var(--font-primary);">Default → Hover → Tekan</div>
+          </div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-left:3px solid var(--color-primary-400); border-radius:10px; padding:20px;">
+            <div style="font-size:11px; font-weight:600; color:var(--color-text-tertiary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; font-family:var(--font-primary);">Latar Primary</div>
+            <div style="font-family:var(--font-mono); font-size:12px; color:var(--color-primary-500); margin-bottom:4px;">--color-blue-b300 → b400 → b500</div>
+            <div style="font-size:12px; color:var(--color-text-secondary); font-family:var(--font-primary);">Default → Hover → Tekan</div>
+          </div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-left:3px solid var(--color-primary-400); border-radius:10px; padding:20px;">
+            <div style="font-size:11px; font-weight:600; color:var(--color-text-tertiary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; font-family:var(--font-primary);">Spasi Default</div>
+            <div style="font-family:var(--font-mono); font-size:12px; color:var(--color-primary-500); margin-bottom:4px;">--space-150 · min-height 32px</div>
+            <div style="font-size:12px; color:var(--color-text-secondary); font-family:var(--font-primary);">Padding H 12px · Min-height 32px</div>
+          </div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-left:3px solid var(--color-primary-400); border-radius:10px; padding:20px;">
+            <div style="font-size:11px; font-weight:600; color:var(--color-text-tertiary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; font-family:var(--font-primary);">Spasi Kompak</div>
+            <div style="font-family:var(--font-mono); font-size:12px; color:var(--color-primary-500); margin-bottom:4px;">--space-150 · min-height 24px</div>
+            <div style="font-size:12px; color:var(--color-text-secondary); font-family:var(--font-primary);">Padding H 12px · Min-height 24px · .ds-btn--compact</div>
+          </div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-left:3px solid var(--color-primary-400); border-radius:10px; padding:20px;">
+            <div style="font-size:11px; font-weight:600; color:var(--color-text-tertiary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; font-family:var(--font-primary);">Fokus</div>
+            <div style="font-family:var(--font-mono); font-size:12px; color:var(--color-primary-500); margin-bottom:4px;">--color-primary-500</div>
+            <div style="font-size:12px; color:var(--color-text-secondary); font-family:var(--font-primary);">Ring 2px · Halo 5px · WCAG AA ✓</div>
+          </div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-left:3px solid var(--color-primary-400); border-radius:10px; padding:20px;">
+            <div style="font-size:11px; font-weight:600; color:var(--color-text-tertiary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; font-family:var(--font-primary);">Status Dipilih</div>
+            <div style="font-family:var(--font-mono); font-size:12px; color:var(--color-primary-500); margin-bottom:4px;">--color-blue-b50 · --color-blue-b300</div>
+            <div style="font-size:12px; color:var(--color-text-secondary); font-family:var(--font-primary);">B50 bg · B300 text · aria-pressed="true"</div>
+          </div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-left:3px solid var(--color-primary-400); border-radius:10px; padding:20px;">
+            <div style="font-size:11px; font-weight:600; color:var(--color-text-tertiary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; font-family:var(--font-primary);">Bahaya &amp; Peringatan</div>
+            <div style="font-family:var(--font-mono); font-size:12px; color:var(--color-primary-500); margin-bottom:4px;">--color-red-r300 · --color-orange-o200</div>
+            <div style="font-size:12px; color:var(--color-text-secondary); font-family:var(--font-primary);">Danger (merah) · Warning (oranye)</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =====================================================
+           PANDUAN PENGGUNAAN
+      ====================================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Panduan Penggunaan
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">Aturan praktis untuk memilih tampilan dan status yang tepat agar tombol dapat diakses, konsisten, dan mudah digunakan.</p>
+
+        <div class="usage-grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+
+          <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+            <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+            Gunakan atribut <code>disabled</code> pada elemen <code>&lt;button&gt;</code> agar pembaca layar mengumumkan status nonaktif secara native tanpa JavaScript tambahan.
+          </div>
+
+          <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+            <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+            Jangan gunakan <code>&lt;div&gt;</code> atau <code>&lt;a&gt;</code> untuk pemicu aksi — selalu gunakan elemen <code>&lt;button&gt;</code> yang semantik agar keyboard dan pembaca layar berfungsi dengan benar.
+          </div>
+
+          <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+            <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+            Tambahkan <code>aria-pressed="true"</code> saat <code>isSelected=true</code> untuk mengomunikasikan status toggle kepada teknologi bantu secara akurat.
+          </div>
+
+          <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+            <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+            Jangan hilangkan fokus dengan <code>outline:none</code> tanpa menyediakan indikator fokus pengganti — <code>.ds-btn:focus-visible</code> sudah menangani ini dengan benar.
+          </div>
+
+          <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+            <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+            Gunakan hanya satu tombol <code>appearance=primary</code> per halaman atau per area aksi — primary menandai satu aksi paling penting dalam konteksnya.
+          </div>
+
+          <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+            <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+            Jangan tempatkan dua tombol primary berdampingan — dua CTA merah/biru yang bersaing membingungkan pengguna tentang langkah yang harus diambil selanjutnya.
+          </div>
+
+          <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+            <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+            Selalu sertakan <code>aria-label</code> pada tombol ikon-saja (<code>.ds-btn--icon-only</code>) — pengguna pembaca layar memerlukan teks deskriptif untuk memahami fungsi tombol.
+          </div>
+
+          <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+            <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+            Jangan gunakan <code>appearance=danger</code> untuk aksi yang tidak destruktif — warna merah harus dicadangkan untuk aksi ireversibel seperti hapus atau reset data.
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- =====================================================
            SECTION 2: APPEARANCE=DEFAULT — ALL STATES
       ====================================================== -->
       <section style="margin-bottom:48px;">
@@ -1515,6 +1705,17 @@
           </tbody>
         </table>
       </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan tombol ikon saja ketika ruang terbatas dan ikonnya sudah dikenal luas — misalnya tutup, hapus, atau pengaturan. Selalu sertakan <code>aria-label</code> yang deskriptif.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan tombol ikon saja tanpa atribut <code>aria-label</code> — pembaca layar tidak dapat menyampaikan fungsi tombol tanpa teks yang bermakna.
+        </div>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -1650,6 +1851,17 @@
           </tbody>
         </table>
       </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan ukuran kompak untuk toolbar atau area kepadatan tinggi seperti tabel dan panel sidebar, di mana baris aksi perlu ringkas.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan ukuran kompak sebagai tombol utama di halaman — target sentuh 24px terlalu kecil untuk antarmuka yang sering diakses.
+        </div>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -1716,6 +1928,17 @@
       </tr>
           </tbody>
         </table>
+
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Tampilkan status loading untuk semua aksi async agar pengguna tahu sistem sedang bekerja — gunakan <code>aria-busy="true"</code> dan <code>aria-label</code> deskriptif.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan biarkan tombol tetap aktif saat proses sedang berlangsung — selalu nonaktifkan interaksi ulang dengan <code>pointer-events:none</code> saat loading.
+        </div>
       </div>
       </section>
 
@@ -2128,6 +2351,17 @@
           </tbody>
         </table>
       </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan primary ikon-saja untuk aksi utama yang ikonnya sudah dikenal luas, seperti tambah (+) atau konfirmasi cepat dalam form kompak.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan tempatkan lebih dari satu tombol primary ikon-saja di area yang sama — ini menciptakan ambiguitas aksi mana yang paling penting.
+        </div>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -2251,6 +2485,17 @@
           </tbody>
         </table>
       </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan primary ikon kompak hanya dalam toolbar padat atau card kecil tempat ruang sangat terbatas namun aksi tetap perlu menonjol.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan primary ikon kompak sebagai CTA utama di halaman besar — ukuran kecil mengurangi visibilitas aksi yang paling penting.
+        </div>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -2317,6 +2562,17 @@
       </tr>
           </tbody>
         </table>
+
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan loading state pada tombol primary untuk operasi penting seperti submit form atau konfirmasi — berikan umpan balik visual yang jelas bahwa sistem merespons.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan menghapus teks tombol saat loading tanpa menambahkan <code>aria-label</code> — pengguna pembaca layar perlu tahu tombol sedang dalam status memproses.
+        </div>
       </div>
       </section>
 
@@ -2449,6 +2705,17 @@
           </tbody>
         </table>
       </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan <code>appearance=subtle</code> untuk aksi sekunder yang tidak perlu latar belakang permanen, seperti tombol di toolbar atau tindakan kontekstual yang jarang digunakan.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan subtle sebagai pengganti primary untuk aksi utama — kurangnya latar belakang membuatnya kurang menonjol dan mudah terlewati pengguna.
+        </div>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -2572,6 +2839,17 @@
           </tbody>
         </table>
       </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan subtle kompak untuk baris aksi dalam tabel atau toolbar ringan di mana tombol tidak boleh memakan ruang berlebih.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan subtle kompak untuk aksi destruktif — ukuran kecil dan visual minim meningkatkan risiko klik yang tidak disengaja.
+        </div>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -2694,6 +2972,17 @@
       </tr>
           </tbody>
         </table>
+
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan tombol subtle tanpa spacing ketika tombol perlu tampil sebagai aksi inline yang menyatu dengan teks atau konten di sekitarnya.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan subtle-none sebagai tombol utama halaman — varian ini dirancang untuk aksi sekunder ringan yang tidak perlu menonjol.
+        </div>
       </div>
       </section>
 
@@ -2826,6 +3115,17 @@
           </tbody>
         </table>
       </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan <code>appearance=link</code> untuk navigasi atau aksi yang terasa seperti hyperlink dalam konteks teks, seperti “Lihat semua” atau “Buka detail”.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan link appearance untuk aksi destruktif atau penting — kurangnya latar belakang membuat pengguna meremehkan bobot aksinya.
+        </div>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -2948,6 +3248,17 @@
       </tr>
           </tbody>
         </table>
+      </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan link kompak dalam toolbar atau daftar di mana teks aksi perlu sejajar rapi dengan konten lain pada baris yang sama.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan menumpuk beberapa link kompak berdampingan tanpa spasi yang cukup — sulit dibedakan sebagai elemen yang terpisah.
+        </div>
       </div>
       </section>
 
@@ -3072,6 +3383,17 @@
           </tbody>
         </table>
       </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan <code>spacing=none</code> untuk link inline di dalam kalimat atau paragraf yang memerlukan tampilan persis seperti tautan biasa tanpa padding berlebih.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan <code>spacing=none</code> jika tombol berdiri sendiri di baris baru — gunakan spacing compact atau default untuk target sentuh yang memadai.
+        </div>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -3194,6 +3516,17 @@
       </tr>
           </tbody>
         </table>
+      </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Sertakan <code>aria-label</code> yang menjelaskan tujuan ikon pada setiap link ikon-saja agar dapat diakses oleh pembaca layar.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan link ikon-saja untuk aksi penting tanpa tooltip pendukung — ikon tanpa teks dapat membingungkan pengguna baru.
+        </div>
       </div>
       </section>
 
@@ -3318,6 +3651,17 @@
           </tbody>
         </table>
       </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan link ikon-saja kompak dalam toolbar navigasi padat di mana label teks akan memakan terlalu banyak ruang.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan link ikon-saja kompak sebagai satu-satunya kontrol di halaman — target sentuh 24px menyulitkan akses di perangkat layar sentuh.
+        </div>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -3441,6 +3785,17 @@
           </tbody>
         </table>
       </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan link ikon-saja tanpa spasi untuk ikon inline dalam paragraf, seperti ikon tautan eksternal atau ikon info di akhir teks.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan ukuran ini untuk aksi yang sering digunakan — target sentuh tanpa padding sangat kecil dan rawan klik salah.
+        </div>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -3507,6 +3862,17 @@
       </tr>
           </tbody>
         </table>
+
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan link loading state saat navigasi memerlukan waktu memuat — pastikan spinner terlihat jelas dan tombol tidak dapat diklik ulang selama proses.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan loading state pada tombol link untuk halaman yang sudah di-cache — hanya tampilkan spinner saat ada operasi async yang nyata.
+        </div>
       </div>
       </section>
 
@@ -3639,6 +4005,17 @@
           </tbody>
         </table>
       </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan <code>appearance=subtle-link</code> untuk aksi navigasi sekunder yang lebih sunyi, seperti tombol “Kembali”, “Lewati”, atau tautan kontekstual ringan.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan subtle-link untuk aksi utama — warnanya yang netral membuatnya hampir tidak terlihat pada latar belakang terang.
+        </div>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -3761,6 +4138,17 @@
       </tr>
           </tbody>
         </table>
+      </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan subtle-link kompak dalam baris metadata atau caption di mana aksi perlu hadir namun tidak boleh bersaing secara visual dengan konten utama.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan subtle-link kompak tanpa konteks teks di sekitarnya — tombol ini dirancang untuk menyatu dengan konten, bukan berdiri sendiri.
+        </div>
       </div>
       </section>
 
@@ -3885,6 +4273,17 @@
           </tbody>
         </table>
       </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan <code>spacing=none</code> untuk subtle-link inline dalam teks panjang atau keterangan yang memerlukan tautan yang tidak mengganggu alur baca.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan subtle-link <code>spacing=none</code> untuk aksi penting — warna abu-abu dengan nol padding membuatnya hampir tidak terdeteksi pengguna.
+        </div>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -4007,6 +4406,17 @@
       </tr>
           </tbody>
         </table>
+      </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Sertakan <code>aria-label</code> pada setiap tombol ikon subtle-link, karena warnanya yang redup tidak memberikan petunjuk visual yang kuat tentang fungsinya.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan subtle-link ikon-saja untuk aksi yang sering dilakukan — kurangnya kontras warna mempersulit pengguna menemukan tombol ini.
+        </div>
       </div>
       </section>
 
@@ -4131,6 +4541,17 @@
           </tbody>
         </table>
       </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan subtle-link ikon kompak dalam panel informasi atau card sekunder di mana aksi bersifat opsional dan jarang digunakan.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan menempatkan banyak subtle-link ikon kompak berdampingan — kesamaan visualnya membuat pengguna sulit membedakan fungsi masing-masing.
+        </div>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -4254,6 +4675,17 @@
           </tbody>
         </table>
       </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan untuk ikon tambahan di akhir teks seperti indikator tautan eksternal atau ikon informasi inline yang tidak memerlukan padding tambahan.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan untuk aksi yang menghapus atau mengubah data — ukuran sangat kecil dan kontras rendah meningkatkan risiko klik yang tidak disengaja.
+        </div>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -4320,6 +4752,17 @@
       </tr>
           </tbody>
         </table>
+
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan subtle-link loading state untuk aksi navigasi ringan yang memerlukan waktu — pastikan pengguna mendapat umpan balik bahwa aksi sedang diproses.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan loading state pada tombol subtle-link untuk aksi yang selesai instan — penggunaan berlebih akan mengikis kepercayaan pengguna terhadap performa sistem.
+        </div>
       </div>
       </section>
 
@@ -4436,6 +4879,17 @@
           </tbody>
         </table>
       </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan <code>appearance=danger</code> hanya untuk aksi destruktif ireversibel seperti hapus data, batalkan langganan, atau reset — selalu sertakan modal konfirmasi.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan danger untuk aksi peringatan yang masih bisa dibatalkan — gunakan <code>appearance=warning</code> untuk skenario yang kurang kritis.
+        </div>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -4542,6 +4996,17 @@
       </tr>
           </tbody>
         </table>
+      </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan danger kompak dalam tabel yang memiliki aksi hapus per baris, di mana ruang terbatas namun warna merah tetap perlu memperingatkan pengguna.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan tempatkan danger kompak terlalu dekat dengan tombol aksi positif — jarak minimal diperlukan untuk mencegah klik salah yang tidak dapat dibatalkan.
+        </div>
       </div>
       </section>
 
@@ -4650,6 +5115,17 @@
           </tbody>
         </table>
       </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan danger ikon-saja dengan ikon yang sudah dikenal (seperti ikon tempat sampah) dan selalu sertakan <code>aria-label</code> yang menjelaskan aksi destruktifnya.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan danger ikon-saja tanpa label teks pendukung — pengguna mungkin tidak menyadari bobot destruktif dari tombol tersebut.
+        </div>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -4757,6 +5233,17 @@
           </tbody>
         </table>
       </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan danger ikon kompak hanya jika ikonnya sudah sangat familiar, seperti ikon ✕ untuk menghapus item dari daftar secara inline.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan tempatkan danger ikon kompak di area yang mudah tersentuh tidak sengaja, seperti di antara tombol aksi non-destruktif atau di tepi layar.
+        </div>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -4823,6 +5310,17 @@
       </tr>
           </tbody>
         </table>
+
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan danger loading state saat menjalankan operasi destruktif yang memerlukan waktu (seperti penghapusan massal) — cegah pengguna dari klik ganda yang tidak disengaja.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan danger loading state untuk aksi yang tidak destruktif — memilih warna merah saat loading dapat menimbulkan kecemasan yang tidak perlu pada pengguna.
+        </div>
       </div>
       </section>
 
@@ -4939,6 +5437,17 @@
           </tbody>
         </table>
       </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan <code>appearance=warning</code> untuk aksi yang memerlukan perhatian ekstra namun tidak ireversibel, seperti menonaktifkan fitur atau mengubah pengaturan kritis.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan warning sebagai pengganti danger untuk aksi yang benar-benar destruktif — warna oranye kurang menimbulkan urgensi setara dengan merah.
+        </div>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -5045,6 +5554,17 @@
       </tr>
           </tbody>
         </table>
+      </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan warning kompak dalam card atau panel peringatan di mana tombol perlu hadir namun tidak boleh mendominasi ruang visual.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan terlalu banyak warning kompak dalam satu tampilan — penggunaan berlebih mengurangi efektivitas sinyal visual peringatan.
+        </div>
       </div>
       </section>
 
@@ -5153,6 +5673,17 @@
           </tbody>
         </table>
       </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan ikon yang secara universal bermakna peringatan dan sertakan <code>aria-label</code> deskriptif pada tombol warning ikon-saja.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan warning ikon-saja tanpa konteks yang jelas di sekitarnya — pengguna membutuhkan konteks untuk memahami konsekuensi menekan tombol.
+        </div>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -5260,6 +5791,17 @@
           </tbody>
         </table>
       </div>
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan warning ikon kompak dalam toolbar atau tabel untuk menandai baris yang memerlukan perhatian pengguna tanpa memakan ruang berlebih.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan gunakan warning ikon kompak sebagai indikator status murni — gunakan Badge atau Lozenge untuk status; simpan tombol untuk aksi.
+        </div>
+      </div>
       </section>
 
       <!-- =====================================================
@@ -5326,156 +5868,18 @@
       </tr>
           </tbody>
         </table>
-      </div>
-      </section>
 
-      <!-- ── Documentation & Usage ── -->
-      <div class="ds-group-label">
-        <div class="ds-group-label-pill">
-          <span class="ds-group-dot ds-group-dot--default"></span>
-          Documentation &amp; Usage
+      <!-- Panduan Penggunaan -->
+      <div style="margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:12px;" class="usage-grid-2">
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
+          Gunakan warning loading state untuk aksi yang memerlukan konfirmasi dan memakan waktu — tampilkan spinner dengan warna yang sesuai agar pengguna tidak melakukan aksi ulang.
+        </div>
+        <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
+          <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
+          Jangan abaikan <code>aria-busy="true"</code> pada tombol warning loading — pengguna dengan alat bantu aksesibilitas perlu mengetahui bahwa sistem sedang memproses peringatan.
         </div>
       </div>
-
-      <!-- =====================================================
-           SECTION 3: PRODUCTION-READY COMPONENT
-      ====================================================== -->
-      <section style="margin-bottom:48px;">
-        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
-          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
-          Production-ready Component
-        </h2>
-        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">Copy-ready button using <code>.ds-btn</code> with all interactive states wired via tokens.css custom properties.</p>
-
-        <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; padding:40px 32px; display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap; min-height:120px;" class="demo-wrap">
-          <button type="button" class="ds-btn">Button</button>
-          <button type="button" class="ds-btn" aria-pressed="true">Selected</button>
-          <button type="button" class="ds-btn" disabled>Disabled</button>
-        </div>
-
-        <!-- CSS snippet -->
-        <div style="margin-top:16px; background:#0F172A; border-radius:10px; border:1px solid #1E2D45; padding:20px 24px; overflow-x:auto;">
-          <div style="font-size:10px; font-weight:600; color:#475569; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:12px; font-family:var(--font-mono);">CSS — .ds-btn using tokens.css</div>
-          <pre style="margin:0; padding:0; background:none; border:none; font-size:12px; line-height:1.7; color:#CBD5E1; font-family:'JetBrains Mono','Courier New',monospace; white-space:pre-wrap;"><code><span style="color:#94A3B8;">/* tokens from tokens.css */</span>
-<span style="color:#7DD3FC;">.ds-btn</span> {
-  <span style="color:#86C3FA;">background-color</span>: <span style="color:#BBF7D0;">var(--color-neutral-n20)</span>;
-  <span style="color:#86C3FA;">color</span>:            <span style="color:#BBF7D0;">var(--color-neutral-n900)</span>; <span style="color:#475569;">/* --Color-Text-Bold */</span>
-  <span style="color:#86C3FA;">font-family</span>:      <span style="color:#BBF7D0;">var(--font-primary)</span>;       <span style="color:#475569;">/* Poppins */</span>
-  <span style="color:#86C3FA;">font-size</span>:        <span style="color:#BBF7D0;">var(--font-size-sm)</span>;       <span style="color:#475569;">/* 14px */</span>
-  <span style="color:#86C3FA;">font-weight</span>:      <span style="color:#BBF7D0;">var(--font-weight-medium)</span>; <span style="color:#475569;">/* 500 */</span>
-  <span style="color:#86C3FA;">line-height</span>:      <span style="color:#BBF7D0;">var(--text-body-small-medium-lh)</span>; <span style="color:#475569;">/* 20px */</span>
-  <span style="color:#86C3FA;">word-wrap</span>:        <span style="color:#BBF7D0;">break-word</span>;
-  <span style="color:#86C3FA;">padding</span>:          <span style="color:#BBF7D0;">0 var(--space-150)</span>;        <span style="color:#475569;">/* 12px */</span>
-  <span style="color:#86C3FA;">min-height</span>:       <span style="color:#BBF7D0;">32px</span>;
-  <span style="color:#86C3FA;">border-radius</span>:    <span style="color:#BBF7D0;">6px</span>;
-  <span style="color:#86C3FA;">transition</span>:       <span style="color:#BBF7D0;">background-color var(--transition-fast)</span>;
-}
-<span style="color:#7DD3FC;">.ds-btn</span>:<span style="color:#F0ABFC;">hover</span>   { <span style="color:#86C3FA;">background-color</span>: <span style="color:#BBF7D0;">var(--color-neutral-n30)</span>; }
-<span style="color:#7DD3FC;">.ds-btn</span>:<span style="color:#F0ABFC;">active</span>  { <span style="color:#86C3FA;">background-color</span>: <span style="color:#BBF7D0;">var(--color-neutral-n40)</span>; }
-<span style="color:#7DD3FC;">.ds-btn</span>:<span style="color:#F0ABFC;">disabled</span> { <span style="color:#86C3FA;">color</span>: <span style="color:#BBF7D0;">var(--color-neutral-n50)</span>; }</code></pre>
-        </div>
-
-        <!-- HTML snippet -->
-        <div style="margin-top:8px; background:#0F172A; border-radius:10px; border:1px solid #1E2D45; padding:20px 24px; overflow-x:auto;">
-          <div style="font-size:10px; font-weight:600; color:#475569; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:12px; font-family:var(--font-mono);">HTML</div>
-          <pre style="margin:0; padding:0; background:none; border:none; font-size:12px; line-height:1.7; color:#CBD5E1; font-family:'JetBrains Mono','Courier New',monospace; white-space:pre-wrap;"><code><span style="color:#7DD3FC;">&lt;button</span> <span style="color:#86C3FA;">type</span>=<span style="color:#BBF7D0;">"button"</span> <span style="color:#86C3FA;">class</span>=<span style="color:#BBF7D0;">"ds-btn"</span><span style="color:#7DD3FC;">&gt;</span>Button<span style="color:#7DD3FC;">&lt;/button&gt;</span>
-
-<span style="color:#94A3B8;">&lt;!-- Selected --&gt;</span>
-<span style="color:#7DD3FC;">&lt;button</span> <span style="color:#86C3FA;">type</span>=<span style="color:#BBF7D0;">"button"</span> <span style="color:#86C3FA;">class</span>=<span style="color:#BBF7D0;">"ds-btn"</span> <span style="color:#86C3FA;">aria-pressed</span>=<span style="color:#BBF7D0;">"true"</span><span style="color:#7DD3FC;">&gt;</span>Selected<span style="color:#7DD3FC;">&lt;/button&gt;</span>
-
-<span style="color:#94A3B8;">&lt;!-- Disabled --&gt;</span>
-<span style="color:#7DD3FC;">&lt;button</span> <span style="color:#86C3FA;">type</span>=<span style="color:#BBF7D0;">"button"</span> <span style="color:#86C3FA;">class</span>=<span style="color:#BBF7D0;">"ds-btn"</span> <span style="color:#86C3FA;">disabled</span><span style="color:#7DD3FC;">&gt;</span>Disabled<span style="color:#7DD3FC;">&lt;/button&gt;</span></code></pre>
-        </div>
-      </section>
-
-      <!-- =====================================================
-           SECTION 4: ANATOMY & TOKENS
-      ====================================================== -->
-      <section style="margin-bottom:48px;">
-        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
-          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
-          Anatomy &amp; Tokens
-        </h2>
-
-        <div class="anatomy-grid" style="display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px;">
-
-          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-left:3px solid var(--color-primary-400); border-radius:10px; padding:20px;">
-            <div style="font-size:11px; font-weight:600; color:var(--color-text-tertiary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; font-family:var(--font-primary);">Text Color</div>
-            <div style="font-family:var(--font-mono); font-size:12px; color:var(--color-primary-500); margin-bottom:4px;">--color-neutral-n900</div>
-            <div style="font-size:12px; color:var(--color-text-secondary); font-family:var(--font-primary);">#091E42 · Bold / Default</div>
-          </div>
-
-          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-left:3px solid var(--color-primary-400); border-radius:10px; padding:20px;">
-            <div style="font-size:11px; font-weight:600; color:var(--color-text-tertiary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; font-family:var(--font-primary);">Typography</div>
-            <div style="font-family:var(--font-mono); font-size:12px; color:var(--color-primary-500); margin-bottom:4px;">--font-primary · --font-size-sm</div>
-            <div style="font-size:12px; color:var(--color-text-secondary); font-family:var(--font-primary);">Poppins · 14px · 500 · 20px lh</div>
-          </div>
-
-          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-left:3px solid var(--color-primary-400); border-radius:10px; padding:20px;">
-            <div style="font-size:11px; font-weight:600; color:var(--color-text-tertiary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; font-family:var(--font-primary);">Background</div>
-            <div style="font-family:var(--font-mono); font-size:12px; color:var(--color-primary-500); margin-bottom:4px;">--color-neutral-n20 → n30 → n40</div>
-            <div style="font-size:12px; color:var(--color-text-secondary); font-family:var(--font-primary);">Default → Hover → Press</div>
-          </div>
-
-          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-left:3px solid var(--color-primary-400); border-radius:10px; padding:20px;">
-            <div style="font-size:11px; font-weight:600; color:var(--color-text-tertiary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; font-family:var(--font-primary);">Spacing</div>
-            <div style="font-family:var(--font-mono); font-size:12px; color:var(--color-primary-500); margin-bottom:4px;">--space-150 · min-height 32px</div>
-            <div style="font-size:12px; color:var(--color-text-secondary); font-family:var(--font-primary);">12px H-pad · 32px min-height</div>
-          </div>
-
-          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-left:3px solid var(--color-primary-400); border-radius:10px; padding:20px;">
-            <div style="font-size:11px; font-weight:600; color:var(--color-text-tertiary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; font-family:var(--font-primary);">Focus Ring</div>
-            <div style="font-family:var(--font-mono); font-size:12px; color:var(--color-primary-500); margin-bottom:4px;">--color-primary-500</div>
-            <div style="font-size:12px; color:var(--color-text-secondary); font-family:var(--font-primary);">2px ring · WCAG AA accessible</div>
-          </div>
-
-          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-left:3px solid var(--color-primary-400); border-radius:10px; padding:20px;">
-            <div style="font-size:11px; font-weight:600; color:var(--color-text-tertiary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; font-family:var(--font-primary);">Selected</div>
-            <div style="font-family:var(--font-mono); font-size:12px; color:var(--color-primary-500); margin-bottom:4px;">--color-blue-b50 · --color-blue-b300</div>
-            <div style="font-size:12px; color:var(--color-text-secondary); font-family:var(--font-primary);">B50 bg · B300 text · aria-pressed="true"</div>
-          </div>
-
-          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-left:3px solid var(--color-primary-400); border-radius:10px; padding:20px;">
-            <div style="font-size:11px; font-weight:600; color:var(--color-text-tertiary); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; font-family:var(--font-primary);">Spacing Compact</div>
-            <div style="font-family:var(--font-mono); font-size:12px; color:var(--color-primary-500); margin-bottom:4px;">--space-150 · min-height 24px</div>
-            <div style="font-size:12px; color:var(--color-text-secondary); font-family:var(--font-primary);">12px H-pad · 24px min-height · .ds-btn--compact</div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- =====================================================
-           SECTION 5: USAGE GUIDANCE
-      ====================================================== -->
-      <section style="margin-bottom:48px;">
-        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
-          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
-          Usage Guidance
-        </h2>
-
-        <div class="usage-grid-2" style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
-
-          <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
-            <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
-            Use <code>disabled</code> attribute on the <code>&lt;button&gt;</code> element so screen readers announce the disabled state natively.
-          </div>
-
-          <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
-            <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
-            Never use <code>&lt;div&gt;</code> or <code>&lt;a&gt;</code> for action triggers — use a semantic <code>&lt;button&gt;</code>.
-          </div>
-
-          <div style="padding:16px; border-radius:10px; border:1px solid var(--color-success-200); border-left:3px solid var(--color-success-500); background:var(--color-success-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
-            <div style="font-size:12px; font-weight:600; color:var(--color-success-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Lakukan</div>
-            Add <code>aria-pressed="true"</code> when <code>isSelected=true</code> to communicate toggle state to assistive technology.
-          </div>
-
-          <div style="padding:16px; border-radius:10px; border:1px solid var(--color-error-200); border-left:3px solid var(--color-error-500); background:var(--color-error-50); font-size:14px; line-height:1.6; color:var(--color-text-secondary); font-family:var(--font-primary);">
-            <div style="font-size:12px; font-weight:600; color:var(--color-error-600); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px;">Jangan</div>
-            Don't suppress focus with <code>outline:none</code> without providing a custom focus indicator — <code>.ds-btn:focus-visible</code> handles this correctly.
-          </div>
-
-        </div>
       </section>
 
 
