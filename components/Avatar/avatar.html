@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avatar — DS GPOS Lite V2</title>
+  <link rel="stylesheet" href="../../styles/globals.css">
+  <link rel="stylesheet" href="../../styles/enhancements.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            b50:  '#E9F2FB', b75:  '#A3CBEE', b100: '#7DB5E7',
+            b200: '#4495DD', b300: '#1E7FD6', b400: '#155996',
+            n0:   '#FFFFFF', n10:  '#FAFBFB', n20:  '#F5F6F7',
+            n30:  '#EBEDF0', n40:  '#DFE2E6', n50:  '#C2C7D0',
+            n100: '#7A8699', n200: '#6B788E', n300: '#5D6B82',
+            n400: '#505F79', n500: '#42526D', n700: '#243757',
+            n800: '#15294B', n900: '#091E42',
+            g300: '#00AA5B',
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    /* ================================================================
+       DS Avatar Component — token-based styles dari tokens.css
+       Figma source: Size=Extra Large/Large/Medium/Small, Status=None, Presence=Online
+       Color-Background-Accent-Blue-Subtle → --color-blue-b50
+       Color-Notification-Online           → --color-green-g300
+       Color-Notification-Background       → --color-neutral-n0
+    ================================================================ */
+
+    /* ── Base avatar ── */
+    .ds-avatar {
+      position: relative;
+      display: inline-block;
+      border-radius: var(--border-radius-full);
+      background-color: var(--color-blue-b50);   /* Color-Background-Accent-Blue-Subtle */
+      flex-shrink: 0;
+    }
+
+    .ds-avatar__image {
+      position: absolute;
+      border-radius: var(--border-radius-full);
+      object-fit: cover;
+    }
+
+    .ds-avatar__presence {
+      position: absolute;
+      border-radius: var(--border-radius-full);
+      background-color: var(--color-green-g300);  /* Color-Notification-Online */
+      border: 2px solid var(--color-neutral-n0);  /* Color-Notification-Background */
+    }
+
+    /* ── Size: Extra Large — 96px ── */
+    .ds-avatar--xl {
+      width:  96px;
+      height: 96px;
+    }
+    .ds-avatar--xl .ds-avatar__image {
+      width:  64px;
+      height: 64px;
+      left:   12px;
+      top:    12px;
+    }
+    .ds-avatar--xl .ds-avatar__presence {
+      width:  16px;
+      height: 16px;
+      left:   73px;
+      top:    73px;
+    }
+
+    /* ── Size: Large — 40px ── */
+    .ds-avatar--lg {
+      width:  40px;
+      height: 40px;
+    }
+    .ds-avatar--lg .ds-avatar__image {
+      width:  28px;
+      height: 28px;
+      left:   6px;
+      top:    6px;
+    }
+    .ds-avatar--lg .ds-avatar__presence {
+      width:  14px;
+      height: 14px;
+      left:   27px;
+      top:    27px;
+    }
+
+    /* ── Size: Medium — 32px ── */
+    .ds-avatar--md {
+      width:  32px;
+      height: 32px;
+    }
+    .ds-avatar--md .ds-avatar__image {
+      width:  20px;
+      height: 20px;
+      left:   5px;
+      top:    5px;
+    }
+    .ds-avatar--md .ds-avatar__presence {
+      width:  14px;
+      height: 14px;
+      left:   20px;
+      top:    20px;
+    }
+
+    /* ── Size: Small — 24px ── */
+    .ds-avatar--sm {
+      width:  24px;
+      height: 24px;
+    }
+    .ds-avatar--sm .ds-avatar__image {
+      width:  16px;
+      height: 16px;
+      left:   3px;
+      top:    3px;
+    }
+    .ds-avatar--sm .ds-avatar__presence {
+      width:  12px;
+      height: 12px;
+      left:   14px;
+      top:    14px;
+    }
+
+    /* ================================================================
+       Page-specific responsive overrides
+    ================================================================ */
+    @media (max-width: 900px) {
+      .size-grid    { grid-template-columns: repeat(2, 1fr) !important; }
+      .anatomy-grid { grid-template-columns: repeat(2, 1fr) !important; }
+    }
+    @media (max-width: 640px) {
+      .size-grid    { grid-template-columns: 1fr !important; }
+      .anatomy-grid { grid-template-columns: 1fr !important; }
+      .usage-grid-2 { grid-template-columns: 1fr !important; }
+    }
+
+    /* ================================================================
+       POLISH LAYER — konsisten dengan button.html
+    ================================================================ */
+
+    section > h2 > span:first-child {
+      width: 5px !important;
+      height: 5px !important;
+      min-width: 5px !important;
+      background: var(--color-primary-500) !important;
+      border-radius: 50% !important;
+      align-self: center !important;
+    }
+
+    .size-grid > div,
+    .anatomy-grid > div {
+      transition: transform 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  box-shadow 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .size-grid > div:hover,
+    .anatomy-grid > div:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(9, 30, 66, 0.11), 0 3px 8px rgba(9, 30, 66, 0.06);
+    }
+
+    .size-grid > div > div:first-child {
+      background-image: radial-gradient(circle, rgba(9,30,66,0.055) 1.5px, transparent 1.5px) !important;
+      background-size: 18px 18px !important;
+    }
+
+    section > h2 {
+      border-bottom: none !important;
+      background-image: linear-gradient(to right, var(--color-primary-500) 0%, rgba(30,127,214,0.18) 32%, transparent 68%) !important;
+      background-repeat: no-repeat !important;
+      background-size: 100% 1px !important;
+      background-position: left bottom !important;
+    }
+
+    .size-grid > div > div:last-child,
+    .anatomy-grid > div > div:last-child {
+      border-top: 2px solid var(--color-neutral-n30) !important;
+    }
+
+    .size-grid > div:hover,
+    .anatomy-grid > div:hover {
+      border-color: rgba(30, 127, 214, 0.22) !important;
+    }
+
+    @keyframes ds-card-rise {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .size-grid > div {
+      animation: ds-card-rise 260ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+    .size-grid > div:nth-child(1) { animation-delay:   0ms; }
+    .size-grid > div:nth-child(2) { animation-delay:  32ms; }
+    .size-grid > div:nth-child(3) { animation-delay:  64ms; }
+    .size-grid > div:nth-child(4) { animation-delay:  96ms; }
+
+    @keyframes ds-reveal {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .content-inner > header {
+      animation: ds-reveal 360ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+    .content-inner > section.mb-12 {
+      animation: ds-reveal 400ms 60ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+
+    code {
+      font-family: var(--font-mono) !important;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 7px;
+      background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n30);
+      border-radius: 4px;
+      color: var(--color-blue-b300);
+      letter-spacing: 0.01em;
+      line-height: 1.6;
+    }
+
+    .hero-feat-card {
+      transition: transform 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  box-shadow 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  border-color 160ms ease;
+    }
+    .hero-feat-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--color-blue-b75) !important;
+      box-shadow: 0 12px 32px rgba(9, 30, 66, 0.11), 0 3px 8px rgba(9, 30, 66, 0.06);
+    }
+
+    .usage-grid-2 > div {
+      transition: transform 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  box-shadow 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .usage-grid-2 > div:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(9, 30, 66, 0.09);
+    }
+
+    .ds-hero-banner {
+      position: relative;
+      overflow: hidden;
+    }
+    .ds-hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ds-hero-banner > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Scroll progress indicator ── */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #1E7FD6 0%, #22D3EE 100%);
+      z-index: 99999;
+      transition: width 80ms linear;
+      pointer-events: none;
+      border-radius: 0 2px 2px 0;
+    }
+
+    /* ── Dark mode toggle ── */
+    .dark-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: none;
+      border: 1px solid var(--color-border);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      border-radius: var(--border-radius-md);
+      transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+      flex-shrink: 0;
+    }
+    .dark-toggle:hover {
+      background-color: var(--color-primary-50);
+      border-color: var(--color-primary-200);
+      color: var(--color-primary-600);
+    }
+    .dark-toggle .icon-sun  { display: none; }
+    .dark-toggle .icon-moon { display: block; }
+    [data-theme="dark"] .dark-toggle .icon-sun  { display: block; }
+    [data-theme="dark"] .dark-toggle .icon-moon { display: none; }
+    [data-theme="dark"] .dark-toggle {
+      border-color: #1A2E48;
+      color: #94A3B8;
+    }
+    [data-theme="dark"] .dark-toggle:hover {
+      background-color: rgba(30,127,214,0.14);
+      border-color: rgba(30,127,214,0.3);
+      color: #7DB5E7;
+    }
+
+    /* ── Scroll-to-top button ── */
+    .scroll-top-btn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 40px;
+      height: 40px;
+      background: var(--color-primary-500);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 14px rgba(30,127,214,0.38);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 200ms ease, transform 200ms ease, background-color 150ms ease;
+      z-index: 200;
+      pointer-events: none;
+    }
+    .scroll-top-btn.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .scroll-top-btn:hover { background-color: var(--color-primary-600); }
+
+    .topbar {
+      background-color: rgba(255,255,255,0.9) !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+    }
+
+    /* ── Anatomy label callout ── */
+    .anatomy-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      letter-spacing: 0.04em;
+      color: var(--color-text-secondary);
+    }
+    .anatomy-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--color-blue-b300);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ================================================================
+       DARK MODE overrides
+    ================================================================ */
+    [data-theme="dark"] body { background-color: #080F1E; color: #CBD5E1; }
+    [data-theme="dark"] .main-content { background-color: #080F1E; }
+
+    [data-theme="dark"] section > h2 {
+      color: #CBD5E1 !important;
+      background-image: linear-gradient(to right, #1E7FD6 0%, rgba(30,127,214,0.12) 32%, transparent 68%) !important;
+    }
+    [data-theme="dark"] p { color: #94A3B8; }
+    [data-theme="dark"] code {
+      background: #0F1D30 !important;
+      border-color: #1A2E48 !important;
+      color: #7DB5E7 !important;
+    }
+
+    [data-theme="dark"] .size-grid > div,
+    [data-theme="dark"] .anatomy-grid > div {
+      background-color: #0F1D30 !important;
+      border-color: #1A2E48 !important;
+    }
+    [data-theme="dark"] .size-grid > div > div:first-child {
+      background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1.5px, transparent 1.5px) !important;
+    }
+    [data-theme="dark"] .size-grid > div > div:last-child,
+    [data-theme="dark"] .anatomy-grid > div > div:last-child {
+      background: #0F1D30 !important;
+      border-top-color: #1A2E48 !important;
+    }
+    [data-theme="dark"] .hero-feat-card {
+      background-color: #0F1D30 !important;
+      border-color: #1A2E48 !important;
+    }
+    [data-theme="dark"] .usage-grid-2 > div {
+      background-color: #0F1D30 !important;
+      border-color: #1A2E48 !important;
+    }
+    [data-theme="dark"] .topbar {
+      background-color: rgba(8,15,30,0.92) !important;
+      border-bottom-color: #1A2E48 !important;
+    }
+    [data-theme="dark"] .page-footer {
+      border-top-color: #1A2E48 !important;
+      color: #94A3B8 !important;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .size-grid > div,
+      .anatomy-grid > div,
+      .content-inner > header,
+      .content-inner > section.mb-12,
+      .scroll-progress,
+      .scroll-top-btn,
+      .dark-toggle { animation: none !important; transition: none !important; }
+    }
+    @media (max-width: 480px) {
+      .scroll-top-btn { bottom: 16px; right: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scroll-progress" style="width:0%" role="progressbar" aria-hidden="true"></div>
+
+<div class="container">
+
+  <!-- Mobile overlay -->
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo-icon">GL</div>
+        <div class="sidebar-brand-text">
+          <div class="logo">GPOS Lite</div>
+          <div class="version">Design System V2.0</div>
+        </div>
+      </div>
+      <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">&#x2715;</button>
+    </div>
+
+    <div class="sidebar-search">
+      <input type="search" class="search-input" placeholder="&#x1F50D;  Cari token, component...">
+    </div>
+
+    <div class="nav-scroll">
+      <nav class="nav-menu">
+
+        <div class="nav-section">
+          <h3 class="nav-title">Overview</h3>
+          <ul class="nav-list">
+            <li>
+              <a href="../../index.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+                Home
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="nav-title">Foundations</h3>
+          <ul class="nav-list">
+            <li>
+              <a href="../../foundations/colors/colors.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg>
+                Colors
+              </a>
+            </li>
+            <li>
+              <a href="../../foundations/typography/typography.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+                Typography
+              </a>
+            </li>
+            <li>
+              <a href="../../foundations/spacing/spacing.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>
+                Spacing
+              </a>
+            </li>
+            <li>
+              <a href="../../foundations/shadows/shadows.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h12a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V7z" opacity="0.4"/></svg>
+                Shadows
+              </a>
+            </li>
+            <li>
+              <a href="../../foundations/borders/borders.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
+                Borders &amp; Radius
+              </a>
+            </li>
+            <li>
+              <a href="../../foundations/grid/grid.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                Grid &amp; Layout
+              </a>
+            </li>
+            <li>
+              <a href="../../foundations/icons/icons.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="5" height="5" rx="1"/><rect x="10" y="3" width="5" height="5" rx="1"/><rect x="17" y="3" width="4" height="5" rx="1"/><rect x="3" y="10" width="5" height="5" rx="1"/><rect x="10" y="10" width="5" height="5" rx="1"/><rect x="17" y="10" width="4" height="5" rx="1"/><rect x="3" y="17" width="5" height="4" rx="1"/><rect x="10" y="17" width="5" height="4" rx="1"/><rect x="17" y="17" width="4" height="4" rx="1"/></svg>
+                Icons
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="nav-title">Komponen</h3>
+          <ul class="nav-list">
+            <li>
+              <a href="../Button/button.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="3"/><line x1="7" y1="12" x2="17" y2="12" opacity="0.5"/></svg>
+                Button
+              </a>
+            </li>
+            <li>
+              <a href="avatar.html" class="nav-link active">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                Avatar
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="nav-title">Resources</h3>
+          <ul class="nav-list">
+            <li>
+              <a href="https://github.com/zaenalaripin28/DS-Gpos-Lite-V2" class="nav-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                GitHub Repo
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </nav>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="tailwind-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 6C9.33 6 7.67 7.33 7 10c1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35.98 1 2.09 2.15 4.59 2.15C19.67 12 21.33 10.67 22 8c-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C15.61 7.15 14.5 6 12 6zm-7 6c-2.67 0-4.33 1.33-5 4 1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35C6.39 17.15 7.5 18 10 18c2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C8.61 12.85 7.5 12 5 12z"/></svg>
+        Built with tokens.css
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===================== MAIN ===================== -->
+  <main class="main-content">
+
+    <!-- Topbar -->
+    <div class="topbar">
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="breadcrumb">
+        <a href="../../index.html">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="#">Components</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="current">Avatar</span>
+      </div>
+      <div class="topbar-actions">
+        <button type="button" class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun"  width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <span class="version-badge">v2.0</span>
+      </div>
+    </div>
+
+    <div class="content-inner">
+
+      <!-- =====================================================
+           HERO — Component Overview Banner
+      ====================================================== -->
+      <section class="mb-12">
+
+        <!-- Main hero banner -->
+        <div class="ds-hero-banner rounded-2xl overflow-hidden mb-3 flex flex-col lg:flex-row bg-n900" style="border: 1px solid rgba(255,255,255,0.07);">
+
+          <!-- Left: Component metadata -->
+          <div class="flex-1 px-8 py-10 lg:px-11 lg:py-12 flex flex-col justify-center">
+
+            <!-- Kicker -->
+            <div class="flex items-center gap-2 mb-5">
+              <div class="flex items-center justify-center w-5 h-5 rounded-md bg-b300/20">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4495DD" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              </div>
+              <span class="text-xs font-semibold uppercase tracking-[0.1em] text-b100">Components · DS GPOS Lite V2</span>
+            </div>
+
+            <!-- Component title -->
+            <div class="font-bold text-n0 mb-3" style="font-size:2.5rem; letter-spacing:-0.035em; line-height:1.04;">Avatar</div>
+
+            <!-- Description -->
+            <p class="text-sm leading-relaxed max-w-xs mb-8" style="color: rgba(255,255,255,0.52); line-height: 1.7;">
+              Merepresentasikan identitas pengguna secara visual. Tersedia dalam 4 ukuran dengan presence indicator untuk menampilkan status online.
+            </p>
+
+            <!-- Meta badges -->
+            <div class="flex flex-wrap gap-2">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.10);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+                v2.0
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.10);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                4 ukuran
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.10);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="4" fill="currentColor"/></svg>
+                Presence indicator
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(68,149,221,0.15); color:#7DB5E7; border-color:rgba(68,149,221,0.28);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                Figma-synced
+              </span>
+            </div>
+
+          </div>
+
+          <!-- Right: Live preview card -->
+          <div class="lg:w-88 lg:flex-shrink-0 p-6 flex items-center justify-center" style="background: rgba(255,255,255,0.03); border-left: 1px solid rgba(255,255,255,0.07);">
+            <div class="w-full rounded-2xl overflow-hidden" style="background: var(--color-neutral-n10); box-shadow: 0 16px 48px rgba(0,0,0,0.32), 0 2px 8px rgba(0,0,0,0.16);">
+              <!-- Card header -->
+              <div class="px-5 py-3.5 flex items-center justify-between" style="border-bottom: 1px solid var(--color-border);">
+                <span class="text-xs font-semibold uppercase tracking-[0.08em]" style="color: var(--color-text-tertiary);">Semua Ukuran</span>
+                <div class="flex items-center gap-1">
+                  <span class="w-2 h-2 rounded-full" style="background:var(--color-neutral-n40);"></span>
+                  <span class="w-2 h-2 rounded-full" style="background:var(--color-neutral-n30);"></span>
+                  <span class="w-2 h-2 rounded-full" style="background:var(--color-neutral-n20);"></span>
+                </div>
+              </div>
+              <!-- Card body -->
+              <div class="p-5 flex flex-col gap-5">
+                <div class="flex items-end gap-4 flex-wrap">
+                  <!-- XL -->
+                  <div class="flex flex-col items-center gap-2">
+                    <div class="ds-avatar ds-avatar--xl">
+                      <img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="Avatar pengguna" width="64" height="64">
+                      <div class="ds-avatar__presence"></div>
+                    </div>
+                    <span class="text-xs font-medium" style="color: var(--color-text-tertiary);">XL</span>
+                  </div>
+                  <!-- Large -->
+                  <div class="flex flex-col items-center gap-2">
+                    <div class="ds-avatar ds-avatar--lg">
+                      <img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="Avatar pengguna" width="28" height="28">
+                      <div class="ds-avatar__presence"></div>
+                    </div>
+                    <span class="text-xs font-medium" style="color: var(--color-text-tertiary);">L</span>
+                  </div>
+                  <!-- Medium -->
+                  <div class="flex flex-col items-center gap-2">
+                    <div class="ds-avatar ds-avatar--md">
+                      <img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="Avatar pengguna" width="20" height="20">
+                      <div class="ds-avatar__presence"></div>
+                    </div>
+                    <span class="text-xs font-medium" style="color: var(--color-text-tertiary);">M</span>
+                  </div>
+                  <!-- Small -->
+                  <div class="flex flex-col items-center gap-2">
+                    <div class="ds-avatar ds-avatar--sm">
+                      <img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="Avatar pengguna" width="16" height="16">
+                      <div class="ds-avatar__presence"></div>
+                    </div>
+                    <span class="text-xs font-medium" style="color: var(--color-text-tertiary);">S</span>
+                  </div>
+                </div>
+                <div class="text-xs" style="color: var(--color-text-tertiary); line-height:1.6;">Status=None · Presence=Online<br>Semua size menggunakan <code style="font-size:10px;">avatar.svg</code></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Feature cards grid -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+
+          <div class="hero-feat-card bg-n0 rounded-xl p-5 border border-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, var(--color-blue-b50) 0%, rgba(163,203,238,0.3) 100%); border: 1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-n900 mb-1.5 tracking-[-0.02em]">4 Ukuran</div>
+            <div class="text-xs leading-relaxed" style="color: var(--color-text-tertiary);">Extra Large · Large · Medium · Small</div>
+          </div>
+
+          <div class="hero-feat-card bg-n0 rounded-xl p-5 border border-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, var(--color-blue-b50) 0%, rgba(163,203,238,0.3) 100%); border: 1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><circle cx="12" cy="12" r="4" fill="#00AA5B" stroke="none"/><circle cx="12" cy="12" r="8" stroke="#1E7FD6" stroke-width="2.5" fill="none"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-n900 mb-1.5 tracking-[-0.02em]">Presence Indicator</div>
+            <div class="text-xs leading-relaxed" style="color: var(--color-text-tertiary);">Status online secara real-time</div>
+          </div>
+
+          <div class="hero-feat-card bg-n0 rounded-xl p-5 border border-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, var(--color-blue-b50) 0%, rgba(163,203,238,0.3) 100%); border: 1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-n900 mb-1.5 tracking-[-0.02em]">Token-Based</div>
+            <div class="text-xs leading-relaxed" style="color: var(--color-text-tertiary);">Semua warna dari semantic tokens</div>
+          </div>
+
+          <div class="hero-feat-card bg-n0 rounded-xl p-5 border border-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, var(--color-blue-b50) 0%, rgba(163,203,238,0.3) 100%); border: 1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><path d="M12 2l9 4.5V17.5L12 22l-9-4.5V6.5L12 2z"/><path d="M12 2v20M3 6.5l9 5 9-5"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-n900 mb-1.5 tracking-[-0.02em]">Figma-Synced</div>
+            <div class="text-xs leading-relaxed" style="color: var(--color-text-tertiary);">Varian sesuai Figma via tokens.css</div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- =====================================================
+           SECTION 1: SIZE VARIANTS
+      ====================================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Varian Ukuran
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">
+          Empat ukuran avatar tersedia untuk berbagai konteks tampilan. Semua varian menggunakan <code>.ds-avatar</code> sebagai base class dengan modifier ukuran.
+        </p>
+
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px;" class="size-grid">
+
+          <!-- Extra Large -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:40px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; min-height:180px;">
+              <div class="ds-avatar ds-avatar--xl">
+                <img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="Avatar pengguna" width="64" height="64">
+                <div class="ds-avatar__presence"></div>
+              </div>
+            </div>
+            <div style="padding:14px 16px; background:var(--color-surface);">
+              <div style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary); margin-bottom:4px;">Extra Large</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono);">96×96px · <code>.ds-avatar--xl</code></div>
+            </div>
+          </div>
+
+          <!-- Large -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:40px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; min-height:180px;">
+              <div class="ds-avatar ds-avatar--lg">
+                <img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="Avatar pengguna" width="28" height="28">
+                <div class="ds-avatar__presence"></div>
+              </div>
+            </div>
+            <div style="padding:14px 16px; background:var(--color-surface);">
+              <div style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary); margin-bottom:4px;">Large</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono);">40×40px · <code>.ds-avatar--lg</code></div>
+            </div>
+          </div>
+
+          <!-- Medium -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:40px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; min-height:180px;">
+              <div class="ds-avatar ds-avatar--md">
+                <img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="Avatar pengguna" width="20" height="20">
+                <div class="ds-avatar__presence"></div>
+              </div>
+            </div>
+            <div style="padding:14px 16px; background:var(--color-surface);">
+              <div style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary); margin-bottom:4px;">Medium</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono);">32×32px · <code>.ds-avatar--md</code></div>
+            </div>
+          </div>
+
+          <!-- Small -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:40px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; min-height:180px;">
+              <div class="ds-avatar ds-avatar--sm">
+                <img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="Avatar pengguna" width="16" height="16">
+                <div class="ds-avatar__presence"></div>
+              </div>
+            </div>
+            <div style="padding:14px 16px; background:var(--color-surface);">
+              <div style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary); margin-bottom:4px;">Small</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono);">24×24px · <code>.ds-avatar--sm</code></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Size token table -->
+        <div style="margin-top:28px; overflow-x:auto;">
+          <table style="width:100%; border-collapse:collapse; font-family:var(--font-primary); font-size:13px;">
+            <thead>
+              <tr style="border-bottom:2px solid var(--color-border);">
+                <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600;">Ukuran</th>
+                <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600;">Container</th>
+                <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600;">Image</th>
+                <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600;">Presence</th>
+                <th style="text-align:left; padding:10px 16px; color:var(--color-text-secondary); font-weight:600;">Modifier Class</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--color-border);">
+                <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Extra Large</td>
+                <td style="padding:12px 16px; color:var(--color-text-secondary);">96 × 96px</td>
+                <td style="padding:12px 16px; color:var(--color-text-secondary);">64 × 64px</td>
+                <td style="padding:12px 16px; color:var(--color-text-secondary);">16 × 16px</td>
+                <td style="padding:12px 16px;"><code>.ds-avatar--xl</code></td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border);">
+                <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Large</td>
+                <td style="padding:12px 16px; color:var(--color-text-secondary);">40 × 40px</td>
+                <td style="padding:12px 16px; color:var(--color-text-secondary);">28 × 28px</td>
+                <td style="padding:12px 16px; color:var(--color-text-secondary);">14 × 14px</td>
+                <td style="padding:12px 16px;"><code>.ds-avatar--lg</code></td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border);">
+                <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Medium</td>
+                <td style="padding:12px 16px; color:var(--color-text-secondary);">32 × 32px</td>
+                <td style="padding:12px 16px; color:var(--color-text-secondary);">20 × 20px</td>
+                <td style="padding:12px 16px; color:var(--color-text-secondary);">14 × 14px</td>
+                <td style="padding:12px 16px;"><code>.ds-avatar--md</code></td>
+              </tr>
+              <tr>
+                <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Small</td>
+                <td style="padding:12px 16px; color:var(--color-text-secondary);">24 × 24px</td>
+                <td style="padding:12px 16px; color:var(--color-text-secondary);">16 × 16px</td>
+                <td style="padding:12px 16px; color:var(--color-text-secondary);">12 × 12px</td>
+                <td style="padding:12px 16px;"><code>.ds-avatar--sm</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+      <!-- =====================================================
+           SECTION 2: COLOR TOKENS
+      ====================================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Color Tokens
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">
+          Semua warna avatar mengacu pada semantic token dari <code>tokens.css</code> — tidak ada nilai hex hardcode.
+        </p>
+
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px;" class="usage-grid-2">
+
+          <!-- Container bg -->
+          <div style="padding:16px; border-radius:10px; border:1px solid var(--color-border); background:var(--color-surface);">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+              <div style="width:32px; height:32px; border-radius:50%; background:var(--color-blue-b50); border:1px solid var(--color-blue-b75); flex-shrink:0;"></div>
+              <div>
+                <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary);">Container Background</div>
+                <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono);">Color-Background-Accent-Blue-Subtle</div>
+              </div>
+            </div>
+            <code style="display:block; font-size:11px;">var(--color-blue-b50)</code>
+            <div style="margin-top:6px; font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-primary);">#E9F2FB · Blue B50</div>
+          </div>
+
+          <!-- Presence Online -->
+          <div style="padding:16px; border-radius:10px; border:1px solid var(--color-border); background:var(--color-surface);">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+              <div style="width:32px; height:32px; border-radius:50%; background:var(--color-green-g300); flex-shrink:0;"></div>
+              <div>
+                <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary);">Presence Online</div>
+                <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono);">Color-Notification-Online</div>
+              </div>
+            </div>
+            <code style="display:block; font-size:11px;">var(--color-green-g300)</code>
+            <div style="margin-top:6px; font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-primary);">#00AA5B · Green G300</div>
+          </div>
+
+          <!-- Presence Border -->
+          <div style="padding:16px; border-radius:10px; border:1px solid var(--color-border); background:var(--color-surface);">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+              <div style="width:32px; height:32px; border-radius:50%; background:var(--color-neutral-n0); border:2px solid var(--color-neutral-n40); flex-shrink:0;"></div>
+              <div>
+                <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary);">Presence Border</div>
+                <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono);">Color-Notification-Background</div>
+              </div>
+            </div>
+            <code style="display:block; font-size:11px;">var(--color-neutral-n0)</code>
+            <div style="margin-top:6px; font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-primary);">#FFFFFF · Neutral N0</div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- =====================================================
+           SECTION 3: ANATOMY
+      ====================================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Anatomi
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">
+          Struktur internal komponen avatar terdiri dari tiga bagian utama.
+        </p>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:start;" class="anatomy-grid">
+
+          <!-- Left: diagram -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; padding:48px 24px; display:flex; align-items:center; justify-content:center; background-image: radial-gradient(circle, rgba(9,30,66,0.055) 1.5px, transparent 1.5px); background-size: 18px 18px;">
+            <div style="position:relative; display:inline-block;">
+              <!-- Avatar XL for anatomy -->
+              <div class="ds-avatar ds-avatar--xl" id="anatomy-avatar" style="outline: 2px dashed var(--color-blue-b200); outline-offset: 4px;">
+                <img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="Anatomy avatar" width="64" height="64" style="outline: 2px dashed rgba(30,127,214,0.5); outline-offset: 2px;">
+                <div class="ds-avatar__presence" style="outline: 2px dashed rgba(0,170,91,0.7); outline-offset: 2px;"></div>
+              </div>
+
+              <!-- Label 1 — Container -->
+              <div style="position:absolute; top:-8px; left:-120px; display:flex; align-items:center; gap:6px; white-space:nowrap;">
+                <span class="anatomy-badge">1</span>
+                <span style="font-size:11px; font-weight:600; color:var(--color-text-secondary); font-family:var(--font-mono);">Container</span>
+                <svg width="32" height="12" viewBox="0 0 32 12" fill="none"><line x1="0" y1="6" x2="32" y2="6" stroke="var(--color-blue-b200)" stroke-width="1" stroke-dasharray="3 2"/><circle cx="32" cy="6" r="2" fill="var(--color-blue-b300)"/></svg>
+              </div>
+
+              <!-- Label 2 — Image -->
+              <div style="position:absolute; top:28px; left:-100px; display:flex; align-items:center; gap:6px; white-space:nowrap;">
+                <span class="anatomy-badge" style="background:var(--color-blue-b200);">2</span>
+                <span style="font-size:11px; font-weight:600; color:var(--color-text-secondary); font-family:var(--font-mono);">Avatar Image</span>
+                <svg width="20" height="12" viewBox="0 0 20 12" fill="none"><line x1="0" y1="6" x2="20" y2="6" stroke="rgba(30,127,214,0.5)" stroke-width="1" stroke-dasharray="3 2"/><circle cx="20" cy="6" r="2" fill="var(--color-blue-b200)"/></svg>
+              </div>
+
+              <!-- Label 3 — Presence -->
+              <div style="position:absolute; bottom:0px; right:-140px; display:flex; align-items:center; gap:6px; white-space:nowrap;">
+                <svg width="24" height="12" viewBox="0 0 24 12" fill="none"><circle cx="0" cy="6" r="2" fill="var(--color-green-g300)"/><line x1="2" y1="6" x2="24" y2="6" stroke="rgba(0,170,91,0.7)" stroke-width="1" stroke-dasharray="3 2"/></svg>
+                <span class="anatomy-badge" style="background:var(--color-green-g300);">3</span>
+                <span style="font-size:11px; font-weight:600; color:var(--color-text-secondary); font-family:var(--font-mono);">Presence</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: descriptions -->
+          <div style="display:flex; flex-direction:column; gap:16px;">
+
+            <div style="padding:16px; border-radius:10px; border:1px solid var(--color-border); background:var(--color-surface);">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                <span class="anatomy-badge">1</span>
+                <span style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary);">Container</span>
+              </div>
+              <div style="font-size:13px; color:var(--color-text-secondary); font-family:var(--font-primary); line-height:1.6; margin-bottom:8px;">
+                Elemen pembungkus utama. Berbentuk lingkaran penuh (<code>border-radius: full</code>) dengan latar belakang biru subtle.
+              </div>
+              <div style="display:flex; flex-direction:column; gap:4px;">
+                <div style="font-size:11px; font-family:var(--font-mono); color:var(--color-text-tertiary);">background: <code>var(--color-blue-b50)</code></div>
+                <div style="font-size:11px; font-family:var(--font-mono); color:var(--color-text-tertiary);">border-radius: <code>var(--border-radius-full)</code></div>
+              </div>
+            </div>
+
+            <div style="padding:16px; border-radius:10px; border:1px solid var(--color-border); background:var(--color-surface);">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                <span class="anatomy-badge" style="background:var(--color-blue-b200);">2</span>
+                <span style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary);">Avatar Image</span>
+              </div>
+              <div style="font-size:13px; color:var(--color-text-secondary); font-family:var(--font-primary); line-height:1.6; margin-bottom:8px;">
+                Gambar atau ilustrasi pengguna. Diposisikan secara absolut di dalam container dengan offset yang proporsional terhadap ukuran.
+              </div>
+              <div style="display:flex; flex-direction:column; gap:4px;">
+                <div style="font-size:11px; font-family:var(--font-mono); color:var(--color-text-tertiary);">source: <code>assets/images/avatar.svg</code></div>
+                <div style="font-size:11px; font-family:var(--font-mono); color:var(--color-text-tertiary);">position: <code>absolute</code></div>
+              </div>
+            </div>
+
+            <div style="padding:16px; border-radius:10px; border:1px solid var(--color-border); background:var(--color-surface);">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px;">
+                <span class="anatomy-badge" style="background:var(--color-green-g300);">3</span>
+                <span style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary);">Presence Indicator</span>
+              </div>
+              <div style="font-size:13px; color:var(--color-text-secondary); font-family:var(--font-primary); line-height:1.6; margin-bottom:8px;">
+                Dot kecil di pojok kanan bawah yang menunjukkan status online pengguna. Diberi border putih agar terlihat di atas semua latar belakang.
+              </div>
+              <div style="display:flex; flex-direction:column; gap:4px;">
+                <div style="font-size:11px; font-family:var(--font-mono); color:var(--color-text-tertiary);">background: <code>var(--color-green-g300)</code></div>
+                <div style="font-size:11px; font-family:var(--font-mono); color:var(--color-text-tertiary);">border: <code>2px solid var(--color-neutral-n0)</code></div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- =====================================================
+           SECTION 4: DO & DON'T
+      ====================================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Do &amp; Don't
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">
+          Panduan penggunaan untuk memastikan konsistensi dan keterbacaan yang optimal.
+        </p>
+
+        <!-- Row 1 -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;" class="usage-grid-2">
+
+          <!-- DO 1 -->
+          <div style="border-radius:12px; border:1px solid var(--color-success-200); overflow:hidden;">
+            <div style="padding:10px 16px; background:var(--color-success-50); border-bottom:1px solid var(--color-success-200); display:flex; align-items:center; gap:8px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-success-600)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span style="font-size:12px; font-weight:700; color:var(--color-success-700); text-transform:uppercase; letter-spacing:0.08em; font-family:var(--font-primary);">Lakukan</span>
+            </div>
+            <div style="padding:24px; background:var(--color-surface); display:flex; flex-direction:column; align-items:center; gap:16px;">
+              <div style="display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:8px; background:var(--color-neutral-n10); width:100%; justify-content:center;">
+                <div class="ds-avatar ds-avatar--lg">
+                  <img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="" width="28" height="28">
+                  <div class="ds-avatar__presence"></div>
+                </div>
+                <div class="ds-avatar ds-avatar--lg">
+                  <img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="" width="28" height="28">
+                  <div class="ds-avatar__presence"></div>
+                </div>
+                <div class="ds-avatar ds-avatar--lg">
+                  <img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="" width="28" height="28">
+                  <div class="ds-avatar__presence"></div>
+                </div>
+              </div>
+              <p style="font-size:13px; color:var(--color-text-secondary); font-family:var(--font-primary); line-height:1.6; text-align:center; margin:0;">
+                Gunakan <strong>ukuran yang sama</strong> dalam satu grup avatar untuk tampilan yang seragam.
+              </p>
+            </div>
+          </div>
+
+          <!-- DON'T 1 -->
+          <div style="border-radius:12px; border:1px solid var(--color-error-200); overflow:hidden;">
+            <div style="padding:10px 16px; background:var(--color-error-50); border-bottom:1px solid var(--color-error-200); display:flex; align-items:center; gap:8px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-error-600)" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              <span style="font-size:12px; font-weight:700; color:var(--color-error-700); text-transform:uppercase; letter-spacing:0.08em; font-family:var(--font-primary);">Jangan</span>
+            </div>
+            <div style="padding:24px; background:var(--color-surface); display:flex; flex-direction:column; align-items:center; gap:16px;">
+              <div style="display:flex; align-items:center; gap:12px; padding:12px 16px; border-radius:8px; background:var(--color-neutral-n10); width:100%; justify-content:center;">
+                <div class="ds-avatar ds-avatar--xl">
+                  <img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="" width="64" height="64">
+                </div>
+                <div class="ds-avatar ds-avatar--sm">
+                  <img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="" width="16" height="16">
+                </div>
+                <div class="ds-avatar ds-avatar--md">
+                  <img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="" width="20" height="20">
+                </div>
+              </div>
+              <p style="font-size:13px; color:var(--color-text-secondary); font-family:var(--font-primary); line-height:1.6; text-align:center; margin:0;">
+                Jangan <strong>mencampur ukuran</strong> avatar secara acak dalam satu baris — ini merusak hierarki visual.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Row 2 -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;" class="usage-grid-2">
+
+          <!-- DO 2 -->
+          <div style="border-radius:12px; border:1px solid var(--color-success-200); overflow:hidden;">
+            <div style="padding:10px 16px; background:var(--color-success-50); border-bottom:1px solid var(--color-success-200); display:flex; align-items:center; gap:8px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-success-600)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+              <span style="font-size:12px; font-weight:700; color:var(--color-success-700); text-transform:uppercase; letter-spacing:0.08em; font-family:var(--font-primary);">Lakukan</span>
+            </div>
+            <div style="padding:24px; background:var(--color-surface); display:flex; flex-direction:column; align-items:center; gap:16px;">
+              <div style="display:flex; align-items:center; gap:16px; padding:16px; border-radius:8px; background:var(--color-neutral-n10); width:100%; justify-content:center;">
+                <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+                  <div class="ds-avatar ds-avatar--lg">
+                    <img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="" width="28" height="28">
+                    <div class="ds-avatar__presence"></div>
+                  </div>
+                  <span style="font-size:10px; color:var(--color-green-g300); font-weight:600; font-family:var(--font-primary);">Online</span>
+                </div>
+                <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+                  <div class="ds-avatar ds-avatar--lg" style="opacity:0.6;">
+                    <img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="" width="28" height="28">
+                  </div>
+                  <span style="font-size:10px; color:var(--color-text-tertiary); font-weight:600; font-family:var(--font-primary);">Offline</span>
+                </div>
+              </div>
+              <p style="font-size:13px; color:var(--color-text-secondary); font-family:var(--font-primary); line-height:1.6; text-align:center; margin:0;">
+                Gunakan <strong>presence indicator</strong> untuk menunjukkan status online pengguna secara real-time.
+              </p>
+            </div>
+          </div>
+
+          <!-- DON'T 2 -->
+          <div style="border-radius:12px; border:1px solid var(--color-error-200); overflow:hidden;">
+            <div style="padding:10px 16px; background:var(--color-error-50); border-bottom:1px solid var(--color-error-200); display:flex; align-items:center; gap:8px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-error-600)" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+              <span style="font-size:12px; font-weight:700; color:var(--color-error-700); text-transform:uppercase; letter-spacing:0.08em; font-family:var(--font-primary);">Jangan</span>
+            </div>
+            <div style="padding:24px; background:var(--color-surface); display:flex; flex-direction:column; align-items:center; gap:16px;">
+              <div style="display:flex; align-items:center; justify-content:center; padding:16px; border-radius:8px; background:var(--color-neutral-n10); width:100%;">
+                <div style="width:64px; height:64px; background:var(--color-blue-b50); border-radius:8px; overflow:hidden; display:flex; align-items:center; justify-content:center; position:relative;">
+                  <img src="../../assets/images/avatar.svg" alt="" width="48" height="48">
+                  <div style="position:absolute; top:2px; right:2px; width:14px; height:14px; background:var(--color-green-g300); border-radius:50%; border:2px solid white;"></div>
+                </div>
+              </div>
+              <p style="font-size:13px; color:var(--color-text-secondary); font-family:var(--font-primary); line-height:1.6; text-align:center; margin:0;">
+                Jangan gunakan <strong>bentuk persegi</strong> untuk avatar — selalu gunakan <code>border-radius: full</code> sesuai spesifikasi Figma.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- =====================================================
+           FOOTER
+      ====================================================== -->
+      <footer style="padding:32px 0 24px; border-top:1px solid var(--color-border); margin-top:16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;" class="page-footer">
+        <div style="font-size:12px; color:var(--color-text-tertiary); font-family:var(--font-primary);">
+          DS GPOS Lite V2 — Avatar Component · Synced from Figma · <code>tokens.css</code>
+        </div>
+        <div style="font-size:12px; color:var(--color-text-tertiary); font-family:var(--font-primary);">
+          v2.0 · 2026
+        </div>
+      </footer>
+
+    </div><!-- /content-inner -->
+  </main>
+
+</div><!-- /container -->
+
+<!-- Scroll-to-top button -->
+<button class="scroll-top-btn" id="scroll-top-btn" aria-label="Scroll ke atas">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 15l-6-6-6 6"/></svg>
+</button>
+
+<script src="../../scripts/script.js"></script>
+<script>
+  /* ── Dark mode ── */
+  const html       = document.documentElement;
+  const darkToggle = document.getElementById('dark-toggle');
+  const saved      = localStorage.getItem('ds-theme');
+
+  if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    html.dataset.theme = 'dark';
+  }
+
+  darkToggle.addEventListener('click', () => {
+    const isDark = html.dataset.theme === 'dark';
+    html.dataset.theme = isDark ? 'light' : 'dark';
+    localStorage.setItem('ds-theme', isDark ? 'light' : 'dark');
+  });
+
+  /* ── Scroll progress + scroll-to-top ── */
+  const progressBar  = document.getElementById('scroll-progress');
+  const scrollTopBtn = document.getElementById('scroll-top-btn');
+
+  window.addEventListener('scroll', () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    progressBar.style.width = pct + '%';
+    scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>
