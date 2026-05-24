@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toast Banner — DS GPOS Lite V2</title>
+  <link rel="stylesheet" href="../../styles/globals.css">
+  <link rel="stylesheet" href="../../styles/enhancements.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            b50:  '#E9F2FB', b75:  '#A3CBEE', b100: '#7DB5E7',
+            b200: '#4495DD', b300: '#1E7FD6', b400: '#155996',
+            n0:   '#FFFFFF', n10:  '#FAFBFB', n20:  '#F5F6F7',
+            n30:  '#EBEDF0', n40:  '#DFE2E6', n50:  '#C2C7D0',
+            n100: '#7A8699', n200: '#6B788E', n300: '#5D6B82',
+            n400: '#505F79', n500: '#42526D', n700: '#243757',
+            n800: '#15294B', n900: '#091E42',
+            r50:  '#FDE8E9', r300: '#EC1C24',
+            g50:  '#E6F7EF', g300: '#00AA5B',
+            o50:  '#FFF4E8', o200: '#FFA33D',
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    /* ================================================================
+       DS Toast Banner Component — token-based styles dari tokens.css
+       Figma source: appearance=warning/success/error/announcement
+
+       Semantic token mapping:
+         Color-Background-Warning-Bold  → Background.Warning.Bold   → Color.Orange.O200 (#FFA33D)
+         Color-Text-Bold                → Text.Bold                 → Color.Neutral.N900 (#091E42)
+         Color-Icon-Bold                → Icon.Bold                 → Color.Neutral.N900 (#091E42)
+
+         Color-Background-Success-Bold  → Background.Success.Bold   → Color.Green.G300  (#00AA5B)
+         Color-Text-Inverse             → Text.Inverse              → Color.Neutral.N0  (#FFFFFF)
+         Color-Icon-Inverse             → Icon.Inverse              → Color.Neutral.N0  (#FFFFFF)
+
+         Color-Background-Danger-Bold   → Background.Danger.Bold    → Color.Red.R300    (#EC1C24)
+
+         Color-Background-Neutral-Bold  → Background.Neutral.Bold   → Color.Neutral.N500 (#42526D)
+    ================================================================ */
+
+    /* ── Base banner ── */
+    .ds-banner {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 12px;           /* p-3 */
+      border-radius: 8px;      /* rounded-lg */
+      gap: 4px;                /* gap-1 */
+      font-family: var(--font-primary);
+    }
+
+    /* ── Icon slot ── */
+    .ds-banner__icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Text slot ── */
+    .ds-banner__text {
+      flex: 1;
+      font-size: 14px;         /* text-sm */
+      font-weight: 500;        /* font-medium */
+      line-height: 20px;       /* leading-5 */
+    }
+
+    /* ── appearance=warning ── */
+    .ds-banner--warning {
+      background-color: #FFA33D;   /* Color-Background-Warning-Bold = O200 */
+    }
+    .ds-banner--warning .ds-banner__text  { color: #091E42; }   /* Color-Text-Bold = N900 */
+    .ds-banner--warning .ds-banner__icon path { fill: #091E42; } /* Color-Icon-Bold = N900 */
+
+    /* ── appearance=success ── */
+    .ds-banner--success {
+      background-color: #00AA5B;   /* Color-Background-Success-Bold = G300 */
+    }
+    .ds-banner--success .ds-banner__text  { color: #FFFFFF; }   /* Color-Text-Inverse = N0 */
+    .ds-banner--success .ds-banner__icon path { fill: #FFFFFF; } /* Color-Icon-Inverse = N0 */
+
+    /* ── appearance=error ── */
+    .ds-banner--error {
+      background-color: #EC1C24;   /* Color-Background-Danger-Bold = R300 */
+    }
+    .ds-banner--error .ds-banner__text  { color: #FFFFFF; }    /* Color-Text-Inverse = N0 */
+    .ds-banner--error .ds-banner__icon path { fill: #FFFFFF; }  /* Color-Icon-Inverse = N0 */
+
+    /* ── appearance=announcement ── */
+    .ds-banner--announcement {
+      background-color: #42526D;   /* Color-Background-Neutral-Bold = N500 */
+    }
+    .ds-banner--announcement .ds-banner__text { color: #FFFFFF; } /* Color-Text-Inverse = N0 */
+
+    /* ================================================================
+       Page-specific responsive overrides
+    ================================================================ */
+    @media (max-width: 900px) {
+      .variant-grid    { grid-template-columns: repeat(2, 1fr) !important; }
+      .anatomy-grid    { grid-template-columns: 1fr !important; }
+      .usage-grid-2    { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 640px) {
+      .variant-grid    { grid-template-columns: 1fr !important; }
+    }
+
+    /* ================================================================
+       POLISH LAYER — konsisten dengan badge.html, avatar.html, button.html
+    ================================================================ */
+    section > h2 > span:first-child {
+      width: 5px !important;
+      height: 5px !important;
+      min-width: 5px !important;
+      background: var(--color-primary-500) !important;
+      border-radius: 50% !important;
+      align-self: center !important;
+    }
+
+    .variant-grid > div,
+    .anatomy-grid > div {
+      transition: transform 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  box-shadow 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .variant-grid > div:hover,
+    .anatomy-grid > div:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(9, 30, 66, 0.11), 0 3px 8px rgba(9, 30, 66, 0.06);
+    }
+
+    .variant-grid > div > div:first-child {
+      background-image: radial-gradient(circle, rgba(9,30,66,0.045) 1.5px, transparent 1.5px) !important;
+      background-size: 18px 18px !important;
+    }
+
+    section > h2 {
+      border-bottom: none !important;
+      background-image: linear-gradient(to right, var(--color-primary-500) 0%, rgba(30,127,214,0.18) 32%, transparent 68%) !important;
+      background-repeat: no-repeat !important;
+      background-size: 100% 1px !important;
+      background-position: left bottom !important;
+    }
+
+    .variant-grid > div > div:last-child,
+    .anatomy-grid > div > div:last-child {
+      border-top: 2px solid var(--color-neutral-n30) !important;
+    }
+
+    .variant-grid > div:hover,
+    .anatomy-grid > div:hover {
+      border-color: rgba(30, 127, 214, 0.22) !important;
+    }
+
+    @keyframes ds-card-rise {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .variant-grid > div {
+      animation: ds-card-rise 260ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+    .variant-grid > div:nth-child(1) { animation-delay:   0ms; }
+    .variant-grid > div:nth-child(2) { animation-delay:  32ms; }
+    .variant-grid > div:nth-child(3) { animation-delay:  64ms; }
+    .variant-grid > div:nth-child(4) { animation-delay:  96ms; }
+
+    @keyframes ds-reveal {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .content-inner > header {
+      animation: ds-reveal 360ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+    .content-inner > section.mb-12 {
+      animation: ds-reveal 400ms 60ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+
+    code {
+      font-family: var(--font-mono) !important;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 7px;
+      background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n30);
+      border-radius: 4px;
+      color: var(--color-blue-b300);
+      letter-spacing: 0.01em;
+      line-height: 1.6;
+    }
+
+    .hero-feat-card {
+      transition: transform 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  box-shadow 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  border-color 160ms ease;
+    }
+    .hero-feat-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--color-blue-b75) !important;
+      box-shadow: 0 12px 32px rgba(9, 30, 66, 0.11), 0 3px 8px rgba(9, 30, 66, 0.06);
+    }
+
+    .usage-grid-2 > div {
+      transition: transform 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  box-shadow 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .usage-grid-2 > div:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(9, 30, 66, 0.09);
+    }
+
+    .ds-hero-banner {
+      position: relative;
+      overflow: hidden;
+    }
+    .ds-hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ds-hero-banner > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #1E7FD6 0%, #22D3EE 100%);
+      z-index: 99999;
+      transition: width 80ms linear;
+      pointer-events: none;
+      border-radius: 0 2px 2px 0;
+    }
+
+    .dark-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: none;
+      border: 1px solid var(--color-border);
+      color: var(--color-text-secondary);
+      cursor: pointer;
+      border-radius: var(--border-radius-md);
+      transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+      flex-shrink: 0;
+    }
+    .dark-toggle:hover {
+      background-color: var(--color-primary-50);
+      border-color: var(--color-primary-200);
+      color: var(--color-primary-600);
+    }
+    .dark-toggle .icon-sun  { display: none; }
+    .dark-toggle .icon-moon { display: block; }
+    [data-theme="dark"] .dark-toggle .icon-sun  { display: block; }
+    [data-theme="dark"] .dark-toggle .icon-moon { display: none; }
+    [data-theme="dark"] .dark-toggle {
+      border-color: #1A2E48;
+      color: #94A3B8;
+    }
+    [data-theme="dark"] .dark-toggle:hover {
+      background-color: rgba(30,127,214,0.14);
+      border-color: rgba(30,127,214,0.3);
+      color: #7DB5E7;
+    }
+
+    .scroll-top-btn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 40px;
+      height: 40px;
+      background: var(--color-primary-500);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 14px rgba(30,127,214,0.38);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 200ms ease, transform 200ms ease, background-color 150ms ease;
+      z-index: 200;
+      pointer-events: none;
+    }
+    .scroll-top-btn.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .scroll-top-btn:hover { background-color: var(--color-primary-600); }
+
+    .topbar {
+      background-color: rgba(255,255,255,0.9) !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+    }
+
+    .anatomy-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      letter-spacing: 0.04em;
+      color: var(--color-text-secondary);
+    }
+    .anatomy-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--color-blue-b300);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .token-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      font-family: var(--font-primary);
+    }
+    .token-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--color-neutral-n300);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 10px 14px;
+      background: var(--color-neutral-n20);
+      border-bottom: 1px solid var(--color-neutral-n30);
+    }
+    .token-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--color-neutral-n30);
+      color: var(--color-neutral-n700);
+      vertical-align: middle;
+    }
+    .token-table tr:last-child td { border-bottom: none; }
+    .token-table tr:hover td { background: var(--color-neutral-n10); }
+    .color-swatch-sm {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      border: 1px solid rgba(0,0,0,0.08);
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    .copy-btn {
+      padding: 4px 10px;
+      background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n30);
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-neutral-n400);
+      cursor: pointer;
+      transition: all 120ms ease;
+      font-family: var(--font-primary);
+      letter-spacing: 0.02em;
+    }
+    .copy-btn:hover { background: var(--color-blue-b300); border-color: var(--color-blue-b300); color: #fff; }
+    .copy-btn.copied { background: var(--color-green-g300); border-color: var(--color-green-g300); color: #fff; }
+
+    .code-block {
+      background: #0F172A;
+      color: #CBD5E1;
+      padding: 20px 24px;
+      border-radius: 12px;
+      overflow-x: auto;
+      font-size: 13px;
+      line-height: 1.7;
+      border: 1px solid #1E2D45;
+      font-family: var(--font-mono);
+    }
+    .code-block code { background: none; border: none; padding: 0; color: inherit; font-size: inherit; border-radius: 0; }
+    .code-comment { color: #475569; }
+    .code-tag     { color: #7DB5E7; }
+    .code-attr    { color: #A3CBEE; }
+    .code-string  { color: #86EFAC; }
+
+    /* ================================================================
+       DARK MODE overrides
+    ================================================================ */
+    [data-theme="dark"] body { background-color: #080F1E; color: #CBD5E1; }
+    [data-theme="dark"] .main-content { background-color: #080F1E; }
+
+    [data-theme="dark"] section > h2 {
+      color: #CBD5E1 !important;
+      background-image: linear-gradient(to right, #1E7FD6 0%, rgba(30,127,214,0.12) 32%, transparent 68%) !important;
+    }
+    [data-theme="dark"] p { color: #94A3B8; }
+    [data-theme="dark"] code {
+      background: #0F1D30 !important;
+      border-color: #1A2E48 !important;
+      color: #7DB5E7 !important;
+    }
+
+    [data-theme="dark"] .variant-grid > div,
+    [data-theme="dark"] .anatomy-grid > div {
+      background-color: #0F1D30 !important;
+      border-color: #1A2E48 !important;
+    }
+    [data-theme="dark"] .variant-grid > div > div:first-child {
+      background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1.5px, transparent 1.5px) !important;
+    }
+    [data-theme="dark"] .variant-grid > div > div:last-child,
+    [data-theme="dark"] .anatomy-grid > div > div:last-child {
+      background: #0F1D30 !important;
+      border-top-color: #1A2E48 !important;
+    }
+    [data-theme="dark"] .hero-feat-card {
+      background-color: #0F1D30 !important;
+      border-color: #1A2E48 !important;
+    }
+    [data-theme="dark"] .usage-grid-2 > div {
+      background-color: #0F1D30 !important;
+      border-color: #1A2E48 !important;
+    }
+    [data-theme="dark"] .topbar {
+      background-color: rgba(8,15,30,0.92) !important;
+      border-bottom-color: #1A2E48 !important;
+    }
+    [data-theme="dark"] .page-footer {
+      border-top-color: #1A2E48 !important;
+      color: #94A3B8 !important;
+    }
+    [data-theme="dark"] .token-table th {
+      background: #0F1D30 !important;
+      border-bottom-color: #1A2E48 !important;
+      color: #64748B !important;
+    }
+    [data-theme="dark"] .token-table td {
+      border-bottom-color: #1A2E48 !important;
+      color: #94A3B8 !important;
+    }
+    [data-theme="dark"] .token-table tr:hover td { background: rgba(255,255,255,0.03) !important; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .variant-grid > div,
+      .anatomy-grid > div,
+      .content-inner > header,
+      .content-inner > section.mb-12,
+      .scroll-progress,
+      .scroll-top-btn,
+      .dark-toggle { animation: none !important; transition: none !important; }
+    }
+    @media (max-width: 480px) {
+      .scroll-top-btn { bottom: 16px; right: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scroll-progress" style="width:0%" role="progressbar" aria-hidden="true"></div>
+
+<div class="container">
+
+  <!-- Mobile overlay -->
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo-icon">GL</div>
+        <div class="sidebar-brand-text">
+          <div class="logo">GPOS Lite</div>
+          <div class="version">Design System V2.0</div>
+        </div>
+      </div>
+      <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">&#x2715;</button>
+    </div>
+
+    <div class="sidebar-search">
+      <input type="search" class="search-input" placeholder="&#x1F50D;  Cari token, component...">
+    </div>
+
+    <div class="nav-scroll">
+      <nav class="nav-menu">
+
+        <div class="nav-section">
+          <h3 class="nav-title">Overview</h3>
+          <ul class="nav-list">
+            <li>
+              <a href="../../index.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+                Home
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="nav-title">Foundations</h3>
+          <ul class="nav-list">
+            <li>
+              <a href="../../foundations/colors/colors.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg>
+                Colors
+              </a>
+            </li>
+            <li>
+              <a href="../../foundations/typography/typography.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+                Typography
+              </a>
+            </li>
+            <li>
+              <a href="../../foundations/spacing/spacing.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>
+                Spacing
+              </a>
+            </li>
+            <li>
+              <a href="../../foundations/shadows/shadows.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h12a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V7z" opacity="0.4"/></svg>
+                Shadows
+              </a>
+            </li>
+            <li>
+              <a href="../../foundations/borders/borders.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
+                Borders &amp; Radius
+              </a>
+            </li>
+            <li>
+              <a href="../../foundations/grid/grid.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+                Grid &amp; Layout
+              </a>
+            </li>
+            <li>
+              <a href="../../foundations/icons/icons.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="5" height="5" rx="1"/><rect x="10" y="3" width="5" height="5" rx="1"/><rect x="17" y="3" width="4" height="5" rx="1"/><rect x="3" y="10" width="5" height="5" rx="1"/><rect x="10" y="10" width="5" height="5" rx="1"/><rect x="17" y="10" width="4" height="5" rx="1"/><rect x="3" y="17" width="5" height="4" rx="1"/><rect x="10" y="17" width="5" height="4" rx="1"/><rect x="17" y="17" width="4" height="4" rx="1"/></svg>
+                Icons
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="nav-title">Komponen</h3>
+          <ul class="nav-list">
+            <li>
+              <a href="../Button/button.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="3"/><line x1="7" y1="12" x2="17" y2="12" opacity="0.5"/></svg>
+                Button
+              </a>
+            </li>
+            <li>
+              <a href="../Avatar/avatar.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                Avatar
+              </a>
+            </li>
+            <li>
+              <a href="../Badge/badge.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="9" width="22" height="6" rx="3"/><circle cx="6" cy="12" r="1.5" fill="currentColor" opacity="0.5"/></svg>
+                Badge
+              </a>
+            </li>
+            <li>
+              <a href="../Breadcrumbs/breadcrumbs.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/><line x1="3" y1="12" x2="15" y2="12" opacity="0.4"/></svg>
+                Breadcrumbs
+              </a>
+            </li>
+            <li>
+              <a href="banner.html" class="nav-link active">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="8" rx="2"/><circle cx="6" cy="12" r="1" fill="currentColor" stroke="none"/><line x1="10" y1="12" x2="18" y2="12"/></svg>
+                Toast Banner
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="nav-title">Resources</h3>
+          <ul class="nav-list">
+            <li>
+              <a href="https://github.com/zaenalaripin28/DS-Gpos-Lite-V2" class="nav-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                GitHub Repo
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </nav>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="tailwind-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 6C9.33 6 7.67 7.33 7 10c1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35.98 1 2.09 2.15 4.59 2.15C19.67 12 21.33 10.67 22 8c-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C15.61 7.15 14.5 6 12 6zm-7 6c-2.67 0-4.33 1.33-5 4 1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35C6.39 17.15 7.5 18 10 18c2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C8.61 12.85 7.5 12 5 12z"/></svg>
+        Built with tokens.css
+      </div>
+    </div>
+  </aside>
+
+  <!-- ===================== MAIN ===================== -->
+  <main class="main-content">
+
+    <!-- Topbar -->
+    <div class="topbar">
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="breadcrumb">
+        <a href="../../index.html">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="#">Components</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="current">Toast Banner</span>
+      </div>
+      <div class="topbar-actions">
+        <button type="button" class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun"  width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <span class="version-badge">v2.0</span>
+      </div>
+    </div>
+
+    <div class="content-inner">
+
+      <!-- ==============================================
+           HERO — Component Overview Banner
+      =============================================== -->
+      <section class="mb-12">
+
+        <div class="ds-hero-banner rounded-2xl overflow-hidden mb-3 flex flex-col lg:flex-row bg-n900" style="border: 1px solid rgba(255,255,255,0.07);">
+
+          <!-- Left: Component metadata -->
+          <div class="flex-1 px-8 py-10 lg:px-11 lg:py-12 flex flex-col justify-center">
+
+            <div class="flex items-center gap-2 mb-5">
+              <div class="flex items-center justify-center w-5 h-5 rounded-md bg-b300/20">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4495DD" stroke-width="2.5"><rect x="2" y="8" width="20" height="8" rx="2"/><circle cx="6" cy="12" r="1" fill="#4495DD" stroke="none"/><line x1="10" y1="12" x2="18" y2="12"/></svg>
+              </div>
+              <span class="text-xs font-semibold uppercase tracking-[0.1em] text-b100">Components · DS GPOS Lite V2</span>
+            </div>
+
+            <div class="font-bold text-n0 mb-3" style="font-size:2.5rem; letter-spacing:-0.035em; line-height:1.04;">Toast Banner</div>
+
+            <p class="text-sm leading-relaxed max-w-xs mb-8" style="color: rgba(255,255,255,0.52); line-height: 1.7;">
+              Notifikasi lebar penuh yang tampil di area konten untuk menyampaikan pesan kontekstual. Tersedia dalam 4 varian appearance dengan makna semantik yang berbeda.
+            </p>
+
+            <div class="flex flex-wrap gap-2">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.10);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+                v2.0
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.10);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+                4 varian
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.10);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="8" width="20" height="8" rx="2"/></svg>
+                Full-width
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(68,149,221,0.15); color:#7DB5E7; border-color:rgba(68,149,221,0.28);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                Figma-synced
+              </span>
+            </div>
+
+          </div>
+
+          <!-- Right: Live preview card -->
+          <div class="lg:w-96 lg:flex-shrink-0 p-6 flex items-center justify-center" style="background: rgba(255,255,255,0.03); border-left: 1px solid rgba(255,255,255,0.07);">
+            <div class="w-full rounded-2xl overflow-hidden" style="background: var(--color-neutral-n10); box-shadow: 0 16px 48px rgba(0,0,0,0.32), 0 2px 8px rgba(0,0,0,0.16);">
+              <div class="px-5 py-3.5 flex items-center justify-between" style="border-bottom: 1px solid var(--color-border);">
+                <span class="text-xs font-semibold uppercase tracking-[0.08em]" style="color: var(--color-text-tertiary);">4 Varian</span>
+                <div class="flex items-center gap-1">
+                  <span class="w-2 h-2 rounded-full" style="background:var(--color-neutral-n40);"></span>
+                  <span class="w-2 h-2 rounded-full" style="background:var(--color-neutral-n30);"></span>
+                  <span class="w-2 h-2 rounded-full" style="background:var(--color-neutral-n20);"></span>
+                </div>
+              </div>
+              <div class="p-4 flex flex-col gap-2">
+                <!-- Warning mini preview -->
+                <div class="ds-banner ds-banner--warning" style="padding:8px 10px; border-radius:6px; gap:6px;">
+                  <div class="ds-banner__icon" style="width:16px; height:16px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12ZM10.9562 10.5584C12.1025 9.98533 13.3931 11.0206 13.0823 12.2639L12.3733 15.0999L12.4148 15.0792C12.7852 14.894 13.2357 15.0441 13.421 15.4146C13.6062 15.7851 13.4561 16.2356 13.0856 16.4208L13.0441 16.4416C11.8979 17.0147 10.6072 15.9794 10.9181 14.7361L11.6271 11.9001L11.5856 11.9208C11.2151 12.1061 10.7646 11.9559 10.5793 11.5854C10.3941 11.2149 10.5443 10.7644 10.9148 10.5792L10.9562 10.5584ZM12 9C12.4142 9 12.75 8.66421 12.75 8.25C12.75 7.83579 12.4142 7.5 12 7.5C11.5858 7.5 11.25 7.83579 11.25 8.25C11.25 8.66421 11.5858 9 12 9Z" fill="#091E42"/></svg>
+                  </div>
+                  <span class="ds-banner__text" style="font-size:11px; line-height:16px;">Warning</span>
+                </div>
+                <!-- Success mini preview -->
+                <div class="ds-banner ds-banner--success" style="padding:8px 10px; border-radius:6px; gap:6px;">
+                  <div class="ds-banner__icon" style="width:16px; height:16px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12ZM15.6103 10.1859C15.8511 9.84887 15.773 9.38046 15.4359 9.1397C15.0989 8.89894 14.6305 8.97701 14.3897 9.31407L11.1543 13.8436L9.53033 12.2197C9.23744 11.9268 8.76256 11.9268 8.46967 12.2197C8.17678 12.5126 8.17678 12.9874 8.46967 13.2803L10.7197 15.5303C10.8756 15.6862 11.0921 15.7656 11.3119 15.7474C11.5316 15.7293 11.7322 15.6153 11.8603 15.4359L15.6103 10.1859Z" fill="#FFFFFF"/></svg>
+                  </div>
+                  <span class="ds-banner__text" style="font-size:11px; line-height:16px;">Success</span>
+                </div>
+                <!-- Error mini preview -->
+                <div class="ds-banner ds-banner--error" style="padding:8px 10px; border-radius:6px; gap:6px;">
+                  <div class="ds-banner__icon" style="width:16px; height:16px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.40123 3.0034C10.5557 1.00229 13.4439 1.00229 14.5983 3.0034L21.9527 15.7509C23.1065 17.7509 21.6631 20.2501 19.3541 20.2501H4.64546C2.33649 20.2501 0.893061 17.7509 2.04691 15.7509L9.40123 3.0034ZM12 8.25C12.4142 8.25 12.75 8.58579 12.75 9V12.75C12.75 13.1642 12.4142 13.5 12 13.5C11.5858 13.5 11.25 13.1642 11.25 12.75V9C11.25 8.58579 11.5858 8.25 12 8.25ZM12 16.5C12.4142 16.5 12.75 16.1642 12.75 15.75C12.75 15.3358 12.4142 15 12 15C11.5858 15 11.25 15.3358 11.25 15.75C11.25 16.1642 11.5858 16.5 12 16.5Z" fill="#FFFFFF"/></svg>
+                  </div>
+                  <span class="ds-banner__text" style="font-size:11px; line-height:16px;">Error</span>
+                </div>
+                <!-- Announcement mini preview -->
+                <div class="ds-banner ds-banner--announcement" style="padding:8px 10px; border-radius:6px;">
+                  <span class="ds-banner__text" style="font-size:11px; line-height:16px;">Announcement</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Feature cards -->
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+
+          <div class="hero-feat-card bg-n0 rounded-xl p-5 border border-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, var(--color-blue-b50) 0%, rgba(163,203,238,0.3) 100%); border: 1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><rect x="2" y="8" width="20" height="8" rx="2"/><circle cx="6" cy="12" r="1" fill="#1E7FD6" stroke="none"/><line x1="10" y1="12" x2="18" y2="12"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-n900 mb-1.5 tracking-[-0.02em]">4 Varian</div>
+            <div class="text-xs leading-relaxed" style="color: var(--color-text-tertiary);">Warning · Success · Error · Announcement</div>
+          </div>
+
+          <div class="hero-feat-card bg-n0 rounded-xl p-5 border border-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, var(--color-blue-b50) 0%, rgba(163,203,238,0.3) 100%); border: 1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M8 12h3l1-4 2 8 1-4h3"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-n900 mb-1.5 tracking-[-0.02em]">Semantic Colors</div>
+            <div class="text-xs leading-relaxed" style="color: var(--color-text-tertiary);">Semua warna dari semantic color tokens</div>
+          </div>
+
+          <div class="hero-feat-card bg-n0 rounded-xl p-5 border border-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, var(--color-blue-b50) 0%, rgba(163,203,238,0.3) 100%); border: 1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><path d="M12 2l9 4.5V17.5L12 22l-9-4.5V6.5L12 2z"/><path d="M12 2v20M3 6.5l9 5 9-5"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-n900 mb-1.5 tracking-[-0.02em]">Figma-Synced</div>
+            <div class="text-xs leading-relaxed" style="color: var(--color-text-tertiary);">Varian sesuai Figma via tokens.css</div>
+          </div>
+
+          <div class="hero-feat-card bg-n0 rounded-xl p-5 border border-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, var(--color-blue-b50) 0%, rgba(163,203,238,0.3) 100%); border: 1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><path d="M4 6h16M4 10h16M4 14h10"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-n900 mb-1.5 tracking-[-0.02em]">Full-width</div>
+            <div class="text-xs leading-relaxed" style="color: var(--color-text-tertiary);">Melebar penuh dalam container-nya</div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ==============================================
+           SECTION 1: VARIANTS
+      =============================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Varian Appearance
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">
+          Empat varian banner dengan makna semantik berbeda. Setiap varian menggunakan semantic color tokens dari halaman <strong style="color:var(--color-blue-b300);">Colors</strong>.
+        </p>
+
+        <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:16px;" class="variant-grid">
+
+          <!-- Warning -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; min-height:140px; background:#FAFBFB;">
+              <div class="ds-banner ds-banner--warning" style="max-width:380px;">
+                <div class="ds-banner__icon">
+                  <!-- SolidInformationCircle — Color-Icon-Bold (#091E42) -->
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12ZM10.9562 10.5584C12.1025 9.98533 13.3931 11.0206 13.0823 12.2639L12.3733 15.0999L12.4148 15.0792C12.7852 14.894 13.2357 15.0441 13.421 15.4146C13.6062 15.7851 13.4561 16.2356 13.0856 16.4208L13.0441 16.4416C11.8979 17.0147 10.6072 15.9794 10.9181 14.7361L11.6271 11.9001L11.5856 11.9208C11.2151 12.1061 10.7646 11.9559 10.5793 11.5854C10.3941 11.2149 10.5443 10.7644 10.9148 10.5792L10.9562 10.5584ZM12 9C12.4142 9 12.75 8.66421 12.75 8.25C12.75 7.83579 12.4142 7.5 12 7.5C11.5858 7.5 11.25 7.83579 11.25 8.25C11.25 8.66421 11.5858 9 12 9Z" fill="#091E42"/>
+                  </svg>
+                </div>
+                <div class="ds-banner__text">text banner</div>
+              </div>
+            </div>
+            <div style="padding:14px 16px; background:var(--color-surface);">
+              <div style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary); margin-bottom:4px;">Warning</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); margin-bottom:6px;"><code>.ds-banner--warning</code></div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-primary); line-height:1.5;">Peringatan yang membutuhkan perhatian pengguna namun tidak kritis. Gunakan untuk informasi penting sebelum melanjutkan aksi.</div>
+            </div>
+          </div>
+
+          <!-- Success -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; min-height:140px; background:#FAFBFB;">
+              <div class="ds-banner ds-banner--success" style="max-width:380px;">
+                <div class="ds-banner__icon">
+                  <!-- SolidCheckCircle — Color-Icon-Inverse (#FFFFFF) -->
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12ZM15.6103 10.1859C15.8511 9.84887 15.773 9.38046 15.4359 9.1397C15.0989 8.89894 14.6305 8.97701 14.3897 9.31407L11.1543 13.8436L9.53033 12.2197C9.23744 11.9268 8.76256 11.9268 8.46967 12.2197C8.17678 12.5126 8.17678 12.9874 8.46967 13.2803L10.7197 15.5303C10.8756 15.6862 11.0921 15.7656 11.3119 15.7474C11.5316 15.7293 11.7322 15.6153 11.8603 15.4359L15.6103 10.1859Z" fill="#FFFFFF"/>
+                  </svg>
+                </div>
+                <div class="ds-banner__text">text banner</div>
+              </div>
+            </div>
+            <div style="padding:14px 16px; background:var(--color-surface);">
+              <div style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary); margin-bottom:4px;">Success</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); margin-bottom:6px;"><code>.ds-banner--success</code></div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-primary); line-height:1.5;">Konfirmasi bahwa suatu aksi berhasil dilakukan. Gunakan setelah operasi penyimpanan, pengiriman, atau perubahan data berhasil.</div>
+            </div>
+          </div>
+
+          <!-- Error -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; min-height:140px; background:#FAFBFB;">
+              <div class="ds-banner ds-banner--error" style="max-width:380px;">
+                <div class="ds-banner__icon">
+                  <!-- SolidExclamationTriangle — Color-Icon-Inverse (#FFFFFF) -->
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.40123 3.0034C10.5557 1.00229 13.4439 1.00229 14.5983 3.0034L21.9527 15.7509C23.1065 17.7509 21.6631 20.2501 19.3541 20.2501H4.64546C2.33649 20.2501 0.893061 17.7509 2.04691 15.7509L9.40123 3.0034ZM12 8.25C12.4142 8.25 12.75 8.58579 12.75 9V12.75C12.75 13.1642 12.4142 13.5 12 13.5C11.5858 13.5 11.25 13.1642 11.25 12.75V9C11.25 8.58579 11.5858 8.25 12 8.25ZM12 16.5C12.4142 16.5 12.75 16.1642 12.75 15.75C12.75 15.3358 12.4142 15 12 15C11.5858 15 11.25 15.3358 11.25 15.75C11.25 16.1642 11.5858 16.5 12 16.5Z" fill="#FFFFFF"/>
+                  </svg>
+                </div>
+                <div class="ds-banner__text">text banner</div>
+              </div>
+            </div>
+            <div style="padding:14px 16px; background:var(--color-surface);">
+              <div style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary); margin-bottom:4px;">Error</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); margin-bottom:6px;"><code>.ds-banner--error</code></div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-primary); line-height:1.5;">Kondisi kritis yang membutuhkan tindakan segera. Gunakan saat terjadi kesalahan sistem, validasi gagal, atau operasi tidak berhasil.</div>
+            </div>
+          </div>
+
+          <!-- Announcement -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:32px 24px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; min-height:140px; background:#FAFBFB;">
+              <div class="ds-banner ds-banner--announcement" style="max-width:380px;">
+                <div class="ds-banner__text">text banner</div>
+              </div>
+            </div>
+            <div style="padding:14px 16px; background:var(--color-surface);">
+              <div style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary); margin-bottom:4px;">Announcement</div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-mono); margin-bottom:6px;"><code>.ds-banner--announcement</code></div>
+              <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-primary); line-height:1.5;">Informasi atau pengumuman umum yang tidak memiliki urgensi tertentu. Tidak menggunakan ikon — hanya teks.</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SECTION 2: ANATOMY
+      =============================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Anatomy
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">
+          Struktur internal toast banner. Varian <strong style="color:#FFA33D;">Warning</strong>, <strong style="color:#00AA5B;">Success</strong>, dan <strong style="color:#EC1C24;">Error</strong> memiliki icon slot. Varian <strong style="color:var(--color-neutral-n500);">Announcement</strong> hanya memiliki text slot tanpa ikon.
+        </p>
+
+        <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:24px;" class="anatomy-grid">
+
+          <!-- Anatomy: With Icon (Warning / Success / Error) -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:48px 32px 56px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:24px; background:#FAFBFB; position:relative;">
+
+              <div style="position:relative; width:100%; max-width:320px;">
+                <!-- Container annotation outline -->
+                <div style="position:absolute; inset:-10px; border:1.5px dashed var(--color-blue-b200); border-radius:16px; pointer-events:none; z-index:2;"></div>
+                <!-- Icon slot annotation outline -->
+                <div style="position:absolute; top:50%; left:2px; transform:translateY(-50%); width:32px; height:32px; border:1.5px dashed #00AA5B; border-radius:6px; pointer-events:none; z-index:2;"></div>
+                <!-- Text slot annotation outline -->
+                <div style="position:absolute; top:50%; left:44px; right:2px; transform:translateY(-50%); height:24px; border:1.5px dashed var(--color-neutral-n200); border-radius:4px; pointer-events:none; z-index:2;"></div>
+
+                <div class="ds-banner ds-banner--warning">
+                  <div class="ds-banner__icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12ZM10.9562 10.5584C12.1025 9.98533 13.3931 11.0206 13.0823 12.2639L12.3733 15.0999L12.4148 15.0792C12.7852 14.894 13.2357 15.0441 13.421 15.4146C13.6062 15.7851 13.4561 16.2356 13.0856 16.4208L13.0441 16.4416C11.8979 17.0147 10.6072 15.9794 10.9181 14.7361L11.6271 11.9001L11.5856 11.9208C11.2151 12.1061 10.7646 11.9559 10.5793 11.5854C10.3941 11.2149 10.5443 10.7644 10.9148 10.5792L10.9562 10.5584ZM12 9C12.4142 9 12.75 8.66421 12.75 8.25C12.75 7.83579 12.4142 7.5 12 7.5C11.5858 7.5 11.25 7.83579 11.25 8.25C11.25 8.66421 11.5858 9 12 9Z" fill="#091E42"/></svg>
+                  </div>
+                  <div class="ds-banner__text">text banner</div>
+                </div>
+
+                <!-- Label A: Container -->
+                <div style="position:absolute; top:-38px; left:50%; transform:translateX(-50%); white-space:nowrap;" class="anatomy-label">
+                  <span class="anatomy-badge">A</span> Container
+                </div>
+                <!-- Label B: Icon -->
+                <div style="position:absolute; bottom:-38px; left:16px; white-space:nowrap;" class="anatomy-label">
+                  <span class="anatomy-badge" style="background:#00AA5B;">B</span> Icon Slot
+                </div>
+                <!-- Label C: Text -->
+                <div style="position:absolute; bottom:-38px; right:16px; white-space:nowrap;" class="anatomy-label">
+                  <span class="anatomy-badge" style="background:var(--color-neutral-n300);">C</span> Text Slot
+                </div>
+              </div>
+
+            </div>
+            <div style="padding:16px 20px; background:var(--color-surface);">
+              <div style="font-size:13px; font-weight:700; color:var(--color-text-primary); font-family:var(--font-primary); margin-bottom:12px;">Warning · Success · Error</div>
+              <div style="display:flex; flex-direction:column; gap:10px;">
+                <div style="display:flex; align-items:flex-start; gap:10px;">
+                  <span class="anatomy-badge" style="margin-top:1px; flex-shrink:0;">A</span>
+                  <div>
+                    <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary);">Container</div>
+                    <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-primary); margin-top:2px; line-height:1.5;">Wrapper dengan <code>padding: 12px</code>, <code>border-radius: 8px</code>, dan background sesuai varian. Lebar mengikuti parent container.</div>
+                  </div>
+                </div>
+                <div style="display:flex; align-items:flex-start; gap:10px;">
+                  <span class="anatomy-badge" style="background:#00AA5B; margin-top:1px; flex-shrink:0;">B</span>
+                  <div>
+                    <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary);">Icon Slot</div>
+                    <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-primary); margin-top:2px; line-height:1.5;">Area ikon berukuran <code>24×24px</code>. Warning menggunakan <code>SolidInformationCircle</code>, Success <code>SolidCheckCircle</code>, Error <code>SolidExclamationTriangle</code>.</div>
+                  </div>
+                </div>
+                <div style="display:flex; align-items:flex-start; gap:10px;">
+                  <span class="anatomy-badge" style="background:var(--color-neutral-n300); margin-top:1px; flex-shrink:0;">C</span>
+                  <div>
+                    <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary);">Text Slot</div>
+                    <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-primary); margin-top:2px; line-height:1.5;">Teks pesan. Poppins 14px, weight 500. Menggunakan <code>flex:1</code> sehingga selalu mengisi sisa lebar banner.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Anatomy: Without Icon (Announcement) -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:48px 32px 56px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:24px; background:#FAFBFB; position:relative;">
+
+              <div style="position:relative; width:100%; max-width:320px;">
+                <!-- Container annotation outline -->
+                <div style="position:absolute; inset:-10px; border:1.5px dashed var(--color-blue-b200); border-radius:16px; pointer-events:none; z-index:2;"></div>
+                <!-- Text slot annotation outline -->
+                <div style="position:absolute; top:50%; left:2px; right:2px; transform:translateY(-50%); height:24px; border:1.5px dashed var(--color-neutral-n200); border-radius:4px; pointer-events:none; z-index:2;"></div>
+
+                <div class="ds-banner ds-banner--announcement">
+                  <div class="ds-banner__text">text banner</div>
+                </div>
+
+                <!-- Label A: Container -->
+                <div style="position:absolute; top:-38px; left:50%; transform:translateX(-50%); white-space:nowrap;" class="anatomy-label">
+                  <span class="anatomy-badge">A</span> Container
+                </div>
+                <!-- Label B: Text -->
+                <div style="position:absolute; bottom:-38px; left:50%; transform:translateX(-50%); white-space:nowrap;" class="anatomy-label">
+                  <span class="anatomy-badge" style="background:var(--color-neutral-n300);">B</span> Text Slot
+                </div>
+              </div>
+
+            </div>
+            <div style="padding:16px 20px; background:var(--color-surface);">
+              <div style="font-size:13px; font-weight:700; color:var(--color-text-primary); font-family:var(--font-primary); margin-bottom:12px;">Announcement</div>
+              <div style="display:flex; flex-direction:column; gap:10px;">
+                <div style="display:flex; align-items:flex-start; gap:10px;">
+                  <span class="anatomy-badge" style="margin-top:1px; flex-shrink:0;">A</span>
+                  <div>
+                    <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary);">Container</div>
+                    <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-primary); margin-top:2px; line-height:1.5;">Sama seperti varian lain. Background menggunakan <code>Color-Background-Neutral-Bold</code> (N500 = #42526D). Tidak ada <code>gap</code> untuk icon.</div>
+                  </div>
+                </div>
+                <div style="display:flex; align-items:flex-start; gap:10px;">
+                  <span class="anatomy-badge" style="background:var(--color-neutral-n300); margin-top:1px; flex-shrink:0;">B</span>
+                  <div>
+                    <div style="font-size:12px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary);">Text Slot</div>
+                    <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-primary); margin-top:2px; line-height:1.5;">Teks mengisi lebar penuh container karena tidak ada ikon. Announcement adalah satu-satunya varian tanpa icon slot.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SECTION 3: DO & DON'T
+      =============================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Do &amp; Don't
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">
+          Panduan penggunaan toast banner yang benar untuk menjaga konsistensi dan kejelasan komunikasi visual.
+        </p>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;" class="usage-grid-2">
+
+          <!-- DO -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:10px 16px; background:var(--color-green-g50); border-bottom:2px solid var(--color-green-g200); display:flex; align-items:center; gap:8px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--color-green-g400)" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg>
+              <span style="font-size:12px; font-weight:700; color:var(--color-green-g400); font-family:var(--font-primary); letter-spacing:0.04em; text-transform:uppercase;">Do — Lakukan ini</span>
+            </div>
+            <div style="padding:20px 20px 24px;">
+              <div style="display:flex; flex-direction:column; gap:18px;">
+
+                <div style="display:flex; gap:14px; align-items:flex-start;">
+                  <div style="flex-shrink:0; min-width:160px; background:var(--color-green-g50); border-radius:8px; padding:8px; border:1px solid var(--color-green-g100);">
+                    <div class="ds-banner ds-banner--warning" style="padding:6px 8px; border-radius:6px;">
+                      <div class="ds-banner__icon" style="width:16px; height:16px;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12ZM10.9562 10.5584C12.1025 9.98533 13.3931 11.0206 13.0823 12.2639L12.3733 15.0999L12.4148 15.0792C12.7852 14.894 13.2357 15.0441 13.421 15.4146C13.6062 15.7851 13.4561 16.2356 13.0856 16.4208L13.0441 16.4416C11.8979 17.0147 10.6072 15.9794 10.9181 14.7361L11.6271 11.9001L11.5856 11.9208C11.2151 12.1061 10.7646 11.9559 10.5793 11.5854C10.3941 11.2149 10.5443 10.7644 10.9148 10.5792L10.9562 10.5584ZM12 9C12.4142 9 12.75 8.66421 12.75 8.25C12.75 7.83579 12.4142 7.5 12 7.5C11.5858 7.5 11.25 7.83579 11.25 8.25C11.25 8.66421 11.5858 9 12 9Z" fill="#091E42"/></svg>
+                      </div>
+                      <span class="ds-banner__text" style="font-size:11px; line-height:16px;">Sesi akan berakhir dalam 5 menit</span>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary); margin-bottom:3px;">Gunakan varian yang sesuai konteks</div>
+                    <div style="font-size:12px; color:var(--color-text-tertiary); font-family:var(--font-primary); line-height:1.5;">Pilih varian berdasarkan jenis pesan: Warning untuk peringatan, Success untuk konfirmasi, Error untuk kegagalan, Announcement untuk pengumuman.</div>
+                  </div>
+                </div>
+
+                <div style="display:flex; gap:14px; align-items:flex-start;">
+                  <div style="flex-shrink:0; min-width:160px; background:var(--color-green-g50); border-radius:8px; padding:8px; border:1px solid var(--color-green-g100);">
+                    <div class="ds-banner ds-banner--success" style="padding:6px 8px; border-radius:6px;">
+                      <div class="ds-banner__icon" style="width:16px; height:16px;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12ZM15.6103 10.1859C15.8511 9.84887 15.773 9.38046 15.4359 9.1397C15.0989 8.89894 14.6305 8.97701 14.3897 9.31407L11.1543 13.8436L9.53033 12.2197C9.23744 11.9268 8.76256 11.9268 8.46967 12.2197C8.17678 12.5126 8.17678 12.9874 8.46967 13.2803L10.7197 15.5303C10.8756 15.6862 11.0921 15.7656 11.3119 15.7474C11.5316 15.7293 11.7322 15.6153 11.8603 15.4359L15.6103 10.1859Z" fill="#FFFFFF"/></svg>
+                      </div>
+                      <span class="ds-banner__text" style="font-size:11px; line-height:16px;">Data berhasil disimpan</span>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary); margin-bottom:3px;">Tulis teks yang ringkas dan jelas</div>
+                    <div style="font-size:12px; color:var(--color-text-tertiary); font-family:var(--font-primary); line-height:1.5;">Gunakan kalimat pendek yang langsung menyatakan kondisi atau aksi. Pengguna harus memahami pesan hanya dalam 1–2 detik baca.</div>
+                  </div>
+                </div>
+
+                <div style="display:flex; gap:14px; align-items:flex-start;">
+                  <div style="flex-shrink:0; min-width:160px; background:var(--color-green-g50); border-radius:8px; padding:8px; border:1px solid var(--color-green-g100);">
+                    <div class="ds-banner ds-banner--announcement" style="padding:6px 8px; border-radius:6px;">
+                      <span class="ds-banner__text" style="font-size:11px; line-height:16px;">Pemeliharaan sistem pukul 22.00</span>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary); margin-bottom:3px;">Tampilkan satu banner dalam satu waktu</div>
+                    <div style="font-size:12px; color:var(--color-text-tertiary); font-family:var(--font-primary); line-height:1.5;">Satu banner cukup untuk satu konteks. Jika ada beberapa informasi, prioritaskan yang paling kritis dan tampilkan bergantian.</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- DON'T -->
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+            <div style="padding:10px 16px; background:var(--color-red-r50); border-bottom:2px solid var(--color-red-r100); display:flex; align-items:center; gap:8px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--color-red-r300)" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              <span style="font-size:12px; font-weight:700; color:var(--color-red-r300); font-family:var(--font-primary); letter-spacing:0.04em; text-transform:uppercase;">Don't — Hindari ini</span>
+            </div>
+            <div style="padding:20px 20px 24px;">
+              <div style="display:flex; flex-direction:column; gap:18px;">
+
+                <div style="display:flex; gap:14px; align-items:flex-start;">
+                  <div style="flex-shrink:0; min-width:160px; background:var(--color-red-r50); border-radius:8px; padding:8px; border:1px solid var(--color-red-r75); display:flex; flex-direction:column; gap:4px; position:relative;">
+                    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:100%; height:2px; background:var(--color-red-r300); z-index:5; opacity:0.6;"></div>
+                    <div class="ds-banner ds-banner--error" style="padding:4px 6px; border-radius:4px; opacity:0.7;">
+                      <div class="ds-banner__icon" style="width:12px; height:12px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.40123 3.0034C10.5557 1.00229 13.4439 1.00229 14.5983 3.0034L21.9527 15.7509C23.1065 17.7509 21.6631 20.2501 19.3541 20.2501H4.64546C2.33649 20.2501 0.893061 17.7509 2.04691 15.7509L9.40123 3.0034ZM12 8.25C12.4142 8.25 12.75 8.58579 12.75 9V12.75C12.75 13.1642 12.4142 13.5 12 13.5C11.5858 13.5 11.25 13.1642 11.25 12.75V9C11.25 8.58579 11.5858 8.25 12 8.25ZM12 16.5C12.4142 16.5 12.75 16.1642 12.75 15.75C12.75 15.3358 12.4142 15 12 15C11.5858 15 11.25 15.3358 11.25 15.75C11.25 16.1642 11.5858 16.5 12 16.5Z" fill="#FFFFFF"/></svg></div>
+                      <span class="ds-banner__text" style="font-size:9px; line-height:13px;">Error A</span>
+                    </div>
+                    <div class="ds-banner ds-banner--warning" style="padding:4px 6px; border-radius:4px; opacity:0.7;">
+                      <div class="ds-banner__icon" style="width:12px; height:12px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12ZM10.9562 10.5584C12.1025 9.98533 13.3931 11.0206 13.0823 12.2639L12.3733 15.0999L12.4148 15.0792C12.7852 14.894 13.2357 15.0441 13.421 15.4146C13.6062 15.7851 13.4561 16.2356 13.0856 16.4208L13.0441 16.4416C11.8979 17.0147 10.6072 15.9794 10.9181 14.7361L11.6271 11.9001L11.5856 11.9208C11.2151 12.1061 10.7646 11.9559 10.5793 11.5854C10.3941 11.2149 10.5443 10.7644 10.9148 10.5792L10.9562 10.5584ZM12 9C12.4142 9 12.75 8.66421 12.75 8.25C12.75 7.83579 12.4142 7.5 12 7.5C11.5858 7.5 11.25 7.83579 11.25 8.25C11.25 8.66421 11.5858 9 12 9Z" fill="#091E42"/></svg></div>
+                      <span class="ds-banner__text" style="font-size:9px; line-height:13px;">Warning B</span>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary); margin-bottom:3px;">Jangan tampilkan lebih dari satu banner sekaligus</div>
+                    <div style="font-size:12px; color:var(--color-text-tertiary); font-family:var(--font-primary); line-height:1.5;">Beberapa banner sekaligus akan membingungkan pengguna dan menurunkan prioritas informasi. Tampilkan satu banner yang paling kritis.</div>
+                  </div>
+                </div>
+
+                <div style="display:flex; gap:14px; align-items:flex-start;">
+                  <div style="flex-shrink:0; min-width:160px; background:var(--color-red-r50); border-radius:8px; padding:8px; border:1px solid var(--color-red-r75); position:relative;">
+                    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:100%; height:2px; background:var(--color-red-r300); z-index:5; opacity:0.6;"></div>
+                    <div class="ds-banner ds-banner--success" style="padding:6px 8px; border-radius:6px; opacity:0.7;">
+                      <div class="ds-banner__icon" style="width:16px; height:16px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12ZM15.6103 10.1859C15.8511 9.84887 15.773 9.38046 15.4359 9.1397C15.0989 8.89894 14.6305 8.97701 14.3897 9.31407L11.1543 13.8436L9.53033 12.2197C9.23744 11.9268 8.76256 11.9268 8.46967 12.2197C8.17678 12.5126 8.17678 12.9874 8.46967 13.2803L10.7197 15.5303C10.8756 15.6862 11.0921 15.7656 11.3119 15.7474C11.5316 15.7293 11.7322 15.6153 11.8603 15.4359L15.6103 10.1859Z" fill="#FFFFFF"/></svg></div>
+                      <span class="ds-banner__text" style="font-size:11px; line-height:16px;">Terjadi kesalahan saat upload</span>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary); margin-bottom:3px;">Jangan gunakan varian yang salah untuk kondisi</div>
+                    <div style="font-size:12px; color:var(--color-text-tertiary); font-family:var(--font-primary); line-height:1.5;">Jangan pakai Success (hijau) untuk pesan error, atau Error (merah) untuk pengumuman biasa. Warna memiliki makna semantik yang kuat.</div>
+                  </div>
+                </div>
+
+                <div style="display:flex; gap:14px; align-items:flex-start;">
+                  <div style="flex-shrink:0; min-width:160px; background:var(--color-red-r50); border-radius:8px; padding:8px; border:1px solid var(--color-red-r75); position:relative;">
+                    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:100%; height:2px; background:var(--color-red-r300); z-index:5; opacity:0.6;"></div>
+                    <div class="ds-banner ds-banner--announcement" style="padding:6px 8px; border-radius:6px; opacity:0.7;">
+                      <span class="ds-banner__text" style="font-size:9px; line-height:13px;">Ini adalah teks yang sangat panjang, bertele-tele, dan berisi informasi yang seharusnya tidak dimasukkan ke dalam sebuah banner notifikasi ringkas</span>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary); margin-bottom:3px;">Jangan isi banner dengan teks terlalu panjang</div>
+                    <div style="font-size:12px; color:var(--color-text-tertiary); font-family:var(--font-primary); line-height:1.5;">Banner bukan tempat untuk konten panjang. Jika pesan memerlukan penjelasan detail, gunakan modal atau halaman terpisah.</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SECTION 4: TOKEN REFERENCE
+      =============================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Token Reference
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">
+          Semantic color tokens yang digunakan oleh setiap varian toast banner.
+        </p>
+
+        <div style="border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+          <table class="token-table">
+            <thead>
+              <tr>
+                <th>Varian</th>
+                <th>Token</th>
+                <th>Nilai (Color Scale)</th>
+                <th>Hex</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td rowspan="2" style="font-weight:600; color:var(--color-text-primary);">Warning</td>
+                <td><code>Color-Background-Warning-Bold</code></td>
+                <td>Background.Warning.Bold → Color.Orange.O200</td>
+                <td><span class="color-swatch-sm" style="background:#FFA33D;"></span>#FFA33D</td>
+              </tr>
+              <tr>
+                <td><code>Color-Text-Bold</code> / <code>Color-Icon-Bold</code></td>
+                <td>Text.Bold / Icon.Bold → Color.Neutral.N900</td>
+                <td><span class="color-swatch-sm" style="background:#091E42;"></span>#091E42</td>
+              </tr>
+              <tr>
+                <td rowspan="2" style="font-weight:600; color:var(--color-text-primary);">Success</td>
+                <td><code>Color-Background-Success-Bold</code></td>
+                <td>Background.Success.Bold → Color.Green.G300</td>
+                <td><span class="color-swatch-sm" style="background:#00AA5B;"></span>#00AA5B</td>
+              </tr>
+              <tr>
+                <td><code>Color-Text-Inverse</code> / <code>Color-Icon-Inverse</code></td>
+                <td>Text.Inverse / Icon.Inverse → Color.Neutral.N0</td>
+                <td><span class="color-swatch-sm" style="background:#FFFFFF; border-color:var(--color-neutral-n40);"></span>#FFFFFF</td>
+              </tr>
+              <tr>
+                <td rowspan="2" style="font-weight:600; color:var(--color-text-primary);">Error</td>
+                <td><code>Color-Background-Danger-Bold</code></td>
+                <td>Background.Danger.Bold → Color.Red.R300</td>
+                <td><span class="color-swatch-sm" style="background:#EC1C24;"></span>#EC1C24</td>
+              </tr>
+              <tr>
+                <td><code>Color-Text-Inverse</code> / <code>Color-Icon-Inverse</code></td>
+                <td>Text.Inverse / Icon.Inverse → Color.Neutral.N0</td>
+                <td><span class="color-swatch-sm" style="background:#FFFFFF; border-color:var(--color-neutral-n40);"></span>#FFFFFF</td>
+              </tr>
+              <tr>
+                <td rowspan="2" style="font-weight:600; color:var(--color-text-primary);">Announcement</td>
+                <td><code>Color-Background-Neutral-Bold</code></td>
+                <td>Background.Neutral.Bold → Color.Neutral.N500</td>
+                <td><span class="color-swatch-sm" style="background:#42526D;"></span>#42526D</td>
+              </tr>
+              <tr>
+                <td><code>Color-Text-Inverse</code></td>
+                <td>Text.Inverse → Color.Neutral.N0</td>
+                <td><span class="color-swatch-sm" style="background:#FFFFFF; border-color:var(--color-neutral-n40);"></span>#FFFFFF</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           SECTION 5: CODE SNIPPET
+      =============================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Code Snippet
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">
+          Struktur HTML untuk setiap varian toast banner.
+        </p>
+
+        <div style="display:flex; flex-direction:column; gap:16px;">
+
+          <!-- Warning -->
+          <div>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+              <span style="font-size:12px; font-weight:600; color:var(--color-text-secondary); font-family:var(--font-primary);">Warning</span>
+              <button class="copy-btn" onclick="copyCode(this, 'code-warning')">Copy</button>
+            </div>
+            <div class="code-block">
+              <code id="code-warning"><span class="code-comment">&lt;!-- appearance=warning --&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-banner ds-banner--warning"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-banner__icon"</span><span class="code-tag">&gt;</span>
+    <span class="code-comment">&lt;!-- icon: SolidInformationCircle (24×24) --&gt;</span>
+    <span class="code-tag">&lt;img</span> <span class="code-attr">src</span>=<span class="code-string">"assets/icons/icon-solid-information-circle.svg"</span> <span class="code-attr">width</span>=<span class="code-string">"24"</span> <span class="code-attr">height</span>=<span class="code-string">"24"</span> <span class="code-attr">alt</span>=<span class="code-string">""</span><span class="code-tag">/&gt;</span>
+  <span class="code-tag">&lt;/div&gt;</span>
+  <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-banner__text"</span><span class="code-tag">&gt;</span>Teks pesan banner<span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;/div&gt;</span></code>
+            </div>
+          </div>
+
+          <!-- Success -->
+          <div>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+              <span style="font-size:12px; font-weight:600; color:var(--color-text-secondary); font-family:var(--font-primary);">Success</span>
+              <button class="copy-btn" onclick="copyCode(this, 'code-success')">Copy</button>
+            </div>
+            <div class="code-block">
+              <code id="code-success"><span class="code-comment">&lt;!-- appearance=success --&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-banner ds-banner--success"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-banner__icon"</span><span class="code-tag">&gt;</span>
+    <span class="code-comment">&lt;!-- icon: SolidCheckCircle (24×24) --&gt;</span>
+    <span class="code-tag">&lt;img</span> <span class="code-attr">src</span>=<span class="code-string">"assets/icons/icon-solid-check-circle.svg"</span> <span class="code-attr">width</span>=<span class="code-string">"24"</span> <span class="code-attr">height</span>=<span class="code-string">"24"</span> <span class="code-attr">alt</span>=<span class="code-string">""</span><span class="code-tag">/&gt;</span>
+  <span class="code-tag">&lt;/div&gt;</span>
+  <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-banner__text"</span><span class="code-tag">&gt;</span>Teks pesan banner<span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;/div&gt;</span></code>
+            </div>
+          </div>
+
+          <!-- Error -->
+          <div>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+              <span style="font-size:12px; font-weight:600; color:var(--color-text-secondary); font-family:var(--font-primary);">Error</span>
+              <button class="copy-btn" onclick="copyCode(this, 'code-error')">Copy</button>
+            </div>
+            <div class="code-block">
+              <code id="code-error"><span class="code-comment">&lt;!-- appearance=error --&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-banner ds-banner--error"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-banner__icon"</span><span class="code-tag">&gt;</span>
+    <span class="code-comment">&lt;!-- icon: SolidExclamationTriangle (24×24) --&gt;</span>
+    <span class="code-tag">&lt;img</span> <span class="code-attr">src</span>=<span class="code-string">"assets/icons/icon-solid-exclamation-triangle.svg"</span> <span class="code-attr">width</span>=<span class="code-string">"24"</span> <span class="code-attr">height</span>=<span class="code-string">"24"</span> <span class="code-attr">alt</span>=<span class="code-string">""</span><span class="code-tag">/&gt;</span>
+  <span class="code-tag">&lt;/div&gt;</span>
+  <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-banner__text"</span><span class="code-tag">&gt;</span>Teks pesan banner<span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;/div&gt;</span></code>
+            </div>
+          </div>
+
+          <!-- Announcement -->
+          <div>
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+              <span style="font-size:12px; font-weight:600; color:var(--color-text-secondary); font-family:var(--font-primary);">Announcement</span>
+              <button class="copy-btn" onclick="copyCode(this, 'code-announcement')">Copy</button>
+            </div>
+            <div class="code-block">
+              <code id="code-announcement"><span class="code-comment">&lt;!-- appearance=announcement (no icon) --&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-banner ds-banner--announcement"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-banner__text"</span><span class="code-tag">&gt;</span>Teks pesan banner<span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;/div&gt;</span></code>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="page-footer" style="border-top:1px solid var(--color-border); padding-top:24px; padding-bottom:32px; font-size:12px; color:var(--color-text-tertiary); font-family:var(--font-primary); display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+        <span>DS GPOS Lite V2.0 — Toast Banner Component</span>
+        <span>Figma-synced · Semantic tokens · v2.0</span>
+      </footer>
+
+    </div><!-- /.content-inner -->
+  </main>
+
+</div><!-- /.container -->
+
+<!-- Scroll to top -->
+<button class="scroll-top-btn" id="scroll-top-btn" aria-label="Kembali ke atas">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18,15 12,9 6,15"/></svg>
+</button>
+
+<script>
+  /* ── Sidebar toggle ── */
+  const sidebar        = document.getElementById('sidebar');
+  const overlay        = document.getElementById('sidebar-overlay');
+  const hamburgerBtn   = document.getElementById('hamburger-btn');
+  const sidebarClose   = document.getElementById('sidebar-close');
+
+  function openSidebar()  { sidebar.classList.add('open'); overlay.classList.add('active'); }
+  function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('active'); }
+
+  hamburgerBtn.addEventListener('click', openSidebar);
+  sidebarClose.addEventListener('click', closeSidebar);
+  overlay.addEventListener('click', closeSidebar);
+
+  /* ── Dark mode ── */
+  const darkToggle = document.getElementById('dark-toggle');
+  const root       = document.documentElement;
+
+  const saved = localStorage.getItem('ds-theme');
+  if (saved) root.setAttribute('data-theme', saved);
+
+  darkToggle.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('ds-theme', next);
+  });
+
+  /* ── Scroll progress ── */
+  const progressBar = document.getElementById('scroll-progress');
+  window.addEventListener('scroll', () => {
+    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    progressBar.style.width = Math.min(pct, 100) + '%';
+  }, { passive: true });
+
+  /* ── Scroll to top ── */
+  const scrollTopBtn = document.getElementById('scroll-top-btn');
+  window.addEventListener('scroll', () => {
+    scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+  scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  /* ── Copy code ── */
+  function copyCode(btn, codeId) {
+    const el   = document.getElementById(codeId);
+    const text = el ? el.innerText : '';
+    navigator.clipboard.writeText(text).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = text; document.body.appendChild(ta);
+      ta.select(); document.execCommand('copy');
+      document.body.removeChild(ta);
+    });
+    const orig = btn.textContent;
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 1500);
+  }
+</script>
+</body>
+</html>
