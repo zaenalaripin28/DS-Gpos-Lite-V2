@@ -19,6 +19,8 @@
             n100: '#7A8699', n200: '#6B788E', n300: '#5D6B82',
             n400: '#505F79', n500: '#42526D', n700: '#243757',
             n800: '#15294B', n900: '#091E42',
+            r50:  '#FDE8E9', r300: '#EC1C24',
+            g50:  '#E6F7EF', g100: '#B3E6D1', g200: '#66C799', g400: '#008F4A',
           },
         }
       }
@@ -91,6 +93,155 @@
       box-shadow: 0 0 0 2px var(--color-blue-b200);
     }
 
+    /* ── part=selected ── */
+    .ds-tab--selected,
+    .ds-tab[aria-selected="true"] {
+      color: var(--color-blue-b300);
+    }
+    .ds-tab--selected .ds-tab__indicator,
+    .ds-tab[aria-selected="true"] .ds-tab__indicator {
+      background-color: var(--color-blue-b300);
+    }
+    .ds-tab--selected:hover .ds-tab__indicator,
+    .ds-tab--selected.ds-tab--hover .ds-tab__indicator,
+    .ds-tab[aria-selected="true"]:hover .ds-tab__indicator {
+      background-color: var(--color-blue-b300);
+    }
+    .ds-tab--selected:active,
+    .ds-tab--selected.ds-tab--press,
+    .ds-tab[aria-selected="true"]:active {
+      color: var(--color-neutral-n900);
+    }
+    .ds-tab--selected:active .ds-tab__indicator,
+    .ds-tab--selected.ds-tab--press .ds-tab__indicator,
+    .ds-tab[aria-selected="true"]:active .ds-tab__indicator {
+      background-color: var(--color-blue-b300);
+    }
+
+    /* ── part=default:required / notification — label row ── */
+    .ds-tab__row {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-050);
+    }
+    .ds-tab__required {
+      flex-shrink: 0;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      line-height: 1;
+      color: var(--color-red-r300);
+    }
+    .ds-tab__badge {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    /* Badge (notification) — sama dengan badge.html appearance=important */
+    .ds-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: var(--space-025) var(--space-075);
+      border-radius: var(--border-radius-full);
+      font-family: var(--font-primary);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+    .ds-badge--important {
+      background-color: var(--color-red-r300);
+      color: var(--color-neutral-n0);
+    }
+
+    /* ── Tabs component (tablist) — figma/Tabs-components.png ── */
+    .ds-tablist {
+      display: inline-flex;
+      align-items: flex-end;
+      flex-wrap: nowrap;
+      gap: var(--space-200);
+      max-width: 100%;
+    }
+    .ds-tablist--track {
+      border-bottom: 1px solid var(--color-neutral-n40);
+      width: 100%;
+    }
+    .ds-tablist--track .ds-tab__indicator {
+      margin-bottom: -1px;
+    }
+
+    /* ── Usage / Do-Don't grids ── */
+    .usage-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .usage-grid-2 > div {
+      transition: transform 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  box-shadow 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .usage-grid-2 > div:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(9, 30, 66, 0.09);
+    }
+    .usage-info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .usage-info-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    /* ── Tailwind copy snippets ── */
+    .tw-snippet-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--color-neutral-n30);
+    }
+    .tw-snippet-row:last-child { border-bottom: none; }
+    .tw-snippet-code {
+      flex: 1;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      line-height: 1.55;
+      color: var(--color-neutral-n700);
+      word-break: break-all;
+    }
+    .tw-copy-btn {
+      flex-shrink: 0;
+      padding: 4px 10px;
+      background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n40);
+      border-radius: var(--border-radius-sm);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-neutral-n400);
+      cursor: pointer;
+      font-family: var(--font-primary);
+      transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+    }
+    .tw-copy-btn:hover {
+      background: var(--color-blue-b300);
+      border-color: var(--color-blue-b300);
+      color: var(--color-neutral-n0);
+    }
+    .tw-copy-btn.copied {
+      background: var(--color-green-g300);
+      border-color: var(--color-green-g300);
+      color: var(--color-neutral-n0);
+    }
+
     /* ================================================================
        Page layout polish — konsisten dengan breadcrumbs.html
     ================================================================ */
@@ -138,6 +289,10 @@
     .variant-grid > div:nth-child(2) { animation-delay:  32ms; }
     .variant-grid > div:nth-child(3) { animation-delay:  64ms; }
     .variant-grid > div:nth-child(4) { animation-delay:  96ms; }
+    .variant-grid > div:nth-child(5) { animation-delay: 128ms; }
+    .variant-grid > div:nth-child(6) { animation-delay: 160ms; }
+    .variant-grid > div:nth-child(7) { animation-delay: 192ms; }
+    .variant-grid > div:nth-child(8) { animation-delay: 224ms; }
 
     @keyframes ds-reveal {
       from { opacity: 0; transform: translateY(8px); }
@@ -248,11 +403,13 @@
 
     @media (max-width: 900px) {
       .variant-grid { grid-template-columns: repeat(2, 1fr) !important; }
+      .component-layout-grid { grid-template-columns: 1fr !important; }
+      .usage-info-grid { grid-template-columns: 1fr !important; }
+      .usage-grid-2 { grid-template-columns: 1fr !important; }
     }
     @media (max-width: 640px) {
       .variant-grid { grid-template-columns: 1fr !important; }
     }
-
     @media (prefers-reduced-motion: reduce) {
       .variant-grid > div,
       .content-inner > section.mb-12,
@@ -390,11 +547,12 @@
             </div>
             <div class="font-bold text-n0 mb-3" style="font-size:2.5rem;letter-spacing:-0.035em;line-height:1.04;">Tabs</div>
             <p class="text-sm leading-relaxed max-w-sm mb-8" style="color:rgba(255,255,255,0.52);line-height:1.7;">
-              Navigasi horizontal antar panel konten. Item tab tidak terpilih (<code style="background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.12);color:#A3CBEE;">part=default</code>) menampilkan label dengan indikator bawah saat hover atau press.
+              Navigasi horizontal antar panel konten. Satu tab aktif per baris; sisanya default. Dua layout: tanpa garis dasar atau dengan track penuh di bawah bar tab.
             </p>
             <div class="flex flex-wrap gap-2">
               <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.10);">v2.0</span>
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.10);">part=default</span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.10);">2 layout</span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.10);">4 parts</span>
               <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(68,149,221,0.15);color:#7DB5E7;border-color:rgba(68,149,221,0.28);">Figma-synced</span>
             </div>
           </div>
@@ -403,15 +561,21 @@
               <div class="px-5 py-3.5 flex items-center justify-between" style="border-bottom:1px solid var(--color-border);">
                 <span class="text-xs font-semibold uppercase tracking-[0.08em]" style="color:var(--color-text-tertiary);">Live Preview</span>
               </div>
-              <div class="p-5 flex items-center justify-center gap-6" role="tablist" aria-label="Tab preview">
-                <button type="button" class="ds-tab" role="tab" aria-selected="false">
-                  <span class="ds-tab__label">Tab</span>
-                  <span class="ds-tab__indicator" aria-hidden="true"></span>
-                </button>
-                <button type="button" class="ds-tab ds-tab--hover" tabindex="-1" style="pointer-events:none;" role="tab" aria-selected="false">
-                  <span class="ds-tab__label">Tab</span>
-                  <span class="ds-tab__indicator" aria-hidden="true"></span>
-                </button>
+              <div class="p-5 flex items-center justify-center">
+                <div class="ds-tablist ds-tablist--track" role="tablist" aria-label="Tab preview">
+                  <button type="button" class="ds-tab" role="tab" aria-selected="false" tabindex="-1" style="pointer-events:none;">
+                    <span class="ds-tab__label">Tab</span>
+                    <span class="ds-tab__indicator" aria-hidden="true"></span>
+                  </button>
+                  <button type="button" class="ds-tab ds-tab--selected" role="tab" aria-selected="true" tabindex="-1" style="pointer-events:none;">
+                    <span class="ds-tab__label">Tab</span>
+                    <span class="ds-tab__indicator" aria-hidden="true"></span>
+                  </button>
+                  <button type="button" class="ds-tab" role="tab" aria-selected="false" tabindex="-1" style="pointer-events:none;">
+                    <span class="ds-tab__label">Tab</span>
+                    <span class="ds-tab__indicator" aria-hidden="true"></span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -419,8 +583,8 @@
 
         <div class="grid grid-cols-2 lg:grid-cols-3 gap-3">
           <div class="hero-feat-card bg-n0 rounded-xl p-5 border border-n30 cursor-default">
-            <div class="text-sm font-semibold text-n900 mb-1.5 tracking-[-0.02em]">4 State</div>
-            <div class="text-xs leading-relaxed" style="color:var(--color-text-tertiary);">Default · Hover · Press · Focus</div>
+            <div class="text-sm font-semibold text-n900 mb-1.5 tracking-[-0.02em]">2 Layout</div>
+            <div class="text-xs leading-relaxed" style="color:var(--color-text-tertiary);">Tanpa track · Dengan garis dasar penuh</div>
           </div>
           <div class="hero-feat-card bg-n0 rounded-xl p-5 border border-n30 cursor-default">
             <div class="text-sm font-semibold text-n900 mb-1.5 tracking-[-0.02em]">Semantic Tokens</div>
@@ -429,6 +593,120 @@
           <div class="hero-feat-card bg-n0 rounded-xl p-5 border border-n30 cursor-default">
             <div class="text-sm font-semibold text-n900 mb-1.5 tracking-[-0.02em]">A11y</div>
             <div class="text-xs leading-relaxed" style="color:var(--color-text-tertiary);"><code>role="tab"</code> · <code>aria-selected</code> · <code>:focus-visible</code></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- KOMPONEN TABS -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
+          <span style="width:3px;height:18px;background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300));border-radius:3px;flex-shrink:0;display:block;"></span>
+          Komponen Tabs
+        </h2>
+        <p style="font-size:14px;color:var(--color-text-tertiary);margin-top:-12px;margin-bottom:28px;font-family:var(--font-primary);">
+          Susunan tab horizontal sesuai <code>figma/Tabs-components.png</code>. Bungkus item tab dalam <code>.ds-tablist</code>; hanya satu tab dengan <code>.ds-tab--selected</code> atau <code>aria-selected="true"</code>.
+        </p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;" class="variant-grid component-layout-grid">
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:32px 24px;display:flex;align-items:center;justify-content:center;min-height:100px;">
+              <div class="ds-tablist" role="tablist" aria-label="Tabs tanpa track">
+                <button type="button" class="ds-tab" role="tab" aria-selected="false" tabindex="-1" style="pointer-events:none;">
+                  <span class="ds-tab__label">Tab</span>
+                  <span class="ds-tab__indicator" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="ds-tab ds-tab--selected" role="tab" aria-selected="true" tabindex="-1" style="pointer-events:none;">
+                  <span class="ds-tab__label">Tab</span>
+                  <span class="ds-tab__indicator" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="ds-tab" role="tab" aria-selected="false" tabindex="-1" style="pointer-events:none;">
+                  <span class="ds-tab__label">Tab</span>
+                  <span class="ds-tab__indicator" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+            <div style="padding:14px 16px;background:var(--color-surface);">
+              <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Tanpa track</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-mono);margin-bottom:6px;"><code>.ds-tablist</code></div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Hanya tab aktif yang menampilkan indikator biru. Cocok untuk area sempit atau header ringan.</div>
+            </div>
+          </div>
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:32px 24px;display:flex;align-items:center;justify-content:center;min-height:100px;">
+              <div class="ds-tablist ds-tablist--track" role="tablist" aria-label="Tabs dengan track" style="min-width:220px;">
+                <button type="button" class="ds-tab" role="tab" aria-selected="false" tabindex="-1" style="pointer-events:none;">
+                  <span class="ds-tab__label">Tab</span>
+                  <span class="ds-tab__indicator" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="ds-tab ds-tab--selected" role="tab" aria-selected="true" tabindex="-1" style="pointer-events:none;">
+                  <span class="ds-tab__label">Tab</span>
+                  <span class="ds-tab__indicator" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="ds-tab" role="tab" aria-selected="false" tabindex="-1" style="pointer-events:none;">
+                  <span class="ds-tab__label">Tab</span>
+                  <span class="ds-tab__indicator" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+            <div style="padding:14px 16px;background:var(--color-surface);">
+              <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Dengan track</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-mono);margin-bottom:6px;"><code>.ds-tablist.ds-tablist--track</code></div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Garis dasar <code>Border.Subtle</code> memanjang penuh; indikator aktif menempel di atas track.</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:24px;display:flex;justify-content:center;">
+          <img src="figma/Tabs-components.png" alt="Figma Tabs component — dua layout tab bar" width="480" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+        </div>
+      </section>
+
+      <!-- INFORMASI PENGGUNAAN -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
+          <span style="width:3px;height:18px;background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300));border-radius:3px;flex-shrink:0;display:block;"></span>
+          Informasi Penggunaan
+        </h2>
+        <p style="font-size:14px;color:var(--color-text-tertiary);margin-top:-12px;margin-bottom:28px;font-family:var(--font-primary);">
+          Panduan singkat memasang Tabs di halaman produk GPOS Lite.
+        </p>
+
+        <div class="usage-info-grid">
+          <div class="usage-info-card">
+            <div style="font-size:13px;font-weight:700;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:8px;">Kapan dipakai</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.6;">
+              Gunakan saat konten dibagi 2–6 bagian setara (mis. Ringkasan, Detail, Riwayat). Jangan ganti navigasi utama aplikasi — itu peran menu/sidebar.
+            </div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-size:13px;font-weight:700;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:8px;">Struktur HTML</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.6;">
+              <code>role="tablist"</code> pada wrapper · <code>role="tab"</code> + <code>aria-selected</code> pada tiap tombol · panel konten terkait memakai <code>role="tabpanel"</code> dan <code>aria-labelledby</code>.
+            </div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-size:13px;font-weight:700;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:8px;">Part item tab</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.6;">
+              <code>default</code> (tidak aktif) · <code>selected</code> (aktif) · <code>required</code> (asterisk) · <code>notification</code> (badge). Kombinasikan dengan layout track sesuai kebutuhan visual halaman.
+            </div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-size:13px;font-weight:700;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:8px;">Layout track</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.6;">
+              Pilih <code>ds-tablist--track</code> bila tab berada di atas konten kartu/form dan perlu pemisah horizontal yang jelas. Tanpa track untuk toolbar atau sub-nav yang lebih ringan.
+            </div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-size:13px;font-weight:700;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:8px;">Interaksi</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.6;">
+              Klik mengubah tab aktif. Keyboard: panah kiri/kanan pindah fokus, Enter/Space memilih. Saat pindah tab, update <code>aria-selected</code> dan class <code>ds-tab--selected</code>.
+            </div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-size:13px;font-weight:700;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:8px;">Notifikasi &amp; wajib</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.6;">
+              Badge notifikasi memakai <code>ds-badge--important</code> dari komponen Badge. Asterisk wajib hanya untuk tab yang kontennya belum lengkap atau wajib diisi pengguna.
+            </div>
           </div>
         </div>
       </section>
@@ -511,6 +789,264 @@
         </div>
       </section>
 
+      <!-- PART: SELECTED -->
+      <div class="ds-group-label">
+        <div class="ds-group-label-pill">
+          <span class="ds-group-dot" style="background:var(--color-blue-b300);"></span>
+          tab-part-selected
+        </div>
+      </div>
+
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
+          <span style="width:3px;height:18px;background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300));border-radius:3px;flex-shrink:0;display:block;"></span>
+          Part Selected — State
+        </h2>
+        <p style="font-size:14px;color:var(--color-text-tertiary);margin-top:-12px;margin-bottom:28px;font-family:var(--font-primary);">
+          Item tab terpilih. Referensi Figma: <code>figma/tab:part:selected.png</code>. Gunakan <code>.ds-tab--selected</code> atau <code>aria-selected="true"</code>.
+        </p>
+
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;" class="variant-grid">
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;">
+              <button type="button" class="ds-tab ds-tab--selected" tabindex="-1" style="pointer-events:none;" role="tab" aria-selected="true">
+                <span class="ds-tab__label">Tab</span>
+                <span class="ds-tab__indicator" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div style="padding:14px 16px;background:var(--color-surface);">
+              <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Selected</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-mono);margin-bottom:6px;"><code>.ds-tab--selected</code></div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Label <code>Color-Text-Brand</code> + indikator <code>B300</code>.</div>
+            </div>
+          </div>
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;">
+              <button type="button" class="ds-tab ds-tab--selected ds-tab--hover" tabindex="-1" style="pointer-events:none;" role="tab" aria-selected="true">
+                <span class="ds-tab__label">Tab</span>
+                <span class="ds-tab__indicator" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div style="padding:14px 16px;background:var(--color-surface);">
+              <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Hover</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-mono);margin-bottom:6px;"><code>.ds-tab--selected.ds-tab--hover</code></div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Indikator brand tetap aktif saat hover.</div>
+            </div>
+          </div>
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;">
+              <button type="button" class="ds-tab ds-tab--selected ds-tab--press" tabindex="-1" style="pointer-events:none;" role="tab" aria-selected="true">
+                <span class="ds-tab__label">Tab</span>
+                <span class="ds-tab__indicator" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div style="padding:14px 16px;background:var(--color-surface);">
+              <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Press</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-mono);margin-bottom:6px;"><code>.ds-tab--selected.ds-tab--press</code></div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Label <code>Color-Text-Bold</code> + indikator brand.</div>
+            </div>
+          </div>
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;">
+              <button type="button" class="ds-tab ds-tab--selected ds-tab--focus" tabindex="-1" style="pointer-events:none;" role="tab" aria-selected="true">
+                <span class="ds-tab__label">Tab</span>
+                <span class="ds-tab__indicator" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div style="padding:14px 16px;background:var(--color-surface);">
+              <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Focus</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-mono);margin-bottom:6px;"><code>.ds-tab--selected.ds-tab--focus</code></div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Ring fokus <code>Border.Focused</code> (B200).</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- PART: DEFAULT — REQUIRED -->
+      <div class="ds-group-label">
+        <div class="ds-group-label-pill">
+          <span class="ds-group-dot"></span>
+          tab-part-default-required
+        </div>
+      </div>
+
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
+          <span style="width:3px;height:18px;background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300));border-radius:3px;flex-shrink:0;display:block;"></span>
+          Part Default Required — State
+        </h2>
+        <p style="font-size:14px;color:var(--color-text-tertiary);margin-top:-12px;margin-bottom:28px;font-family:var(--font-primary);">
+          Tab tidak terpilih dengan indikator wajib (<code>*</code>). Referensi Figma: <code>figma/tab:part:default:required.png</code>.
+        </p>
+
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;" class="variant-grid">
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;">
+              <button type="button" class="ds-tab ds-tab--required" tabindex="-1" style="pointer-events:none;" role="tab" aria-selected="false">
+                <span class="ds-tab__row">
+                  <span class="ds-tab__label">Tab</span>
+                  <span class="ds-tab__required" aria-hidden="true">*</span>
+                </span>
+                <span class="ds-tab__indicator" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div style="padding:14px 16px;background:var(--color-surface);">
+              <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Default</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-mono);margin-bottom:6px;"><code>.ds-tab--required</code></div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Asterisk <code>Color-Text-Danger</code> di samping label.</div>
+            </div>
+          </div>
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;">
+              <button type="button" class="ds-tab ds-tab--required ds-tab--hover" tabindex="-1" style="pointer-events:none;" role="tab" aria-selected="false">
+                <span class="ds-tab__row">
+                  <span class="ds-tab__label">Tab</span>
+                  <span class="ds-tab__required" aria-hidden="true">*</span>
+                </span>
+                <span class="ds-tab__indicator" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div style="padding:14px 16px;background:var(--color-surface);">
+              <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Hover</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-mono);margin-bottom:6px;"><code>.ds-tab--required.ds-tab--hover</code></div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Indikator abu muncul di bawah row label.</div>
+            </div>
+          </div>
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;">
+              <button type="button" class="ds-tab ds-tab--required ds-tab--press" tabindex="-1" style="pointer-events:none;" role="tab" aria-selected="false">
+                <span class="ds-tab__row">
+                  <span class="ds-tab__label">Tab</span>
+                  <span class="ds-tab__required" aria-hidden="true">*</span>
+                </span>
+                <span class="ds-tab__indicator" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div style="padding:14px 16px;background:var(--color-surface);">
+              <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Press</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-mono);margin-bottom:6px;"><code>.ds-tab--required.ds-tab--press</code></div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Label bold + indikator abu.</div>
+            </div>
+          </div>
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;">
+              <button type="button" class="ds-tab ds-tab--required ds-tab--focus" tabindex="-1" style="pointer-events:none;" role="tab" aria-selected="false">
+                <span class="ds-tab__row">
+                  <span class="ds-tab__label">Tab</span>
+                  <span class="ds-tab__required" aria-hidden="true">*</span>
+                </span>
+                <span class="ds-tab__indicator" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div style="padding:14px 16px;background:var(--color-surface);">
+              <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Focus</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-mono);margin-bottom:6px;"><code>.ds-tab--required.ds-tab--focus</code></div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Ring fokus pada seluruh tombol tab.</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- PART: DEFAULT — NOTIFICATION -->
+      <div class="ds-group-label">
+        <div class="ds-group-label-pill">
+          <span class="ds-group-dot"></span>
+          tab-part-default-notification
+        </div>
+      </div>
+
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
+          <span style="width:3px;height:18px;background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300));border-radius:3px;flex-shrink:0;display:block;"></span>
+          Part Default Notification — State
+        </h2>
+        <p style="font-size:14px;color:var(--color-text-tertiary);margin-top:-12px;margin-bottom:28px;font-family:var(--font-primary);">
+          Tab tidak terpilih dengan badge notifikasi. Referensi Figma: <code>figma/tab:part:default:notification.png</code>. Badge memakai <code>.ds-badge--important</code> dari <a href="../Badge/badge.html" style="color:var(--color-blue-b300);text-decoration:none;font-weight:600;">Badge</a>.
+        </p>
+
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;" class="variant-grid">
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;">
+              <button type="button" class="ds-tab ds-tab--notification" tabindex="-1" style="pointer-events:none;" role="tab" aria-selected="false">
+                <span class="ds-tab__row">
+                  <span class="ds-tab__label">Tab</span>
+                  <span class="ds-tab__badge"><span class="ds-badge ds-badge--important">1</span></span>
+                </span>
+                <span class="ds-tab__indicator" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div style="padding:14px 16px;background:var(--color-surface);">
+              <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Default</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-mono);margin-bottom:6px;"><code>.ds-tab--notification</code></div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Badge <code>appearance=important</code> di samping label.</div>
+            </div>
+          </div>
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;">
+              <button type="button" class="ds-tab ds-tab--notification ds-tab--hover" tabindex="-1" style="pointer-events:none;" role="tab" aria-selected="false">
+                <span class="ds-tab__row">
+                  <span class="ds-tab__label">Tab</span>
+                  <span class="ds-tab__badge"><span class="ds-badge ds-badge--important">1</span></span>
+                </span>
+                <span class="ds-tab__indicator" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div style="padding:14px 16px;background:var(--color-surface);">
+              <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Hover</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-mono);margin-bottom:6px;"><code>.ds-tab--notification.ds-tab--hover</code></div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Indikator abu + badge tetap tampil.</div>
+            </div>
+          </div>
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;">
+              <button type="button" class="ds-tab ds-tab--notification ds-tab--press" tabindex="-1" style="pointer-events:none;" role="tab" aria-selected="false">
+                <span class="ds-tab__row">
+                  <span class="ds-tab__label">Tab</span>
+                  <span class="ds-tab__badge"><span class="ds-badge ds-badge--important">1</span></span>
+                </span>
+                <span class="ds-tab__indicator" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div style="padding:14px 16px;background:var(--color-surface);">
+              <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Press</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-mono);margin-bottom:6px;"><code>.ds-tab--notification.ds-tab--press</code></div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Label bold + indikator abu.</div>
+            </div>
+          </div>
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:40px 24px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:120px;">
+              <button type="button" class="ds-tab ds-tab--notification ds-tab--focus" tabindex="-1" style="pointer-events:none;" role="tab" aria-selected="false">
+                <span class="ds-tab__row">
+                  <span class="ds-tab__label">Tab</span>
+                  <span class="ds-tab__badge"><span class="ds-badge ds-badge--important">1</span></span>
+                </span>
+                <span class="ds-tab__indicator" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div style="padding:14px 16px;background:var(--color-surface);">
+              <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Focus</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-mono);margin-bottom:6px;"><code>.ds-tab--notification.ds-tab--focus</code></div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Ring fokus pada seluruh tombol tab.</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
       <!-- INTERACTIVE -->
       <section style="margin-bottom:48px;">
         <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
@@ -518,24 +1054,251 @@
           Demo Interaktif
         </h2>
         <p style="font-size:14px;color:var(--color-text-tertiary);margin-top:-12px;margin-bottom:28px;font-family:var(--font-primary);">
-          Arahkan kursor, klik, dan tekan <kbd style="font-family:var(--font-mono);font-size:11px;padding:2px 6px;background:var(--color-neutral-n20);border:1px solid var(--color-neutral-n30);border-radius:4px;">Tab</kbd> pada tombol di bawah.
+          Klik tab untuk mengganti item aktif. Layout dengan track — sama seperti varian bawah pada referensi Figma.
         </p>
         <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:40px 32px;display:flex;align-items:center;justify-content:center;" class="demo-wrap">
-          <button type="button" class="ds-tab" id="interactive-tab" role="tab" aria-selected="false">
-            <span class="ds-tab__label">Tab</span>
-            <span class="ds-tab__indicator" aria-hidden="true"></span>
-          </button>
+          <div class="ds-tablist ds-tablist--track" id="interactive-tablist" role="tablist" aria-label="Demo tabs interaktif" style="min-width:280px;">
+            <button type="button" class="ds-tab" role="tab" aria-selected="false" data-tab-index="0">
+              <span class="ds-tab__label">Tab</span>
+              <span class="ds-tab__indicator" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="ds-tab ds-tab--selected" role="tab" aria-selected="true" data-tab-index="1">
+              <span class="ds-tab__label">Tab</span>
+              <span class="ds-tab__indicator" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="ds-tab" role="tab" aria-selected="false" data-tab-index="2">
+              <span class="ds-tab__label">Tab</span>
+              <span class="ds-tab__indicator" aria-hidden="true"></span>
+            </button>
+          </div>
         </div>
       </section>
 
-      <!-- FIGMA REF -->
+      <!-- DO & DON'T -->
       <section style="margin-bottom:48px;">
         <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
           <span style="width:3px;height:18px;background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300));border-radius:3px;flex-shrink:0;display:block;"></span>
-          Referensi Figma
+          Do &amp; Don't
         </h2>
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:24px;display:flex;justify-content:center;">
-          <img src="figma/tab:part:default.png" alt="Figma tab part default — empat state" width="280" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+        <p style="font-size:14px;color:var(--color-text-tertiary);margin-top:-12px;margin-bottom:28px;font-family:var(--font-primary);">
+          Panduan penggunaan Tabs yang benar agar navigasi antar-panel tetap jelas dan konsisten dengan design system.
+        </p>
+
+        <div class="usage-grid-2">
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:10px 16px;background:var(--color-green-g50);border-bottom:2px solid var(--color-green-g200);display:flex;align-items:center;gap:8px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--color-green-g400)" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg>
+              <span style="font-size:12px;font-weight:700;color:var(--color-green-g400);font-family:var(--font-primary);letter-spacing:0.04em;text-transform:uppercase;">Do — Lakukan ini</span>
+            </div>
+            <div style="padding:20px 20px 24px;">
+              <div style="display:flex;flex-direction:column;gap:16px;">
+
+                <div style="display:flex;gap:14px;align-items:flex-start;">
+                  <div style="flex-shrink:0;min-width:140px;padding:8px 10px;background:var(--color-green-g50);border-radius:8px;border:1px solid var(--color-green-g100);display:flex;justify-content:center;">
+                    <div class="ds-tablist ds-tablist--track" role="tablist" aria-label="Contoh benar satu aktif">
+                      <button type="button" class="ds-tab" role="tab" aria-selected="false" tabindex="-1" style="pointer-events:none;font-size:11px;"><span class="ds-tab__label">A</span><span class="ds-tab__indicator" aria-hidden="true"></span></button>
+                      <button type="button" class="ds-tab ds-tab--selected" role="tab" aria-selected="true" tabindex="-1" style="pointer-events:none;font-size:11px;"><span class="ds-tab__label">B</span><span class="ds-tab__indicator" aria-hidden="true"></span></button>
+                      <button type="button" class="ds-tab" role="tab" aria-selected="false" tabindex="-1" style="pointer-events:none;font-size:11px;"><span class="ds-tab__label">C</span><span class="ds-tab__indicator" aria-hidden="true"></span></button>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:3px;">Hanya satu tab aktif</div>
+                    <div style="font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Selalu tepat satu <code>aria-selected="true"</code> per <code>tablist</code>. Indikator biru hanya pada tab aktif.</div>
+                  </div>
+                </div>
+
+                <div style="display:flex;gap:14px;align-items:flex-start;">
+                  <div style="flex-shrink:0;min-width:140px;padding:8px 10px;background:var(--color-green-g50);border-radius:8px;border:1px solid var(--color-green-g100);display:flex;justify-content:center;">
+                    <div class="ds-tablist ds-tablist--track" role="tablist" aria-label="Contoh label singkat">
+                      <button type="button" class="ds-tab ds-tab--selected" role="tab" aria-selected="true" tabindex="-1" style="pointer-events:none;font-size:11px;"><span class="ds-tab__label">Ringkasan</span><span class="ds-tab__indicator" aria-hidden="true"></span></button>
+                      <button type="button" class="ds-tab" role="tab" aria-selected="false" tabindex="-1" style="pointer-events:none;font-size:11px;"><span class="ds-tab__label">Stok</span><span class="ds-tab__indicator" aria-hidden="true"></span></button>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:3px;">Label singkat &amp; bermakna</div>
+                    <div style="font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">1–2 kata yang menjelaskan panel di bawahnya, bukan kalimat panjang atau instruksi.</div>
+                  </div>
+                </div>
+
+                <div style="display:flex;gap:14px;align-items:flex-start;">
+                  <div style="flex-shrink:0;min-width:140px;padding:8px 10px;background:var(--color-green-g50);border-radius:8px;border:1px solid var(--color-green-g100);display:flex;justify-content:center;">
+                    <div class="ds-tablist" role="tablist" aria-label="Contoh notifikasi">
+                      <button type="button" class="ds-tab ds-tab--notification" role="tab" aria-selected="false" tabindex="-1" style="pointer-events:none;font-size:11px;">
+                        <span class="ds-tab__row"><span class="ds-tab__label">Pesan</span><span class="ds-tab__badge"><span class="ds-badge ds-badge--important">3</span></span></span>
+                        <span class="ds-tab__indicator" aria-hidden="true"></span>
+                      </button>
+                      <button type="button" class="ds-tab ds-tab--selected" role="tab" aria-selected="true" tabindex="-1" style="pointer-events:none;font-size:11px;"><span class="ds-tab__label">Umum</span><span class="ds-tab__indicator" aria-hidden="true"></span></button>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:3px;">Badge untuk hitungan belum dibaca</div>
+                    <div style="font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Gunakan <code>ds-badge--important</code> hanya bila ada angka/notifikasi nyata. Hilangkan badge setelah pengguna membuka panel.</div>
+                  </div>
+                </div>
+
+                <div style="display:flex;gap:14px;align-items:flex-start;">
+                  <div style="flex-shrink:0;min-width:140px;padding:8px 10px;background:var(--color-green-g50);border-radius:8px;border:1px solid var(--color-green-g100);display:flex;justify-content:center;">
+                    <div class="ds-tablist ds-tablist--track" role="tablist" aria-label="Contoh track di atas konten">
+                      <button type="button" class="ds-tab" role="tab" aria-selected="false" tabindex="-1" style="pointer-events:none;font-size:11px;"><span class="ds-tab__label">Tab</span><span class="ds-tab__indicator" aria-hidden="true"></span></button>
+                      <button type="button" class="ds-tab ds-tab--selected" role="tab" aria-selected="true" tabindex="-1" style="pointer-events:none;font-size:11px;"><span class="ds-tab__label">Tab</span><span class="ds-tab__indicator" aria-hidden="true"></span></button>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:3px;">Track di atas area konten</div>
+                    <div style="font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Pasang <code>ds-tablist--track</code> saat tab memisahkan blok konten besar (form, tabel, kartu).</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:10px 16px;background:var(--color-red-r50);border-bottom:2px solid var(--color-red-r100);display:flex;align-items:center;gap:8px;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--color-red-r400)" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              <span style="font-size:12px;font-weight:700;color:var(--color-red-r400);font-family:var(--font-primary);letter-spacing:0.04em;text-transform:uppercase;">Don't — Hindari ini</span>
+            </div>
+            <div style="padding:20px 20px 24px;">
+              <div style="display:flex;flex-direction:column;gap:16px;">
+
+                <div style="display:flex;gap:14px;align-items:flex-start;">
+                  <div style="flex-shrink:0;min-width:140px;padding:8px 10px;background:var(--color-red-r50);border-radius:8px;border:1px solid var(--color-red-r75);display:flex;justify-content:center;">
+                    <div class="ds-tablist" role="tablist" aria-label="Contoh salah dua aktif">
+                      <button type="button" class="ds-tab ds-tab--selected" role="tab" aria-selected="true" tabindex="-1" style="pointer-events:none;font-size:11px;"><span class="ds-tab__label">Tab</span><span class="ds-tab__indicator" aria-hidden="true"></span></button>
+                      <button type="button" class="ds-tab ds-tab--selected" role="tab" aria-selected="true" tabindex="-1" style="pointer-events:none;font-size:11px;"><span class="ds-tab__label">Tab</span><span class="ds-tab__indicator" aria-hidden="true"></span></button>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:3px;">Jangan dua tab aktif sekaligus</div>
+                    <div style="font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Lebih dari satu indikator biru membingungkan pengguna tentang panel mana yang sedang ditampilkan.</div>
+                  </div>
+                </div>
+
+                <div style="display:flex;gap:14px;align-items:flex-start;">
+                  <div style="flex-shrink:0;min-width:140px;padding:8px 10px;background:var(--color-red-r50);border-radius:8px;border:1px solid var(--color-red-r75);display:flex;justify-content:center;">
+                    <button type="button" class="ds-tab ds-tab--selected" role="tab" aria-selected="true" tabindex="-1" style="pointer-events:none;font-size:10px;max-width:90px;">
+                      <span class="ds-tab__label" style="white-space:normal;text-align:center;">Pengaturan akun pengguna dan preferensi</span>
+                      <span class="ds-tab__indicator" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                  <div>
+                    <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:3px;">Jangan label terlalu panjang</div>
+                    <div style="font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Teks panjang merusak ritme horizontal tab. Ringkas atau pindah ke tooltip/breadcrumb.</div>
+                  </div>
+                </div>
+
+                <div style="display:flex;gap:14px;align-items:flex-start;">
+                  <div style="flex-shrink:0;min-width:140px;padding:8px 10px;background:var(--color-red-r50);border-radius:8px;border:1px solid var(--color-red-r75);display:flex;justify-content:center;">
+                    <div class="ds-tablist" role="tablist" aria-label="Contoh salah terlalu banyak tab" style="gap:4px;">
+                      <button type="button" class="ds-tab" role="tab" aria-selected="false" tabindex="-1" style="pointer-events:none;font-size:9px;padding:2px 4px;"><span class="ds-tab__label">1</span><span class="ds-tab__indicator" aria-hidden="true"></span></button>
+                      <button type="button" class="ds-tab" role="tab" aria-selected="false" tabindex="-1" style="pointer-events:none;font-size:9px;padding:2px 4px;"><span class="ds-tab__label">2</span><span class="ds-tab__indicator" aria-hidden="true"></span></button>
+                      <button type="button" class="ds-tab" role="tab" aria-selected="false" tabindex="-1" style="pointer-events:none;font-size:9px;padding:2px 4px;"><span class="ds-tab__label">3</span><span class="ds-tab__indicator" aria-hidden="true"></span></button>
+                      <button type="button" class="ds-tab" role="tab" aria-selected="false" tabindex="-1" style="pointer-events:none;font-size:9px;padding:2px 4px;"><span class="ds-tab__label">4</span><span class="ds-tab__indicator" aria-hidden="true"></span></button>
+                      <button type="button" class="ds-tab" role="tab" aria-selected="false" tabindex="-1" style="pointer-events:none;font-size:9px;padding:2px 4px;"><span class="ds-tab__label">5</span><span class="ds-tab__indicator" aria-hidden="true"></span></button>
+                      <button type="button" class="ds-tab" role="tab" aria-selected="false" tabindex="-1" style="pointer-events:none;font-size:9px;padding:2px 4px;"><span class="ds-tab__label">6</span><span class="ds-tab__indicator" aria-hidden="true"></span></button>
+                      <button type="button" class="ds-tab" role="tab" aria-selected="false" tabindex="-1" style="pointer-events:none;font-size:9px;padding:2px 4px;"><span class="ds-tab__label">7</span><span class="ds-tab__indicator" aria-hidden="true"></span></button>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:3px;">Jangan lebih dari ~6 tab</div>
+                    <div style="font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Terlalu banyak pilihan sejajar sulit discan. Pertimbangkan dropdown atau sub-nav untuk kategori tambahan.</div>
+                  </div>
+                </div>
+
+                <div style="display:flex;gap:14px;align-items:flex-start;">
+                  <div style="flex-shrink:0;min-width:140px;padding:8px 10px;background:var(--color-red-r50);border-radius:8px;border:1px solid var(--color-red-r75);display:flex;justify-content:center;">
+                    <button type="button" class="ds-tab ds-tab--required" role="tab" aria-selected="false" tabindex="-1" style="pointer-events:none;font-size:11px;">
+                      <span class="ds-tab__row"><span class="ds-tab__label">Info</span><span class="ds-tab__required" aria-hidden="true">*</span></span>
+                      <span class="ds-tab__indicator" aria-hidden="true"></span>
+                    </button>
+                  </div>
+                  <div>
+                    <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:3px;">Jangan asterisk tanpa alasan</div>
+                    <div style="font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;"><code>ds-tab--required</code> hanya jika tab memang wajib diisi/diselesaikan. Jangan untuk sekadar menarik perhatian.</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- TAILWIND -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
+          <span style="width:3px;height:18px;background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300));border-radius:3px;flex-shrink:0;display:block;"></span>
+          Tailwind — Salin Class
+        </h2>
+        <p style="font-size:14px;color:var(--color-text-tertiary);margin-top:-12px;margin-bottom:28px;font-family:var(--font-primary);">
+          Utility class dari token warna DS (<code>n*</code>, <code>b*</code>). Gabungkan dengan struktur <code>ds-tab</code> atau pakai murni Tailwind di bawah.
+        </p>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);">
+            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-mono);letter-spacing:0.04em;">tailwind.config — colors sudah di-extend di halaman ini</span>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Tablist (tanpa track)</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'inline-flex items-end gap-4')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Tablist + track</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'inline-flex items-end gap-4 border-b border-n40 w-full')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Tab item — default</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'inline-flex flex-col items-center gap-0.5 px-2 py-0.5 text-sm font-medium text-n300 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Tab item — selected</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'text-b300 [&_.tab-indicator]:bg-b300')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Indikator bawah (span)</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'tab-indicator block h-0.5 min-h-[2px] w-full rounded-full bg-transparent')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Indikator — selected</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'tab-indicator bg-b300')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Hover indikator (default tab)</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'hover:[&_.tab-indicator]:bg-n40 active:text-n900')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Row label + badge/required</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'inline-flex items-center justify-center gap-0.5')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Asterisk wajib</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'text-r300 shrink-0')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Badge notifikasi</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'inline-flex px-1.5 py-0.5 rounded-full text-xs bg-r300 text-n0')">Salin</button>
+          </div>
+        </div>
+
+        <p style="font-size:13px;font-weight:600;color:var(--color-text-primary);margin:28px 0 12px;font-family:var(--font-primary);">Blok siap pakai — tablist dengan track</p>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-mono);letter-spacing:0.04em;">tabs-tailwind.html</span>
+            <button class="copy-btn" id="copy-tailwind-block-btn" onclick="copyTailwindBlock()" aria-label="Salin blok Tailwind">Salin semua</button>
+          </div>
+          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-mono);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="tailwind-block">&lt;div role="tablist" aria-label="Sections" class="inline-flex items-end gap-4 border-b border-n40 w-full"&gt;
+  &lt;button type="button" role="tab" aria-selected="false"
+    class="inline-flex flex-col items-center gap-0.5 px-2 py-0.5 text-sm font-medium text-n300 rounded-sm hover:[&amp;_.tab-indicator]:bg-n40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200"&gt;
+    &lt;span&gt;Tab&lt;/span&gt;
+    &lt;span class="tab-indicator block h-0.5 w-full rounded-full bg-transparent" aria-hidden="true"&gt;&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;button type="button" role="tab" aria-selected="true"
+    class="inline-flex flex-col items-center gap-0.5 px-2 py-0.5 text-sm font-medium text-b300 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200"&gt;
+    &lt;span&gt;Tab&lt;/span&gt;
+    &lt;span class="tab-indicator block h-0.5 w-full rounded-full bg-b300 -mb-px" aria-hidden="true"&gt;&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
         </div>
       </section>
 
@@ -543,27 +1306,53 @@
       <section style="margin-bottom:48px;">
         <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
           <span style="width:3px;height:18px;background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300));border-radius:3px;flex-shrink:0;display:block;"></span>
-          Kode
+          Kode HTML (ds-tab)
         </h2>
         <p style="font-size:14px;color:var(--color-text-tertiary);margin-top:-12px;margin-bottom:28px;font-family:var(--font-primary);">
-          Copy HTML untuk <code>tab-part-default</code>. Letakkan beberapa item dalam <code>role="tablist"</code>.
+          Copy HTML per part. Bungkus dalam <code>.ds-tablist</code> atau <code>.ds-tablist.ds-tablist--track</code>.
         </p>
         <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
           <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
             <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-mono);letter-spacing:0.04em;">tabs.html</span>
             <button class="copy-btn" id="copy-code-btn" onclick="copyCode()" aria-label="Salin kode">Salin</button>
           </div>
-          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-mono);font-size:12px;line-height:1.65;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="code-block">&lt;div role="tablist" aria-label="Sections"&gt;
-  &lt;button type="button" class="ds-tab" role="tab" aria-selected="false"&gt;
-    &lt;span class="ds-tab__label"&gt;Tab&lt;/span&gt;
-    &lt;span class="ds-tab__indicator" aria-hidden="true"&gt;&lt;/span&gt;
-  &lt;/button&gt;
+          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-mono);font-size:12px;line-height:1.65;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="code-block">&lt;!-- Tablist + track (disarankan di atas konten) --&gt;
+&lt;div class="ds-tablist ds-tablist--track" role="tablist" aria-label="Sections"&gt;
+  &lt;button type="button" class="ds-tab" role="tab" aria-selected="false"&gt;...&lt;/button&gt;
+  &lt;button type="button" class="ds-tab ds-tab--selected" role="tab" aria-selected="true"&gt;...&lt;/button&gt;
 &lt;/div&gt;
 
-&lt;!-- Static state snapshots --&gt;
-&lt;button type="button" class="ds-tab ds-tab--hover" tabindex="-1" style="pointer-events:none;" role="tab" aria-selected="false"&gt;...&lt;/button&gt;
-&lt;button type="button" class="ds-tab ds-tab--press" tabindex="-1" style="pointer-events:none;" role="tab" aria-selected="false"&gt;...&lt;/button&gt;
-&lt;button type="button" class="ds-tab ds-tab--focus" tabindex="-1" style="pointer-events:none;" role="tab" aria-selected="false"&gt;...&lt;/button&gt;</code></pre>
+&lt;!-- part=default --&gt;
+&lt;button type="button" class="ds-tab" role="tab" aria-selected="false"&gt;
+  &lt;span class="ds-tab__label"&gt;Tab&lt;/span&gt;
+  &lt;span class="ds-tab__indicator" aria-hidden="true"&gt;&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;!-- part=selected --&gt;
+&lt;button type="button" class="ds-tab ds-tab--selected" role="tab" aria-selected="true"&gt;
+  &lt;span class="ds-tab__label"&gt;Tab&lt;/span&gt;
+  &lt;span class="ds-tab__indicator" aria-hidden="true"&gt;&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;!-- part=default:required --&gt;
+&lt;button type="button" class="ds-tab ds-tab--required" role="tab" aria-selected="false"&gt;
+  &lt;span class="ds-tab__row"&gt;
+    &lt;span class="ds-tab__label"&gt;Tab&lt;/span&gt;
+    &lt;span class="ds-tab__required" aria-hidden="true"&gt;*&lt;/span&gt;
+  &lt;/span&gt;
+  &lt;span class="ds-tab__indicator" aria-hidden="true"&gt;&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;!-- part=default:notification (badge dari Badge component) --&gt;
+&lt;button type="button" class="ds-tab ds-tab--notification" role="tab" aria-selected="false"&gt;
+  &lt;span class="ds-tab__row"&gt;
+    &lt;span class="ds-tab__label"&gt;Tab&lt;/span&gt;
+    &lt;span class="ds-tab__badge"&gt;&lt;span class="ds-badge ds-badge--important"&gt;1&lt;/span&gt;&lt;/span&gt;
+  &lt;/span&gt;
+  &lt;span class="ds-tab__indicator" aria-hidden="true"&gt;&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;!-- Static state: --hover | --press | --focus --&gt;</code></pre>
         </div>
       </section>
 
@@ -620,6 +1409,45 @@
       }, 2000);
     });
   }
+
+  function copyTailwind(btn, text) {
+    navigator.clipboard.writeText(text).then(function () {
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () {
+        btn.textContent = 'Salin';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+
+  function copyTailwindBlock() {
+    const raw = document.getElementById('tailwind-block').textContent;
+    navigator.clipboard.writeText(raw).then(function () {
+      const btn = document.getElementById('copy-tailwind-block-btn');
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () {
+        btn.textContent = 'Salin semua';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+
+  (function initTablist() {
+    const tablist = document.getElementById('interactive-tablist');
+    if (!tablist) return;
+    tablist.querySelectorAll('[role="tab"]').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        tablist.querySelectorAll('[role="tab"]').forEach(function (t) {
+          t.classList.remove('ds-tab--selected');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('ds-tab--selected');
+        tab.setAttribute('aria-selected', 'true');
+      });
+    });
+  })();
 </script>
 </body>
 </html>
