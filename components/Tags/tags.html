@@ -15,7 +15,8 @@
             b50:  '#E9F2FB', b75:  '#A3CBEE', b200: '#4495DD', b300: '#1E7FD6',
             n0:   '#FFFFFF', n10:  '#FAFBFB', n20:  '#F5F6F7',
             n40:  '#DFE2E6', n60:  '#B3B9C4', n900: '#091E42',
-            r50:  '#FDE8E9', r75:  '#F7A2A5', r100: '#F8BFC2', r500: '#901116',
+            g50:  '#E6F7EF', g75:  '#96DCBC', g100: '#6BCEA0', g300: '#00AA5B', g500: '#006838',
+            r50:  '#FDE8E9', r75:  '#F7A2A5', r100: '#F8BFC2', r300: '#EC1C24', r500: '#901116',
           },
         }
       }
@@ -73,26 +74,6 @@
       box-shadow: 0 0 0 1px var(--color-blue-b200);
     }
 
-    .ds-tag--standard.ds-tag--removable {
-      padding-right: var(--space-050);
-    }
-
-    /* content=text + remove | leading icon + text + remove */
-    .ds-tag--standard.ds-tag--removable:hover,
-    .ds-tag--standard.ds-tag--removable.ds-tag--state-hover {
-      background-color: var(--color-red-r50);
-      color: var(--color-red-r500);
-    }
-    .ds-tag--standard.ds-tag--removable:active,
-    .ds-tag--standard.ds-tag--removable.ds-tag--state-pressed {
-      background-color: var(--color-red-r75);
-      color: var(--color-red-r500);
-    }
-    .ds-tag--standard.ds-tag--removable.ds-tag--state-focus {
-      background-color: var(--color-neutral-n20);
-      color: var(--color-neutral-n900);
-    }
-
     .ds-tag__icon {
       width: 16px;
       height: 16px;
@@ -100,18 +81,36 @@
       display: block;
     }
 
-    .ds-tag--standard.ds-tag--removable:hover .ds-tag__icon,
-    .ds-tag--standard.ds-tag--removable.ds-tag--state-hover .ds-tag__icon,
-    .ds-tag--standard.ds-tag--removable:active .ds-tag__icon,
-    .ds-tag--standard.ds-tag--removable.ds-tag--state-pressed .ds-tag__icon,
-    .ds-tag--standard.ds-tag--removable:hover .ds-tag__remove img,
-    .ds-tag--standard.ds-tag--removable.ds-tag--state-hover .ds-tag__remove img,
-    .ds-tag--standard.ds-tag--removable:active .ds-tag__remove img,
-    .ds-tag--standard.ds-tag--removable.ds-tag--state-pressed .ds-tag__remove img {
+    /* content=text + remove | leading icon + text + remove — semua varian */
+    .ds-tag--removable {
+      padding-right: var(--space-050);
+    }
+    .ds-tag--removable:hover,
+    .ds-tag--removable.ds-tag--state-hover {
+      background-color: var(--color-red-r50);
+      color: var(--color-red-r500);
+    }
+    .ds-tag--removable:active,
+    .ds-tag--removable.ds-tag--state-pressed {
+      background-color: var(--color-red-r75);
+      color: var(--color-red-r500);
+    }
+    .ds-tag--removable.ds-tag--state-focus {
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n900);
+    }
+    .ds-tag--removable:hover .ds-tag__icon,
+    .ds-tag--removable.ds-tag--state-hover .ds-tag__icon,
+    .ds-tag--removable:active .ds-tag__icon,
+    .ds-tag--removable.ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--removable:hover .ds-tag__remove img,
+    .ds-tag--removable.ds-tag--state-hover .ds-tag__remove img,
+    .ds-tag--removable:active .ds-tag__remove img,
+    .ds-tag--removable.ds-tag--state-pressed .ds-tag__remove img {
       filter: brightness(0) saturate(100%) invert(11%) sepia(68%) saturate(3048%) hue-rotate(346deg) brightness(93%) contrast(93%);
     }
-    .ds-tag--standard.ds-tag--removable.ds-tag--state-focus .ds-tag__icon,
-    .ds-tag--standard.ds-tag--removable.ds-tag--state-focus .ds-tag__remove img {
+    .ds-tag--removable.ds-tag--state-focus .ds-tag__icon,
+    .ds-tag--removable.ds-tag--state-focus .ds-tag__remove img {
       filter: none;
     }
 
@@ -120,11 +119,10 @@
          Background.Accent.Blue.Subtler   → --color-blue-b75
          Background.Accent.Blue.Subtlest  → --color-blue-b50
          Background.Accent.Blue.Subtle    → --color-blue-b200 (pressed, matrix)
-         Background.Danger.Tag.Hovered    → --color-red-r75
          Text.Bold                        → --color-neutral-n900
          Text.Brand                       → --color-blue-b300
-         Text.Accent.Red                  → --color-red-r500
          Border.Focused                   → --color-blue-b200
+         removable → sama token varian standard
     ================================================================ */
     .ds-tag--bluelight {
       background-color: var(--color-blue-b75);
@@ -149,60 +147,42 @@
       box-shadow: 0 0 0 1px var(--color-blue-b200);
     }
 
-    .ds-tag--bluelight.ds-tag--removable {
-      padding-right: var(--space-050);
-    }
-
-    .ds-tag--bluelight.ds-tag--removable:hover,
-    .ds-tag--bluelight.ds-tag--removable.ds-tag--state-hover,
-    .ds-tag--bluelight.ds-tag--removable:active,
-    .ds-tag--bluelight.ds-tag--removable.ds-tag--state-pressed {
-      background-color: var(--color-red-r75);
-      color: var(--color-red-r500);
-    }
-    .ds-tag--bluelight.ds-tag--removable.ds-tag--state-focus {
-      background-color: var(--color-blue-b75);
-      color: var(--color-neutral-n900);
-    }
-
-    .ds-tag--bluelight.ds-tag--removable:hover .ds-tag__icon,
-    .ds-tag--bluelight.ds-tag--removable.ds-tag--state-hover .ds-tag__icon,
-    .ds-tag--bluelight.ds-tag--removable:active .ds-tag__icon,
-    .ds-tag--bluelight.ds-tag--removable.ds-tag--state-pressed .ds-tag__icon,
-    .ds-tag--bluelight.ds-tag--removable:hover .ds-tag__remove img,
-    .ds-tag--bluelight.ds-tag--removable.ds-tag--state-hover .ds-tag__remove img,
-    .ds-tag--bluelight.ds-tag--removable:active .ds-tag__remove img,
-    .ds-tag--bluelight.ds-tag--removable.ds-tag--state-pressed .ds-tag__remove img {
-      filter: brightness(0) saturate(100%) invert(11%) sepia(68%) saturate(3048%) hue-rotate(346deg) brightness(93%) contrast(93%);
-    }
-    .ds-tag--bluelight.ds-tag--removable.ds-tag--state-focus .ds-tag__icon,
-    .ds-tag--bluelight.ds-tag--removable.ds-tag--state-focus .ds-tag__remove img {
-      filter: none;
-    }
-
     /* ================================================================
        DS Tag — variant=redlight (Tags/figma/component-tag-redlight.png)
          Background.Accent.Red.Subtler    → --color-red-r75   (default, focus)
-         Background.Accent.Red.Subtlest   → --color-red-r50   (hover non-removable)
-         Background.Accent.Red.Subtle     → --color-red-r100  (pressed non-removable)
-         Background.Danger.Tag.Hovered    → --color-red-r75   (removable hover/pressed)
-         Text.Accent.Red                  → --color-red-r500
+         Background.Accent.Red.Subtlest   → --color-red-r50   (hover)
+         Background.Accent.Red.Subtle     → --color-red-r100  (pressed)
+         Text.Accent.Red                  → --color-red-r500  (semua state kecuali hover)
+         Text.Danger                      → --color-red-r300  (hover — teks & ikon)
          Border.Focused                   → --color-blue-b200
+         removable bg → sama token varian standard
     ================================================================ */
     .ds-tag--redlight {
       background-color: var(--color-red-r75);
-      color: var(--color-neutral-n900);
+      color: var(--color-red-r500);
+      --ds-tag-redlight-icon-accent: brightness(0) saturate(100%) invert(11%) sepia(68%) saturate(3048%) hue-rotate(346deg) brightness(93%) contrast(93%);
+      --ds-tag-redlight-icon-danger: brightness(0) saturate(100%) invert(32%) sepia(89%) saturate(2976%) hue-rotate(346deg) brightness(95%) contrast(95%);
     }
 
-    /* content=text only | leading icon + text */
+    /* content=text only | leading icon + text — hover: Text.Danger */
+    .ds-tag--redlight:hover,
+    .ds-tag--redlight.ds-tag--state-hover {
+      color: var(--color-red-r300);
+    }
     .ds-tag--redlight:not(.ds-tag--removable):hover,
     .ds-tag--redlight:not(.ds-tag--removable).ds-tag--state-hover {
       background-color: var(--color-red-r50);
     }
+
+    .ds-tag--redlight:not(.ds-tag--removable):active,
+    .ds-tag--redlight:not(.ds-tag--removable).ds-tag--state-pressed,
+    .ds-tag--redlight:not(.ds-tag--removable):focus-visible,
+    .ds-tag--redlight:not(.ds-tag--removable).ds-tag--state-focus {
+      color: var(--color-red-r500);
+    }
     .ds-tag--redlight:not(.ds-tag--removable):active,
     .ds-tag--redlight:not(.ds-tag--removable).ds-tag--state-pressed {
       background-color: var(--color-red-r100);
-      color: var(--color-red-r500);
     }
     .ds-tag--redlight:not(.ds-tag--removable):focus-visible,
     .ds-tag--redlight:not(.ds-tag--removable).ds-tag--state-focus {
@@ -212,43 +192,136 @@
       box-shadow: 0 0 0 1px var(--color-blue-b200);
     }
 
-    .ds-tag--redlight.ds-tag--removable {
-      padding-right: var(--space-050);
+    /* removable — teks: hover Text.Danger, selain itu Text.Accent.Red */
+    .ds-tag--redlight.ds-tag--removable:hover,
+    .ds-tag--redlight.ds-tag--removable.ds-tag--state-hover {
+      color: var(--color-red-r300);
+    }
+    .ds-tag--redlight.ds-tag--removable:active,
+    .ds-tag--redlight.ds-tag--removable.ds-tag--state-pressed,
+    .ds-tag--redlight.ds-tag--removable.ds-tag--state-focus {
+      color: var(--color-red-r500);
     }
 
-    /* content=text + remove | leading icon + text + remove */
-    .ds-tag--redlight.ds-tag--removable:hover,
-    .ds-tag--redlight.ds-tag--removable.ds-tag--state-hover,
-    .ds-tag--redlight.ds-tag--removable:active,
-    .ds-tag--redlight.ds-tag--removable.ds-tag--state-pressed {
+    /* Ikon — default/pressed/focus: Text.Accent.Red */
+    .ds-tag--redlight .ds-tag__icon,
+    .ds-tag--redlight .ds-tag__remove img {
+      filter: var(--ds-tag-redlight-icon-accent);
+    }
+    .ds-tag--redlight:active .ds-tag__icon,
+    .ds-tag--redlight.ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--redlight:active .ds-tag__remove img,
+    .ds-tag--redlight.ds-tag--state-pressed .ds-tag__remove img,
+    .ds-tag--redlight.ds-tag--state-focus .ds-tag__icon {
+      filter: var(--ds-tag-redlight-icon-accent);
+    }
+
+    /* Ikon — hover: Text.Danger */
+    .ds-tag--redlight:hover .ds-tag__icon,
+    .ds-tag--redlight.ds-tag--state-hover .ds-tag__icon,
+    .ds-tag--redlight:hover .ds-tag__remove img,
+    .ds-tag--redlight.ds-tag--state-hover .ds-tag__remove img {
+      filter: var(--ds-tag-redlight-icon-danger);
+    }
+
+    .ds-tag--redlight.ds-tag--removable.ds-tag--state-focus .ds-tag__remove.ds-tag__remove--state-focus img {
+      filter: brightness(0) invert(1);
+    }
+
+    /* ================================================================
+       DS Tag — variant=greenlight (Tags/figma/component-tag-greenlight.png)
+         Background.Accent.Green.Subtler    → --color-green-g75   (default, focus)
+         Background.Accent.Green.Subtlest   → --color-green-g50   (hover)
+         Background.Accent.Green.Subtle      → --color-green-g100  (pressed)
+         Text.Accent.Green                  → --color-green-g500
+         Text.Success                       → --color-green-g300  (hover — teks & ikon)
+         Background.Danger.Tag.Hovered      → --color-red-r75     (removable hover)
+         Text.Accent.Red                    → --color-red-r500    (removable hover/pressed)
+         Border.Focused                     → --color-blue-b200
+    ================================================================ */
+    .ds-tag--greenlight {
+      background-color: var(--color-green-g75);
+      color: var(--color-green-g500);
+      --ds-tag-greenlight-icon-accent: brightness(0) saturate(100%) invert(24%) sepia(89%) saturate(1200%) hue-rotate(128deg) brightness(92%) contrast(101%);
+      --ds-tag-greenlight-icon-success: brightness(0) saturate(100%) invert(42%) sepia(93%) saturate(1352%) hue-rotate(118deg) brightness(96%) contrast(101%);
+    }
+
+    /* content=text only | leading icon + text — hover: Text.Success */
+    .ds-tag--greenlight:hover,
+    .ds-tag--greenlight.ds-tag--state-hover {
+      color: var(--color-green-g300);
+    }
+    .ds-tag--greenlight:not(.ds-tag--removable):hover,
+    .ds-tag--greenlight:not(.ds-tag--removable).ds-tag--state-hover {
+      background-color: var(--color-green-g50);
+    }
+
+    .ds-tag--greenlight:not(.ds-tag--removable):active,
+    .ds-tag--greenlight:not(.ds-tag--removable).ds-tag--state-pressed,
+    .ds-tag--greenlight:not(.ds-tag--removable):focus-visible,
+    .ds-tag--greenlight:not(.ds-tag--removable).ds-tag--state-focus {
+      color: var(--color-green-g500);
+    }
+    .ds-tag--greenlight:not(.ds-tag--removable):active,
+    .ds-tag--greenlight:not(.ds-tag--removable).ds-tag--state-pressed {
+      background-color: var(--color-green-g100);
+    }
+    .ds-tag--greenlight:not(.ds-tag--removable):focus-visible,
+    .ds-tag--greenlight:not(.ds-tag--removable).ds-tag--state-focus {
+      outline: none;
+      background-color: var(--color-green-g75);
+      border-color: var(--color-blue-b200);
+      box-shadow: 0 0 0 1px var(--color-blue-b200);
+    }
+
+    /* removable — hover: Background.Danger.Tag.Hovered + Text.Accent.Red */
+    .ds-tag--greenlight.ds-tag--removable:hover,
+    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-hover {
       background-color: var(--color-red-r75);
       color: var(--color-red-r500);
     }
-    .ds-tag--redlight.ds-tag--removable.ds-tag--state-focus {
-      background-color: var(--color-red-r75);
-      color: var(--color-neutral-n900);
+    .ds-tag--greenlight.ds-tag--removable:active,
+    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-pressed,
+    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-focus {
+      color: var(--color-red-r500);
     }
 
-    /* Icon tint — pressed non-removable → Text.Accent.Red (r500) */
-    .ds-tag--redlight:not(.ds-tag--removable):active .ds-tag__icon,
-    .ds-tag--redlight:not(.ds-tag--removable).ds-tag--state-pressed .ds-tag__icon {
-      filter: brightness(0) saturate(100%) invert(11%) sepia(68%) saturate(3048%) hue-rotate(346deg) brightness(93%) contrast(93%);
+    /* Ikon — default/pressed/focus: Text.Accent.Green */
+    .ds-tag--greenlight .ds-tag__icon,
+    .ds-tag--greenlight .ds-tag__remove img {
+      filter: var(--ds-tag-greenlight-icon-accent);
+    }
+    .ds-tag--greenlight:active .ds-tag__icon,
+    .ds-tag--greenlight.ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--greenlight:active .ds-tag__remove img,
+    .ds-tag--greenlight.ds-tag--state-pressed .ds-tag__remove img,
+    .ds-tag--greenlight.ds-tag--state-focus .ds-tag__icon {
+      filter: var(--ds-tag-greenlight-icon-accent);
     }
 
-    /* Icon tint — removable hover/pressed → Text.Accent.Red (r500) */
-    .ds-tag--redlight.ds-tag--removable:hover .ds-tag__icon,
-    .ds-tag--redlight.ds-tag--removable.ds-tag--state-hover .ds-tag__icon,
-    .ds-tag--redlight.ds-tag--removable:active .ds-tag__icon,
-    .ds-tag--redlight.ds-tag--removable.ds-tag--state-pressed .ds-tag__icon,
-    .ds-tag--redlight.ds-tag--removable:hover .ds-tag__remove img,
-    .ds-tag--redlight.ds-tag--removable.ds-tag--state-hover .ds-tag__remove img,
-    .ds-tag--redlight.ds-tag--removable:active .ds-tag__remove img,
-    .ds-tag--redlight.ds-tag--removable.ds-tag--state-pressed .ds-tag__remove img {
+    /* Ikon — hover netral: Text.Success */
+    .ds-tag--greenlight:not(.ds-tag--removable):hover .ds-tag__icon,
+    .ds-tag--greenlight:not(.ds-tag--removable).ds-tag--state-hover .ds-tag__icon {
+      filter: var(--ds-tag-greenlight-icon-success);
+    }
+
+    /* Ikon — removable hover/pressed: Text.Accent.Red (override global) */
+    .ds-tag--greenlight.ds-tag--removable:hover .ds-tag__icon,
+    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-hover .ds-tag__icon,
+    .ds-tag--greenlight.ds-tag--removable:hover .ds-tag__remove img,
+    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-hover .ds-tag__remove img,
+    .ds-tag--greenlight.ds-tag--removable:active .ds-tag__icon,
+    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--greenlight.ds-tag--removable:active .ds-tag__remove img,
+    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-pressed .ds-tag__remove img {
       filter: brightness(0) saturate(100%) invert(11%) sepia(68%) saturate(3048%) hue-rotate(346deg) brightness(93%) contrast(93%);
     }
-    .ds-tag--redlight.ds-tag--removable.ds-tag--state-focus .ds-tag__icon,
-    .ds-tag--redlight.ds-tag--removable.ds-tag--state-focus .ds-tag__remove img {
+    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-focus .ds-tag__icon,
+    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-focus .ds-tag__remove img {
       filter: none;
+    }
+    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-focus .ds-tag__remove.ds-tag__remove--state-focus img {
+      filter: brightness(0) invert(1);
     }
 
     .tag-state-matrix + .tag-state-matrix {
@@ -534,7 +607,7 @@
       <section class="mb-12">
         <h2 style="border:none;background:none;padding:0;margin-bottom:12px;">Tags</h2>
         <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:720px;margin-bottom:24px;">
-          Chip pill untuk label, filter aktif, atau tag yang bisa dihapus. Varian: <code>standard</code>, <code>bluelight</code>, <code>redlight</code>.
+          Chip pill untuk label, filter aktif, atau tag yang bisa dihapus. Varian: <code>standard</code>, <code>bluelight</code>, <code>redlight</code>, <code>greenlight</code>.
         </p>
 
         <h3 style="font-size:15px;font-weight:600;color:var(--color-text-primary);margin:0 0 12px;font-family:var(--font-primary);">variant=standard</h3>
@@ -887,6 +960,123 @@
           <div style="font-size:11px;font-weight:700;color:var(--color-text-tertiary);font-family:var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Referensi Figma — redlight</div>
           <img src="figma/component-tag-redlight.png" alt="Referensi Figma Tag redlight" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
         </div>
+
+        <h3 style="font-size:15px;font-weight:600;color:var(--color-text-primary);margin:32px 0 12px;font-family:var(--font-primary);">variant=greenlight</h3>
+        <div class="tag-state-matrix" role="table" aria-label="Varian Tag greenlight — state matrix">
+          <div class="tag-state-matrix__head">Default</div>
+          <div class="tag-state-matrix__head">Hover</div>
+          <div class="tag-state-matrix__head">Pressed</div>
+          <div class="tag-state-matrix__head">Focus</div>
+
+          <div class="tag-state-matrix__label">content=text only</div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--greenlight"><span class="ds-tag__label">Tag</span></span></div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--greenlight ds-tag--state-hover"><span class="ds-tag__label">Tag</span></span></div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--greenlight ds-tag--state-pressed"><span class="ds-tag__label">Tag</span></span></div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--greenlight ds-tag--state-focus" tabindex="0"><span class="ds-tag__label">Tag</span></span></div>
+
+          <div class="tag-state-matrix__label">content=leading icon + text</div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greenlight">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greenlight ds-tag--state-hover">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greenlight ds-tag--state-pressed">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greenlight ds-tag--state-focus" tabindex="0">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+
+          <div class="tag-state-matrix__label">content=text + remove (removable)</div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greenlight ds-tag--removable">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greenlight ds-tag--removable ds-tag--state-hover">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greenlight ds-tag--removable ds-tag--state-pressed">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greenlight ds-tag--removable">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove ds-tag__remove--state-focus" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+
+          <div class="tag-state-matrix__label">content=leading icon + text + remove</div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greenlight ds-tag--removable">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greenlight ds-tag--removable ds-tag--state-hover">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greenlight ds-tag--removable ds-tag--state-pressed">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greenlight ds-tag--removable">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove ds-tag__remove--state-focus" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;margin-top:16px;">
+          <div style="font-size:11px;font-weight:700;color:var(--color-text-tertiary);font-family:var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Referensi Figma — greenlight</div>
+          <img src="figma/component-tag-greenlight.png" alt="Referensi Figma Tag greenlight" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+        </div>
       </section>
 
       <section style="margin-bottom:48px;">
@@ -902,15 +1092,19 @@
           </div>
           <div class="usage-info-card">
             <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Varian bluelight</div>
-            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Default/focus: <code>Background.Accent.Blue.Subtler</code> (<code>b75</code>). Hover netral: <code>Background.Accent.Blue.Subtlest</code> (<code>b50</code>). Removable hover/pressed: <code>Background.Danger.Tag.Hovered</code> + <code>Text.Accent.Red</code>; focus removable: <code>Background.Accent.Blue.Subtler</code>.</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Default/focus netral: <code>Background.Accent.Blue.Subtler</code> (<code>b75</code>). Hover netral: <code>Background.Accent.Blue.Subtlest</code> (<code>b50</code>). Removable: token sama <code>standard</code> (<code>Danger.Tag</code> / <code>.Hovered</code> + <code>Text.Accent.Red</code>; focus <code>Background.Neutral</code>).</div>
           </div>
           <div class="usage-info-card">
             <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Varian redlight</div>
-            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Default/focus: <code>Background.Accent.Red.Subtler</code> (<code>r75</code>). Hover: <code>Background.Accent.Red.Subtlest</code> (<code>r50</code>). Pressed: <code>Background.Accent.Red.Subtle</code> (<code>r100</code>) + <code>Text.Accent.Red</code>. Removable hover/pressed: <code>Background.Danger.Tag.Hovered</code> (<code>r75</code>) + <code>Text.Accent.Red</code>.</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Latar: <code>Accent.Red.Subtler</code> / <code>Subtlest</code> (hover) / <code>Subtle</code> (pressed). Teks &amp; ikon: <code>Text.Accent.Red</code> (<code>r500</code>) — kecuali <strong>hover</strong> pakai <code>Text.Danger</code> (<code>r300</code>). Removable bg sama <code>standard</code>.</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Varian greenlight</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Default/focus: <code>Background.Accent.Green.Subtler</code> + <code>Text.Accent.Green</code>. Hover netral: <code>Background.Accent.Green.Subtlest</code> + <code>Text.Success</code>. Removable hover: <code>Background.Danger.Tag.Hovered</code> + <code>Text.Accent.Red</code>.</div>
           </div>
           <div class="usage-info-card">
             <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Konten &amp; ikon</div>
-            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Empat struktur konten: teks saja, ikon + teks, teks + remove, ikon + teks + remove. Class: <code>ds-tag--standard</code>, <code>ds-tag--bluelight</code>, atau <code>ds-tag--redlight</code> + <code>ds-tag--removable</code>.</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Empat struktur konten: teks saja, ikon + teks, teks + remove, ikon + teks + remove. Class: <code>ds-tag--standard</code>, <code>ds-tag--bluelight</code>, <code>ds-tag--redlight</code>, atau <code>ds-tag--greenlight</code> + <code>ds-tag--removable</code>.</div>
           </div>
         </div>
       </section>
@@ -952,36 +1146,32 @@
             <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-n20 text-n900 hover:bg-n40 active:bg-n60 focus-visible:bg-n20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
           </div>
           <div class="tw-snippet-row">
-            <code class="tw-snippet-code">standard · removable hover/pressed</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-n20 text-n900 hover:bg-r50 hover:text-r500 active:bg-r75 active:text-r500')">Salin</button>
+            <code class="tw-snippet-code">removable · hover/pressed (semua varian)</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'hover:bg-r50 hover:text-r500 active:bg-r75 active:text-r500')">Salin</button>
           </div>
           <div class="tw-snippet-row">
-            <code class="tw-snippet-code">standard · removable focus</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-n20 text-n900')">Salin</button>
+            <code class="tw-snippet-code">removable · focus (semua varian)</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'focus-within:bg-n20 focus-within:text-n900')">Salin</button>
           </div>
           <div class="tw-snippet-row">
             <code class="tw-snippet-code">bluelight · default</code>
             <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-b75 text-n900 hover:bg-b50 hover:text-b300 active:bg-b200 focus-visible:bg-b75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
           </div>
           <div class="tw-snippet-row">
-            <code class="tw-snippet-code">bluelight · removable hover/pressed</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-b75 text-n900 hover:bg-r75 hover:text-r500 active:bg-r75 active:text-r500')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">bluelight · removable focus</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-b75 text-n900')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
             <code class="tw-snippet-code">redlight · default</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-r75 text-n900 hover:bg-r50 active:bg-r100 active:text-r500 focus-visible:bg-r75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-r75 text-r500 hover:bg-r50 hover:text-r300 active:bg-r100 active:text-r500 focus-visible:bg-r75 focus-visible:text-r500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
           </div>
           <div class="tw-snippet-row">
-            <code class="tw-snippet-code">redlight · removable hover/pressed</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-r75 text-n900 hover:bg-r75 hover:text-r500 active:bg-r75 active:text-r500')">Salin</button>
+            <code class="tw-snippet-code">redlight · removable (+ hover Text.Danger)</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-r75 text-r500 hover:bg-r50 hover:text-r300 active:bg-r75 active:text-r500')">Salin</button>
           </div>
           <div class="tw-snippet-row">
-            <code class="tw-snippet-code">redlight · removable focus</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-r75 text-n900')">Salin</button>
+            <code class="tw-snippet-code">greenlight · default</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-g75 text-g500 hover:bg-g50 hover:text-g300 active:bg-g100 active:text-g500 focus-visible:bg-g75 focus-visible:text-g500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">greenlight · removable hover</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-g75 text-g500 hover:bg-r75 hover:text-r500 active:bg-r75 active:text-r500')">Salin</button>
           </div>
           <div class="tw-snippet-row">
             <code class="tw-snippet-code">Leading icon</code>
