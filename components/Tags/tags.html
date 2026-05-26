@@ -84,11 +84,13 @@
     /* content=text + remove | leading icon + text + remove — semua varian */
     .ds-tag--removable {
       padding-right: var(--space-050);
+      --ds-tag-removable-icon-danger: brightness(0) saturate(100%) invert(32%) sepia(89%) saturate(2976%) hue-rotate(346deg) brightness(95%) contrast(95%);
+      --ds-tag-removable-icon-accent: brightness(0) saturate(100%) invert(11%) sepia(68%) saturate(3048%) hue-rotate(346deg) brightness(93%) contrast(93%);
     }
     .ds-tag--removable:hover,
     .ds-tag--removable.ds-tag--state-hover {
       background-color: var(--color-red-r50);
-      color: var(--color-red-r500);
+      color: var(--color-red-r300);
     }
     .ds-tag--removable:active,
     .ds-tag--removable.ds-tag--state-pressed {
@@ -101,13 +103,15 @@
     }
     .ds-tag--removable:hover .ds-tag__icon,
     .ds-tag--removable.ds-tag--state-hover .ds-tag__icon,
+    .ds-tag--removable:hover .ds-tag__remove img,
+    .ds-tag--removable.ds-tag--state-hover .ds-tag__remove img {
+      filter: var(--ds-tag-removable-icon-danger);
+    }
     .ds-tag--removable:active .ds-tag__icon,
     .ds-tag--removable.ds-tag--state-pressed .ds-tag__icon,
-    .ds-tag--removable:hover .ds-tag__remove img,
-    .ds-tag--removable.ds-tag--state-hover .ds-tag__remove img,
     .ds-tag--removable:active .ds-tag__remove img,
     .ds-tag--removable.ds-tag--state-pressed .ds-tag__remove img {
-      filter: brightness(0) saturate(100%) invert(11%) sepia(68%) saturate(3048%) hue-rotate(346deg) brightness(93%) contrast(93%);
+      filter: var(--ds-tag-removable-icon-accent);
     }
     .ds-tag--removable.ds-tag--state-focus .ds-tag__icon,
     .ds-tag--removable.ds-tag--state-focus .ds-tag__remove img {
@@ -235,8 +239,7 @@
          Background.Accent.Green.Subtle      → --color-green-g100  (pressed)
          Text.Accent.Green                  → --color-green-g500
          Text.Success                       → --color-green-g300  (hover — teks & ikon)
-         Background.Danger.Tag.Hovered      → --color-red-r75     (removable hover)
-         Text.Accent.Red                    → --color-red-r500    (removable hover/pressed)
+         removable hover → Background.Danger.Tag + Text.Danger (global)
          Border.Focused                     → --color-blue-b200
     ================================================================ */
     .ds-tag--greenlight {
@@ -247,8 +250,8 @@
     }
 
     /* content=text only | leading icon + text — hover: Text.Success */
-    .ds-tag--greenlight:hover,
-    .ds-tag--greenlight.ds-tag--state-hover {
+    .ds-tag--greenlight:not(.ds-tag--removable):hover,
+    .ds-tag--greenlight:not(.ds-tag--removable).ds-tag--state-hover {
       color: var(--color-green-g300);
     }
     .ds-tag--greenlight:not(.ds-tag--removable):hover,
@@ -274,18 +277,6 @@
       box-shadow: 0 0 0 1px var(--color-blue-b200);
     }
 
-    /* removable — hover: Background.Danger.Tag.Hovered + Text.Accent.Red */
-    .ds-tag--greenlight.ds-tag--removable:hover,
-    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-hover {
-      background-color: var(--color-red-r75);
-      color: var(--color-red-r500);
-    }
-    .ds-tag--greenlight.ds-tag--removable:active,
-    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-pressed,
-    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-focus {
-      color: var(--color-red-r500);
-    }
-
     /* Ikon — default/pressed/focus: Text.Accent.Green */
     .ds-tag--greenlight .ds-tag__icon,
     .ds-tag--greenlight .ds-tag__remove img {
@@ -303,25 +294,6 @@
     .ds-tag--greenlight:not(.ds-tag--removable):hover .ds-tag__icon,
     .ds-tag--greenlight:not(.ds-tag--removable).ds-tag--state-hover .ds-tag__icon {
       filter: var(--ds-tag-greenlight-icon-success);
-    }
-
-    /* Ikon — removable hover/pressed: Text.Accent.Red (override global) */
-    .ds-tag--greenlight.ds-tag--removable:hover .ds-tag__icon,
-    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-hover .ds-tag__icon,
-    .ds-tag--greenlight.ds-tag--removable:hover .ds-tag__remove img,
-    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-hover .ds-tag__remove img,
-    .ds-tag--greenlight.ds-tag--removable:active .ds-tag__icon,
-    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-pressed .ds-tag__icon,
-    .ds-tag--greenlight.ds-tag--removable:active .ds-tag__remove img,
-    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-pressed .ds-tag__remove img {
-      filter: brightness(0) saturate(100%) invert(11%) sepia(68%) saturate(3048%) hue-rotate(346deg) brightness(93%) contrast(93%);
-    }
-    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-focus .ds-tag__icon,
-    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-focus .ds-tag__remove img {
-      filter: none;
-    }
-    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-focus .ds-tag__remove.ds-tag__remove--state-focus img {
-      filter: brightness(0) invert(1);
     }
 
     .tag-state-matrix + .tag-state-matrix {
@@ -1088,11 +1060,11 @@
           </div>
           <div class="usage-info-card">
             <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Varian standard</div>
-            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Default semua varian: <code>Background.Neutral</code>. Hover netral: <code>Background.Neutral.Pressed</code>; pressed: <code>Background.Neutral.Bold.Pressed</code>. Removable hover/pressed: <code>Background.Danger.Tag</code> / <code>.Hovered</code> + <code>Text.Accent.Red</code>; focus removable: kembali <code>Background.Neutral</code>.</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Default semua varian: <code>Background.Neutral</code>. Hover netral: <code>Background.Neutral.Pressed</code>; pressed: <code>Background.Neutral.Bold.Pressed</code>. Removable hover: <code>Background.Danger.Tag</code> + <code>Text.Danger</code>; pressed: <code>Background.Danger.Tag.Hovered</code> + <code>Text.Accent.Red</code>; focus: kembali <code>Background.Neutral</code>.</div>
           </div>
           <div class="usage-info-card">
             <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Varian bluelight</div>
-            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Default/focus netral: <code>Background.Accent.Blue.Subtler</code> (<code>b75</code>). Hover netral: <code>Background.Accent.Blue.Subtlest</code> (<code>b50</code>). Removable: token sama <code>standard</code> (<code>Danger.Tag</code> / <code>.Hovered</code> + <code>Text.Accent.Red</code>; focus <code>Background.Neutral</code>).</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Default/focus netral: <code>Background.Accent.Blue.Subtler</code> (<code>b75</code>). Hover netral: <code>Background.Accent.Blue.Subtlest</code> (<code>b50</code>). Removable: token sama <code>standard</code> (hover <code>Danger.Tag</code> + <code>Text.Danger</code>; focus <code>Background.Neutral</code>).</div>
           </div>
           <div class="usage-info-card">
             <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Varian redlight</div>
@@ -1100,7 +1072,7 @@
           </div>
           <div class="usage-info-card">
             <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Varian greenlight</div>
-            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Default/focus: <code>Background.Accent.Green.Subtler</code> + <code>Text.Accent.Green</code>. Hover netral: <code>Background.Accent.Green.Subtlest</code> + <code>Text.Success</code>. Removable hover: <code>Background.Danger.Tag.Hovered</code> + <code>Text.Accent.Red</code>.</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Default/focus: <code>Background.Accent.Green.Subtler</code> + <code>Text.Accent.Green</code>. Hover netral: <code>Background.Accent.Green.Subtlest</code> + <code>Text.Success</code>. Removable hover: sama <code>standard</code> (<code>Danger.Tag</code> + <code>Text.Danger</code>).</div>
           </div>
           <div class="usage-info-card">
             <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Konten &amp; ikon</div>
@@ -1146,8 +1118,12 @@
             <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-n20 text-n900 hover:bg-n40 active:bg-n60 focus-visible:bg-n20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
           </div>
           <div class="tw-snippet-row">
-            <code class="tw-snippet-code">removable · hover/pressed (semua varian)</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'hover:bg-r50 hover:text-r500 active:bg-r75 active:text-r500')">Salin</button>
+            <code class="tw-snippet-code">removable · hover (semua varian)</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'hover:bg-r50 hover:text-r300')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">removable · pressed (semua varian)</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'active:bg-r75 active:text-r500')">Salin</button>
           </div>
           <div class="tw-snippet-row">
             <code class="tw-snippet-code">removable · focus (semua varian)</code>
@@ -1168,10 +1144,6 @@
           <div class="tw-snippet-row">
             <code class="tw-snippet-code">greenlight · default</code>
             <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-g75 text-g500 hover:bg-g50 hover:text-g300 active:bg-g100 active:text-g500 focus-visible:bg-g75 focus-visible:text-g500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">greenlight · removable hover</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-g75 text-g500 hover:bg-r75 hover:text-r500 active:bg-r75 active:text-r500')">Salin</button>
           </div>
           <div class="tw-snippet-row">
             <code class="tw-snippet-code">Leading icon</code>
@@ -1199,7 +1171,7 @@
 &lt;/span&gt;
 
 &lt;!-- Removable --&gt;
-&lt;span class="inline-flex items-center gap-1 rounded-full bg-n20 py-1 pl-2 pr-1 text-sm font-medium text-n900 hover:bg-r50 hover:text-r500 active:bg-r75 active:text-r500"&gt;
+&lt;span class="inline-flex items-center gap-1 rounded-full bg-n20 py-1 pl-2 pr-1 text-sm font-medium text-n900 hover:bg-r50 hover:text-r300 active:bg-r75 active:text-r500"&gt;
   Tag
   &lt;button type="button" class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full focus-visible:bg-b300 focus-visible:ring-2 focus-visible:ring-b200 [&:focus-visible_img]:brightness-0 [&:focus-visible_img]:invert" aria-label="Hapus tag Tag"&gt;
     &lt;img src="../../assets/icons/icon-x-mark.svg" alt="" class="h-3 w-3" aria-hidden="true" /&gt;
