@@ -23,14 +23,18 @@
   </script>
   <style>
     /* ================================================================
-       DS Checkbox — parts (Checkbox/figma/checkbox-parts.png)
-       Semantic mapping:
-         Background.Input / Neutral.N0     → unchecked fill
-         Border.Input                    → --color-neutral-n40
-         Border.Focused                  → --color-blue-b200 (hover)
-         Background.Brand.Bold           → --color-blue-b300 (checked / indeterminate)
-         Icon.Inverse                    → white check / minus (filter on icon asset)
-         Border.Danger                   → --color-red-r300 (error ring)
+       DS Checkbox — parts & components (figma/checkbox-parts.png, checkbox-components.png)
+       Parts appearances:
+         default · hover · isIndeterminate · checked · checked+invalid
+       Component: state=default | hover | pressed | disable | focus
+       Tokens:
+         Background.Input              → n0
+         Background.Neutral.Hover      → n20 (unchecked hover)
+         Background.Neutral.Pressed    → n40 (unchecked pressed)
+         Background.Brand.Bold         → b300 (checked / indeterminate)
+         Border.Input                  → n40
+         Border.Focused                → b200 (focus ring)
+         Border.Danger                 → r300 (invalid)
     ================================================================ */
     .ds-checkbox {
       display: inline-flex;
@@ -70,9 +74,15 @@
       filter: brightness(0) invert(1);
     }
 
-    .ds-checkbox:hover .ds-checkbox__box,
-    .ds-checkbox__box--hover {
-      border-color: var(--color-blue-b200);
+    .ds-checkbox:hover:not(.ds-checkbox--disabled) .ds-checkbox__input:not(:checked):not(:indeterminate) + .ds-checkbox__box,
+    .ds-checkbox__box--hover:not(.ds-checkbox__box--checked):not(.ds-checkbox__box--indeterminate) {
+      background-color: var(--color-neutral-n20);
+      border-color: var(--color-neutral-n0);
+    }
+    .ds-checkbox--error:hover .ds-checkbox__input:not(:checked):not(:indeterminate) + .ds-checkbox__box,
+    .ds-checkbox__box--error-unchecked.ds-checkbox__box--hover {
+      background-color: var(--color-neutral-n20);
+      border-color: var(--color-red-r300);
     }
 
     .ds-checkbox__input:checked + .ds-checkbox__box,
@@ -107,6 +117,9 @@
       background-color: var(--color-neutral-n20);
       border-color: var(--color-neutral-n50);
       cursor: not-allowed;
+    }
+    .ds-checkbox__box--disabled.ds-checkbox__box--error-unchecked {
+      border-color: var(--color-red-r300);
     }
     .ds-checkbox__input:disabled:checked + .ds-checkbox__box {
       background-color: var(--color-neutral-n50);
@@ -144,9 +157,15 @@
     .ds-checkbox__input:focus-visible:not(:checked):not(:indeterminate) + .ds-checkbox__box,
     .ds-checkbox__box--focus-unchecked {
       outline: none;
-      background-color: var(--color-neutral-n900);
+      background-color: var(--color-neutral-n0);
       border-color: var(--color-neutral-n0);
-      box-shadow: 0 0 0 1px var(--color-neutral-n0);
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+    .ds-checkbox--error .ds-checkbox__input:focus-visible:not(:checked):not(:indeterminate) + .ds-checkbox__box,
+    .ds-checkbox__box--error-unchecked.ds-checkbox__box--focus-unchecked {
+      background-color: var(--color-neutral-n0);
+      border-color: var(--color-red-r300);
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
     }
     .ds-checkbox__input:focus-visible:checked + .ds-checkbox__box,
     .ds-checkbox__input:focus-visible:indeterminate + .ds-checkbox__box,
@@ -156,8 +175,23 @@
       box-shadow: 0 0 0 2px var(--color-blue-b200);
     }
 
-    .ds-checkbox__input:active + .ds-checkbox__box,
-    .ds-checkbox__box--pressed {
+    .ds-checkbox__input:active:not(:disabled):not(:checked):not(:indeterminate) + .ds-checkbox__box,
+    .ds-checkbox__box--pressed:not(.ds-checkbox__box--checked):not(.ds-checkbox__box--indeterminate):not(.ds-checkbox__box--error-unchecked) {
+      background-color: var(--color-neutral-n40);
+      border-color: var(--color-neutral-n40);
+      box-shadow: none;
+    }
+    .ds-checkbox__input:active:not(:disabled):checked + .ds-checkbox__box,
+    .ds-checkbox__input:active:not(:disabled):indeterminate + .ds-checkbox__box,
+    .ds-checkbox__box--checked.ds-checkbox__box--pressed,
+    .ds-checkbox__box--indeterminate.ds-checkbox__box--pressed,
+    .ds-checkbox__box--error-unchecked.ds-checkbox__box--pressed {
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+    .ds-checkbox--error .ds-checkbox__input:active:not(:disabled):not(:checked) + .ds-checkbox__box,
+    .ds-checkbox__box--error-unchecked.ds-checkbox__box--pressed {
+      background-color: var(--color-neutral-n40);
+      border-color: var(--color-red-r300);
       box-shadow: 0 0 0 2px var(--color-blue-b200);
     }
 
@@ -470,6 +504,7 @@
             <li><a href="../Tags/tags.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/></svg>Tags</a></li>
             <li><a href="../Lozenge/lozenge.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="7" width="16" height="10" rx="2"/></svg>Lozenge</a></li>
             <li><a href="checkbox.html" class="nav-link active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg>Checkbox</a></li>
+            <li><a href="../Flags/flags.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>Flags</a></li>
             <li><a href="../Breadcrumbs/breadcrumbs.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>Breadcrumbs</a></li>
             <li><a href="../Tabs/tabs.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="4" rx="1"/></svg>Tabs</a></li>
             <li><a href="../Pagination/pagination.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="10,6 4,12 10,18"/><polyline points="14,6 20,12 14,18"/></svg>Pagination</a></li>
@@ -519,29 +554,29 @@
         <div class="parts-grid" role="table" aria-label="Varian part checkbox">
           <div class="parts-grid__cell">
             <span class="ds-checkbox__box" aria-hidden="true"></span>
-            <span class="parts-grid__label">unchecked</span>
+            <span class="parts-grid__label">appearance=default</span>
           </div>
           <div class="parts-grid__cell">
             <span class="ds-checkbox__box ds-checkbox__box--hover" aria-hidden="true"></span>
-            <span class="parts-grid__label">hover</span>
+            <span class="parts-grid__label">appearance=hover</span>
           </div>
           <div class="parts-grid__cell">
             <span class="ds-checkbox__box ds-checkbox__box--indeterminate" aria-hidden="true">
               <img src="../../assets/icons/icon-minus.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--minus" aria-hidden="true" style="display:block;">
             </span>
-            <span class="parts-grid__label">indeterminate</span>
+            <span class="parts-grid__label">isIndeterminate=true</span>
           </div>
           <div class="parts-grid__cell">
             <span class="ds-checkbox__box ds-checkbox__box--checked" aria-hidden="true">
               <img src="../../assets/icons/icon-check.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--check" aria-hidden="true" style="display:block;">
             </span>
-            <span class="parts-grid__label">checked</span>
+            <span class="parts-grid__label">isChecked=true</span>
           </div>
           <div class="parts-grid__cell">
             <span class="ds-checkbox__box ds-checkbox__box--checked ds-checkbox__box--error" aria-hidden="true">
               <img src="../../assets/icons/icon-check.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--check" aria-hidden="true" style="display:block;">
             </span>
-            <span class="parts-grid__label">checked · error</span>
+            <span class="parts-grid__label">isChecked=true · isInvalid=true</span>
           </div>
         </div>
 
@@ -597,50 +632,50 @@
       <section class="mb-12" style="margin-bottom:48px;">
         <h2>Checkbox — Components</h2>
         <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:720px;margin-top:-12px;margin-bottom:24px;">
-          Komponen lengkap: kotak + label <code>Label</code> dengan lima interaksi kolom (default, hover, focus, disabled, pressed) dan lima baris status. Referensi: <code>Checkbox/figma/checkbox-components.png</code>.
+          Komponen lengkap: kotak + label <code>Label</code>. Kolom <code>state</code>: default · hover · pressed · disable · focus. Baris sesuai Figma. Referensi: <code>Checkbox/figma/checkbox-components.png</code>.
         </p>
 
         <div class="component-matrix" role="table" aria-label="Matrix komponen checkbox">
-          <div class="component-matrix__head">Default</div>
-          <div class="component-matrix__head">Hover</div>
-          <div class="component-matrix__head">Focus</div>
-          <div class="component-matrix__head">Disabled</div>
-          <div class="component-matrix__head">Pressed</div>
+          <div class="component-matrix__head">state=default</div>
+          <div class="component-matrix__head">state=hover</div>
+          <div class="component-matrix__head">state=pressed</div>
+          <div class="component-matrix__head">state=disable</div>
+          <div class="component-matrix__head">state=focus</div>
 
-          <div class="component-matrix__label">isChecked=false</div>
+          <div class="component-matrix__label">isChecked=false · isIndeterminate=false · isInvalid=false</div>
           <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot" aria-hidden="true"><span class="ds-checkbox__box"></span><span class="ds-checkbox__label">Label</span></div></div>
           <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--hover"></span><span class="ds-checkbox__label">Label</span></div></div>
-          <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--focus-unchecked"></span><span class="ds-checkbox__label">Label</span></div></div>
-          <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot ds-checkbox--disabled" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--disabled"></span><span class="ds-checkbox__label">Label</span></div></div>
           <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--pressed"></span><span class="ds-checkbox__label">Label</span></div></div>
+          <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot ds-checkbox--disabled" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--disabled"></span><span class="ds-checkbox__label">Label</span></div></div>
+          <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--focus-unchecked"></span><span class="ds-checkbox__label">Label</span></div></div>
 
-          <div class="component-matrix__label">isChecked=true</div>
+          <div class="component-matrix__label">isChecked=true · isIndeterminate=false · isInvalid=false</div>
           <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--checked"><img src="../../assets/icons/icon-check.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--check" style="display:block;" aria-hidden="true"></span><span class="ds-checkbox__label">Label</span></div></div>
           <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--checked ds-checkbox__box--hover"><img src="../../assets/icons/icon-check.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--check" style="display:block;" aria-hidden="true"></span><span class="ds-checkbox__label">Label</span></div></div>
-          <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--checked ds-checkbox__box--focus"><img src="../../assets/icons/icon-check.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--check" style="display:block;" aria-hidden="true"></span><span class="ds-checkbox__label">Label</span></div></div>
-          <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot ds-checkbox--disabled" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--disabled ds-checkbox__box--checked"><img src="../../assets/icons/icon-check.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--check" aria-hidden="true"></span><span class="ds-checkbox__label">Label</span></div></div>
           <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--checked ds-checkbox__box--pressed"><img src="../../assets/icons/icon-check.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--check" style="display:block;" aria-hidden="true"></span><span class="ds-checkbox__label">Label</span></div></div>
+          <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot ds-checkbox--disabled" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--disabled ds-checkbox__box--checked"><img src="../../assets/icons/icon-check.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--check" aria-hidden="true"></span><span class="ds-checkbox__label">Label</span></div></div>
+          <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--checked ds-checkbox__box--focus"><img src="../../assets/icons/icon-check.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--check" style="display:block;" aria-hidden="true"></span><span class="ds-checkbox__label">Label</span></div></div>
 
-          <div class="component-matrix__label">isIndeterminate=true</div>
+          <div class="component-matrix__label">isChecked=false · isIndeterminate=true · isInvalid=false</div>
           <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--indeterminate"><img src="../../assets/icons/icon-minus.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--minus" style="display:block;" aria-hidden="true"></span><span class="ds-checkbox__label">Label</span></div></div>
           <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--indeterminate ds-checkbox__box--hover"><img src="../../assets/icons/icon-minus.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--minus" style="display:block;" aria-hidden="true"></span><span class="ds-checkbox__label">Label</span></div></div>
-          <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--indeterminate ds-checkbox__box--focus"><img src="../../assets/icons/icon-minus.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--minus" style="display:block;" aria-hidden="true"></span><span class="ds-checkbox__label">Label</span></div></div>
-          <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot ds-checkbox--disabled" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--disabled ds-checkbox__box--indeterminate"><img src="../../assets/icons/icon-minus.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--minus" aria-hidden="true"></span><span class="ds-checkbox__label">Label</span></div></div>
           <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--indeterminate ds-checkbox__box--pressed"><img src="../../assets/icons/icon-minus.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--minus" style="display:block;" aria-hidden="true"></span><span class="ds-checkbox__label">Label</span></div></div>
+          <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot ds-checkbox--disabled" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--disabled ds-checkbox__box--indeterminate"><img src="../../assets/icons/icon-minus.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--minus" aria-hidden="true"></span><span class="ds-checkbox__label">Label</span></div></div>
+          <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--indeterminate ds-checkbox__box--focus"><img src="../../assets/icons/icon-minus.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--minus" style="display:block;" aria-hidden="true"></span><span class="ds-checkbox__label">Label</span></div></div>
 
-          <div class="component-matrix__label">isInvalid=true · unchecked</div>
+          <div class="component-matrix__label">isChecked=false · isIndeterminate=false · isInvalid=true</div>
           <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot ds-checkbox--error" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--error-unchecked"></span><span class="ds-checkbox__label">Label</span></div></div>
           <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot ds-checkbox--error" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--error-unchecked ds-checkbox__box--hover"></span><span class="ds-checkbox__label">Label</span></div></div>
-          <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot ds-checkbox--error" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--error-unchecked ds-checkbox__box--focus-unchecked"></span><span class="ds-checkbox__label">Label</span></div></div>
-          <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot ds-checkbox--disabled ds-checkbox--error" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--disabled ds-checkbox__box--error-unchecked"></span><span class="ds-checkbox__label">Label</span></div></div>
           <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot ds-checkbox--error" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--error-unchecked ds-checkbox__box--pressed"></span><span class="ds-checkbox__label">Label</span></div></div>
+          <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot ds-checkbox--disabled ds-checkbox--error" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--disabled ds-checkbox__box--error-unchecked"></span><span class="ds-checkbox__label">Label</span></div></div>
+          <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot ds-checkbox--error" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--error-unchecked ds-checkbox__box--focus-unchecked"></span><span class="ds-checkbox__label">Label</span></div></div>
 
-          <div class="component-matrix__label">isInvalid=true · checked</div>
+          <div class="component-matrix__label">isChecked=true · isIndeterminate=false · isInvalid=true</div>
           <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot ds-checkbox--error" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--checked ds-checkbox__box--error"><img src="../../assets/icons/icon-check.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--check" style="display:block;" aria-hidden="true"></span><span class="ds-checkbox__label">Label</span></div></div>
           <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot ds-checkbox--error" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--checked ds-checkbox__box--error ds-checkbox__box--hover"><img src="../../assets/icons/icon-check.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--check" style="display:block;" aria-hidden="true"></span><span class="ds-checkbox__label">Label</span></div></div>
-          <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot ds-checkbox--error" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--checked ds-checkbox__box--error ds-checkbox__box--focus"><img src="../../assets/icons/icon-check.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--check" style="display:block;" aria-hidden="true"></span><span class="ds-checkbox__label">Label</span></div></div>
-          <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot ds-checkbox--disabled ds-checkbox--error" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--disabled ds-checkbox__box--checked ds-checkbox__box--error"><img src="../../assets/icons/icon-check.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--check" aria-hidden="true"></span><span class="ds-checkbox__label">Label</span></div></div>
           <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot ds-checkbox--error" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--checked ds-checkbox__box--error ds-checkbox__box--pressed"><img src="../../assets/icons/icon-check.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--check" style="display:block;" aria-hidden="true"></span><span class="ds-checkbox__label">Label</span></div></div>
+          <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot ds-checkbox--disabled ds-checkbox--error" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--disabled ds-checkbox__box--checked ds-checkbox__box--error"><img src="../../assets/icons/icon-check.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--check" aria-hidden="true"></span><span class="ds-checkbox__label">Label</span></div></div>
+          <div class="component-matrix__cell"><div class="ds-checkbox ds-checkbox--snapshot ds-checkbox--error" aria-hidden="true"><span class="ds-checkbox__box ds-checkbox__box--checked ds-checkbox__box--error ds-checkbox__box--focus"><img src="../../assets/icons/icon-check.svg" alt="" class="ds-checkbox__icon ds-checkbox__icon--check" style="display:block;" aria-hidden="true"></span><span class="ds-checkbox__label">Label</span></div></div>
         </div>
 
         <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;margin-top:16px;">
@@ -666,7 +701,7 @@
             <div style="padding:16px 20px;background:var(--color-surface);">
               <div style="font-size:13px;font-weight:700;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:12px;">Unchecked</div>
               <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">
-                Ukuran <code>16×16px</code>, radius <code>border-radius-sm</code>, border <code>Border.Input</code> (<code>n40</code>), fill <code>Neutral.N0</code>. Hover: border <code>Border.Focused</code> (<code>b200</code>).
+                Ukuran <code>16×16px</code>, radius <code>border-radius-sm</code>. Default: <code>n0</code> + border <code>n40</code>. Hover: fill <code>n20</code> + border <code>n0</code>.
               </div>
             </div>
           </div>
@@ -702,8 +737,8 @@
             <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Untuk memilih satu atau beberapa opsi independen dalam form, tabel bulk-select, atau filter. Gunakan radio jika hanya satu pilihan dalam grup.</div>
           </div>
           <div class="usage-info-card">
-            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Matrix komponen</div>
-            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Baris: <code>isChecked</code>, <code>indeterminate</code>, <code>isInvalid</code> (unchecked &amp; checked). Kolom interaksi: default, hover, focus, disabled, pressed. Modifier error unchecked memakai border <code>r300</code>; error checked memakai ring luar.</div>
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Parts &amp; komponen</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Parts Figma: <code>appearance=default/hover</code>, <code>isIndeterminate</code>, <code>isChecked</code>, invalid. Komponen: matrix <code>state</code> (default → hover → pressed → disable → focus) × status boolean Figma.</div>
           </div>
           <div class="usage-info-card">
             <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Aksesibilitas</div>
@@ -721,7 +756,7 @@
               <li>Gunakan ukuran kotak 16×16px dan radius <code>border-radius-sm</code> sesuai token Corner untuk form control.</li>
               <li>Pakai <code>icon-check.svg</code> dan <code>icon-minus.svg</code> dari <code>assets/icons</code> untuk checked dan indeterminate.</li>
               <li>Tampilkan ring error (<code>Border.Danger</code>) hanya saat validasi gagal, bukan sebagai gaya dekoratif.</li>
-              <li>Pertahankan <code>focus-visible</code> dengan ring <code>Border.Focused</code> (<code>b200</code>) seperti komponen interaktif lain.</li>
+              <li>Hover unchecked memakai fill <code>n20</code>; pressed unchecked memakai <code>n40</code>; focus memakai ring <code>b200</code> (bukan fill gelap).</li>
               <li>Hubungkan label teks ke input agar area klik mencakup teks (gap <code>space-100</code>).</li>
             </ul>
           </div>
@@ -747,8 +782,12 @@
             <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'inline-flex h-4 w-4 shrink-0 items-center justify-center rounded border border-n40 bg-n0')">Salin</button>
           </div>
           <div class="tw-snippet-row">
-            <code class="tw-snippet-code">hover · border</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'hover:border-b200')">Salin</button>
+            <code class="tw-snippet-code">hover · unchecked</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'hover:border-n0 hover:bg-n20')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">pressed · unchecked</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'active:border-n40 active:bg-n40')">Salin</button>
           </div>
           <div class="tw-snippet-row">
             <code class="tw-snippet-code">checked / indeterminate fill</code>
@@ -771,8 +810,8 @@
             <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'inline-flex cursor-pointer items-start gap-2 text-sm font-medium text-n900')">Salin</button>
           </div>
           <div class="tw-snippet-row">
-            <code class="tw-snippet-code">focus · unchecked (komponen)</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'focus-visible:bg-n900 focus-visible:border-n0 focus-visible:ring-1 focus-visible:ring-n0')">Salin</button>
+            <code class="tw-snippet-code">focus · unchecked</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'focus-visible:border-n0 focus-visible:bg-n0 focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
           </div>
           <div class="tw-snippet-row">
             <code class="tw-snippet-code">error · unchecked border</code>
@@ -783,8 +822,8 @@
             <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'text-n50 cursor-not-allowed')">Salin</button>
           </div>
           <div class="tw-snippet-row">
-            <code class="tw-snippet-code">pressed · ring</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'ring-2 ring-b200')">Salin</button>
+            <code class="tw-snippet-code">pressed/checked · ring</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'active:ring-2 active:ring-b200')">Salin</button>
           </div>
         </div>
 
@@ -794,8 +833,11 @@
             <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-mono);">checkbox-tailwind.html</span>
             <button class="tw-copy-btn" id="copy-tailwind-block-btn" onclick="copyTailwindBlock()">Salin semua</button>
           </div>
-          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-mono);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="tailwind-block">&lt;!-- Unchecked --&gt;
-&lt;span class="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded border border-n40 bg-n0 hover:border-b200"&gt;&lt;/span&gt;
+          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-mono);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="tailwind-block">&lt;!-- appearance=default --&gt;
+&lt;span class="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded border border-n40 bg-n0"&gt;&lt;/span&gt;
+
+&lt;!-- appearance=hover --&gt;
+&lt;span class="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded border border-n0 bg-n20"&gt;&lt;/span&gt;
 
 &lt;!-- Checked --&gt;
 &lt;span class="inline-flex h-4 w-4 shrink-0 items-center justify-center rounded border border-b300 bg-b300"&gt;
