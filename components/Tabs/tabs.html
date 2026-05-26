@@ -417,6 +417,60 @@
       .scroll-top-btn,
       .dark-toggle { animation: none !important; transition: none !important; }
     }
+
+    /* ── Token table ── */
+    .token-table { width:100%; border-collapse:collapse; font-size:13px; font-family:var(--font-primary); }
+    .token-table th {
+      text-align:left; font-size:11px; font-weight:700;
+      color:var(--color-neutral-n300); letter-spacing:0.06em;
+      text-transform:uppercase; padding:10px 14px;
+      background:var(--color-neutral-n20); border-bottom:1px solid var(--color-neutral-n30);
+    }
+    .token-table td { padding:10px 14px; border-bottom:1px solid var(--color-neutral-n30); color:var(--color-neutral-n700); vertical-align:middle; }
+    .token-table tr:last-child td { border-bottom:none; }
+    .token-table tr:hover td { background:var(--color-neutral-n10); }
+    .color-swatch-sm {
+      display:inline-block; width:14px; height:14px; border-radius:3px;
+      border:1px solid rgba(0,0,0,0.08); vertical-align:middle; margin-right:6px;
+    }
+
+    /* ── Dark code block ── */
+    .code-block {
+      background:#0F172A; color:#CBD5E1;
+      padding:20px 24px; border-radius:0;
+      overflow-x:auto; font-size:12px; line-height:1.7;
+      border:none; font-family:var(--font-mono);
+      margin:0;
+    }
+    .code-block code { background:none; border:none; padding:0; color:inherit; font-size:inherit; border-radius:0; }
+    .code-comment { color:#475569; }
+    .code-tag     { color:#7DB5E7; }
+    .code-attr    { color:#A3CBEE; }
+    .code-string  { color:#86EFAC; }
+
+    /* ── Dark mode ── */
+    [data-theme="dark"] body { background-color:#080F1E; color:#CBD5E1; }
+    [data-theme="dark"] .main-content { background-color:#080F1E; }
+    [data-theme="dark"] section > h2 { color:#CBD5E1 !important; background-image:linear-gradient(to right,#1E7FD6 0%,rgba(30,127,214,0.12) 32%,transparent 68%) !important; }
+    [data-theme="dark"] p { color:#94A3B8; }
+    [data-theme="dark"] code { background:#0F1D30 !important; border-color:#1A2E48 !important; color:#7DB5E7 !important; }
+    [data-theme="dark"] .variant-grid > div { background-color:#0F1D30 !important; border-color:#1A2E48 !important; }
+    [data-theme="dark"] .variant-grid > div > div:first-child { background-image:radial-gradient(circle,rgba(255,255,255,0.04) 1.5px,transparent 1.5px) !important; background-color:#0F1D30 !important; }
+    [data-theme="dark"] .variant-grid > div > div:last-child { background:#0F1D30 !important; border-top-color:#1A2E48 !important; }
+    [data-theme="dark"] .hero-feat-card { background-color:#0F1D30 !important; border-color:#1A2E48 !important; }
+    [data-theme="dark"] .usage-grid-2 > div { background-color:#0F1D30 !important; border-color:#1A2E48 !important; }
+    [data-theme="dark"] .usage-info-card { background-color:#0F1D30 !important; border-color:#1A2E48 !important; }
+    [data-theme="dark"] .usage-info-card div[style] { color:#94A3B8 !important; }
+    [data-theme="dark"] .topbar { background-color:rgba(8,15,30,0.92) !important; border-bottom-color:#1A2E48 !important; }
+    [data-theme="dark"] .page-footer { border-top-color:#1A2E48 !important; color:#94A3B8 !important; }
+    [data-theme="dark"] .token-table th { background:#0F1D30 !important; border-bottom-color:#1A2E48 !important; color:#64748B !important; }
+    [data-theme="dark"] .token-table td { border-bottom-color:#1A2E48 !important; color:#94A3B8 !important; }
+    [data-theme="dark"] .token-table tr:hover td { background:rgba(255,255,255,0.03) !important; }
+    [data-theme="dark"] .ds-group-label-pill { background-color:#0F1D30 !important; border-color:#1A2E48 !important; color:#94A3B8 !important; }
+    [data-theme="dark"] .dark-toggle { border-color:#1A2E48; color:#94A3B8; }
+    [data-theme="dark"] .dark-toggle:hover { background-color:rgba(30,127,214,0.14); border-color:rgba(30,127,214,0.3); color:#7DB5E7; }
+
+    @media (max-width:480px) { .scroll-top-btn { bottom:16px; right:16px; } }
   </style>
 </head>
 <body>
@@ -482,6 +536,16 @@
               <a href="tabs.html" class="nav-link active">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="4" rx="1"/><rect x="2" y="13" width="14" height="4" rx="1"/></svg>
                 Tabs
+              </a>
+            </li>
+            <li>
+              <a href="../Pagination/pagination.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="10,6 4,12 10,18"/>
+                  <polyline points="14,6 20,12 14,18"/>
+                  <line x1="11.5" y1="12" x2="12.5" y2="12" opacity="0.55"/>
+                </svg>
+                Pagination
               </a>
             </li>
             <li><a href="../Toast-Banner/banner.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="8" rx="2"/><circle cx="6" cy="12" r="1" fill="currentColor" stroke="none"/><line x1="10" y1="12" x2="18" y2="12"/></svg>Toast Banner</a></li>
@@ -581,18 +645,34 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-2 lg:grid-cols-3 gap-3">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
           <div class="hero-feat-card bg-n0 rounded-xl p-5 border border-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background:linear-gradient(135deg,var(--color-blue-b50) 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><rect x="2" y="7" width="20" height="4" rx="1"/><rect x="2" y="13" width="14" height="4" rx="1"/></svg>
+            </div>
             <div class="text-sm font-semibold text-n900 mb-1.5 tracking-[-0.02em]">2 Layout</div>
             <div class="text-xs leading-relaxed" style="color:var(--color-text-tertiary);">Tanpa track · Dengan garis dasar penuh</div>
           </div>
           <div class="hero-feat-card bg-n0 rounded-xl p-5 border border-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background:linear-gradient(135deg,var(--color-blue-b50) 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M8 12h3l1-4 2 8 1-4h3"/></svg>
+            </div>
             <div class="text-sm font-semibold text-n900 mb-1.5 tracking-[-0.02em]">Semantic Tokens</div>
             <div class="text-xs leading-relaxed" style="color:var(--color-text-tertiary);">Warna, spacing, dan tipografi dari tokens.css</div>
           </div>
           <div class="hero-feat-card bg-n0 rounded-xl p-5 border border-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background:linear-gradient(135deg,var(--color-blue-b50) 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+            </div>
             <div class="text-sm font-semibold text-n900 mb-1.5 tracking-[-0.02em]">A11y</div>
             <div class="text-xs leading-relaxed" style="color:var(--color-text-tertiary);"><code>role="tab"</code> · <code>aria-selected</code> · <code>:focus-visible</code></div>
+          </div>
+          <div class="hero-feat-card bg-n0 rounded-xl p-5 border border-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background:linear-gradient(135deg,var(--color-blue-b50) 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><path d="M12 2l9 4.5V17.5L12 22l-9-4.5V6.5L12 2z"/><path d="M12 2v20M3 6.5l9 5 9-5"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-n900 mb-1.5 tracking-[-0.02em]">Figma-Synced</div>
+            <div class="text-xs leading-relaxed" style="color:var(--color-text-tertiary);">4 parts · Varian sesuai referensi Figma</div>
           </div>
         </div>
       </section>
@@ -1302,6 +1382,79 @@
         </div>
       </section>
 
+      <!-- TOKEN REFERENCE -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
+          <span style="width:3px;height:18px;background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300));border-radius:3px;flex-shrink:0;display:block;"></span>
+          Token Reference
+        </h2>
+        <p style="font-size:14px;color:var(--color-text-tertiary);margin-top:-12px;margin-bottom:28px;font-family:var(--font-primary);">
+          Mapping semantic token Figma ke CSS variable. Semua token terdefinisi di <code>tokens.css</code> dan dapat ditelusuri di halaman <strong style="color:var(--color-blue-b300);">Colors</strong>.
+        </p>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+          <table class="token-table">
+            <thead>
+              <tr>
+                <th style="width:110px;">State</th>
+                <th>Figma Token</th>
+                <th>Semantic Token</th>
+                <th>CSS Variable</th>
+                <th style="width:100px;">Nilai</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:600;font-family:var(--font-mono);font-size:11px;color:var(--color-neutral-n300);">default</td>
+                <td style="font-family:var(--font-mono);font-size:11px;">Color-Text-Subtle</td>
+                <td style="font-family:var(--font-mono);font-size:11px;">Text.Subtle</td>
+                <td><code>--color-neutral-n300</code></td>
+                <td><span class="color-swatch-sm" style="background:#5D6B82;"></span><span style="font-family:var(--font-mono);font-size:11px;">#5D6B82</span></td>
+              </tr>
+              <tr>
+                <td rowspan="2" style="font-weight:600;font-family:var(--font-mono);font-size:11px;color:var(--color-blue-b300);">selected</td>
+                <td style="font-family:var(--font-mono);font-size:11px;">Color-Text-Brand</td>
+                <td style="font-family:var(--font-mono);font-size:11px;">Text.Brand</td>
+                <td><code>--color-blue-b300</code></td>
+                <td><span class="color-swatch-sm" style="background:#1E7FD6;"></span><span style="font-family:var(--font-mono);font-size:11px;">#1E7FD6</span></td>
+              </tr>
+              <tr>
+                <td style="font-family:var(--font-mono);font-size:11px;">Color-Border-Brand</td>
+                <td style="font-family:var(--font-mono);font-size:11px;">Border.Brand</td>
+                <td><code>--color-blue-b300</code></td>
+                <td><span class="color-swatch-sm" style="background:#1E7FD6;"></span><span style="font-family:var(--font-mono);font-size:11px;">#1E7FD6</span></td>
+              </tr>
+              <tr>
+                <td rowspan="2" style="font-weight:600;font-family:var(--font-mono);font-size:11px;color:var(--color-neutral-n900);">press</td>
+                <td style="font-family:var(--font-mono);font-size:11px;">Color-Text-Bold</td>
+                <td style="font-family:var(--font-mono);font-size:11px;">Text.Bold</td>
+                <td><code>--color-neutral-n900</code></td>
+                <td><span class="color-swatch-sm" style="background:#091E42;"></span><span style="font-family:var(--font-mono);font-size:11px;">#091E42</span></td>
+              </tr>
+              <tr>
+                <td style="font-family:var(--font-mono);font-size:11px;">Color-Border-Subtle</td>
+                <td style="font-family:var(--font-mono);font-size:11px;">Border.Subtle</td>
+                <td><code>--color-neutral-n40</code></td>
+                <td><span class="color-swatch-sm" style="background:#DFE2E6;border:1px solid #C2C7D0;"></span><span style="font-family:var(--font-mono);font-size:11px;">#DFE2E6</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight:600;font-family:var(--font-mono);font-size:11px;color:var(--color-blue-b200);">focus</td>
+                <td style="font-family:var(--font-mono);font-size:11px;">Border.Focused</td>
+                <td style="font-family:var(--font-mono);font-size:11px;">Border.Focused</td>
+                <td><code>--color-blue-b200</code></td>
+                <td><span class="color-swatch-sm" style="background:#4495DD;"></span><span style="font-family:var(--font-mono);font-size:11px;">#4495DD</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight:600;font-family:var(--font-mono);font-size:11px;color:var(--color-red-r300);">required</td>
+                <td style="font-family:var(--font-mono);font-size:11px;">Color-Text-Danger</td>
+                <td style="font-family:var(--font-mono);font-size:11px;">Text.Danger</td>
+                <td><code>--color-red-r300</code></td>
+                <td><span class="color-swatch-sm" style="background:#EC1C24;"></span><span style="font-family:var(--font-mono);font-size:11px;">#EC1C24</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
       <!-- CODE -->
       <section style="margin-bottom:48px;">
         <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
@@ -1316,48 +1469,52 @@
             <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-mono);letter-spacing:0.04em;">tabs.html</span>
             <button class="copy-btn" id="copy-code-btn" onclick="copyCode()" aria-label="Salin kode">Salin</button>
           </div>
-          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-mono);font-size:12px;line-height:1.65;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="code-block">&lt;!-- Tablist + track (disarankan di atas konten) --&gt;
-&lt;div class="ds-tablist ds-tablist--track" role="tablist" aria-label="Sections"&gt;
-  &lt;button type="button" class="ds-tab" role="tab" aria-selected="false"&gt;...&lt;/button&gt;
-  &lt;button type="button" class="ds-tab ds-tab--selected" role="tab" aria-selected="true"&gt;...&lt;/button&gt;
-&lt;/div&gt;
+          <pre class="code-block" id="code-block"><code><span class="code-comment">&lt;!-- Tablist + track (disarankan di atas konten) --&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tablist ds-tablist--track"</span> <span class="code-attr">role</span>=<span class="code-string">"tablist"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Sections"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;button</span> <span class="code-attr">type</span>=<span class="code-string">"button"</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab"</span> <span class="code-attr">role</span>=<span class="code-string">"tab"</span> <span class="code-attr">aria-selected</span>=<span class="code-string">"false"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/button&gt;</span>
+  <span class="code-tag">&lt;button</span> <span class="code-attr">type</span>=<span class="code-string">"button"</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab ds-tab--selected"</span> <span class="code-attr">role</span>=<span class="code-string">"tab"</span> <span class="code-attr">aria-selected</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/button&gt;</span>
+<span class="code-tag">&lt;/div&gt;</span>
 
-&lt;!-- part=default --&gt;
-&lt;button type="button" class="ds-tab" role="tab" aria-selected="false"&gt;
-  &lt;span class="ds-tab__label"&gt;Tab&lt;/span&gt;
-  &lt;span class="ds-tab__indicator" aria-hidden="true"&gt;&lt;/span&gt;
-&lt;/button&gt;
+<span class="code-comment">&lt;!-- part=default --&gt;</span>
+<span class="code-tag">&lt;button</span> <span class="code-attr">type</span>=<span class="code-string">"button"</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab"</span> <span class="code-attr">role</span>=<span class="code-string">"tab"</span> <span class="code-attr">aria-selected</span>=<span class="code-string">"false"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__label"</span><span class="code-tag">&gt;</span>Tab<span class="code-tag">&lt;/span&gt;</span>
+  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__indicator"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;&lt;/span&gt;</span>
+<span class="code-tag">&lt;/button&gt;</span>
 
-&lt;!-- part=selected --&gt;
-&lt;button type="button" class="ds-tab ds-tab--selected" role="tab" aria-selected="true"&gt;
-  &lt;span class="ds-tab__label"&gt;Tab&lt;/span&gt;
-  &lt;span class="ds-tab__indicator" aria-hidden="true"&gt;&lt;/span&gt;
-&lt;/button&gt;
+<span class="code-comment">&lt;!-- part=selected --&gt;</span>
+<span class="code-tag">&lt;button</span> <span class="code-attr">type</span>=<span class="code-string">"button"</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab ds-tab--selected"</span> <span class="code-attr">role</span>=<span class="code-string">"tab"</span> <span class="code-attr">aria-selected</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__label"</span><span class="code-tag">&gt;</span>Tab<span class="code-tag">&lt;/span&gt;</span>
+  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__indicator"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;&lt;/span&gt;</span>
+<span class="code-tag">&lt;/button&gt;</span>
 
-&lt;!-- part=default:required --&gt;
-&lt;button type="button" class="ds-tab ds-tab--required" role="tab" aria-selected="false"&gt;
-  &lt;span class="ds-tab__row"&gt;
-    &lt;span class="ds-tab__label"&gt;Tab&lt;/span&gt;
-    &lt;span class="ds-tab__required" aria-hidden="true"&gt;*&lt;/span&gt;
-  &lt;/span&gt;
-  &lt;span class="ds-tab__indicator" aria-hidden="true"&gt;&lt;/span&gt;
-&lt;/button&gt;
+<span class="code-comment">&lt;!-- part=default:required --&gt;</span>
+<span class="code-tag">&lt;button</span> <span class="code-attr">type</span>=<span class="code-string">"button"</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab ds-tab--required"</span> <span class="code-attr">role</span>=<span class="code-string">"tab"</span> <span class="code-attr">aria-selected</span>=<span class="code-string">"false"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__row"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__label"</span><span class="code-tag">&gt;</span>Tab<span class="code-tag">&lt;/span&gt;</span>
+    <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__required"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>*<span class="code-tag">&lt;/span&gt;</span>
+  <span class="code-tag">&lt;/span&gt;</span>
+  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__indicator"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;&lt;/span&gt;</span>
+<span class="code-tag">&lt;/button&gt;</span>
 
-&lt;!-- part=default:notification (badge dari Badge component) --&gt;
-&lt;button type="button" class="ds-tab ds-tab--notification" role="tab" aria-selected="false"&gt;
-  &lt;span class="ds-tab__row"&gt;
-    &lt;span class="ds-tab__label"&gt;Tab&lt;/span&gt;
-    &lt;span class="ds-tab__badge"&gt;&lt;span class="ds-badge ds-badge--important"&gt;1&lt;/span&gt;&lt;/span&gt;
-  &lt;/span&gt;
-  &lt;span class="ds-tab__indicator" aria-hidden="true"&gt;&lt;/span&gt;
-&lt;/button&gt;
+<span class="code-comment">&lt;!-- part=default:notification (badge dari Badge component) --&gt;</span>
+<span class="code-tag">&lt;button</span> <span class="code-attr">type</span>=<span class="code-string">"button"</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab ds-tab--notification"</span> <span class="code-attr">role</span>=<span class="code-string">"tab"</span> <span class="code-attr">aria-selected</span>=<span class="code-string">"false"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__row"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__label"</span><span class="code-tag">&gt;</span>Tab<span class="code-tag">&lt;/span&gt;</span>
+    <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__badge"</span><span class="code-tag">&gt;&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-badge ds-badge--important"</span><span class="code-tag">&gt;</span>1<span class="code-tag">&lt;/span&gt;&lt;/span&gt;</span>
+  <span class="code-tag">&lt;/span&gt;</span>
+  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__indicator"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;&lt;/span&gt;</span>
+<span class="code-tag">&lt;/button&gt;</span>
 
-&lt;!-- Static state: --hover | --press | --focus --&gt;</code></pre>
+<span class="code-comment">&lt;!-- Static state: --hover | --press | --focus --&gt;</span></code></pre>
         </div>
       </section>
 
       <footer class="page-footer" style="margin-top:64px;padding-top:24px;border-top:1px solid var(--color-border);display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-primary);">
         <div>&copy; 2026 <strong style="color:var(--color-text-secondary);">GPOS Lite Design System V2.0</strong></div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="opacity:0.4;"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub Pages
+        </div>
       </footer>
 
     </div>

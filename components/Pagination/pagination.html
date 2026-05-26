@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagination — DS GPOS Lite V2</title>
+  <link rel="stylesheet" href="../../styles/globals.css">
+  <link rel="stylesheet" href="../../styles/enhancements.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            b50:  '#E9F2FB', b75:  '#A3CBEE', b100: '#7DB5E7',
+            b200: '#4495DD', b300: '#1E7FD6', b400: '#155996',
+            n0:   '#FFFFFF', n10:  '#FAFBFB', n20:  '#F5F6F7',
+            n30:  '#EBEDF0', n40:  '#DFE2E6', n50:  '#C2C7D0',
+            n100: '#7A8699', n200: '#6B788E', n300: '#5D6B82',
+            n400: '#505F79', n500: '#42526D', n700: '#243757',
+            n800: '#15294B', n900: '#091E42',
+            g50:  '#E6F7EF', g100: '#B3E6D1', g400: '#008F4A',
+            r50:  '#FDE8E9', r100: '#F8BFC2', r400: '#C21823',
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    .ds-pagination {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-050);
+      font-family: var(--font-primary);
+    }
+    .ds-pagination__item {
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: transparent;
+      border-radius: var(--border-radius-md);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--text-body-small-medium-size);
+      font-weight: var(--text-body-small-medium-weight);
+      line-height: var(--text-body-small-medium-lh);
+      color: var(--color-neutral-n300);
+      transition: background-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
+      cursor: pointer;
+    }
+    .ds-pagination__item img {
+      width: 16px;
+      height: 16px;
+      opacity: 0.75;
+    }
+    .ds-pagination__item:hover {
+      color: var(--color-blue-b300);
+      background: var(--color-neutral-n20);
+    }
+    .ds-pagination__item:active {
+      color: var(--color-neutral-n900);
+    }
+    .ds-pagination__item:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+    .ds-pagination__item--active {
+      background: var(--color-blue-b50);
+      color: var(--color-blue-b300);
+    }
+    .ds-pagination__item--active:hover {
+      background: var(--color-blue-b50);
+      color: var(--color-blue-b300);
+    }
+    .ds-pagination__item--ellipsis {
+      cursor: default;
+      pointer-events: none;
+    }
+    .usage-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .usage-grid-2 > div {
+      transition: transform 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .usage-grid-2 > div:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .usage-info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .usage-info-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .tw-snippet-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--color-neutral-n30);
+    }
+    .tw-snippet-row:last-child { border-bottom: none; }
+    .tw-snippet-code {
+      flex: 1;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      line-height: 1.55;
+      color: var(--color-neutral-n700);
+      word-break: break-all;
+    }
+    .tw-copy-btn {
+      flex-shrink: 0;
+      padding: 4px 10px;
+      background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n40);
+      border-radius: var(--border-radius-sm);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-neutral-n400);
+      cursor: pointer;
+      font-family: var(--font-primary);
+      transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+    }
+    .tw-copy-btn:hover {
+      background: var(--color-blue-b300);
+      border-color: var(--color-blue-b300);
+      color: var(--color-neutral-n0);
+    }
+    .tw-copy-btn.copied {
+      background: var(--color-green-g400);
+      border-color: var(--color-green-g400);
+      color: var(--color-neutral-n0);
+    }
+    @media (max-width: 900px) {
+      .usage-info-grid { grid-template-columns: 1fr !important; }
+      .usage-grid-2 { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo-icon">GL</div>
+        <div class="sidebar-brand-text">
+          <div class="logo">GPOS Lite</div>
+          <div class="version">Design System V2.0</div>
+        </div>
+      </div>
+      <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">&#x2715;</button>
+    </div>
+    <div class="sidebar-search">
+      <input type="search" class="search-input" placeholder="&#x1F50D;  Cari token, component...">
+    </div>
+    <div class="nav-scroll">
+      <nav class="nav-menu">
+        <div class="nav-section">
+          <h3 class="nav-title">Overview</h3>
+          <ul class="nav-list"><li><a href="../../index.html" class="nav-link">Home</a></li></ul>
+        </div>
+        <div class="nav-section">
+          <h3 class="nav-title">Komponen</h3>
+          <ul class="nav-list">
+            <li>
+              <a href="../Button/button.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="3"/><line x1="7" y1="12" x2="17" y2="12" opacity="0.5"/></svg>
+                Button
+              </a>
+            </li>
+            <li>
+              <a href="../Avatar/avatar.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                Avatar
+              </a>
+            </li>
+            <li>
+              <a href="../Badge/badge.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="9" width="22" height="6" rx="3"/><circle cx="6" cy="12" r="1.5" fill="currentColor" opacity="0.5"/></svg>
+                Badge
+              </a>
+            </li>
+            <li>
+              <a href="../Breadcrumbs/breadcrumbs.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/><line x1="3" y1="12" x2="15" y2="12" opacity="0.4"/></svg>
+                Breadcrumbs
+              </a>
+            </li>
+            <li>
+              <a href="../Tabs/tabs.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="4" rx="1"/><rect x="2" y="13" width="14" height="4" rx="1"/></svg>
+                Tabs
+              </a>
+            </li>
+            <li>
+              <a href="pagination.html" class="nav-link active">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="10,6 4,12 10,18"/>
+                  <polyline points="14,6 20,12 14,18"/>
+                  <line x1="11.5" y1="12" x2="12.5" y2="12" opacity="0.55"/>
+                </svg>
+                Pagination
+              </a>
+            </li>
+            <li>
+              <a href="../Toast-Banner/banner.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="8" rx="2"/><circle cx="6" cy="12" r="1" fill="currentColor" stroke="none"/><line x1="10" y1="12" x2="18" y2="12"/></svg>
+                Toast Banner
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">☰</button>
+      <div class="breadcrumb">
+        <a href="../../index.html">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="#">Components</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="current">Pagination</span>
+      </div>
+      <span class="version-badge">v2.0</span>
+    </div>
+
+    <div class="content-inner">
+      <section class="mb-12">
+        <h2>Pagination Components</h2>
+        <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);">
+          Implementasi komponen pagination berdasarkan referensi <code>Paginations/figma/Pagination-components.png</code>.
+        </p>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:28px;display:flex;justify-content:center;align-items:center;">
+          <nav class="ds-pagination" aria-label="Pagination">
+            <button type="button" class="ds-pagination__item" aria-label="Halaman sebelumnya">
+              <img src="../../assets/icons/icon-chevron-left.svg" alt="" aria-hidden="true">
+            </button>
+            <button type="button" class="ds-pagination__item ds-pagination__item--active" aria-current="page">1</button>
+            <button type="button" class="ds-pagination__item">2</button>
+            <button type="button" class="ds-pagination__item">3</button>
+            <button type="button" class="ds-pagination__item">4</button>
+            <button type="button" class="ds-pagination__item">5</button>
+            <button type="button" class="ds-pagination__item">6</button>
+            <button type="button" class="ds-pagination__item">7</button>
+            <button type="button" class="ds-pagination__item">8</button>
+            <span class="ds-pagination__item ds-pagination__item--ellipsis" aria-hidden="true">...</span>
+            <button type="button" class="ds-pagination__item">20</button>
+            <button type="button" class="ds-pagination__item" aria-label="Halaman berikutnya">
+              <img src="../../assets/icons/icon-chevron-right.svg" alt="" aria-hidden="true">
+            </button>
+          </nav>
+        </div>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;margin-top:16px;">
+          <img src="../../Paginations/figma/Pagination-components.png" alt="Referensi Figma Pagination" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Informasi Penggunaan</h2>
+        <div class="usage-info-grid">
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Kapan dipakai</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Gunakan untuk navigasi antar halaman list/table ketika jumlah data besar dan tidak muat dalam satu layar.</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">State aktif</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Selalu tandai halaman aktif dengan background <code>Color-Background-Brand-Subtle</code> dan teks brand.</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Aksesibilitas</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Gunakan <code>nav[aria-label]</code>, <code>aria-current="page"</code> pada item aktif, dan label untuk tombol previous/next.</div>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Do &amp; Don&apos;t</h2>
+        <div class="usage-grid-2">
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:10px 16px;background:var(--color-green-g50);border-bottom:2px solid var(--color-green-g100);font-weight:700;color:var(--color-green-g400);">Do — Lakukan ini</div>
+            <ul style="padding:16px 20px 20px 36px;color:var(--color-text-tertiary);font-size:13px;line-height:1.7;">
+              <li>Tampilkan satu halaman aktif pada satu waktu.</li>
+              <li>Pakai ellipsis saat jumlah halaman panjang.</li>
+              <li>Gunakan ikon chevron existing di <code>assets/icons</code>.</li>
+              <li>Jaga jarak antar item konsisten dengan spacing token.</li>
+            </ul>
+          </div>
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:10px 16px;background:var(--color-red-r50);border-bottom:2px solid var(--color-red-r100);font-weight:700;color:var(--color-red-r400);">Don&apos;t — Hindari ini</div>
+            <ul style="padding:16px 20px 20px 36px;color:var(--color-text-tertiary);font-size:13px;line-height:1.7;">
+              <li>Jangan beri dua item aktif bersamaan.</li>
+              <li>Jangan hardcode warna hex di komponen.</li>
+              <li>Jangan ganti ikon dengan library eksternal.</li>
+              <li>Jangan hilangkan focus state untuk keyboard user.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Tailwind — Salin Code</h2>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Wrapper pagination</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'inline-flex items-center gap-1')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Item default</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'inline-flex h-8 w-8 items-center justify-center rounded-md text-sm font-medium text-n300 hover:bg-n20 hover:text-b300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Item aktif</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-b50 text-b300')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Ikon previous/next</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'h-4 w-4 opacity-75')">Salin</button>
+          </div>
+        </div>
+        <p style="font-size:13px;font-weight:600;color:var(--color-text-primary);margin:28px 0 12px;font-family:var(--font-primary);">Blok siap copy</p>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-mono);letter-spacing:0.04em;">pagination-tailwind.html</span>
+            <button class="tw-copy-btn" id="copy-tailwind-block-btn" onclick="copyTailwindBlock()">Salin semua</button>
+          </div>
+          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-mono);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="tailwind-block">&lt;nav aria-label="Pagination" class="inline-flex items-center gap-1"&gt;
+  &lt;button class="inline-flex h-8 w-8 items-center justify-center rounded-md text-sm font-medium text-n300 hover:bg-n20 hover:text-b300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200"&gt;
+    &lt;img src="../../assets/icons/icon-chevron-left.svg" alt="" class="h-4 w-4 opacity-75" /&gt;
+  &lt;/button&gt;
+  &lt;button aria-current="page" class="inline-flex h-8 w-8 items-center justify-center rounded-md bg-b50 text-sm font-medium text-b300"&gt;1&lt;/button&gt;
+  &lt;button class="inline-flex h-8 w-8 items-center justify-center rounded-md text-sm font-medium text-n300 hover:bg-n20 hover:text-b300"&gt;2&lt;/button&gt;
+  &lt;span class="inline-flex h-8 w-8 items-center justify-center text-sm font-medium text-n300"&gt;...&lt;/span&gt;
+  &lt;button class="inline-flex h-8 w-8 items-center justify-center rounded-md text-sm font-medium text-n300 hover:bg-n20 hover:text-b300"&gt;20&lt;/button&gt;
+  &lt;button class="inline-flex h-8 w-8 items-center justify-center rounded-md text-sm font-medium text-n300 hover:bg-n20 hover:text-b300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200"&gt;
+    &lt;img src="../../assets/icons/icon-chevron-right.svg" alt="" class="h-4 w-4 opacity-75" /&gt;
+  &lt;/button&gt;
+&lt;/nav&gt;</code></pre>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<script src="../../scripts/script.js"></script>
+<script>
+  function copyTailwind(btn, text) {
+    navigator.clipboard.writeText(text).then(function () {
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () {
+        btn.textContent = 'Salin';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+  function copyTailwindBlock() {
+    const raw = document.getElementById('tailwind-block').textContent;
+    navigator.clipboard.writeText(raw).then(function () {
+      const btn = document.getElementById('copy-tailwind-block-btn');
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () {
+        btn.textContent = 'Salin semua';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+</script>
+</body>
+</html>
