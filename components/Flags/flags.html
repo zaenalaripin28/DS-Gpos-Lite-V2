@@ -279,6 +279,17 @@
       line-height: var(--text-body-small-medium-lh);
     }
 
+    .ds-flag--normal .ds-flag__title,
+    .ds-flag--warning .ds-flag__title {
+      color: var(--color-neutral-n900);
+    }
+
+    .ds-flag--success .ds-flag__title,
+    .ds-flag--error .ds-flag__title,
+    .ds-flag--info .ds-flag__title {
+      color: var(--color-text-inverse);
+    }
+
     .ds-flag__controls {
       display: flex;
       flex-shrink: 0;
@@ -1173,41 +1184,138 @@
       <section style="margin-bottom:48px;">
         <h2>Anatomy</h2>
         <p style="font-size:14px;color:var(--color-text-tertiary);margin-top:-12px;margin-bottom:28px;font-family:var(--font-primary);">
-          Setiap code part adalah <code>&lt;button&gt;</code> mandiri — hit area 24×24px (ikon) atau teks link dengan padding <code>space-050</code> / <code>space-100</code>. Warna ikon/teks menyesuaikan kontras latar Flag (inverse pada bold, brand pada subtle).
+          Struktur komponen <code>.ds-flag</code>: <strong>container</strong> + <strong>header</strong> (icon, title, control) + <strong>body</strong> opsional (description, actions). Title pada appearance bold memakai <code>Text.Inverse</code>; <code>normal</code> / <code>warning</code> memakai <code>Text.Bold</code>.
         </p>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;" class="anatomy-grid">
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px;" class="anatomy-grid">
 
           <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
-            <div class="ds-flag-parts-preview" style="padding:40px 24px;display:flex;align-items:center;justify-content:center;">
-              <button type="button" class="ds-flag-part ds-flag-part--dismiss" aria-label="Tutup">
-                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
-              </button>
+            <div style="padding:48px 32px 64px;display:flex;align-items:center;justify-content:center;background:var(--color-neutral-n10);position:relative;">
+              <div style="position:relative;width:100%;max-width:400px;">
+                <div style="position:absolute;inset:-10px;border:1.5px dashed var(--color-blue-b200);border-radius:var(--border-radius-lg);pointer-events:none;z-index:2;"></div>
+                <div style="position:absolute;top:14px;left:14px;width:24px;height:24px;border:1.5px dashed var(--color-green-g300);border-radius:var(--border-radius-sm);pointer-events:none;z-index:2;"></div>
+                <div style="position:absolute;top:14px;left:46px;right:44px;height:20px;border:1.5px dashed var(--color-neutral-n300);border-radius:var(--border-radius-sm);pointer-events:none;z-index:2;"></div>
+                <div style="position:absolute;top:14px;right:14px;width:24px;height:24px;border:1.5px dashed var(--color-orange-o300);border-radius:var(--border-radius-sm);pointer-events:none;z-index:2;"></div>
+                <div style="position:absolute;top:46px;left:46px;right:14px;min-height:40px;border:1.5px dashed var(--color-neutral-n200);border-radius:var(--border-radius-sm);pointer-events:none;z-index:2;"></div>
+                <div style="position:absolute;top:94px;left:46px;right:14px;height:28px;border:1.5px dashed var(--color-blue-b200);border-radius:var(--border-radius-sm);pointer-events:none;z-index:2;"></div>
+
+                <article class="ds-flag ds-flag--success" style="position:relative;z-index:1;max-width:100%;" aria-hidden="true">
+                  <div class="ds-flag__header">
+                    <div class="ds-flag__icon">
+                      <img src="../../assets/icons/icon-solid-check-circle.svg" alt="">
+                    </div>
+                    <div class="ds-flag__main">
+                      <div class="ds-flag__title-row">
+                        <h3 class="ds-flag__title">Title</h3>
+                        <div class="ds-flag__controls">
+                          <span class="ds-flag-part ds-flag-part--icon" aria-hidden="true">
+                            <img src="../../assets/icons/icon-chevron-up.svg" alt="" aria-hidden="true">
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ds-flag__body">
+                    <p class="ds-flag__description">Your board is almost ready to be used. We just need to finish setting up your account.</p>
+                    <div class="ds-flag__actions">
+                      <span class="ds-flag__action ds-flag__action--primary">Join the conversation</span>
+                      <span class="ds-flag-part ds-flag-part--custom">No thanks</span>
+                    </div>
+                  </div>
+                </article>
+
+                <div style="position:absolute;top:-38px;left:50%;transform:translateX(-50%);white-space:nowrap;" class="anatomy-label"><span class="anatomy-badge">A</span> Container</div>
+                <div style="position:absolute;top:6px;left:-4px;white-space:nowrap;" class="anatomy-label"><span class="anatomy-badge" style="background:var(--color-green-g300);">B</span> Icon</div>
+                <div style="position:absolute;top:6px;left:50%;transform:translateX(-50%);white-space:nowrap;" class="anatomy-label"><span class="anatomy-badge" style="background:var(--color-neutral-n300);">C</span> Title</div>
+                <div style="position:absolute;top:6px;right:-4px;white-space:nowrap;" class="anatomy-label"><span class="anatomy-badge" style="background:var(--color-orange-o300);">D</span> Control</div>
+                <div style="position:absolute;bottom:52px;left:50%;transform:translateX(-50%);white-space:nowrap;" class="anatomy-label"><span class="anatomy-badge" style="background:var(--color-neutral-n200);color:var(--color-neutral-n700);">E</span> Body</div>
+                <div style="position:absolute;bottom:-38px;left:50%;transform:translateX(-50%);white-space:nowrap;" class="anatomy-label"><span class="anatomy-badge" style="background:var(--color-blue-b300);">F</span> Actions</div>
+              </div>
             </div>
-            <div style="padding:16px 20px;">
-              <div style="font-size:13px;font-weight:700;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:8px;">DismissButton</div>
-              <div style="font-size:11px;color:var(--color-text-tertiary);line-height:1.55;">Menutup flag. Ikon <code>icon-x-mark.svg</code> 16×16px, <code>Icon.Inverse</code> pada latar bold.</div>
+            <div style="padding:16px 20px;background:var(--color-surface);">
+              <div style="font-size:13px;font-weight:700;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:12px;">Expanded</div>
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <div style="display:flex;align-items:flex-start;gap:10px;">
+                  <span class="anatomy-badge" style="margin-top:1px;flex-shrink:0;">A</span>
+                  <div>
+                    <div style="font-size:12px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);">Container</div>
+                    <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);margin-top:2px;line-height:1.5;">Padding <code>space-150</code>, radius <code>border-radius-lg</code>, background sesuai <code>appearance</code>.</div>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:10px;">
+                  <span class="anatomy-badge" style="background:var(--color-green-g300);margin-top:1px;flex-shrink:0;">B</span>
+                  <div>
+                    <div style="font-size:12px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);">Icon slot</div>
+                    <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);margin-top:2px;line-height:1.5;">Ikon 24×24px di <code>.ds-flag__icon</code> — check / warning / error / info sesuai varian.</div>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:10px;">
+                  <span class="anatomy-badge" style="background:var(--color-neutral-n300);margin-top:1px;flex-shrink:0;">C</span>
+                  <div>
+                    <div style="font-size:12px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);">Title</div>
+                    <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);margin-top:2px;line-height:1.5;">Body small semibold. Bold surface: <code>color: var(--color-text-inverse)</code> (<code>Text.Inverse</code>).</div>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:10px;">
+                  <span class="anatomy-badge" style="background:var(--color-orange-o300);margin-top:1px;flex-shrink:0;">D</span>
+                  <div>
+                    <div style="font-size:12px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);">Control</div>
+                    <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);margin-top:2px;line-height:1.5;"><code>IconButton</code> (chevron) untuk expand/collapse, atau <code>DismissButton</code> pada <code>appearance=normal</code>.</div>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:10px;">
+                  <span class="anatomy-badge" style="background:var(--color-neutral-n200);color:var(--color-neutral-n700);margin-top:1px;flex-shrink:0;">E</span>
+                  <div>
+                    <div style="font-size:12px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);">Body</div>
+                    <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);margin-top:2px;line-height:1.5;">Description + actions. Indent <code>padding-left: 24px + space-100</code> selaras dengan title.</div>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:10px;">
+                  <span class="anatomy-badge" style="background:var(--color-blue-b300);margin-top:1px;flex-shrink:0;">F</span>
+                  <div>
+                    <div style="font-size:12px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);">Actions</div>
+                    <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);margin-top:2px;line-height:1.5;">Primary button (<code>.ds-flag__action--primary</code>) + <code>CustomButton</code> opsional.</div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
           <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
-            <div class="ds-flag-parts-preview" style="padding:40px 24px;display:flex;align-items:center;justify-content:center;">
-              <button type="button" class="ds-flag-part ds-flag-part--icon" aria-label="Perluas">
-                <img src="../../assets/icons/icon-chevron-down.svg" alt="" aria-hidden="true">
-              </button>
-            </div>
-            <div style="padding:16px 20px;">
-              <div style="font-size:13px;font-weight:700;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:8px;">IconButton</div>
-              <div style="font-size:11px;color:var(--color-text-tertiary);line-height:1.55;">Expand/collapse konten flag. Ikon <code>icon-chevron-down.svg</code>, sama hit area &amp; fokus dengan dismiss.</div>
-            </div>
-          </div>
+            <div style="padding:48px 32px 56px;display:flex;align-items:center;justify-content:center;background:var(--color-neutral-n10);position:relative;">
+              <div style="position:relative;width:100%;max-width:400px;">
+                <div style="position:absolute;inset:-10px;border:1.5px dashed var(--color-blue-b200);border-radius:var(--border-radius-lg);pointer-events:none;z-index:2;"></div>
+                <div style="position:absolute;top:14px;left:14px;width:24px;height:24px;border:1.5px dashed var(--color-green-g300);border-radius:var(--border-radius-sm);pointer-events:none;z-index:2;"></div>
+                <div style="position:absolute;top:14px;left:46px;right:44px;height:20px;border:1.5px dashed var(--color-neutral-n300);border-radius:var(--border-radius-sm);pointer-events:none;z-index:2;"></div>
+                <div style="position:absolute;top:14px;right:14px;width:24px;height:24px;border:1.5px dashed var(--color-orange-o300);border-radius:var(--border-radius-sm);pointer-events:none;z-index:2;"></div>
 
-          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
-            <div class="ds-flag-parts-preview" style="padding:40px 24px;display:flex;align-items:center;justify-content:center;">
-              <button type="button" class="ds-flag-part ds-flag-part--custom">No thanks</button>
+                <article class="ds-flag ds-flag--normal" style="position:relative;z-index:1;max-width:100%;" aria-hidden="true">
+                  <div class="ds-flag__header">
+                    <div class="ds-flag__icon">
+                      <img src="../../assets/icons/icon-solid-check-circle.svg" alt="">
+                    </div>
+                    <div class="ds-flag__main">
+                      <div class="ds-flag__title-row">
+                        <h3 class="ds-flag__title">Title</h3>
+                        <div class="ds-flag__controls">
+                          <span class="ds-flag-part ds-flag-part--dismiss" aria-hidden="true">
+                            <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+
+                <div style="position:absolute;top:-38px;left:50%;transform:translateX(-50%);white-space:nowrap;" class="anatomy-label"><span class="anatomy-badge">A</span> Container</div>
+                <div style="position:absolute;bottom:-38px;left:50%;transform:translateX(-50%);white-space:nowrap;" class="anatomy-label"><span class="anatomy-badge" style="background:var(--color-neutral-n300);">C</span> Title · Text.Bold</div>
+              </div>
             </div>
-            <div style="padding:16px 20px;">
-              <div style="font-size:13px;font-weight:700;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:8px;">CustomButton</div>
-              <div style="font-size:11px;color:var(--color-text-tertiary);line-height:1.55;">Aksi sekunder teks. Body small medium, <code>Text.Inverse</code> pada bold; hover/press dengan underline.</div>
+            <div style="padding:16px 20px;background:var(--color-surface);">
+              <div style="font-size:13px;font-weight:700;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:12px;">Collapsed · Normal</div>
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.55;margin-bottom:4px;">Varian <code>success</code> / <code>error</code> / <code>warning</code> / <code>info</code>: class <code>.ds-flag--collapsed</code> menyembunyikan <code>.ds-flag__body</code> — hanya header + IconButton.</div>
+                <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.55;">Varian <code>normal</code>: selalu expanded, memakai <code>DismissButton</code>, title <code>Text.Bold</code> (<code>n900</code>), tanpa chevron.</div>
+              </div>
             </div>
           </div>
 
