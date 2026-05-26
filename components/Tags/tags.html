@@ -12,10 +12,10 @@
       theme: {
         extend: {
           colors: {
-            b50:  '#E9F2FB', b200: '#4495DD', b300: '#1E7FD6',
+            b50:  '#E9F2FB', b75:  '#A3CBEE', b200: '#4495DD', b300: '#1E7FD6',
             n0:   '#FFFFFF', n10:  '#FAFBFB', n20:  '#F5F6F7',
             n40:  '#DFE2E6', n60:  '#B3B9C4', n900: '#091E42',
-            r50:  '#FDE8E9', r75:  '#F7A2A5', r500: '#901116',
+            r50:  '#FDE8E9', r75:  '#F7A2A5', r100: '#F8BFC2', r500: '#901116',
           },
         }
       }
@@ -113,6 +113,146 @@
     .ds-tag--standard.ds-tag--removable.ds-tag--state-focus .ds-tag__icon,
     .ds-tag--standard.ds-tag--removable.ds-tag--state-focus .ds-tag__remove img {
       filter: none;
+    }
+
+    /* ================================================================
+       DS Tag — variant=bluelight (Tags/figma/component-tag-bluelight.png)
+         Background.Accent.Blue.Subtler   → --color-blue-b75
+         Background.Accent.Blue.Subtlest  → --color-blue-b50
+         Background.Accent.Blue.Subtle    → --color-blue-b200 (pressed, matrix)
+         Background.Danger.Tag.Hovered    → --color-red-r75
+         Text.Bold                        → --color-neutral-n900
+         Text.Brand                       → --color-blue-b300
+         Text.Accent.Red                  → --color-red-r500
+         Border.Focused                   → --color-blue-b200
+    ================================================================ */
+    .ds-tag--bluelight {
+      background-color: var(--color-blue-b75);
+      color: var(--color-neutral-n900);
+    }
+
+    .ds-tag--bluelight:not(.ds-tag--removable):hover,
+    .ds-tag--bluelight:not(.ds-tag--removable).ds-tag--state-hover {
+      background-color: var(--color-blue-b50);
+      color: var(--color-blue-b300);
+    }
+    .ds-tag--bluelight:not(.ds-tag--removable):active,
+    .ds-tag--bluelight:not(.ds-tag--removable).ds-tag--state-pressed {
+      background-color: var(--color-blue-b200);
+      color: var(--color-neutral-n900);
+    }
+    .ds-tag--bluelight:not(.ds-tag--removable):focus-visible,
+    .ds-tag--bluelight:not(.ds-tag--removable).ds-tag--state-focus {
+      outline: none;
+      background-color: var(--color-blue-b75);
+      border-color: var(--color-blue-b200);
+      box-shadow: 0 0 0 1px var(--color-blue-b200);
+    }
+
+    .ds-tag--bluelight.ds-tag--removable {
+      padding-right: var(--space-050);
+    }
+
+    .ds-tag--bluelight.ds-tag--removable:hover,
+    .ds-tag--bluelight.ds-tag--removable.ds-tag--state-hover,
+    .ds-tag--bluelight.ds-tag--removable:active,
+    .ds-tag--bluelight.ds-tag--removable.ds-tag--state-pressed {
+      background-color: var(--color-red-r75);
+      color: var(--color-red-r500);
+    }
+    .ds-tag--bluelight.ds-tag--removable.ds-tag--state-focus {
+      background-color: var(--color-blue-b75);
+      color: var(--color-neutral-n900);
+    }
+
+    .ds-tag--bluelight.ds-tag--removable:hover .ds-tag__icon,
+    .ds-tag--bluelight.ds-tag--removable.ds-tag--state-hover .ds-tag__icon,
+    .ds-tag--bluelight.ds-tag--removable:active .ds-tag__icon,
+    .ds-tag--bluelight.ds-tag--removable.ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--bluelight.ds-tag--removable:hover .ds-tag__remove img,
+    .ds-tag--bluelight.ds-tag--removable.ds-tag--state-hover .ds-tag__remove img,
+    .ds-tag--bluelight.ds-tag--removable:active .ds-tag__remove img,
+    .ds-tag--bluelight.ds-tag--removable.ds-tag--state-pressed .ds-tag__remove img {
+      filter: brightness(0) saturate(100%) invert(11%) sepia(68%) saturate(3048%) hue-rotate(346deg) brightness(93%) contrast(93%);
+    }
+    .ds-tag--bluelight.ds-tag--removable.ds-tag--state-focus .ds-tag__icon,
+    .ds-tag--bluelight.ds-tag--removable.ds-tag--state-focus .ds-tag__remove img {
+      filter: none;
+    }
+
+    /* ================================================================
+       DS Tag — variant=redlight (Tags/figma/component-tag-redlight.png)
+         Background.Accent.Red.Subtler    → --color-red-r75   (default, focus)
+         Background.Accent.Red.Subtlest   → --color-red-r50   (hover non-removable)
+         Background.Accent.Red.Subtle     → --color-red-r100  (pressed non-removable)
+         Background.Danger.Tag.Hovered    → --color-red-r75   (removable hover/pressed)
+         Text.Accent.Red                  → --color-red-r500
+         Border.Focused                   → --color-blue-b200
+    ================================================================ */
+    .ds-tag--redlight {
+      background-color: var(--color-red-r75);
+      color: var(--color-neutral-n900);
+    }
+
+    /* content=text only | leading icon + text */
+    .ds-tag--redlight:not(.ds-tag--removable):hover,
+    .ds-tag--redlight:not(.ds-tag--removable).ds-tag--state-hover {
+      background-color: var(--color-red-r50);
+    }
+    .ds-tag--redlight:not(.ds-tag--removable):active,
+    .ds-tag--redlight:not(.ds-tag--removable).ds-tag--state-pressed {
+      background-color: var(--color-red-r100);
+      color: var(--color-red-r500);
+    }
+    .ds-tag--redlight:not(.ds-tag--removable):focus-visible,
+    .ds-tag--redlight:not(.ds-tag--removable).ds-tag--state-focus {
+      outline: none;
+      background-color: var(--color-red-r75);
+      border-color: var(--color-blue-b200);
+      box-shadow: 0 0 0 1px var(--color-blue-b200);
+    }
+
+    .ds-tag--redlight.ds-tag--removable {
+      padding-right: var(--space-050);
+    }
+
+    /* content=text + remove | leading icon + text + remove */
+    .ds-tag--redlight.ds-tag--removable:hover,
+    .ds-tag--redlight.ds-tag--removable.ds-tag--state-hover,
+    .ds-tag--redlight.ds-tag--removable:active,
+    .ds-tag--redlight.ds-tag--removable.ds-tag--state-pressed {
+      background-color: var(--color-red-r75);
+      color: var(--color-red-r500);
+    }
+    .ds-tag--redlight.ds-tag--removable.ds-tag--state-focus {
+      background-color: var(--color-red-r75);
+      color: var(--color-neutral-n900);
+    }
+
+    /* Icon tint — pressed non-removable → Text.Accent.Red (r500) */
+    .ds-tag--redlight:not(.ds-tag--removable):active .ds-tag__icon,
+    .ds-tag--redlight:not(.ds-tag--removable).ds-tag--state-pressed .ds-tag__icon {
+      filter: brightness(0) saturate(100%) invert(11%) sepia(68%) saturate(3048%) hue-rotate(346deg) brightness(93%) contrast(93%);
+    }
+
+    /* Icon tint — removable hover/pressed → Text.Accent.Red (r500) */
+    .ds-tag--redlight.ds-tag--removable:hover .ds-tag__icon,
+    .ds-tag--redlight.ds-tag--removable.ds-tag--state-hover .ds-tag__icon,
+    .ds-tag--redlight.ds-tag--removable:active .ds-tag__icon,
+    .ds-tag--redlight.ds-tag--removable.ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--redlight.ds-tag--removable:hover .ds-tag__remove img,
+    .ds-tag--redlight.ds-tag--removable.ds-tag--state-hover .ds-tag__remove img,
+    .ds-tag--redlight.ds-tag--removable:active .ds-tag__remove img,
+    .ds-tag--redlight.ds-tag--removable.ds-tag--state-pressed .ds-tag__remove img {
+      filter: brightness(0) saturate(100%) invert(11%) sepia(68%) saturate(3048%) hue-rotate(346deg) brightness(93%) contrast(93%);
+    }
+    .ds-tag--redlight.ds-tag--removable.ds-tag--state-focus .ds-tag__icon,
+    .ds-tag--redlight.ds-tag--removable.ds-tag--state-focus .ds-tag__remove img {
+      filter: none;
+    }
+
+    .tag-state-matrix + .tag-state-matrix {
+      margin-top: 32px;
     }
 
     .ds-tag__label {
@@ -394,9 +534,10 @@
       <section class="mb-12">
         <h2 style="border:none;background:none;padding:0;margin-bottom:12px;">Tags</h2>
         <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:720px;margin-bottom:24px;">
-          Chip pill untuk label, filter aktif, atau tag yang bisa dihapus. Halaman ini mendokumentasikan varian <code>standard</code> — referensi: <code>Tags/figma/component-tag-standart.png</code>.
+          Chip pill untuk label, filter aktif, atau tag yang bisa dihapus. Varian: <code>standard</code>, <code>bluelight</code>, <code>redlight</code>.
         </p>
 
+        <h3 style="font-size:15px;font-weight:600;color:var(--color-text-primary);margin:0 0 12px;font-family:var(--font-primary);">variant=standard</h3>
         <div class="tag-state-matrix" role="table" aria-label="Varian Tag standard — state matrix">
           <div class="tag-state-matrix__head">Default</div>
           <div class="tag-state-matrix__head">Hover</div>
@@ -509,8 +650,242 @@
         </div>
 
         <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;margin-top:16px;">
-          <div style="font-size:11px;font-weight:700;color:var(--color-text-tertiary);font-family:var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Referensi Figma</div>
+          <div style="font-size:11px;font-weight:700;color:var(--color-text-tertiary);font-family:var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Referensi Figma — standard</div>
           <img src="figma/component-tag-standart.png" alt="Referensi Figma Tag standard" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+        </div>
+
+        <h3 style="font-size:15px;font-weight:600;color:var(--color-text-primary);margin:32px 0 12px;font-family:var(--font-primary);">variant=bluelight</h3>
+        <div class="tag-state-matrix" role="table" aria-label="Varian Tag bluelight — state matrix">
+          <div class="tag-state-matrix__head">Default</div>
+          <div class="tag-state-matrix__head">Hover</div>
+          <div class="tag-state-matrix__head">Pressed</div>
+          <div class="tag-state-matrix__head">Focus</div>
+
+          <div class="tag-state-matrix__label">content=text only</div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--bluelight"><span class="ds-tag__label">Tag</span></span></div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--bluelight ds-tag--state-hover"><span class="ds-tag__label">Tag</span></span></div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--bluelight ds-tag--state-pressed"><span class="ds-tag__label">Tag</span></span></div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--bluelight ds-tag--state-focus" tabindex="0"><span class="ds-tag__label">Tag</span></span></div>
+
+          <div class="tag-state-matrix__label">content=leading icon + text</div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--bluelight">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--bluelight ds-tag--state-hover">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--bluelight ds-tag--state-pressed">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--bluelight ds-tag--state-focus" tabindex="0">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+
+          <div class="tag-state-matrix__label">content=text + remove (removable)</div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--bluelight ds-tag--removable">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--bluelight ds-tag--removable ds-tag--state-hover">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--bluelight ds-tag--removable ds-tag--state-pressed">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--bluelight ds-tag--removable">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove ds-tag__remove--state-focus" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+
+          <div class="tag-state-matrix__label">content=leading icon + text + remove</div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--bluelight ds-tag--removable">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--bluelight ds-tag--removable ds-tag--state-hover">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--bluelight ds-tag--removable ds-tag--state-pressed">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--bluelight ds-tag--removable">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove ds-tag__remove--state-focus" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;margin-top:16px;">
+          <div style="font-size:11px;font-weight:700;color:var(--color-text-tertiary);font-family:var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Referensi Figma — bluelight</div>
+          <img src="figma/component-tag-bluelight.png" alt="Referensi Figma Tag bluelight" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+        </div>
+
+        <h3 style="font-size:15px;font-weight:600;color:var(--color-text-primary);margin:32px 0 12px;font-family:var(--font-primary);">variant=redlight</h3>
+        <div class="tag-state-matrix" role="table" aria-label="Varian Tag redlight — state matrix">
+          <div class="tag-state-matrix__head">Default</div>
+          <div class="tag-state-matrix__head">Hover</div>
+          <div class="tag-state-matrix__head">Pressed</div>
+          <div class="tag-state-matrix__head">Focus</div>
+
+          <div class="tag-state-matrix__label">content=text only</div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--redlight"><span class="ds-tag__label">Tag</span></span></div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--redlight ds-tag--state-hover"><span class="ds-tag__label">Tag</span></span></div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--redlight ds-tag--state-pressed"><span class="ds-tag__label">Tag</span></span></div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--redlight ds-tag--state-focus" tabindex="0"><span class="ds-tag__label">Tag</span></span></div>
+
+          <div class="tag-state-matrix__label">content=leading icon + text</div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--redlight">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--redlight ds-tag--state-hover">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--redlight ds-tag--state-pressed">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--redlight ds-tag--state-focus" tabindex="0">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+
+          <div class="tag-state-matrix__label">content=text + remove (removable)</div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--redlight ds-tag--removable">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--redlight ds-tag--removable ds-tag--state-hover">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--redlight ds-tag--removable ds-tag--state-pressed">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--redlight ds-tag--removable">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove ds-tag__remove--state-focus" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+
+          <div class="tag-state-matrix__label">content=leading icon + text + remove</div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--redlight ds-tag--removable">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--redlight ds-tag--removable ds-tag--state-hover">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--redlight ds-tag--removable ds-tag--state-pressed">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--redlight ds-tag--removable">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove ds-tag__remove--state-focus" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;margin-top:16px;">
+          <div style="font-size:11px;font-weight:700;color:var(--color-text-tertiary);font-family:var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Referensi Figma — redlight</div>
+          <img src="figma/component-tag-redlight.png" alt="Referensi Figma Tag redlight" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
         </div>
       </section>
 
@@ -526,8 +901,16 @@
             <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Default semua varian: <code>Background.Neutral</code>. Hover netral: <code>Background.Neutral.Pressed</code>; pressed: <code>Background.Neutral.Bold.Pressed</code>. Removable hover/pressed: <code>Background.Danger.Tag</code> / <code>.Hovered</code> + <code>Text.Accent.Red</code>; focus removable: kembali <code>Background.Neutral</code>.</div>
           </div>
           <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Varian bluelight</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Default/focus: <code>Background.Accent.Blue.Subtler</code> (<code>b75</code>). Hover netral: <code>Background.Accent.Blue.Subtlest</code> (<code>b50</code>). Removable hover/pressed: <code>Background.Danger.Tag.Hovered</code> + <code>Text.Accent.Red</code>; focus removable: <code>Background.Accent.Blue.Subtler</code>.</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Varian redlight</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Default/focus: <code>Background.Accent.Red.Subtler</code> (<code>r75</code>). Hover: <code>Background.Accent.Red.Subtlest</code> (<code>r50</code>). Pressed: <code>Background.Accent.Red.Subtle</code> (<code>r100</code>) + <code>Text.Accent.Red</code>. Removable hover/pressed: <code>Background.Danger.Tag.Hovered</code> (<code>r75</code>) + <code>Text.Accent.Red</code>.</div>
+          </div>
+          <div class="usage-info-card">
             <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Konten &amp; ikon</div>
-            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Empat struktur konten: teks saja, ikon + teks, teks + remove, ikon + teks + remove. Ikon dari <code>assets/icons</code> (mis. <code>icon-tag.svg</code>, <code>icon-x-mark.svg</code>), ukuran 16px / 12px.</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Empat struktur konten: teks saja, ikon + teks, teks + remove, ikon + teks + remove. Class: <code>ds-tag--standard</code>, <code>ds-tag--bluelight</code>, atau <code>ds-tag--redlight</code> + <code>ds-tag--removable</code>.</div>
           </div>
         </div>
       </section>
@@ -558,7 +941,7 @@
 
       <section style="margin-bottom:48px;">
         <h2>Tailwind — Salin Code</h2>
-        <p style="font-size:14px;color:var(--color-text-tertiary);margin:-12px 0 20px;font-family:var(--font-primary);">Class dasar + modifier <code>standard</code> dan <code>removable</code>. Warna mengacu alias di <code>tailwind.config</code> halaman ini.</p>
+        <p style="font-size:14px;color:var(--color-text-tertiary);margin:-12px 0 20px;font-family:var(--font-primary);">Class dasar + modifier <code>standard</code> / <code>bluelight</code> dan <code>removable</code>. Warna mengacu alias di <code>tailwind.config</code> halaman ini.</p>
         <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
           <div class="tw-snippet-row">
             <code class="tw-snippet-code">Base tag</code>
@@ -575,6 +958,30 @@
           <div class="tw-snippet-row">
             <code class="tw-snippet-code">standard · removable focus</code>
             <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-n20 text-n900')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">bluelight · default</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-b75 text-n900 hover:bg-b50 hover:text-b300 active:bg-b200 focus-visible:bg-b75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">bluelight · removable hover/pressed</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-b75 text-n900 hover:bg-r75 hover:text-r500 active:bg-r75 active:text-r500')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">bluelight · removable focus</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-b75 text-n900')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">redlight · default</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-r75 text-n900 hover:bg-r50 active:bg-r100 active:text-r500 focus-visible:bg-r75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">redlight · removable hover/pressed</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-r75 text-n900 hover:bg-r75 hover:text-r500 active:bg-r75 active:text-r500')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">redlight · removable focus</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-r75 text-n900')">Salin</button>
           </div>
           <div class="tw-snippet-row">
             <code class="tw-snippet-code">Leading icon</code>
@@ -607,7 +1014,10 @@
   &lt;button type="button" class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full focus-visible:bg-b300 focus-visible:ring-2 focus-visible:ring-b200 [&:focus-visible_img]:brightness-0 [&:focus-visible_img]:invert" aria-label="Hapus tag Tag"&gt;
     &lt;img src="../../assets/icons/icon-x-mark.svg" alt="" class="h-3 w-3" aria-hidden="true" /&gt;
   &lt;/button&gt;
-&lt;/span&gt;</code></pre>
+&lt;/span&gt;
+
+&lt;!-- bluelight --&gt;
+&lt;span class="inline-flex items-center gap-1 rounded-full border border-transparent bg-b75 px-2 py-1 text-sm font-medium text-n900 hover:bg-b50 hover:text-b300 active:bg-b200 focus-visible:bg-b75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200"&gt;Tag&lt;/span&gt;</code></pre>
         </div>
       </section>
 
