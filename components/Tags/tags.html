@@ -280,17 +280,31 @@
       box-shadow: 0 0 0 1px var(--color-blue-b200);
     }
 
-    /* Ikon — default/pressed/focus: Text.Accent.Green */
-    .ds-tag--greenlight .ds-tag__icon,
-    .ds-tag--greenlight .ds-tag__remove img {
+    /* Ikon — default/pressed/focus netral: Text.Accent.Green */
+    .ds-tag--greenlight:not(.ds-tag--removable) .ds-tag__icon,
+    .ds-tag--greenlight:not(.ds-tag--removable) .ds-tag__remove img {
       filter: var(--ds-tag-greenlight-icon-accent);
     }
-    .ds-tag--greenlight:active .ds-tag__icon,
-    .ds-tag--greenlight.ds-tag--state-pressed .ds-tag__icon,
-    .ds-tag--greenlight:active .ds-tag__remove img,
-    .ds-tag--greenlight.ds-tag--state-pressed .ds-tag__remove img,
-    .ds-tag--greenlight.ds-tag--state-focus .ds-tag__icon {
+    .ds-tag--greenlight:not(.ds-tag--removable):active .ds-tag__icon,
+    .ds-tag--greenlight:not(.ds-tag--removable).ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--greenlight:not(.ds-tag--removable):active .ds-tag__remove img,
+    .ds-tag--greenlight:not(.ds-tag--removable).ds-tag--state-pressed .ds-tag__remove img,
+    .ds-tag--greenlight:not(.ds-tag--removable).ds-tag--state-focus .ds-tag__icon {
       filter: var(--ds-tag-greenlight-icon-accent);
+    }
+
+    /* removable default ikon: Text.Accent.Green */
+    .ds-tag--greenlight.ds-tag--removable:not(:hover):not(.ds-tag--state-hover):not(:active):not(.ds-tag--state-pressed) .ds-tag__icon,
+    .ds-tag--greenlight.ds-tag--removable:not(:hover):not(.ds-tag--state-hover):not(:active):not(.ds-tag--state-pressed) .ds-tag__remove img {
+      filter: var(--ds-tag-greenlight-icon-accent);
+    }
+
+    /* removable pressed — ikon: Text.Accent.Red */
+    .ds-tag--greenlight.ds-tag--removable:active .ds-tag__icon,
+    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--greenlight.ds-tag--removable:active .ds-tag__remove img,
+    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-pressed .ds-tag__remove img {
+      filter: var(--ds-tag-removable-icon-accent);
     }
 
     /* Ikon — hover netral: Text.Success */
@@ -396,17 +410,31 @@
       box-shadow: 0 0 0 1px var(--color-blue-b200);
     }
 
-    /* Ikon — default/pressed/focus: Text.Accent.Yellow */
-    .ds-tag--yellowlight .ds-tag__icon,
-    .ds-tag--yellowlight .ds-tag__remove img {
+    /* Ikon — default/pressed/focus netral: Text.Accent.Yellow */
+    .ds-tag--yellowlight:not(.ds-tag--removable) .ds-tag__icon,
+    .ds-tag--yellowlight:not(.ds-tag--removable) .ds-tag__remove img {
       filter: var(--ds-tag-yellowlight-icon-accent);
     }
-    .ds-tag--yellowlight:active .ds-tag__icon,
-    .ds-tag--yellowlight.ds-tag--state-pressed .ds-tag__icon,
-    .ds-tag--yellowlight:active .ds-tag__remove img,
-    .ds-tag--yellowlight.ds-tag--state-pressed .ds-tag__remove img,
-    .ds-tag--yellowlight.ds-tag--state-focus .ds-tag__icon {
+    .ds-tag--yellowlight:not(.ds-tag--removable):active .ds-tag__icon,
+    .ds-tag--yellowlight:not(.ds-tag--removable).ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--yellowlight:not(.ds-tag--removable):active .ds-tag__remove img,
+    .ds-tag--yellowlight:not(.ds-tag--removable).ds-tag--state-pressed .ds-tag__remove img,
+    .ds-tag--yellowlight:not(.ds-tag--removable).ds-tag--state-focus .ds-tag__icon {
       filter: var(--ds-tag-yellowlight-icon-accent);
+    }
+
+    /* removable default ikon: Text.Accent.Yellow */
+    .ds-tag--yellowlight.ds-tag--removable:not(:hover):not(.ds-tag--state-hover):not(:active):not(.ds-tag--state-pressed) .ds-tag__icon,
+    .ds-tag--yellowlight.ds-tag--removable:not(:hover):not(.ds-tag--state-hover):not(:active):not(.ds-tag--state-pressed) .ds-tag__remove img {
+      filter: var(--ds-tag-yellowlight-icon-accent);
+    }
+
+    /* removable pressed — ikon: Text.Accent.Red */
+    .ds-tag--yellowlight.ds-tag--removable:active .ds-tag__icon,
+    .ds-tag--yellowlight.ds-tag--removable.ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--yellowlight.ds-tag--removable:active .ds-tag__remove img,
+    .ds-tag--yellowlight.ds-tag--removable.ds-tag--state-pressed .ds-tag__remove img {
+      filter: var(--ds-tag-removable-icon-accent);
     }
 
     /* Ikon — hover netral: Text.Warning */
@@ -460,17 +488,31 @@
       box-shadow: 0 0 0 1px var(--color-blue-b200);
     }
 
-    /* Ikon — default/pressed/focus: Text.Accent.Purple */
-    .ds-tag--purplelight .ds-tag__icon,
-    .ds-tag--purplelight .ds-tag__remove img {
+    /* Ikon — default/pressed/focus netral: Text.Accent.Purple */
+    .ds-tag--purplelight:not(.ds-tag--removable) .ds-tag__icon,
+    .ds-tag--purplelight:not(.ds-tag--removable) .ds-tag__remove img {
       filter: var(--ds-tag-purplelight-icon-accent);
     }
-    .ds-tag--purplelight:active .ds-tag__icon,
-    .ds-tag--purplelight.ds-tag--state-pressed .ds-tag__icon,
-    .ds-tag--purplelight:active .ds-tag__remove img,
-    .ds-tag--purplelight.ds-tag--state-pressed .ds-tag__remove img,
-    .ds-tag--purplelight.ds-tag--state-focus .ds-tag__icon {
+    .ds-tag--purplelight:not(.ds-tag--removable):active .ds-tag__icon,
+    .ds-tag--purplelight:not(.ds-tag--removable).ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--purplelight:not(.ds-tag--removable):active .ds-tag__remove img,
+    .ds-tag--purplelight:not(.ds-tag--removable).ds-tag--state-pressed .ds-tag__remove img,
+    .ds-tag--purplelight:not(.ds-tag--removable).ds-tag--state-focus .ds-tag__icon {
       filter: var(--ds-tag-purplelight-icon-accent);
+    }
+
+    /* removable default ikon: Text.Accent.Purple */
+    .ds-tag--purplelight.ds-tag--removable:not(:hover):not(.ds-tag--state-hover):not(:active):not(.ds-tag--state-pressed) .ds-tag__icon,
+    .ds-tag--purplelight.ds-tag--removable:not(:hover):not(.ds-tag--state-hover):not(:active):not(.ds-tag--state-pressed) .ds-tag__remove img {
+      filter: var(--ds-tag-purplelight-icon-accent);
+    }
+
+    /* removable pressed — ikon: Text.Accent.Red */
+    .ds-tag--purplelight.ds-tag--removable:active .ds-tag__icon,
+    .ds-tag--purplelight.ds-tag--removable.ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--purplelight.ds-tag--removable:active .ds-tag__remove img,
+    .ds-tag--purplelight.ds-tag--removable.ds-tag--state-pressed .ds-tag__remove img {
+      filter: var(--ds-tag-removable-icon-accent);
     }
 
     /* Ikon — hover netral: Text.Discovery */
