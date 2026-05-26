@@ -14,8 +14,8 @@
           colors: {
             b50:  '#E9F2FB', b200: '#4495DD', b300: '#1E7FD6',
             n0:   '#FFFFFF', n10:  '#FAFBFB', n20:  '#F5F6F7',
-            n30:  '#EBEDF0', n900: '#091E42',
-            r50:  '#FDE8E9', r100: '#F8BFC2', r300: '#EC1C24',
+            n40:  '#DFE2E6', n60:  '#B3B9C4', n900: '#091E42',
+            r50:  '#FDE8E9', r75:  '#F7A2A5', r500: '#901116',
           },
         }
       }
@@ -24,9 +24,15 @@
   <style>
     /* ================================================================
        DS Tag — variant=standard (Tags/figma/component-tag-standart.png)
-       Semantic: Color-Background-Neutral-Subtle, Color-Text-Bold,
-                 Color-Background-Danger-Inverse, Color-Text-Danger,
-                 focus ring Color-Border-Brand
+       Semantic mapping (foundations/colors):
+         Background.Neutral              → --color-neutral-n20
+         Background.Neutral.Pressed      → --color-neutral-n40
+         Background.Neutral.Bold.Pressed → --color-neutral-n60
+         Background.Danger.Tag           → --color-red-r50
+         Background.Danger.Tag.Hovered   → --color-red-r75
+         Text.Bold                       → --color-neutral-n900
+         Text.Accent.Red                 → --color-red-r500
+         Border.Focused                  → --color-blue-b200
     ================================================================ */
     .ds-tag {
       display: inline-flex;
@@ -46,44 +52,45 @@
     }
 
     .ds-tag--standard {
-      background-color: var(--color-neutral-n10);
+      background-color: var(--color-neutral-n20);
       color: var(--color-neutral-n900);
     }
-    .ds-tag--standard:hover,
-    .ds-tag--standard.ds-tag--state-hover {
-      background-color: var(--color-neutral-n20);
+
+    /* content=text only | leading icon + text */
+    .ds-tag--standard:not(.ds-tag--removable):hover,
+    .ds-tag--standard:not(.ds-tag--removable).ds-tag--state-hover {
+      background-color: var(--color-neutral-n40);
     }
-    .ds-tag--standard:active,
-    .ds-tag--standard.ds-tag--state-pressed {
-      background-color: var(--color-neutral-n30);
+    .ds-tag--standard:not(.ds-tag--removable):active,
+    .ds-tag--standard:not(.ds-tag--removable).ds-tag--state-pressed {
+      background-color: var(--color-neutral-n60);
     }
-    .ds-tag--standard:focus-visible,
-    .ds-tag--standard.ds-tag--state-focus {
+    .ds-tag--standard:not(.ds-tag--removable):focus-visible,
+    .ds-tag--standard:not(.ds-tag--removable).ds-tag--state-focus {
       outline: none;
+      background-color: var(--color-neutral-n20);
       border-color: var(--color-blue-b200);
       box-shadow: 0 0 0 1px var(--color-blue-b200);
     }
 
     .ds-tag--standard.ds-tag--removable {
-      background-color: var(--color-red-r50);
-      color: var(--color-red-r300);
       padding-right: var(--space-050);
     }
+
+    /* content=text + remove | leading icon + text + remove */
     .ds-tag--standard.ds-tag--removable:hover,
     .ds-tag--standard.ds-tag--removable.ds-tag--state-hover {
-      background-color: var(--color-red-r100);
+      background-color: var(--color-red-r50);
+      color: var(--color-red-r500);
     }
     .ds-tag--standard.ds-tag--removable:active,
     .ds-tag--standard.ds-tag--removable.ds-tag--state-pressed {
-      background-color: var(--color-red-r100);
-      color: var(--color-red-r300);
+      background-color: var(--color-red-r75);
+      color: var(--color-red-r500);
     }
-    .ds-tag--standard.ds-tag--removable:focus-visible,
     .ds-tag--standard.ds-tag--removable.ds-tag--state-focus {
-      outline: none;
-      border-color: transparent;
-      box-shadow: none;
-      background-color: var(--color-red-r50);
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n900);
     }
 
     .ds-tag__icon {
@@ -92,8 +99,20 @@
       flex-shrink: 0;
       display: block;
     }
-    .ds-tag--removable .ds-tag__icon {
-      opacity: 0.9;
+
+    .ds-tag--standard.ds-tag--removable:hover .ds-tag__icon,
+    .ds-tag--standard.ds-tag--removable.ds-tag--state-hover .ds-tag__icon,
+    .ds-tag--standard.ds-tag--removable:active .ds-tag__icon,
+    .ds-tag--standard.ds-tag--removable.ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--standard.ds-tag--removable:hover .ds-tag__remove img,
+    .ds-tag--standard.ds-tag--removable.ds-tag--state-hover .ds-tag__remove img,
+    .ds-tag--standard.ds-tag--removable:active .ds-tag__remove img,
+    .ds-tag--standard.ds-tag--removable.ds-tag--state-pressed .ds-tag__remove img {
+      filter: brightness(0) saturate(100%) invert(11%) sepia(68%) saturate(3048%) hue-rotate(346deg) brightness(93%) contrast(93%);
+    }
+    .ds-tag--standard.ds-tag--removable.ds-tag--state-focus .ds-tag__icon,
+    .ds-tag--standard.ds-tag--removable.ds-tag--state-focus .ds-tag__remove img {
+      filter: none;
     }
 
     .ds-tag__label {
@@ -504,7 +523,7 @@
           </div>
           <div class="usage-info-card">
             <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Varian standard</div>
-            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Latar netral (<code>n10</code>) untuk tag informatif. Tambahkan modifier <code>ds-tag--removable</code> saat tag punya aksi hapus — latar berubah ke <code>r50</code> / teks <code>r300</code>.</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Default semua varian: <code>Background.Neutral</code>. Hover netral: <code>Background.Neutral.Pressed</code>; pressed: <code>Background.Neutral.Bold.Pressed</code>. Removable hover/pressed: <code>Background.Danger.Tag</code> / <code>.Hovered</code> + <code>Text.Accent.Red</code>; focus removable: kembali <code>Background.Neutral</code>.</div>
           </div>
           <div class="usage-info-card">
             <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Konten &amp; ikon</div>
@@ -547,11 +566,15 @@
           </div>
           <div class="tw-snippet-row">
             <code class="tw-snippet-code">standard · default</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-n10 text-n900 hover:bg-n20 active:bg-n30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-n20 text-n900 hover:bg-n40 active:bg-n60 focus-visible:bg-n20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
           </div>
           <div class="tw-snippet-row">
-            <code class="tw-snippet-code">standard · removable</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-r50 text-r300 hover:bg-r100 active:bg-r100')">Salin</button>
+            <code class="tw-snippet-code">standard · removable hover/pressed</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-n20 text-n900 hover:bg-r50 hover:text-r500 active:bg-r75 active:text-r500')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">standard · removable focus</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-n20 text-n900')">Salin</button>
           </div>
           <div class="tw-snippet-row">
             <code class="tw-snippet-code">Leading icon</code>
@@ -570,16 +593,16 @@
             <button class="tw-copy-btn" id="copy-tailwind-block-btn" onclick="copyTailwindBlock()">Salin semua</button>
           </div>
           <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-mono);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="tailwind-block">&lt;!-- Text only --&gt;
-&lt;span class="inline-flex items-center gap-1 rounded-full border border-transparent bg-n10 px-2 py-1 text-sm font-medium text-n900 hover:bg-n20 active:bg-n30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200"&gt;Tag&lt;/span&gt;
+&lt;span class="inline-flex items-center gap-1 rounded-full border border-transparent bg-n20 px-2 py-1 text-sm font-medium text-n900 hover:bg-n40 active:bg-n60 focus-visible:bg-n20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200"&gt;Tag&lt;/span&gt;
 
 &lt;!-- Leading icon + text --&gt;
-&lt;span class="inline-flex items-center gap-1 rounded-full border border-transparent bg-n10 px-2 py-1 text-sm font-medium text-n900 hover:bg-n20"&gt;
+&lt;span class="inline-flex items-center gap-1 rounded-full border border-transparent bg-n20 px-2 py-1 text-sm font-medium text-n900 hover:bg-n40 active:bg-n60"&gt;
   &lt;img src="../../assets/icons/icon-tag.svg" alt="" class="h-4 w-4 shrink-0" aria-hidden="true" /&gt;
   Tag
 &lt;/span&gt;
 
 &lt;!-- Removable --&gt;
-&lt;span class="inline-flex items-center gap-1 rounded-full bg-r50 py-1 pl-2 pr-1 text-sm font-medium text-r300 hover:bg-r100"&gt;
+&lt;span class="inline-flex items-center gap-1 rounded-full bg-n20 py-1 pl-2 pr-1 text-sm font-medium text-n900 hover:bg-r50 hover:text-r500 active:bg-r75 active:text-r500"&gt;
   Tag
   &lt;button type="button" class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full focus-visible:bg-b300 focus-visible:ring-2 focus-visible:ring-b200 [&:focus-visible_img]:brightness-0 [&:focus-visible_img]:invert" aria-label="Hapus tag Tag"&gt;
     &lt;img src="../../assets/icons/icon-x-mark.svg" alt="" class="h-3 w-3" aria-hidden="true" /&gt;
