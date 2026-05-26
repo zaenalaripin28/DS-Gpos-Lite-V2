@@ -471,6 +471,42 @@
     [data-theme="dark"] .dark-toggle:hover { background-color:rgba(30,127,214,0.14); border-color:rgba(30,127,214,0.3); color:#7DB5E7; }
 
     @media (max-width:480px) { .scroll-top-btn { bottom:16px; right:16px; } }
+
+    .anatomy-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      letter-spacing: 0.04em;
+      color: var(--color-text-secondary);
+    }
+    .anatomy-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--color-blue-b300);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .anatomy-grid > div {
+      transition: transform 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .anatomy-grid > div:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(9, 30, 66, 0.11), 0 3px 8px rgba(9, 30, 66, 0.06);
+    }
+    .anatomy-grid > div > div:last-child { border-top: 2px solid var(--color-neutral-n30) !important; }
+    @media (max-width: 900px) { .anatomy-grid { grid-template-columns: 1fr !important; } }
+    [data-theme="dark"] .anatomy-grid > div { background-color: #0F1D30 !important; border-color: #1A2E48 !important; }
+    [data-theme="dark"] .anatomy-grid > div > div:first-child { background: #080F1E !important; }
+    [data-theme="dark"] .anatomy-grid > div > div:last-child { background: #0F1D30 !important; border-top-color: #1A2E48 !important; }
   </style>
 </head>
 <body>
@@ -745,6 +781,75 @@
 
         <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:24px;display:flex;justify-content:center;">
           <img src="figma/Tabs-components.png" alt="Figma Tabs component — dua layout tab bar" width="480" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+        </div>
+      </section>
+
+      <!-- ANATOMY -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
+          <span style="width:3px;height:18px;background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300));border-radius:3px;flex-shrink:0;display:block;"></span>
+          Anatomy
+        </h2>
+        <p style="font-size:14px;color:var(--color-text-tertiary);margin-top:-12px;margin-bottom:28px;font-family:var(--font-primary);">
+          Setiap item tab adalah tombol dengan <strong>label</strong> dan <strong>indicator</strong> bawah. Hanya tab terpilih yang menampilkan indikator biru.
+        </p>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px;" class="anatomy-grid">
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:48px 32px 56px;display:flex;align-items:center;justify-content:center;background:#FAFBFB;position:relative;">
+              <div style="position:relative;">
+                <div style="position:absolute;inset:-8px -4px;border:1.5px dashed var(--color-blue-b200);border-radius:8px;pointer-events:none;z-index:2;"></div>
+                <div style="position:absolute;top:8px;left:12px;right:12px;height:18px;border:1.5px dashed var(--color-neutral-n200);border-radius:4px;pointer-events:none;z-index:2;"></div>
+                <div style="position:absolute;bottom:4px;left:12px;right:12px;height:3px;border:1.5px dashed var(--color-blue-b300);border-radius:2px;pointer-events:none;z-index:2;"></div>
+                <button type="button" class="ds-tab ds-tab--selected" role="tab" aria-selected="true" tabindex="-1" style="pointer-events:none;position:relative;z-index:1;">
+                  <span class="ds-tab__label">Tab</span>
+                  <span class="ds-tab__indicator" aria-hidden="true"></span>
+                </button>
+                <div style="position:absolute;top:-38px;left:50%;transform:translateX(-50%);white-space:nowrap;" class="anatomy-label"><span class="anatomy-badge">A</span> Tab</div>
+                <div style="position:absolute;bottom:-38px;left:20px;white-space:nowrap;" class="anatomy-label"><span class="anatomy-badge" style="background:var(--color-neutral-n300);">B</span> Label</div>
+                <div style="position:absolute;bottom:-38px;right:20px;white-space:nowrap;" class="anatomy-label"><span class="anatomy-badge" style="background:var(--color-blue-b300);">C</span> Indicator</div>
+              </div>
+            </div>
+            <div style="padding:16px 20px;background:var(--color-surface);">
+              <div style="font-size:13px;font-weight:700;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:12px;">Tab terpilih</div>
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <div style="display:flex;align-items:flex-start;gap:10px;">
+                  <span class="anatomy-badge" style="margin-top:1px;flex-shrink:0;">A</span>
+                  <div>
+                    <div style="font-size:12px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);">Tab Button</div>
+                    <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);margin-top:2px;line-height:1.5;"><code>.ds-tab</code> + <code>role="tab"</code>. Class <code>.ds-tab--selected</code> atau <code>aria-selected="true"</code>.</div>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:flex-start;gap:10px;">
+                  <span class="anatomy-badge" style="background:var(--color-blue-b300);margin-top:1px;flex-shrink:0;">C</span>
+                  <div>
+                    <div style="font-size:12px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);">Indicator</div>
+                    <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);margin-top:2px;line-height:1.5;"><code>.ds-tab__indicator</code> — garis bawah brand 3px, hanya visible saat selected.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:48px 32px 56px;display:flex;align-items:center;justify-content:center;background:#FAFBFB;position:relative;">
+              <div style="position:relative;width:100%;max-width:280px;">
+                <div style="position:absolute;inset:-8px;border:1.5px dashed var(--color-blue-b200);border-radius:8px;pointer-events:none;z-index:2;"></div>
+                <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--color-neutral-n40);z-index:1;"></div>
+                <div class="ds-tablist ds-tablist--track" role="tablist" aria-label="Anatomy tabs" style="position:relative;z-index:1;pointer-events:none;">
+                  <button type="button" class="ds-tab" role="tab" aria-selected="false" tabindex="-1"><span class="ds-tab__label">Tab</span><span class="ds-tab__indicator" aria-hidden="true"></span></button>
+                  <button type="button" class="ds-tab ds-tab--selected" role="tab" aria-selected="true" tabindex="-1"><span class="ds-tab__label">Tab</span><span class="ds-tab__indicator" aria-hidden="true"></span></button>
+                </div>
+                <div style="position:absolute;top:-38px;left:50%;transform:translateX(-50%);white-space:nowrap;" class="anatomy-label"><span class="anatomy-badge">A</span> Tablist</div>
+                <div style="position:absolute;bottom:-38px;left:50%;transform:translateX(-50%);white-space:nowrap;" class="anatomy-label"><span class="anatomy-badge" style="background:var(--color-neutral-n300);">B</span> Track</div>
+              </div>
+            </div>
+            <div style="padding:16px 20px;background:var(--color-surface);">
+              <div style="font-size:13px;font-weight:700;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:12px;">Dengan track</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;"><code>.ds-tablist--track</code> menambahkan garis dasar penuh (<code>Border.Subtle</code>); indikator aktif menempel di atas track.</div>
+            </div>
+          </div>
+
         </div>
       </section>
 

@@ -433,6 +433,41 @@
       border-radius: 4px;
       color: var(--color-blue-b300);
     }
+    .anatomy-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      letter-spacing: 0.04em;
+      color: var(--color-text-secondary);
+    }
+    .anatomy-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--color-blue-b300);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .anatomy-grid > div {
+      transition: transform 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .anatomy-grid > div:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(9, 30, 66, 0.11), 0 3px 8px rgba(9, 30, 66, 0.06);
+    }
+    .anatomy-grid > div > div:last-child { border-top: 2px solid var(--color-neutral-n30) !important; }
+    @media (max-width: 900px) { .anatomy-grid { grid-template-columns: 1fr !important; } }
+    [data-theme="dark"] .anatomy-grid > div { background-color: #0F1D30 !important; border-color: #1A2E48 !important; }
+    [data-theme="dark"] .anatomy-grid > div > div:first-child { background: #080F1E !important; }
+    [data-theme="dark"] .anatomy-grid > div > div:last-child { background: #0F1D30 !important; border-top-color: #1A2E48 !important; }
     [data-theme="dark"] .usage-grid-2 > div,
     [data-theme="dark"] .usage-info-card { background-color: #0F1D30 !important; border-color: #1A2E48 !important; }
   </style>
@@ -468,7 +503,10 @@
             <li><a href="../../foundations/colors/colors.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg>Colors</a></li>
             <li><a href="../../foundations/typography/typography.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Typography</a></li>
             <li><a href="../../foundations/spacing/spacing.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>Spacing</a></li>
-            <li><a href="../../foundations/icons/icons.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="5" height="5" rx="1"/><rect x="10" y="3" width="5" height="5" rx="1"/><rect x="17" y="3" width="4" height="5" rx="1"/></svg>Icons</a></li>
+            <li><a href="../../foundations/shadows/shadows.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h12a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V7z" opacity="0.4"/></svg>Shadows</a></li>
+            <li><a href="../../foundations/borders/borders.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>Borders &amp; Radius</a></li>
+            <li><a href="../../foundations/grid/grid.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Grid &amp; Layout</a></li>
+            <li><a href="../../foundations/icons/icons.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="5" height="5" rx="1"/><rect x="10" y="3" width="5" height="5" rx="1"/><rect x="17" y="3" width="4" height="5" rx="1"/><rect x="3" y="10" width="5" height="5" rx="1"/><rect x="10" y="10" width="5" height="5" rx="1"/><rect x="17" y="10" width="4" height="5" rx="1"/><rect x="3" y="17" width="5" height="4" rx="1"/><rect x="10" y="17" width="5" height="4" rx="1"/><rect x="17" y="17" width="4" height="4" rx="1"/></svg>Icons</a></li>
           </ul>
         </div>
         <div class="nav-section">
@@ -530,6 +568,18 @@
               <a href="../Toast-Banner/banner.html" class="nav-link">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="8" rx="2"/><circle cx="6" cy="12" r="1" fill="currentColor" stroke="none"/><line x1="10" y1="12" x2="18" y2="12"/></svg>
                 Toast Banner
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section">
+          <h3 class="nav-title">Resources</h3>
+          <ul class="nav-list">
+            <li>
+              <a href="https://github.com/zaenalaripin28/DS-Gpos-Lite-V2" class="nav-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                GitHub Repo
               </a>
             </li>
           </ul>
@@ -813,6 +863,57 @@
             <img src="figma/calendar-part-day.png" alt="Referensi Figma Calendar Day" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
             <img src="figma/Calendar-components.png" alt="Referensi Figma Calendar component" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
           </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Anatomy</h2>
+        <p style="font-size:14px;color:var(--color-text-tertiary);margin-top:-12px;margin-bottom:28px;font-family:var(--font-primary);">
+          Calendar dirakit dari tiga part: <strong>month header</strong> (navigasi bulan), <strong>week header</strong> (label hari), dan <strong>day cell</strong> (sel tanggal).
+        </p>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px;" class="anatomy-grid">
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:40px 24px 56px;display:flex;align-items:center;justify-content:center;background:#FAFBFB;position:relative;">
+              <div style="position:relative;width:100%;max-width:280px;">
+                <div style="position:absolute;inset:-8px;border:1.5px dashed var(--color-blue-b200);border-radius:10px;pointer-events:none;z-index:2;"></div>
+                <div class="ds-calendar-month-header" role="group" aria-label="Navigasi bulan" style="position:relative;z-index:1;pointer-events:none;">
+                  <button type="button" class="ds-calendar-month-header__nav" aria-label="Bulan sebelumnya" tabindex="-1">
+                    <img src="../../assets/icons/icon-chevron-left.svg" alt="" aria-hidden="true">
+                  </button>
+                  <h2 class="ds-calendar-month-header__label" style="margin:0;font-size:inherit;">December 2022</h2>
+                  <button type="button" class="ds-calendar-month-header__nav" aria-label="Bulan berikutnya" tabindex="-1">
+                    <img src="../../assets/icons/icon-chevron-right.svg" alt="" aria-hidden="true">
+                  </button>
+                </div>
+                <div style="position:absolute;top:50%;left:4px;width:28px;height:28px;transform:translateY(-50%);border:1.5px dashed #00AA5B;border-radius:6px;pointer-events:none;z-index:2;"></div>
+                <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:140px;height:24px;border:1.5px dashed var(--color-neutral-n200);border-radius:4px;pointer-events:none;z-index:2;"></div>
+                <div style="position:absolute;top:50%;right:4px;width:28px;height:28px;transform:translateY(-50%);border:1.5px dashed #00AA5B;border-radius:6px;pointer-events:none;z-index:2;"></div>
+                <div style="position:absolute;top:-38px;left:50%;transform:translateX(-50%);white-space:nowrap;" class="anatomy-label"><span class="anatomy-badge">A</span> Month header</div>
+                <div style="position:absolute;bottom:-38px;left:50%;transform:translateX(-50%);white-space:nowrap;" class="anatomy-label"><span class="anatomy-badge" style="background:var(--color-neutral-n300);">B</span> Label</div>
+              </div>
+            </div>
+            <div style="padding:16px 20px;background:var(--color-surface);">
+              <div style="font-size:13px;font-weight:700;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:12px;">Month header</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;"><code>.ds-calendar-month-header</code> — nav kiri/kanan + label <code>Bulan YYYY</code>. Ikon chevron dari <code>assets/icons</code>.</div>
+            </div>
+          </div>
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:40px 24px 56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:#FAFBFB;position:relative;">
+              <div style="position:relative;">
+                <div style="position:absolute;inset:-8px;border:1.5px dashed var(--color-blue-b200);border-radius:8px;pointer-events:none;z-index:2;"></div>
+                <button type="button" class="ds-calendar-day ds-calendar-day--selected" aria-selected="true" tabindex="-1" style="pointer-events:none;position:relative;z-index:1;">15</button>
+                <div style="position:absolute;inset:2px;border:1.5px dashed var(--color-neutral-n200);border-radius:6px;pointer-events:none;z-index:2;"></div>
+                <div style="position:absolute;top:-38px;left:50%;transform:translateX(-50%);white-space:nowrap;" class="anatomy-label"><span class="anatomy-badge">C</span> Day cell</div>
+              </div>
+            </div>
+            <div style="padding:16px 20px;background:var(--color-surface);">
+              <div style="font-size:13px;font-weight:700;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:12px;">Day</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;"><code>.ds-calendar-day</code> 32×32px. State: default, today, hover, selected, range, outside, disabled. Grid 7 kolom sejajar dengan week header.</div>
+            </div>
+          </div>
+
         </div>
       </section>
 

@@ -314,6 +314,42 @@
     @media (max-width: 480px) {
       .scroll-top-btn { bottom: 16px; right: 16px; }
     }
+
+    .anatomy-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      letter-spacing: 0.04em;
+      color: var(--color-text-secondary);
+    }
+    .anatomy-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--color-blue-b300);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .anatomy-grid > div {
+      transition: transform 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .anatomy-grid > div:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(9, 30, 66, 0.11), 0 3px 8px rgba(9, 30, 66, 0.06);
+    }
+    .anatomy-grid > div > div:last-child { border-top: 2px solid var(--color-neutral-n30) !important; }
+    @media (max-width: 900px) { .anatomy-grid { grid-template-columns: 1fr !important; } }
+    [data-theme="dark"] .anatomy-grid > div { background-color: #0F1D30 !important; border-color: #1A2E48 !important; }
+    [data-theme="dark"] .anatomy-grid > div > div:first-child { background: #080F1E !important; }
+    [data-theme="dark"] .anatomy-grid > div > div:last-child { background: #0F1D30 !important; border-top-color: #1A2E48 !important; }
   </style>
 </head>
 <body>
@@ -587,6 +623,69 @@
           <img src="../../Paginations/figma/Pagination-components.png" alt="Referensi Figma Pagination" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
         </div>
 
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
+          <span style="width:3px;height:18px;background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300));border-radius:3px;flex-shrink:0;display:block;"></span>
+          Anatomy
+        </h2>
+        <p style="font-size:14px;color:var(--color-text-tertiary);margin-top:-12px;margin-bottom:28px;font-family:var(--font-primary);">
+          Pagination terdiri dari wrapper <strong>nav</strong>, deretan <strong>item</strong> (tombol halaman / navigasi), dan opsional <strong>ikon chevron</strong> pada previous/next.
+        </p>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px;" class="anatomy-grid">
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:48px 24px 56px;display:flex;align-items:center;justify-content:center;background:#FAFBFB;position:relative;">
+              <div style="position:relative;">
+                <div style="position:absolute;inset:-10px;border:1.5px dashed var(--color-blue-b200);border-radius:12px;pointer-events:none;z-index:2;"></div>
+                <nav class="ds-pagination" aria-label="Anatomy pagination" style="position:relative;z-index:1;pointer-events:none;">
+                  <button type="button" class="ds-pagination__item ds-pagination__item--active" aria-current="page" tabindex="-1">1</button>
+                </nav>
+                <div style="position:absolute;top:50%;left:12px;right:12px;transform:translateY(-50%);width:32px;height:32px;border:1.5px dashed var(--color-neutral-n200);border-radius:6px;pointer-events:none;z-index:2;"></div>
+                <div style="position:absolute;top:-38px;left:50%;transform:translateX(-50%);white-space:nowrap;" class="anatomy-label"><span class="anatomy-badge">A</span> Nav</div>
+                <div style="position:absolute;bottom:-38px;left:50%;transform:translateX(-50%);white-space:nowrap;" class="anatomy-label"><span class="anatomy-badge" style="background:var(--color-neutral-n300);">B</span> Item</div>
+              </div>
+            </div>
+            <div style="padding:16px 20px;background:var(--color-surface);">
+              <div style="font-size:13px;font-weight:700;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:12px;">Page item</div>
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <div style="display:flex;align-items:flex-start;gap:10px;">
+                  <span class="anatomy-badge" style="margin-top:1px;flex-shrink:0;">B</span>
+                  <div>
+                    <div style="font-size:12px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);">Item</div>
+                    <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);margin-top:2px;line-height:1.5;"><code>.ds-pagination__item</code> 32×32px. Aktif: <code>--active</code> + <code>aria-current="page"</code>.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:48px 24px 56px;display:flex;align-items:center;justify-content:center;background:#FAFBFB;position:relative;">
+              <div style="position:relative;">
+                <div style="position:absolute;inset:-10px;border:1.5px dashed var(--color-blue-b200);border-radius:12px;pointer-events:none;z-index:2;"></div>
+                <nav class="ds-pagination" aria-label="Anatomy pagination nav" style="position:relative;z-index:1;pointer-events:none;gap:4px;">
+                  <button type="button" class="ds-pagination__item" aria-label="Halaman sebelumnya" tabindex="-1">
+                    <img src="../../assets/icons/icon-chevron-left.svg" alt="" aria-hidden="true">
+                  </button>
+                  <button type="button" class="ds-pagination__item ds-pagination__item--active" aria-current="page" tabindex="-1">2</button>
+                  <button type="button" class="ds-pagination__item" aria-label="Halaman berikutnya" tabindex="-1">
+                    <img src="../../assets/icons/icon-chevron-right.svg" alt="" aria-hidden="true">
+                  </button>
+                </nav>
+                <div style="position:absolute;top:-38px;left:50%;transform:translateX(-50%);white-space:nowrap;" class="anatomy-label"><span class="anatomy-badge">A</span> Nav</div>
+                <div style="position:absolute;bottom:-38px;left:16px;white-space:nowrap;" class="anatomy-label"><span class="anatomy-badge" style="background:#00AA5B;">C</span> Icon</div>
+                <div style="position:absolute;bottom:-38px;right:16px;white-space:nowrap;" class="anatomy-label"><span class="anatomy-badge" style="background:#00AA5B;">C</span> Icon</div>
+              </div>
+            </div>
+            <div style="padding:16px 20px;background:var(--color-surface);">
+              <div style="font-size:13px;font-weight:700;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:12px;">Previous / Next</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Item navigasi memuat chevron 16×16 dari <code>assets/icons</code> + <code>aria-label</code> deskriptif. Ellipsis memakai <code>.ds-pagination__item--ellipsis</code> tanpa interaksi.</div>
+            </div>
+          </div>
+
+        </div>
       </section>
 
       <section style="margin-bottom:48px;">
