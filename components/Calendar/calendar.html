@@ -16,7 +16,7 @@
             b200: '#4495DD', b300: '#1E7FD6', b400: '#155996',
             n0:   '#FFFFFF', n10:  '#FAFBFB', n20:  '#F5F6F7',
             n30:  '#EBEDF0', n40:  '#DFE2E6', n50:  '#C2C7D0',
-            n100: '#7A8699', n300: '#5D6B82', n500: '#42526D', n900: '#091E42',
+            n60:  '#B3B9C4', n100: '#7A8699', n300: '#5D6B82', n500: '#42526D', n900: '#091E42',
             g50:  '#E6F7EF', g100: '#B3E6D1', g400: '#008F4A',
             r50:  '#FDE8E9', r100: '#F8BFC2', r400: '#C21823',
           },
@@ -42,7 +42,7 @@
       font-size: var(--text-body-medium-medium-size);
       font-weight: var(--text-body-medium-medium-weight);
       line-height: var(--text-body-medium-medium-lh);
-      color: var(--color-blue-b300);
+      color: var(--color-neutral-n900); /* Text.Bold */
       letter-spacing: -0.01em;
     }
     .ds-calendar-month-header__nav {
@@ -61,13 +61,10 @@
     .ds-calendar-month-header__nav img {
       width: 16px;
       height: 16px;
-      opacity: 0.75;
+      /* Icon.Bold → --color-neutral-n900 (#091E42), baked in SVG asset */
     }
     .ds-calendar-month-header__nav:hover {
       background: var(--color-neutral-n20);
-    }
-    .ds-calendar-month-header__nav:hover img {
-      opacity: 1;
     }
     .ds-calendar-month-header__nav:active {
       background: var(--color-neutral-n30);
@@ -80,6 +77,236 @@
       opacity: 0.4;
       cursor: not-allowed;
       pointer-events: none;
+    }
+
+    /* ── Calendar · Week header (calendar-part-Week header.png) ── */
+    .ds-calendar-week-header {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: var(--space-050);
+      width: 100%;
+      padding: 0 var(--space-150);
+      font-family: var(--font-primary);
+    }
+    .ds-calendar-week-header__day {
+      margin: 0;
+      text-align: center;
+      font-size: var(--text-overline-medium-size);
+      font-weight: var(--text-overline-medium-weight);
+      line-height: var(--text-overline-medium-lh);
+      letter-spacing: var(--text-overline-medium-ls);
+      text-transform: var(--text-overline-medium-transform);
+      color: var(--color-neutral-n300); /* Text.Subtle */
+    }
+
+    /* ── Calendar · Day (calendar-part-day.png) ── */
+    .ds-calendar-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: var(--space-050);
+      width: 100%;
+      padding: var(--space-100) var(--space-150);
+      font-family: var(--font-primary);
+    }
+    .ds-calendar-day {
+      position: relative;
+      width: 32px;
+      height: 32px;
+      margin: 0 auto;
+      padding: 0;
+      border: none;
+      border-radius: var(--border-radius-md);
+      background: transparent;
+      font-size: var(--text-body-small-medium-size);
+      font-weight: var(--text-body-small-medium-weight);
+      line-height: var(--text-body-small-medium-lh);
+      color: var(--color-neutral-n900); /* Text.Bold */
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .ds-calendar-day--outside {
+      color: var(--color-neutral-n300); /* Text.Subtle */
+    }
+    .ds-calendar-day--today {
+      color: var(--color-blue-b300); /* Text.Brand */
+    }
+    .ds-calendar-day--today::after {
+      content: '';
+      position: absolute;
+      bottom: var(--space-050);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 12px;
+      height: 2px;
+      border-radius: var(--border-radius-sm);
+      background: var(--color-blue-b300);
+    }
+    .ds-calendar-day:hover:not(:disabled):not(.ds-calendar-day--disabled) {
+      background: var(--color-neutral-n20); /* Background.Neutral.Hover */
+      color: var(--color-neutral-n900);
+    }
+    .ds-calendar-day--today:hover:not(:disabled):not(.ds-calendar-day--disabled)::after {
+      background: var(--color-neutral-n900);
+    }
+    .ds-calendar-day:active:not(:disabled):not(.ds-calendar-day--disabled) {
+      background: var(--color-neutral-n40); /* Background.Neutral.Pressed */
+      color: var(--color-neutral-n900);
+    }
+    .ds-calendar-day:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200); /* Border.Focused */
+    }
+    .ds-calendar-day--selected {
+      background: var(--color-blue-b50); /* Background.Selected */
+      color: var(--color-blue-b300); /* Text.Selected */
+    }
+    .ds-calendar-day--selected.ds-calendar-day--today::after {
+      background: var(--color-blue-b300);
+    }
+    .ds-calendar-day--range {
+      background: var(--color-blue-b50);
+      color: var(--color-neutral-n300);
+    }
+    .ds-calendar-day:disabled,
+    .ds-calendar-day--disabled {
+      color: var(--color-neutral-n60); /* Text.Disabled */
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .ds-calendar-day--disabled.ds-calendar-day--today::after {
+      background: var(--color-neutral-n60);
+    }
+
+    /* Demo modifiers — matrix dokumentasi */
+    .ds-calendar-day--state-hover {
+      background: var(--color-neutral-n20);
+      color: var(--color-neutral-n900);
+    }
+    .ds-calendar-day--state-hover.ds-calendar-day--today::after {
+      background: var(--color-neutral-n900);
+    }
+    .ds-calendar-day--state-pressed {
+      background: var(--color-neutral-n40);
+      color: var(--color-neutral-n900);
+    }
+    .ds-calendar-day--state-pressed.ds-calendar-day--today::after {
+      background: var(--color-neutral-n900);
+    }
+    .ds-calendar-day--state-focus {
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+
+    .calendar-day-matrix {
+      display: grid;
+      grid-template-columns: 100px 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--color-surface);
+      max-width: 280px;
+    }
+    .calendar-day-matrix__head,
+    .calendar-day-matrix__label,
+    .calendar-day-matrix__cell {
+      padding: var(--space-100) var(--space-150);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .calendar-day-matrix__head {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      background: var(--color-neutral-n20);
+      font-family: var(--font-primary);
+    }
+    .calendar-day-matrix__head:not(:first-child) {
+      border-left: 1px solid var(--color-border);
+    }
+    .calendar-day-matrix__label {
+      justify-content: flex-start;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      color: var(--color-text-tertiary);
+      background: var(--color-neutral-n10);
+      border-right: 1px solid var(--color-border);
+    }
+    .calendar-day-matrix__cell {
+      background: var(--color-neutral-n10);
+      border-left: 1px solid var(--color-border);
+    }
+    .calendar-day-matrix__label:last-of-type,
+    .calendar-day-matrix__cell:nth-last-child(-n+2) {
+      border-bottom: none;
+    }
+
+    /* ── Calendar · Component (Calendar-components.png) ── */
+    .ds-calendar {
+      width: 100%;
+      max-width: 320px;
+      background: var(--color-neutral-n0);
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-lg);
+      font-family: var(--font-primary);
+      overflow: hidden;
+    }
+    .ds-calendar__body {
+      padding-bottom: var(--space-100);
+    }
+    .ds-calendar .ds-calendar-month-header {
+      padding-top: var(--space-150);
+    }
+    .ds-calendar .ds-calendar-days {
+      padding-bottom: var(--space-050);
+    }
+    .ds-calendar__footer {
+      display: flex;
+      justify-content: flex-end;
+      padding: var(--space-150) var(--space-200) var(--space-200);
+      border-top: 1px solid var(--color-border);
+    }
+    .ds-calendar__action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 32px;
+      padding: var(--space-050) var(--space-200);
+      border: none;
+      border-radius: var(--border-radius-md);
+      background: var(--color-blue-b300); /* Background.Brand.Bold */
+      color: var(--color-neutral-n0); /* Text.Inverse */
+      font-size: var(--text-body-small-medium-size);
+      font-weight: var(--text-body-small-medium-weight);
+      line-height: var(--text-body-small-medium-lh);
+      font-family: var(--font-primary);
+      cursor: pointer;
+      transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .ds-calendar__action:hover {
+      background: var(--color-blue-b400); /* Background.Brand.Hover */
+    }
+    .ds-calendar__action:active {
+      background: var(--color-blue-b500); /* Background.Brand.Pressed */
+    }
+    .ds-calendar__action:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200); /* Border.Focused */
+    }
+
+    .calendar-component-showcase {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-300);
+      align-items: flex-start;
     }
 
     .calendar-part-label {
@@ -332,8 +559,154 @@
       <section class="mb-12">
         <h2 style="border:none;background:none;padding:0;margin-bottom:12px;">Calendar</h2>
         <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:640px;margin-bottom:24px;">
-          Komponen pemilih tanggal. Dokumentasi parts dimulai dari <strong>Month header</strong> — navigasi bulan dengan label bulan/tahun di tengah. Referensi: <code>calendar/figma/calendar-part-month header.png</code>.
+          Komponen pemilih tanggal — parts (<strong>Month header</strong>, <strong>Week header</strong>, <strong>Day</strong>) dirakit menjadi <strong>Calendar component</strong>. Referensi: <code>calendar/figma/Calendar-components.png</code>.
         </p>
+
+        <!-- Calendar component -->
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:24px;margin-bottom:16px;">
+          <span class="calendar-part-label">Calendar component</span>
+
+          <div class="calendar-component-showcase">
+            <!-- Default -->
+            <div class="ds-calendar" role="group" aria-label="Kalender Desember 2022">
+              <div class="ds-calendar__body">
+                <div class="ds-calendar-month-header" role="group" aria-label="Navigasi bulan">
+                  <button type="button" class="ds-calendar-month-header__nav" aria-label="Bulan sebelumnya">
+                    <img src="../../assets/icons/icon-chevron-left.svg" alt="" aria-hidden="true">
+                  </button>
+                  <h2 class="ds-calendar-month-header__label">December 2022</h2>
+                  <button type="button" class="ds-calendar-month-header__nav" aria-label="Bulan berikutnya">
+                    <img src="../../assets/icons/icon-chevron-right.svg" alt="" aria-hidden="true">
+                  </button>
+                </div>
+                <div class="ds-calendar-week-header" role="row">
+                  <span class="ds-calendar-week-header__day" role="columnheader">SUN</span>
+                  <span class="ds-calendar-week-header__day" role="columnheader">MON</span>
+                  <span class="ds-calendar-week-header__day" role="columnheader">TUE</span>
+                  <span class="ds-calendar-week-header__day" role="columnheader">WED</span>
+                  <span class="ds-calendar-week-header__day" role="columnheader">THU</span>
+                  <span class="ds-calendar-week-header__day" role="columnheader">FRI</span>
+                  <span class="ds-calendar-week-header__day" role="columnheader">SAT</span>
+                </div>
+                <div class="ds-calendar-days" role="grid">
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">27</button>
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">28</button>
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">29</button>
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">30</button>
+                  <button type="button" class="ds-calendar-day">1</button>
+                  <button type="button" class="ds-calendar-day">2</button>
+                  <button type="button" class="ds-calendar-day">3</button>
+                  <button type="button" class="ds-calendar-day">4</button>
+                  <button type="button" class="ds-calendar-day">5</button>
+                  <button type="button" class="ds-calendar-day">6</button>
+                  <button type="button" class="ds-calendar-day">7</button>
+                  <button type="button" class="ds-calendar-day">8</button>
+                  <button type="button" class="ds-calendar-day">9</button>
+                  <button type="button" class="ds-calendar-day">10</button>
+                  <button type="button" class="ds-calendar-day">11</button>
+                  <button type="button" class="ds-calendar-day">12</button>
+                  <button type="button" class="ds-calendar-day">13</button>
+                  <button type="button" class="ds-calendar-day">14</button>
+                  <button type="button" class="ds-calendar-day">15</button>
+                  <button type="button" class="ds-calendar-day">16</button>
+                  <button type="button" class="ds-calendar-day">17</button>
+                  <button type="button" class="ds-calendar-day">18</button>
+                  <button type="button" class="ds-calendar-day">19</button>
+                  <button type="button" class="ds-calendar-day">20</button>
+                  <button type="button" class="ds-calendar-day">21</button>
+                  <button type="button" class="ds-calendar-day">22</button>
+                  <button type="button" class="ds-calendar-day">23</button>
+                  <button type="button" class="ds-calendar-day">24</button>
+                  <button type="button" class="ds-calendar-day">25</button>
+                  <button type="button" class="ds-calendar-day">26</button>
+                  <button type="button" class="ds-calendar-day">27</button>
+                  <button type="button" class="ds-calendar-day">28</button>
+                  <button type="button" class="ds-calendar-day">29</button>
+                  <button type="button" class="ds-calendar-day">30</button>
+                  <button type="button" class="ds-calendar-day">31</button>
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">1</button>
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">2</button>
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">3</button>
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">4</button>
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">5</button>
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">6</button>
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">7</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- With footer action -->
+            <div class="ds-calendar" role="group" aria-label="Kalender Desember 2022 dengan aksi">
+              <div class="ds-calendar__body">
+                <div class="ds-calendar-month-header" role="group" aria-label="Navigasi bulan">
+                  <button type="button" class="ds-calendar-month-header__nav" aria-label="Bulan sebelumnya">
+                    <img src="../../assets/icons/icon-chevron-left.svg" alt="" aria-hidden="true">
+                  </button>
+                  <h2 class="ds-calendar-month-header__label">December 2022</h2>
+                  <button type="button" class="ds-calendar-month-header__nav" aria-label="Bulan berikutnya">
+                    <img src="../../assets/icons/icon-chevron-right.svg" alt="" aria-hidden="true">
+                  </button>
+                </div>
+                <div class="ds-calendar-week-header" role="row">
+                  <span class="ds-calendar-week-header__day" role="columnheader">SUN</span>
+                  <span class="ds-calendar-week-header__day" role="columnheader">MON</span>
+                  <span class="ds-calendar-week-header__day" role="columnheader">TUE</span>
+                  <span class="ds-calendar-week-header__day" role="columnheader">WED</span>
+                  <span class="ds-calendar-week-header__day" role="columnheader">THU</span>
+                  <span class="ds-calendar-week-header__day" role="columnheader">FRI</span>
+                  <span class="ds-calendar-week-header__day" role="columnheader">SAT</span>
+                </div>
+                <div class="ds-calendar-days" role="grid">
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">27</button>
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">28</button>
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">29</button>
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">30</button>
+                  <button type="button" class="ds-calendar-day">1</button>
+                  <button type="button" class="ds-calendar-day">2</button>
+                  <button type="button" class="ds-calendar-day">3</button>
+                  <button type="button" class="ds-calendar-day">4</button>
+                  <button type="button" class="ds-calendar-day">5</button>
+                  <button type="button" class="ds-calendar-day">6</button>
+                  <button type="button" class="ds-calendar-day">7</button>
+                  <button type="button" class="ds-calendar-day">8</button>
+                  <button type="button" class="ds-calendar-day">9</button>
+                  <button type="button" class="ds-calendar-day">10</button>
+                  <button type="button" class="ds-calendar-day">11</button>
+                  <button type="button" class="ds-calendar-day">12</button>
+                  <button type="button" class="ds-calendar-day">13</button>
+                  <button type="button" class="ds-calendar-day">14</button>
+                  <button type="button" class="ds-calendar-day">15</button>
+                  <button type="button" class="ds-calendar-day">16</button>
+                  <button type="button" class="ds-calendar-day">17</button>
+                  <button type="button" class="ds-calendar-day">18</button>
+                  <button type="button" class="ds-calendar-day">19</button>
+                  <button type="button" class="ds-calendar-day">20</button>
+                  <button type="button" class="ds-calendar-day">21</button>
+                  <button type="button" class="ds-calendar-day">22</button>
+                  <button type="button" class="ds-calendar-day">23</button>
+                  <button type="button" class="ds-calendar-day">24</button>
+                  <button type="button" class="ds-calendar-day">25</button>
+                  <button type="button" class="ds-calendar-day">26</button>
+                  <button type="button" class="ds-calendar-day">27</button>
+                  <button type="button" class="ds-calendar-day">28</button>
+                  <button type="button" class="ds-calendar-day">29</button>
+                  <button type="button" class="ds-calendar-day">30</button>
+                  <button type="button" class="ds-calendar-day">31</button>
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">1</button>
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">2</button>
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">3</button>
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">4</button>
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">5</button>
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">6</button>
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">7</button>
+                </div>
+              </div>
+              <div class="ds-calendar__footer">
+                <button type="button" class="ds-calendar__action">Simpan</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <!-- Part: Month header -->
         <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:24px;margin-bottom:16px;">
@@ -350,26 +723,129 @@
           </div>
         </div>
 
+        <!-- Part: Week header -->
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:24px;margin-bottom:16px;">
+          <span class="calendar-part-label">Week header</span>
+
+          <div class="ds-calendar-week-header" role="row">
+            <span class="ds-calendar-week-header__day" role="columnheader" abbr="Sunday">SUN</span>
+            <span class="ds-calendar-week-header__day" role="columnheader" abbr="Monday">MON</span>
+            <span class="ds-calendar-week-header__day" role="columnheader" abbr="Tuesday">TUE</span>
+            <span class="ds-calendar-week-header__day" role="columnheader" abbr="Wednesday">WED</span>
+            <span class="ds-calendar-week-header__day" role="columnheader" abbr="Thursday">THU</span>
+            <span class="ds-calendar-week-header__day" role="columnheader" abbr="Friday">FRI</span>
+            <span class="ds-calendar-week-header__day" role="columnheader" abbr="Saturday">SAT</span>
+          </div>
+        </div>
+
+        <!-- Part: Day -->
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:24px;margin-bottom:16px;">
+          <span class="calendar-part-label">Day</span>
+
+          <p style="font-size:12px;color:var(--color-text-tertiary);margin:0 0 var(--space-200);font-family:var(--font-primary);">Contoh grid (minggu dimulai Minggu) — sel di luar bulan memakai <code>--outside</code>.</p>
+          <div class="ds-calendar-week-header" role="row" style="margin-bottom:var(--space-050);">
+            <span class="ds-calendar-week-header__day" role="columnheader">SUN</span>
+            <span class="ds-calendar-week-header__day" role="columnheader">MON</span>
+            <span class="ds-calendar-week-header__day" role="columnheader">TUE</span>
+            <span class="ds-calendar-week-header__day" role="columnheader">WED</span>
+            <span class="ds-calendar-week-header__day" role="columnheader">THU</span>
+            <span class="ds-calendar-week-header__day" role="columnheader">FRI</span>
+            <span class="ds-calendar-week-header__day" role="columnheader">SAT</span>
+          </div>
+          <div class="ds-calendar-days" role="grid" aria-label="Desember 2022">
+            <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">27</button>
+            <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">28</button>
+            <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">29</button>
+            <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true">30</button>
+            <button type="button" class="ds-calendar-day">1</button>
+            <button type="button" class="ds-calendar-day">2</button>
+            <button type="button" class="ds-calendar-day">3</button>
+            <button type="button" class="ds-calendar-day">4</button>
+            <button type="button" class="ds-calendar-day ds-calendar-day--today" aria-current="date">5</button>
+            <button type="button" class="ds-calendar-day">6</button>
+            <button type="button" class="ds-calendar-day ds-calendar-day--selected" aria-selected="true">7</button>
+            <button type="button" class="ds-calendar-day">8</button>
+            <button type="button" class="ds-calendar-day">9</button>
+            <button type="button" class="ds-calendar-day">10</button>
+          </div>
+
+          <p style="font-size:12px;color:var(--color-text-tertiary);margin:var(--space-300) 0 var(--space-150);font-family:var(--font-primary);">Matrix state (kolom: default · today)</p>
+          <div class="calendar-day-matrix" role="table" aria-label="Varian state Day">
+            <div class="calendar-day-matrix__head"></div>
+            <div class="calendar-day-matrix__head">Default</div>
+            <div class="calendar-day-matrix__head">Today</div>
+
+            <div class="calendar-day-matrix__label">default</div>
+            <div class="calendar-day-matrix__cell"><button type="button" class="ds-calendar-day" tabindex="-1">0</button></div>
+            <div class="calendar-day-matrix__cell"><button type="button" class="ds-calendar-day ds-calendar-day--today" tabindex="-1">0</button></div>
+
+            <div class="calendar-day-matrix__label">hover</div>
+            <div class="calendar-day-matrix__cell"><button type="button" class="ds-calendar-day ds-calendar-day--state-hover" tabindex="-1">0</button></div>
+            <div class="calendar-day-matrix__cell"><button type="button" class="ds-calendar-day ds-calendar-day--today ds-calendar-day--state-hover" tabindex="-1">0</button></div>
+
+            <div class="calendar-day-matrix__label">pressed</div>
+            <div class="calendar-day-matrix__cell"><button type="button" class="ds-calendar-day ds-calendar-day--state-pressed" tabindex="-1">0</button></div>
+            <div class="calendar-day-matrix__cell"><button type="button" class="ds-calendar-day ds-calendar-day--today ds-calendar-day--state-pressed" tabindex="-1">0</button></div>
+
+            <div class="calendar-day-matrix__label">focus</div>
+            <div class="calendar-day-matrix__cell"><button type="button" class="ds-calendar-day ds-calendar-day--state-focus" tabindex="-1">0</button></div>
+            <div class="calendar-day-matrix__cell"><button type="button" class="ds-calendar-day ds-calendar-day--today ds-calendar-day--state-focus" tabindex="-1">0</button></div>
+
+            <div class="calendar-day-matrix__label">range</div>
+            <div class="calendar-day-matrix__cell"><button type="button" class="ds-calendar-day ds-calendar-day--range" tabindex="-1">0</button></div>
+            <div class="calendar-day-matrix__cell"><button type="button" class="ds-calendar-day ds-calendar-day--today ds-calendar-day--range" tabindex="-1">0</button></div>
+
+            <div class="calendar-day-matrix__label">selected</div>
+            <div class="calendar-day-matrix__cell"><button type="button" class="ds-calendar-day ds-calendar-day--selected" tabindex="-1">0</button></div>
+            <div class="calendar-day-matrix__cell"><button type="button" class="ds-calendar-day ds-calendar-day--today ds-calendar-day--selected" tabindex="-1">0</button></div>
+
+            <div class="calendar-day-matrix__label">disabled</div>
+            <div class="calendar-day-matrix__cell"><button type="button" class="ds-calendar-day ds-calendar-day--disabled" disabled tabindex="-1">0</button></div>
+            <div class="calendar-day-matrix__cell"><button type="button" class="ds-calendar-day ds-calendar-day--today ds-calendar-day--disabled" disabled tabindex="-1">0</button></div>
+          </div>
+        </div>
+
         <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;">
           <div style="font-size:11px;font-weight:700;color:var(--color-text-tertiary);font-family:var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Referensi Figma</div>
-          <img src="figma/calendar-part-month%20header.png" alt="Referensi Figma Calendar Month header" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <img src="figma/calendar-part-month%20header.png" alt="Referensi Figma Calendar Month header" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+            <img src="figma/calendar-part-Week%20header.png" alt="Referensi Figma Calendar Week header" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+            <img src="figma/calendar-part-day.png" alt="Referensi Figma Calendar Day" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+            <img src="figma/Calendar-components.png" alt="Referensi Figma Calendar component" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+          </div>
         </div>
       </section>
 
       <section style="margin-bottom:48px;">
         <h2>Informasi Penggunaan</h2>
-        <div class="usage-info-grid">
+        <div class="usage-info-grid" style="grid-template-columns:repeat(3,1fr);">
           <div class="usage-info-card">
-            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Kapan dipakai</div>
-            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Bagian atas panel kalender untuk menampilkan bulan &amp; tahun aktif dan memindahkan tampilan ke bulan sebelumnya/berikutnya.</div>
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Calendar component</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Rakit month header → week header → day grid dalam <code>.ds-calendar</code>. Varian footer opsional untuk aksi konfirmasi (<code>Simpan</code>).</div>
           </div>
           <div class="usage-info-card">
-            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Struktur</div>
-            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Tiga zona: tombol prev (kiri), label <code>Bulan YYYY</code> (tengah), tombol next (kanan). Label memakai <code>body-medium-medium</code> dan warna brand <code>b300</code>.</div>
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Month header</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Navigasi bulan/tahun. Label <code>Text.Bold</code>, ikon <code>Icon.Bold</code>. Padding <code>space-100</code> / <code>space-150</code>.</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Week header</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Baris 7 kolom label hari (<code>SUN</code>–<code>SAT</code>). Typography <code>overline-medium</code>, warna <code>Text.Subtle</code> (<code>n300</code>). Sejajar dengan grid day.</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Day</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Sel 32×32, <code>body-small-medium</code>. State: default, today (underline), hover/pressed, focus, selected, range, outside, disabled.</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Grid alignment</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Week header dan day grid memakai <code>grid-template-columns: repeat(7, 1fr)</code> + gap <code>space-050</code> agar kolom sejajar.</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Hari di luar bulan</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Tanggal trailing/leading pakai <code>--outside</code> + <code>disabled</code> — <code>Text.Subtle</code>, non-interaktif.</div>
           </div>
           <div class="usage-info-card">
             <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Aksesibilitas</div>
-            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Gunakan <code>role="group"</code> + <code>aria-label</code> pada wrapper, <code>aria-label</code> pada tombol nav, dan elemen heading (<code>h2</code>) untuk label bulan agar terbaca screen reader.</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;"><code>role="columnheader"</code> pada week day, <code>role="grid"</code> pada days, <code>aria-current="date"</code> / <code>aria-selected</code> pada sel aktif.</div>
           </div>
         </div>
       </section>
@@ -380,19 +856,21 @@
           <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
             <div style="padding:10px 16px;background:var(--color-green-g50);border-bottom:2px solid var(--color-green-g100);font-weight:700;color:var(--color-green-g400);">Do — Lakukan ini</div>
             <ul style="padding:16px 20px 20px 36px;color:var(--color-text-tertiary);font-size:13px;line-height:1.7;">
-              <li>Format label konsisten: nama bulan penuh + tahun empat digit (mis. <code>December 2022</code>).</li>
-              <li>Gunakan ikon <code>icon-chevron-left</code> / <code>icon-chevron-right</code> dari <code>assets/icons</code>.</li>
-              <li>Terapkan pola hover/focus yang sama dengan navigasi chevron (Pagination).</li>
-              <li>Pakai padding <code>space-100</code> vertikal dan <code>space-150</code> horizontal.</li>
+              <li>Rakit parts berurutan di dalam <code>.ds-calendar</code> — jangan ubah urutan month → week → days.</li>
+              <li>Month header: format <code>Bulan YYYY</code>, chevron dari <code>assets/icons</code>.</li>
+              <li>Week header: singkatan 3 huruf UPPERCASE, 7 kolom sama lebar dengan day grid.</li>
+              <li>Day: satu state aktif per grid; today + selected boleh digabung dengan modifier.</li>
+              <li>Token semantik: <code>Text.Bold</code>, <code>Text.Subtle</code>, <code>Text.Brand</code>, <code>Background.Selected</code>, <code>Border.Focused</code>.</li>
             </ul>
           </div>
           <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
             <div style="padding:10px 16px;background:var(--color-red-r50);border-bottom:2px solid var(--color-red-r100);font-weight:700;color:var(--color-red-r400);">Don&apos;t — Hindari ini</div>
             <ul style="padding:16px 20px 20px 36px;color:var(--color-text-tertiary);font-size:13px;line-height:1.7;">
-              <li>Jangan ganti chevron dengan teks panjang “Previous” / “Next” di header ini.</li>
-              <li>Jangan hardcode warna hex — gunakan token <code>--color-blue-b300</code> / alias Tailwind DS.</li>
-              <li>Jangan menempatkan aksi lain (dropdown tahun, close) di baris month header.</li>
-              <li>Jangan hilangkan <code>focus-visible</code> pada tombol navigasi.</li>
+              <li>Jangan letakkan footer action di tengah — rata kanan di <code>.ds-calendar__footer</code>.</li>
+              <li>Jangan ubah jumlah kolom week/day (harus 7).</li>
+              <li>Jangan hardcode hex — pakai token <code>--color-neutral-*</code> / <code>--color-blue-*</code>.</li>
+              <li>Jangan pakai nama hari penuh di week header (ruang terbatas).</li>
+              <li>Jangan hilangkan <code>focus-visible</code> pada day button dan nav month.</li>
             </ul>
           </div>
         </div>
@@ -403,12 +881,20 @@
         <p style="font-size:14px;color:var(--color-text-tertiary);margin:-12px 0 20px;font-family:var(--font-primary);">Class mengacu alias di <code>tailwind.config</code> halaman ini. Pola interaksi selaras Pagination.</p>
         <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
           <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Calendar component card</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'w-full max-w-xs overflow-hidden rounded-xl border border-n30 bg-n0')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Footer action (primary)</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'inline-flex min-h-8 items-center justify-center rounded-md bg-b300 px-4 py-1 text-sm font-medium text-n0 hover:bg-b400 active:bg-b400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
             <code class="tw-snippet-code">Wrapper month header</code>
             <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'flex w-full items-center justify-between gap-2 px-3 py-2')">Salin</button>
           </div>
           <div class="tw-snippet-row">
             <code class="tw-snippet-code">Label bulan/tahun</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'flex-1 text-center text-base font-medium text-b300 tracking-tight')">Salin</button>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'flex-1 text-center text-base font-medium text-n900 tracking-tight')">Salin</button>
           </div>
           <div class="tw-snippet-row">
             <code class="tw-snippet-code">Tombol nav prev/next</code>
@@ -416,36 +902,114 @@
           </div>
           <div class="tw-snippet-row">
             <code class="tw-snippet-code">Ikon chevron</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'h-4 w-4 opacity-75')">Salin</button>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'h-4 w-4')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Week header grid</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'grid w-full grid-cols-7 gap-1 px-3')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Week day label</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'text-center text-xs font-medium uppercase tracking-widest text-n300')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Day cell base</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'relative mx-auto flex h-8 w-8 items-center justify-center rounded-md text-sm font-medium text-n900 hover:bg-n20 active:bg-n40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Day · outside</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'text-n300 pointer-events-none')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Day · today</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'relative text-b300 after:absolute after:bottom-1 after:left-1/2 after:block after:h-0.5 after:w-3 after:-translate-x-1/2 after:rounded-sm after:bg-b300')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Day · selected</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-b50 text-b300')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Day · disabled</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'text-n60 cursor-not-allowed pointer-events-none')">Salin</button>
           </div>
         </div>
 
-        <p style="font-size:13px;font-weight:600;color:var(--color-text-primary);margin:28px 0 12px;font-family:var(--font-primary);">Blok siap copy (Tailwind)</p>
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+        <p style="font-size:13px;font-weight:600;color:var(--color-text-primary);margin:28px 0 12px;font-family:var(--font-primary);">Blok siap copy — Calendar component</p>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;margin-bottom:24px;">
+          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-mono);">calendar-component-tailwind.html</span>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwindBlock('tailwind-block-component', this)">Salin semua</button>
+          </div>
+          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-mono);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="tailwind-block-component">&lt;div class="w-full max-w-xs overflow-hidden rounded-xl border border-n30 bg-n0" role="group" aria-label="Kalender"&gt;
+  &lt;!-- month header + week header + day grid (lihat parts) --&gt;
+  &lt;div class="flex justify-end border-t border-n30 p-4"&gt;
+    &lt;button type="button" class="inline-flex min-h-8 items-center justify-center rounded-md bg-b300 px-4 py-1 text-sm font-medium text-n0 hover:bg-b400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200"&gt;Simpan&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <p style="font-size:13px;font-weight:600;color:var(--color-text-primary);margin:28px 0 12px;font-family:var(--font-primary);">Blok siap copy — Month header</p>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;margin-bottom:24px;">
           <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
             <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-mono);">calendar-month-header-tailwind.html</span>
-            <button class="tw-copy-btn" id="copy-tailwind-block-btn" onclick="copyTailwindBlock()">Salin semua</button>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwindBlock('tailwind-block-month', this)">Salin semua</button>
           </div>
-          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-mono);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="tailwind-block">&lt;div class="flex w-full items-center justify-between gap-2 px-3 py-2" role="group" aria-label="Navigasi bulan"&gt;
+          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-mono);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="tailwind-block-month">&lt;div class="flex w-full items-center justify-between gap-2 px-3 py-2" role="group" aria-label="Navigasi bulan"&gt;
   &lt;button type="button" class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md hover:bg-n20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200" aria-label="Bulan sebelumnya"&gt;
-    &lt;img src="../../assets/icons/icon-chevron-left.svg" alt="" class="h-4 w-4 opacity-75" aria-hidden="true" /&gt;
+    &lt;img src="../../assets/icons/icon-chevron-left.svg" alt="" class="h-4 w-4" aria-hidden="true" /&gt;
   &lt;/button&gt;
-  &lt;h2 class="flex-1 text-center text-base font-medium text-b300 tracking-tight"&gt;December 2022&lt;/h2&gt;
+  &lt;h2 class="flex-1 text-center text-base font-medium text-n900 tracking-tight"&gt;December 2022&lt;/h2&gt;
   &lt;button type="button" class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md hover:bg-n20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200" aria-label="Bulan berikutnya"&gt;
-    &lt;img src="../../assets/icons/icon-chevron-right.svg" alt="" class="h-4 w-4 opacity-75" aria-hidden="true" /&gt;
+    &lt;img src="../../assets/icons/icon-chevron-right.svg" alt="" class="h-4 w-4" aria-hidden="true" /&gt;
   &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <p style="font-size:13px;font-weight:600;color:var(--color-text-primary);margin:28px 0 12px;font-family:var(--font-primary);">Blok siap copy — Week header &amp; Day</p>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-mono);">calendar-week-day-tailwind.html</span>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwindBlock('tailwind-block-week-day', this)">Salin semua</button>
+          </div>
+          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-mono);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="tailwind-block-week-day">&lt;div class="grid w-full grid-cols-7 gap-1 px-3" role="row"&gt;
+  &lt;span class="text-center text-xs font-medium uppercase tracking-widest text-n300" role="columnheader"&gt;SUN&lt;/span&gt;
+  &lt;span class="text-center text-xs font-medium uppercase tracking-widest text-n300" role="columnheader"&gt;MON&lt;/span&gt;
+  &lt;!-- ... TUE–SAT --&gt;
+&lt;/div&gt;
+
+&lt;div class="grid w-full grid-cols-7 gap-1 px-3 py-2" role="grid" aria-label="Desember 2022"&gt;
+  &lt;button type="button" class="relative mx-auto flex h-8 w-8 items-center justify-center rounded-md text-sm font-medium text-n300 pointer-events-none" disabled&gt;27&lt;/button&gt;
+  &lt;button type="button" class="relative mx-auto flex h-8 w-8 items-center justify-center rounded-md text-sm font-medium text-n900 hover:bg-n20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200"&gt;1&lt;/button&gt;
+  &lt;button type="button" class="relative mx-auto flex h-8 w-8 items-center justify-center rounded-md text-sm font-medium text-b300 after:absolute after:bottom-1 after:left-1/2 after:block after:h-0.5 after:w-3 after:-translate-x-1/2 after:rounded-sm after:bg-b300" aria-current="date"&gt;5&lt;/button&gt;
+  &lt;button type="button" class="relative mx-auto flex h-8 w-8 items-center justify-center rounded-md bg-b50 text-sm font-medium text-b300" aria-selected="true"&gt;7&lt;/button&gt;
 &lt;/div&gt;</code></pre>
         </div>
       </section>
 
       <section style="margin-bottom:48px;">
         <h2>Kode HTML</h2>
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;margin-bottom:16px;">
+          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-mono);">calendar-component.html</span>
+            <button type="button" class="copy-btn" onclick="copyHtml('html-block-component', this)">Salin</button>
+          </div>
+          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-mono);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="html-block-component">&lt;div class="ds-calendar" role="group" aria-label="Kalender Desember 2022"&gt;
+  &lt;div class="ds-calendar__body"&gt;
+    &lt;div class="ds-calendar-month-header" role="group" aria-label="Navigasi bulan"&gt;...&lt;/div&gt;
+    &lt;div class="ds-calendar-week-header" role="row"&gt;...&lt;/div&gt;
+    &lt;div class="ds-calendar-days" role="grid"&gt;...&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="ds-calendar__footer"&gt;
+    &lt;button type="button" class="ds-calendar__action"&gt;Simpan&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;margin-bottom:16px;">
           <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
             <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-mono);">calendar-month-header.html</span>
-            <button class="copy-btn" id="copy-html-btn" onclick="copyHtml()">Salin</button>
+            <button type="button" class="copy-btn" onclick="copyHtml('html-block-month', this)">Salin</button>
           </div>
-          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-mono);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="html-block">&lt;div class="ds-calendar-month-header" role="group" aria-label="Navigasi bulan"&gt;
+          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-mono);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="html-block-month">&lt;div class="ds-calendar-month-header" role="group" aria-label="Navigasi bulan"&gt;
   &lt;button type="button" class="ds-calendar-month-header__nav" aria-label="Bulan sebelumnya"&gt;
     &lt;img src="../../assets/icons/icon-chevron-left.svg" alt="" aria-hidden="true"&gt;
   &lt;/button&gt;
@@ -453,6 +1017,24 @@
   &lt;button type="button" class="ds-calendar-month-header__nav" aria-label="Bulan berikutnya"&gt;
     &lt;img src="../../assets/icons/icon-chevron-right.svg" alt="" aria-hidden="true"&gt;
   &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-mono);">calendar-week-day.html</span>
+            <button type="button" class="copy-btn" onclick="copyHtml('html-block-week-day', this)">Salin</button>
+          </div>
+          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-mono);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="html-block-week-day">&lt;div class="ds-calendar-week-header" role="row"&gt;
+  &lt;span class="ds-calendar-week-header__day" role="columnheader"&gt;SUN&lt;/span&gt;
+  &lt;span class="ds-calendar-week-header__day" role="columnheader"&gt;MON&lt;/span&gt;
+  &lt;!-- ... TUE–SAT --&gt;
+&lt;/div&gt;
+
+&lt;div class="ds-calendar-days" role="grid" aria-label="Desember 2022"&gt;
+  &lt;button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled&gt;27&lt;/button&gt;
+  &lt;button type="button" class="ds-calendar-day"&gt;1&lt;/button&gt;
+  &lt;button type="button" class="ds-calendar-day ds-calendar-day--today" aria-current="date"&gt;5&lt;/button&gt;
+  &lt;button type="button" class="ds-calendar-day ds-calendar-day--selected" aria-selected="true"&gt;7&lt;/button&gt;
 &lt;/div&gt;</code></pre>
         </div>
       </section>
@@ -476,20 +1058,24 @@
       }, 2000);
     });
   }
-  function copyTailwindBlock() {
-    navigator.clipboard.writeText(document.getElementById('tailwind-block').textContent).then(function () {
-      var btn = document.getElementById('copy-tailwind-block-btn');
+  function copyTailwindBlock(id, btn) {
+    navigator.clipboard.writeText(document.getElementById(id).textContent).then(function () {
       btn.textContent = 'Tersalin!';
       btn.classList.add('copied');
-      setTimeout(function () { btn.textContent = 'Salin semua'; btn.classList.remove('copied'); }, 2000);
+      setTimeout(function () {
+        btn.textContent = 'Salin semua';
+        btn.classList.remove('copied');
+      }, 2000);
     });
   }
-  function copyHtml() {
-    navigator.clipboard.writeText(document.getElementById('html-block').textContent).then(function () {
-      var btn = document.getElementById('copy-html-btn');
+  function copyHtml(id, btn) {
+    navigator.clipboard.writeText(document.getElementById(id).textContent).then(function () {
       btn.textContent = 'Tersalin!';
       btn.classList.add('copied');
-      setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
+      setTimeout(function () {
+        btn.textContent = 'Salin';
+        btn.classList.remove('copied');
+      }, 2000);
     });
   }
 </script>
