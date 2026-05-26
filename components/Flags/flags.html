@@ -29,8 +29,8 @@
        DS Flag — code parts (Flags/figma/flag-parts.png)
        DismissButton · IconButton · CustomButton
        Semantic mapping:
-         Icon.Inverse on bold flag surface  → filter invert on icon assets
-         Text.Inverse                       → --color-neutral-n0
+         color/icon/inverse (Icon.Inverse)  → --color-neutral-n0
+         Text.Inverse                       → --color-text-inverse
          Text.Link / Brand                  → --color-blue-b300 (custom on light)
          Border.Focused                     → --color-blue-b200
          Background overlay (hover/press)   → --color-neutral-n800 on n900 preview
@@ -258,6 +258,13 @@
       width: 24px;
       height: 24px;
       display: block;
+    }
+
+    /* color/icon/inverse → Icon.Inverse → var(--color-neutral-n0) */
+    .ds-flag--success .ds-flag__icon img,
+    .ds-flag--error .ds-flag__icon img,
+    .ds-flag--info .ds-flag__icon img {
+      filter: brightness(0) invert(1);
     }
 
     .ds-flag__main {
@@ -496,6 +503,44 @@
       font-weight: 600;
       color: var(--color-text-tertiary);
       padding-top: var(--space-100);
+    }
+
+    /* Demo interaktif — expand / collapse micro-interaction */
+    #demo-flag .ds-flag__body-anim {
+      display: grid;
+      grid-template-rows: 1fr;
+      transition: grid-template-rows var(--transition-fast), opacity var(--transition-fast);
+      opacity: 1;
+    }
+
+    #demo-flag.ds-flag--collapsed .ds-flag__body-anim {
+      grid-template-rows: 0fr;
+      opacity: 0;
+    }
+
+    #demo-flag.ds-flag--collapsed .ds-flag__body {
+      display: block;
+    }
+
+    #demo-flag .ds-flag__body {
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    #demo-flag-chevron {
+      transition: transform var(--transition-fast);
+      transform-origin: center;
+    }
+
+    #demo-flag:not(.ds-flag--collapsed) #demo-flag-chevron {
+      transform: rotate(180deg);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #demo-flag .ds-flag__body-anim,
+      #demo-flag-chevron {
+        transition: none;
+      }
     }
 
     .flag-components-row__variants {
@@ -1163,18 +1208,20 @@
                 <div class="ds-flag__title-row">
                   <h3 class="ds-flag__title">Title</h3>
                   <div class="ds-flag__controls">
-                    <button type="button" class="ds-flag-part ds-flag-part--icon" id="demo-flag-toggle" aria-label="Perluas detail flag" aria-expanded="false" aria-controls="demo-flag-body">
+                    <button type="button" class="ds-flag-part ds-flag-part--icon" id="demo-flag-toggle" aria-label="Perluas detail flag" aria-expanded="false" aria-controls="demo-flag-body-anim">
                       <img src="../../assets/icons/icon-chevron-down.svg" alt="" id="demo-flag-chevron" aria-hidden="true">
                     </button>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="ds-flag__body" id="demo-flag-body">
-              <p class="ds-flag__description">Your board is almost ready to be used. We just need to finish setting up your account.</p>
-              <div class="ds-flag__actions">
-                <button type="button" class="ds-flag__action ds-flag__action--primary">Join the conversation</button>
-                <button type="button" class="ds-flag-part ds-flag-part--custom">No thanks</button>
+            <div class="ds-flag__body-anim" id="demo-flag-body-anim">
+              <div class="ds-flag__body" id="demo-flag-body">
+                <p class="ds-flag__description">Your board is almost ready to be used. We just need to finish setting up your account.</p>
+                <div class="ds-flag__actions">
+                  <button type="button" class="ds-flag__action ds-flag__action--primary">Join the conversation</button>
+                  <button type="button" class="ds-flag-part ds-flag-part--custom">No thanks</button>
+                </div>
               </div>
             </div>
           </article>
@@ -1454,16 +1501,12 @@
   (function () {
     var flag = document.getElementById('demo-flag');
     var toggle = document.getElementById('demo-flag-toggle');
-    var chevron = document.getElementById('demo-flag-chevron');
-    if (!flag || !toggle || !chevron) return;
+    if (!flag || !toggle) return;
     toggle.addEventListener('click', function () {
       var collapsed = flag.classList.toggle('ds-flag--collapsed');
       var expanded = !collapsed;
       toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
       toggle.setAttribute('aria-label', expanded ? 'Ciutkan detail flag' : 'Perluas detail flag');
-      chevron.src = expanded
-        ? '../../assets/icons/icon-chevron-up.svg'
-        : '../../assets/icons/icon-chevron-down.svg';
     });
   })();
 
