@@ -14,9 +14,12 @@
           colors: {
             b50:  '#E9F2FB', b75:  '#A3CBEE', b200: '#4495DD', b300: '#1E7FD6',
             n0:   '#FFFFFF', n10:  '#FAFBFB', n20:  '#F5F6F7',
-            n40:  '#DFE2E6', n60:  '#B3B9C4', n900: '#091E42',
+            n40:  '#DFE2E6', n60:  '#B3B9C4', n70:  '#A6AEBB',
+            n300: '#5D6B82', n900: '#091E42',
             g50:  '#E6F7EF', g75:  '#96DCBC', g100: '#6BCEA0', g300: '#00AA5B', g500: '#006838',
+            o50:  '#FFF4E8', o75:  '#FFD19F', o100: '#FFBF77', o300: '#FF9015', o500: '#9C580D',
             r50:  '#FDE8E9', r75:  '#F7A2A5', r100: '#F8BFC2', r300: '#EC1C24', r500: '#901116',
+            p50:  '#F1ECFE', p75:  '#C4B0FB', p100: '#AB8FFA', p300: '#6E3EF6', p500: '#432696',
           },
         }
       }
@@ -294,6 +297,186 @@
     .ds-tag--greenlight:not(.ds-tag--removable):hover .ds-tag__icon,
     .ds-tag--greenlight:not(.ds-tag--removable).ds-tag--state-hover .ds-tag__icon {
       filter: var(--ds-tag-greenlight-icon-success);
+    }
+
+    /* ================================================================
+       DS Tag — variant=greylight (Tags/figma/component-tag-greylight.png)
+         Background.Accent.Gray.Subtler     → --color-neutral-n40   (default, focus)
+         Background.Accent.Gray.Subtlest    → --color-neutral-n20   (hover)
+         Background.Accent.Gray.Subtle      → --color-neutral-n70   (pressed)
+         Text.Bold                          → --color-neutral-n900
+         Text.Subtle                        → --color-neutral-n300  (hover — teks & ikon)
+         removable hover/pressed → global Danger.Tag (sama greenlight)
+         Border.Focused                     → --color-blue-b200
+    ================================================================ */
+    .ds-tag--greylight {
+      background-color: var(--color-neutral-n40);
+      color: var(--color-neutral-n900);
+      --ds-tag-greylight-icon-subtle: brightness(0) saturate(100%) invert(38%) sepia(14%) saturate(1018%) hue-rotate(182deg) brightness(92%) contrast(88%);
+    }
+
+    /* content=text only | leading icon + text — hover: Text.Subtle */
+    .ds-tag--greylight:not(.ds-tag--removable):hover,
+    .ds-tag--greylight:not(.ds-tag--removable).ds-tag--state-hover {
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n300);
+    }
+
+    .ds-tag--greylight:not(.ds-tag--removable):active,
+    .ds-tag--greylight:not(.ds-tag--removable).ds-tag--state-pressed,
+    .ds-tag--greylight:not(.ds-tag--removable):focus-visible,
+    .ds-tag--greylight:not(.ds-tag--removable).ds-tag--state-focus {
+      color: var(--color-neutral-n900);
+    }
+    .ds-tag--greylight:not(.ds-tag--removable):active,
+    .ds-tag--greylight:not(.ds-tag--removable).ds-tag--state-pressed {
+      background-color: var(--color-neutral-n70);
+    }
+    .ds-tag--greylight:not(.ds-tag--removable):focus-visible,
+    .ds-tag--greylight:not(.ds-tag--removable).ds-tag--state-focus {
+      outline: none;
+      background-color: var(--color-neutral-n40);
+      border-color: var(--color-blue-b200);
+      box-shadow: 0 0 0 1px var(--color-blue-b200);
+    }
+
+    /* Ikon — hover netral: Text.Subtle */
+    .ds-tag--greylight:not(.ds-tag--removable):hover .ds-tag__icon,
+    .ds-tag--greylight:not(.ds-tag--removable).ds-tag--state-hover .ds-tag__icon {
+      filter: var(--ds-tag-greylight-icon-subtle);
+    }
+    .ds-tag--greylight:not(.ds-tag--removable):active .ds-tag__icon,
+    .ds-tag--greylight:not(.ds-tag--removable).ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--greylight:not(.ds-tag--removable).ds-tag--state-focus .ds-tag__icon {
+      filter: none;
+    }
+
+    /* ================================================================
+       DS Tag — variant=yellowlight (Tags/figma/component-tag-yellowlight.png)
+         Background.Accent.Yellow.Subtler    → --color-orange-o75   (default, focus)
+         Background.Accent.Yellow.Subtlest   → --color-orange-o50   (hover)
+         Background.Accent.Yellow.Subtle     → --color-orange-o100  (pressed)
+         Text.Accent.Yellow                  → --color-orange-o500
+         Text.Warning                        → --color-orange-o300  (hover — teks & ikon)
+         removable hover/pressed → sama varian greenlight (global Danger.Tag)
+         Border.Focused                      → --color-blue-b200
+    ================================================================ */
+    .ds-tag--yellowlight {
+      background-color: var(--color-orange-o75);
+      color: var(--color-orange-o500);
+      --ds-tag-yellowlight-icon-accent: brightness(0) saturate(100%) invert(28%) sepia(72%) saturate(1800%) hue-rotate(12deg) brightness(95%) contrast(101%);
+      --ds-tag-yellowlight-icon-warning: brightness(0) saturate(100%) invert(58%) sepia(98%) saturate(2200%) hue-rotate(1deg) brightness(102%) contrast(101%);
+    }
+
+    /* content=text only | leading icon + text — hover: Text.Warning */
+    .ds-tag--yellowlight:not(.ds-tag--removable):hover,
+    .ds-tag--yellowlight:not(.ds-tag--removable).ds-tag--state-hover {
+      color: var(--color-orange-o300);
+    }
+    .ds-tag--yellowlight:not(.ds-tag--removable):hover,
+    .ds-tag--yellowlight:not(.ds-tag--removable).ds-tag--state-hover {
+      background-color: var(--color-orange-o50);
+    }
+
+    .ds-tag--yellowlight:not(.ds-tag--removable):active,
+    .ds-tag--yellowlight:not(.ds-tag--removable).ds-tag--state-pressed,
+    .ds-tag--yellowlight:not(.ds-tag--removable):focus-visible,
+    .ds-tag--yellowlight:not(.ds-tag--removable).ds-tag--state-focus {
+      color: var(--color-orange-o500);
+    }
+    .ds-tag--yellowlight:not(.ds-tag--removable):active,
+    .ds-tag--yellowlight:not(.ds-tag--removable).ds-tag--state-pressed {
+      background-color: var(--color-orange-o100);
+    }
+    .ds-tag--yellowlight:not(.ds-tag--removable):focus-visible,
+    .ds-tag--yellowlight:not(.ds-tag--removable).ds-tag--state-focus {
+      outline: none;
+      background-color: var(--color-orange-o75);
+      border-color: var(--color-blue-b200);
+      box-shadow: 0 0 0 1px var(--color-blue-b200);
+    }
+
+    /* Ikon — default/pressed/focus: Text.Accent.Yellow */
+    .ds-tag--yellowlight .ds-tag__icon,
+    .ds-tag--yellowlight .ds-tag__remove img {
+      filter: var(--ds-tag-yellowlight-icon-accent);
+    }
+    .ds-tag--yellowlight:active .ds-tag__icon,
+    .ds-tag--yellowlight.ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--yellowlight:active .ds-tag__remove img,
+    .ds-tag--yellowlight.ds-tag--state-pressed .ds-tag__remove img,
+    .ds-tag--yellowlight.ds-tag--state-focus .ds-tag__icon {
+      filter: var(--ds-tag-yellowlight-icon-accent);
+    }
+
+    /* Ikon — hover netral: Text.Warning */
+    .ds-tag--yellowlight:not(.ds-tag--removable):hover .ds-tag__icon,
+    .ds-tag--yellowlight:not(.ds-tag--removable).ds-tag--state-hover .ds-tag__icon {
+      filter: var(--ds-tag-yellowlight-icon-warning);
+    }
+
+    /* ================================================================
+       DS Tag — variant=purplelight (Tags/figma/component-tag-purplelight.png)
+         Background.Accent.Purple.Subtler    → --color-purple-p75   (default, focus)
+         Background.Accent.Purple.Subtlest   → --color-purple-p50   (hover)
+         Background.Accent.Purple.Subtle     → --color-purple-p100  (pressed)
+         Text.Accent.Purple                  → --color-purple-p500
+         Text.Discovery                      → --color-purple-p300  (hover — teks & ikon)
+         removable hover/pressed → sama varian greenlight (global Danger.Tag)
+         Border.Focused                      → --color-blue-b200
+    ================================================================ */
+    .ds-tag--purplelight {
+      background-color: var(--color-purple-p75);
+      color: var(--color-purple-p500);
+      --ds-tag-purplelight-icon-accent: brightness(0) saturate(100%) invert(16%) sepia(42%) saturate(4200%) hue-rotate(252deg) brightness(92%) contrast(95%);
+      --ds-tag-purplelight-icon-discovery: brightness(0) saturate(100%) invert(33%) sepia(95%) saturate(4500%) hue-rotate(248deg) brightness(98%) contrast(98%);
+    }
+
+    /* content=text only | leading icon + text — hover: Text.Discovery */
+    .ds-tag--purplelight:not(.ds-tag--removable):hover,
+    .ds-tag--purplelight:not(.ds-tag--removable).ds-tag--state-hover {
+      color: var(--color-purple-p300);
+    }
+    .ds-tag--purplelight:not(.ds-tag--removable):hover,
+    .ds-tag--purplelight:not(.ds-tag--removable).ds-tag--state-hover {
+      background-color: var(--color-purple-p50);
+    }
+
+    .ds-tag--purplelight:not(.ds-tag--removable):active,
+    .ds-tag--purplelight:not(.ds-tag--removable).ds-tag--state-pressed,
+    .ds-tag--purplelight:not(.ds-tag--removable):focus-visible,
+    .ds-tag--purplelight:not(.ds-tag--removable).ds-tag--state-focus {
+      color: var(--color-purple-p500);
+    }
+    .ds-tag--purplelight:not(.ds-tag--removable):active,
+    .ds-tag--purplelight:not(.ds-tag--removable).ds-tag--state-pressed {
+      background-color: var(--color-purple-p100);
+    }
+    .ds-tag--purplelight:not(.ds-tag--removable):focus-visible,
+    .ds-tag--purplelight:not(.ds-tag--removable).ds-tag--state-focus {
+      outline: none;
+      background-color: var(--color-purple-p75);
+      border-color: var(--color-blue-b200);
+      box-shadow: 0 0 0 1px var(--color-blue-b200);
+    }
+
+    /* Ikon — default/pressed/focus: Text.Accent.Purple */
+    .ds-tag--purplelight .ds-tag__icon,
+    .ds-tag--purplelight .ds-tag__remove img {
+      filter: var(--ds-tag-purplelight-icon-accent);
+    }
+    .ds-tag--purplelight:active .ds-tag__icon,
+    .ds-tag--purplelight.ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--purplelight:active .ds-tag__remove img,
+    .ds-tag--purplelight.ds-tag--state-pressed .ds-tag__remove img,
+    .ds-tag--purplelight.ds-tag--state-focus .ds-tag__icon {
+      filter: var(--ds-tag-purplelight-icon-accent);
+    }
+
+    /* Ikon — hover netral: Text.Discovery */
+    .ds-tag--purplelight:not(.ds-tag--removable):hover .ds-tag__icon,
+    .ds-tag--purplelight:not(.ds-tag--removable).ds-tag--state-hover .ds-tag__icon {
+      filter: var(--ds-tag-purplelight-icon-discovery);
     }
 
     .tag-state-matrix + .tag-state-matrix {
@@ -579,7 +762,7 @@
       <section class="mb-12">
         <h2 style="border:none;background:none;padding:0;margin-bottom:12px;">Tags</h2>
         <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:720px;margin-bottom:24px;">
-          Chip pill untuk label, filter aktif, atau tag yang bisa dihapus. Varian: <code>standard</code>, <code>bluelight</code>, <code>redlight</code>, <code>greenlight</code>.
+          Chip pill untuk label, filter aktif, atau tag yang bisa dihapus. Varian: <code>standard</code>, <code>bluelight</code>, <code>redlight</code>, <code>greenlight</code>, <code>greylight</code>, <code>yellowlight</code>, <code>purplelight</code>.
         </p>
 
         <h3 style="font-size:15px;font-weight:600;color:var(--color-text-primary);margin:0 0 12px;font-family:var(--font-primary);">variant=standard</h3>
@@ -1049,6 +1232,357 @@
           <div style="font-size:11px;font-weight:700;color:var(--color-text-tertiary);font-family:var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Referensi Figma — greenlight</div>
           <img src="figma/component-tag-greenlight.png" alt="Referensi Figma Tag greenlight" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
         </div>
+
+        <h3 style="font-size:15px;font-weight:600;color:var(--color-text-primary);margin:32px 0 12px;font-family:var(--font-primary);">variant=greylight</h3>
+        <div class="tag-state-matrix" role="table" aria-label="Varian Tag greylight — state matrix">
+          <div class="tag-state-matrix__head">Default</div>
+          <div class="tag-state-matrix__head">Hover</div>
+          <div class="tag-state-matrix__head">Pressed</div>
+          <div class="tag-state-matrix__head">Focus</div>
+
+          <div class="tag-state-matrix__label">content=text only</div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--greylight"><span class="ds-tag__label">Tag</span></span></div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--greylight ds-tag--state-hover"><span class="ds-tag__label">Tag</span></span></div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--greylight ds-tag--state-pressed"><span class="ds-tag__label">Tag</span></span></div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--greylight ds-tag--state-focus" tabindex="0"><span class="ds-tag__label">Tag</span></span></div>
+
+          <div class="tag-state-matrix__label">content=leading icon + text</div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greylight">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greylight ds-tag--state-hover">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greylight ds-tag--state-pressed">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greylight ds-tag--state-focus" tabindex="0">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+
+          <div class="tag-state-matrix__label">content=text + remove (removable)</div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greylight ds-tag--removable">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greylight ds-tag--removable ds-tag--state-hover">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greylight ds-tag--removable ds-tag--state-pressed">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greylight ds-tag--removable">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove ds-tag__remove--state-focus" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+
+          <div class="tag-state-matrix__label">content=leading icon + text + remove</div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greylight ds-tag--removable">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greylight ds-tag--removable ds-tag--state-hover">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greylight ds-tag--removable ds-tag--state-pressed">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--greylight ds-tag--removable">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove ds-tag__remove--state-focus" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;margin-top:16px;">
+          <div style="font-size:11px;font-weight:700;color:var(--color-text-tertiary);font-family:var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Referensi Figma — greylight</div>
+          <img src="figma/component-tag-greylight.png" alt="Referensi Figma Tag greylight" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+        </div>
+
+        <h3 style="font-size:15px;font-weight:600;color:var(--color-text-primary);margin:32px 0 12px;font-family:var(--font-primary);">variant=yellowlight</h3>
+        <div class="tag-state-matrix" role="table" aria-label="Varian Tag yellowlight — state matrix">
+          <div class="tag-state-matrix__head">Default</div>
+          <div class="tag-state-matrix__head">Hover</div>
+          <div class="tag-state-matrix__head">Pressed</div>
+          <div class="tag-state-matrix__head">Focus</div>
+
+          <div class="tag-state-matrix__label">content=text only</div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--yellowlight"><span class="ds-tag__label">Tag</span></span></div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--yellowlight ds-tag--state-hover"><span class="ds-tag__label">Tag</span></span></div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--yellowlight ds-tag--state-pressed"><span class="ds-tag__label">Tag</span></span></div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--yellowlight ds-tag--state-focus" tabindex="0"><span class="ds-tag__label">Tag</span></span></div>
+
+          <div class="tag-state-matrix__label">content=leading icon + text</div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--yellowlight">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--yellowlight ds-tag--state-hover">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--yellowlight ds-tag--state-pressed">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--yellowlight ds-tag--state-focus" tabindex="0">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+
+          <div class="tag-state-matrix__label">content=text + remove (removable)</div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--yellowlight ds-tag--removable">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--yellowlight ds-tag--removable ds-tag--state-hover">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--yellowlight ds-tag--removable ds-tag--state-pressed">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--yellowlight ds-tag--removable">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove ds-tag__remove--state-focus" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+
+          <div class="tag-state-matrix__label">content=leading icon + text + remove</div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--yellowlight ds-tag--removable">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--yellowlight ds-tag--removable ds-tag--state-hover">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--yellowlight ds-tag--removable ds-tag--state-pressed">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--yellowlight ds-tag--removable">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove ds-tag__remove--state-focus" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;margin-top:16px;">
+          <div style="font-size:11px;font-weight:700;color:var(--color-text-tertiary);font-family:var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Referensi Figma — yellowlight</div>
+          <img src="figma/component-tag-yellowlight.png" alt="Referensi Figma Tag yellowlight" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+        </div>
+
+        <h3 style="font-size:15px;font-weight:600;color:var(--color-text-primary);margin:32px 0 12px;font-family:var(--font-primary);">variant=purplelight</h3>
+        <div class="tag-state-matrix" role="table" aria-label="Varian Tag purplelight — state matrix">
+          <div class="tag-state-matrix__head">Default</div>
+          <div class="tag-state-matrix__head">Hover</div>
+          <div class="tag-state-matrix__head">Pressed</div>
+          <div class="tag-state-matrix__head">Focus</div>
+
+          <div class="tag-state-matrix__label">content=text only</div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--purplelight"><span class="ds-tag__label">Tag</span></span></div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--purplelight ds-tag--state-hover"><span class="ds-tag__label">Tag</span></span></div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--purplelight ds-tag--state-pressed"><span class="ds-tag__label">Tag</span></span></div>
+          <div class="tag-state-matrix__cell"><span class="ds-tag ds-tag--purplelight ds-tag--state-focus" tabindex="0"><span class="ds-tag__label">Tag</span></span></div>
+
+          <div class="tag-state-matrix__label">content=leading icon + text</div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--purplelight">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--purplelight ds-tag--state-hover">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--purplelight ds-tag--state-pressed">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--purplelight ds-tag--state-focus" tabindex="0">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+            </span>
+          </div>
+
+          <div class="tag-state-matrix__label">content=text + remove (removable)</div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--purplelight ds-tag--removable">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--purplelight ds-tag--removable ds-tag--state-hover">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--purplelight ds-tag--removable ds-tag--state-pressed">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--purplelight ds-tag--removable">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove ds-tag__remove--state-focus" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+
+          <div class="tag-state-matrix__label">content=leading icon + text + remove</div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--purplelight ds-tag--removable">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--purplelight ds-tag--removable ds-tag--state-hover">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--purplelight ds-tag--removable ds-tag--state-pressed">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+          <div class="tag-state-matrix__cell">
+            <span class="ds-tag ds-tag--purplelight ds-tag--removable">
+              <img class="ds-tag__icon" src="../../assets/icons/icon-tag.svg" alt="" aria-hidden="true">
+              <span class="ds-tag__label">Tag</span>
+              <button type="button" class="ds-tag__remove ds-tag__remove--state-focus" aria-label="Hapus tag Tag">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;margin-top:16px;">
+          <div style="font-size:11px;font-weight:700;color:var(--color-text-tertiary);font-family:var(--font-mono);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Referensi Figma — purplelight</div>
+          <img src="figma/component-tag-purplelight.png" alt="Referensi Figma Tag purplelight" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+        </div>
       </section>
 
       <section style="margin-bottom:48px;">
@@ -1075,8 +1609,20 @@
             <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Default/focus: <code>Background.Accent.Green.Subtler</code> + <code>Text.Accent.Green</code>. Hover netral: <code>Background.Accent.Green.Subtlest</code> + <code>Text.Success</code>. Removable hover: sama <code>standard</code> (<code>Danger.Tag</code> + <code>Text.Danger</code>).</div>
           </div>
           <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Varian greylight</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Default/focus: <code>Background.Accent.Gray.Subtler</code> (<code>n40</code>) + <code>Text.Bold</code>. Hover netral: <code>Background.Accent.Gray.Subtlest</code> (<code>n20</code>) + <code>Text.Subtle</code>. Pressed netral: <code>Background.Accent.Gray.Subtle</code> (<code>n70</code>). Removable hover/pressed: global <code>Danger.Tag</code> (sama <code>greenlight</code>).</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Varian yellowlight</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Default/focus: <code>Background.Accent.Yellow.Subtler</code> + <code>Text.Accent.Yellow</code>. Hover netral: <code>Background.Accent.Yellow.Subtlest</code> + <code>Text.Warning</code>. Pressed: <code>Background.Accent.Yellow.Subtle</code>. Removable hover/pressed: sama <code>greenlight</code> (<code>Danger.Tag</code> global).</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Varian purplelight</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Default/focus: <code>Background.Accent.Purple.Subtler</code> + <code>Text.Accent.Purple</code>. Hover netral: <code>Background.Accent.Purple.Subtlest</code> + <code>Text.Discovery</code>. Pressed netral: <code>Background.Accent.Purple.Subtle</code>. Removable hover/pressed: sama <code>greenlight</code> (<code>Danger.Tag</code> global).</div>
+          </div>
+          <div class="usage-info-card">
             <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Konten &amp; ikon</div>
-            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Empat struktur konten: teks saja, ikon + teks, teks + remove, ikon + teks + remove. Class: <code>ds-tag--standard</code>, <code>ds-tag--bluelight</code>, <code>ds-tag--redlight</code>, atau <code>ds-tag--greenlight</code> + <code>ds-tag--removable</code>.</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Empat struktur konten: teks saja, ikon + teks, teks + remove, ikon + teks + remove. Class: <code>ds-tag--standard</code>, <code>ds-tag--bluelight</code>, <code>ds-tag--redlight</code>, <code>ds-tag--greenlight</code>, <code>ds-tag--greylight</code>, <code>ds-tag--yellowlight</code>, <code>ds-tag--purplelight</code> + <code>ds-tag--removable</code>.</div>
           </div>
         </div>
       </section>
@@ -1144,6 +1690,18 @@
           <div class="tw-snippet-row">
             <code class="tw-snippet-code">greenlight · default</code>
             <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-g75 text-g500 hover:bg-g50 hover:text-g300 active:bg-g100 active:text-g500 focus-visible:bg-g75 focus-visible:text-g500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">greylight · default</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-n40 text-n900 hover:bg-n20 hover:text-n300 active:bg-n70 active:text-n900 focus-visible:bg-n40 focus-visible:text-n900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">yellowlight · default</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-o75 text-o500 hover:bg-o50 hover:text-o300 active:bg-o100 active:text-o500 focus-visible:bg-o75 focus-visible:text-o500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">purplelight · default</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-p75 text-p500 hover:bg-p50 hover:text-p300 active:bg-p100 active:text-p500 focus-visible:bg-p75 focus-visible:text-p500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
           </div>
           <div class="tw-snippet-row">
             <code class="tw-snippet-code">Leading icon</code>
