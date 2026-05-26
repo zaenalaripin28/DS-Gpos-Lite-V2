@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flags — DS GPOS Lite V2</title>
+  <link rel="stylesheet" href="../../styles/globals.css">
+  <link rel="stylesheet" href="../../styles/enhancements.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            b50:  '#E9F2FB', b200: '#4495DD', b300: '#1E7FD6', b400: '#155996',
+            n0:   '#FFFFFF', n20:  '#F5F6F7', n30:  '#EBEDF0', n40:  '#DFE2E6',
+            n50:  '#C2C7D0', n300: '#5D6B82', n500: '#42526D', n700: '#243757',
+            n800: '#15294B', n900: '#091E42',
+            g300: '#00AA5B', g400: '#008746', g500: '#006838',
+            r300: '#EC1C24', r400: '#C4171E',
+            o200: '#FFA33D', o300: '#FF9015',
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    /* ================================================================
+       DS Flag — code parts (Flags/figma/flag-parts.png)
+       DismissButton · IconButton · CustomButton
+       Semantic mapping:
+         Icon.Inverse on bold flag surface  → filter invert on icon assets
+         Text.Inverse                       → --color-neutral-n0
+         Text.Link / Brand                  → --color-blue-b300 (custom on light)
+         Border.Focused                     → --color-blue-b200
+         Background overlay (hover/press)   → --color-neutral-n800 on n900 preview
+    ================================================================ */
+    .ds-flag-part {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-family: var(--font-primary);
+      border-radius: var(--border-radius-sm);
+      transition: background-color var(--transition-fast), box-shadow var(--transition-fast),
+                  color var(--transition-fast), opacity var(--transition-fast);
+    }
+
+    .ds-flag-part--dismiss,
+    .ds-flag-part--icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .ds-flag-part--dismiss img,
+    .ds-flag-part--icon img {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
+    .ds-flag-part--custom {
+      min-height: 24px;
+      padding: var(--space-050) var(--space-100);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--text-body-small-medium-lh);
+      color: var(--color-neutral-n0);
+      text-decoration: none;
+    }
+
+    /* Preview on bold / inverse flag surface (Figma matrix) */
+    .ds-flag-parts-preview .ds-flag-part--dismiss img,
+    .ds-flag-parts-preview .ds-flag-part--icon img {
+      filter: brightness(0) invert(1);
+    }
+
+    .ds-flag-parts-preview .ds-flag-part--dismiss:hover,
+    .ds-flag-parts-preview .ds-flag-part--dismiss.ds-flag-part--hover,
+    .ds-flag-parts-preview .ds-flag-part--icon:hover,
+    .ds-flag-parts-preview .ds-flag-part--icon.ds-flag-part--hover {
+      background-color: var(--color-neutral-n800);
+    }
+
+    .ds-flag-parts-preview .ds-flag-part--dismiss:active,
+    .ds-flag-parts-preview .ds-flag-part--dismiss.ds-flag-part--press,
+    .ds-flag-parts-preview .ds-flag-part--icon:active,
+    .ds-flag-parts-preview .ds-flag-part--icon.ds-flag-part--press {
+      background-color: var(--color-neutral-n800);
+      opacity: 0.85;
+    }
+
+    .ds-flag-parts-preview .ds-flag-part--dismiss:focus-visible,
+    .ds-flag-parts-preview .ds-flag-part--dismiss.ds-flag-part--focus,
+    .ds-flag-parts-preview .ds-flag-part--icon:focus-visible,
+    .ds-flag-parts-preview .ds-flag-part--icon.ds-flag-part--focus {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+
+    .ds-flag-parts-preview .ds-flag-part--custom:hover,
+    .ds-flag-parts-preview .ds-flag-part--custom.ds-flag-part--hover,
+    .ds-flag-parts-preview .ds-flag-part--custom:active,
+    .ds-flag-parts-preview .ds-flag-part--custom.ds-flag-part--press {
+      text-decoration: underline;
+    }
+
+    .ds-flag-parts-preview .ds-flag-part--custom:focus-visible,
+    .ds-flag-parts-preview .ds-flag-part--custom.ds-flag-part--focus {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+
+    .ds-flag-parts-preview .ds-flag-part--custom {
+      color: var(--color-neutral-n0);
+    }
+
+    /* Interactive demo on light surface */
+    .ds-flag-part--dismiss img,
+    .ds-flag-part--icon img {
+      filter: brightness(0) saturate(100%) invert(11%) sepia(19%) saturate(1942%) hue-rotate(186deg) brightness(95%) contrast(101%);
+    }
+
+    .ds-flag-part--dismiss:hover,
+    .ds-flag-part--dismiss.ds-flag-part--hover,
+    .ds-flag-part--icon:hover,
+    .ds-flag-part--icon.ds-flag-part--hover {
+      background-color: var(--color-neutral-n20);
+    }
+
+    .ds-flag-part--dismiss:active,
+    .ds-flag-part--dismiss.ds-flag-part--press,
+    .ds-flag-part--icon:active,
+    .ds-flag-part--icon.ds-flag-part--press {
+      background-color: var(--color-neutral-n40);
+    }
+
+    .ds-flag-part--dismiss:focus-visible,
+    .ds-flag-part--dismiss.ds-flag-part--focus,
+    .ds-flag-part--icon:focus-visible,
+    .ds-flag-part--icon.ds-flag-part--focus {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+
+    .ds-flag-part--custom {
+      color: var(--color-blue-b300);
+    }
+
+    .ds-flag-part--custom:hover,
+    .ds-flag-part--custom.ds-flag-part--hover,
+    .ds-flag-part--custom:active,
+    .ds-flag-part--custom.ds-flag-part--press {
+      text-decoration: underline;
+      color: var(--color-blue-b400);
+    }
+
+    .ds-flag-part--custom:focus-visible,
+    .ds-flag-part--custom.ds-flag-part--focus {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+
+    .flag-parts-matrix {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--color-surface);
+    }
+    .flag-parts-matrix__head {
+      padding: 10px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      background: var(--color-neutral-n20);
+      border-bottom: 1px solid var(--color-border);
+      font-family: var(--font-primary);
+      text-align: center;
+    }
+    .flag-parts-matrix__head:not(:last-child) {
+      border-right: 1px solid var(--color-border);
+    }
+    .flag-parts-matrix__label {
+      grid-column: 1 / -1;
+      padding: 8px 16px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      color: var(--color-text-tertiary);
+      background: var(--color-neutral-n10);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .flag-parts-matrix__cell {
+      padding: 28px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 72px;
+      border-top: 1px solid var(--color-border);
+      border-right: 1px solid var(--color-border);
+    }
+    .flag-parts-matrix__cell:nth-child(4n+5) {
+      border-right: none;
+    }
+    .ds-flag-parts-preview .flag-parts-matrix__cell {
+      background-color: var(--color-neutral-n900);
+      border-color: var(--color-neutral-n800);
+    }
+    .ds-flag-parts-preview .flag-parts-matrix__label {
+      background: var(--color-neutral-n800);
+      color: var(--color-neutral-n50);
+      border-color: var(--color-neutral-n800);
+    }
+
+    /* ================================================================
+       DS Flag — components (Flags/figma/Flag-components.png)
+       appearance: normal | success | error | warning | info
+    ================================================================ */
+    .ds-flag {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-100);
+      width: 100%;
+      max-width: 400px;
+      padding: var(--space-150);
+      border-radius: var(--border-radius-lg);
+      font-family: var(--font-primary);
+      box-sizing: border-box;
+    }
+
+    .ds-flag__header {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-100);
+    }
+
+    .ds-flag__icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ds-flag__icon img {
+      width: 24px;
+      height: 24px;
+      display: block;
+    }
+
+    .ds-flag__main {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .ds-flag__title-row {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-050);
+    }
+
+    .ds-flag__title {
+      flex: 1;
+      margin: 0;
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--text-body-small-medium-lh);
+    }
+
+    .ds-flag__controls {
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      gap: var(--space-025);
+      margin-left: auto;
+    }
+
+    .ds-flag__body {
+      padding-left: calc(24px + var(--space-100));
+    }
+
+    .ds-flag--collapsed .ds-flag__body {
+      display: none;
+    }
+
+    .ds-flag__description {
+      margin: 0 0 var(--space-100);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--text-body-small-regular-lh);
+    }
+
+    .ds-flag__actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-100);
+    }
+
+    .ds-flag__action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 24px;
+      padding: var(--space-050) var(--space-150);
+      border: none;
+      border-radius: var(--border-radius-sm);
+      font-family: inherit;
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--text-body-small-medium-lh);
+      cursor: pointer;
+      transition: background-color var(--transition-fast), color var(--transition-fast);
+    }
+
+    .ds-flag__action--link {
+      padding: var(--space-050) var(--space-100);
+      background: transparent;
+      color: var(--color-blue-b300);
+    }
+
+    .ds-flag__action--link:hover {
+      text-decoration: underline;
+      color: var(--color-blue-b400);
+    }
+
+    /* ── appearance=normal ── */
+    .ds-flag--normal {
+      background-color: var(--color-neutral-n0);
+      color: var(--color-neutral-n900);
+      border: 1px solid var(--color-neutral-n30);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .ds-flag--normal .ds-flag__description {
+      color: var(--color-neutral-n500);
+    }
+
+    /* ── appearance=success ── */
+    .ds-flag--success {
+      background-color: var(--color-green-g300);
+      color: var(--color-neutral-n0);
+    }
+
+    .ds-flag--success .ds-flag__description {
+      color: var(--color-neutral-n0);
+      opacity: 0.92;
+    }
+
+    .ds-flag--success .ds-flag__action--primary {
+      background-color: var(--color-green-g400);
+      color: var(--color-neutral-n0);
+    }
+
+    .ds-flag--success .ds-flag__action--primary:hover {
+      background-color: var(--color-green-g500);
+    }
+
+    /* ── appearance=error ── */
+    .ds-flag--error {
+      background-color: var(--color-red-r300);
+      color: var(--color-neutral-n0);
+    }
+
+    .ds-flag--error .ds-flag__description {
+      color: var(--color-neutral-n0);
+      opacity: 0.92;
+    }
+
+    .ds-flag--error .ds-flag__action--primary {
+      background-color: var(--color-red-r400);
+      color: var(--color-neutral-n0);
+    }
+
+    .ds-flag--error .ds-flag__action--primary:hover {
+      background-color: var(--color-red-r500);
+    }
+
+    /* ── appearance=warning ── */
+    .ds-flag--warning {
+      background-color: var(--color-orange-o200);
+      color: var(--color-neutral-n900);
+    }
+
+    .ds-flag--warning .ds-flag__description {
+      color: var(--color-neutral-n700);
+    }
+
+    .ds-flag--warning .ds-flag__action--primary {
+      background-color: var(--color-orange-o300);
+      color: var(--color-neutral-n900);
+    }
+
+    .ds-flag--warning .ds-flag__action--primary:hover {
+      background-color: var(--color-orange-o500);
+      color: var(--color-neutral-n0);
+    }
+
+    /* ── appearance=info ── */
+    .ds-flag--info {
+      background-color: var(--color-neutral-n500);
+      color: var(--color-neutral-n0);
+    }
+
+    .ds-flag--info .ds-flag__description {
+      color: var(--color-neutral-n0);
+      opacity: 0.92;
+    }
+
+    .ds-flag--info .ds-flag__action--primary {
+      background-color: var(--color-neutral-n700);
+      color: var(--color-neutral-n0);
+    }
+
+    .ds-flag--info .ds-flag__action--primary:hover {
+      background-color: var(--color-neutral-n800);
+    }
+
+    /* Code parts on bold flag surfaces */
+    .ds-flag--success .ds-flag-part--dismiss img,
+    .ds-flag--success .ds-flag-part--icon img,
+    .ds-flag--error .ds-flag-part--dismiss img,
+    .ds-flag--error .ds-flag-part--icon img,
+    .ds-flag--info .ds-flag-part--dismiss img,
+    .ds-flag--info .ds-flag-part--icon img {
+      filter: brightness(0) invert(1);
+    }
+
+    .ds-flag--success .ds-flag-part--custom,
+    .ds-flag--error .ds-flag-part--custom,
+    .ds-flag--info .ds-flag-part--custom {
+      color: var(--color-neutral-n0);
+    }
+
+    .ds-flag--warning .ds-flag-part--custom {
+      color: var(--color-neutral-n900);
+    }
+
+    .ds-flag--success .ds-flag-part--dismiss:hover,
+    .ds-flag--success .ds-flag-part--icon:hover,
+    .ds-flag--error .ds-flag-part--dismiss:hover,
+    .ds-flag--error .ds-flag-part--icon:hover,
+    .ds-flag--info .ds-flag-part--dismiss:hover,
+    .ds-flag--info .ds-flag-part--icon:hover {
+      background-color: var(--color-neutral-n800);
+    }
+
+    .ds-flag--warning .ds-flag-part--dismiss:hover,
+    .ds-flag--warning .ds-flag-part--icon:hover {
+      background-color: var(--color-neutral-n20);
+    }
+
+    .flag-components-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .flag-components-row {
+      display: grid;
+      grid-template-columns: 168px 1fr;
+      gap: 20px;
+      align-items: start;
+      padding: 20px;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      background: var(--color-neutral-n10);
+    }
+
+    .flag-components-row__label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-text-tertiary);
+      padding-top: var(--space-100);
+    }
+
+    .flag-components-row__variants {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .flag-components-variant__label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      font-family: var(--font-primary);
+      margin-bottom: var(--space-100);
+    }
+
+    @media (max-width: 900px) {
+      .flag-components-row { grid-template-columns: 1fr !important; }
+    }
+
+    .usage-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .usage-grid-2 > div {
+      transition: transform 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .usage-grid-2 > div:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .usage-info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .usage-info-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .tw-snippet-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--color-neutral-n30);
+    }
+    .tw-snippet-row:last-child { border-bottom: none; }
+    .tw-snippet-code {
+      flex: 1;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      line-height: 1.55;
+      color: var(--color-neutral-n700);
+      word-break: break-all;
+    }
+    .tw-copy-btn {
+      flex-shrink: 0;
+      padding: 4px 10px;
+      background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n40);
+      border-radius: var(--border-radius-sm);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-neutral-n400);
+      cursor: pointer;
+      font-family: var(--font-primary);
+      transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+    }
+    .tw-copy-btn:hover {
+      background: var(--color-blue-b300);
+      border-color: var(--color-blue-b300);
+      color: var(--color-neutral-n0);
+    }
+    .tw-copy-btn.copied {
+      background: var(--color-green-g400);
+      border-color: var(--color-green-g400);
+      color: var(--color-neutral-n0);
+    }
+    .copy-btn {
+      padding: 4px 10px;
+      background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n30);
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-neutral-n400);
+      cursor: pointer;
+      font-family: var(--font-primary);
+    }
+    .copy-btn:hover { background: var(--color-blue-b300); border-color: var(--color-blue-b300); color: var(--color-neutral-n0); }
+    .copy-btn.copied { background: var(--color-green-g300); border-color: var(--color-green-g300); color: var(--color-neutral-n0); }
+
+    @media (max-width: 900px) {
+      .flag-parts-matrix { grid-template-columns: repeat(2, 1fr) !important; }
+      .flag-parts-matrix__head { border-right: none !important; }
+      .flag-parts-matrix__cell { border-right: none !important; border-bottom: 1px solid var(--color-border); }
+      .usage-info-grid { grid-template-columns: 1fr !important; }
+      .usage-grid-2 { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 640px) {
+      .flag-parts-matrix { grid-template-columns: 1fr !important; }
+    }
+
+    section > h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: none !important;
+      background-image: linear-gradient(to right, var(--color-primary-500) 0%, rgba(30,127,214,0.18) 32%, transparent 68%) !important;
+      background-repeat: no-repeat !important;
+      background-size: 100% 1px !important;
+      background-position: left bottom !important;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--color-text-primary);
+      letter-spacing: -0.01em;
+      font-family: var(--font-primary);
+    }
+    section > h2::before {
+      content: '';
+      width: 3px;
+      height: 18px;
+      background: linear-gradient(to bottom, var(--color-primary-500), var(--color-primary-300));
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    code {
+      font-family: var(--font-mono) !important;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 7px;
+      background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n30);
+      border-radius: 4px;
+      color: var(--color-blue-b300);
+    }
+    .anatomy-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      letter-spacing: 0.04em;
+      color: var(--color-text-secondary);
+    }
+    .anatomy-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--color-blue-b300);
+      color: var(--color-neutral-n0);
+      font-size: 10px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .anatomy-grid > div {
+      transition: transform 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .anatomy-grid > div:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(9, 30, 66, 0.11), 0 3px 8px rgba(9, 30, 66, 0.06);
+    }
+    .anatomy-grid > div > div:last-child { border-top: 2px solid var(--color-neutral-n30) !important; }
+    @media (max-width: 900px) { .anatomy-grid { grid-template-columns: 1fr !important; } }
+    [data-theme="dark"] .anatomy-grid > div,
+    [data-theme="dark"] .usage-grid-2 > div,
+    [data-theme="dark"] .usage-info-card { background-color: #0F1D30 !important; border-color: #1A2E48 !important; }
+    [data-theme="dark"] .anatomy-grid > div > div:first-child { background: #080F1E !important; }
+    [data-theme="dark"] .flag-parts-matrix { border-color: #1A2E48; }
+    [data-theme="dark"] .flag-parts-matrix__head { background: #0F1D30; border-color: #1A2E48; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo-icon">GL</div>
+        <div class="sidebar-brand-text">
+          <div class="logo">GPOS Lite</div>
+          <div class="version">Design System V2.0</div>
+        </div>
+      </div>
+      <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">&#x2715;</button>
+    </div>
+    <div class="sidebar-search">
+      <input type="search" class="search-input" placeholder="&#x1F50D;  Cari token, component...">
+    </div>
+    <div class="nav-scroll">
+      <nav class="nav-menu">
+        <div class="nav-section">
+          <h3 class="nav-title">Overview</h3>
+          <ul class="nav-list">
+            <li><a href="../../index.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>Home</a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <h3 class="nav-title">Foundations</h3>
+          <ul class="nav-list">
+            <li><a href="../../foundations/colors/colors.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg>Colors</a></li>
+            <li><a href="../../foundations/typography/typography.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Typography</a></li>
+            <li><a href="../../foundations/spacing/spacing.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>Spacing</a></li>
+            <li><a href="../../foundations/shadows/shadows.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h12a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V7z" opacity="0.4"/></svg>Shadows</a></li>
+            <li><a href="../../foundations/borders/borders.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>Borders &amp; Radius</a></li>
+            <li><a href="../../foundations/grid/grid.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Grid &amp; Layout</a></li>
+            <li><a href="../../foundations/icons/icons.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="5" height="5" rx="1"/><rect x="10" y="3" width="5" height="5" rx="1"/><rect x="17" y="3" width="4" height="5" rx="1"/><rect x="3" y="10" width="5" height="5" rx="1"/><rect x="10" y="10" width="5" height="5" rx="1"/><rect x="17" y="10" width="4" height="5" rx="1"/><rect x="3" y="17" width="5" height="4" rx="1"/><rect x="10" y="17" width="5" height="4" rx="1"/><rect x="17" y="17" width="4" height="4" rx="1"/></svg>Icons</a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <h3 class="nav-title">Komponen</h3>
+          <ul class="nav-list">
+            <li><a href="../Button/button.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="3"/></svg>Button</a></li>
+            <li><a href="../Avatar/avatar.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Avatar</a></li>
+            <li><a href="../Badge/badge.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="9" width="22" height="6" rx="3"/></svg>Badge</a></li>
+            <li><a href="../Tags/tags.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/></svg>Tags</a></li>
+            <li><a href="../Lozenge/lozenge.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="7" width="16" height="10" rx="2"/></svg>Lozenge</a></li>
+            <li><a href="../Checkbox/checkbox.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg>Checkbox</a></li>
+            <li><a href="flags.html" class="nav-link active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>Flags</a></li>
+            <li><a href="../Breadcrumbs/breadcrumbs.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>Breadcrumbs</a></li>
+            <li><a href="../Tabs/tabs.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="4" rx="1"/></svg>Tabs</a></li>
+            <li><a href="../Pagination/pagination.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="10,6 4,12 10,18"/><polyline points="14,6 20,12 14,18"/></svg>Pagination</a></li>
+            <li><a href="../Calendar/calendar.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Calendar</a></li>
+            <li><a href="../Toast-Banner/banner.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="8" rx="2"/></svg>Toast Banner</a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <h3 class="nav-title">Resources</h3>
+          <ul class="nav-list">
+            <li>
+              <a href="https://github.com/zaenalaripin28/DS-Gpos-Lite-V2" class="nav-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                GitHub Repo
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="sidebar-footer">
+      <div class="tailwind-badge">Built with tokens.css</div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">☰</button>
+      <div class="breadcrumb">
+        <a href="../../index.html">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="#">Components</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="current">Flags</span>
+      </div>
+      <span class="version-badge">v2.0</span>
+    </div>
+
+    <div class="content-inner">
+
+      <section class="mb-12">
+        <h2 style="border:none;background:none;padding:0;margin-bottom:12px;">Flags — Code Parts</h2>
+        <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:720px;margin-bottom:24px;">
+          Sub-komponen interaktif untuk menyusun Flag: <code>&lt;DismissButton&gt;</code>, <code>&lt;IconButton&gt;</code>, dan <code>&lt;CustomButton&gt;</code>. Matrix empat kolom interaksi (default, hover, focus, press). Referensi: <code>Flags/figma/flag-parts.png</code>.
+        </p>
+
+        <div class="ds-flag-parts-preview">
+          <div class="flag-parts-matrix" role="table" aria-label="Matrix code parts Flag">
+            <div class="flag-parts-matrix__head">Default</div>
+            <div class="flag-parts-matrix__head">Hover</div>
+            <div class="flag-parts-matrix__head">Focus</div>
+            <div class="flag-parts-matrix__head">Press</div>
+
+            <div class="flag-parts-matrix__label">&lt;DismissButton&gt;</div>
+            <div class="flag-parts-matrix__cell">
+              <span class="ds-flag-part ds-flag-part--dismiss" aria-hidden="true">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </span>
+            </div>
+            <div class="flag-parts-matrix__cell">
+              <span class="ds-flag-part ds-flag-part--dismiss ds-flag-part--hover" aria-hidden="true">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </span>
+            </div>
+            <div class="flag-parts-matrix__cell">
+              <span class="ds-flag-part ds-flag-part--dismiss ds-flag-part--focus" aria-hidden="true">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </span>
+            </div>
+            <div class="flag-parts-matrix__cell">
+              <span class="ds-flag-part ds-flag-part--dismiss ds-flag-part--press" aria-hidden="true">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </span>
+            </div>
+
+            <div class="flag-parts-matrix__label">&lt;IconButton&gt;</div>
+            <div class="flag-parts-matrix__cell">
+              <span class="ds-flag-part ds-flag-part--icon" aria-hidden="true">
+                <img src="../../assets/icons/icon-chevron-down.svg" alt="" aria-hidden="true">
+              </span>
+            </div>
+            <div class="flag-parts-matrix__cell">
+              <span class="ds-flag-part ds-flag-part--icon ds-flag-part--hover" aria-hidden="true">
+                <img src="../../assets/icons/icon-chevron-down.svg" alt="" aria-hidden="true">
+              </span>
+            </div>
+            <div class="flag-parts-matrix__cell">
+              <span class="ds-flag-part ds-flag-part--icon ds-flag-part--focus" aria-hidden="true">
+                <img src="../../assets/icons/icon-chevron-down.svg" alt="" aria-hidden="true">
+              </span>
+            </div>
+            <div class="flag-parts-matrix__cell">
+              <span class="ds-flag-part ds-flag-part--icon ds-flag-part--press" aria-hidden="true">
+                <img src="../../assets/icons/icon-chevron-down.svg" alt="" aria-hidden="true">
+              </span>
+            </div>
+
+            <div class="flag-parts-matrix__label">&lt;CustomButton&gt;</div>
+            <div class="flag-parts-matrix__cell">
+              <span class="ds-flag-part ds-flag-part--custom" aria-hidden="true">No thanks</span>
+            </div>
+            <div class="flag-parts-matrix__cell">
+              <span class="ds-flag-part ds-flag-part--custom ds-flag-part--hover" aria-hidden="true">No thanks</span>
+            </div>
+            <div class="flag-parts-matrix__cell">
+              <span class="ds-flag-part ds-flag-part--custom ds-flag-part--focus" aria-hidden="true">No thanks</span>
+            </div>
+            <div class="flag-parts-matrix__cell">
+              <span class="ds-flag-part ds-flag-part--custom ds-flag-part--press" aria-hidden="true">No thanks</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;margin-top:16px;">
+          <img src="figma/flag-parts.png" alt="Referensi Figma Flag code parts" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+        </div>
+
+        <p style="font-size:13px;font-weight:600;color:var(--color-text-primary);margin:28px 0 16px;font-family:var(--font-primary);">Interaktif (native button)</p>
+        <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:center;padding:20px;background:var(--color-neutral-n10);border:1px solid var(--color-border);border-radius:12px;">
+          <div class="ds-flag-parts-preview" style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:var(--border-radius-sm);">
+            <button type="button" class="ds-flag-part ds-flag-part--dismiss" aria-label="Tutup flag">
+              <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+            </button>
+            <button type="button" class="ds-flag-part ds-flag-part--icon" aria-label="Perluas detail flag" aria-expanded="false">
+              <img src="../../assets/icons/icon-chevron-down.svg" alt="" aria-hidden="true">
+            </button>
+            <button type="button" class="ds-flag-part ds-flag-part--custom">No thanks</button>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--color-neutral-n10);border:1px solid var(--color-border);border-radius:var(--border-radius-sm);">
+            <button type="button" class="ds-flag-part ds-flag-part--dismiss" aria-label="Tutup">
+              <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+            </button>
+            <button type="button" class="ds-flag-part ds-flag-part--icon" aria-label="Perluas">
+              <img src="../../assets/icons/icon-chevron-down.svg" alt="" aria-hidden="true">
+            </button>
+            <button type="button" class="ds-flag-part ds-flag-part--custom">No thanks</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-12" style="margin-bottom:48px;">
+        <h2 style="border:none;background:none;padding:0;margin-bottom:12px;">Flags — Components</h2>
+        <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:720px;margin-bottom:24px;">
+          Komponen Flag lengkap dengan lima <code>appearance</code>. Varian <code>normal</code> selalu expanded + dismiss; varian lain mendukung <code>collapsed</code> / <code>expanded</code> via IconButton. Referensi: <code>Flags/figma/Flag-components.png</code>.
+        </p>
+
+        <div class="flag-components-stack">
+
+          <div class="flag-components-row">
+            <div class="flag-components-row__label">appearance=normal</div>
+            <div class="flag-components-row__variants">
+              <article class="ds-flag ds-flag--normal" role="region" aria-label="Flag normal">
+                <div class="ds-flag__header">
+                  <div class="ds-flag__icon" aria-hidden="true">
+                    <img src="../../assets/icons/icon-solid-check-circle.svg" alt="">
+                  </div>
+                  <div class="ds-flag__main">
+                    <div class="ds-flag__title-row">
+                      <h3 class="ds-flag__title">Title</h3>
+                      <div class="ds-flag__controls">
+                        <button type="button" class="ds-flag-part ds-flag-part--dismiss" aria-label="Tutup flag">
+                          <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="ds-flag__body">
+                  <p class="ds-flag__description">Your board is almost ready to be used. We just need to finish setting up your account.</p>
+                  <div class="ds-flag__actions">
+                    <button type="button" class="ds-flag__action ds-flag__action--link">Understood</button>
+                    <button type="button" class="ds-flag-part ds-flag-part--custom">No thanks</button>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+
+          <div class="flag-components-row">
+            <div class="flag-components-row__label">appearance=success</div>
+            <div class="flag-components-row__variants">
+              <div>
+                <div class="flag-components-variant__label">collapsed</div>
+                <article class="ds-flag ds-flag--success ds-flag--collapsed" role="region" aria-label="Flag success collapsed">
+                  <div class="ds-flag__header">
+                    <div class="ds-flag__icon" aria-hidden="true">
+                      <img src="../../assets/icons/icon-solid-check-circle.svg" alt="">
+                    </div>
+                    <div class="ds-flag__main">
+                      <div class="ds-flag__title-row">
+                        <h3 class="ds-flag__title">Title</h3>
+                        <div class="ds-flag__controls">
+                          <button type="button" class="ds-flag-part ds-flag-part--icon" aria-label="Perluas detail flag" aria-expanded="false">
+                            <img src="../../assets/icons/icon-chevron-down.svg" alt="" aria-hidden="true">
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ds-flag__body" hidden>
+                    <p class="ds-flag__description">Your board is almost ready to be used. We just need to finish setting up your account.</p>
+                    <div class="ds-flag__actions">
+                      <button type="button" class="ds-flag__action ds-flag__action--primary">Join the conversation</button>
+                      <button type="button" class="ds-flag-part ds-flag-part--custom">No thanks</button>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div>
+                <div class="flag-components-variant__label">expanded</div>
+                <article class="ds-flag ds-flag--success" role="region" aria-label="Flag success expanded">
+                  <div class="ds-flag__header">
+                    <div class="ds-flag__icon" aria-hidden="true">
+                      <img src="../../assets/icons/icon-solid-check-circle.svg" alt="">
+                    </div>
+                    <div class="ds-flag__main">
+                      <div class="ds-flag__title-row">
+                        <h3 class="ds-flag__title">Title</h3>
+                        <div class="ds-flag__controls">
+                          <button type="button" class="ds-flag-part ds-flag-part--icon" aria-label="Ciutkan detail flag" aria-expanded="true">
+                            <img src="../../assets/icons/icon-chevron-up.svg" alt="" aria-hidden="true">
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ds-flag__body">
+                    <p class="ds-flag__description">Your board is almost ready to be used. We just need to finish setting up your account.</p>
+                    <div class="ds-flag__actions">
+                      <button type="button" class="ds-flag__action ds-flag__action--primary">Join the conversation</button>
+                      <button type="button" class="ds-flag-part ds-flag-part--custom">No thanks</button>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <div class="flag-components-row">
+            <div class="flag-components-row__label">appearance=error</div>
+            <div class="flag-components-row__variants">
+              <div>
+                <div class="flag-components-variant__label">collapsed</div>
+                <article class="ds-flag ds-flag--error ds-flag--collapsed" role="region" aria-label="Flag error collapsed">
+                  <div class="ds-flag__header">
+                    <div class="ds-flag__icon" aria-hidden="true">
+                      <img src="../../assets/icons/icon-solid-exclamation-triangle.svg" alt="">
+                    </div>
+                    <div class="ds-flag__main">
+                      <div class="ds-flag__title-row">
+                        <h3 class="ds-flag__title">Title</h3>
+                        <div class="ds-flag__controls">
+                          <button type="button" class="ds-flag-part ds-flag-part--icon" aria-label="Perluas detail flag" aria-expanded="false">
+                            <img src="../../assets/icons/icon-chevron-down.svg" alt="" aria-hidden="true">
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ds-flag__body" hidden>
+                    <p class="ds-flag__description">Your board is almost ready to be used. We just need to finish setting up your account.</p>
+                    <div class="ds-flag__actions">
+                      <button type="button" class="ds-flag__action ds-flag__action--primary">Join the conversation</button>
+                      <button type="button" class="ds-flag-part ds-flag-part--custom">No thanks</button>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div>
+                <div class="flag-components-variant__label">expanded</div>
+                <article class="ds-flag ds-flag--error" role="region" aria-label="Flag error expanded">
+                  <div class="ds-flag__header">
+                    <div class="ds-flag__icon" aria-hidden="true">
+                      <img src="../../assets/icons/icon-solid-exclamation-triangle.svg" alt="">
+                    </div>
+                    <div class="ds-flag__main">
+                      <div class="ds-flag__title-row">
+                        <h3 class="ds-flag__title">Title</h3>
+                        <div class="ds-flag__controls">
+                          <button type="button" class="ds-flag-part ds-flag-part--icon" aria-label="Ciutkan detail flag" aria-expanded="true">
+                            <img src="../../assets/icons/icon-chevron-up.svg" alt="" aria-hidden="true">
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ds-flag__body">
+                    <p class="ds-flag__description">Your board is almost ready to be used. We just need to finish setting up your account.</p>
+                    <div class="ds-flag__actions">
+                      <button type="button" class="ds-flag__action ds-flag__action--primary">Join the conversation</button>
+                      <button type="button" class="ds-flag-part ds-flag-part--custom">No thanks</button>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <div class="flag-components-row">
+            <div class="flag-components-row__label">appearance=warning</div>
+            <div class="flag-components-row__variants">
+              <div>
+                <div class="flag-components-variant__label">collapsed</div>
+                <article class="ds-flag ds-flag--warning ds-flag--collapsed" role="region" aria-label="Flag warning collapsed">
+                  <div class="ds-flag__header">
+                    <div class="ds-flag__icon" aria-hidden="true">
+                      <img src="../../assets/icons/icon-solid-exclamation-triangle.svg" alt="">
+                    </div>
+                    <div class="ds-flag__main">
+                      <div class="ds-flag__title-row">
+                        <h3 class="ds-flag__title">Title</h3>
+                        <div class="ds-flag__controls">
+                          <button type="button" class="ds-flag-part ds-flag-part--icon" aria-label="Perluas detail flag" aria-expanded="false">
+                            <img src="../../assets/icons/icon-chevron-down.svg" alt="" aria-hidden="true">
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ds-flag__body" hidden>
+                    <p class="ds-flag__description">Your board is almost ready to be used. We just need to finish setting up your account.</p>
+                    <div class="ds-flag__actions">
+                      <button type="button" class="ds-flag__action ds-flag__action--primary">Join the conversation</button>
+                      <button type="button" class="ds-flag-part ds-flag-part--custom">No thanks</button>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div>
+                <div class="flag-components-variant__label">expanded</div>
+                <article class="ds-flag ds-flag--warning" role="region" aria-label="Flag warning expanded">
+                  <div class="ds-flag__header">
+                    <div class="ds-flag__icon" aria-hidden="true">
+                      <img src="../../assets/icons/icon-solid-exclamation-triangle.svg" alt="">
+                    </div>
+                    <div class="ds-flag__main">
+                      <div class="ds-flag__title-row">
+                        <h3 class="ds-flag__title">Title</h3>
+                        <div class="ds-flag__controls">
+                          <button type="button" class="ds-flag-part ds-flag-part--icon" aria-label="Ciutkan detail flag" aria-expanded="true">
+                            <img src="../../assets/icons/icon-chevron-up.svg" alt="" aria-hidden="true">
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ds-flag__body">
+                    <p class="ds-flag__description">Your board is almost ready to be used. We just need to finish setting up your account.</p>
+                    <div class="ds-flag__actions">
+                      <button type="button" class="ds-flag__action ds-flag__action--primary">Join the conversation</button>
+                      <button type="button" class="ds-flag-part ds-flag-part--custom">No thanks</button>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <div class="flag-components-row">
+            <div class="flag-components-row__label">appearance=info</div>
+            <div class="flag-components-row__variants">
+              <div>
+                <div class="flag-components-variant__label">collapsed</div>
+                <article class="ds-flag ds-flag--info ds-flag--collapsed" role="region" aria-label="Flag info collapsed">
+                  <div class="ds-flag__header">
+                    <div class="ds-flag__icon" aria-hidden="true">
+                      <img src="../../assets/icons/icon-solid-information-circle.svg" alt="">
+                    </div>
+                    <div class="ds-flag__main">
+                      <div class="ds-flag__title-row">
+                        <h3 class="ds-flag__title">Title</h3>
+                        <div class="ds-flag__controls">
+                          <button type="button" class="ds-flag-part ds-flag-part--icon" aria-label="Perluas detail flag" aria-expanded="false">
+                            <img src="../../assets/icons/icon-chevron-down.svg" alt="" aria-hidden="true">
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ds-flag__body" hidden>
+                    <p class="ds-flag__description">Your board is almost ready to be used. We just need to finish setting up your account.</p>
+                    <div class="ds-flag__actions">
+                      <button type="button" class="ds-flag__action ds-flag__action--primary">Join the conversation</button>
+                      <button type="button" class="ds-flag-part ds-flag-part--custom">No thanks</button>
+                    </div>
+                  </div>
+                </article>
+              </div>
+              <div>
+                <div class="flag-components-variant__label">expanded</div>
+                <article class="ds-flag ds-flag--info" role="region" aria-label="Flag info expanded">
+                  <div class="ds-flag__header">
+                    <div class="ds-flag__icon" aria-hidden="true">
+                      <img src="../../assets/icons/icon-solid-information-circle.svg" alt="">
+                    </div>
+                    <div class="ds-flag__main">
+                      <div class="ds-flag__title-row">
+                        <h3 class="ds-flag__title">Title</h3>
+                        <div class="ds-flag__controls">
+                          <button type="button" class="ds-flag-part ds-flag-part--icon" aria-label="Ciutkan detail flag" aria-expanded="true">
+                            <img src="../../assets/icons/icon-chevron-up.svg" alt="" aria-hidden="true">
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ds-flag__body">
+                    <p class="ds-flag__description">Your board is almost ready to be used. We just need to finish setting up your account.</p>
+                    <div class="ds-flag__actions">
+                      <button type="button" class="ds-flag__action ds-flag__action--primary">Join the conversation</button>
+                      <button type="button" class="ds-flag-part ds-flag-part--custom">No thanks</button>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;margin-top:16px;">
+          <img src="figma/Flag-components.png" alt="Referensi Figma Flag components" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+        </div>
+
+        <p style="font-size:13px;font-weight:600;color:var(--color-text-primary);margin:28px 0 16px;font-family:var(--font-primary);">Interaktif (expand / collapse)</p>
+        <div style="padding:20px;background:var(--color-neutral-n10);border:1px solid var(--color-border);border-radius:12px;">
+          <article class="ds-flag ds-flag--success ds-flag--collapsed" id="demo-flag" role="region" aria-label="Flag demo interaktif">
+            <div class="ds-flag__header">
+              <div class="ds-flag__icon" aria-hidden="true">
+                <img src="../../assets/icons/icon-solid-check-circle.svg" alt="">
+              </div>
+              <div class="ds-flag__main">
+                <div class="ds-flag__title-row">
+                  <h3 class="ds-flag__title">Title</h3>
+                  <div class="ds-flag__controls">
+                    <button type="button" class="ds-flag-part ds-flag-part--icon" id="demo-flag-toggle" aria-label="Perluas detail flag" aria-expanded="false" aria-controls="demo-flag-body">
+                      <img src="../../assets/icons/icon-chevron-down.svg" alt="" id="demo-flag-chevron" aria-hidden="true">
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ds-flag__body" id="demo-flag-body">
+              <p class="ds-flag__description">Your board is almost ready to be used. We just need to finish setting up your account.</p>
+              <div class="ds-flag__actions">
+                <button type="button" class="ds-flag__action ds-flag__action--primary">Join the conversation</button>
+                <button type="button" class="ds-flag-part ds-flag-part--custom">No thanks</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Anatomy</h2>
+        <p style="font-size:14px;color:var(--color-text-tertiary);margin-top:-12px;margin-bottom:28px;font-family:var(--font-primary);">
+          Setiap code part adalah <code>&lt;button&gt;</code> mandiri — hit area 24×24px (ikon) atau teks link dengan padding <code>space-050</code> / <code>space-100</code>. Warna ikon/teks menyesuaikan kontras latar Flag (inverse pada bold, brand pada subtle).
+        </p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;" class="anatomy-grid">
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div class="ds-flag-parts-preview" style="padding:40px 24px;display:flex;align-items:center;justify-content:center;">
+              <button type="button" class="ds-flag-part ds-flag-part--dismiss" aria-label="Tutup">
+                <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+              </button>
+            </div>
+            <div style="padding:16px 20px;">
+              <div style="font-size:13px;font-weight:700;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:8px;">DismissButton</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);line-height:1.55;">Menutup flag. Ikon <code>icon-x-mark.svg</code> 16×16px, <code>Icon.Inverse</code> pada latar bold.</div>
+            </div>
+          </div>
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div class="ds-flag-parts-preview" style="padding:40px 24px;display:flex;align-items:center;justify-content:center;">
+              <button type="button" class="ds-flag-part ds-flag-part--icon" aria-label="Perluas">
+                <img src="../../assets/icons/icon-chevron-down.svg" alt="" aria-hidden="true">
+              </button>
+            </div>
+            <div style="padding:16px 20px;">
+              <div style="font-size:13px;font-weight:700;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:8px;">IconButton</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);line-height:1.55;">Expand/collapse konten flag. Ikon <code>icon-chevron-down.svg</code>, sama hit area &amp; fokus dengan dismiss.</div>
+            </div>
+          </div>
+
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div class="ds-flag-parts-preview" style="padding:40px 24px;display:flex;align-items:center;justify-content:center;">
+              <button type="button" class="ds-flag-part ds-flag-part--custom">No thanks</button>
+            </div>
+            <div style="padding:16px 20px;">
+              <div style="font-size:13px;font-weight:700;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:8px;">CustomButton</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);line-height:1.55;">Aksi sekunder teks. Body small medium, <code>Text.Inverse</code> pada bold; hover/press dengan underline.</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Informasi Penggunaan</h2>
+        <div class="usage-info-grid">
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Peran tiap part</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;"><strong>DismissButton</strong> menutup flag. <strong>IconButton</strong> untuk expand detail. <strong>CustomButton</strong> untuk aksi sekunder opsional (mis. &quot;No thanks&quot;, &quot;Nanti saja&quot;).</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">State &amp; fokus</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Empat state wajib: default, hover, focus (<code>Border.Focused</code> / ring <code>b200</code>), press. CustomButton menambahkan underline pada hover dan press.</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Aksesibilitas</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Gunakan <code>&lt;button type=&quot;button&quot;&gt;</code> dengan <code>aria-label</code> pada ikon. IconButton expand memakai <code>aria-expanded</code>. Jangan gunakan <code>div</code> klik-able.</div>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Do &amp; Don&apos;t</h2>
+        <div class="usage-grid-2">
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:10px 16px;background:var(--color-green-g50);border-bottom:2px solid var(--color-green-g100);font-weight:700;color:var(--color-green-g400);">Do — Lakukan ini</div>
+            <ul style="padding:16px 20px 20px 36px;color:var(--color-text-tertiary);font-size:13px;line-height:1.7;">
+              <li>Pakai ikon dari <code>assets/icons</code>: <code>icon-x-mark.svg</code> dan <code>icon-chevron-down.svg</code>.</li>
+              <li>Sesuaikan warna ikon/teks dengan kontras latar Flag (inverse pada bold, brand pada subtle).</li>
+              <li>Berikan <code>aria-label</code> yang jelas pada DismissButton dan IconButton.</li>
+              <li>Pertahankan hit area minimal 24×24px untuk kontrol ikon.</li>
+              <li>Tampilkan ring fokus <code>Border.Focused</code> — jangan hapus outline tanpa pengganti.</li>
+            </ul>
+          </div>
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:10px 16px;background:var(--color-red-r50);border-bottom:2px solid var(--color-red-r100);font-weight:700;color:var(--color-red-r400);">Don&apos;t — Hindari ini</div>
+            <ul style="padding:16px 20px 20px 36px;color:var(--color-text-tertiary);font-size:13px;line-height:1.7;">
+              <li>Jangan mengganti dismiss dengan teks &quot;X&quot; atau ikon library eksternal.</li>
+              <li>Jangan hardcode warna hex — gunakan token semantic / alias Tailwind DS.</li>
+              <li>Jangan membuat CustomButton selebar primary CTA — tetap gaya link sekunder.</li>
+              <li>Jangan menempatkan lebih dari satu DismissButton dalam satu flag.</li>
+              <li>Jangan hilangkan state focus hanya karena flag berlatar gelap.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Tailwind — Salin Code</h2>
+        <p style="font-size:14px;color:var(--color-text-tertiary);margin:-12px 0 20px;font-family:var(--font-primary);">Class untuk code parts pada latar bold (inverse). Warna mengacu alias di <code>tailwind.config</code> halaman ini.</p>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">DismissButton / IconButton (24×24)</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'inline-flex h-6 w-6 shrink-0 items-center justify-center rounded bg-transparent hover:bg-n800 active:opacity-85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Ikon inverse 16×16 (pada bold)</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'h-4 w-4 brightness-0 invert')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">CustomButton — teks inverse</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'inline-flex min-h-6 items-center rounded px-2 py-0.5 text-sm font-medium text-n0 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200 active:underline')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">CustomButton — teks link (subtle flag)</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'inline-flex min-h-6 items-center rounded px-2 py-0.5 text-sm font-medium text-b300 hover:text-b400 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Ikon bold pada latar terang</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'h-4 w-4 text-n900')">Salin</button>
+          </div>
+        </div>
+
+        <p style="font-size:13px;font-weight:600;color:var(--color-text-primary);margin:28px 0 12px;font-family:var(--font-primary);">Blok siap copy (Tailwind)</p>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-mono);">flag-parts-tailwind.html</span>
+            <button class="tw-copy-btn" id="copy-tailwind-block-btn" onclick="copyTailwindBlock()">Salin semua</button>
+          </div>
+          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-mono);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="tailwind-block">&lt;!-- DismissButton (pada latar bold) --&gt;
+&lt;button type="button" class="inline-flex h-6 w-6 items-center justify-center rounded bg-transparent hover:bg-n800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200" aria-label="Tutup flag"&gt;
+  &lt;img src="../../assets/icons/icon-x-mark.svg" alt="" class="h-4 w-4 brightness-0 invert" aria-hidden="true" /&gt;
+&lt;/button&gt;
+
+&lt;!-- IconButton expand --&gt;
+&lt;button type="button" class="inline-flex h-6 w-6 items-center justify-center rounded bg-transparent hover:bg-n800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200" aria-label="Perluas detail" aria-expanded="false"&gt;
+  &lt;img src="../../assets/icons/icon-chevron-down.svg" alt="" class="h-4 w-4 brightness-0 invert" aria-hidden="true" /&gt;
+&lt;/button&gt;
+
+&lt;!-- CustomButton --&gt;
+&lt;button type="button" class="inline-flex min-h-6 items-center rounded px-2 py-0.5 text-sm font-medium text-n0 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200"&gt;
+  No thanks
+&lt;/button&gt;</code></pre>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Kode HTML</h2>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-mono);">flags.html — ds-flag-part</span>
+            <button class="copy-btn" id="copy-html-btn" onclick="copyHtml()">Salin</button>
+          </div>
+          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-mono);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="html-block">&lt;!-- DismissButton --&gt;
+&lt;button type="button" class="ds-flag-part ds-flag-part--dismiss" aria-label="Tutup flag"&gt;
+  &lt;img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"&gt;
+&lt;/button&gt;
+
+&lt;!-- IconButton --&gt;
+&lt;button type="button" class="ds-flag-part ds-flag-part--icon" aria-label="Perluas detail flag" aria-expanded="false"&gt;
+  &lt;img src="../../assets/icons/icon-chevron-down.svg" alt="" aria-hidden="true"&gt;
+&lt;/button&gt;
+
+&lt;!-- CustomButton --&gt;
+&lt;button type="button" class="ds-flag-part ds-flag-part--custom"&gt;No thanks&lt;/button&gt;
+
+&lt;!-- Snapshot focus (dokumentasi) --&gt;
+&lt;span class="ds-flag-part ds-flag-part--dismiss ds-flag-part--focus" aria-hidden="true"&gt;
+  &lt;img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"&gt;
+&lt;/span&gt;</code></pre>
+        </div>
+      </section>
+
+      <footer class="page-footer" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--color-border);font-size:12px;color:var(--color-text-tertiary);">
+        &copy; 2026 GPOS Lite Design System V2.0
+      </footer>
+    </div>
+  </main>
+</div>
+
+<script src="../../scripts/script.js"></script>
+<script>
+  (function () {
+    var flag = document.getElementById('demo-flag');
+    var toggle = document.getElementById('demo-flag-toggle');
+    var chevron = document.getElementById('demo-flag-chevron');
+    if (!flag || !toggle || !chevron) return;
+    toggle.addEventListener('click', function () {
+      var collapsed = flag.classList.toggle('ds-flag--collapsed');
+      var expanded = !collapsed;
+      toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      toggle.setAttribute('aria-label', expanded ? 'Ciutkan detail flag' : 'Perluas detail flag');
+      chevron.src = expanded
+        ? '../../assets/icons/icon-chevron-up.svg'
+        : '../../assets/icons/icon-chevron-down.svg';
+    });
+  })();
+
+  function copyTailwind(btn, text) {
+    navigator.clipboard.writeText(text).then(function () {
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () {
+        btn.textContent = 'Salin';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+  function copyTailwindBlock() {
+    navigator.clipboard.writeText(document.getElementById('tailwind-block').textContent).then(function () {
+      var btn = document.getElementById('copy-tailwind-block-btn');
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Salin semua'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+  function copyHtml() {
+    navigator.clipboard.writeText(document.getElementById('html-block').textContent).then(function () {
+      var btn = document.getElementById('copy-html-btn');
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+</script>
+</body>
+</html>
