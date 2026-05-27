@@ -157,9 +157,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        primary: ['Poppins', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
-        mono:    ['JetBrains Mono', 'Courier New', 'monospace'],
-        serif:   ['Georgia', 'Times New Roman', 'serif'],
+        primary: ['Poppins', 'sans-serif'],
+        mono:    ['Poppins', 'sans-serif'],
       },
       fontSize: {
         xs:   ['0.75rem',   { lineHeight: '1rem' }],

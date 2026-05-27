@@ -40,15 +40,14 @@ background-color: var(--color-primary-500);
 ```
 
 ### Typography
-- **Primary Font**: System stack (-apple-system, Segoe UI, Roboto, etc)
-- **Mono Font**: Courier New (untuk code blocks)
+- **Font Family**: Poppins (seluruh UI, termasuk code blocks)
 - **Font Sizes**: 9 levels (12px - 48px)
 - **Font Weights**: Light (300), Normal (400), Medium (500), Semibold (600), Bold (700)
 
 ```html
 <h1 class="text-4xl font-bold">Heading 1</h1>
 <p class="text-base font-normal">Body text</p>
-<code class="font-mono text-sm">Code snippet</code>
+<code class="font-primary text-sm">Code snippet</code>
 ```
 
 ### Spacing
