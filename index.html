@@ -8,6 +8,89 @@
   <title>GPOS Lite — Design System V2.0</title>
   <link rel="stylesheet" href="styles/globals.css">
   <link rel="stylesheet" href="styles/enhancements.css">
+  <style>
+    /* Sidebar menu — dark blue (sidebar color tokens) */
+    .page-home .sidebar {
+      background-color: var(--sidebar-bg);
+    }
+
+    .page-home .sidebar-header {
+      background-color: var(--sidebar-header-bg);
+      border-bottom-color: var(--sidebar-border);
+    }
+
+    .page-home .sidebar-brand-text .logo    { color: var(--sidebar-logo-color); }
+    .page-home .sidebar-brand-text .version { color: var(--sidebar-version-color); }
+    .page-home .sidebar-close-btn          { color: var(--sidebar-link-color); }
+    .page-home .sidebar-close-btn:hover    { color: var(--color-text-inverse); background: transparent; }
+
+    .page-home .sidebar-search { border-bottom-color: var(--sidebar-border); }
+
+    .page-home .search-input {
+      background-color: var(--sidebar-search-bg);
+      border-color: var(--sidebar-search-border);
+      color: var(--sidebar-link-color);
+    }
+
+    .page-home .search-input::placeholder { color: var(--sidebar-section-title); }
+
+    .page-home .search-input:focus {
+      border-color: var(--color-primary-500);
+      background-color: var(--sidebar-link-hover-bg);
+      color: var(--sidebar-link-hover-color);
+      box-shadow: 0 0 0 3px rgba(30, 127, 214, 0.15);
+    }
+
+    .page-home .nav-scroll {
+      scrollbar-color: var(--sidebar-border) transparent;
+    }
+
+    .page-home .nav-scroll::-webkit-scrollbar-thumb {
+      background: var(--sidebar-border);
+    }
+
+    .page-home .nav-title { color: var(--sidebar-section-title); }
+
+    .page-home .nav-link {
+      color: var(--sidebar-link-color);
+      border-left: 2px solid transparent;
+      border-radius: var(--border-radius-md);
+    }
+
+    .page-home .nav-link:hover {
+      background-color: var(--sidebar-link-hover-bg);
+      color: var(--sidebar-link-hover-color);
+      border-left-color: rgba(30, 127, 214, 0.5);
+    }
+
+    .page-home .nav-link.active {
+      background-color: var(--sidebar-link-active-bg);
+      color: var(--sidebar-link-active-color);
+      border-left-color: var(--sidebar-link-active-border);
+    }
+
+    .page-home .nav-link svg        { opacity: 0.6; }
+    .page-home .nav-link:hover svg,
+    .page-home .nav-link.active svg { opacity: 1; }
+
+    .page-home .sidebar-footer {
+      background-color: var(--sidebar-header-bg);
+      border-top-color: var(--sidebar-border);
+    }
+
+    .page-home .system-status-indicator { color: var(--color-success-400); }
+
+    .page-home .status-dot-live {
+      background: var(--color-success-400);
+      box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.25);
+    }
+
+    .page-home .tailwind-badge {
+      background: rgba(6, 182, 212, 0.08);
+      border-color: rgba(6, 182, 212, 0.2);
+      color: var(--color-secondary-300);
+    }
+  </style>
 </head>
 <body class="page-home">
 
