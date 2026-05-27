@@ -790,31 +790,42 @@
 }
 
 /* ============================================================
-   14. HOME PAGE — SIDEBAR LIGHT THEME + ROUNDED NAV
+   14. HOME PAGE — SIDEBAR INSET ROUNDED PANEL (light, ref-matched)
    ============================================================ */
 
-/* Sidebar surface — flip dark → light */
+/*
+   Pattern: sidebar sits inside the layout column — not overlaying content.
+   Inset margin creates gap from all screen edges.
+   border-radius gives the rounded panel shape from the UI reference.
+   position:fixed keeps it sticky while page scrolls, main-content
+   margin-left unchanged so sidebar never covers content.
+*/
 .page-home .sidebar {
+  margin: var(--spacing-3);
+  height: calc(100vh - var(--spacing-6));
+  border-radius: var(--border-radius-2xl);
   background-color: var(--color-surface);
-  border-right-color: var(--color-border);
+  border-right: none;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
 }
 
 .page-home .sidebar-header {
-  background-color: var(--color-gray-50);
-  border-bottom-color: var(--color-border);
+  background-color: var(--color-surface);
+  border-bottom-color: var(--color-gray-100);
 }
 
-.page-home .sidebar-brand-text .logo  { color: var(--color-text-primary); }
+.page-home .sidebar-brand-text .logo    { color: var(--color-text-primary); }
 .page-home .sidebar-brand-text .version { color: var(--color-text-tertiary); }
-.page-home .sidebar-close-btn        { color: var(--color-text-secondary); }
-.page-home .sidebar-close-btn:hover  { color: var(--color-text-primary); }
+.page-home .sidebar-close-btn          { color: var(--color-text-secondary); }
+.page-home .sidebar-close-btn:hover    { color: var(--color-text-primary); background: var(--color-gray-100); border-radius: var(--border-radius-md); }
 
-/* Search input — light style */
-.page-home .sidebar-search { border-bottom-color: var(--color-border); }
+/* Search */
+.page-home .sidebar-search { border-bottom-color: var(--color-gray-100); }
 
 .page-home .search-input {
-  background-color: var(--color-gray-100);
-  border-color: var(--color-border);
+  background-color: var(--color-gray-50);
+  border-color: var(--color-gray-200);
   color: var(--color-text-secondary);
 }
 
@@ -827,7 +838,7 @@
   box-shadow: 0 0 0 3px rgba(30, 127, 214, 0.10);
 }
 
-/* Scrollbar — light track */
+/* Scrollbar — light */
 .page-home .nav-scroll {
   scrollbar-color: var(--color-gray-200) transparent;
 }
@@ -839,7 +850,7 @@
 /* Section titles */
 .page-home .nav-title { color: var(--color-text-tertiary); }
 
-/* Nav links — rounded pill, no left border indicator */
+/* Nav links — rounded pill, light surface */
 .page-home .nav-link {
   color: var(--color-text-secondary);
   border-left: none;
@@ -859,17 +870,17 @@
   font-weight: var(--font-weight-medium);
 }
 
-.page-home .nav-link svg             { opacity: 0.5; }
+.page-home .nav-link svg          { opacity: 0.45; }
 .page-home .nav-link:hover svg,
-.page-home .nav-link.active svg      { opacity: 1; }
+.page-home .nav-link.active svg   { opacity: 1; }
 
-/* Sidebar footer — light surface */
+/* Sidebar footer */
 .page-home .sidebar-footer {
   background-color: var(--color-gray-50);
-  border-top-color: var(--color-border);
+  border-top-color: var(--color-gray-100);
 }
 
-.page-home .system-status-indicator  { color: var(--color-success-600); }
+.page-home .system-status-indicator { color: var(--color-success-600); }
 
 .page-home .status-dot-live {
   background: var(--color-success-500);
@@ -882,10 +893,139 @@
   color: var(--color-secondary-700);
 }
 
-/* Topbar — mobile responsive for rounded style */
+/* Topbar — mobile responsive */
 @media (max-width: 768px) {
+  .page-home .sidebar {
+    margin: 0;
+    height: 100vh;
+    border-radius: 0;
+    box-shadow: var(--shadow-2xl);
+  }
+
   .page-home .topbar {
     margin: var(--spacing-2) var(--spacing-3) 0;
     top: var(--spacing-2);
+  }
+}
+
+/* ============================================================
+   15. BEST PRACTICES — TWO-COLUMN DO/DON'T LAYOUT
+   ============================================================ */
+
+.practices-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-6);
+  align-items: start;
+}
+
+.practices-col-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.practices-col-group .practices-col-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--border-radius-lg);
+  margin-bottom: var(--spacing-1);
+  width: fit-content;
+}
+
+.practices-col-group .do-label {
+  background-color: var(--color-success-50);
+  color: var(--color-success-700);
+  border: 1px solid var(--color-success-200);
+}
+
+.practices-col-group .dont-label {
+  background-color: var(--color-error-50);
+  color: var(--color-error-700);
+  border: 1px solid var(--color-error-200);
+}
+
+/* ============================================================
+   16. MOBILE RESPONSIVE — FULL COVERAGE
+   ============================================================ */
+
+@media (max-width: 640px) {
+  .practices-two-col {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-6);
+  }
+}
+
+@media (max-width: 480px) {
+  .page-home .topbar {
+    margin: var(--spacing-2) var(--spacing-2) 0;
+    padding: 0 var(--spacing-3);
+    border-radius: var(--border-radius-xl);
+  }
+
+  .page-home .hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-2);
+  }
+
+  .page-home .hero-stat {
+    padding: var(--spacing-3) var(--spacing-3);
+  }
+
+  .page-home .hero-stat-value {
+    font-size: var(--font-size-lg);
+  }
+
+  .page-home .hero-section.hero-section-dashboard {
+    padding: var(--spacing-6) var(--spacing-4);
+    border-radius: var(--border-radius-xl);
+    margin-bottom: var(--spacing-8);
+  }
+
+  .content-inner {
+    padding: var(--spacing-3) var(--spacing-3) var(--spacing-6);
+  }
+
+  .page-home section {
+    margin-bottom: var(--spacing-10);
+  }
+
+  .hero-content h2 {
+    font-size: var(--font-size-xl);
+    line-height: var(--line-height-tight);
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+  }
+
+  .cta-buttons .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .guide-timeline::before { display: none; }
+
+  .tokens-section-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-2);
+  }
+
+  .page-home .card {
+    padding: var(--spacing-4);
+  }
+
+  .page-home .guide-section {
+    padding: var(--spacing-4);
+  }
+
+  pre {
+    font-size: 11px;
+    padding: var(--spacing-4);
   }
 }

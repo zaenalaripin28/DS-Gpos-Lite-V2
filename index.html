@@ -609,51 +609,56 @@ module.exports = {
           <h2>Best Practices</h2>
           <p class="section-intro">Panduan singkat untuk menjaga konsistensi dan kualitas implementasi di seluruh project.</p>
 
-          <!-- Column labels -->
-          <div class="practices-header">
-            <div class="practices-col-label do-label">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg>
-              Do — Yang harus dilakukan
-            </div>
-            <div class="practices-col-label dont-label">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-              Don't — Yang harus dihindari
-            </div>
-          </div>
+          <div class="practices-two-col">
 
-          <div class="practices-grid">
-            <div class="practice-item do">
-              <span class="practice-icon">✅</span>
-              Gunakan design tokens dari system — jangan hardcode nilai warna atau spacing
+            <!-- DO Column -->
+            <div class="practices-col-group">
+              <div class="practices-col-label do-label">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg>
+                Do — Yang harus dilakukan
+              </div>
+              <div class="practice-item do">
+                <span class="practice-icon">✅</span>
+                Gunakan design tokens dari system — jangan hardcode nilai warna atau spacing
+              </div>
+              <div class="practice-item do">
+                <span class="practice-icon">✅</span>
+                Konsistenkan spacing menggunakan spacing scale 4px base unit
+              </div>
+              <div class="practice-item do">
+                <span class="practice-icon">✅</span>
+                Gunakan semantic color naming: primary, success, warning, error
+              </div>
+              <div class="practice-item do">
+                <span class="practice-icon">✅</span>
+                Ikuti typography scale dan gunakan font Inter untuk konsistensi
+              </div>
+              <div class="practice-item do">
+                <span class="practice-icon">✅</span>
+                Test tampilan pada semua breakpoints: mobile, tablet, dan desktop
+              </div>
             </div>
-            <div class="practice-item dont">
-              <span class="practice-icon">❌</span>
-              Jangan hardcode seperti <code style="background:none;border:none;padding:0;color:inherit;">#1e7fd6</code> atau <code style="background:none;border:none;padding:0;color:inherit;">16px</code> langsung di CSS
+
+            <!-- DON'T Column -->
+            <div class="practices-col-group">
+              <div class="practices-col-label dont-label">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                Don't — Yang harus dihindari
+              </div>
+              <div class="practice-item dont">
+                <span class="practice-icon">❌</span>
+                Jangan hardcode seperti <code style="background:none;border:none;padding:0;color:inherit;">#1e7fd6</code> atau <code style="background:none;border:none;padding:0;color:inherit;">16px</code> langsung di CSS
+              </div>
+              <div class="practice-item dont">
+                <span class="practice-icon">❌</span>
+                Jangan membuat custom color palette di luar design system
+              </div>
+              <div class="practice-item dont">
+                <span class="practice-icon">❌</span>
+                Jangan skip accessibility — pastikan contrast ratio memenuhi WCAG AA
+              </div>
             </div>
-            <div class="practice-item do">
-              <span class="practice-icon">✅</span>
-              Konsistenkan spacing menggunakan spacing scale 4px base unit
-            </div>
-            <div class="practice-item dont">
-              <span class="practice-icon">❌</span>
-              Jangan membuat custom color palette di luar design system
-            </div>
-            <div class="practice-item do">
-              <span class="practice-icon">✅</span>
-              Gunakan semantic color naming: primary, success, warning, error
-            </div>
-            <div class="practice-item dont">
-              <span class="practice-icon">❌</span>
-              Jangan skip accessibility — pastikan contrast ratio memenuhi WCAG AA
-            </div>
-            <div class="practice-item do">
-              <span class="practice-icon">✅</span>
-              Ikuti typography scale dan gunakan font Inter untuk konsistensi
-            </div>
-            <div class="practice-item do">
-              <span class="practice-icon">✅</span>
-              Test tampilan pada semua breakpoints: mobile, tablet, dan desktop
-            </div>
+
           </div>
         </section>
 
