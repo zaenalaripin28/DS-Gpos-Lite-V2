@@ -12,7 +12,7 @@
     .ds-option {
       min-height: 40px;
       border-radius: var(--border-radius-sm);
-      background: var(--color-neutral-n20);
+      background: transparent;
       color: var(--color-neutral-n500);
       font-family: var(--font-primary);
       font-size: var(--text-body-small-regular-size);
@@ -22,12 +22,28 @@
       align-items: center;
       gap: var(--space-075);
       padding: var(--space-075) var(--space-100);
+      border-left: var(--border-width-2) solid transparent;
       transition: background-color var(--transition-fast), color var(--transition-fast);
     }
-    .ds-option--hover { background: var(--color-neutral-n30); }
-    .ds-option--pressed { background: var(--color-neutral-n20); color: var(--color-blue-b300); }
-    .ds-option--selected { background: var(--color-neutral-n0); color: var(--color-blue-b300); }
-    .ds-option--selected-hover { background: var(--color-blue-b50); color: var(--color-blue-b300); }
+    .ds-option--hover {
+      background: var(--color-neutral-n30);
+      border-left-color: var(--color-blue-b300);
+    }
+    .ds-option--pressed {
+      background: var(--color-neutral-n20);
+      color: var(--color-blue-b300);
+      border-left-color: var(--color-blue-b300);
+    }
+    .ds-option--selected {
+      background: var(--color-neutral-n0);
+      color: var(--color-blue-b300);
+      border-left-color: var(--color-blue-b300);
+    }
+    .ds-option--selected-hover {
+      background: var(--color-blue-b50);
+      color: var(--color-blue-b300);
+      border-left-color: var(--color-blue-b300);
+    }
     .ds-option__control {
       width: 14px;
       height: 14px;
@@ -51,9 +67,9 @@
     .ds-option__icon {
       width: 16px;
       height: 16px;
-      border: 1px dashed var(--color-neutral-n100);
-      border-radius: var(--border-radius-xs);
-      opacity: 0.75;
+      display: inline-block;
+      object-fit: contain;
+      flex-shrink: 0;
     }
     .preview-card { border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface); }
     .type-stack { display: grid; gap: var(--space-200); }
@@ -148,9 +164,9 @@
       gap: var(--space-100);
       padding: var(--space-075) var(--space-100);
       font-family: var(--font-primary);
-      font-size: var(--text-body-medium-regular-size);
-      line-height: var(--text-body-medium-regular-lh);
-      font-weight: var(--text-body-medium-regular-weight);
+      font-size: var(--text-body-small-regular-size);
+      line-height: var(--text-body-small-regular-lh);
+      font-weight: var(--text-body-small-regular-weight);
       color: var(--color-neutral-n500);
       background: var(--color-neutral-n0);
       border-left: 3px solid transparent;
@@ -203,9 +219,9 @@
       gap: var(--space-100);
       padding: var(--space-075) var(--space-100);
       font-family: var(--font-primary);
-      font-size: var(--text-body-large-regular-size);
-      line-height: var(--text-body-large-regular-lh);
-      font-weight: var(--text-body-large-regular-weight);
+      font-size: var(--text-body-small-regular-size);
+      line-height: var(--text-body-small-regular-lh);
+      font-weight: var(--text-body-small-regular-weight);
       color: var(--color-blue-b400);
       background: var(--color-neutral-n0);
       border-left: 3px solid transparent;
@@ -269,20 +285,7 @@
     .ds-select-empty__action {
       margin-top: var(--space-100);
       display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--color-blue-b300);
-      font-size: var(--text-body-medium-semibold-size);
-      line-height: var(--text-body-medium-semibold-lh);
-      font-weight: var(--text-body-medium-semibold-weight);
       text-decoration: none;
-      border-radius: var(--border-radius-sm);
-      padding: var(--space-025) var(--space-050);
-      transition: background-color var(--transition-fast), color var(--transition-fast);
-    }
-    .ds-select-empty__action:hover {
-      background: var(--color-blue-b50);
-      color: var(--color-blue-b400);
     }
     .ds-select-empty--with-icon .ds-select-empty__title {
       display: inline-flex;
@@ -292,15 +295,9 @@
     .ds-select-empty__icon {
       width: 16px;
       height: 16px;
-      border-radius: var(--border-radius-xs);
-      border: 1px solid var(--color-neutral-n40);
-      background: var(--color-neutral-n10);
-      color: var(--color-neutral-n300);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      line-height: 1;
+      object-fit: contain;
+      display: inline-block;
+      flex-shrink: 0;
     }
     .ds-group-label-list {
       width: 100%;
@@ -316,10 +313,10 @@
       align-items: center;
       padding: 0 var(--space-200);
       font-family: var(--font-primary);
-      font-size: var(--text-body-medium-semibold-size);
-      line-height: var(--text-body-medium-semibold-lh);
-      font-weight: var(--text-body-medium-semibold-weight);
-      letter-spacing: 0.08em;
+      font-size: var(--text-overline-medium-size);
+      line-height: var(--text-overline-medium-lh);
+      font-weight: var(--text-overline-medium-weight);
+      letter-spacing: var(--text-overline-medium-ls);
       text-transform: uppercase;
       color: var(--color-neutral-n300);
     }
@@ -384,9 +381,9 @@
       border-radius: var(--border-radius-sm);
       color: var(--color-blue-b400);
       font-family: var(--font-primary);
-      font-size: var(--text-body-large-regular-size);
-      line-height: var(--text-body-large-regular-lh);
-      font-weight: var(--text-body-large-regular-weight);
+      font-size: var(--text-body-small-regular-size);
+      line-height: var(--text-body-small-regular-lh);
+      font-weight: var(--text-body-small-regular-weight);
       transition: background-color var(--transition-fast), color var(--transition-fast);
     }
     .ds-groups-scrollable__option:hover {
@@ -452,9 +449,9 @@
       border-radius: var(--border-radius-sm);
       color: var(--color-blue-b400);
       font-family: var(--font-primary);
-      font-size: var(--text-body-large-regular-size);
-      line-height: var(--text-body-large-regular-lh);
-      font-weight: var(--text-body-large-regular-weight);
+      font-size: var(--text-body-small-regular-size);
+      line-height: var(--text-body-small-regular-lh);
+      font-weight: var(--text-body-small-regular-weight);
       transition: background-color var(--transition-fast), color var(--transition-fast);
     }
     .ds-select-scrollable__option:hover {
@@ -477,9 +474,9 @@
       border-radius: var(--border-radius-sm);
       color: var(--color-blue-b400);
       font-family: var(--font-primary);
-      font-size: var(--text-body-large-regular-size);
-      line-height: var(--text-body-large-regular-lh);
-      font-weight: var(--text-body-large-regular-weight);
+      font-size: var(--text-body-small-regular-size);
+      line-height: var(--text-body-small-regular-lh);
+      font-weight: var(--text-body-small-regular-weight);
       transition: background-color var(--transition-fast), color var(--transition-fast);
     }
     .ds-select__option:hover {
@@ -527,23 +524,23 @@
         <div class="nav-section">
           <h3 class="nav-title">Komponen</h3>
           <ul class="nav-list">
-            <li><a href="../Button/button.html" class="nav-link">Button</a></li>
-            <li><a href="../Avatar/avatar.html" class="nav-link">Avatar</a></li>
-            <li><a href="../Badge/badge.html" class="nav-link">Badge</a></li>
-            <li><a href="../Tags/tags.html" class="nav-link">Tags</a></li>
-            <li><a href="../Checkbox/checkbox.html" class="nav-link">Checkbox</a></li>
-            <li><a href="../Radio/radio.html" class="nav-link">Radio</a></li>
-            <li><a href="../Toggle/toggle.html" class="nav-link">Toggle</a></li>
-            <li><a href="../Text Field/text field.html" class="nav-link">Text Field</a></li>
-            <li><a href="../Text Area/text area.html" class="nav-link">Text Area</a></li>
-            <li><a href="../Flags/flags.html" class="nav-link">Flags</a></li>
-            <li><a href="../section messages/section-message.html" class="nav-link">Section Message</a></li>
-            <li><a href="../Breadcrumbs/breadcrumbs.html" class="nav-link">Breadcrumbs</a></li>
-            <li><a href="../Tabs/tabs.html" class="nav-link">Tabs</a></li>
-            <li><a href="../Pagination/pagination.html" class="nav-link">Pagination</a></li>
-            <li><a href="../Calendar/calendar.html" class="nav-link">Calendar</a></li>
-            <li><a href="../Toast-Banner/banner.html" class="nav-link">Toast Banner</a></li>
-            <li><a href="select.html" class="nav-link active">Select</a></li>
+            <li><a href="../Button/button.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="3"/><line x1="7" y1="12" x2="17" y2="12" opacity="0.5"/></svg>Button</a></li>
+            <li><a href="../Avatar/avatar.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Avatar</a></li>
+            <li><a href="../Badge/badge.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="9" width="22" height="6" rx="3"/><circle cx="6" cy="12" r="1.5" fill="currentColor" opacity="0.5"/></svg>Badge</a></li>
+            <li><a href="../Tags/tags.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/></svg>Tags</a></li>
+            <li><a href="../Checkbox/checkbox.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg>Checkbox</a></li>
+            <li><a href="../Radio/radio.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg>Radio</a></li>
+            <li><a href="../Toggle/toggle.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="5"/><circle cx="7" cy="12" r="3" fill="currentColor" stroke="none"/></svg>Toggle</a></li>
+            <li><a href="../Text Field/text field.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="10" rx="2"/><line x1="7" y1="11" x2="13" y2="11"/></svg>Text Field</a></li>
+            <li><a href="../Text Area/text area.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="16" height="14" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg>Text Area</a></li>
+            <li><a href="../Flags/flags.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>Flags</a></li>
+            <li><a href="../section messages/section-message.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="14" y2="13"/></svg>Section Message</a></li>
+            <li><a href="../Breadcrumbs/breadcrumbs.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/><line x1="3" y1="12" x2="15" y2="12" opacity="0.4"/></svg>Breadcrumbs</a></li>
+            <li><a href="../Tabs/tabs.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="4" rx="1"/><rect x="2" y="13" width="14" height="4" rx="1"/></svg>Tabs</a></li>
+            <li><a href="../Pagination/pagination.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="10,6 4,12 10,18"/><polyline points="14,6 20,12 14,18"/></svg>Pagination</a></li>
+            <li><a href="../Calendar/calendar.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Calendar</a></li>
+            <li><a href="../Toast-Banner/banner.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="8" rx="2"/><circle cx="6" cy="12" r="1" fill="currentColor" stroke="none"/><line x1="10" y1="12" x2="18" y2="12"/></svg>Toast Banner</a></li>
+            <li><a href="select.html" class="nav-link active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><polyline points="8,10 12,14 16,10"/></svg>Select</a></li>
           </ul>
         </div>
       </nav>
@@ -663,7 +660,7 @@
 
       <section style="margin-bottom:48px;">
         <h2>Varian Option Part</h2>
-        <p class="section-caption">Implementasi option mengikuti existing interaction pattern input/list: neutral di idle, naik kontras di hover, dan biru pada selected.</p>
+        <p class="section-caption">Implementasi option mengikuti referensi state terbaru: default tanpa background, hover=neutral hover, pressed=neutral pressed, selected=selected background, selected-hover=accent blue subtler, serta left inside border 2px pada semua state non-default.</p>
         <div class="type-stack">
           <div class="preview-card p-5">
             <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px;">type-default</div>
@@ -702,21 +699,21 @@
             <div class="preview-card p-5">
               <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px;">type-1 icon</div>
               <div class="ds-option-list">
-                <div class="ds-option">Label<span class="ds-option__icon-slot"><span class="ds-option__icon" aria-hidden="true"></span></span></div>
-                <div class="ds-option ds-option--hover">Label<span class="ds-option__icon-slot"><span class="ds-option__icon" aria-hidden="true"></span></span></div>
-                <div class="ds-option ds-option--pressed">Label<span class="ds-option__icon-slot"><span class="ds-option__icon" aria-hidden="true"></span></span></div>
-                <div class="ds-option ds-option--selected">Label<span class="ds-option__icon-slot"><span class="ds-option__icon" aria-hidden="true"></span></span></div>
-                <div class="ds-option ds-option--selected-hover">Label<span class="ds-option__icon-slot"><span class="ds-option__icon" aria-hidden="true"></span></span></div>
+                <div class="ds-option">Label<span class="ds-option__icon-slot"><img class="ds-option__icon" src="../../assets/icons/icon-ellipsis-vertical.svg" alt="more"></span></div>
+                <div class="ds-option ds-option--hover">Label<span class="ds-option__icon-slot"><img class="ds-option__icon" src="../../assets/icons/icon-ellipsis-vertical.svg" alt="more"></span></div>
+                <div class="ds-option ds-option--pressed">Label<span class="ds-option__icon-slot"><img class="ds-option__icon" src="../../assets/icons/icon-ellipsis-vertical.svg" alt="more"></span></div>
+                <div class="ds-option ds-option--selected">Label<span class="ds-option__icon-slot"><img class="ds-option__icon" src="../../assets/icons/icon-ellipsis-vertical.svg" alt="more"></span></div>
+                <div class="ds-option ds-option--selected-hover">Label<span class="ds-option__icon-slot"><img class="ds-option__icon" src="../../assets/icons/icon-ellipsis-vertical.svg" alt="more"></span></div>
               </div>
             </div>
             <div class="preview-card p-5">
               <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px;">type-2 icon</div>
               <div class="ds-option-list">
-                <div class="ds-option">Label<span class="ds-option__icon-slot"><span class="ds-option__icon" aria-hidden="true"></span><span class="ds-option__icon" aria-hidden="true"></span></span></div>
-                <div class="ds-option ds-option--hover">Label<span class="ds-option__icon-slot"><span class="ds-option__icon" aria-hidden="true"></span><span class="ds-option__icon" aria-hidden="true"></span></span></div>
-                <div class="ds-option ds-option--pressed">Label<span class="ds-option__icon-slot"><span class="ds-option__icon" aria-hidden="true"></span><span class="ds-option__icon" aria-hidden="true"></span></span></div>
-                <div class="ds-option ds-option--selected">Label<span class="ds-option__icon-slot"><span class="ds-option__icon" aria-hidden="true"></span><span class="ds-option__icon" aria-hidden="true"></span></span></div>
-                <div class="ds-option ds-option--selected-hover">Label<span class="ds-option__icon-slot"><span class="ds-option__icon" aria-hidden="true"></span><span class="ds-option__icon" aria-hidden="true"></span></span></div>
+                <div class="ds-option">Label<span class="ds-option__icon-slot"><img class="ds-option__icon" src="../../assets/icons/icon-square-2-stack.svg" alt="duplicate"><img class="ds-option__icon" src="../../assets/icons/icon-ellipsis-vertical.svg" alt="more"></span></div>
+                <div class="ds-option ds-option--hover">Label<span class="ds-option__icon-slot"><img class="ds-option__icon" src="../../assets/icons/icon-square-2-stack.svg" alt="duplicate"><img class="ds-option__icon" src="../../assets/icons/icon-ellipsis-vertical.svg" alt="more"></span></div>
+                <div class="ds-option ds-option--pressed">Label<span class="ds-option__icon-slot"><img class="ds-option__icon" src="../../assets/icons/icon-square-2-stack.svg" alt="duplicate"><img class="ds-option__icon" src="../../assets/icons/icon-ellipsis-vertical.svg" alt="more"></span></div>
+                <div class="ds-option ds-option--selected">Label<span class="ds-option__icon-slot"><img class="ds-option__icon" src="../../assets/icons/icon-square-2-stack.svg" alt="duplicate"><img class="ds-option__icon" src="../../assets/icons/icon-ellipsis-vertical.svg" alt="more"></span></div>
+                <div class="ds-option ds-option--selected-hover">Label<span class="ds-option__icon-slot"><img class="ds-option__icon" src="../../assets/icons/icon-square-2-stack.svg" alt="duplicate"><img class="ds-option__icon" src="../../assets/icons/icon-ellipsis-vertical.svg" alt="more"></span></div>
               </div>
             </div>
           </div>
@@ -873,15 +870,14 @@
             <div class="ds-select-empty">
               <h3 class="ds-select-empty__title">No options</h3>
               <p class="ds-select-empty__desc">Item yang Anda cari belum tersedia di master</p>
-              <a href="#" class="ds-select-empty__action">Permintaan Item Baru</a>
             </div>
           </div>
           <div class="preview-card p-5">
             <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px;">variant=with icon</div>
             <div class="ds-select-empty ds-select-empty--with-icon">
-              <h3 class="ds-select-empty__title"><span class="ds-select-empty__icon" aria-hidden="true">i</span>No options</h3>
+              <h3 class="ds-select-empty__title"><img class="ds-select-empty__icon" src="../../assets/icons/icon-solid-information-circle.svg" alt="informasi">No options</h3>
               <p class="ds-select-empty__desc">Item yang Anda cari belum tersedia di master</p>
-              <a href="#" class="ds-select-empty__action">Permintaan Item Baru</a>
+              <a href="#" class="btn btn-ghost ds-select-empty__action">Permintaan Item Baru</a>
             </div>
           </div>
         </div>
