@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Section Message — DS GPOS Lite V2</title>
+  <link rel="stylesheet" href="../../styles/globals.css">
+  <link rel="stylesheet" href="../../styles/enhancements.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            b50:  '#E9F2FB', b300: '#1E7FD6', b400: '#155996',
+            n0:   '#FFFFFF', n300: '#5D6B82', n500: '#42526D', n900: '#091E42',
+            o50:  '#FFF4E8', o300: '#FF9015',
+            p50:  '#F1ECFE', p300: '#6E3EF6',
+            r50:  '#FDE8E9', r300: '#EC1C24',
+            g50:  '#E6F7EF', g300: '#00AA5B',
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    /* ================================================================
+       DS Section Message — section messages/figma/section message-components.png
+       appearance: information | success | warning | error | discovery
+
+       Semantic mapping (subtle surfaces):
+         Background.Information  → var(--color-blue-b50)
+         Background.Success      → var(--color-green-g50)
+         Background.Warning      → var(--color-orange-o50)
+         Background.Danger.Inverse → var(--color-red-r50)
+         Background.Discovery    → var(--color-purple-p50)
+         Text.Bold               → var(--color-neutral-n900)
+         Text.Subtle             → var(--color-neutral-n500)
+         Text.Link               → var(--color-blue-b300)
+         Icon.Brand / Success / Warning / Danger / Discovery
+    ================================================================ */
+    .ds-section-message {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-100);
+      width: 100%;
+      max-width: 400px;
+      padding: var(--space-150);
+      border-radius: var(--border-radius-lg);
+      font-family: var(--font-primary);
+      box-sizing: border-box;
+    }
+
+    .ds-section-message__header {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-100);
+    }
+
+    .ds-section-message__icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      display: block;
+      background-color: currentColor;
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+    }
+
+    .ds-section-message__main {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .ds-section-message__title {
+      margin: 0;
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--text-body-small-medium-lh);
+      color: var(--color-neutral-n900);
+    }
+
+    .ds-section-message__body {
+      padding-left: calc(24px + var(--space-100));
+    }
+
+    .ds-section-message__description {
+      margin: 0 0 var(--space-100);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-regular);
+      line-height: var(--text-body-small-regular-lh);
+      color: var(--color-neutral-n500);
+    }
+
+    .ds-section-message__actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-050);
+    }
+
+    .ds-section-message__action {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: var(--space-050) var(--space-100);
+      border: none;
+      background: transparent;
+      font-family: inherit;
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--text-body-small-medium-lh);
+      color: var(--color-blue-b300);
+      cursor: pointer;
+      text-decoration: none;
+      border-radius: var(--border-radius-sm);
+      transition: color var(--transition-fast), text-decoration var(--transition-fast);
+    }
+
+    .ds-section-message__action:hover {
+      color: var(--color-blue-b400);
+      text-decoration: underline;
+    }
+
+    .ds-section-message__action:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+
+    .ds-section-message__action-sep {
+      color: var(--color-neutral-n300);
+      font-size: var(--font-size-sm);
+      line-height: 1;
+      user-select: none;
+      padding: 0 var(--space-025);
+    }
+
+    /* ── appearance=information ── */
+    .ds-section-message--information {
+      background-color: var(--color-blue-b50);
+    }
+    .ds-section-message--information .ds-section-message__icon {
+      color: var(--color-blue-b300);
+      -webkit-mask-image: url('../../assets/icons/icon-solid-information-circle.svg');
+      mask-image: url('../../assets/icons/icon-solid-information-circle.svg');
+    }
+
+    /* ── appearance=success ── */
+    .ds-section-message--success {
+      background-color: var(--color-green-g50);
+    }
+    .ds-section-message--success .ds-section-message__icon {
+      color: var(--color-green-g300);
+      -webkit-mask-image: url('../../assets/icons/icon-solid-check-circle.svg');
+      mask-image: url('../../assets/icons/icon-solid-check-circle.svg');
+    }
+
+    /* ── appearance=warning ── */
+    .ds-section-message--warning {
+      background-color: var(--color-orange-o50);
+    }
+    .ds-section-message--warning .ds-section-message__icon {
+      color: var(--color-orange-o300);
+      -webkit-mask-image: url('../../assets/icons/icon-solid-exclamation-triangle.svg');
+      mask-image: url('../../assets/icons/icon-solid-exclamation-triangle.svg');
+    }
+
+    /* ── appearance=error ── */
+    .ds-section-message--error {
+      background-color: var(--color-red-r50);
+    }
+    .ds-section-message--error .ds-section-message__icon {
+      color: var(--color-red-r300);
+      -webkit-mask-image: url('../../assets/icons/icon-solid-exclamation-triangle.svg');
+      mask-image: url('../../assets/icons/icon-solid-exclamation-triangle.svg');
+    }
+
+    /* ── appearance=discovery ── */
+    .ds-section-message--discovery {
+      background-color: var(--color-purple-p50);
+    }
+    .ds-section-message--discovery .ds-section-message__icon {
+      color: var(--color-purple-p300);
+      -webkit-mask-image: url('../../assets/icons/icon-solid-question-mark-circle.svg');
+      mask-image: url('../../assets/icons/icon-solid-question-mark-circle.svg');
+    }
+
+    .section-message-stack {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-200);
+      max-width: 440px;
+    }
+
+    .section-message-row__label {
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      color: var(--color-text-tertiary);
+      margin-bottom: var(--space-100);
+      letter-spacing: 0.02em;
+    }
+
+    .usage-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .usage-grid-2 > div {
+      transition: transform 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .usage-grid-2 > div:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .usage-info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .usage-info-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .tw-snippet-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--color-neutral-n30);
+    }
+    .tw-snippet-row:last-child { border-bottom: none; }
+    .tw-snippet-code {
+      flex: 1;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      line-height: 1.55;
+      color: var(--color-neutral-n700);
+      word-break: break-all;
+    }
+    .tw-copy-btn {
+      flex-shrink: 0;
+      padding: 4px 10px;
+      background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n40);
+      border-radius: var(--border-radius-sm);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-neutral-n400);
+      cursor: pointer;
+      font-family: var(--font-primary);
+      transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+    }
+    .tw-copy-btn:hover {
+      background: var(--color-blue-b300);
+      border-color: var(--color-blue-b300);
+      color: var(--color-neutral-n0);
+    }
+    .tw-copy-btn.copied {
+      background: var(--color-green-g400);
+      border-color: var(--color-green-g400);
+      color: var(--color-neutral-n0);
+    }
+    .copy-btn {
+      padding: 4px 10px;
+      background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n30);
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-neutral-n400);
+      cursor: pointer;
+      font-family: var(--font-primary);
+    }
+    .copy-btn:hover { background: var(--color-blue-b300); border-color: var(--color-blue-b300); color: #fff; }
+    .copy-btn.copied { background: var(--color-green-g300); border-color: var(--color-green-g300); color: #fff; }
+
+    @media (max-width: 900px) {
+      .usage-info-grid { grid-template-columns: 1fr !important; }
+      .usage-grid-2 { grid-template-columns: 1fr !important; }
+      .anatomy-grid { grid-template-columns: 1fr !important; }
+    }
+
+    section > h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: none !important;
+      background-image: linear-gradient(to right, var(--color-primary-500) 0%, rgba(30,127,214,0.18) 32%, transparent 68%) !important;
+      background-repeat: no-repeat !important;
+      background-size: 100% 1px !important;
+      background-position: left bottom !important;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--color-text-primary);
+      letter-spacing: -0.01em;
+      font-family: var(--font-primary);
+    }
+    section > h2::before {
+      content: '';
+      width: 3px;
+      height: 18px;
+      background: linear-gradient(to bottom, var(--color-primary-500), var(--color-primary-300));
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    code {
+      font-family: var(--font-mono) !important;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 7px;
+      background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n30);
+      border-radius: 4px;
+      color: var(--color-blue-b300);
+    }
+    .anatomy-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font-mono);
+      letter-spacing: 0.04em;
+      color: var(--color-text-secondary);
+    }
+    .anatomy-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--color-blue-b300);
+      color: var(--color-neutral-n0);
+      font-size: 10px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .anatomy-grid > div {
+      transition: transform 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .anatomy-grid > div:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(9, 30, 66, 0.11), 0 3px 8px rgba(9, 30, 66, 0.06);
+    }
+    .anatomy-grid > div > div:last-child { border-top: 2px solid var(--color-neutral-n30) !important; }
+    [data-theme="dark"] .anatomy-grid > div,
+    [data-theme="dark"] .usage-grid-2 > div,
+    [data-theme="dark"] .usage-info-card { background-color: #0F1D30 !important; border-color: #1A2E48 !important; }
+    [data-theme="dark"] .anatomy-grid > div > div:first-child { background: #080F1E !important; }
+    [data-theme="dark"] .anatomy-grid > div > div:last-child { background: #0F1D30 !important; border-top-color: #1A2E48 !important; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo-icon">GL</div>
+        <div class="sidebar-brand-text">
+          <div class="logo">GPOS Lite</div>
+          <div class="version">Design System V2.0</div>
+        </div>
+      </div>
+      <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">&#x2715;</button>
+    </div>
+    <div class="sidebar-search">
+      <input type="search" class="search-input" placeholder="&#x1F50D;  Cari token, component...">
+    </div>
+    <div class="nav-scroll">
+      <nav class="nav-menu">
+        <div class="nav-section">
+          <h3 class="nav-title">Overview</h3>
+          <ul class="nav-list">
+            <li><a href="../../index.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>Home</a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <h3 class="nav-title">Foundations</h3>
+          <ul class="nav-list">
+            <li><a href="../../foundations/colors/colors.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg>Colors</a></li>
+            <li><a href="../../foundations/typography/typography.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Typography</a></li>
+            <li><a href="../../foundations/spacing/spacing.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>Spacing</a></li>
+            <li><a href="../../foundations/shadows/shadows.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h12a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V7z" opacity="0.4"/></svg>Shadows</a></li>
+            <li><a href="../../foundations/borders/borders.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>Borders &amp; Radius</a></li>
+            <li><a href="../../foundations/grid/grid.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Grid &amp; Layout</a></li>
+            <li><a href="../../foundations/icons/icons.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="5" height="5" rx="1"/><rect x="10" y="3" width="5" height="5" rx="1"/><rect x="17" y="3" width="4" height="5" rx="1"/><rect x="3" y="10" width="5" height="5" rx="1"/><rect x="10" y="10" width="5" height="5" rx="1"/><rect x="17" y="10" width="4" height="5" rx="1"/><rect x="3" y="17" width="5" height="4" rx="1"/><rect x="10" y="17" width="5" height="4" rx="1"/><rect x="17" y="17" width="4" height="4" rx="1"/></svg>Icons</a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <h3 class="nav-title">Komponen</h3>
+          <ul class="nav-list">
+            <li><a href="../Button/button.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="3"/></svg>Button</a></li>
+            <li><a href="../Avatar/avatar.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Avatar</a></li>
+            <li><a href="../Badge/badge.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="9" width="22" height="6" rx="3"/></svg>Badge</a></li>
+            <li><a href="../Tags/tags.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/></svg>Tags</a></li>
+            <li><a href="../Lozenge/lozenge.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="7" width="16" height="10" rx="2"/></svg>Lozenge</a></li>
+            <li><a href="../Checkbox/checkbox.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg>Checkbox</a></li>
+            <li>
+              <a href="../Radio/radio.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg>
+                Radio
+              </a>
+            </li>
+            <li><a href="../Toggle/toggle.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="5"/><circle cx="7" cy="12" r="3" fill="currentColor" stroke="none"/></svg>Toggle</a></li>
+            <li><a href="../Flags/flags.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>Flags</a></li>
+            <li><a href="section-message.html" class="nav-link active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="14" y2="13"/></svg>Section Message</a></li>
+            <li><a href="../Breadcrumbs/breadcrumbs.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>Breadcrumbs</a></li>
+            <li><a href="../Tabs/tabs.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="4" rx="1"/></svg>Tabs</a></li>
+            <li><a href="../Pagination/pagination.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="10,6 4,12 10,18"/><polyline points="14,6 20,12 14,18"/></svg>Pagination</a></li>
+            <li><a href="../Calendar/calendar.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Calendar</a></li>
+            <li><a href="../Toast-Banner/banner.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="8" rx="2"/></svg>Toast Banner</a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <h3 class="nav-title">Resources</h3>
+          <ul class="nav-list">
+            <li>
+              <a href="https://github.com/zaenalaripin28/DS-Gpos-Lite-V2" class="nav-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                GitHub Repo
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="sidebar-footer">
+      <div class="tailwind-badge">Built with tokens.css</div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">☰</button>
+      <div class="breadcrumb">
+        <a href="../../index.html">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="#">Components</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="current">Section Message</span>
+      </div>
+      <span class="version-badge">v2.0</span>
+    </div>
+
+    <div class="content-inner">
+
+      <section class="mb-12">
+        <h2 style="border:none;background:none;padding:0;margin-bottom:12px;">Section Message</h2>
+        <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:720px;margin-bottom:24px;">
+          Blok pesan kontekstual dengan latar subtle, ikon semantik, judul, deskripsi, dan tautan aksi opsional. Dipakai di dalam section halaman — bukan notifikasi sementara. Referensi: <code>section messages/figma/section message-components.png</code>.
+        </p>
+
+        <div class="section-message-stack">
+
+          <div>
+            <div class="section-message-row__label">appearance=information</div>
+            <article class="ds-section-message ds-section-message--information" role="region" aria-labelledby="sm-title-information">
+              <div class="ds-section-message__header">
+                <span class="ds-section-message__icon" aria-hidden="true"></span>
+                <div class="ds-section-message__main">
+                  <h3 class="ds-section-message__title" id="sm-title-information">Title</h3>
+                </div>
+              </div>
+              <div class="ds-section-message__body">
+                <p class="ds-section-message__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                <div class="ds-section-message__actions">
+                  <a href="#" class="ds-section-message__action">Action link</a>
+                  <span class="ds-section-message__action-sep" aria-hidden="true">·</span>
+                  <a href="#" class="ds-section-message__action">Action link</a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div>
+            <div class="section-message-row__label">appearance=success</div>
+            <article class="ds-section-message ds-section-message--success" role="region" aria-labelledby="sm-title-success">
+              <div class="ds-section-message__header">
+                <span class="ds-section-message__icon" aria-hidden="true"></span>
+                <div class="ds-section-message__main">
+                  <h3 class="ds-section-message__title" id="sm-title-success">Title</h3>
+                </div>
+              </div>
+              <div class="ds-section-message__body">
+                <p class="ds-section-message__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                <div class="ds-section-message__actions">
+                  <a href="#" class="ds-section-message__action">Action link</a>
+                  <span class="ds-section-message__action-sep" aria-hidden="true">·</span>
+                  <a href="#" class="ds-section-message__action">Action link</a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div>
+            <div class="section-message-row__label">appearance=warning</div>
+            <article class="ds-section-message ds-section-message--warning" role="region" aria-labelledby="sm-title-warning">
+              <div class="ds-section-message__header">
+                <span class="ds-section-message__icon" aria-hidden="true"></span>
+                <div class="ds-section-message__main">
+                  <h3 class="ds-section-message__title" id="sm-title-warning">Title</h3>
+                </div>
+              </div>
+              <div class="ds-section-message__body">
+                <p class="ds-section-message__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                <div class="ds-section-message__actions">
+                  <a href="#" class="ds-section-message__action">Action link</a>
+                  <span class="ds-section-message__action-sep" aria-hidden="true">·</span>
+                  <a href="#" class="ds-section-message__action">Action link</a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div>
+            <div class="section-message-row__label">appearance=error</div>
+            <article class="ds-section-message ds-section-message--error" role="region" aria-labelledby="sm-title-error">
+              <div class="ds-section-message__header">
+                <span class="ds-section-message__icon" aria-hidden="true"></span>
+                <div class="ds-section-message__main">
+                  <h3 class="ds-section-message__title" id="sm-title-error">Title</h3>
+                </div>
+              </div>
+              <div class="ds-section-message__body">
+                <p class="ds-section-message__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                <div class="ds-section-message__actions">
+                  <a href="#" class="ds-section-message__action">Action link</a>
+                  <span class="ds-section-message__action-sep" aria-hidden="true">·</span>
+                  <a href="#" class="ds-section-message__action">Action link</a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div>
+            <div class="section-message-row__label">appearance=discovery</div>
+            <article class="ds-section-message ds-section-message--discovery" role="region" aria-labelledby="sm-title-discovery">
+              <div class="ds-section-message__header">
+                <span class="ds-section-message__icon" aria-hidden="true"></span>
+                <div class="ds-section-message__main">
+                  <h3 class="ds-section-message__title" id="sm-title-discovery">Title</h3>
+                </div>
+              </div>
+              <div class="ds-section-message__body">
+                <p class="ds-section-message__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                <div class="ds-section-message__actions">
+                  <a href="#" class="ds-section-message__action">Action link</a>
+                  <span class="ds-section-message__action-sep" aria-hidden="true">·</span>
+                  <a href="#" class="ds-section-message__action">Action link</a>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </div>
+
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;margin-top:24px;">
+          <img src="figma/section message-components.png" alt="Referensi Figma Section Message" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Anatomy</h2>
+        <p style="font-size:14px;color:var(--color-text-tertiary);margin-top:-12px;margin-bottom:28px;font-family:var(--font-primary);">
+          Lima bagian utama: <strong>container</strong>, <strong>icon</strong>, <strong>title</strong>, <strong>description</strong>, dan <strong>action links</strong> opsional. Semua varian appearance memakai struktur yang sama; perbedaan hanya pada token warna latar dan ikon.
+        </p>
+
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px;" class="anatomy-grid">
+
+          <!-- Diagram beranotasi -->
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:48px 28px 56px;display:flex;justify-content:center;background:var(--color-neutral-n10);position:relative;">
+              <div style="position:relative;width:100%;max-width:360px;">
+                <div style="position:absolute;inset:-10px;border:1.5px dashed var(--color-blue-b200);border-radius:14px;pointer-events:none;z-index:2;"></div>
+                <div style="position:absolute;top:14px;left:14px;width:28px;height:28px;border:1.5px dashed var(--color-blue-b300);border-radius:6px;pointer-events:none;z-index:2;"></div>
+                <div style="position:absolute;top:14px;left:50px;right:14px;height:22px;border:1.5px dashed var(--color-neutral-n200);border-radius:4px;pointer-events:none;z-index:2;"></div>
+                <div style="position:absolute;top:48px;left:50px;right:14px;height:36px;border:1.5px dashed var(--color-neutral-n200);border-radius:4px;pointer-events:none;z-index:2;"></div>
+                <div style="position:absolute;bottom:18px;left:50px;right:14px;height:24px;border:1.5px dashed var(--color-green-g300);border-radius:4px;pointer-events:none;z-index:2;"></div>
+
+                <article class="ds-section-message ds-section-message--information" style="max-width:none;position:relative;z-index:1;">
+                  <div class="ds-section-message__header">
+                    <span class="ds-section-message__icon" aria-hidden="true"></span>
+                    <div class="ds-section-message__main">
+                      <h3 class="ds-section-message__title">Title</h3>
+                    </div>
+                  </div>
+                  <div class="ds-section-message__body">
+                    <p class="ds-section-message__description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <div class="ds-section-message__actions">
+                      <span class="ds-section-message__action" style="pointer-events:none;">Action link</span>
+                      <span class="ds-section-message__action-sep" aria-hidden="true">·</span>
+                      <span class="ds-section-message__action" style="pointer-events:none;">Action link</span>
+                    </div>
+                  </div>
+                </article>
+
+                <div style="position:absolute;top:-38px;left:50%;transform:translateX(-50%);white-space:nowrap;z-index:3;" class="anatomy-label"><span class="anatomy-badge">A</span> Container</div>
+                <div style="position:absolute;top:50%;left:-4px;transform:translateY(-50%);white-space:nowrap;z-index:3;" class="anatomy-label"><span class="anatomy-badge" style="background:var(--color-blue-b300);">B</span> Icon</div>
+                <div style="position:absolute;top:22px;right:-4px;white-space:nowrap;z-index:3;" class="anatomy-label"><span class="anatomy-badge" style="background:var(--color-neutral-n300);">C</span> Title</div>
+                <div style="position:absolute;top:58px;right:-4px;white-space:nowrap;z-index:3;" class="anatomy-label"><span class="anatomy-badge" style="background:var(--color-neutral-n400);">D</span> Description</div>
+                <div style="position:absolute;bottom:-38px;left:50%;transform:translateX(-50%);white-space:nowrap;z-index:3;" class="anatomy-label"><span class="anatomy-badge" style="background:var(--color-green-g300);">E</span> Actions</div>
+              </div>
+            </div>
+            <div style="padding:16px 20px;background:var(--color-surface);">
+              <div style="font-size:13px;font-weight:700;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:8px;">Diagram</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Preview <code>appearance=information</code>. Garis putus-putus menandai batas tiap slot. Body (<code>ds-section-message__body</code>) di-indent <code>calc(24px + space-100)</code> agar sejajar dengan judul.</div>
+            </div>
+          </div>
+
+          <!-- Informasi anatomy -->
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:14px 16px;background:var(--color-blue-b50);border-bottom:1px solid var(--color-blue-b75);">
+              <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);font-family:var(--font-primary);letter-spacing:0.04em;text-transform:uppercase;">Informasi Anatomy</div>
+            </div>
+            <div style="padding:16px 20px 20px;">
+              <div style="display:flex;flex-direction:column;gap:14px;">
+
+                <div style="display:flex;align-items:flex-start;gap:10px;">
+                  <span class="anatomy-badge" style="margin-top:1px;flex-shrink:0;">A</span>
+                  <div>
+                    <div style="font-size:12px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);">Container</div>
+                    <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);margin-top:2px;line-height:1.5;"><code>article.ds-section-message</code> — padding <code>space-150</code>, gap <code>space-100</code>, radius <code>border-radius-lg</code>. Latar subtle: <code>Background.Information</code> (B50), <code>Background.Success</code> (G50), <code>Background.Warning</code> (O50), <code>Background.Danger.Inverse</code> (R50), <code>Background.Discovery</code> (P50).</div>
+                  </div>
+                </div>
+
+                <div style="display:flex;align-items:flex-start;gap:10px;">
+                  <span class="anatomy-badge" style="background:var(--color-blue-b300);margin-top:1px;flex-shrink:0;">B</span>
+                  <div>
+                    <div style="font-size:12px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);">Icon slot</div>
+                    <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);margin-top:2px;line-height:1.5;">Berukuran <code>24×24px</code> di <code>ds-section-message__header</code>. Information → <code>icon-solid-information-circle</code>; Success → <code>icon-solid-check-circle</code>; Warning/Error → <code>icon-solid-exclamation-triangle</code>; Discovery → <code>icon-solid-question-mark-circle</code>. Warna ikon: <code>Icon.Brand</code>, <code>Icon.Success</code>, <code>Icon.Warning</code>, <code>Icon.Danger</code>, <code>Icon.Discovery</code>.</div>
+                  </div>
+                </div>
+
+                <div style="display:flex;align-items:flex-start;gap:10px;">
+                  <span class="anatomy-badge" style="background:var(--color-neutral-n300);margin-top:1px;flex-shrink:0;">C</span>
+                  <div>
+                    <div style="font-size:12px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);">Title</div>
+                    <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);margin-top:2px;line-height:1.5;"><code>h3.ds-section-message__title</code> — <code>font-size-sm</code>, semibold, <code>Text.Bold</code> (N900). Satu baris ringkas yang merangkum pesan utama.</div>
+                  </div>
+                </div>
+
+                <div style="display:flex;align-items:flex-start;gap:10px;">
+                  <span class="anatomy-badge" style="background:var(--color-neutral-n400);margin-top:1px;flex-shrink:0;">D</span>
+                  <div>
+                    <div style="font-size:12px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);">Description</div>
+                    <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);margin-top:2px;line-height:1.5;"><code>p.ds-section-message__description</code> — regular 14px, <code>Text.Subtle</code> (N500). Margin bawah <code>space-100</code> sebelum baris aksi.</div>
+                  </div>
+                </div>
+
+                <div style="display:flex;align-items:flex-start;gap:10px;">
+                  <span class="anatomy-badge" style="background:var(--color-green-g300);margin-top:1px;flex-shrink:0;">E</span>
+                  <div>
+                    <div style="font-size:12px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);">Action links</div>
+                    <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);margin-top:2px;line-height:1.5;"><code>ds-section-message__actions</code> — opsional, maks. 2 tautan. Gaya <code>Text.Link</code> (B300), hover underline + B400. Pemisah <code>·</code> memakai <code>ds-section-message__action-sep</code> (<code>Text.Subtle</code> / N300).</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Informasi Penggunaan</h2>
+        <div class="usage-info-grid">
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Kapan dipakai</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Untuk informasi yang relevan dengan konten section atau halaman (onboarding, kebijakan, hasil operasi, peringatan field). Bukan untuk feedback sementara — gunakan <a href="../Toast-Banner/banner.html" style="color:var(--color-blue-b300);">Toast Banner</a>.</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Appearance</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Lima varian: <code>information</code>, <code>success</code>, <code>warning</code>, <code>error</code>, <code>discovery</code>. Pilih sesuai urgensi dan makna semantik — jangan tukar success untuk error.</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);">Aksi &amp; aksesibilitas</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;">Maksimal 2 tautan aksi. Gunakan <code>role="region"</code> + <code>aria-labelledby</code> pada judul. Tautan fokus memakai ring <code>Border.Focused</code> (<code>b200</code>).</div>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Do &amp; Don&apos;t</h2>
+        <div class="usage-grid-2">
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:10px 16px;background:var(--color-green-g50);border-bottom:2px solid var(--color-green-g100);font-weight:700;color:var(--color-green-g400);">Do — Lakukan ini</div>
+            <ul style="padding:16px 20px 20px 36px;color:var(--color-text-tertiary);font-size:13px;line-height:1.7;">
+              <li>Gunakan section message untuk konteks halaman yang tetap relevan selama pengguna berada di section tersebut.</li>
+              <li>Pilih ikon solid yang sesuai: <code>icon-solid-information-circle</code>, <code>icon-solid-check-circle</code>, <code>icon-solid-exclamation-triangle</code>, <code>icon-solid-question-mark-circle</code>.</li>
+              <li>Tulis judul singkat (1 baris) dan deskripsi yang menjelaskan dampak atau langkah berikutnya.</li>
+              <li>Gunakan tautan aksi hanya jika ada langkah lanjutan yang jelas (maks. 2 link).</li>
+              <li>Pertahankan padding <code>space-150</code> dan indent body <code>24px + space-100</code> agar sejajar dengan judul.</li>
+            </ul>
+          </div>
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:10px 16px;background:var(--color-red-r50);border-bottom:2px solid var(--color-red-r100);font-weight:700;color:var(--color-red-r400);">Don&apos;t — Hindari ini</div>
+            <ul style="padding:16px 20px 20px 36px;color:var(--color-text-tertiary);font-size:13px;line-height:1.7;">
+              <li>Jangan gunakan section message untuk notifikasi sementara setelah aksi — pakai toast/banner.</li>
+              <li>Jangan menumpuk banyak section message dalam satu viewport; prioritaskan yang paling penting.</li>
+              <li>Jangan menghilangkan ikon — ikon membantu identifikasi tingkat pesan secara cepat.</li>
+              <li>Jangan hardcode warna hex; gunakan token semantic atau alias Tailwind DS.</li>
+              <li>Jangan mengganti tautan aksi dengan tombol primary penuh — gunakan gaya link <code>Text.Link</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Tailwind — Salin Code</h2>
+        <p style="font-size:14px;color:var(--color-text-tertiary);margin:-12px 0 20px;font-family:var(--font-primary);">Utility untuk container subtle per appearance. Ikon &amp; teks mengacu alias di <code>tailwind.config</code> halaman ini.</p>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Base container</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'flex w-full max-w-md flex-col gap-2 rounded-lg p-3 font-sans')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">appearance=information</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-b50')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">appearance=success</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-g50')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">appearance=warning</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-o50')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">appearance=error</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-r50')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">appearance=discovery</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-p50')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Header row (icon + title)</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'flex items-start gap-2')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Title</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'text-sm font-semibold text-n900')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Body indent</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'pl-8')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Description</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'mb-2 text-sm font-normal text-n500')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Action link</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'inline-flex min-h-6 items-center rounded px-2 py-0.5 text-sm font-medium text-b300 hover:text-b400 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
+          </div>
+          <div class="tw-snippet-row">
+            <code class="tw-snippet-code">Ikon 24×24 (information)</code>
+            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'h-6 w-6 shrink-0 text-b300')">Salin</button>
+          </div>
+        </div>
+
+        <p style="font-size:13px;font-weight:600;color:var(--color-text-primary);margin:28px 0 12px;font-family:var(--font-primary);">Blok siap copy (Tailwind)</p>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-mono);">section-message-tailwind.html</span>
+            <button class="tw-copy-btn" id="copy-tailwind-block-btn" onclick="copyTailwindBlock()">Salin semua</button>
+          </div>
+          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-mono);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="tailwind-block">&lt;!-- appearance=information --&gt;
+&lt;article class="flex w-full max-w-md flex-col gap-2 rounded-lg bg-b50 p-3" role="region" aria-labelledby="section-msg-title"&gt;
+  &lt;div class="flex items-start gap-2"&gt;
+    &lt;img src="../../assets/icons/icon-solid-information-circle.svg" alt="" class="h-6 w-6 shrink-0 text-b300" width="24" height="24" /&gt;
+    &lt;h3 id="section-msg-title" class="text-sm font-semibold text-n900"&gt;Title&lt;/h3&gt;
+  &lt;/div&gt;
+  &lt;div class="pl-8"&gt;
+    &lt;p class="mb-2 text-sm font-normal text-n500"&gt;Deskripsi pesan section.&lt;/p&gt;
+    &lt;div class="flex flex-wrap items-center gap-1"&gt;
+      &lt;a href="#" class="inline-flex min-h-6 items-center rounded px-2 py-0.5 text-sm font-medium text-b300 hover:text-b400 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200"&gt;Action link&lt;/a&gt;
+      &lt;span class="px-0.5 text-sm text-n300" aria-hidden="true"&gt;·&lt;/span&gt;
+      &lt;a href="#" class="inline-flex min-h-6 items-center rounded px-2 py-0.5 text-sm font-medium text-b300 hover:text-b400 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200"&gt;Action link&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/article&gt;
+
+&lt;!-- appearance=success · bg-g50 · ikon text-g300 --&gt;
+&lt;!-- appearance=warning · bg-o50 · ikon text-o300 --&gt;
+&lt;!-- appearance=error · bg-r50 · ikon text-r300 --&gt;
+&lt;!-- appearance=discovery · bg-p50 · ikon text-p300 --&gt;</code></pre>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Kode HTML</h2>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-mono);">section-message.html — ds-section-message</span>
+            <button class="copy-btn" id="copy-html-btn" onclick="copyHtml()">Salin</button>
+          </div>
+          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-mono);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="html-block">&lt;!-- appearance=information --&gt;
+&lt;article class="ds-section-message ds-section-message--information" role="region" aria-labelledby="sm-title"&gt;
+  &lt;div class="ds-section-message__header"&gt;
+    &lt;span class="ds-section-message__icon" aria-hidden="true"&gt;&lt;/span&gt;
+    &lt;div class="ds-section-message__main"&gt;
+      &lt;h3 class="ds-section-message__title" id="sm-title"&gt;Title&lt;/h3&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="ds-section-message__body"&gt;
+    &lt;p class="ds-section-message__description"&gt;Deskripsi pesan section.&lt;/p&gt;
+    &lt;div class="ds-section-message__actions"&gt;
+      &lt;a href="#" class="ds-section-message__action"&gt;Action link&lt;/a&gt;
+      &lt;span class="ds-section-message__action-sep" aria-hidden="true"&gt;·&lt;/span&gt;
+      &lt;a href="#" class="ds-section-message__action"&gt;Action link&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+        </div>
+      </section>
+
+      <footer class="page-footer" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--color-border);font-size:12px;color:var(--color-text-tertiary);">
+        &copy; 2026 GPOS Lite Design System V2.0 — Section Message
+      </footer>
+    </div>
+  </main>
+</div>
+
+<script src="../../scripts/script.js"></script>
+<script>
+  function copyTailwind(btn, text) {
+    navigator.clipboard.writeText(text).then(function () {
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () {
+        btn.textContent = 'Salin';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+  function copyTailwindBlock() {
+    navigator.clipboard.writeText(document.getElementById('tailwind-block').textContent).then(function () {
+      var btn = document.getElementById('copy-tailwind-block-btn');
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Salin semua'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+  function copyHtml() {
+    navigator.clipboard.writeText(document.getElementById('html-block').textContent).then(function () {
+      var btn = document.getElementById('copy-html-btn');
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+</script>
+</body>
+</html>
