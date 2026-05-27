@@ -548,87 +548,7 @@
       </section>
 
       <section style="margin-bottom:48px;">
-        <h2>Tailwind — Salin Code</h2>
-        <p style="font-size:14px;color:var(--color-text-tertiary);margin:-12px 0 20px;font-family:var(--font-primary);">Class dasar + modifier per appearance. Warna mengacu alias di <code>tailwind.config</code> halaman ini.</p>
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Base lozenge</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'inline-flex items-center rounded px-2 py-0.5 text-xs font-semibold uppercase tracking-wider')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">default · subtle</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-n20 text-n500')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">default · bold</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-n500 text-n0')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">inprogress · subtle</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-b50 text-b300')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">inprogress · bold</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-b300 text-n0')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">moved · subtle</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-o50 text-o300')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">moved · bold</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-o300 text-n900')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">new · subtle</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-p50 text-p300')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">new · bold</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-p300 text-n0')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">removed · subtle</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-r50 text-r300')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">removed · bold</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-r300 text-n0')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">success · subtle</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-g50 text-g300')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">success · bold</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-g300 text-n0')">Salin</button>
-          </div>
-        </div>
-
-        <p style="font-size:13px;font-weight:600;color:var(--color-text-primary);margin:28px 0 12px;font-family:var(--font-primary);">Blok siap copy (Tailwind)</p>
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
-          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);">lozenge-tailwind.html</span>
-            <button class="tw-copy-btn" id="copy-tailwind-block-btn" onclick="copyTailwindBlock()">Salin semua</button>
-          </div>
-          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-primary);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="tailwind-block">&lt;!-- Base + appearance subtle --&gt;
-&lt;span class="inline-flex items-center rounded px-2 py-0.5 text-xs font-semibold uppercase tracking-wider bg-b50 text-b300"&gt;In Progress&lt;/span&gt;
-
-&lt;!-- Bold modifier --&gt;
-&lt;span class="inline-flex items-center rounded px-2 py-0.5 text-xs font-semibold uppercase tracking-wider bg-b300 text-n0"&gt;In Progress&lt;/span&gt;
-
-&lt;!-- Semua appearance (subtle) --&gt;
-&lt;span class="inline-flex items-center rounded px-2 py-0.5 text-xs font-semibold uppercase tracking-wider bg-n20 text-n500"&gt;Default&lt;/span&gt;
-&lt;span class="inline-flex items-center rounded px-2 py-0.5 text-xs font-semibold uppercase tracking-wider bg-b50 text-b300"&gt;In Progress&lt;/span&gt;
-&lt;span class="inline-flex items-center rounded px-2 py-0.5 text-xs font-semibold uppercase tracking-wider bg-o50 text-o300"&gt;Moved&lt;/span&gt;
-&lt;span class="inline-flex items-center rounded px-2 py-0.5 text-xs font-semibold uppercase tracking-wider bg-p50 text-p300"&gt;New&lt;/span&gt;
-&lt;span class="inline-flex items-center rounded px-2 py-0.5 text-xs font-semibold uppercase tracking-wider bg-r50 text-r300"&gt;Removed&lt;/span&gt;
-&lt;span class="inline-flex items-center rounded px-2 py-0.5 text-xs font-semibold uppercase tracking-wider bg-g50 text-g300"&gt;Success&lt;/span&gt;</code></pre>
-        </div>
-      </section>
-
-      <section style="margin-bottom:48px;">
-        <h2>Kode HTML</h2>
+        <h2>Code — Salin Code</h2>
         <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
           <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
             <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);">lozenge.html</span>
@@ -651,24 +571,6 @@
 
 <script src="../../scripts/script.js"></script>
 <script>
-  function copyTailwind(btn, text) {
-    navigator.clipboard.writeText(text).then(function () {
-      btn.textContent = 'Tersalin!';
-      btn.classList.add('copied');
-      setTimeout(function () {
-        btn.textContent = 'Salin';
-        btn.classList.remove('copied');
-      }, 2000);
-    });
-  }
-  function copyTailwindBlock() {
-    navigator.clipboard.writeText(document.getElementById('tailwind-block').textContent).then(function () {
-      var btn = document.getElementById('copy-tailwind-block-btn');
-      btn.textContent = 'Tersalin!';
-      btn.classList.add('copied');
-      setTimeout(function () { btn.textContent = 'Salin semua'; btn.classList.remove('copied'); }, 2000);
-    });
-  }
   function copyHtml() {
     navigator.clipboard.writeText(document.getElementById('html-block').textContent).then(function () {
       var btn = document.getElementById('copy-html-btn');

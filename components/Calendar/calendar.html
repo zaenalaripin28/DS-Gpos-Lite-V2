@@ -1008,117 +1008,7 @@
       </section>
 
       <section style="margin-bottom:48px;">
-        <h2>Tailwind — Salin Code</h2>
-        <p style="font-size:14px;color:var(--color-text-tertiary);margin:-12px 0 20px;font-family:var(--font-primary);">Class mengacu alias di <code>tailwind.config</code> halaman ini. Pola interaksi selaras Pagination.</p>
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Calendar component card</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'w-full max-w-xs overflow-hidden rounded-xl border border-n30 bg-n0')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Footer action (primary)</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'inline-flex min-h-8 items-center justify-center rounded-md bg-b300 px-4 py-1 text-sm font-medium text-n0 hover:bg-b400 active:bg-b400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Wrapper month header</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'flex w-full items-center justify-between gap-2 px-3 py-2')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Label bulan/tahun</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'flex-1 text-center text-base font-medium text-n900 tracking-tight')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Tombol nav prev/next</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md hover:bg-n20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200 disabled:opacity-40 disabled:pointer-events-none')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Ikon chevron</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'h-4 w-4')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Week header grid</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'grid w-full grid-cols-7 gap-1 px-3')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Week day label</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'text-center text-xs font-medium uppercase tracking-widest text-n300')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Day cell base</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'relative mx-auto flex h-8 w-8 items-center justify-center rounded-md text-sm font-medium text-n900 hover:bg-n20 active:bg-n40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Day · outside</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'text-n300 pointer-events-none')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Day · today</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'relative text-b300 after:absolute after:bottom-1 after:left-1/2 after:block after:h-0.5 after:w-3 after:-translate-x-1/2 after:rounded-sm after:bg-b300')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Day · selected</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'bg-b50 text-b300')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Day · disabled</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'text-n60 cursor-not-allowed pointer-events-none')">Salin</button>
-          </div>
-        </div>
-
-        <p style="font-size:13px;font-weight:600;color:var(--color-text-primary);margin:28px 0 12px;font-family:var(--font-primary);">Blok siap copy — Calendar component</p>
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;margin-bottom:24px;">
-          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);">calendar-component-tailwind.html</span>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwindBlock('tailwind-block-component', this)">Salin semua</button>
-          </div>
-          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-primary);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="tailwind-block-component">&lt;div class="w-full max-w-xs overflow-hidden rounded-xl border border-n30 bg-n0" role="group" aria-label="Kalender"&gt;
-  &lt;!-- month header + week header + day grid (lihat parts) --&gt;
-  &lt;div class="flex justify-end border-t border-n30 p-4"&gt;
-    &lt;button type="button" class="inline-flex min-h-8 items-center justify-center rounded-md bg-b300 px-4 py-1 text-sm font-medium text-n0 hover:bg-b400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200"&gt;Simpan&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-        </div>
-
-        <p style="font-size:13px;font-weight:600;color:var(--color-text-primary);margin:28px 0 12px;font-family:var(--font-primary);">Blok siap copy — Month header</p>
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;margin-bottom:24px;">
-          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);">calendar-month-header-tailwind.html</span>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwindBlock('tailwind-block-month', this)">Salin semua</button>
-          </div>
-          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-primary);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="tailwind-block-month">&lt;div class="flex w-full items-center justify-between gap-2 px-3 py-2" role="group" aria-label="Navigasi bulan"&gt;
-  &lt;button type="button" class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md hover:bg-n20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200" aria-label="Bulan sebelumnya"&gt;
-    &lt;img src="../../assets/icons/icon-chevron-left.svg" alt="" class="h-4 w-4" aria-hidden="true" /&gt;
-  &lt;/button&gt;
-  &lt;h2 class="flex-1 text-center text-base font-medium text-n900 tracking-tight"&gt;December 2022&lt;/h2&gt;
-  &lt;button type="button" class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md hover:bg-n20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200" aria-label="Bulan berikutnya"&gt;
-    &lt;img src="../../assets/icons/icon-chevron-right.svg" alt="" class="h-4 w-4" aria-hidden="true" /&gt;
-  &lt;/button&gt;
-&lt;/div&gt;</code></pre>
-        </div>
-
-        <p style="font-size:13px;font-weight:600;color:var(--color-text-primary);margin:28px 0 12px;font-family:var(--font-primary);">Blok siap copy — Week header &amp; Day</p>
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
-          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);">calendar-week-day-tailwind.html</span>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwindBlock('tailwind-block-week-day', this)">Salin semua</button>
-          </div>
-          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-primary);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="tailwind-block-week-day">&lt;div class="grid w-full grid-cols-7 gap-1 px-3" role="row"&gt;
-  &lt;span class="text-center text-xs font-medium uppercase tracking-widest text-n300" role="columnheader"&gt;SUN&lt;/span&gt;
-  &lt;span class="text-center text-xs font-medium uppercase tracking-widest text-n300" role="columnheader"&gt;MON&lt;/span&gt;
-  &lt;!-- ... TUE–SAT --&gt;
-&lt;/div&gt;
-
-&lt;div class="grid w-full grid-cols-7 gap-1 px-3 py-2" role="grid" aria-label="Desember 2022"&gt;
-  &lt;button type="button" class="relative mx-auto flex h-8 w-8 items-center justify-center rounded-md text-sm font-medium text-n300 pointer-events-none" disabled&gt;27&lt;/button&gt;
-  &lt;button type="button" class="relative mx-auto flex h-8 w-8 items-center justify-center rounded-md text-sm font-medium text-n900 hover:bg-n20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-b200"&gt;1&lt;/button&gt;
-  &lt;button type="button" class="relative mx-auto flex h-8 w-8 items-center justify-center rounded-md text-sm font-medium text-b300 after:absolute after:bottom-1 after:left-1/2 after:block after:h-0.5 after:w-3 after:-translate-x-1/2 after:rounded-sm after:bg-b300" aria-current="date"&gt;5&lt;/button&gt;
-  &lt;button type="button" class="relative mx-auto flex h-8 w-8 items-center justify-center rounded-md bg-b50 text-sm font-medium text-b300" aria-selected="true"&gt;7&lt;/button&gt;
-&lt;/div&gt;</code></pre>
-        </div>
-      </section>
-
-      <section style="margin-bottom:48px;">
-        <h2>Kode HTML</h2>
+        <h2>Code — Salin Code</h2>
         <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;margin-bottom:16px;">
           <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
             <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);">calendar-component.html</span>
@@ -1179,26 +1069,6 @@
 
 <script src="../../scripts/script.js"></script>
 <script>
-  function copyTailwind(btn, text) {
-    navigator.clipboard.writeText(text).then(function () {
-      btn.textContent = 'Tersalin!';
-      btn.classList.add('copied');
-      setTimeout(function () {
-        btn.textContent = 'Salin';
-        btn.classList.remove('copied');
-      }, 2000);
-    });
-  }
-  function copyTailwindBlock(id, btn) {
-    navigator.clipboard.writeText(document.getElementById(id).textContent).then(function () {
-      btn.textContent = 'Tersalin!';
-      btn.classList.add('copied');
-      setTimeout(function () {
-        btn.textContent = 'Salin semua';
-        btn.classList.remove('copied');
-      }, 2000);
-    });
-  }
   function copyHtml(id, btn) {
     navigator.clipboard.writeText(document.getElementById(id).textContent).then(function () {
       btn.textContent = 'Tersalin!';
