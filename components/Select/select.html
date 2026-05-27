@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select — DS GPOS Lite V2</title>
+  <link rel="stylesheet" href="../../styles/globals.css">
+  <link rel="stylesheet" href="../../styles/enhancements.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .ds-option-list { display: grid; gap: var(--space-050); max-width: 360px; }
+    .ds-option {
+      min-height: 40px;
+      border-radius: var(--border-radius-sm);
+      background: var(--color-neutral-n20);
+      color: var(--color-neutral-n500);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+      line-height: var(--text-body-small-regular-lh);
+      font-weight: var(--text-body-small-regular-weight);
+      display: flex;
+      align-items: center;
+      gap: var(--space-075);
+      padding: var(--space-075) var(--space-100);
+      transition: background-color var(--transition-fast), color var(--transition-fast);
+    }
+    .ds-option--hover { background: var(--color-neutral-n30); }
+    .ds-option--pressed { background: var(--color-neutral-n20); color: var(--color-blue-b300); }
+    .ds-option--selected { background: var(--color-neutral-n0); color: var(--color-blue-b300); }
+    .ds-option--selected-hover { background: var(--color-blue-b50); color: var(--color-blue-b300); }
+    .ds-option__control {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--color-neutral-n50);
+      background: var(--color-neutral-n0);
+    }
+    .ds-option__control--checkbox { border-radius: 2px; }
+    .ds-option__control--radio { border-radius: 999px; }
+    .ds-option--selected .ds-option__control,
+    .ds-option--selected-hover .ds-option__control {
+      border-color: var(--color-blue-b300);
+      background: var(--color-blue-b300);
+      color: var(--color-neutral-n0);
+    }
+    .ds-option__control svg { width: 10px; height: 10px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .ds-option__icon-slot { margin-left: auto; display: inline-flex; align-items: center; gap: var(--space-050); }
+    .ds-option__icon {
+      width: 16px;
+      height: 16px;
+      border: 1px dashed var(--color-neutral-n100);
+      border-radius: var(--border-radius-xs);
+      opacity: 0.75;
+    }
+    .preview-card { border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface); }
+    .type-stack { display: grid; gap: var(--space-200); }
+    .section-caption { color: var(--color-text-tertiary); font-size: 13px; line-height: 1.6; }
+    .ds-select-component {
+      display: grid;
+      gap: var(--space-150);
+      width: 100%;
+      max-width: 860px;
+    }
+    .ds-select-trigger {
+      min-height: 40px;
+      border: 1px solid var(--color-neutral-n40);
+      border-radius: var(--border-radius-sm);
+      background: var(--color-neutral-n0);
+      color: var(--color-neutral-n500);
+      padding: var(--space-075) var(--space-100);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-100);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+      line-height: var(--text-body-small-regular-lh);
+      font-weight: var(--text-body-small-regular-weight);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+    }
+    .ds-select-trigger:hover { border-color: var(--color-neutral-n100); }
+    .ds-select-trigger--focus {
+      border-color: var(--color-blue-b300);
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+    .ds-select-trigger--invalid {
+      border-color: var(--color-red-r300);
+      box-shadow: 0 0 0 2px var(--color-red-r100);
+    }
+    .ds-select-trigger--disabled {
+      background: var(--color-neutral-n20);
+      border-color: var(--color-neutral-n30);
+      color: var(--color-neutral-n100);
+      cursor: not-allowed;
+    }
+    .ds-select-trigger__value {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-050);
+      min-width: 0;
+      flex: 1;
+    }
+    .ds-select-trigger__tag {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-025);
+      padding: 0 var(--space-050);
+      min-height: 20px;
+      border: 1px solid var(--color-neutral-n40);
+      border-radius: var(--border-radius-xs);
+      background: var(--color-neutral-n0);
+      font-size: var(--font-size-xs);
+      line-height: 1.3;
+      color: var(--color-neutral-n500);
+    }
+    .ds-select-trigger__icon {
+      width: 14px;
+      height: 14px;
+      color: var(--color-neutral-n100);
+      flex-shrink: 0;
+    }
+    .ds-select-dropdown {
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-md);
+      background: var(--color-neutral-n0);
+      padding: var(--space-075);
+      display: grid;
+      gap: var(--space-025);
+    }
+    .ds-checkbox-select {
+      display: grid;
+      gap: var(--space-050);
+      width: 100%;
+      max-width: 560px;
+      padding: var(--space-100);
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-md);
+      background: var(--color-neutral-n0);
+    }
+    .ds-checkbox-select__item {
+      min-height: 44px;
+      border-radius: var(--border-radius-sm);
+      display: flex;
+      align-items: center;
+      gap: var(--space-100);
+      padding: var(--space-075) var(--space-100);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-medium-regular-size);
+      line-height: var(--text-body-medium-regular-lh);
+      font-weight: var(--text-body-medium-regular-weight);
+      color: var(--color-neutral-n500);
+      background: var(--color-neutral-n0);
+      border-left: 3px solid transparent;
+      transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+    }
+    .ds-checkbox-select__item:hover { background: var(--color-neutral-n20); }
+    .ds-checkbox-select__item--selected {
+      color: var(--color-neutral-n800);
+      background: var(--color-neutral-n30);
+      border-left-color: var(--color-blue-b200);
+    }
+    .ds-checkbox-select__box {
+      width: 16px;
+      height: 16px;
+      border: 1px solid var(--color-neutral-n50);
+      border-radius: 2px;
+      background: var(--color-neutral-n0);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .ds-checkbox-select__item--selected .ds-checkbox-select__box {
+      border-color: var(--color-blue-b300);
+      background: var(--color-blue-b300);
+      color: var(--color-neutral-n0);
+    }
+    .ds-checkbox-select__box svg {
+      width: 11px;
+      height: 11px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2.25;
+    }
+    .ds-radio-select {
+      display: grid;
+      gap: var(--space-050);
+      width: 100%;
+      max-width: 560px;
+      padding: var(--space-100);
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-md);
+      background: var(--color-neutral-n0);
+    }
+    .ds-radio-select__item {
+      min-height: 44px;
+      border-radius: var(--border-radius-sm);
+      display: flex;
+      align-items: center;
+      gap: var(--space-100);
+      padding: var(--space-075) var(--space-100);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-large-regular-size);
+      line-height: var(--text-body-large-regular-lh);
+      font-weight: var(--text-body-large-regular-weight);
+      color: var(--color-blue-b400);
+      background: var(--color-neutral-n0);
+      border-left: 3px solid transparent;
+      transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+    }
+    .ds-radio-select__item:hover { background: var(--color-neutral-n20); }
+    .ds-radio-select__item--selected {
+      color: var(--color-neutral-n800);
+      background: var(--color-neutral-n30);
+      border-left-color: var(--color-blue-b200);
+    }
+    .ds-radio-select__dot {
+      width: 16px;
+      height: 16px;
+      border: 1px solid var(--color-neutral-n50);
+      border-radius: var(--border-radius-full);
+      background: var(--color-neutral-n0);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .ds-radio-select__item--selected .ds-radio-select__dot {
+      border-color: var(--color-blue-b300);
+      background: var(--color-blue-b300);
+    }
+    .ds-radio-select__dot::after {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border-radius: var(--border-radius-full);
+      background: transparent;
+    }
+    .ds-radio-select__item--selected .ds-radio-select__dot::after {
+      background: var(--color-neutral-n0);
+    }
+    .ds-select-empty {
+      width: 100%;
+      max-width: 720px;
+      border: 1px dashed var(--color-blue-b200);
+      border-radius: var(--border-radius-md);
+      background: var(--color-neutral-n0);
+      padding: var(--space-300) var(--space-200);
+      text-align: center;
+      font-family: var(--font-primary);
+    }
+    .ds-select-empty__title {
+      margin: 0;
+      color: var(--color-neutral-n500);
+      font-size: var(--text-heading-h4-size);
+      line-height: var(--text-heading-h4-lh);
+      font-weight: var(--text-heading-h4-weight);
+    }
+    .ds-select-empty__desc {
+      margin: var(--space-200) 0 0 0;
+      color: var(--color-neutral-n400);
+      font-size: var(--text-body-medium-regular-size);
+      line-height: var(--text-body-medium-regular-lh);
+      font-weight: var(--text-body-medium-regular-weight);
+    }
+    .ds-select-empty__action {
+      margin-top: var(--space-100);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-blue-b300);
+      font-size: var(--text-body-medium-semibold-size);
+      line-height: var(--text-body-medium-semibold-lh);
+      font-weight: var(--text-body-medium-semibold-weight);
+      text-decoration: none;
+      border-radius: var(--border-radius-sm);
+      padding: var(--space-025) var(--space-050);
+      transition: background-color var(--transition-fast), color var(--transition-fast);
+    }
+    .ds-select-empty__action:hover {
+      background: var(--color-blue-b50);
+      color: var(--color-blue-b400);
+    }
+    .ds-select-empty--with-icon .ds-select-empty__title {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-050);
+    }
+    .ds-select-empty__icon {
+      width: 16px;
+      height: 16px;
+      border-radius: var(--border-radius-xs);
+      border: 1px solid var(--color-neutral-n40);
+      background: var(--color-neutral-n10);
+      color: var(--color-neutral-n300);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      line-height: 1;
+    }
+    .ds-group-label-list {
+      width: 100%;
+      max-width: 420px;
+      border: 1px dashed var(--color-blue-b200);
+      border-radius: var(--border-radius-md);
+      padding: var(--space-200) 0;
+      background: var(--color-neutral-n0);
+    }
+    .ds-group-label {
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      padding: 0 var(--space-200);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-medium-semibold-size);
+      line-height: var(--text-body-medium-semibold-lh);
+      font-weight: var(--text-body-medium-semibold-weight);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-neutral-n300);
+    }
+    .ds-group-label--first {
+      color: var(--color-neutral-n400);
+      padding-top: var(--space-050);
+      padding-bottom: var(--space-050);
+    }
+    .ds-group-label--default {
+      margin-top: var(--space-300);
+    }
+    .ds-groups {
+      width: 100%;
+      max-width: 860px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-md);
+      background: var(--color-neutral-n0);
+      padding: var(--space-100);
+    }
+    .ds-groups-scrollable {
+      width: 100%;
+      max-width: 860px;
+      max-height: 360px;
+      overflow-y: auto;
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-md);
+      background: var(--color-neutral-n0);
+      padding: var(--space-100);
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-neutral-n50) transparent;
+    }
+    .ds-groups-scrollable::-webkit-scrollbar {
+      width: 8px;
+    }
+    .ds-groups-scrollable::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .ds-groups-scrollable::-webkit-scrollbar-thumb {
+      background: var(--color-neutral-n50);
+      border-radius: var(--border-radius-full);
+    }
+    .ds-groups-scrollable__label {
+      margin-top: var(--space-200);
+      margin-bottom: var(--space-050);
+      padding: 0 var(--space-050);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-medium-semibold-size);
+      line-height: var(--text-body-medium-semibold-lh);
+      font-weight: var(--text-body-medium-semibold-weight);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-neutral-n300);
+    }
+    .ds-groups-scrollable__label:first-child {
+      margin-top: 0;
+    }
+    .ds-groups-scrollable__option {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      padding: 0 var(--space-050);
+      border-radius: var(--border-radius-sm);
+      color: var(--color-blue-b400);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-large-regular-size);
+      line-height: var(--text-body-large-regular-lh);
+      font-weight: var(--text-body-large-regular-weight);
+      transition: background-color var(--transition-fast), color var(--transition-fast);
+    }
+    .ds-groups-scrollable__option:hover {
+      background: var(--color-blue-b50);
+      color: var(--color-blue-b500);
+    }
+    .ds-select-loading {
+      width: 100%;
+      max-width: 720px;
+      min-height: 120px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-md);
+      background: var(--color-neutral-n0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-075);
+      padding: var(--space-200);
+    }
+    .ds-select-loading__spinner {
+      width: 16px;
+      height: 16px;
+      border-radius: var(--border-radius-full);
+      border: 2px solid var(--color-neutral-n40);
+      border-top-color: var(--color-blue-b300);
+      animation: ds-spin 0.8s linear infinite;
+    }
+    .ds-select-loading__text {
+      color: var(--color-neutral-n300);
+      font-family: var(--font-primary);
+      font-size: var(--text-heading-h4-size);
+      line-height: var(--text-heading-h4-lh);
+      font-weight: var(--text-heading-h4-weight);
+      letter-spacing: -0.01em;
+    }
+    .ds-select-scrollable {
+      width: 100%;
+      max-width: 860px;
+      max-height: 360px;
+      overflow-y: auto;
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-md);
+      background: var(--color-neutral-n0);
+      padding: var(--space-100);
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-neutral-n50) transparent;
+    }
+    .ds-select-scrollable::-webkit-scrollbar {
+      width: 8px;
+    }
+    .ds-select-scrollable::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .ds-select-scrollable::-webkit-scrollbar-thumb {
+      background: var(--color-neutral-n50);
+      border-radius: var(--border-radius-full);
+    }
+    .ds-select-scrollable__option {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      padding: 0 var(--space-050);
+      border-radius: var(--border-radius-sm);
+      color: var(--color-blue-b400);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-large-regular-size);
+      line-height: var(--text-body-large-regular-lh);
+      font-weight: var(--text-body-large-regular-weight);
+      transition: background-color var(--transition-fast), color var(--transition-fast);
+    }
+    .ds-select-scrollable__option:hover {
+      background: var(--color-blue-b50);
+      color: var(--color-blue-b500);
+    }
+    .ds-select {
+      width: 100%;
+      max-width: 860px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-md);
+      background: var(--color-neutral-n0);
+      padding: var(--space-100);
+    }
+    .ds-select__option {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      padding: 0 var(--space-050);
+      border-radius: var(--border-radius-sm);
+      color: var(--color-blue-b400);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-large-regular-size);
+      line-height: var(--text-body-large-regular-lh);
+      font-weight: var(--text-body-large-regular-weight);
+      transition: background-color var(--transition-fast), color var(--transition-fast);
+    }
+    .ds-select__option:hover {
+      background: var(--color-blue-b50);
+      color: var(--color-blue-b500);
+    }
+    @keyframes ds-spin {
+      to { transform: rotate(360deg); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ds-select-loading__spinner { animation: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo-icon">GL</div>
+        <div class="sidebar-brand-text">
+          <div class="logo">GPOS Lite</div>
+          <div class="version">Design System V2.0</div>
+        </div>
+      </div>
+      <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">&#x2715;</button>
+    </div>
+    <div class="sidebar-search"><input type="search" class="search-input" placeholder="&#x1F50D;  Cari token, component..."></div>
+    <div class="nav-scroll">
+      <nav class="nav-menu">
+        <div class="nav-section"><h3 class="nav-title">Overview</h3><ul class="nav-list"><li><a href="../../index.html" class="nav-link">Home</a></li></ul></div>
+        <div class="nav-section">
+          <h3 class="nav-title">Foundations</h3>
+          <ul class="nav-list">
+            <li><a href="../../foundations/colors/colors.html" class="nav-link">Colors</a></li>
+            <li><a href="../../foundations/typography/typography.html" class="nav-link">Typography</a></li>
+            <li><a href="../../foundations/spacing/spacing.html" class="nav-link">Spacing</a></li>
+            <li><a href="../../foundations/shadows/shadows.html" class="nav-link">Shadows</a></li>
+            <li><a href="../../foundations/borders/borders.html" class="nav-link">Borders &amp; Radius</a></li>
+            <li><a href="../../foundations/grid/grid.html" class="nav-link">Grid &amp; Layout</a></li>
+            <li><a href="../../foundations/icons/icons.html" class="nav-link">Icons</a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <h3 class="nav-title">Komponen</h3>
+          <ul class="nav-list">
+            <li><a href="../Button/button.html" class="nav-link">Button</a></li>
+            <li><a href="../Avatar/avatar.html" class="nav-link">Avatar</a></li>
+            <li><a href="../Badge/badge.html" class="nav-link">Badge</a></li>
+            <li><a href="../Tags/tags.html" class="nav-link">Tags</a></li>
+            <li><a href="../Checkbox/checkbox.html" class="nav-link">Checkbox</a></li>
+            <li><a href="../Radio/radio.html" class="nav-link">Radio</a></li>
+            <li><a href="../Toggle/toggle.html" class="nav-link">Toggle</a></li>
+            <li><a href="../Text Field/text field.html" class="nav-link">Text Field</a></li>
+            <li><a href="../Text Area/text area.html" class="nav-link">Text Area</a></li>
+            <li><a href="../Flags/flags.html" class="nav-link">Flags</a></li>
+            <li><a href="../section messages/section-message.html" class="nav-link">Section Message</a></li>
+            <li><a href="../Breadcrumbs/breadcrumbs.html" class="nav-link">Breadcrumbs</a></li>
+            <li><a href="../Tabs/tabs.html" class="nav-link">Tabs</a></li>
+            <li><a href="../Pagination/pagination.html" class="nav-link">Pagination</a></li>
+            <li><a href="../Calendar/calendar.html" class="nav-link">Calendar</a></li>
+            <li><a href="../Toast-Banner/banner.html" class="nav-link">Toast Banner</a></li>
+            <li><a href="select.html" class="nav-link active">Select</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <div class="breadcrumb"><a href="../../index.html">Home</a><span class="breadcrumb-sep">/</span><a href="#">Components</a><span class="breadcrumb-sep">/</span><span class="current">Select</span></div>
+      <div class="topbar-actions"><span class="version-badge">v2.0</span></div>
+    </div>
+
+    <div class="content-inner">
+      <section class="mb-12">
+        <div class="ds-hero-banner rounded-2xl overflow-hidden mb-3 flex flex-col lg:flex-row bg-n900" style="border:1px solid var(--color-neutral-n500);">
+          <div class="flex-1 px-8 py-10 lg:px-11 lg:py-12">
+            <div class="text-xs font-semibold uppercase tracking-[0.1em] text-b100 mb-4">Components · DS GPOS Lite V2</div>
+            <div class="font-bold text-n0 mb-3" style="font-size:2.25rem;line-height:1.1;">Select — Option Part</div>
+            <p class="text-sm leading-relaxed max-w-xl mb-6" style="color:var(--color-neutral-n50);">Bagian option pada komponen Select untuk state default, hover, pressed, selected, dan selected hover sesuai referensi Figma.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border border-b75 text-b100">type-default</span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border border-b75 text-b100">type-checkbox</span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border border-b75 text-b100">type-radio</span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border border-b75 text-b100">type + icon</span>
+            </div>
+          </div>
+          <div class="lg:w-96 p-6 flex items-center">
+            <div class="w-full preview-card p-4">
+              <div class="ds-option ds-option--selected-hover">Label</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Select Component</h2>
+        <p class="section-caption">Representasi komponen Select utuh: trigger field, state validasi, mode multi-value, dan panel option yang terbuka.</p>
+        <div class="preview-card p-5">
+          <div class="ds-select-component">
+            <div class="grid md:grid-cols-2 gap-3">
+              <div class="ds-select-trigger">
+                <span class="ds-select-trigger__value">Value</span>
+                <svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg>
+              </div>
+              <div class="ds-select-trigger ds-select-trigger--focus">
+                <span class="ds-select-trigger__value">Selected Value</span>
+                <svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg>
+              </div>
+              <div class="ds-select-trigger ds-select-trigger--invalid">
+                <span class="ds-select-trigger__value">Value</span>
+                <svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg>
+              </div>
+              <div class="ds-select-trigger ds-select-trigger--disabled">
+                <span class="ds-select-trigger__value">Value</span>
+                <svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg>
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-3">
+              <div class="ds-select-trigger ds-select-trigger--focus">
+                <span class="ds-select-trigger__value">
+                  <span class="ds-select-trigger__tag">Tag X</span>
+                  <span class="ds-select-trigger__tag">Tag X</span>
+                </span>
+                <svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg>
+              </div>
+              <div class="ds-select-dropdown" role="listbox" aria-label="Select options">
+                <div class="ds-option">Label</div>
+                <div class="ds-option ds-option--hover">Label</div>
+                <div class="ds-option ds-option--selected">Label</div>
+                <div class="ds-option">Label</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4" style="margin-top:16px;">
+          <div class="preview-card p-5">
+            <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Informasi Anatomy</div>
+            <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;">
+              <li>A. Trigger Field: area interaksi utama untuk membuka/menutup list option.</li>
+              <li>B. Value Slot: menampilkan placeholder, single value, atau multi-value (tag).</li>
+              <li>C. Chevron Icon: indikator status dropdown (collapsed/expanded).</li>
+              <li>D. Dropdown Panel: kontainer option dengan state hover/selected/loading/empty.</li>
+            </ul>
+          </div>
+          <div class="preview-card p-5">
+            <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Informasi Penggunaan</div>
+            <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;">
+              <li>Gunakan Select untuk pilihan terstruktur dengan jumlah item sedang hingga banyak.</li>
+              <li>Gunakan single-select jika hanya boleh satu nilai; gunakan multi-select saat butuh kombinasi nilai.</li>
+              <li>Tampilkan state loading/empty secara eksplisit agar pengguna memahami status data option.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4" style="margin-top:16px;">
+          <div class="preview-card p-5">
+            <div style="font-weight:700;color:var(--color-green-g400);margin-bottom:8px;">Do (Lakukan)</div>
+            <ul style="color:var(--color-text-tertiary);font-size:13px;line-height:1.7;">
+              <li>Gunakan state focus, invalid, disabled sesuai kondisi form yang nyata.</li>
+              <li>Pertahankan struktur trigger + dropdown + option secara konsisten di semua varian.</li>
+              <li>Pastikan label value singkat agar tidak memotong affordance ikon dan tag.</li>
+            </ul>
+          </div>
+          <div class="preview-card p-5">
+            <div style="font-weight:700;color:var(--color-red-r300);margin-bottom:8px;">Don&apos;t (Hindari)</div>
+            <ul style="color:var(--color-text-tertiary);font-size:13px;line-height:1.7;">
+              <li>Jangan hardcode warna border/state di luar token semantik yang tersedia.</li>
+              <li>Jangan campur pola single-select dan multi-select dalam satu trigger yang sama.</li>
+              <li>Jangan sembunyikan feedback error; state invalid harus tetap terlihat jelas.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Varian Option Part</h2>
+        <p class="section-caption">Implementasi option mengikuti existing interaction pattern input/list: neutral di idle, naik kontras di hover, dan biru pada selected.</p>
+        <div class="type-stack">
+          <div class="preview-card p-5">
+            <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px;">type-default</div>
+            <div class="ds-option-list">
+              <div class="ds-option">Label</div>
+              <div class="ds-option ds-option--hover">Label</div>
+              <div class="ds-option ds-option--pressed">Label</div>
+              <div class="ds-option ds-option--selected">Label</div>
+              <div class="ds-option ds-option--selected-hover">Label</div>
+            </div>
+          </div>
+
+          <div class="preview-card p-5">
+            <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px;">type-checkbox</div>
+            <div class="ds-option-list">
+              <div class="ds-option"><span class="ds-option__control ds-option__control--checkbox"></span>Label</div>
+              <div class="ds-option ds-option--hover"><span class="ds-option__control ds-option__control--checkbox"></span>Label</div>
+              <div class="ds-option ds-option--pressed"><span class="ds-option__control ds-option__control--checkbox"></span>Label</div>
+              <div class="ds-option ds-option--selected"><span class="ds-option__control ds-option__control--checkbox"><svg viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"></polyline></svg></span>Label</div>
+              <div class="ds-option ds-option--selected-hover"><span class="ds-option__control ds-option__control--checkbox"><svg viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"></polyline></svg></span>Label</div>
+            </div>
+          </div>
+
+          <div class="preview-card p-5">
+            <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px;">type-radio</div>
+            <div class="ds-option-list">
+              <div class="ds-option"><span class="ds-option__control ds-option__control--radio"></span>Label</div>
+              <div class="ds-option ds-option--hover"><span class="ds-option__control ds-option__control--radio"></span>Label</div>
+              <div class="ds-option ds-option--pressed"><span class="ds-option__control ds-option__control--radio"></span>Label</div>
+              <div class="ds-option ds-option--selected"><span class="ds-option__control ds-option__control--radio"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"></circle></svg></span>Label</div>
+              <div class="ds-option ds-option--selected-hover"><span class="ds-option__control ds-option__control--radio"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"></circle></svg></span>Label</div>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="preview-card p-5">
+              <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px;">type-1 icon</div>
+              <div class="ds-option-list">
+                <div class="ds-option">Label<span class="ds-option__icon-slot"><span class="ds-option__icon" aria-hidden="true"></span></span></div>
+                <div class="ds-option ds-option--hover">Label<span class="ds-option__icon-slot"><span class="ds-option__icon" aria-hidden="true"></span></span></div>
+                <div class="ds-option ds-option--pressed">Label<span class="ds-option__icon-slot"><span class="ds-option__icon" aria-hidden="true"></span></span></div>
+                <div class="ds-option ds-option--selected">Label<span class="ds-option__icon-slot"><span class="ds-option__icon" aria-hidden="true"></span></span></div>
+                <div class="ds-option ds-option--selected-hover">Label<span class="ds-option__icon-slot"><span class="ds-option__icon" aria-hidden="true"></span></span></div>
+              </div>
+            </div>
+            <div class="preview-card p-5">
+              <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px;">type-2 icon</div>
+              <div class="ds-option-list">
+                <div class="ds-option">Label<span class="ds-option__icon-slot"><span class="ds-option__icon" aria-hidden="true"></span><span class="ds-option__icon" aria-hidden="true"></span></span></div>
+                <div class="ds-option ds-option--hover">Label<span class="ds-option__icon-slot"><span class="ds-option__icon" aria-hidden="true"></span><span class="ds-option__icon" aria-hidden="true"></span></span></div>
+                <div class="ds-option ds-option--pressed">Label<span class="ds-option__icon-slot"><span class="ds-option__icon" aria-hidden="true"></span><span class="ds-option__icon" aria-hidden="true"></span></span></div>
+                <div class="ds-option ds-option--selected">Label<span class="ds-option__icon-slot"><span class="ds-option__icon" aria-hidden="true"></span><span class="ds-option__icon" aria-hidden="true"></span></span></div>
+                <div class="ds-option ds-option--selected-hover">Label<span class="ds-option__icon-slot"><span class="ds-option__icon" aria-hidden="true"></span><span class="ds-option__icon" aria-hidden="true"></span></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="preview-card p-5" style="margin-top:16px;">
+          <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Informasi Relevan — Option Part</div>
+          <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;">
+            <li>Option Part adalah fondasi seluruh varian Select (default, checkbox, radio, icon) dengan state konsisten: default, hover, pressed, selected, selected-hover.</li>
+            <li>Gunakan struktur base yang sama untuk semua turunan agar transisi antar varian tetap seragam dan mudah dipelihara.</li>
+            <li>Untuk kebutuhan list panjang, gunakan turunan <code>Select (Scrollable)</code> atau <code>Group (Scrollable)</code> tanpa mengubah token inti Option Part.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Anatomy</h2>
+        <div class="preview-card p-5">
+          <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Informasi Anatomy</div>
+          <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.6;">
+            <li>A. Row Container: area option dengan tinggi minimum 40px dan padding horizontal tokenized.</li>
+            <li>B. Label: text body-small sebagai konten utama.</li>
+            <li>C. Control Slot (opsional): checkbox/radio indicator untuk multi/single selection.</li>
+            <li>D. Icon Slot (opsional): trailing 1 atau 2 icon sesuai kebutuhan konteks option.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>CheckboxSelect Part</h2>
+        <p class="section-caption">Part ini untuk multi-select list. Mengikuti visual referensi: checkbox di kiri, label kota, serta highlight bar kiri saat item terpilih.</p>
+        <div class="preview-card p-5">
+          <div class="ds-checkbox-select" role="listbox" aria-multiselectable="true" aria-label="Options CheckboxSelect">
+            <div class="ds-checkbox-select__item" role="option" aria-selected="false">
+              <span class="ds-checkbox-select__box" aria-hidden="true"></span>
+              <span>Adelaide</span>
+            </div>
+            <div class="ds-checkbox-select__item ds-checkbox-select__item--selected" role="option" aria-selected="true">
+              <span class="ds-checkbox-select__box" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"></polyline></svg>
+              </span>
+              <span>Brisbane</span>
+            </div>
+            <div class="ds-checkbox-select__item" role="option" aria-selected="false">
+              <span class="ds-checkbox-select__box" aria-hidden="true"></span>
+              <span>Canberra</span>
+            </div>
+            <div class="ds-checkbox-select__item" role="option" aria-selected="false">
+              <span class="ds-checkbox-select__box" aria-hidden="true"></span>
+              <span>Darwin</span>
+            </div>
+            <div class="ds-checkbox-select__item" role="option" aria-selected="false">
+              <span class="ds-checkbox-select__box" aria-hidden="true"></span>
+              <span>Hobart</span>
+            </div>
+            <div class="ds-checkbox-select__item" role="option" aria-selected="false">
+              <span class="ds-checkbox-select__box" aria-hidden="true"></span>
+              <span>Melbourne</span>
+            </div>
+            <div class="ds-checkbox-select__item" role="option" aria-selected="false">
+              <span class="ds-checkbox-select__box" aria-hidden="true"></span>
+              <span>Perth</span>
+            </div>
+            <div class="ds-checkbox-select__item" role="option" aria-selected="false">
+              <span class="ds-checkbox-select__box" aria-hidden="true"></span>
+              <span>Sydney</span>
+            </div>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4" style="margin-top:16px;">
+          <div class="preview-card p-5">
+            <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Informasi Relevan</div>
+            <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;">
+              <li>Gunakan pattern ini saat pengguna boleh memilih lebih dari satu option.</li>
+              <li>Item selected wajib terlihat dari dua sinyal: checkbox checked + row highlight.</li>
+              <li>Teks item menggunakan typography body-medium agar tetap terbaca pada list panjang.</li>
+            </ul>
+          </div>
+          <div class="preview-card p-5">
+            <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Interaction Notes</div>
+            <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;">
+              <li>Hover hanya menaikkan kontras background tanpa mengubah state selected.</li>
+              <li>State selected mempertahankan warna teks yang lebih tegas untuk scannability.</li>
+              <li>Target klik minimum 44px dipertahankan untuk kenyamanan pointer/touch.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>RadioSelect Part</h2>
+        <p class="section-caption">Part ini untuk single-select list. Hanya satu item aktif pada satu waktu, dengan indikator radio dan highlight bar kiri.</p>
+        <div class="preview-card p-5">
+          <div class="ds-radio-select" role="listbox" aria-label="Options RadioSelect" aria-multiselectable="false">
+            <div class="ds-radio-select__item" role="option" aria-selected="false">
+              <span class="ds-radio-select__dot" aria-hidden="true"></span>
+              <span>Adelaide</span>
+            </div>
+            <div class="ds-radio-select__item ds-radio-select__item--selected" role="option" aria-selected="true">
+              <span class="ds-radio-select__dot" aria-hidden="true"></span>
+              <span>Label</span>
+            </div>
+            <div class="ds-radio-select__item" role="option" aria-selected="false">
+              <span class="ds-radio-select__dot" aria-hidden="true"></span>
+              <span>Canberra</span>
+            </div>
+            <div class="ds-radio-select__item" role="option" aria-selected="false">
+              <span class="ds-radio-select__dot" aria-hidden="true"></span>
+              <span>Darwin</span>
+            </div>
+            <div class="ds-radio-select__item" role="option" aria-selected="false">
+              <span class="ds-radio-select__dot" aria-hidden="true"></span>
+              <span>Hobart</span>
+            </div>
+            <div class="ds-radio-select__item" role="option" aria-selected="false">
+              <span class="ds-radio-select__dot" aria-hidden="true"></span>
+              <span>Melbourne</span>
+            </div>
+            <div class="ds-radio-select__item" role="option" aria-selected="false">
+              <span class="ds-radio-select__dot" aria-hidden="true"></span>
+              <span>Perth</span>
+            </div>
+            <div class="ds-radio-select__item" role="option" aria-selected="false">
+              <span class="ds-radio-select__dot" aria-hidden="true"></span>
+              <span>Sydney</span>
+            </div>
+          </div>
+        </div>
+        <div class="grid md:grid-cols-2 gap-4" style="margin-top:16px;">
+          <div class="preview-card p-5">
+            <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Informasi Relevan</div>
+            <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;">
+              <li>Gunakan pattern RadioSelect ketika user hanya boleh memilih satu option.</li>
+              <li>Item aktif harus terlihat jelas dari dua sinyal: radio terisi + highlight row.</li>
+              <li>Pastikan list tetap bisa dinavigasi keyboard untuk mendukung aksesibilitas.</li>
+            </ul>
+          </div>
+          <div class="preview-card p-5">
+            <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Interaction Notes</div>
+            <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;">
+              <li>Hover menambah kontras row tanpa mengganti pilihan saat ini.</li>
+              <li>Saat memilih item baru, selection sebelumnya harus otomatis terlepas.</li>
+              <li>Tinggi row dijaga konsisten agar ritme scan visual tetap stabil.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Empty State Part</h2>
+        <p class="section-caption">State ini ditampilkan saat hasil pencarian option kosong. Tersedia varian default dan varian dengan ikon pendukung.</p>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="preview-card p-5">
+            <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px;">variant=default</div>
+            <div class="ds-select-empty">
+              <h3 class="ds-select-empty__title">No options</h3>
+              <p class="ds-select-empty__desc">Item yang Anda cari belum tersedia di master</p>
+              <a href="#" class="ds-select-empty__action">Permintaan Item Baru</a>
+            </div>
+          </div>
+          <div class="preview-card p-5">
+            <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px;">variant=with icon</div>
+            <div class="ds-select-empty ds-select-empty--with-icon">
+              <h3 class="ds-select-empty__title"><span class="ds-select-empty__icon" aria-hidden="true">i</span>No options</h3>
+              <p class="ds-select-empty__desc">Item yang Anda cari belum tersedia di master</p>
+              <a href="#" class="ds-select-empty__action">Permintaan Item Baru</a>
+            </div>
+          </div>
+        </div>
+        <div class="preview-card p-5" style="margin-top:16px;">
+          <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Informasi Relevan</div>
+          <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;">
+            <li>Gunakan empty state ini ketika filter/search tidak mengembalikan option.</li>
+            <li>CTA “Permintaan Item Baru” dipakai untuk mengarahkan user ke proses penambahan data master.</li>
+            <li>Varian with-icon digunakan saat butuh penekanan konteks tanpa mengubah struktur konten.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Group Label Part</h2>
+        <p class="section-caption">Group label dipakai sebagai pemisah kategori option di dalam dropdown list. Tersedia dua tipe: first dan default.</p>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="preview-card p-5">
+            <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px;">Group Label Preview</div>
+            <div class="ds-group-label-list">
+              <div class="ds-group-label ds-group-label--first">Label</div>
+              <div class="ds-group-label ds-group-label--default">Label</div>
+            </div>
+          </div>
+          <div class="preview-card p-5">
+            <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Type Mapping</div>
+            <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;">
+              <li><strong style="color:var(--color-text-primary);">type=first</strong>: label grup pertama di awal list.</li>
+              <li><strong style="color:var(--color-text-primary);">type=default</strong>: label grup berikutnya setelah kelompok option sebelumnya.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="preview-card p-5" style="margin-top:16px;">
+          <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Informasi Relevan</div>
+          <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;">
+            <li>Gunakan group label saat option sudah banyak agar pengguna lebih cepat scanning kategori.</li>
+            <li>Style uppercase + tracking membantu membedakan label grup dari item option biasa.</li>
+            <li>Hindari interaksi klik pada group label karena ini elemen informatif, bukan option selectable.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Groups Part</h2>
+        <p class="section-caption">Varian grouped standar untuk daftar option dengan kategori, tanpa kebutuhan area scroll internal.</p>
+        <div class="preview-card p-5">
+          <div class="ds-groups" role="listbox" aria-label="Options Groups">
+            <div class="ds-groups-scrollable__label">NSW</div>
+            <div class="ds-groups-scrollable__option">Label</div>
+            <div class="ds-groups-scrollable__option">Label</div>
+
+            <div class="ds-groups-scrollable__label">QLD</div>
+            <div class="ds-groups-scrollable__option">Label</div>
+            <div class="ds-groups-scrollable__option">Label</div>
+            <div class="ds-groups-scrollable__option">Label</div>
+          </div>
+        </div>
+        <div class="preview-card p-5" style="margin-top:16px;">
+          <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Informasi Relevan</div>
+          <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;">
+            <li>Pakai grouped non-scrollable saat jumlah option masih cukup pendek untuk ditampilkan penuh.</li>
+            <li>Setiap group label berfungsi sebagai penanda kategori, bukan item yang bisa dipilih.</li>
+            <li>Transisi ke varian scrollable dilakukan saat tinggi list mulai mengganggu layout kontainer dropdown.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Group (Scrollable) Part</h2>
+        <p class="section-caption">Varian ini untuk list grouped yang panjang. Struktur group tetap terbaca, sementara area option bisa di-scroll secara vertikal.</p>
+        <div class="preview-card p-5">
+          <div class="ds-groups-scrollable" role="listbox" aria-label="Options Groups Scrollable">
+            <div class="ds-groups-scrollable__label">NSW</div>
+            <div class="ds-groups-scrollable__option">Label</div>
+            <div class="ds-groups-scrollable__option">Label</div>
+
+            <div class="ds-groups-scrollable__label">QLD</div>
+            <div class="ds-groups-scrollable__option">Label</div>
+            <div class="ds-groups-scrollable__option">Label</div>
+
+            <div class="ds-groups-scrollable__label">OTHER</div>
+            <div class="ds-groups-scrollable__option">Label</div>
+            <div class="ds-groups-scrollable__option">Label</div>
+            <div class="ds-groups-scrollable__option">Label</div>
+            <div class="ds-groups-scrollable__option">Label</div>
+            <div class="ds-groups-scrollable__option">Label</div>
+            <div class="ds-groups-scrollable__option">Label</div>
+          </div>
+        </div>
+        <div class="preview-card p-5" style="margin-top:16px;">
+          <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Informasi Relevan</div>
+          <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;">
+            <li>Gunakan mode scrollable saat jumlah option melebihi tinggi maksimum dropdown.</li>
+            <li>Pertahankan urutan Group Label → Option agar hierarki informasi tetap konsisten.</li>
+            <li>Gunakan tinggi fixed untuk viewport list supaya layout halaman di sekitar dropdown tidak terdorong.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Loading State Part</h2>
+        <p class="section-caption">State ini tampil saat option Select sedang diambil dari server atau proses filtering belum selesai.</p>
+        <div class="preview-card p-5">
+          <div class="ds-select-loading" role="status" aria-live="polite" aria-busy="true">
+            <span class="ds-select-loading__spinner" aria-hidden="true"></span>
+            <span class="ds-select-loading__text">Loading...</span>
+          </div>
+        </div>
+        <div class="preview-card p-5" style="margin-top:16px;">
+          <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Informasi Relevan</div>
+          <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;">
+            <li>Tampilkan loading state ketika data option belum siap agar user tidak mengira list kosong.</li>
+            <li>Gunakan indikator singkat dan jelas, lalu transisi ke list option segera setelah data tersedia.</li>
+            <li>Gunakan <code>aria-busy</code> dan <code>role="status"</code> agar perubahan state terbaca oleh assistive technology.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Select Part</h2>
+        <p class="section-caption">Part baseline untuk daftar option tanpa grouping dan tanpa scroll internal. Cocok untuk jumlah item yang masih pendek.</p>
+        <div class="preview-card p-5">
+          <div class="ds-select" role="listbox" aria-label="Options Select">
+            <div class="ds-select__option">Label</div>
+            <div class="ds-select__option">Label</div>
+            <div class="ds-select__option">Label</div>
+            <div class="ds-select__option">Label</div>
+            <div class="ds-select__option">Label</div>
+            <div class="ds-select__option">Label</div>
+            <div class="ds-select__option">Label</div>
+          </div>
+        </div>
+        <div class="preview-card p-5" style="margin-top:16px;">
+          <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Informasi Relevan</div>
+          <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;">
+            <li>Gunakan Select Part sebagai default saat jumlah option sedikit dan semua item bisa ditampilkan sekaligus.</li>
+            <li>Pertahankan tinggi item konsisten agar pola hover dan navigasi keyboard tetap stabil.</li>
+            <li>Jika jumlah option bertambah, gunakan varian <code>Select (Scrollable)</code> tanpa mengubah struktur option item.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Select (Scrollable) Part</h2>
+        <p class="section-caption">Varian ini digunakan saat list option tunggal cukup panjang, sehingga viewport daftar perlu dibatasi dan bisa di-scroll vertikal.</p>
+        <div class="preview-card p-5">
+          <div class="ds-select-scrollable" role="listbox" aria-label="Options Select Scrollable">
+            <div class="ds-select-scrollable__option">Label</div>
+            <div class="ds-select-scrollable__option">Label</div>
+            <div class="ds-select-scrollable__option">Label</div>
+            <div class="ds-select-scrollable__option">Label</div>
+            <div class="ds-select-scrollable__option">Label</div>
+            <div class="ds-select-scrollable__option">Label</div>
+            <div class="ds-select-scrollable__option">Label</div>
+            <div class="ds-select-scrollable__option">Label</div>
+            <div class="ds-select-scrollable__option">Label</div>
+          </div>
+        </div>
+        <div class="preview-card p-5" style="margin-top:16px;">
+          <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Informasi Relevan</div>
+          <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;">
+            <li>Gunakan select scrollable ketika option banyak namun tidak membutuhkan grouping.</li>
+            <li>Batasi tinggi viewport list agar dropdown tidak mendorong layout halaman.</li>
+            <li>Pertahankan tinggi baris dan spacing konsisten untuk menjaga ritme scanning visual.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Micro Interaction</h2>
+        <div class="preview-card p-5">
+          <ul style="color:var(--color-text-tertiary);font-size:13px;line-height:1.7;">
+            <li>Hover: background berpindah ke neutral surface yang sedikit lebih kontras.</li>
+            <li>Pressed: label pindah ke warna brand untuk memberi feedback sentuhan/klik.</li>
+            <li>Selected: background ke white dan teks brand sebagai state terpilih yang stabil.</li>
+            <li>Selected Hover: mempertahankan selected sambil menambahkan tint biru untuk affordance interaktif.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Informasi Penggunaan</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="preview-card p-5">
+            <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Section Information</div>
+            <p style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;">Option part dipakai sebagai building block list pada menu Select. Struktur ini konsisten untuk default item, item dengan checkbox/radio, dan item dengan icon actions.</p>
+          </div>
+          <div class="preview-card p-5">
+            <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Aksesibilitas</div>
+            <p style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;">Pastikan state selected tetap terbaca jelas, area klik cukup besar, dan label tetap ringkas agar scanning list tetap cepat.</p>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Do &amp; Don&apos;t</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="preview-card p-5">
+            <div style="font-weight:700;color:var(--color-green-g400);margin-bottom:8px;">Do (Lakukan)</div>
+            <ul style="color:var(--color-text-tertiary);font-size:13px;line-height:1.7;">
+              <li>Gunakan state visual sesuai urutan interaksi: default → hover → pressed → selected.</li>
+              <li>Pakai checkbox/radio hanya saat tipe pemilihan memang membutuhkannya.</li>
+              <li>Pertahankan jarak dan ukuran option sesuai token spacing yang sudah ada.</li>
+              <li>Gunakan icon slot sebagai pelengkap, bukan pengganti label.</li>
+            </ul>
+          </div>
+          <div class="preview-card p-5">
+            <div style="font-weight:700;color:var(--color-red-r300);margin-bottom:8px;">Don&apos;t (Hindari)</div>
+            <ul style="color:var(--color-text-tertiary);font-size:13px;line-height:1.7;">
+              <li>Jangan hardcode warna di luar token semantic yang sudah tersedia.</li>
+              <li>Jangan ubah pattern selected menjadi style baru yang berbeda dengan komponen input lain.</li>
+              <li>Jangan menaruh terlalu banyak icon hingga label sulit dibaca.</li>
+              <li>Jangan menurunkan tinggi option sehingga target klik menjadi sempit.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebar-overlay');
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const sidebarClose = document.getElementById('sidebar-close');
+  function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('active'); }
+  function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('active'); }
+  hamburgerBtn?.addEventListener('click', openSidebar);
+  sidebarClose?.addEventListener('click', closeSidebar);
+  overlay?.addEventListener('click', closeSidebar);
+</script>
+</body>
+</html>

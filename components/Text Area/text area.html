@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Area — DS GPOS Lite V2</title>
+  <link rel="stylesheet" href="../../styles/globals.css">
+  <link rel="stylesheet" href="../../styles/enhancements.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .ds-text-area { width: 100%; max-width: 420px; font-family: var(--font-primary); }
+    .ds-text-area__field {
+      width: 100%;
+      min-height: 96px;
+      resize: vertical;
+      border: 1px solid var(--color-neutral-n40);
+      border-radius: var(--border-radius-sm);
+      background: var(--color-neutral-n0);
+      color: var(--color-neutral-n900);
+      padding: var(--space-100);
+      font-size: var(--text-body-small-regular-size);
+      font-weight: var(--text-body-small-regular-weight);
+      line-height: var(--text-body-small-regular-lh);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+      outline: none;
+    }
+    .ds-text-area__field::placeholder { color: var(--color-neutral-n100); }
+    .ds-text-area__field:hover:not(:disabled),
+    .ds-text-area__field--hover { border-color: var(--color-neutral-n100); }
+    .ds-text-area__field:focus,
+    .ds-text-area__field--focus { border-color: var(--color-blue-b300); box-shadow: 0 0 0 2px var(--color-blue-b200); }
+    .ds-text-area--invalid .ds-text-area__field,
+    .ds-text-area__field--invalid { border-color: var(--color-red-r300); }
+    .ds-text-area--invalid .ds-text-area__field:focus,
+    .ds-text-area__field--invalid.ds-text-area__field--focus { box-shadow: 0 0 0 2px var(--color-red-r100); }
+    .ds-text-area__field:disabled,
+    .ds-text-area__field--disabled { background: var(--color-neutral-n20); color: var(--color-neutral-n50); border-color: var(--color-neutral-n30); cursor: not-allowed; }
+    .ds-text-area--compact .ds-text-area__field { min-height: 72px; padding: var(--space-075) var(--space-100); }
+    .preview-card { border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface); }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo-icon">GL</div>
+        <div class="sidebar-brand-text">
+          <div class="logo">GPOS Lite</div>
+          <div class="version">Design System V2.0</div>
+        </div>
+      </div>
+      <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">&#x2715;</button>
+    </div>
+    <div class="sidebar-search"><input type="search" class="search-input" placeholder="&#x1F50D;  Cari token, component..."></div>
+    <div class="nav-scroll">
+      <nav class="nav-menu">
+        <div class="nav-section"><h3 class="nav-title">Overview</h3><ul class="nav-list"><li><a href="../../index.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>Home</a></li></ul></div>
+        <div class="nav-section">
+          <h3 class="nav-title">Foundations</h3>
+          <ul class="nav-list">
+            <li><a href="../../foundations/colors/colors.html" class="nav-link">Colors</a></li>
+            <li><a href="../../foundations/typography/typography.html" class="nav-link">Typography</a></li>
+            <li><a href="../../foundations/spacing/spacing.html" class="nav-link">Spacing</a></li>
+            <li><a href="../../foundations/shadows/shadows.html" class="nav-link">Shadows</a></li>
+            <li><a href="../../foundations/borders/borders.html" class="nav-link">Borders &amp; Radius</a></li>
+            <li><a href="../../foundations/grid/grid.html" class="nav-link">Grid &amp; Layout</a></li>
+            <li><a href="../../foundations/icons/icons.html" class="nav-link">Icons</a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <h3 class="nav-title">Komponen</h3>
+          <ul class="nav-list">
+            <li><a href="../Button/button.html" class="nav-link">Button</a></li>
+            <li><a href="../Avatar/avatar.html" class="nav-link">Avatar</a></li>
+            <li><a href="../Badge/badge.html" class="nav-link">Badge</a></li>
+            <li><a href="../Tags/tags.html" class="nav-link">Tags</a></li>
+            <li><a href="../Checkbox/checkbox.html" class="nav-link">Checkbox</a></li>
+            <li><a href="../Radio/radio.html" class="nav-link">Radio</a></li>
+            <li><a href="../Toggle/toggle.html" class="nav-link">Toggle</a></li>
+            <li><a href="../Text Field/text field.html" class="nav-link">Text Field</a></li>
+            <li><a href="text area.html" class="nav-link active">Text Area</a></li>
+            <li><a href="../Flags/flags.html" class="nav-link">Flags</a></li>
+            <li><a href="../section messages/section-message.html" class="nav-link">Section Message</a></li>
+            <li><a href="../Breadcrumbs/breadcrumbs.html" class="nav-link">Breadcrumbs</a></li>
+            <li><a href="../Tabs/tabs.html" class="nav-link">Tabs</a></li>
+            <li><a href="../Pagination/pagination.html" class="nav-link">Pagination</a></li>
+            <li><a href="../Calendar/calendar.html" class="nav-link">Calendar</a></li>
+            <li><a href="../Toast-Banner/banner.html" class="nav-link">Toast Banner</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <div class="breadcrumb"><a href="../../index.html">Home</a><span class="breadcrumb-sep">/</span><a href="#">Components</a><span class="breadcrumb-sep">/</span><span class="current">Text Area</span></div>
+      <div class="topbar-actions"><span class="version-badge">v2.0</span></div>
+    </div>
+
+    <div class="content-inner">
+      <section class="mb-12">
+        <div class="ds-hero-banner rounded-2xl overflow-hidden mb-3 flex flex-col lg:flex-row bg-n900" style="border:1px solid var(--color-neutral-n500);">
+          <div class="flex-1 px-8 py-10 lg:px-11 lg:py-12">
+            <div class="text-xs font-semibold uppercase tracking-[0.1em] text-b100 mb-4">Components · DS GPOS Lite V2</div>
+            <div class="font-bold text-n0 mb-3" style="font-size:2.25rem;line-height:1.1;">Text Area</div>
+            <p class="text-sm leading-relaxed max-w-xl mb-6" style="color:var(--color-neutral-n50);">Komponen input multi-baris untuk konten panjang seperti catatan, deskripsi, dan alasan. Mengikuti semantic color token, spacing token, typography token, dan interaction pattern yang sama seperti input komponen lain.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border border-b75 text-b100">Multi-line input</span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border border-b75 text-b100">Hover / Focus / Invalid / Disabled</span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border border-b75 text-b100">Figma-synced</span>
+            </div>
+          </div>
+          <div class="lg:w-96 p-6 flex items-center">
+            <div class="w-full preview-card p-4">
+              <label class="ds-text-area">
+                <textarea class="ds-text-area__field" placeholder="Tulis catatan transaksi..."></textarea>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Varian &amp; State</h2>
+        <p style="color:var(--color-text-tertiary);margin-bottom:16px;">Gunakan state sesuai konteks interaksi komponen.</p>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="preview-card p-4"><div class="text-xs mb-2 text-secondary">Default</div><label class="ds-text-area"><textarea class="ds-text-area__field" placeholder="Contoh teks"></textarea></label></div>
+          <div class="preview-card p-4"><div class="text-xs mb-2 text-secondary">Focus</div><label class="ds-text-area"><textarea class="ds-text-area__field ds-text-area__field--focus">Pengguna sedang mengetik...</textarea></label></div>
+          <div class="preview-card p-4"><div class="text-xs mb-2 text-secondary">Invalid</div><label class="ds-text-area ds-text-area--invalid"><textarea class="ds-text-area__field" placeholder="Field wajib diisi"></textarea></label></div>
+          <div class="preview-card p-4"><div class="text-xs mb-2 text-secondary">Disabled</div><label class="ds-text-area"><textarea class="ds-text-area__field" disabled>Field nonaktif</textarea></label></div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Anatomy</h2>
+        <div class="preview-card p-5">
+          <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Informasi Anatomy</div>
+          <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.6;">
+            <li>A. Container: wrapper komponen dengan lebar mengikuti parent.</li>
+            <li>B. Textarea Field: area input multi-baris dengan min-height dan vertical resize.</li>
+            <li>C. Placeholder / Value: menggunakan typography token body-small.</li>
+            <li>D. Border &amp; Focus Ring: border input dan ring fokus mengikuti interaction pattern text input.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Micro Interaction</h2>
+        <div class="preview-card p-5">
+          <ul style="color:var(--color-text-tertiary);font-size:13px;line-height:1.7;">
+            <li>Hover: border berubah ke <code>var(--color-neutral-n100)</code>.</li>
+            <li>Focus: border berubah ke <code>var(--color-blue-b300)</code> dan ring 2px <code>var(--color-blue-b200)</code>.</li>
+            <li>Invalid focus: ring menggunakan token danger untuk menjaga feedback error tetap jelas.</li>
+            <li>Disabled: background dan text pindah ke token neutral-disabled serta cursor <code>not-allowed</code>.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Informasi Penggunaan</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="preview-card p-5">
+            <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;display:flex;align-items:center;gap:8px;">
+              <img src="../../assets/icons/icon-document-text.svg" alt="" width="14" height="14">
+              Section Information
+            </div>
+            <p style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;">Text Area digunakan saat pengguna perlu menulis input panjang (lebih dari satu baris), misalnya catatan tambahan, alasan, komentar, atau deskripsi produk.</p>
+          </div>
+          <div class="preview-card p-5">
+            <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Aksesibilitas</div>
+            <p style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;">Gunakan label yang jelas, placeholder sebagai bantuan singkat, dan state invalid dengan pesan error terpisah agar keterbacaan serta validasi tetap konsisten.</p>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Do &amp; Don&apos;t</h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="preview-card p-5">
+            <div style="font-weight:700;color:var(--color-green-g400);margin-bottom:8px;">Do (Lakukan)</div>
+            <ul style="color:var(--color-text-tertiary);font-size:13px;line-height:1.7;">
+              <li>Gunakan Text Area untuk input panjang/multi-baris.</li>
+              <li>Pertahankan tinggi minimal agar konten awal tetap terbaca.</li>
+              <li>Aktifkan state invalid saat validasi gagal.</li>
+              <li>Ikuti token spacing dan typography yang sudah ada.</li>
+            </ul>
+          </div>
+          <div class="preview-card p-5">
+            <div style="font-weight:700;color:var(--color-red-r300);margin-bottom:8px;">Don&apos;t (Hindari)</div>
+            <ul style="color:var(--color-text-tertiary);font-size:13px;line-height:1.7;">
+              <li>Jangan pakai Text Area untuk input satu kata/sangat pendek.</li>
+              <li>Jangan hardcode warna border, text, atau background.</li>
+              <li>Jangan hilangkan fokus ring karena mengurangi aksesibilitas.</li>
+              <li>Jangan ubah pattern interaksi berbeda dari komponen input lain.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebar-overlay');
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const sidebarClose = document.getElementById('sidebar-close');
+  function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('active'); }
+  function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('active'); }
+  hamburgerBtn?.addEventListener('click', openSidebar);
+  sidebarClose?.addEventListener('click', closeSidebar);
+  overlay?.addEventListener('click', closeSidebar);
+</script>
+</body>
+</html>
