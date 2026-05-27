@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="styles/globals.css">
   <link rel="stylesheet" href="styles/enhancements.css">
 </head>
-<body>
+<body class="page-home">
 
   <!-- Mobile overlay -->
   <div id="sidebar-overlay" class="sidebar-overlay"></div>
@@ -229,7 +229,7 @@
       <div class="content-inner">
 
         <!-- ===== PAGE HEADER ===== -->
-        <header class="page-header">
+        <header class="page-header page-header-surface">
           <div class="page-header-kicker">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
             Documentation
@@ -239,7 +239,7 @@
         </header>
 
         <!-- ===== HERO ===== -->
-        <section class="hero-section" style="margin-bottom: var(--spacing-12);">
+        <section class="hero-section hero-section-dashboard">
 
           <div class="hero-split">
 
@@ -289,16 +289,16 @@
               <!-- Primary color palette strip -->
               <div class="hvp-label">Color Tokens — Primary</div>
               <div class="hvp-palette">
-                <div class="hvp-swatch" style="background:#EEF7FF;" title="primary-50"></div>
-                <div class="hvp-swatch" style="background:#D9EFFE;" title="primary-100"></div>
-                <div class="hvp-swatch" style="background:#BADDFD;" title="primary-200"></div>
-                <div class="hvp-swatch" style="background:#86C3FA;" title="primary-300"></div>
-                <div class="hvp-swatch" style="background:#4FA6F5;" title="primary-400"></div>
-                <div class="hvp-swatch" style="background:#1E7FD6;" title="primary-500 (brand)"></div>
-                <div class="hvp-swatch" style="background:#1668B0;" title="primary-600"></div>
-                <div class="hvp-swatch" style="background:#115188;" title="primary-700"></div>
-                <div class="hvp-swatch" style="background:#0D3C63;" title="primary-800"></div>
-                <div class="hvp-swatch" style="background:#09293F;" title="primary-900"></div>
+                <div class="hvp-swatch hvp-swatch-50" title="primary-50"></div>
+                <div class="hvp-swatch hvp-swatch-100" title="primary-100"></div>
+                <div class="hvp-swatch hvp-swatch-200" title="primary-200"></div>
+                <div class="hvp-swatch hvp-swatch-300" title="primary-300"></div>
+                <div class="hvp-swatch hvp-swatch-400" title="primary-400"></div>
+                <div class="hvp-swatch hvp-swatch-500" title="primary-500 (brand)"></div>
+                <div class="hvp-swatch hvp-swatch-600" title="primary-600"></div>
+                <div class="hvp-swatch hvp-swatch-700" title="primary-700"></div>
+                <div class="hvp-swatch hvp-swatch-800" title="primary-800"></div>
+                <div class="hvp-swatch hvp-swatch-900" title="primary-900"></div>
               </div>
 
               <div class="hvp-divider"></div>
@@ -307,22 +307,22 @@
               <div class="hvp-label">Design Tokens</div>
               <div class="hvp-tokens">
                 <div class="hvp-token-row">
-                  <span class="hvp-token-dot" style="background:#1E7FD6;"></span>
+                  <span class="hvp-token-dot hvp-token-dot-primary"></span>
                   <span class="hvp-token-name">--color-primary-500</span>
                   <span class="hvp-token-value">#1E7FD6</span>
                 </div>
                 <div class="hvp-token-row">
-                  <span class="hvp-token-dot" style="background:transparent;border-color:rgba(255,255,255,0.2);"></span>
+                  <span class="hvp-token-dot hvp-token-dot-ghost"></span>
                   <span class="hvp-token-name">--spacing-4</span>
                   <span class="hvp-token-value">1rem / 16px</span>
                 </div>
                 <div class="hvp-token-row">
-                  <span class="hvp-token-dot" style="background:transparent;border-color:rgba(255,255,255,0.2);border-radius:4px;"></span>
+                  <span class="hvp-token-dot hvp-token-dot-ghost hvp-token-dot-square"></span>
                   <span class="hvp-token-name">--border-radius-md</span>
                   <span class="hvp-token-value">8px</span>
                 </div>
                 <div class="hvp-token-row">
-                  <span class="hvp-token-dot" style="background:transparent;border-color:rgba(255,255,255,0.2);"></span>
+                  <span class="hvp-token-dot hvp-token-dot-ghost"></span>
                   <span class="hvp-token-name">--font-size-base</span>
                   <span class="hvp-token-value">1rem / 16px</span>
                 </div>
@@ -333,14 +333,14 @@
               <!-- Spacing scale visualization -->
               <div class="hvp-label">Spacing Scale — 4px base unit</div>
               <div class="hvp-spacer-preview">
-                <div class="hvp-spacer-bar" style="width:4px;  height:4px; " title="4px"></div>
-                <div class="hvp-spacer-bar" style="width:8px;  height:8px; " title="8px"></div>
-                <div class="hvp-spacer-bar" style="width:12px; height:12px;" title="12px"></div>
-                <div class="hvp-spacer-bar" style="width:16px; height:16px;" title="16px"></div>
-                <div class="hvp-spacer-bar" style="width:20px; height:20px;" title="20px"></div>
-                <div class="hvp-spacer-bar" style="width:24px; height:24px;" title="24px"></div>
-                <div class="hvp-spacer-bar" style="width:32px; height:24px;" title="32px"></div>
-                <div class="hvp-spacer-bar" style="width:40px; height:24px;" title="40px"></div>
+                <div class="hvp-spacer-bar hvp-spacer-1" title="4px"></div>
+                <div class="hvp-spacer-bar hvp-spacer-2" title="8px"></div>
+                <div class="hvp-spacer-bar hvp-spacer-3" title="12px"></div>
+                <div class="hvp-spacer-bar hvp-spacer-4" title="16px"></div>
+                <div class="hvp-spacer-bar hvp-spacer-5" title="20px"></div>
+                <div class="hvp-spacer-bar hvp-spacer-6" title="24px"></div>
+                <div class="hvp-spacer-bar hvp-spacer-8" title="32px"></div>
+                <div class="hvp-spacer-bar hvp-spacer-10" title="40px"></div>
               </div>
 
             </div>
@@ -369,7 +369,7 @@
                 </svg>
               </div>
               <h3>Colors</h3>
-              <p>Palette warna lengkap berbasis brand <strong style="color:var(--color-primary-600)">#1E7FD6</strong>, semantic colors, dan panduan penggunaannya.</p>
+              <p>Palette warna lengkap berbasis brand <strong class="text-brand">#1E7FD6</strong>, semantic colors, dan panduan penggunaannya.</p>
               <a href="foundations/colors/colors.html" class="card-link">Lihat Color System</a>
             </div>
 
@@ -457,7 +457,7 @@
         <section class="tokens-overview has-intro">
           <h2>Design Tokens Overview</h2>
           <div class="tokens-section-meta">
-            <p class="section-intro" style="margin-top:0; margin-bottom:0;">Semua tokens terdefinisi sebagai CSS Custom Properties dan siap dipakai sebagai Tailwind utilities.</p>
+            <p class="section-intro section-intro-flush">Semua tokens terdefinisi sebagai CSS Custom Properties dan siap dipakai sebagai Tailwind utilities.</p>
             <span class="token-count-badge">
               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg>
               120+ Tokens
@@ -656,7 +656,7 @@ module.exports = {
             &copy; 2026 <strong>GPOS Lite Design System V2.0</strong> — Maintained with ❤️
           </div>
           <div class="footer-right">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="opacity:0.4"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+            <svg class="footer-icon-muted" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
             GitHub Pages
           </div>
         </footer>

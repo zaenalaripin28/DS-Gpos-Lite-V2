@@ -68,6 +68,37 @@
 
 ---
 
+# Anatomy Precision Rules
+
+- Follow anatomy reference exactly
+- Use exact spacing from anatomy spec
+- Use exact padding values from reference
+- Use exact gap values from reference
+- Use exact min-width from reference
+- Use exact height from reference
+- Use exact icon spacing from reference
+- Use exact alignment from reference
+
+If anatomy reference exists:
+- anatomy reference becomes source of truth
+- never estimate spacing manually
+- never approximate dimensions
+- never improvise layout density
+
+Priority:
+1. Existing token system
+2. Anatomy spec
+3. Visual reference
+4. Existing structure
+
+Do not:
+- visually approximate
+- guess spacing
+- invent layout values
+- create alternative proportions
+
+---
+
 # Figma Rules
 
 - Use Figma as visual reference only
@@ -103,6 +134,28 @@
 - Preserve focus visibility
 - Use accessible button behavior
 - Avoid accessibility regression
+
+---
+
+# Visual Accuracy Rules
+
+- Match visual hierarchy exactly
+- Match component density exactly
+- Match whitespace rhythm exactly
+- Match Figma proportions exactly
+- Match interaction behavior closely
+- Match optical alignment closely
+
+Prefer:
+- accuracy over creativity
+- consistency over redesign
+- implementation fidelity over interpretation
+
+Avoid:
+- redesigning UI
+- modernizing layout
+- adding stylistic improvisation
+- changing component personality
 
 ---
 
@@ -168,6 +221,52 @@ Start directly from result.
 
 ---
 
+# Reference Rules
+
+Reference images inside:
+- .claude/references/
+
+may contain:
+- visual reference
+- anatomy reference
+- interaction reference
+- responsive reference
+
+When reference exists:
+- use reference as implementation source
+- do not reinterpret design
+- do not simplify anatomy
+- do not recreate spacing manually
+
+Preferred workflow:
+1. Read anatomy reference
+2. Read visual reference
+3. Match tokens
+4. Implement in existing structure
+
+---
+
+# Dashboard UI Rules
+
+- Maintain clean SaaS dashboard aesthetic
+- Prefer soft surface layering
+- Prefer subtle hierarchy separation
+- Prefer spacious but controlled layout density
+- Maintain consistent card structure
+- Maintain consistent sidebar rhythm
+- Maintain clean navigation hierarchy
+- Maintain premium whitespace distribution
+
+Avoid:
+- excessive decoration
+- strong shadows
+- inconsistent card radius
+- uneven spacing
+- crowded layout
+- random visual treatment
+
+---
+
 # Preferred Output Format
 
 Prefer:
@@ -175,3 +274,8 @@ Prefer:
 ```diff
 - old code
 + new code
+
+---
+
+If exact anatomy exists,
+never optimize spacing subjectively.
