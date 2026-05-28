@@ -197,6 +197,67 @@
       color: var(--color-neutral-n100);
       flex-shrink: 0;
     }
+    .ds-select-trigger__value--multi {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-050);
+      flex-wrap: wrap;
+      min-width: 0;
+    }
+    .ds-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-050);
+      padding: var(--space-050) var(--space-100);
+      border-radius: var(--border-radius-full);
+      border: 1px solid transparent;
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-medium-size);
+      font-weight: var(--text-body-small-medium-weight);
+      line-height: var(--text-body-small-medium-lh);
+      white-space: nowrap;
+      vertical-align: middle;
+      transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .ds-tag--standard {
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n900);
+    }
+    .ds-tag--removable {
+      padding-right: var(--space-050);
+      --ds-tag-removable-icon-danger: brightness(0) saturate(100%) invert(32%) sepia(89%) saturate(2976%) hue-rotate(346deg) brightness(95%) contrast(95%);
+    }
+    .ds-tag__label {
+      font: inherit;
+      line-height: inherit;
+    }
+    .ds-tag__remove {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      margin: 0 calc(var(--space-025) * -1) 0 0;
+      padding: 0;
+      border: none;
+      background: transparent;
+      border-radius: var(--border-radius-full);
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .ds-tag__remove img {
+      width: 12px;
+      height: 12px;
+      display: block;
+    }
+    .ds-tag--removable:hover {
+      background-color: var(--color-red-r50);
+      color: var(--color-red-r300);
+    }
+    .ds-tag--removable:hover .ds-tag__remove img {
+      filter: var(--ds-tag-removable-icon-danger);
+    }
     .ds-select-state-table {
       width: 100%;
       border-collapse: collapse;
@@ -974,6 +1035,75 @@
                 </tbody>
               </table>
             </div>
+            <div style="margin-top:16px;">
+              <div class="ds-select-variant-title">variant-multi/default</div>
+              <table class="ds-select-state-table" aria-label="Tabel state select component multi default">
+                <thead>
+                  <tr>
+                    <th>State</th>
+                    <th>Preview</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>state-default</td><td><div class="ds-select-trigger"><span class="ds-select-trigger__value">Value</span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                  <tr><td>state-hover</td><td><div class="ds-select-trigger ds-select-trigger--hover"><span class="ds-select-trigger__value">Value</span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                  <tr><td>state-focus</td><td><div class="ds-select-trigger ds-select-trigger--focus"><span class="ds-select-trigger__value ds-select-trigger__value--multi"><span class="ds-tag ds-tag--standard ds-tag--removable"><span class="ds-tag__label">Tag X</span><button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag X"><img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"></button></span></span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                  <tr><td>state-typing</td><td><div class="ds-select-trigger ds-select-trigger--typing"><span class="ds-select-trigger__value ds-select-trigger__value--multi"><span class="ds-tag ds-tag--standard ds-tag--removable"><span class="ds-tag__label">Tag X</span><button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag X"><img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"></button></span><span class="ds-tag ds-tag--standard ds-tag--removable"><span class="ds-tag__label">Tag X</span><button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag X"><img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"></button></span></span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                  <tr><td>state-loading</td><td><div class="ds-select-trigger ds-select-trigger--loading"><span class="ds-select-loading__spinner" aria-hidden="true"></span><span class="ds-select-trigger__value">Loading...</span></div></td></tr>
+                  <tr><td>state-empty</td><td><div class="ds-select-trigger ds-select-trigger--empty"><span class="ds-select-trigger__value">No options</span></div></td></tr>
+                  <tr><td>state-hydrate</td><td><div class="ds-select-trigger ds-select-trigger--hydrate"><span class="ds-select-trigger__value ds-select-trigger__value--multi"><span class="ds-tag ds-tag--standard ds-tag--removable"><span class="ds-tag__label">Tag X</span><button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag X"><img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"></button></span><span class="ds-tag ds-tag--standard ds-tag--removable"><span class="ds-tag__label">Tag X</span><button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag X"><img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"></button></span></span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                  <tr><td>state-reset</td><td><div class="ds-select-trigger ds-select-trigger--reset"><span class="ds-select-trigger__value">Value</span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                  <tr><td>state-filled-invalid</td><td><div class="ds-select-trigger ds-select-trigger--filled-invalid"><span class="ds-select-trigger__value">Value</span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                  <tr><td>state-disabled</td><td><div class="ds-select-trigger ds-select-trigger--disabled"><span class="ds-select-trigger__value ds-select-trigger__value--multi"><span class="ds-tag ds-tag--standard ds-tag--removable"><span class="ds-tag__label">Tag X</span><button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag X"><img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"></button></span></span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="margin-top:16px;">
+              <div class="ds-select-variant-title">variant-multi/subtle</div>
+              <table class="ds-select-state-table" aria-label="Tabel state select component multi subtle">
+                <thead>
+                  <tr>
+                    <th>State</th>
+                    <th>Preview</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>state-default</td><td><div class="ds-select-trigger ds-select-trigger--subtle"><span class="ds-select-trigger__value">Value</span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                  <tr><td>state-hover</td><td><div class="ds-select-trigger ds-select-trigger--subtle ds-select-trigger--hover"><span class="ds-select-trigger__value">Value</span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                  <tr><td>state-focus</td><td><div class="ds-select-trigger ds-select-trigger--subtle ds-select-trigger--focus"><span class="ds-select-trigger__value ds-select-trigger__value--multi"><span class="ds-tag ds-tag--standard ds-tag--removable"><span class="ds-tag__label">Tag X</span><button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag X"><img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"></button></span></span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                  <tr><td>state-typing</td><td><div class="ds-select-trigger ds-select-trigger--subtle ds-select-trigger--typing"><span class="ds-select-trigger__value ds-select-trigger__value--multi"><span class="ds-tag ds-tag--standard ds-tag--removable"><span class="ds-tag__label">Tag X</span><button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag X"><img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"></button></span><span class="ds-tag ds-tag--standard ds-tag--removable"><span class="ds-tag__label">Tag X</span><button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag X"><img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"></button></span></span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                  <tr><td>state-loading</td><td><div class="ds-select-trigger ds-select-trigger--subtle ds-select-trigger--loading"><span class="ds-select-loading__spinner" aria-hidden="true"></span><span class="ds-select-trigger__value">Loading...</span></div></td></tr>
+                  <tr><td>state-empty</td><td><div class="ds-select-trigger ds-select-trigger--subtle ds-select-trigger--empty"><span class="ds-select-trigger__value">No options</span></div></td></tr>
+                  <tr><td>state-hydrate</td><td><div class="ds-select-trigger ds-select-trigger--subtle ds-select-trigger--hydrate"><span class="ds-select-trigger__value ds-select-trigger__value--multi"><span class="ds-tag ds-tag--standard ds-tag--removable"><span class="ds-tag__label">Tag X</span><button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag X"><img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"></button></span><span class="ds-tag ds-tag--standard ds-tag--removable"><span class="ds-tag__label">Tag X</span><button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag X"><img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"></button></span></span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                  <tr><td>state-reset</td><td><div class="ds-select-trigger ds-select-trigger--subtle ds-select-trigger--reset"><span class="ds-select-trigger__value">Value</span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                  <tr><td>state-filled-invalid</td><td><div class="ds-select-trigger ds-select-trigger--subtle ds-select-trigger--filled-invalid"><span class="ds-select-trigger__value">Value</span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                  <tr><td>state-disabled</td><td><div class="ds-select-trigger ds-select-trigger--subtle ds-select-trigger--disabled"><span class="ds-select-trigger__value ds-select-trigger__value--multi"><span class="ds-tag ds-tag--standard ds-tag--removable"><span class="ds-tag__label">Tag X</span><button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag X"><img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"></button></span></span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="margin-top:16px;">
+              <div class="ds-select-variant-title">variant-multi/none</div>
+              <table class="ds-select-state-table" aria-label="Tabel state select component multi none">
+                <thead>
+                  <tr>
+                    <th>State</th>
+                    <th>Preview</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>state-default</td><td><div class="ds-select-trigger ds-select-trigger--none"><span class="ds-select-trigger__value">Value</span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                  <tr><td>state-hover</td><td><div class="ds-select-trigger ds-select-trigger--none ds-select-trigger--hover"><span class="ds-select-trigger__value">Value</span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                  <tr><td>state-focus</td><td><div class="ds-select-trigger ds-select-trigger--none ds-select-trigger--focus"><span class="ds-select-trigger__value ds-select-trigger__value--multi"><span class="ds-tag ds-tag--standard ds-tag--removable"><span class="ds-tag__label">Tag X</span><button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag X"><img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"></button></span></span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                  <tr><td>state-typing</td><td><div class="ds-select-trigger ds-select-trigger--none ds-select-trigger--typing"><span class="ds-select-trigger__value ds-select-trigger__value--multi"><span class="ds-tag ds-tag--standard ds-tag--removable"><span class="ds-tag__label">Tag X</span><button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag X"><img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"></button></span><span class="ds-tag ds-tag--standard ds-tag--removable"><span class="ds-tag__label">Tag X</span><button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag X"><img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"></button></span></span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                  <tr><td>state-loading</td><td><div class="ds-select-trigger ds-select-trigger--none ds-select-trigger--loading"><span class="ds-select-loading__spinner" aria-hidden="true"></span><span class="ds-select-trigger__value">Loading...</span></div></td></tr>
+                  <tr><td>state-empty</td><td><div class="ds-select-trigger ds-select-trigger--none ds-select-trigger--empty"><span class="ds-select-trigger__value">No options</span></div></td></tr>
+                  <tr><td>state-hydrate</td><td><div class="ds-select-trigger ds-select-trigger--none ds-select-trigger--hydrate"><span class="ds-select-trigger__value ds-select-trigger__value--multi"><span class="ds-tag ds-tag--standard ds-tag--removable"><span class="ds-tag__label">Tag X</span><button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag X"><img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"></button></span><span class="ds-tag ds-tag--standard ds-tag--removable"><span class="ds-tag__label">Tag X</span><button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag X"><img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"></button></span></span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                  <tr><td>state-reset</td><td><div class="ds-select-trigger ds-select-trigger--none ds-select-trigger--reset"><span class="ds-select-trigger__value">Value</span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                  <tr><td>state-filled-invalid</td><td><div class="ds-select-trigger ds-select-trigger--none ds-select-trigger--filled-invalid"><span class="ds-select-trigger__value">Value</span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                  <tr><td>state-disabled</td><td><div class="ds-select-trigger ds-select-trigger--none ds-select-trigger--disabled"><span class="ds-select-trigger__value ds-select-trigger__value--multi"><span class="ds-tag ds-tag--standard ds-tag--removable"><span class="ds-tag__label">Tag X</span><button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag X"><img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"></button></span></span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
         <div class="grid md:grid-cols-2 gap-4" style="margin-top:16px;">
@@ -984,7 +1114,7 @@
           <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px;">Playground</div>
           <div class="ds-select-playground">
             <div class="ds-select-playground__controls">
-              <select id="select-playground-variant" class="ds-select-playground__control" aria-label="Pilih variant select trigger"><option value="default">Variant: Default</option><option value="subtle">Variant: Subtle</option><option value="none">Variant: None</option></select>
+              <select id="select-playground-variant" class="ds-select-playground__control" aria-label="Pilih variant select trigger"><option value="default">Variant: Default</option><option value="subtle">Variant: Subtle</option><option value="none">Variant: None</option><option value="multi-default">Variant: Multi/Default</option><option value="multi-subtle">Variant: Multi/Subtle</option><option value="multi-none">Variant: Multi/None</option></select>
               <select id="select-playground-state" class="ds-select-playground__control" aria-label="Pilih state select trigger"><option value="default">State: Default</option><option value="hover">State: Hover</option><option value="focus">State: Focus</option><option value="typing">State: Typing</option><option value="loading">State: Loading</option><option value="empty">State: Empty</option><option value="hydrate">State: Hydrate</option><option value="reset">State: Reset</option><option value="filled-invalid">State: Filled Invalid</option><option value="disabled">State: Disabled</option></select>
               <select id="select-playground-option" class="ds-select-playground__control" aria-label="Pilih variant option part"><option value="default">Option Part: Default</option><option value="checkbox">Option Part: Checkbox</option><option value="radio">Option Part: Radio</option><option value="icon">Option Part: Icon</option></select>
             </div>
@@ -1488,8 +1618,18 @@
 
   function renderPlaygroundVariant(variant) {
     if (!playgroundTrigger) return;
-    playgroundTrigger.classList.toggle('ds-select-trigger--subtle', variant === 'subtle');
-    playgroundTrigger.classList.toggle('ds-select-trigger--none', variant === 'none');
+    const isSubtle = variant === 'subtle' || variant === 'multi-subtle';
+    const isNone = variant === 'none' || variant === 'multi-none';
+    playgroundTrigger.classList.toggle('ds-select-trigger--subtle', isSubtle);
+    playgroundTrigger.classList.toggle('ds-select-trigger--none', isNone);
+  }
+
+  function getMultiTagMarkup(count) {
+    const tags = [];
+    for (let i = 0; i < count; i += 1) {
+      tags.push('<span class="ds-tag ds-tag--standard ds-tag--removable"><span class="ds-tag__label">Tag X</span><button type="button" class="ds-tag__remove" aria-label="Hapus tag Tag X"><img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"></button></span>');
+    }
+    return `<span class="ds-select-trigger__value ds-select-trigger__value--multi">${tags.join('')}</span>`;
   }
 
   function setPlaygroundOpen(nextOpen) {
@@ -1501,6 +1641,7 @@
 
   function renderPlaygroundState(state) {
     if (!playgroundTrigger) return;
+    const variant = playgroundVariant?.value || 'default';
     playgroundTrigger.classList.remove(...triggerStateClasses);
     if (state !== 'default') {
       playgroundTrigger.classList.add(`ds-select-trigger--${state}`);
@@ -1515,9 +1656,15 @@
       setPlaygroundOpen(false);
       return;
     }
-    playgroundTrigger.innerHTML = '<span class="ds-select-trigger__value"></span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg>';
-    const valueSlot = playgroundTrigger.querySelector('.ds-select-trigger__value');
-    if (valueSlot) valueSlot.textContent = triggerStateLabelMap[state] || 'Value';
+    const isMultiVariant = variant === 'multi-default' || variant === 'multi-subtle' || variant === 'multi-none';
+    const multiTagCount = (state === 'typing' || state === 'hydrate') ? 2 : ((state === 'focus' || state === 'disabled') ? 1 : 0);
+    if (isMultiVariant && multiTagCount > 0) {
+      playgroundTrigger.innerHTML = `${getMultiTagMarkup(multiTagCount)}<svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg>`;
+    } else {
+      playgroundTrigger.innerHTML = '<span class="ds-select-trigger__value"></span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg>';
+      const valueSlot = playgroundTrigger.querySelector('.ds-select-trigger__value');
+      if (valueSlot) valueSlot.textContent = triggerStateLabelMap[state] || 'Value';
+    }
     const shouldOpen = state === 'focus' || state === 'typing';
     setPlaygroundOpen(shouldOpen);
   }
@@ -1527,6 +1674,7 @@
   });
   playgroundVariant?.addEventListener('change', (event) => {
     renderPlaygroundVariant(event.target.value);
+    renderPlaygroundState(playgroundState?.value || 'default');
   });
   playgroundOption?.addEventListener('change', (event) => {
     renderPlaygroundOption(event.target.value);
