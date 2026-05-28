@@ -98,9 +98,38 @@
       transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
     }
     .ds-select-trigger:hover { border-color: var(--color-neutral-n100); }
+    .ds-select-trigger--hover { border-color: var(--color-neutral-n100); }
     .ds-select-trigger--focus {
       border-color: var(--color-blue-b300);
       box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+    .ds-select-trigger--typing {
+      border-color: var(--color-blue-b300);
+      box-shadow: 0 0 0 2px var(--color-blue-b50);
+      color: var(--color-neutral-n800);
+    }
+    .ds-select-trigger--loading {
+      color: var(--color-neutral-n300);
+      justify-content: center;
+      gap: var(--space-050);
+      min-height: 44px;
+      box-shadow: var(--shadow-sm);
+    }
+    .ds-select-trigger--empty {
+      color: var(--color-neutral-n300);
+      justify-content: center;
+    }
+    .ds-select-trigger--hydrate {
+      color: var(--color-blue-b400);
+      font-weight: var(--text-body-small-semibold-weight);
+    }
+    .ds-select-trigger--reset {
+      border-color: var(--color-red-r300);
+      color: var(--color-red-r300);
+    }
+    .ds-select-trigger--filled-invalid {
+      border-color: var(--color-red-r300);
+      color: var(--color-neutral-n500);
     }
     .ds-select-trigger--invalid {
       border-color: var(--color-red-r300);
@@ -137,6 +166,71 @@
       height: 14px;
       color: var(--color-neutral-n100);
       flex-shrink: 0;
+    }
+    .ds-select-component-grid {
+      display: grid;
+      gap: var(--space-100);
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+    .ds-select-state-item {
+      min-width: 0;
+      display: grid;
+      gap: var(--space-050);
+    }
+    .ds-select-state-item__label {
+      color: var(--color-neutral-n300);
+      font-family: var(--font-primary);
+      font-size: var(--text-caption-semibold-size);
+      line-height: var(--text-caption-semibold-lh);
+      font-weight: var(--text-caption-semibold-weight);
+      text-transform: lowercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .ds-select-playground {
+      display: grid;
+      gap: var(--space-100);
+    }
+    .ds-select-playground__controls {
+      display: grid;
+      gap: var(--space-075);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .ds-select-playground__control {
+      min-height: 40px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-sm);
+      background: var(--color-neutral-n0);
+      color: var(--color-neutral-n500);
+      padding: 0 var(--space-075);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+      line-height: var(--text-body-small-regular-lh);
+      font-weight: var(--text-body-small-regular-weight);
+    }
+    .ds-select-playground__control:focus {
+      outline: none;
+      border-color: var(--color-blue-b300);
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+    .ds-select-playground__menu {
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-md);
+      background: var(--color-neutral-n0);
+      padding: var(--space-075);
+      display: grid;
+      gap: var(--space-025);
+    }
+    @media (max-width: 1024px) {
+      .ds-select-component-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width: 640px) {
+      .ds-select-playground__controls {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
     .ds-select-dropdown {
       border: 1px solid var(--color-border);
@@ -725,84 +819,42 @@
 
       <section style="margin-bottom:48px;">
         <h2>Select Component</h2>
-        <p class="section-caption">Representasi komponen Select utuh: trigger field, state validasi, mode multi-value, dan panel option yang terbuka.</p>
+        <p class="section-caption">Komponen ini untuk spacing default dengan daftar state trigger, informasi state, dan playground untuk validasi visual.</p>
         <div class="preview-card p-5">
           <div class="ds-select-component">
-            <div class="grid md:grid-cols-2 gap-3">
-              <div class="ds-select-trigger">
-                <span class="ds-select-trigger__value">Value</span>
-                <svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg>
-              </div>
-              <div class="ds-select-trigger ds-select-trigger--focus">
-                <span class="ds-select-trigger__value">Selected Value</span>
-                <svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg>
-              </div>
-              <div class="ds-select-trigger ds-select-trigger--invalid">
-                <span class="ds-select-trigger__value">Value</span>
-                <svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg>
-              </div>
-              <div class="ds-select-trigger ds-select-trigger--disabled">
-                <span class="ds-select-trigger__value">Value</span>
-                <svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg>
-              </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-3">
-              <div class="ds-select-trigger ds-select-trigger--focus">
-                <span class="ds-select-trigger__value">
-                  <span class="ds-select-trigger__tag">Tag X</span>
-                  <span class="ds-select-trigger__tag">Tag X</span>
-                </span>
-                <svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg>
-              </div>
-              <div class="ds-select-dropdown" role="listbox" aria-label="Select options">
-                <div class="ds-option">Label</div>
-                <div class="ds-option ds-option--hover">Label</div>
-                <div class="ds-option ds-option--selected">Label</div>
-                <div class="ds-option">Label</div>
-              </div>
+            <div class="ds-select-component-grid">
+              <div class="ds-select-state-item"><div class="ds-select-state-item__label">state-default</div><div class="ds-select-trigger"><span class="ds-select-trigger__value">Value</span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></div>
+              <div class="ds-select-state-item"><div class="ds-select-state-item__label">state-hover</div><div class="ds-select-trigger ds-select-trigger--hover"><span class="ds-select-trigger__value">Value</span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></div>
+              <div class="ds-select-state-item"><div class="ds-select-state-item__label">state-focus</div><div class="ds-select-trigger ds-select-trigger--focus"><span class="ds-select-trigger__value">Value</span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></div>
+              <div class="ds-select-state-item"><div class="ds-select-state-item__label">state-typing</div><div class="ds-select-trigger ds-select-trigger--typing"><span class="ds-select-trigger__value">Value|</span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></div>
+              <div class="ds-select-state-item"><div class="ds-select-state-item__label">state-loading</div><div class="ds-select-trigger ds-select-trigger--loading"><span class="ds-select-loading__spinner" aria-hidden="true"></span><span class="ds-select-trigger__value">Loading...</span></div></div>
+              <div class="ds-select-state-item"><div class="ds-select-state-item__label">state-empty</div><div class="ds-select-trigger ds-select-trigger--empty"><span class="ds-select-trigger__value">No options</span></div></div>
+              <div class="ds-select-state-item"><div class="ds-select-state-item__label">state-hydrate</div><div class="ds-select-trigger ds-select-trigger--hydrate"><span class="ds-select-trigger__value">Selected Value</span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></div>
+              <div class="ds-select-state-item"><div class="ds-select-state-item__label">state-reset</div><div class="ds-select-trigger ds-select-trigger--reset"><span class="ds-select-trigger__value">Value</span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></div>
+              <div class="ds-select-state-item"><div class="ds-select-state-item__label">state-filled-invalid</div><div class="ds-select-trigger ds-select-trigger--filled-invalid"><span class="ds-select-trigger__value">Value</span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></div>
+              <div class="ds-select-state-item"><div class="ds-select-state-item__label">state-disabled</div><div class="ds-select-trigger ds-select-trigger--disabled"><span class="ds-select-trigger__value">Value</span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div></div>
             </div>
           </div>
         </div>
-
         <div class="grid md:grid-cols-2 gap-4" style="margin-top:16px;">
-          <div class="preview-card p-5">
-            <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Informasi Anatomy</div>
-            <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;">
-              <li>A. Trigger Field: area interaksi utama untuk membuka/menutup list option.</li>
-              <li>B. Value Slot: menampilkan placeholder, single value, atau multi-value (tag).</li>
-              <li>C. Chevron Icon: indikator status dropdown (collapsed/expanded).</li>
-              <li>D. Dropdown Panel: kontainer option dengan state hover/selected/loading/empty.</li>
-            </ul>
-          </div>
-          <div class="preview-card p-5">
-            <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Informasi Penggunaan</div>
-            <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;">
-              <li>Gunakan Select untuk pilihan terstruktur dengan jumlah item sedang hingga banyak.</li>
-              <li>Gunakan single-select jika hanya boleh satu nilai; gunakan multi-select saat butuh kombinasi nilai.</li>
-              <li>Tampilkan state loading/empty secara eksplisit agar pengguna memahami status data option.</li>
-            </ul>
+          <div class="preview-card p-5"><div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Informasi State</div><ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;"><li>State default, hover, focus, typing adalah fase interaksi input.</li><li>State loading dan empty dipakai untuk status data option.</li><li>State hydrate, reset, filled-invalid, disabled dipakai untuk validasi dan status form.</li><li>Semua spacing menggunakan token default agar konsisten.</li></ul></div>
+          <div class="preview-card p-5"><div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Catatan Option Part</div><ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;"><li>Dropdown option bisa menggunakan option-parts: <code>default</code>, <code>checkbox</code>, <code>radio</code>, dan <code>icon</code>.</li><li>Gunakan slot control/icon dan asset existing agar konsisten antar varian.</li><li>Gunakan token yang sudah ada untuk warna, spacing, border, dan typography.</li></ul></div>
+        </div>
+        <div class="preview-card p-5" style="margin-top:16px;">
+          <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:10px;">Playground</div>
+          <div class="ds-select-playground">
+            <div class="ds-select-playground__controls">
+              <select id="select-playground-state" class="ds-select-playground__control" aria-label="Pilih state select trigger"><option value="default">State: Default</option><option value="hover">State: Hover</option><option value="focus">State: Focus</option><option value="typing">State: Typing</option><option value="loading">State: Loading</option><option value="empty">State: Empty</option><option value="hydrate">State: Hydrate</option><option value="reset">State: Reset</option><option value="filled-invalid">State: Filled Invalid</option><option value="disabled">State: Disabled</option></select>
+              <select id="select-playground-option" class="ds-select-playground__control" aria-label="Pilih variant option part"><option value="default">Option Part: Default</option><option value="checkbox">Option Part: Checkbox</option><option value="radio">Option Part: Radio</option><option value="icon">Option Part: Icon</option></select>
+            </div>
+            <div id="select-playground-trigger" class="ds-select-trigger"><span class="ds-select-trigger__value">Value</span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div>
+            <div id="select-playground-menu" class="ds-select-playground__menu" role="listbox" aria-label="Playground option parts"><div class="ds-option">Label</div><div class="ds-option ds-option--hover">Label</div><div class="ds-option ds-option--selected">Label</div><div class="ds-option">Label</div></div>
           </div>
         </div>
-
-        <div class="grid md:grid-cols-2 gap-4" style="margin-top:16px;">
-          <div class="preview-card p-5">
-            <div style="font-weight:700;color:var(--color-green-g400);margin-bottom:8px;">Do (Lakukan)</div>
-            <ul style="color:var(--color-text-tertiary);font-size:13px;line-height:1.7;">
-              <li>Gunakan state focus, invalid, disabled sesuai kondisi form yang nyata.</li>
-              <li>Pertahankan struktur trigger + dropdown + option secara konsisten di semua varian.</li>
-              <li>Pastikan label value singkat agar tidak memotong affordance ikon dan tag.</li>
-            </ul>
-          </div>
-          <div class="preview-card p-5">
-            <div style="font-weight:700;color:var(--color-red-r300);margin-bottom:8px;">Don&apos;t (Hindari)</div>
-            <ul style="color:var(--color-text-tertiary);font-size:13px;line-height:1.7;">
-              <li>Jangan hardcode warna border/state di luar token semantik yang tersedia.</li>
-              <li>Jangan campur pola single-select dan multi-select dalam satu trigger yang sama.</li>
-              <li>Jangan sembunyikan feedback error; state invalid harus tetap terlihat jelas.</li>
-            </ul>
-          </div>
-        </div>
+        <template id="select-playground-option-default"><div class="ds-option">Label</div><div class="ds-option ds-option--hover">Label</div><div class="ds-option ds-option--selected">Label</div><div class="ds-option">Label</div></template>
+        <template id="select-playground-option-checkbox"><div class="ds-option"><span class="ds-option__control ds-option__control--checkbox"></span>Label</div><div class="ds-option ds-option--hover"><span class="ds-option__control ds-option__control--checkbox"></span>Label</div><div class="ds-option ds-option--selected"><span class="ds-option__control ds-option__control--checkbox"><svg viewBox="0 0 24 24"><polyline points="20,6 9,17 4,12"></polyline></svg></span>Label</div><div class="ds-option"><span class="ds-option__control ds-option__control--checkbox"></span>Label</div></template>
+        <template id="select-playground-option-radio"><div class="ds-option"><span class="ds-option__control ds-option__control--radio"></span>Label</div><div class="ds-option ds-option--hover"><span class="ds-option__control ds-option__control--radio"></span>Label</div><div class="ds-option ds-option--selected"><span class="ds-option__control ds-option__control--radio"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"></circle></svg></span>Label</div><div class="ds-option"><span class="ds-option__control ds-option__control--radio"></span>Label</div></template>
+        <template id="select-playground-option-icon"><div class="ds-option">Label<span class="ds-option__icon-slot"><img class="ds-option__icon" src="../../assets/icons/icon-square-2-stack.svg" alt="duplicate"><img class="ds-option__icon" src="../../assets/icons/icon-ellipsis-vertical.svg" alt="more"></span></div><div class="ds-option ds-option--hover">Label<span class="ds-option__icon-slot"><img class="ds-option__icon" src="../../assets/icons/icon-square-2-stack.svg" alt="duplicate"><img class="ds-option__icon" src="../../assets/icons/icon-ellipsis-vertical.svg" alt="more"></span></div><div class="ds-option ds-option--selected">Label<span class="ds-option__icon-slot"><img class="ds-option__icon" src="../../assets/icons/icon-square-2-stack.svg" alt="duplicate"><img class="ds-option__icon" src="../../assets/icons/icon-ellipsis-vertical.svg" alt="more"></span></div><div class="ds-option">Label<span class="ds-option__icon-slot"><img class="ds-option__icon" src="../../assets/icons/icon-square-2-stack.svg" alt="duplicate"><img class="ds-option__icon" src="../../assets/icons/icon-ellipsis-vertical.svg" alt="more"></span></div></template>
       </section>
 
       <section style="margin-bottom:48px;">
@@ -1255,6 +1307,69 @@
   hamburgerBtn?.addEventListener('click', openSidebar);
   sidebarClose?.addEventListener('click', closeSidebar);
   overlay?.addEventListener('click', closeSidebar);
+
+  const playgroundState = document.getElementById('select-playground-state');
+  const playgroundOption = document.getElementById('select-playground-option');
+  const playgroundTrigger = document.getElementById('select-playground-trigger');
+  const playgroundMenu = document.getElementById('select-playground-menu');
+  const triggerStateClasses = [
+    'ds-select-trigger--hover',
+    'ds-select-trigger--focus',
+    'ds-select-trigger--typing',
+    'ds-select-trigger--loading',
+    'ds-select-trigger--empty',
+    'ds-select-trigger--hydrate',
+    'ds-select-trigger--reset',
+    'ds-select-trigger--filled-invalid',
+    'ds-select-trigger--disabled'
+  ];
+  const triggerStateLabelMap = {
+    default: 'Value',
+    hover: 'Value',
+    focus: 'Value',
+    typing: 'Value|',
+    loading: 'Loading...',
+    empty: 'No options',
+    hydrate: 'Selected Value',
+    reset: 'Value',
+    'filled-invalid': 'Value',
+    disabled: 'Value'
+  };
+
+  function renderPlaygroundOption(type) {
+    const template = document.getElementById(`select-playground-option-${type}`) || document.getElementById('select-playground-option-default');
+    if (playgroundMenu && template) {
+      playgroundMenu.innerHTML = template.innerHTML;
+    }
+  }
+
+  function renderPlaygroundState(state) {
+    if (!playgroundTrigger) return;
+    playgroundTrigger.classList.remove(...triggerStateClasses);
+    if (state !== 'default') {
+      playgroundTrigger.classList.add(`ds-select-trigger--${state}`);
+    }
+    if (state === 'loading') {
+      playgroundTrigger.innerHTML = '<span class="ds-select-loading__spinner" aria-hidden="true"></span><span class="ds-select-trigger__value">Loading...</span>';
+      return;
+    }
+    if (state === 'empty') {
+      playgroundTrigger.innerHTML = '<span class="ds-select-trigger__value">No options</span>';
+      return;
+    }
+    playgroundTrigger.innerHTML = '<span class="ds-select-trigger__value"></span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg>';
+    const valueSlot = playgroundTrigger.querySelector('.ds-select-trigger__value');
+    if (valueSlot) valueSlot.textContent = triggerStateLabelMap[state] || 'Value';
+  }
+
+  playgroundState?.addEventListener('change', (event) => {
+    renderPlaygroundState(event.target.value);
+  });
+  playgroundOption?.addEventListener('change', (event) => {
+    renderPlaygroundOption(event.target.value);
+  });
+  renderPlaygroundState(playgroundState?.value || 'default');
+  renderPlaygroundOption(playgroundOption?.value || 'default');
 </script>
 </body>
 </html>
