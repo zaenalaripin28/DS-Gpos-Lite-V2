@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form — DS GPOS Lite V2</title>
+  <link rel="stylesheet" href="../../styles/globals.css">
+  <link rel="stylesheet" href="../../styles/enhancements.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .ds-form-message {
+      display: inline-flex;
+      align-items: flex-start;
+      gap: var(--space-050);
+      margin: 0;
+      font-family: var(--font-primary);
+      font-size: var(--text-caption-regular-size);
+      font-weight: var(--text-caption-regular-weight);
+      line-height: var(--text-caption-regular-lh);
+    }
+    .ds-form-message__icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ds-form-message__icon img {
+      width: 16px;
+      height: 16px;
+      display: block;
+      object-fit: contain;
+    }
+    .ds-form-message--error { color: var(--color-red-r300); }
+    .ds-form-message--true { color: var(--color-green-g300); }
+    .ds-form-message--information { color: var(--color-neutral-n300); }
+
+    .form-parts-stack {
+      display: grid;
+      gap: 0;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--color-surface);
+      max-width: 520px;
+    }
+    .form-parts-stack__part-title {
+      padding: var(--space-075) var(--space-150);
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font-primary);
+      color: var(--color-text-tertiary);
+      background: var(--color-neutral-n20);
+      border-bottom: 1px solid var(--color-border);
+      letter-spacing: 0.02em;
+    }
+    .form-parts-stack__row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: var(--space-100);
+      padding: var(--space-150);
+      align-items: center;
+      border-bottom: 1px solid var(--color-border);
+      background: var(--color-neutral-n10);
+    }
+    .form-parts-stack__row:last-child { border-bottom: none; }
+    .form-parts-stack__label {
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font-primary);
+      color: var(--color-text-tertiary);
+      letter-spacing: 0.02em;
+    }
+    .ds-select-trigger {
+      min-height: 40px;
+      border: 1px solid var(--color-neutral-n40);
+      border-radius: var(--border-radius-sm);
+      background: var(--color-neutral-n0);
+      color: var(--color-neutral-n500);
+      padding: var(--space-075) var(--space-100);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-100);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+      line-height: var(--text-body-small-regular-lh);
+      font-weight: var(--text-body-small-regular-weight);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+      box-sizing: border-box;
+      width: 100%;
+    }
+    .ds-select-trigger__value {
+      display: inline-flex;
+      align-items: center;
+      min-width: 0;
+      flex: 1;
+    }
+    .ds-select-trigger__icon {
+      width: 16px;
+      height: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--color-neutral-n200);
+    }
+    .ds-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-025);
+      padding: 0 var(--space-150);
+      min-height: 32px;
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n900);
+      font-family: var(--font-primary);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--text-body-small-medium-lh);
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color var(--transition-fast);
+    }
+    .ds-btn:hover { background-color: var(--color-neutral-n30); }
+    .ds-btn:active { background-color: var(--color-neutral-n40); }
+    .ds-btn--icon-only {
+      padding: 0 var(--space-050);
+      gap: 0;
+    }
+    .ds-btn--subtle {
+      background-color: transparent;
+      color: var(--color-neutral-n900);
+    }
+    .ds-btn--subtle:hover  { background-color: var(--color-neutral-n20); }
+    .ds-btn--subtle:active { background-color: var(--color-neutral-n40); }
+    .ds-form-row {
+      display: grid;
+      gap: var(--space-050);
+      width: 100%;
+      max-width: 540px;
+    }
+    .ds-form-row__label {
+      color: var(--color-text-secondary);
+      font-family: var(--font-primary);
+      font-size: var(--text-caption-medium-size);
+      font-weight: var(--text-caption-medium-weight);
+      line-height: var(--text-caption-medium-lh);
+      margin: 0;
+    }
+    .ds-form-row__field {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--space-050);
+      align-items: start;
+    }
+    .ds-form-row__select {
+      min-width: 0;
+    }
+    .ds-form-row__action-btn {
+      width: 40px;
+      min-height: 40px;
+      border: 1px solid var(--color-neutral-n30);
+      border-radius: var(--border-radius-sm);
+      background: var(--color-neutral-n20);
+      padding: 0;
+      flex-shrink: 0;
+    }
+    .ds-form-row__action-btn img {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+    .ds-form-row--default .ds-select-trigger {
+      border-color: var(--color-neutral-n40);
+      background: var(--color-neutral-n20);
+      color: var(--color-neutral-n200);
+    }
+    .ds-form-row--invalid .ds-select-trigger {
+      border-color: var(--color-red-r300);
+      box-shadow: 0 0 0 1px var(--color-red-r300);
+      color: var(--color-neutral-n800);
+    }
+    .ds-form-row--valid .ds-select-trigger {
+      border-color: var(--color-neutral-n40);
+      color: var(--color-neutral-n800);
+    }
+    .form-component-states {
+      display: grid;
+      gap: var(--space-200);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      background: var(--color-surface);
+      padding: var(--space-200);
+    }
+    .form-component-states__item {
+      display: grid;
+      gap: var(--space-075);
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: var(--space-150);
+    }
+    .form-component-states__item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .form-component-states__state {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      font-family: var(--font-primary);
+      color: var(--color-text-tertiary);
+    }
+    .usage-info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-100);
+    }
+    .usage-info-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: var(--space-150);
+    }
+    .usage-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-100);
+    }
+    .code-block {
+      background: var(--color-neutral-n10);
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-sm);
+      padding: var(--space-100) var(--space-150);
+      overflow-x: auto;
+      font-family: var(--font-primary);
+      font-size: 11px;
+      line-height: 1.6;
+      color: var(--color-neutral-n700);
+    }
+    .copy-btn {
+      padding: 4px 10px;
+      background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n30);
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-neutral-n400);
+      cursor: pointer;
+      font-family: var(--font-primary);
+    }
+    .copy-btn:hover { background: var(--color-blue-b300); border-color: var(--color-blue-b300); color: var(--color-neutral-n0); }
+    .copy-btn.copied { background: var(--color-green-g300); border-color: var(--color-green-g300); color: var(--color-neutral-n0); }
+    .form-playground {
+      display: grid;
+      gap: var(--space-150);
+      max-width: 560px;
+    }
+    .form-playground__controls {
+      display: grid;
+      gap: var(--space-075);
+    }
+    .form-playground__control {
+      min-height: 40px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-sm);
+      background: var(--color-neutral-n0);
+      color: var(--color-neutral-n500);
+      padding: 0 var(--space-075);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+    }
+    .form-playground__control:focus {
+      outline: none;
+      border-color: var(--color-blue-b300);
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+    .form-playground__stage {
+      padding: var(--space-200);
+      background: var(--color-neutral-n10);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+    }
+    .form-playground__hint {
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+      line-height: 1.6;
+      font-family: var(--font-primary);
+      margin: 0;
+    }
+    section > h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: none !important;
+      background-image: linear-gradient(to right, var(--color-primary-500) 0%, rgba(30,127,214,0.18) 32%, transparent 68%) !important;
+      background-repeat: no-repeat !important;
+      background-size: 100% 1px !important;
+      background-position: left bottom !important;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--color-text-primary);
+      font-family: var(--font-primary);
+    }
+    section > h2::before {
+      content: '';
+      width: 3px;
+      height: 18px;
+      background: linear-gradient(to bottom, var(--color-primary-500), var(--color-primary-300));
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    @media (max-width: 640px) {
+      .form-parts-stack__row { grid-template-columns: 1fr; gap: var(--space-075); }
+      .ds-form-row__field { grid-template-columns: 1fr; }
+      .usage-info-grid { grid-template-columns: 1fr; }
+      .usage-grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo-icon">GL</div>
+        <div class="sidebar-brand-text">
+          <div class="logo">GPOS Lite</div>
+          <div class="version">Design System V2.0</div>
+        </div>
+      </div>
+      <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">&#x2715;</button>
+    </div>
+    <div class="sidebar-search">
+      <input type="search" class="search-input" placeholder="&#x1F50D;  Cari token, component...">
+    </div>
+    <div class="nav-scroll">
+      <nav class="nav-menu">
+        <div class="nav-section">
+          <h3 class="nav-title">Overview</h3>
+          <ul class="nav-list">
+            <li>
+              <a href="../../index.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+                Home
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <h3 class="nav-title">Foundations</h3>
+          <ul class="nav-list">
+            <li><a href="../../foundations/colors/colors.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg>Colors</a></li>
+            <li><a href="../../foundations/typography/typography.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Typography</a></li>
+            <li><a href="../../foundations/spacing/spacing.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>Spacing</a></li>
+            <li><a href="../../foundations/shadows/shadows.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h12a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V7z" opacity="0.4"/></svg>Shadows</a></li>
+            <li><a href="../../foundations/borders/borders.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>Borders &amp; Radius</a></li>
+            <li><a href="../../foundations/grid/grid.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Grid &amp; Layout</a></li>
+            <li><a href="../../foundations/icons/icons.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="5" height="5" rx="1"/><rect x="10" y="3" width="5" height="5" rx="1"/><rect x="17" y="3" width="4" height="5" rx="1"/><rect x="3" y="10" width="5" height="5" rx="1"/><rect x="10" y="10" width="5" height="5" rx="1"/><rect x="17" y="10" width="4" height="5" rx="1"/><rect x="3" y="17" width="5" height="4" rx="1"/><rect x="10" y="17" width="5" height="4" rx="1"/><rect x="17" y="17" width="4" height="4" rx="1"/></svg>Icons</a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <h3 class="nav-title">Komponen</h3>
+          <ul class="nav-list">
+            <li><a href="../Button/button.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="3"/><line x1="7" y1="12" x2="17" y2="12" opacity="0.5"/></svg>Button</a></li>
+            <li><a href="../Avatar/avatar.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Avatar</a></li>
+            <li><a href="../Badge/badge.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="9" width="22" height="6" rx="3"/><circle cx="6" cy="12" r="1.5" fill="currentColor" opacity="0.5"/></svg>Badge</a></li>
+            <li><a href="../Tags/tags.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/></svg>Tags</a></li>
+            <li><a href="../Lozenge/lozenge.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="7" width="16" height="10" rx="2"/></svg>Lozenge</a></li>
+            <li><a href="../Checkbox/checkbox.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg>Checkbox</a></li>
+            <li><a href="../Radio/radio.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg>Radio</a></li>
+            <li><a href="../Toggle/toggle.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="5"/><circle cx="7" cy="12" r="3" fill="currentColor" stroke="none"/></svg>Toggle</a></li>
+            <li><a href="../Text Field/text field.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="10" rx="2"/><line x1="7" y1="11" x2="13" y2="11"/></svg>Text Field</a></li>
+            <li><a href="../Text Area/text area.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="16" height="14" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg>Text Area</a></li>
+            <li>
+              <a href="form.html" class="nav-link active">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="13" y2="16"/></svg>
+                Form
+              </a>
+            </li>
+            <li><a href="../Flags/flags.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>Flags</a></li>
+            <li><a href="../section messages/section-message.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="14" y2="13"/></svg>Section Message</a></li>
+            <li><a href="../Breadcrumbs/breadcrumbs.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/><line x1="3" y1="12" x2="15" y2="12" opacity="0.4"/></svg>Breadcrumbs</a></li>
+            <li><a href="../Tabs/tabs.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="4" rx="1"/><rect x="2" y="13" width="14" height="4" rx="1"/></svg>Tabs</a></li>
+            <li><a href="../Pagination/pagination.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="10,6 4,12 10,18"/><polyline points="14,6 20,12 14,18"/><line x1="11.5" y1="12" x2="12.5" y2="12" opacity="0.55"/></svg>Pagination</a></li>
+            <li><a href="../Calendar/calendar.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Calendar</a></li>
+            <li><a href="../Toast-Banner/banner.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="8" rx="2"/><circle cx="6" cy="12" r="1" fill="currentColor" stroke="none"/><line x1="10" y1="12" x2="18" y2="12"/></svg>Toast Banner</a></li>
+            <li><a href="../Select/select.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><polyline points="8,10 12,14 16,10"/></svg>Select</a></li>
+            <li><a href="../Inline edit/inline-edit.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Inline Edit</a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <h3 class="nav-title">Resources</h3>
+          <ul class="nav-list">
+            <li>
+              <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="nav-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                GitHub Repo
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="sidebar-footer">
+      <div class="tailwind-badge">Built with tokens.css</div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">☰</button>
+      <div class="breadcrumb">
+        <a href="../../index.html">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="#">Components</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="current">Form</span>
+      </div>
+      <span class="version-badge">v2.0</span>
+    </div>
+
+    <div class="content-inner">
+
+      <section class="mb-12">
+        <h2>Form Parts — Message</h2>
+        <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:640px;margin-bottom:24px;">
+          Part <code>&lt;Message&gt;</code> untuk validasi dan bantuan di bawah field. Typography: <code>caption-regular</code>. Referensi: <code>Form/figma/form-part.png</code>.
+        </p>
+
+        <div class="form-parts-stack" role="table" aria-label="Form message parts">
+          <div class="form-parts-stack__part-title">&lt;Message&gt;</div>
+          <div class="form-parts-stack__row">
+            <span class="form-parts-stack__label">state=error</span>
+            <p class="ds-form-message ds-form-message--error" role="alert">
+              <span class="ds-form-message__icon" aria-hidden="true">
+                <img src="../../assets/icons/icon-solid-exclamation-triangle.svg" alt="">
+              </span>
+              <span class="ds-form-message__text">Please select a color</span>
+            </p>
+          </div>
+          <div class="form-parts-stack__row">
+            <span class="form-parts-stack__label">state=true</span>
+            <p class="ds-form-message ds-form-message--true">
+              <span class="ds-form-message__icon" aria-hidden="true">
+                <img src="../../assets/icons/icon-solid-check-circle.svg" alt="">
+              </span>
+              <span class="ds-form-message__text">Nice one, this username is available</span>
+            </p>
+          </div>
+          <div class="form-parts-stack__row">
+            <span class="form-parts-stack__label">state=information</span>
+            <p class="ds-form-message ds-form-message--information">
+              <span class="ds-form-message__text">You can use letters, numbers and periods.</span>
+            </p>
+          </div>
+        </div>
+
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;margin-top:16px;">
+          <img src="figma/form-part.png" alt="Referensi Figma form message parts" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Form with Button Component</h2>
+        <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:720px;margin-bottom:24px;">
+          Tampilan mengikuti section form component, tetapi action menggunakan komponen button (<code>.ds-btn .ds-btn--icon-only</code>) dari halaman Button. Referensi: <code>Inline edit/figma/form with button-component.png</code>.
+        </p>
+
+        <div class="form-component-states" role="table" aria-label="Form component states">
+          <div class="form-component-states__item">
+            <span class="form-component-states__state">state=default</span>
+            <div class="ds-form-row ds-form-row--default">
+              <p class="ds-form-row__label">Field label</p>
+              <div class="ds-form-row__field">
+                <button type="button" class="ds-select-trigger ds-form-row__select" aria-label="Form default" tabindex="-1">
+                  <span class="ds-select-trigger__value">Placeholder</span>
+                </button>
+                <button type="button" class="ds-btn ds-btn--icon-only ds-btn--subtle ds-form-row__action-btn" aria-label="Aksi field" tabindex="-1">
+                  <img src="../../assets/icons/icon-ellipsis-vertical.svg" alt="">
+                </button>
+              </div>
+              <p class="ds-form-message ds-form-message--information">
+                <span class="ds-form-message__text">You can use letters, numbers and periods.</span>
+              </p>
+            </div>
+          </div>
+          <div class="form-component-states__item">
+            <span class="form-component-states__state">state=invalid</span>
+            <div class="ds-form-row ds-form-row--invalid">
+              <p class="ds-form-row__label">Field label</p>
+              <div class="ds-form-row__field">
+                <button type="button" class="ds-select-trigger ds-form-row__select" aria-label="Form invalid" tabindex="-1">
+                  <span class="ds-select-trigger__value">Value</span>
+                </button>
+                <button type="button" class="ds-btn ds-btn--icon-only ds-btn--subtle ds-form-row__action-btn" aria-label="Aksi field" tabindex="-1">
+                  <img src="../../assets/icons/icon-ellipsis-vertical.svg" alt="">
+                </button>
+              </div>
+              <p class="ds-form-message ds-form-message--error" role="alert">
+                <span class="ds-form-message__icon" aria-hidden="true">
+                  <img src="../../assets/icons/icon-solid-exclamation-triangle.svg" alt="">
+                </span>
+                <span class="ds-form-message__text">Please select a color</span>
+              </p>
+            </div>
+          </div>
+          <div class="form-component-states__item">
+            <span class="form-component-states__state">state=valid</span>
+            <div class="ds-form-row ds-form-row--valid">
+              <p class="ds-form-row__label">Field label</p>
+              <div class="ds-form-row__field">
+                <button type="button" class="ds-select-trigger ds-form-row__select" aria-label="Form valid" tabindex="-1">
+                  <span class="ds-select-trigger__value">Value</span>
+                </button>
+                <button type="button" class="ds-btn ds-btn--icon-only ds-btn--subtle ds-form-row__action-btn" aria-label="Aksi field" tabindex="-1">
+                  <img src="../../assets/icons/icon-ellipsis-vertical.svg" alt="">
+                </button>
+              </div>
+              <p class="ds-form-message ds-form-message--true">
+                <span class="ds-form-message__icon" aria-hidden="true">
+                  <img src="../../assets/icons/icon-solid-check-circle.svg" alt="">
+                </span>
+                <span class="ds-form-message__text">Nice one, this username is available</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;margin-top:16px;">
+          <img src="figma/form with button-components.png" alt="Referensi Figma form with button component" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Informasi Penggunaan</h2>
+        <div class="usage-info-grid">
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);font-family:var(--font-primary);">Kapan dipakai</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;font-family:var(--font-primary);">Untuk field form yang butuh validasi cepat sekaligus tombol aksi contextual di sisi kanan input.</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);font-family:var(--font-primary);">Komposisi</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;font-family:var(--font-primary);">Urutan tetap: <code>Field label</code> (caption-medium), input/select + button icon, lalu message (<code>form-part</code>).</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);font-family:var(--font-primary);">State</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;font-family:var(--font-primary);">Default: helper info. Invalid: border merah + error message. Valid: value normal + success message; button tetap tampil konsisten.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Do &amp; Don&apos;t</h2>
+        <div class="usage-grid-2">
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:10px 16px;background:var(--color-green-g50);border-bottom:2px solid var(--color-green-g100);font-weight:700;color:var(--color-green-g400);font-family:var(--font-primary);font-size:12px;">Do — Lakukan ini</div>
+            <ul style="padding:16px 20px 20px 36px;color:var(--color-text-tertiary);font-size:13px;line-height:1.7;font-family:var(--font-primary);">
+              <li>Gunakan label field dengan token <code>caption-medium</code>.</li>
+              <li>Gunakan button icon dari komponen Button: <code>.ds-btn .ds-btn--icon-only</code>.</li>
+              <li>Tampilkan message tepat di bawah field sesuai state (info, error, success).</li>
+              <li>Gunakan ikon existing untuk error dan success dari assets/icons.</li>
+            </ul>
+          </div>
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:10px 16px;background:var(--color-red-r50);border-bottom:2px solid var(--color-red-r100);font-weight:700;color:var(--color-red-r400);font-family:var(--font-primary);font-size:12px;">Don&apos;t — Hindari ini</div>
+            <ul style="padding:16px 20px 20px 36px;color:var(--color-text-tertiary);font-size:13px;line-height:1.7;font-family:var(--font-primary);">
+              <li>Jangan hardcode warna, spacing, atau typography di luar token.</li>
+              <li>Jangan pindahkan message ke area lain yang memutus konteks field.</li>
+              <li>Jangan gunakan ikon custom baru jika sudah ada asset setara.</li>
+              <li>Jangan mengganti button icon dengan elemen non-button yang mengurangi aksesibilitas.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Code — Salin Code</h2>
+        <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:640px;margin-bottom:20px;">Struktur HTML + utilitas Tailwind untuk varian form dengan button icon.</p>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+              <span style="font-size:12px;font-weight:600;color:var(--color-text-secondary);font-family:var(--font-primary);">HTML</span>
+              <button class="copy-btn" onclick="copyBlock('code-form-html', this)">Salin</button>
+            </div>
+            <div class="code-block"><code id="code-form-html">&lt;div class="ds-form-row ds-form-row--invalid"&gt;
+  &lt;p class="ds-form-row__label"&gt;Field label&lt;/p&gt;
+  &lt;div class="ds-form-row__field"&gt;
+    &lt;button type="button" class="ds-select-trigger ds-form-row__select"&gt;
+      &lt;span class="ds-select-trigger__value"&gt;Value&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;button type="button" class="ds-btn ds-btn--icon-only ds-btn--subtle ds-form-row__action-btn" aria-label="Aksi field"&gt;
+      &lt;img src="assets/icons/icon-ellipsis-vertical.svg" alt=""&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+  &lt;p class="ds-form-message ds-form-message--error"&gt;
+    &lt;span class="ds-form-message__icon" aria-hidden="true"&gt;
+      &lt;img src="assets/icons/icon-solid-exclamation-triangle.svg" alt=""&gt;
+    &lt;/span&gt;
+    &lt;span class="ds-form-message__text"&gt;Please select a color&lt;/span&gt;
+  &lt;/p&gt;
+&lt;/div&gt;</code></div>
+          </div>
+          <div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+              <span style="font-size:12px;font-weight:600;color:var(--color-text-secondary);font-family:var(--font-primary);">Tailwind CSS</span>
+              <button class="copy-btn" onclick="copyBlock('code-form-tailwind', this)">Salin</button>
+            </div>
+            <div class="code-block"><code id="code-form-tailwind">&lt;div class="grid gap-2 w-full max-w-[540px]"&gt;
+  &lt;p class="font-primary text-xs leading-5 font-medium text-slate-600"&gt;Field label&lt;/p&gt;
+  &lt;div class="grid grid-cols-[1fr_auto] gap-2 items-start"&gt;
+    &lt;button class="min-h-[40px] w-full rounded-sm border border-[var(--color-red-r300)] bg-[var(--color-neutral-n0)] px-3 py-2 text-left text-sm text-[var(--color-neutral-n800)] shadow-[0_0_0_1px_var(--color-red-r300)]"&gt;Value&lt;/button&gt;
+    &lt;button type="button" class="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-[var(--color-neutral-n30)] bg-[var(--color-neutral-n20)]"&gt;
+      &lt;img src="assets/icons/icon-ellipsis-vertical.svg" alt="" class="h-4 w-4"&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+  &lt;p class="inline-flex items-start gap-1 text-xs leading-4 font-normal text-red-500"&gt;
+    &lt;img src="assets/icons/icon-solid-exclamation-triangle.svg" alt="" class="h-4 w-4 shrink-0"&gt;
+    &lt;span&gt;Please select a color&lt;/span&gt;
+  &lt;/p&gt;
+&lt;/div&gt;</code></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Playground</h2>
+        <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:640px;margin-bottom:20px;">
+          Pilih state untuk melihat perubahan border, message, dan button icon pada form with button component.
+        </p>
+        <div class="form-playground">
+          <div class="form-playground__controls">
+            <select id="form-playground-state" class="form-playground__control" aria-label="Pilih state form component">
+              <option value="default">State: Default</option>
+              <option value="invalid">State: Invalid</option>
+              <option value="valid">State: Valid</option>
+            </select>
+          </div>
+          <div class="form-playground__stage">
+            <div class="ds-form-row ds-form-row--default" id="form-playground-row">
+              <p class="ds-form-row__label">Field label</p>
+              <div class="ds-form-row__field">
+                <button type="button" class="ds-select-trigger ds-form-row__select" id="form-playground-trigger" aria-label="Form field playground">
+                  <span class="ds-select-trigger__value" id="form-playground-value">Placeholder</span>
+                </button>
+                <button type="button" class="ds-btn ds-btn--icon-only ds-btn--subtle ds-form-row__action-btn" aria-label="Aksi field playground">
+                  <img src="../../assets/icons/icon-ellipsis-vertical.svg" alt="">
+                </button>
+              </div>
+              <p class="ds-form-message ds-form-message--information" id="form-playground-message">
+                <span class="ds-form-message__text">You can use letters, numbers and periods.</span>
+              </p>
+            </div>
+          </div>
+          <p class="form-playground__hint" id="form-playground-hint">Default: helper message tampil.</p>
+        </div>
+      </section>
+
+      <footer class="page-footer" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--color-border);font-size:12px;color:var(--color-text-tertiary);">
+        &copy; 2026 GPOS Lite Design System V2.0
+      </footer>
+    </div>
+  </main>
+</div>
+
+<script src="../../scripts/script.js"></script>
+<script>
+  function copyBlock(id, btn) {
+    navigator.clipboard.writeText(document.getElementById(id).textContent).then(function () {
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+
+  function setFormPlaygroundState(state) {
+    var row = document.getElementById('form-playground-row');
+    var value = document.getElementById('form-playground-value');
+    var msg = document.getElementById('form-playground-message');
+    var hint = document.getElementById('form-playground-hint');
+    if (!row || !value || !msg || !hint) return;
+
+    row.classList.remove('ds-form-row--default', 'ds-form-row--invalid', 'ds-form-row--valid');
+    row.classList.add('ds-form-row--' + state);
+
+    if (state === 'invalid') {
+      value.textContent = 'Value';
+      msg.className = 'ds-form-message ds-form-message--error';
+      msg.innerHTML = '<span class="ds-form-message__icon" aria-hidden="true"><img src="../../assets/icons/icon-solid-exclamation-triangle.svg" alt=""></span><span class="ds-form-message__text">Please select a color</span>';
+      hint.textContent = 'Invalid: border merah + error message.';
+      return;
+    }
+
+    if (state === 'valid') {
+      value.textContent = 'Value';
+      msg.className = 'ds-form-message ds-form-message--true';
+      msg.innerHTML = '<span class="ds-form-message__icon" aria-hidden="true"><img src="../../assets/icons/icon-solid-check-circle.svg" alt=""></span><span class="ds-form-message__text">Nice one, this username is available</span>';
+      hint.textContent = 'Valid: value terisi + success message.';
+      return;
+    }
+
+    value.textContent = 'Placeholder';
+    msg.className = 'ds-form-message ds-form-message--information';
+    msg.innerHTML = '<span class="ds-form-message__text">You can use letters, numbers and periods.</span>';
+    hint.textContent = 'Default: helper message tampil.';
+  }
+
+  (function () {
+    var stateControl = document.getElementById('form-playground-state');
+    if (!stateControl) return;
+    stateControl.addEventListener('change', function () {
+      setFormPlaygroundState(stateControl.value);
+    });
+    setFormPlaygroundState(stateControl.value);
+  })();
+</script>
+</body>
+</html>
