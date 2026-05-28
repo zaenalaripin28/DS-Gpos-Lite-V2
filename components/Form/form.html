@@ -26,12 +26,13 @@
       align-items: center;
       justify-content: center;
     }
-    .ds-form-message__icon img {
+    .ds-form-message__icon svg {
       width: 16px;
       height: 16px;
       display: block;
-      object-fit: contain;
     }
+    .ds-form-message__icon--danger { color: var(--color-red-r300); }
+    .ds-form-message__icon--success { color: var(--color-green-g300); }
     .ds-form-message--error { color: var(--color-red-r300); }
     .ds-form-message--true { color: var(--color-green-g300); }
     .ds-form-message--information { color: var(--color-neutral-n300); }
@@ -75,7 +76,7 @@
     .ds-select-trigger {
       min-height: 40px;
       border: 1px solid var(--color-neutral-n40);
-      border-radius: var(--border-radius-sm);
+      border-radius: 6px;
       background: var(--color-neutral-n0);
       color: var(--color-neutral-n500);
       padding: var(--space-075) var(--space-100);
@@ -440,8 +441,8 @@
           <div class="form-parts-stack__row">
             <span class="form-parts-stack__label">state=error</span>
             <p class="ds-form-message ds-form-message--error" role="alert">
-              <span class="ds-form-message__icon" aria-hidden="true">
-                <img src="../../assets/icons/icon-solid-exclamation-triangle.svg" alt="">
+              <span class="ds-form-message__icon ds-form-message__icon--danger" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.40123 3.0034C10.5557 1.00229 13.4439 1.00229 14.5983 3.0034L21.9527 15.7509C23.1065 17.7509 21.6631 20.2501 19.3541 20.2501H4.64546C2.33649 20.2501 0.893061 17.7509 2.04691 15.7509L9.40123 3.0034ZM12 8.25C12.4142 8.25 12.75 8.58579 12.75 9V12.75C12.75 13.1642 12.4142 13.5 12 13.5C11.5858 13.5 11.25 13.1642 11.25 12.75V9C11.25 8.58579 11.5858 8.25 12 8.25ZM12 16.5C12.4142 16.5 12.75 16.1642 12.75 15.75C12.75 15.3358 12.4142 15 12 15C11.5858 15 11.25 15.3358 11.25 15.75C11.25 16.1642 11.5858 16.5 12 16.5Z"/></svg>
               </span>
               <span class="ds-form-message__text">Please select a color</span>
             </p>
@@ -449,8 +450,8 @@
           <div class="form-parts-stack__row">
             <span class="form-parts-stack__label">state=true</span>
             <p class="ds-form-message ds-form-message--true">
-              <span class="ds-form-message__icon" aria-hidden="true">
-                <img src="../../assets/icons/icon-solid-check-circle.svg" alt="">
+              <span class="ds-form-message__icon ds-form-message__icon--success" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12ZM15.6103 10.1859C15.8511 9.84887 15.773 9.38046 15.4359 9.1397C15.0989 8.89894 14.6305 8.97701 14.3897 9.31407L11.1543 13.8436L9.53033 12.2197C9.23744 11.9268 8.76256 11.9268 8.46967 12.2197C8.17678 12.5126 8.17678 12.9874 8.46967 13.2803L10.7197 15.5303C10.8756 15.6862 11.0921 15.7656 11.3119 15.7474C11.5316 15.7293 11.7322 15.6153 11.8603 15.4359L15.6103 10.1859Z"/></svg>
               </span>
               <span class="ds-form-message__text">Nice one, this username is available</span>
             </p>
@@ -465,6 +466,66 @@
 
         <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;margin-top:16px;">
           <img src="figma/form-part.png" alt="Referensi Figma form message parts" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Form Component</h2>
+        <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:720px;margin-bottom:24px;">
+          Komponen form dasar (tanpa button aksi) sesuai referensi <code>form/figma/form-component.png</code>. Input mengikuti pola Select dengan rounded <code>6px</code>.
+        </p>
+
+        <div class="form-component-states" role="table" aria-label="Form component basic states">
+          <div class="form-component-states__item">
+            <span class="form-component-states__state">state=default</span>
+            <div class="ds-form-row ds-form-row--default">
+              <p class="ds-form-row__label">Field label</p>
+              <div class="ds-form-row__field" style="grid-template-columns:1fr;">
+                <button type="button" class="ds-select-trigger ds-form-row__select" aria-label="Form default basic" tabindex="-1">
+                  <span class="ds-select-trigger__value">Placeholder</span>
+                </button>
+              </div>
+              <p class="ds-form-message ds-form-message--information"><span class="ds-form-message__text">You can use letters, numbers and periods.</span></p>
+            </div>
+          </div>
+          <div class="form-component-states__item">
+            <span class="form-component-states__state">state=invalid</span>
+            <div class="ds-form-row ds-form-row--invalid">
+              <p class="ds-form-row__label">Field label</p>
+              <div class="ds-form-row__field" style="grid-template-columns:1fr;">
+                <button type="button" class="ds-select-trigger ds-form-row__select" aria-label="Form invalid basic" tabindex="-1">
+                  <span class="ds-select-trigger__value">Value</span>
+                </button>
+              </div>
+              <p class="ds-form-message ds-form-message--error" role="alert">
+                <span class="ds-form-message__icon ds-form-message__icon--danger" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.40123 3.0034C10.5557 1.00229 13.4439 1.00229 14.5983 3.0034L21.9527 15.7509C23.1065 17.7509 21.6631 20.2501 19.3541 20.2501H4.64546C2.33649 20.2501 0.893061 17.7509 2.04691 15.7509L9.40123 3.0034ZM12 8.25C12.4142 8.25 12.75 8.58579 12.75 9V12.75C12.75 13.1642 12.4142 13.5 12 13.5C11.5858 13.5 11.25 13.1642 11.25 12.75V9C11.25 8.58579 11.5858 8.25 12 8.25ZM12 16.5C12.4142 16.5 12.75 16.1642 12.75 15.75C12.75 15.3358 12.4142 15 12 15C11.5858 15 11.25 15.3358 11.25 15.75C11.25 16.1642 11.5858 16.5 12 16.5Z"/></svg>
+                </span>
+                <span class="ds-form-message__text">Please select a color</span>
+              </p>
+            </div>
+          </div>
+          <div class="form-component-states__item">
+            <span class="form-component-states__state">state=valid</span>
+            <div class="ds-form-row ds-form-row--valid">
+              <p class="ds-form-row__label">Field label</p>
+              <div class="ds-form-row__field" style="grid-template-columns:1fr;">
+                <button type="button" class="ds-select-trigger ds-form-row__select" aria-label="Form valid basic" tabindex="-1">
+                  <span class="ds-select-trigger__value">Value</span>
+                </button>
+              </div>
+              <p class="ds-form-message ds-form-message--true">
+                <span class="ds-form-message__icon ds-form-message__icon--success" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12ZM15.6103 10.1859C15.8511 9.84887 15.773 9.38046 15.4359 9.1397C15.0989 8.89894 14.6305 8.97701 14.3897 9.31407L11.1543 13.8436L9.53033 12.2197C9.23744 11.9268 8.76256 11.9268 8.46967 12.2197C8.17678 12.5126 8.17678 12.9874 8.46967 13.2803L10.7197 15.5303C10.8756 15.6862 11.0921 15.7656 11.3119 15.7474C11.5316 15.7293 11.7322 15.6153 11.8603 15.4359L15.6103 10.1859Z"/></svg>
+                </span>
+                <span class="ds-form-message__text">Nice one, this username is available</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;margin-top:16px;">
+          <img src="figma/form-components.png" alt="Referensi Figma form component" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
         </div>
       </section>
 
@@ -505,8 +566,8 @@
                 </button>
               </div>
               <p class="ds-form-message ds-form-message--error" role="alert">
-                <span class="ds-form-message__icon" aria-hidden="true">
-                  <img src="../../assets/icons/icon-solid-exclamation-triangle.svg" alt="">
+                <span class="ds-form-message__icon ds-form-message__icon--danger" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.40123 3.0034C10.5557 1.00229 13.4439 1.00229 14.5983 3.0034L21.9527 15.7509C23.1065 17.7509 21.6631 20.2501 19.3541 20.2501H4.64546C2.33649 20.2501 0.893061 17.7509 2.04691 15.7509L9.40123 3.0034ZM12 8.25C12.4142 8.25 12.75 8.58579 12.75 9V12.75C12.75 13.1642 12.4142 13.5 12 13.5C11.5858 13.5 11.25 13.1642 11.25 12.75V9C11.25 8.58579 11.5858 8.25 12 8.25ZM12 16.5C12.4142 16.5 12.75 16.1642 12.75 15.75C12.75 15.3358 12.4142 15 12 15C11.5858 15 11.25 15.3358 11.25 15.75C11.25 16.1642 11.5858 16.5 12 16.5Z"/></svg>
                 </span>
                 <span class="ds-form-message__text">Please select a color</span>
               </p>
@@ -525,8 +586,8 @@
                 </button>
               </div>
               <p class="ds-form-message ds-form-message--true">
-                <span class="ds-form-message__icon" aria-hidden="true">
-                  <img src="../../assets/icons/icon-solid-check-circle.svg" alt="">
+                <span class="ds-form-message__icon ds-form-message__icon--success" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12ZM15.6103 10.1859C15.8511 9.84887 15.773 9.38046 15.4359 9.1397C15.0989 8.89894 14.6305 8.97701 14.3897 9.31407L11.1543 13.8436L9.53033 12.2197C9.23744 11.9268 8.76256 11.9268 8.46967 12.2197C8.17678 12.5126 8.17678 12.9874 8.46967 13.2803L10.7197 15.5303C10.8756 15.6862 11.0921 15.7656 11.3119 15.7474C11.5316 15.7293 11.7322 15.6153 11.8603 15.4359L15.6103 10.1859Z"/></svg>
                 </span>
                 <span class="ds-form-message__text">Nice one, this username is available</span>
               </p>
@@ -601,8 +662,8 @@
     &lt;/button&gt;
   &lt;/div&gt;
   &lt;p class="ds-form-message ds-form-message--error"&gt;
-    &lt;span class="ds-form-message__icon" aria-hidden="true"&gt;
-      &lt;img src="assets/icons/icon-solid-exclamation-triangle.svg" alt=""&gt;
+    &lt;span class="ds-form-message__icon ds-form-message__icon--danger" aria-hidden="true"&gt;
+      &lt;svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"&gt;&lt;path fill-rule="evenodd" clip-rule="evenodd" d="M9.40123 3.0034C10.5557 1.00229 13.4439 1.00229 14.5983 3.0034L21.9527 15.7509C23.1065 17.7509 21.6631 20.2501 19.3541 20.2501H4.64546C2.33649 20.2501 0.893061 17.7509 2.04691 15.7509L9.40123 3.0034ZM12 8.25C12.4142 8.25 12.75 8.58579 12.75 9V12.75C12.75 13.1642 12.4142 13.5 12 13.5C11.5858 13.5 11.25 13.1642 11.25 12.75V9C11.25 8.58579 11.5858 8.25 12 8.25ZM12 16.5C12.4142 16.5 12.75 16.1642 12.75 15.75C12.75 15.3358 12.4142 15 12 15C11.5858 15 11.25 15.3358 11.25 15.75C11.25 16.1642 11.5858 16.5 12 16.5Z"/&gt;&lt;/svg&gt;
     &lt;/span&gt;
     &lt;span class="ds-form-message__text"&gt;Please select a color&lt;/span&gt;
   &lt;/p&gt;
@@ -616,13 +677,13 @@
             <div class="code-block"><code id="code-form-tailwind">&lt;div class="grid gap-2 w-full max-w-[540px]"&gt;
   &lt;p class="font-primary text-xs leading-5 font-medium text-slate-600"&gt;Field label&lt;/p&gt;
   &lt;div class="grid grid-cols-[1fr_auto] gap-2 items-start"&gt;
-    &lt;button class="min-h-[40px] w-full rounded-sm border border-[var(--color-red-r300)] bg-[var(--color-neutral-n0)] px-3 py-2 text-left text-sm text-[var(--color-neutral-n800)] shadow-[0_0_0_1px_var(--color-red-r300)]"&gt;Value&lt;/button&gt;
+    &lt;button class="min-h-[40px] w-full rounded-[6px] border border-[var(--color-red-r300)] bg-[var(--color-neutral-n0)] px-3 py-2 text-left text-sm text-[var(--color-neutral-n800)] shadow-[0_0_0_1px_var(--color-red-r300)]"&gt;Value&lt;/button&gt;
     &lt;button type="button" class="inline-flex h-10 w-10 items-center justify-center rounded-sm border border-[var(--color-neutral-n30)] bg-[var(--color-neutral-n20)]"&gt;
       &lt;img src="assets/icons/icon-ellipsis-vertical.svg" alt="" class="h-4 w-4"&gt;
     &lt;/button&gt;
   &lt;/div&gt;
   &lt;p class="inline-flex items-start gap-1 text-xs leading-4 font-normal text-red-500"&gt;
-    &lt;img src="assets/icons/icon-solid-exclamation-triangle.svg" alt="" class="h-4 w-4 shrink-0"&gt;
+    &lt;svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-4 w-4 shrink-0"&gt;&lt;path fill-rule="evenodd" clip-rule="evenodd" d="M9.40123 3.0034C10.5557 1.00229 13.4439 1.00229 14.5983 3.0034L21.9527 15.7509C23.1065 17.7509 21.6631 20.2501 19.3541 20.2501H4.64546C2.33649 20.2501 0.893061 17.7509 2.04691 15.7509L9.40123 3.0034ZM12 8.25C12.4142 8.25 12.75 8.58579 12.75 9V12.75C12.75 13.1642 12.4142 13.5 12 13.5C11.5858 13.5 11.25 13.1642 11.25 12.75V9C11.25 8.58579 11.5858 8.25 12 8.25ZM12 16.5C12.4142 16.5 12.75 16.1642 12.75 15.75C12.75 15.3358 12.4142 15 12 15C11.5858 15 11.25 15.3358 11.25 15.75C11.25 16.1642 11.5858 16.5 12 16.5Z"/&gt;&lt;/svg&gt;
     &lt;span&gt;Please select a color&lt;/span&gt;
   &lt;/p&gt;
 &lt;/div&gt;</code></div>
@@ -693,7 +754,7 @@
     if (state === 'invalid') {
       value.textContent = 'Value';
       msg.className = 'ds-form-message ds-form-message--error';
-      msg.innerHTML = '<span class="ds-form-message__icon" aria-hidden="true"><img src="../../assets/icons/icon-solid-exclamation-triangle.svg" alt=""></span><span class="ds-form-message__text">Please select a color</span>';
+      msg.innerHTML = '<span class="ds-form-message__icon ds-form-message__icon--danger" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.40123 3.0034C10.5557 1.00229 13.4439 1.00229 14.5983 3.0034L21.9527 15.7509C23.1065 17.7509 21.6631 20.2501 19.3541 20.2501H4.64546C2.33649 20.2501 0.893061 17.7509 2.04691 15.7509L9.40123 3.0034ZM12 8.25C12.4142 8.25 12.75 8.58579 12.75 9V12.75C12.75 13.1642 12.4142 13.5 12 13.5C11.5858 13.5 11.25 13.1642 11.25 12.75V9C11.25 8.58579 11.5858 8.25 12 8.25ZM12 16.5C12.4142 16.5 12.75 16.1642 12.75 15.75C12.75 15.3358 12.4142 15 12 15C11.5858 15 11.25 15.3358 11.25 15.75C11.25 16.1642 11.5858 16.5 12 16.5Z"></path></svg></span><span class="ds-form-message__text">Please select a color</span>';
       hint.textContent = 'Invalid: border merah + error message.';
       return;
     }
@@ -701,7 +762,7 @@
     if (state === 'valid') {
       value.textContent = 'Value';
       msg.className = 'ds-form-message ds-form-message--true';
-      msg.innerHTML = '<span class="ds-form-message__icon" aria-hidden="true"><img src="../../assets/icons/icon-solid-check-circle.svg" alt=""></span><span class="ds-form-message__text">Nice one, this username is available</span>';
+      msg.innerHTML = '<span class="ds-form-message__icon ds-form-message__icon--success" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12ZM15.6103 10.1859C15.8511 9.84887 15.773 9.38046 15.4359 9.1397C15.0989 8.89894 14.6305 8.97701 14.3897 9.31407L11.1543 13.8436L9.53033 12.2197C9.23744 11.9268 8.76256 11.9268 8.46967 12.2197C8.17678 12.5126 8.17678 12.9874 8.46967 13.2803L10.7197 15.5303C10.8756 15.6862 11.0921 15.7656 11.3119 15.7474C11.5316 15.7293 11.7322 15.6153 11.8603 15.4359L15.6103 10.1859Z"></path></svg></span><span class="ds-form-message__text">Nice one, this username is available</span>';
       hint.textContent = 'Valid: value terisi + success message.';
       return;
     }
