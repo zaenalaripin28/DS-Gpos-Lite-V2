@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date Picker — DS GPOS Lite V2</title>
+  <link rel="stylesheet" href="../../styles/globals.css">
+  <link rel="stylesheet" href="../../styles/enhancements.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .ds-date-picker-layout {
+      display: grid;
+      grid-template-columns: minmax(260px, 320px);
+      gap: var(--space-150);
+      align-items: start;
+    }
+    .ds-select-trigger {
+      min-height: 40px;
+      border: 1px solid var(--color-neutral-n40);
+      border-radius: var(--border-radius-sm);
+      background: var(--color-neutral-n0);
+      color: var(--color-neutral-n500);
+      padding: var(--space-075) var(--space-100);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-100);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+      line-height: var(--text-body-small-regular-lh);
+      font-weight: var(--text-body-small-regular-weight);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+    }
+    .ds-select-trigger:hover { border-color: var(--color-neutral-n100); }
+    .ds-select-trigger:focus-visible {
+      outline: none;
+      border-color: var(--color-blue-b300);
+      box-shadow: 0 0 0 var(--border-width-2) var(--color-blue-b200);
+    }
+    .ds-select-trigger__value {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-075);
+      min-width: 0;
+      flex: 1;
+      color: var(--color-neutral-n500);
+    }
+    .ds-select-trigger__icon {
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+    .ds-select-trigger__chevron {
+      width: 14px;
+      height: 14px;
+      display: inline-block;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .ds-calendar {
+      width: 100%;
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-lg);
+      background: var(--color-surface);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      font-family: var(--font-primary);
+    }
+    .ds-calendar-month-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-100);
+      width: 100%;
+      padding: var(--space-100) var(--space-150);
+    }
+    .ds-calendar-month-header__label {
+      flex: 1;
+      margin: 0;
+      text-align: center;
+      font-size: var(--text-body-medium-medium-size);
+      font-weight: var(--text-body-medium-medium-weight);
+      line-height: var(--text-body-medium-medium-lh);
+      color: var(--color-neutral-n900);
+    }
+    .ds-calendar-month-header__nav {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: transparent;
+      border-radius: var(--border-radius-md);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .ds-calendar-month-header__nav:hover { background: var(--color-neutral-n20); }
+    .ds-calendar-month-header__nav:active { background: var(--color-neutral-n30); }
+    .ds-calendar-month-header__nav:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 var(--border-width-2) var(--color-blue-b200);
+    }
+    .ds-calendar-week-header {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: var(--space-050);
+      width: 100%;
+      padding: 0 var(--space-150);
+    }
+    .ds-calendar-week-header__day {
+      margin: 0;
+      text-align: center;
+      font-size: var(--text-overline-medium-size);
+      font-weight: var(--text-overline-medium-weight);
+      line-height: var(--text-overline-medium-lh);
+      letter-spacing: var(--text-overline-medium-ls);
+      text-transform: var(--text-overline-medium-transform);
+      color: var(--color-neutral-n300);
+    }
+    .ds-calendar-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: var(--space-050);
+      width: 100%;
+      padding: var(--space-100) var(--space-150);
+    }
+    .ds-calendar-day {
+      width: 32px;
+      height: 32px;
+      margin: 0 auto;
+      padding: 0;
+      border: none;
+      border-radius: var(--border-radius-md);
+      background: transparent;
+      font-size: var(--text-body-small-medium-size);
+      font-weight: var(--text-body-small-medium-weight);
+      line-height: var(--text-body-small-medium-lh);
+      color: var(--color-neutral-n900);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .ds-calendar-day--outside {
+      color: var(--color-neutral-n300);
+      pointer-events: none;
+    }
+    .ds-calendar-day:hover:not(.ds-calendar-day--outside) { background: var(--color-neutral-n20); }
+    .ds-calendar-day:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 var(--border-width-2) var(--color-blue-b200);
+    }
+    .ds-calendar-day--selected {
+      background: var(--color-blue-b50);
+      color: var(--color-blue-b300);
+    }
+  </style>
+</head>
+<body>
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo-icon">GL</div>
+        <div class="sidebar-brand-text">
+          <h1>DS GPOS Lite</h1>
+          <p>Design System v2</p>
+        </div>
+      </div>
+      <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">&#x2715;</button>
+    </div>
+    <div class="sidebar-search"><input type="search" class="search-input" placeholder="&#x1F50D;  Cari token, component..."></div>
+    <div class="sidebar-nav">
+      <nav class="nav-menu">
+        <div class="nav-section">
+          <h3 class="nav-title">Components</h3>
+          <ul class="nav-list">
+            <li><a href="../Button/button.html" class="nav-link"><span>Button</span></a></li>
+            <li><a href="../Badge/badge.html" class="nav-link"><span>Badge</span></a></li>
+            <li><a href="../Tags/tags.html" class="nav-link"><span>Tags</span></a></li>
+            <li><a href="../Avatar/avatar.html" class="nav-link"><span>Avatar</span></a></li>
+            <li><a href="../Lozenge/lozenge.html" class="nav-link"><span>Lozenge</span></a></li>
+            <li><a href="../Toggle/toggle.html" class="nav-link"><span>Toggle</span></a></li>
+            <li><a href="../Checkbox/checkbox.html" class="nav-link"><span>Checkbox</span></a></li>
+            <li><a href="../Radio/radio.html" class="nav-link"><span>Radio</span></a></li>
+            <li><a href="../Text Field/text field.html" class="nav-link"><span>Text Field</span></a></li>
+            <li><a href="../Text Area/text area.html" class="nav-link"><span>Text Area</span></a></li>
+            <li><a href="../Form/form.html" class="nav-link"><span>Form</span></a></li>
+            <li><a href="../Flags/flags.html" class="nav-link"><span>Flags</span></a></li>
+            <li><a href="../section messages/section-message.html" class="nav-link"><span>Section Message</span></a></li>
+            <li><a href="../Breadcrumbs/breadcrumbs.html" class="nav-link"><span>Breadcrumbs</span></a></li>
+            <li><a href="../Tabs/tabs.html" class="nav-link"><span>Tabs</span></a></li>
+            <li><a href="../Pagination/pagination.html" class="nav-link"><span>Pagination</span></a></li>
+            <li><a href="../Calendar/calendar.html" class="nav-link"><span>Calendar</span></a></li>
+            <li><a href="../Date picker/date-picker.html" class="nav-link active"><span>Date Picker</span></a></li>
+            <li><a href="../Time picker/time-picker.html" class="nav-link"><span>Time Picker</span></a></li>
+            <li><a href="../Toast-Banner/banner.html" class="nav-link"><span>Toast Banner</span></a></li>
+            <li><a href="../Select/select.html" class="nav-link"><span>Select</span></a></li>
+            <li><a href="../Inline edit/inline-edit.html" class="nav-link"><span>Inline Edit</span></a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="sidebar-footer"><div class="tailwind-badge">Built with tokens.css</div></div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">☰</button>
+      <div class="breadcrumb">
+        <a href="../../index.html">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="#">Components</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="current">Date Picker</span>
+      </div>
+    </div>
+    <div class="content-inner">
+      <section class="mb-12">
+        <h2 style="border:none;background:none;padding:0;margin-bottom:12px;">Date Picker</h2>
+        <p style="font-size:13px;color:var(--color-text-tertiary);margin:0 0 var(--space-300);font-family:var(--font-primary);">
+          Komposisi <strong>Select trigger</strong> + <strong>Calendar</strong> berdasarkan referensi <code>Date picker/figma/date picker-components.png</code>.
+        </p>
+
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:var(--space-300);">
+          <div class="ds-date-picker-layout">
+            <button id="date-picker-trigger" type="button" class="ds-select-trigger" aria-haspopup="dialog" aria-expanded="true" aria-controls="date-picker-panel">
+              <span class="ds-select-trigger__value">
+                <img src="../../assets/icons/icon-calendar-days.svg" alt="" aria-hidden="true" class="ds-select-trigger__icon">
+                <span id="date-picker-value">12 December 2022</span>
+              </span>
+              <img src="../../assets/icons/icon-chevron-down.svg" alt="" aria-hidden="true" class="ds-select-trigger__chevron">
+            </button>
+
+            <div id="date-picker-panel" class="ds-calendar" role="dialog" aria-label="Date picker calendar">
+              <div class="ds-calendar-month-header" role="group" aria-label="Navigasi bulan">
+                <button type="button" class="ds-calendar-month-header__nav" aria-label="Bulan sebelumnya">
+                  <img src="../../assets/icons/icon-chevron-left.svg" alt="" aria-hidden="true">
+                </button>
+                <h3 class="ds-calendar-month-header__label">December 2022</h3>
+                <button type="button" class="ds-calendar-month-header__nav" aria-label="Bulan berikutnya">
+                  <img src="../../assets/icons/icon-chevron-right.svg" alt="" aria-hidden="true">
+                </button>
+              </div>
+              <div class="ds-calendar-week-header" role="row">
+                <span class="ds-calendar-week-header__day">SUN</span><span class="ds-calendar-week-header__day">MON</span><span class="ds-calendar-week-header__day">TUE</span><span class="ds-calendar-week-header__day">WED</span><span class="ds-calendar-week-header__day">THU</span><span class="ds-calendar-week-header__day">FRI</span><span class="ds-calendar-week-header__day">SAT</span>
+              </div>
+              <div class="ds-calendar-days" role="grid" aria-label="December 2022">
+                <button type="button" class="ds-calendar-day ds-calendar-day--outside" tabindex="-1">27</button><button type="button" class="ds-calendar-day ds-calendar-day--outside" tabindex="-1">28</button><button type="button" class="ds-calendar-day ds-calendar-day--outside" tabindex="-1">29</button><button type="button" class="ds-calendar-day ds-calendar-day--outside" tabindex="-1">30</button><button type="button" class="ds-calendar-day" data-date="1 December 2022">1</button><button type="button" class="ds-calendar-day" data-date="2 December 2022">2</button><button type="button" class="ds-calendar-day" data-date="3 December 2022">3</button>
+                <button type="button" class="ds-calendar-day" data-date="4 December 2022">4</button><button type="button" class="ds-calendar-day" data-date="5 December 2022">5</button><button type="button" class="ds-calendar-day" data-date="6 December 2022">6</button><button type="button" class="ds-calendar-day" data-date="7 December 2022">7</button><button type="button" class="ds-calendar-day" data-date="8 December 2022">8</button><button type="button" class="ds-calendar-day" data-date="9 December 2022">9</button><button type="button" class="ds-calendar-day" data-date="10 December 2022">10</button>
+                <button type="button" class="ds-calendar-day" data-date="11 December 2022">11</button><button type="button" class="ds-calendar-day ds-calendar-day--selected" data-date="12 December 2022" aria-selected="true">12</button><button type="button" class="ds-calendar-day" data-date="13 December 2022">13</button><button type="button" class="ds-calendar-day" data-date="14 December 2022">14</button><button type="button" class="ds-calendar-day" data-date="15 December 2022">15</button><button type="button" class="ds-calendar-day" data-date="16 December 2022">16</button><button type="button" class="ds-calendar-day" data-date="17 December 2022">17</button>
+                <button type="button" class="ds-calendar-day" data-date="18 December 2022">18</button><button type="button" class="ds-calendar-day" data-date="19 December 2022">19</button><button type="button" class="ds-calendar-day" data-date="20 December 2022">20</button><button type="button" class="ds-calendar-day" data-date="21 December 2022">21</button><button type="button" class="ds-calendar-day" data-date="22 December 2022">22</button><button type="button" class="ds-calendar-day" data-date="23 December 2022">23</button><button type="button" class="ds-calendar-day" data-date="24 December 2022">24</button>
+                <button type="button" class="ds-calendar-day" data-date="25 December 2022">25</button><button type="button" class="ds-calendar-day" data-date="26 December 2022">26</button><button type="button" class="ds-calendar-day" data-date="27 December 2022">27</button><button type="button" class="ds-calendar-day" data-date="28 December 2022">28</button><button type="button" class="ds-calendar-day" data-date="29 December 2022">29</button><button type="button" class="ds-calendar-day" data-date="30 December 2022">30</button><button type="button" class="ds-calendar-day" data-date="31 December 2022">31</button>
+                <button type="button" class="ds-calendar-day ds-calendar-day--outside" tabindex="-1">1</button><button type="button" class="ds-calendar-day ds-calendar-day--outside" tabindex="-1">2</button><button type="button" class="ds-calendar-day ds-calendar-day--outside" tabindex="-1">3</button><button type="button" class="ds-calendar-day ds-calendar-day--outside" tabindex="-1">4</button><button type="button" class="ds-calendar-day ds-calendar-day--outside" tabindex="-1">5</button><button type="button" class="ds-calendar-day ds-calendar-day--outside" tabindex="-1">6</button><button type="button" class="ds-calendar-day ds-calendar-day--outside" tabindex="-1">7</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    const hamburger = document.getElementById('hamburger-btn');
+    const sidebarClose = document.getElementById('sidebar-close');
+    function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('active'); }
+    function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('active'); }
+    hamburger?.addEventListener('click', openSidebar);
+    sidebarClose?.addEventListener('click', closeSidebar);
+    overlay?.addEventListener('click', closeSidebar);
+
+    const valueEl = document.getElementById('date-picker-value');
+    const dayButtons = document.querySelectorAll('.ds-calendar-day[data-date]');
+    dayButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        document.querySelector('.ds-calendar-day--selected')?.classList.remove('ds-calendar-day--selected');
+        button.classList.add('ds-calendar-day--selected');
+        valueEl.textContent = button.dataset.date || '';
+      });
+    });
+  </script>
+</body>
+</html>
