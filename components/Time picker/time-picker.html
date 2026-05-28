@@ -460,11 +460,11 @@
             </select>
           </div>
           <div class="ds-time-picker" id="time-picker-playground">
-            <button type="button" id="time-picker-trigger-playground" class="ds-select-trigger ds-select-trigger--focus" aria-expanded="true" aria-controls="time-picker-menu-playground">
+            <button type="button" id="time-picker-trigger-playground" class="ds-select-trigger" aria-expanded="false" aria-controls="time-picker-menu-playground">
               <span class="ds-select-trigger__value" id="time-picker-value-playground">1:00 PM</span>
               <img src="../../assets/icons/icon-chevron-down.svg" class="ds-select-trigger__icon" alt="" aria-hidden="true">
             </button>
-            <div class="ds-time-picker__menu" id="time-picker-menu-playground" role="listbox" aria-label="Daftar pilihan waktu playground">
+            <div class="ds-time-picker__menu" id="time-picker-menu-playground" role="listbox" aria-label="Daftar pilihan waktu playground" style="display:none;">
               <div class="time-parts-shell">
                 <div class="time-parts-list" id="time-picker-list-playground">
                   <button type="button" class="time-parts-item" role="option">9:00 AM</button>
@@ -531,17 +531,59 @@
     document.querySelector('#time-picker-subtle .time-parts-list'),
     document.getElementById('time-picker-value-subtle')
   );
-  selectTimeFromList(
-    document.getElementById('time-picker-list-playground'),
-    document.getElementById('time-picker-value-playground')
-  );
+  var playgroundList = document.getElementById('time-picker-list-playground');
+  var playgroundValue = document.getElementById('time-picker-value-playground');
+  var playgroundRoot = document.getElementById('time-picker-playground');
+  var playgroundTrigger = document.getElementById('time-picker-trigger-playground');
+  var playgroundMenu = document.getElementById('time-picker-menu-playground');
+
+  selectTimeFromList(playgroundList, playgroundValue);
+
+  function openPlaygroundMenu() {
+    if (!playgroundTrigger || !playgroundMenu || playgroundTrigger.disabled) return;
+    playgroundMenu.style.display = 'block';
+    playgroundTrigger.classList.add('ds-select-trigger--focus');
+    playgroundTrigger.setAttribute('aria-expanded', 'true');
+  }
+
+  function closePlaygroundMenu() {
+    if (!playgroundTrigger || !playgroundMenu) return;
+    playgroundMenu.style.display = 'none';
+    playgroundTrigger.classList.remove('ds-select-trigger--focus');
+    playgroundTrigger.setAttribute('aria-expanded', 'false');
+  }
+
+  if (playgroundTrigger && playgroundRoot) {
+    playgroundTrigger.addEventListener('focus', openPlaygroundMenu);
+    playgroundTrigger.addEventListener('click', function () {
+      if (playgroundMenu && playgroundMenu.style.display === 'block') {
+        closePlaygroundMenu();
+        return;
+      }
+      openPlaygroundMenu();
+    });
+    playgroundRoot.addEventListener('focusout', function () {
+      setTimeout(function () {
+        if (!playgroundRoot.contains(document.activeElement)) {
+          closePlaygroundMenu();
+        }
+      }, 0);
+    });
+  }
+
+  if (playgroundList) {
+    playgroundList.addEventListener('click', function () {
+      if (playgroundTrigger) playgroundTrigger.focus();
+      closePlaygroundMenu();
+    });
+  }
 
   (function () {
     var variantControl = document.getElementById('time-playground-variant');
     var trigger = document.getElementById('time-picker-trigger-playground');
     if (!variantControl || !trigger) return;
     variantControl.addEventListener('change', function () {
-      trigger.className = 'ds-select-trigger ds-select-trigger--focus';
+      trigger.className = 'ds-select-trigger';
       trigger.disabled = false;
       trigger.setAttribute('aria-disabled', 'false');
       if (variantControl.value === 'subtle') {
@@ -551,6 +593,7 @@
         trigger.classList.add('ds-select-trigger--disabled');
         trigger.disabled = true;
         trigger.setAttribute('aria-disabled', 'true');
+        closePlaygroundMenu();
       }
     });
   })();

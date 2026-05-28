@@ -32,6 +32,10 @@
       transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
     }
     .ds-select-trigger:hover { border-color: var(--color-neutral-n100); }
+    .ds-select-trigger--focus {
+      border-color: var(--color-blue-b300);
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
     .ds-select-trigger:focus-visible {
       outline: none;
       border-color: var(--color-blue-b300);
@@ -68,6 +72,15 @@
       box-shadow: var(--shadow-sm);
       overflow: hidden;
       font-family: var(--font-primary);
+    }
+    .ds-calendar__body {
+      padding-bottom: var(--space-100);
+    }
+    .ds-calendar .ds-calendar-month-header {
+      padding-top: var(--space-150);
+    }
+    .ds-calendar .ds-calendar-days {
+      padding-bottom: var(--space-050);
     }
     .ds-calendar-month-header {
       display: flex;
@@ -389,30 +402,34 @@
         <h2 style="font-size:20px;font-weight:600;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--color-border);font-family:var(--font-primary);">Playground</h2>
         <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;">
           <div class="playground-controls">
-            <button type="button" class="playground-btn is-active" id="playground-panel-toggle">Panel: Tampil</button>
             <button type="button" class="playground-btn" id="playground-trigger-hover">Toggle Hover Trigger</button>
           </div>
           <div class="ds-date-picker-layout">
-            <button id="playground-trigger" type="button" class="ds-select-trigger" aria-haspopup="dialog" aria-expanded="true" aria-controls="playground-panel">
+            <button id="playground-trigger" type="button" class="ds-select-trigger" aria-haspopup="dialog" aria-expanded="false" aria-controls="playground-panel">
               <span class="ds-select-trigger__value">
                 <img src="../../assets/icons/icon-calendar-days.svg" alt="" aria-hidden="true" class="ds-select-trigger__icon">
                 <span id="playground-value">12 December 2022</span>
               </span>
               <img src="../../assets/icons/icon-chevron-down.svg" alt="" aria-hidden="true" class="ds-select-trigger__chevron">
             </button>
-            <div id="playground-panel" class="ds-calendar" role="dialog" aria-label="Playground date picker calendar">
-              <div class="ds-calendar-month-header" role="group" aria-label="Navigasi bulan">
-                <button type="button" class="ds-calendar-month-header__nav" aria-label="Bulan sebelumnya"><img src="../../assets/icons/icon-chevron-left.svg" alt="" aria-hidden="true"></button>
-                <h3 class="ds-calendar-month-header__label">December 2022</h3>
-                <button type="button" class="ds-calendar-month-header__nav" aria-label="Bulan berikutnya"><img src="../../assets/icons/icon-chevron-right.svg" alt="" aria-hidden="true"></button>
-              </div>
-              <div class="ds-calendar-week-header" role="row">
-                <span class="ds-calendar-week-header__day">SUN</span><span class="ds-calendar-week-header__day">MON</span><span class="ds-calendar-week-header__day">TUE</span><span class="ds-calendar-week-header__day">WED</span><span class="ds-calendar-week-header__day">THU</span><span class="ds-calendar-week-header__day">FRI</span><span class="ds-calendar-week-header__day">SAT</span>
-              </div>
-              <div class="ds-calendar-days" role="grid" aria-label="December 2022">
-                <button type="button" class="ds-calendar-day ds-calendar-day--outside" tabindex="-1">27</button><button type="button" class="ds-calendar-day ds-calendar-day--outside" tabindex="-1">28</button><button type="button" class="ds-calendar-day ds-calendar-day--outside" tabindex="-1">29</button><button type="button" class="ds-calendar-day ds-calendar-day--outside" tabindex="-1">30</button><button type="button" class="ds-calendar-day" data-playground-date="1 December 2022">1</button><button type="button" class="ds-calendar-day" data-playground-date="2 December 2022">2</button><button type="button" class="ds-calendar-day" data-playground-date="3 December 2022">3</button>
-                <button type="button" class="ds-calendar-day" data-playground-date="4 December 2022">4</button><button type="button" class="ds-calendar-day" data-playground-date="5 December 2022">5</button><button type="button" class="ds-calendar-day" data-playground-date="6 December 2022">6</button><button type="button" class="ds-calendar-day" data-playground-date="7 December 2022">7</button><button type="button" class="ds-calendar-day" data-playground-date="8 December 2022">8</button><button type="button" class="ds-calendar-day" data-playground-date="9 December 2022">9</button><button type="button" class="ds-calendar-day" data-playground-date="10 December 2022">10</button>
-                <button type="button" class="ds-calendar-day" data-playground-date="11 December 2022">11</button><button type="button" class="ds-calendar-day ds-calendar-day--selected" data-playground-date="12 December 2022" aria-selected="true">12</button><button type="button" class="ds-calendar-day" data-playground-date="13 December 2022">13</button><button type="button" class="ds-calendar-day" data-playground-date="14 December 2022">14</button><button type="button" class="ds-calendar-day" data-playground-date="15 December 2022">15</button><button type="button" class="ds-calendar-day" data-playground-date="16 December 2022">16</button><button type="button" class="ds-calendar-day" data-playground-date="17 December 2022">17</button>
+            <div id="playground-panel" class="ds-calendar" role="dialog" aria-label="Playground date picker calendar" style="display:none;">
+              <div class="ds-calendar__body">
+                <div class="ds-calendar-month-header" role="group" aria-label="Navigasi bulan">
+                  <button type="button" class="ds-calendar-month-header__nav" aria-label="Bulan sebelumnya"><img src="../../assets/icons/icon-chevron-left.svg" alt="" aria-hidden="true"></button>
+                  <h3 class="ds-calendar-month-header__label">December 2022</h3>
+                  <button type="button" class="ds-calendar-month-header__nav" aria-label="Bulan berikutnya"><img src="../../assets/icons/icon-chevron-right.svg" alt="" aria-hidden="true"></button>
+                </div>
+                <div class="ds-calendar-week-header" role="row">
+                  <span class="ds-calendar-week-header__day">SUN</span><span class="ds-calendar-week-header__day">MON</span><span class="ds-calendar-week-header__day">TUE</span><span class="ds-calendar-week-header__day">WED</span><span class="ds-calendar-week-header__day">THU</span><span class="ds-calendar-week-header__day">FRI</span><span class="ds-calendar-week-header__day">SAT</span>
+                </div>
+                <div class="ds-calendar-days" role="grid" aria-label="December 2022">
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true" tabindex="-1">27</button><button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true" tabindex="-1">28</button><button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true" tabindex="-1">29</button><button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true" tabindex="-1">30</button><button type="button" class="ds-calendar-day" data-playground-date="1 December 2022">1</button><button type="button" class="ds-calendar-day" data-playground-date="2 December 2022">2</button><button type="button" class="ds-calendar-day" data-playground-date="3 December 2022">3</button>
+                  <button type="button" class="ds-calendar-day" data-playground-date="4 December 2022">4</button><button type="button" class="ds-calendar-day" data-playground-date="5 December 2022">5</button><button type="button" class="ds-calendar-day" data-playground-date="6 December 2022">6</button><button type="button" class="ds-calendar-day" data-playground-date="7 December 2022">7</button><button type="button" class="ds-calendar-day" data-playground-date="8 December 2022">8</button><button type="button" class="ds-calendar-day" data-playground-date="9 December 2022">9</button><button type="button" class="ds-calendar-day" data-playground-date="10 December 2022">10</button>
+                  <button type="button" class="ds-calendar-day" data-playground-date="11 December 2022">11</button><button type="button" class="ds-calendar-day ds-calendar-day--selected" data-playground-date="12 December 2022" aria-selected="true">12</button><button type="button" class="ds-calendar-day" data-playground-date="13 December 2022">13</button><button type="button" class="ds-calendar-day" data-playground-date="14 December 2022">14</button><button type="button" class="ds-calendar-day" data-playground-date="15 December 2022">15</button><button type="button" class="ds-calendar-day" data-playground-date="16 December 2022">16</button><button type="button" class="ds-calendar-day" data-playground-date="17 December 2022">17</button>
+                  <button type="button" class="ds-calendar-day" data-playground-date="18 December 2022">18</button><button type="button" class="ds-calendar-day" data-playground-date="19 December 2022">19</button><button type="button" class="ds-calendar-day" data-playground-date="20 December 2022">20</button><button type="button" class="ds-calendar-day" data-playground-date="21 December 2022">21</button><button type="button" class="ds-calendar-day" data-playground-date="22 December 2022">22</button><button type="button" class="ds-calendar-day" data-playground-date="23 December 2022">23</button><button type="button" class="ds-calendar-day" data-playground-date="24 December 2022">24</button>
+                  <button type="button" class="ds-calendar-day" data-playground-date="25 December 2022">25</button><button type="button" class="ds-calendar-day" data-playground-date="26 December 2022">26</button><button type="button" class="ds-calendar-day" data-playground-date="27 December 2022">27</button><button type="button" class="ds-calendar-day" data-playground-date="28 December 2022">28</button><button type="button" class="ds-calendar-day" data-playground-date="29 December 2022">29</button><button type="button" class="ds-calendar-day" data-playground-date="30 December 2022">30</button><button type="button" class="ds-calendar-day" data-playground-date="31 December 2022">31</button>
+                  <button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true" tabindex="-1">1</button><button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true" tabindex="-1">2</button><button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true" tabindex="-1">3</button><button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true" tabindex="-1">4</button><button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true" tabindex="-1">5</button><button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true" tabindex="-1">6</button><button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled aria-disabled="true" tabindex="-1">7</button>
+                </div>
               </div>
             </div>
           </div>
@@ -465,7 +482,6 @@
     const playgroundValueEl = document.getElementById('playground-value');
     const playgroundDays = document.querySelectorAll('.ds-calendar-day[data-playground-date]');
     const playgroundPanel = document.getElementById('playground-panel');
-    const playgroundToggle = document.getElementById('playground-panel-toggle');
     const playgroundTrigger = document.getElementById('playground-trigger');
     const playgroundTriggerHover = document.getElementById('playground-trigger-hover');
 
@@ -477,12 +493,33 @@
       });
     });
 
-    playgroundToggle?.addEventListener('click', () => {
-      const isHidden = playgroundPanel.style.display === 'none';
-      playgroundPanel.style.display = isHidden ? '' : 'none';
-      playgroundToggle.textContent = isHidden ? 'Panel: Tampil' : 'Panel: Sembunyi';
-      playgroundToggle.classList.toggle('is-active', isHidden);
-      playgroundTrigger.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
+    function showPlaygroundPanel() {
+      playgroundPanel.style.display = '';
+      playgroundTrigger.classList.add('ds-select-trigger--focus');
+      playgroundTrigger.setAttribute('aria-expanded', 'true');
+    }
+    function hidePlaygroundPanel() {
+      playgroundPanel.style.display = 'none';
+      playgroundTrigger.classList.remove('ds-select-trigger--focus');
+      playgroundTrigger.setAttribute('aria-expanded', 'false');
+    }
+
+    playgroundTrigger?.addEventListener('focus', showPlaygroundPanel);
+    playgroundTrigger?.addEventListener('click', showPlaygroundPanel);
+
+    document.addEventListener('click', (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      if (!playgroundTrigger.contains(target) && !playgroundPanel.contains(target)) {
+        hidePlaygroundPanel();
+      }
+    });
+
+    playgroundTrigger?.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        hidePlaygroundPanel();
+        playgroundTrigger.blur();
+      }
     });
 
     playgroundTriggerHover?.addEventListener('click', () => {
