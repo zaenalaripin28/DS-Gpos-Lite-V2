@@ -215,12 +215,39 @@
       box-shadow: 0 0 0 2px var(--color-blue-b200);
     }
     .ds-select-playground__menu {
-      border: 1px solid var(--color-border);
+      border: 0 solid transparent;
       border-radius: var(--border-radius-md);
       background: var(--color-neutral-n0);
-      padding: var(--space-075);
+      padding: 0;
       display: grid;
       gap: var(--space-025);
+      box-shadow: var(--shadow-md);
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-4px);
+      pointer-events: none;
+      transition: opacity var(--transition-fast), transform var(--transition-fast), max-height var(--transition-fast), padding var(--transition-fast), border-width var(--transition-fast), margin-top var(--transition-fast);
+    }
+    .ds-select-playground__menu.is-open {
+      border-width: 1px;
+      border-color: var(--color-border);
+      padding: var(--space-075);
+      margin-top: var(--space-050);
+      max-height: 360px;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .ds-select-playground__trigger {
+      border-radius: var(--border-radius-md);
+      cursor: pointer;
+    }
+    .ds-select-playground__trigger[aria-expanded="true"] .ds-select-trigger__icon {
+      transform: rotate(180deg);
+    }
+    .ds-select-playground__trigger .ds-select-trigger__icon {
+      transition: transform var(--transition-fast);
     }
     @media (max-width: 1024px) {
       .ds-select-component-grid {
@@ -847,7 +874,7 @@
               <select id="select-playground-state" class="ds-select-playground__control" aria-label="Pilih state select trigger"><option value="default">State: Default</option><option value="hover">State: Hover</option><option value="focus">State: Focus</option><option value="typing">State: Typing</option><option value="loading">State: Loading</option><option value="empty">State: Empty</option><option value="hydrate">State: Hydrate</option><option value="reset">State: Reset</option><option value="filled-invalid">State: Filled Invalid</option><option value="disabled">State: Disabled</option></select>
               <select id="select-playground-option" class="ds-select-playground__control" aria-label="Pilih variant option part"><option value="default">Option Part: Default</option><option value="checkbox">Option Part: Checkbox</option><option value="radio">Option Part: Radio</option><option value="icon">Option Part: Icon</option></select>
             </div>
-            <div id="select-playground-trigger" class="ds-select-trigger"><span class="ds-select-trigger__value">Value</span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div>
+            <div id="select-playground-trigger" class="ds-select-trigger ds-select-playground__trigger" role="button" tabindex="0" aria-expanded="false"><span class="ds-select-trigger__value">Value</span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg></div>
             <div id="select-playground-menu" class="ds-select-playground__menu" role="listbox" aria-label="Playground option parts"><div class="ds-option">Label</div><div class="ds-option ds-option--hover">Label</div><div class="ds-option ds-option--selected">Label</div><div class="ds-option">Label</div></div>
           </div>
         </div>
@@ -1312,6 +1339,7 @@
   const playgroundOption = document.getElementById('select-playground-option');
   const playgroundTrigger = document.getElementById('select-playground-trigger');
   const playgroundMenu = document.getElementById('select-playground-menu');
+  let isPlaygroundOpen = false;
   const triggerStateClasses = [
     'ds-select-trigger--hover',
     'ds-select-trigger--focus',
@@ -1343,6 +1371,13 @@
     }
   }
 
+  function setPlaygroundOpen(nextOpen) {
+    if (!playgroundTrigger || !playgroundMenu) return;
+    isPlaygroundOpen = Boolean(nextOpen);
+    playgroundTrigger.setAttribute('aria-expanded', String(isPlaygroundOpen));
+    playgroundMenu.classList.toggle('is-open', isPlaygroundOpen);
+  }
+
   function renderPlaygroundState(state) {
     if (!playgroundTrigger) return;
     playgroundTrigger.classList.remove(...triggerStateClasses);
@@ -1351,15 +1386,19 @@
     }
     if (state === 'loading') {
       playgroundTrigger.innerHTML = '<span class="ds-select-loading__spinner" aria-hidden="true"></span><span class="ds-select-trigger__value">Loading...</span>';
+      setPlaygroundOpen(false);
       return;
     }
     if (state === 'empty') {
       playgroundTrigger.innerHTML = '<span class="ds-select-trigger__value">No options</span>';
+      setPlaygroundOpen(false);
       return;
     }
     playgroundTrigger.innerHTML = '<span class="ds-select-trigger__value"></span><svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg>';
     const valueSlot = playgroundTrigger.querySelector('.ds-select-trigger__value');
     if (valueSlot) valueSlot.textContent = triggerStateLabelMap[state] || 'Value';
+    const shouldOpen = state === 'focus' || state === 'typing';
+    setPlaygroundOpen(shouldOpen);
   }
 
   playgroundState?.addEventListener('change', (event) => {
@@ -1367,6 +1406,35 @@
   });
   playgroundOption?.addEventListener('change', (event) => {
     renderPlaygroundOption(event.target.value);
+  });
+  playgroundTrigger?.addEventListener('click', () => {
+    const state = playgroundState?.value || 'default';
+    if (state === 'loading' || state === 'empty' || state === 'disabled') return;
+    setPlaygroundOpen(!isPlaygroundOpen);
+  });
+  playgroundTrigger?.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      const state = playgroundState?.value || 'default';
+      if (state === 'loading' || state === 'empty' || state === 'disabled') return;
+      setPlaygroundOpen(!isPlaygroundOpen);
+    }
+    if (event.key === 'Escape') {
+      setPlaygroundOpen(false);
+    }
+  });
+  document.addEventListener('click', (event) => {
+    if (!playgroundTrigger || !playgroundMenu) return;
+    const target = event.target;
+    if (!(target instanceof Node)) return;
+    if (!playgroundTrigger.contains(target) && !playgroundMenu.contains(target)) {
+      setPlaygroundOpen(false);
+    }
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      setPlaygroundOpen(false);
+    }
   });
   renderPlaygroundState(playgroundState?.value || 'default');
   renderPlaygroundOption(playgroundOption?.value || 'default');
