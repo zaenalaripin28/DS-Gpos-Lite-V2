@@ -9,24 +9,73 @@
   <link rel="stylesheet" href="../../styles/enhancements.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    .ds-date-picker-layout {
-      display: grid;
-      grid-template-columns: minmax(260px, 320px);
-      gap: var(--space-150);
-      align-items: start;
+    .ds-date-time-picker {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
     }
-    .ds-date-time-picker-layout {
-      display: grid;
-      grid-template-columns: minmax(260px, 320px) minmax(220px, 260px);
-      gap: var(--space-150);
-      align-items: start;
+    .ds-date-time-picker__bar {
+      display: flex;
+      align-items: stretch;
+      width: 100%;
+      min-height: 40px;
+      border: 1px solid var(--color-neutral-n40);
+      border-radius: var(--border-radius-sm);
+      background: var(--color-neutral-n0);
+      overflow: hidden;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
     }
-    .ds-date-time-trigger-group {
-      display: grid;
-      grid-template-columns: minmax(260px, 320px) minmax(220px, 260px);
-      gap: var(--space-100);
+    .ds-date-time-picker__bar:hover,
+    .ds-date-time-picker__bar--hover {
+      border-color: var(--color-neutral-n100);
+    }
+    .ds-date-time-picker__bar--focus {
+      border-color: var(--color-blue-b300);
+      box-shadow: 0 0 0 var(--border-width-2) var(--color-blue-b200);
+    }
+    .ds-date-time-picker__segment {
+      flex: 1;
+      min-width: 0;
+      min-height: 40px;
+      border: none;
+      background: transparent;
+      padding: var(--space-075) var(--space-150);
+      display: inline-flex;
       align-items: center;
-      margin-bottom: var(--space-150);
+      gap: var(--space-075);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+      line-height: var(--text-body-small-regular-lh);
+      font-weight: var(--text-body-small-regular-weight);
+      color: var(--color-neutral-n500);
+      cursor: pointer;
+      transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .ds-date-time-picker__segment:hover {
+      background: var(--color-neutral-n20);
+    }
+    .ds-date-time-picker__segment--time {
+      flex: 0 0 42%;
+      justify-content: flex-end;
+      text-align: right;
+    }
+    .ds-date-time-picker__segment--active {
+      background: var(--color-neutral-n20);
+    }
+    .ds-date-time-picker__segment:focus-visible {
+      outline: none;
+      box-shadow: inset 0 0 0 var(--border-width-2) var(--color-blue-b200);
+    }
+    .ds-date-time-picker__dropdown {
+      position: absolute;
+      top: calc(100% + var(--space-050));
+      z-index: 10;
+    }
+    .ds-date-time-picker__dropdown--date {
+      left: 0;
+    }
+    .ds-date-time-picker__dropdown--time {
+      right: 0;
     }
     .ds-select-trigger {
       min-height: 40px;
@@ -326,41 +375,59 @@
       color: var(--color-blue-b300);
     }
     @media (max-width: 960px) {
-      .ds-date-time-picker-layout,
-      .ds-date-time-trigger-group {
-        grid-template-columns: 1fr;
+      .ds-date-time-picker__segment--time {
+        flex: 0 0 46%;
       }
     }
   </style>
 </head>
 <body>
+<div class="container">
   <div id="sidebar-overlay" class="sidebar-overlay"></div>
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <div class="sidebar-brand">
         <div class="sidebar-logo-icon">GL</div>
         <div class="sidebar-brand-text">
-          <h1>DS GPOS Lite</h1>
-          <p>Design System v2</p>
+          <div class="logo">GPOS Lite</div>
+          <div class="version">Design System V2.0</div>
         </div>
       </div>
       <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">&#x2715;</button>
     </div>
     <div class="sidebar-search"><input type="search" class="search-input" placeholder="&#x1F50D;  Cari token, component..."></div>
-    <div class="sidebar-nav">
+    <div class="nav-scroll">
       <nav class="nav-menu">
         <div class="nav-section">
-          <h3 class="nav-title">Components</h3>
+          <h3 class="nav-title">Overview</h3>
           <ul class="nav-list">
-            <li><a href="../Button/button.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="10" width="18" height="8" rx="2"/><path d="M8 10V8a4 4 0 018 0v2"/></svg>Button</a></li>
-            <li><a href="../Badge/badge.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="4"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="14" y2="13"/></svg>Badge</a></li>
-            <li><a href="../Tags/tags.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12l-8 8-9-9 8-8h7v7z"/><circle cx="16" cy="8" r="1.5"/></svg>Tags</a></li>
-            <li><a href="../Avatar/avatar.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.7-3.3 4.4-5 8-5s6.3 1.7 8 5"/></svg>Avatar</a></li>
-            <li><a href="../Lozenge/lozenge.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12,3 21,12 12,21 3,12"/></svg>Lozenge</a></li>
-            <li><a href="../Toggle/toggle.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="5"/><circle cx="16" cy="12" r="3"/></svg>Toggle</a></li>
-            <li><a href="../Checkbox/checkbox.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><polyline points="7,12 11,16 17,8"/></svg>Checkbox</a></li>
-            <li><a href="../Radio/radio.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg>Radio</a></li>
-            <li><a href="../Text Field/text field.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><line x1="7" y1="12" x2="13" y2="12"/></svg>Text Field</a></li>
+            <li><a href="../../index.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>Home</a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <h3 class="nav-title">Foundations</h3>
+          <ul class="nav-list">
+            <li><a href="../../foundations/colors/colors.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg>Colors</a></li>
+            <li><a href="../../foundations/typography/typography.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Typography</a></li>
+            <li><a href="../../foundations/spacing/spacing.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>Spacing</a></li>
+            <li><a href="../../foundations/shadows/shadows.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h12a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V7z" opacity="0.4"/></svg>Shadows</a></li>
+            <li><a href="../../foundations/borders/borders.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>Borders &amp; Radius</a></li>
+            <li><a href="../../foundations/grid/grid.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Grid &amp; Layout</a></li>
+            <li><a href="../../foundations/icons/icons.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="5" height="5" rx="1"/><rect x="10" y="3" width="5" height="5" rx="1"/><rect x="17" y="3" width="4" height="5" rx="1"/><rect x="3" y="10" width="5" height="5" rx="1"/><rect x="10" y="10" width="5" height="5" rx="1"/><rect x="17" y="10" width="4" height="5" rx="1"/><rect x="3" y="17" width="5" height="4" rx="1"/><rect x="10" y="17" width="5" height="4" rx="1"/><rect x="17" y="17" width="4" height="4" rx="1"/></svg>Icons</a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <h3 class="nav-title">Komponen</h3>
+          <ul class="nav-list">
+            <li><a href="../Button/button.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="3"/><line x1="7" y1="12" x2="17" y2="12" opacity="0.5"/></svg>Button</a></li>
+            <li><a href="../Avatar/avatar.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Avatar</a></li>
+            <li><a href="../Badge/badge.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="9" width="22" height="6" rx="3"/><circle cx="6" cy="12" r="1.5" fill="currentColor" opacity="0.5"/></svg>Badge</a></li>
+            <li><a href="../Tags/tags.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/></svg>Tags</a></li>
+            <li><a href="../Lozenge/lozenge.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="7" width="16" height="10" rx="2"/></svg>Lozenge</a></li>
+            <li><a href="../Checkbox/checkbox.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg>Checkbox</a></li>
+            <li><a href="../Radio/radio.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg>Radio</a></li>
+            <li><a href="../Toggle/toggle.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="5"/><circle cx="7" cy="12" r="3" fill="currentColor" stroke="none"/></svg>Toggle</a></li>
+            <li><a href="../Text Field/text field.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="10" rx="2"/><line x1="7" y1="11" x2="13" y2="11"/></svg>Text Field</a></li>
             <li><a href="../Text Area/text area.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="16" height="14" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg>Text Area</a></li>
             <li><a href="../Form/form.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="13" y2="16"/></svg>Form</a></li>
             <li><a href="../Flags/flags.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>Flags</a></li>
@@ -377,9 +444,14 @@
             <li><a href="../Inline edit/inline-edit.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Inline Edit</a></li>
           </ul>
         </div>
+        <div class="nav-section">
+          <h3 class="nav-title">Resources</h3>
+          <ul class="nav-list">
+            <li><a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="nav-link" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>GitHub Repo</a></li>
+          </ul>
+        </div>
       </nav>
     </div>
-    <div class="sidebar-footer"><div class="tailwind-badge">Built with tokens.css</div></div>
   </aside>
 
   <main class="main-content">
@@ -400,24 +472,18 @@
           Komposisi <strong>Select trigger</strong> + <strong>Calendar</strong> + <strong>Time picker</strong> berdasarkan referensi <code>Date time picker/figma/date time picker-components.png</code>.
         </p>
         <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:var(--space-300);">
-          <div class="ds-date-time-trigger-group">
-            <button id="date-picker-trigger" type="button" class="ds-select-trigger" aria-haspopup="dialog" aria-expanded="true" aria-controls="date-picker-panel">
-              <span class="ds-select-trigger__value">
+          <div class="ds-date-time-picker" id="demo-date-time-picker">
+            <div class="ds-date-time-picker__bar ds-date-time-picker__bar--focus">
+              <button id="date-picker-trigger" type="button" class="ds-date-time-picker__segment ds-date-time-picker__segment--date" aria-haspopup="dialog" aria-expanded="false" aria-controls="date-picker-panel">
                 <img src="../../assets/icons/icon-calendar-days.svg" alt="" aria-hidden="true" class="ds-select-trigger__icon">
                 <span id="date-picker-value">12 December 2022</span>
-              </span>
-              <img src="../../assets/icons/icon-chevron-down.svg" alt="" aria-hidden="true" class="ds-select-trigger__chevron">
-            </button>
-            <button id="time-picker-trigger" type="button" class="ds-select-trigger ds-select-trigger--focus" aria-haspopup="listbox" aria-expanded="true" aria-controls="time-picker-panel">
-              <span class="ds-select-trigger__value">
+              </button>
+              <button id="time-picker-trigger" type="button" class="ds-date-time-picker__segment ds-date-time-picker__segment--time ds-date-time-picker__segment--active" aria-haspopup="listbox" aria-expanded="true" aria-controls="time-picker-panel">
                 <img src="../../assets/icons/icon-clock.svg" alt="" aria-hidden="true" class="ds-select-trigger__icon">
                 <span id="time-picker-value">1:00 PM</span>
-              </span>
-              <img src="../../assets/icons/icon-chevron-down.svg" alt="" aria-hidden="true" class="ds-select-trigger__chevron">
-            </button>
-          </div>
-          <div class="ds-date-time-picker-layout">
-            <div id="date-picker-panel" class="ds-calendar" role="dialog" aria-label="Date picker calendar">
+              </button>
+            </div>
+            <div id="date-picker-panel" class="ds-date-time-picker__dropdown ds-date-time-picker__dropdown--date ds-calendar" role="dialog" aria-label="Date picker calendar" style="display:none;">
               <div class="ds-calendar__body">
                 <div class="ds-calendar-month-header" role="group" aria-label="Navigasi bulan">
                   <button type="button" class="ds-calendar-month-header__nav" aria-label="Bulan sebelumnya">
@@ -441,7 +507,7 @@
                 </div>
               </div>
             </div>
-            <div id="time-picker-panel" class="ds-time-picker" role="listbox" aria-label="Time picker list">
+            <div id="time-picker-panel" class="ds-date-time-picker__dropdown ds-date-time-picker__dropdown--time ds-time-picker" role="listbox" aria-label="Time picker list">
               <div class="ds-time-parts-list">
                 <button type="button" class="ds-time-parts-item" data-time="9:00 AM">9:00 AM</button>
                 <button type="button" class="ds-time-parts-item" data-time="9:30 AM">9:30 AM</button>
@@ -477,7 +543,7 @@
           <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
             <div style="padding:10px 16px;background:var(--color-green-g50);border-bottom:2px solid var(--color-green-g100);font-family:var(--font-primary);font-size:12px;font-weight:700;color:var(--color-green-g400);">Do — Lakukan ini</div>
             <ul style="margin:0;padding:16px 20px 20px 36px;color:var(--color-text-tertiary);font-size:13px;line-height:1.7;font-family:var(--font-primary);">
-              <li>Gunakan dua trigger (tanggal + waktu) agar konteks input jelas.</li>
+              <li>Gunakan satu bar input tanpa jarak antara segmen tanggal dan waktu.</li>
               <li>Tandai tanggal dan jam terpilih dengan state selected yang konsisten.</li>
               <li>Gunakan token semantik existing untuk warna, border, spacing, dan typography.</li>
               <li>Pastikan fokus keyboard terlihat jelas pada trigger, sel tanggal, dan item waktu.</li>
@@ -502,28 +568,21 @@
               <span style="font-size:12px;font-weight:600;color:var(--color-text-secondary);font-family:var(--font-primary);">HTML</span>
               <button class="copy-btn" onclick="copyCode(this, 'code-date-picker-html')">Copy</button>
             </div>
-            <code id="code-date-picker-html" class="code-block">&lt;div class="grid gap-[var(--space-100)] md:grid-cols-[minmax(260px,320px)_minmax(220px,260px)]"&gt;
-  &lt;button type="button" class="ds-select-trigger" aria-haspopup="dialog" aria-expanded="true" aria-controls="date-picker-panel"&gt;
-  &lt;span class="ds-select-trigger__value"&gt;
-    &lt;img src="../../assets/icons/icon-calendar-days.svg" alt="" aria-hidden="true" class="ds-select-trigger__icon"&gt;
-    &lt;span&gt;12 December 2022&lt;/span&gt;
-  &lt;/span&gt;
-  &lt;img src="../../assets/icons/icon-chevron-down.svg" alt="" aria-hidden="true" class="ds-select-trigger__chevron"&gt;
-&lt;/button&gt;
-  &lt;button type="button" class="ds-select-trigger" aria-haspopup="listbox" aria-expanded="true" aria-controls="time-picker-panel"&gt;
-    &lt;span class="ds-select-trigger__value"&gt;
-      &lt;img src="../../assets/icons/icon-clock.svg" alt="" aria-hidden="true" class="ds-select-trigger__icon"&gt;
+            <code id="code-date-picker-html" class="code-block">&lt;div class="ds-date-time-picker relative w-full max-w-[380px]"&gt;
+  &lt;div class="ds-date-time-picker__bar flex items-stretch w-full min-h-10 border border-[var(--color-neutral-n40)] rounded-[var(--border-radius-sm)] bg-[var(--color-neutral-n0)] overflow-hidden"&gt;
+    &lt;button type="button" class="ds-date-time-picker__segment flex-1 min-h-10 border-none bg-transparent px-[var(--space-150)] py-[var(--space-075)] inline-flex items-center gap-[var(--space-075)] text-[var(--color-neutral-n500)]" aria-haspopup="dialog" aria-expanded="false" aria-controls="date-picker-panel"&gt;
+      &lt;img src="../../assets/icons/icon-calendar-days.svg" alt="" aria-hidden="true" class="w-4 h-4"&gt;
+      &lt;span&gt;12 December 2022&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;button type="button" class="ds-date-time-picker__segment ds-date-time-picker__segment--time flex-[0_0_42%] justify-end text-right min-h-10 border-none bg-transparent px-[var(--space-150)] py-[var(--space-075)] inline-flex items-center gap-[var(--space-075)] text-[var(--color-neutral-n500)]" aria-haspopup="listbox" aria-expanded="true" aria-controls="time-picker-panel"&gt;
+      &lt;img src="../../assets/icons/icon-clock.svg" alt="" aria-hidden="true" class="w-4 h-4"&gt;
       &lt;span&gt;1:00 PM&lt;/span&gt;
-    &lt;/span&gt;
-    &lt;img src="../../assets/icons/icon-chevron-down.svg" alt="" aria-hidden="true" class="ds-select-trigger__chevron"&gt;
-  &lt;/button&gt;
-&lt;/div&gt;
-
-&lt;div class="grid gap-[var(--space-150)] md:grid-cols-[minmax(260px,320px)_minmax(220px,260px)]"&gt;
-  &lt;div id="date-picker-panel" class="ds-calendar" role="dialog" aria-label="Date picker calendar"&gt;
-  &lt;!-- gunakan struktur month header, week header, dan day grid seperti komponen Calendar --&gt;
+    &lt;/button&gt;
   &lt;/div&gt;
-  &lt;div id="time-picker-panel" class="ds-time-picker" role="listbox" aria-label="Time picker list"&gt;
+  &lt;div id="date-picker-panel" class="ds-date-time-picker__dropdown ds-date-time-picker__dropdown--date absolute left-0 top-[calc(100%+var(--space-050))] z-10 ds-calendar" role="dialog" aria-label="Date picker calendar" hidden&gt;
+    &lt;!-- gunakan struktur month header, week header, dan day grid seperti komponen Calendar --&gt;
+  &lt;/div&gt;
+  &lt;div id="time-picker-panel" class="ds-date-time-picker__dropdown ds-date-time-picker__dropdown--time absolute right-0 top-[calc(100%+var(--space-050))] z-10 ds-time-picker" role="listbox" aria-label="Time picker list"&gt;
     &lt;button type="button" class="ds-time-parts-item is-selected" aria-selected="true"&gt;1:00 PM&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code>
@@ -533,21 +592,19 @@
               <span style="font-size:12px;font-weight:600;color:var(--color-text-secondary);font-family:var(--font-primary);">CSS Tailwind Utility (langsung pakai)</span>
               <button class="copy-btn" onclick="copyCode(this, 'code-date-picker-tailwind')">Copy</button>
             </div>
-            <code id="code-date-picker-tailwind" class="code-block">&lt;div class="grid gap-[var(--space-100)] md:grid-cols-[minmax(260px,320px)_minmax(220px,260px)]"&gt;
-  &lt;button class="min-h-10 border border-[var(--color-neutral-n40)] rounded-[var(--border-radius-sm)] bg-[var(--color-neutral-n0)] px-[var(--space-100)] py-[var(--space-075)] flex items-center justify-between gap-[var(--space-100)] text-[var(--color-neutral-n500)] hover:border-[var(--color-neutral-n100)] focus-visible:outline-none focus-visible:border-[var(--color-blue-b300)] focus-visible:shadow-[0_0_0_2px_var(--color-blue-b200)]"&gt;
-    &lt;span class="inline-flex items-center gap-[var(--space-075)]"&gt;
+            <code id="code-date-picker-tailwind" class="code-block">&lt;div class="relative w-full max-w-[380px]"&gt;
+  &lt;div class="flex items-stretch w-full min-h-10 border border-[var(--color-neutral-n40)] rounded-[var(--border-radius-sm)] bg-[var(--color-neutral-n0)] overflow-hidden hover:border-[var(--color-neutral-n100)] focus-within:border-[var(--color-blue-b300)] focus-within:shadow-[0_0_0_2px_var(--color-blue-b200)]"&gt;
+    &lt;button class="flex-1 min-h-10 border-none bg-transparent px-[var(--space-150)] py-[var(--space-075)] inline-flex items-center gap-[var(--space-075)] text-[var(--color-neutral-n500)] hover:bg-[var(--color-neutral-n20)] focus-visible:outline-none focus-visible:shadow-[inset_0_0_0_2px_var(--color-blue-b200)]"&gt;
       &lt;img src="../../assets/icons/icon-calendar-days.svg" class="w-4 h-4" alt="" /&gt;
       12 December 2022
-    &lt;/span&gt;
-    &lt;img src="../../assets/icons/icon-chevron-down.svg" class="w-3.5 h-3.5" alt="" /&gt;
-  &lt;/button&gt;
-  &lt;button class="min-h-10 border border-[var(--color-neutral-n40)] rounded-[var(--border-radius-sm)] bg-[var(--color-neutral-n0)] px-[var(--space-100)] py-[var(--space-075)] flex items-center justify-between gap-[var(--space-100)] text-[var(--color-neutral-n500)]"&gt;
-    &lt;span class="inline-flex items-center gap-[var(--space-075)]"&gt;
+    &lt;/button&gt;
+    &lt;button class="flex-[0_0_42%] justify-end text-right min-h-10 border-none bg-transparent px-[var(--space-150)] py-[var(--space-075)] inline-flex items-center gap-[var(--space-075)] text-[var(--color-neutral-n500)] hover:bg-[var(--color-neutral-n20)] focus-visible:outline-none focus-visible:shadow-[inset_0_0_0_2px_var(--color-blue-b200)]"&gt;
       &lt;img src="../../assets/icons/icon-clock.svg" class="w-4 h-4" alt="" /&gt;
       1:00 PM
-    &lt;/span&gt;
-    &lt;img src="../../assets/icons/icon-chevron-down.svg" class="w-3.5 h-3.5" alt="" /&gt;
-  &lt;/button&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="absolute left-0 top-[calc(100%+var(--space-050))] z-10 ds-calendar" hidden&gt;...calendar...&lt;/div&gt;
+  &lt;div class="absolute right-0 top-[calc(100%+var(--space-050))] z-10 ds-time-picker"&gt;...time list...&lt;/div&gt;
 &lt;/div&gt;</code>
           </div>
         </div>
@@ -558,24 +615,18 @@
           <div class="playground-controls">
             <button type="button" class="playground-btn" id="playground-trigger-hover">Toggle Hover Trigger</button>
           </div>
-          <div class="ds-date-time-trigger-group">
-            <button id="playground-trigger" type="button" class="ds-select-trigger" aria-haspopup="dialog" aria-expanded="false" aria-controls="playground-panel">
-              <span class="ds-select-trigger__value">
+          <div class="ds-date-time-picker" id="playground-date-time-picker">
+            <div class="ds-date-time-picker__bar" id="playground-bar">
+              <button id="playground-trigger" type="button" class="ds-date-time-picker__segment ds-date-time-picker__segment--date" aria-haspopup="dialog" aria-expanded="false" aria-controls="playground-panel">
                 <img src="../../assets/icons/icon-calendar-days.svg" alt="" aria-hidden="true" class="ds-select-trigger__icon">
                 <span id="playground-value">12 December 2022</span>
-              </span>
-              <img src="../../assets/icons/icon-chevron-down.svg" alt="" aria-hidden="true" class="ds-select-trigger__chevron">
-            </button>
-            <button id="playground-time-trigger" type="button" class="ds-select-trigger" aria-haspopup="listbox" aria-expanded="false" aria-controls="playground-time-panel">
-              <span class="ds-select-trigger__value">
+              </button>
+              <button id="playground-time-trigger" type="button" class="ds-date-time-picker__segment ds-date-time-picker__segment--time" aria-haspopup="listbox" aria-expanded="false" aria-controls="playground-time-panel">
                 <img src="../../assets/icons/icon-clock.svg" alt="" aria-hidden="true" class="ds-select-trigger__icon">
                 <span id="playground-time-value">1:00 PM</span>
-              </span>
-              <img src="../../assets/icons/icon-chevron-down.svg" alt="" aria-hidden="true" class="ds-select-trigger__chevron">
-            </button>
-          </div>
-          <div class="ds-date-time-picker-layout">
-            <div id="playground-panel" class="ds-calendar" role="dialog" aria-label="Playground date picker calendar" style="display:none;">
+              </button>
+            </div>
+            <div id="playground-panel" class="ds-date-time-picker__dropdown ds-date-time-picker__dropdown--date ds-calendar" role="dialog" aria-label="Playground date picker calendar" style="display:none;">
               <div class="ds-calendar__body">
                 <div class="ds-calendar-month-header" role="group" aria-label="Navigasi bulan">
                   <button type="button" class="ds-calendar-month-header__nav" aria-label="Bulan sebelumnya"><img src="../../assets/icons/icon-chevron-left.svg" alt="" aria-hidden="true"></button>
@@ -595,7 +646,7 @@
                 </div>
               </div>
             </div>
-            <div id="playground-time-panel" class="ds-time-picker" role="listbox" aria-label="Playground time picker list" style="display:none;">
+            <div id="playground-time-panel" class="ds-date-time-picker__dropdown ds-date-time-picker__dropdown--time ds-time-picker" role="listbox" aria-label="Playground time picker list" style="display:none;">
               <div class="ds-time-parts-list">
                 <button type="button" class="ds-time-parts-item" data-playground-time="9:00 AM">9:00 AM</button>
                 <button type="button" class="ds-time-parts-item" data-playground-time="9:30 AM">9:30 AM</button>
@@ -616,35 +667,76 @@
       </section>
     </div>
   </main>
-  <script>
-    const sidebar = document.getElementById('sidebar');
-    const overlay = document.getElementById('sidebar-overlay');
-    const hamburger = document.getElementById('hamburger-btn');
-    const sidebarClose = document.getElementById('sidebar-close');
-    function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('active'); }
-    function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('active'); }
-    hamburger?.addEventListener('click', openSidebar);
-    sidebarClose?.addEventListener('click', closeSidebar);
-    overlay?.addEventListener('click', closeSidebar);
+</div>
 
+<script src="../../scripts/script.js"></script>
+<script>
+    const demoRoot = document.getElementById('demo-date-time-picker');
+    const demoBar = demoRoot?.querySelector('.ds-date-time-picker__bar');
+    const demoDateTrigger = document.getElementById('date-picker-trigger');
+    const demoTimeTrigger = document.getElementById('time-picker-trigger');
+    const demoDatePanel = document.getElementById('date-picker-panel');
+    const demoTimePanel = document.getElementById('time-picker-panel');
     const valueEl = document.getElementById('date-picker-value');
     const timeValueEl = document.getElementById('time-picker-value');
-    const dayButtons = document.querySelectorAll('.ds-calendar-day[data-date]');
-    const timeButtons = document.querySelectorAll('.ds-time-parts-item[data-time]');
+    const dayButtons = demoDatePanel?.querySelectorAll('.ds-calendar-day[data-date]') || [];
+    const timeButtons = demoTimePanel?.querySelectorAll('.ds-time-parts-item[data-time]') || [];
+
+    function setDemoFocusState(activeTrigger) {
+      demoBar?.classList.add('ds-date-time-picker__bar--focus');
+      demoDateTrigger?.classList.toggle('ds-date-time-picker__segment--active', activeTrigger === demoDateTrigger);
+      demoTimeTrigger?.classList.toggle('ds-date-time-picker__segment--active', activeTrigger === demoTimeTrigger);
+    }
+    function clearDemoFocusState() {
+      demoBar?.classList.remove('ds-date-time-picker__bar--focus');
+      demoDateTrigger?.classList.remove('ds-date-time-picker__segment--active');
+      demoTimeTrigger?.classList.remove('ds-date-time-picker__segment--active');
+    }
+    function showDemoDatePanel() {
+      if (!demoDatePanel || !demoTimePanel) return;
+      demoTimePanel.style.display = 'none';
+      demoTimeTrigger?.setAttribute('aria-expanded', 'false');
+      demoDatePanel.style.display = '';
+      demoDateTrigger?.setAttribute('aria-expanded', 'true');
+      setDemoFocusState(demoDateTrigger);
+    }
+    function showDemoTimePanel() {
+      if (!demoDatePanel || !demoTimePanel) return;
+      demoDatePanel.style.display = 'none';
+      demoDateTrigger?.setAttribute('aria-expanded', 'false');
+      demoTimePanel.style.display = '';
+      demoTimeTrigger?.setAttribute('aria-expanded', 'true');
+      setDemoFocusState(demoTimeTrigger);
+    }
+
+    demoDateTrigger?.addEventListener('click', showDemoDatePanel);
+    demoTimeTrigger?.addEventListener('click', showDemoTimePanel);
+    document.addEventListener('click', (event) => {
+      const target = event.target;
+      if (!(target instanceof Element) || !demoRoot) return;
+      if (!demoRoot.contains(target)) {
+        if (demoDatePanel) demoDatePanel.style.display = 'none';
+        if (demoTimePanel) demoTimePanel.style.display = 'none';
+        demoDateTrigger?.setAttribute('aria-expanded', 'false');
+        demoTimeTrigger?.setAttribute('aria-expanded', 'false');
+        clearDemoFocusState();
+      }
+    });
+
     dayButtons.forEach((button) => {
       button.addEventListener('click', () => {
-        document.querySelector('.ds-calendar-day--selected')?.classList.remove('ds-calendar-day--selected');
+        demoDatePanel?.querySelector('.ds-calendar-day--selected')?.classList.remove('ds-calendar-day--selected');
         button.classList.add('ds-calendar-day--selected');
-        valueEl.textContent = button.dataset.date || '';
+        if (valueEl) valueEl.textContent = button.dataset.date || '';
       });
     });
     timeButtons.forEach((button) => {
       button.addEventListener('click', () => {
-        document.querySelector('.ds-time-parts-item.is-selected')?.classList.remove('is-selected');
-        document.querySelector('.ds-time-parts-item[aria-selected="true"]')?.removeAttribute('aria-selected');
+        demoTimePanel?.querySelector('.ds-time-parts-item.is-selected')?.classList.remove('is-selected');
+        demoTimePanel?.querySelector('.ds-time-parts-item[aria-selected="true"]')?.removeAttribute('aria-selected');
         button.classList.add('is-selected');
         button.setAttribute('aria-selected', 'true');
-        timeValueEl.textContent = button.dataset.time || '';
+        if (timeValueEl) timeValueEl.textContent = button.dataset.time || '';
       });
     });
 
@@ -668,6 +760,8 @@
       }, 1200);
     }
 
+    const playgroundRoot = document.getElementById('playground-date-time-picker');
+    const playgroundBar = document.getElementById('playground-bar');
     const playgroundValueEl = document.getElementById('playground-value');
     const playgroundDays = document.querySelectorAll('.ds-calendar-day[data-playground-date]');
     const playgroundPanel = document.getElementById('playground-panel');
@@ -686,25 +780,39 @@
       });
     });
 
-    function showPlaygroundPanel() {
-      playgroundPanel.style.display = '';
-      playgroundTrigger.classList.add('ds-select-trigger--focus');
-      playgroundTrigger.setAttribute('aria-expanded', 'true');
+    function setPlaygroundFocusState(activeTrigger) {
+      playgroundBar?.classList.add('ds-date-time-picker__bar--focus');
+      playgroundTrigger?.classList.toggle('ds-date-time-picker__segment--active', activeTrigger === playgroundTrigger);
+      playgroundTimeTrigger?.classList.toggle('ds-date-time-picker__segment--active', activeTrigger === playgroundTimeTrigger);
     }
-    function hidePlaygroundPanel() {
+    function clearPlaygroundFocusState() {
+      playgroundBar?.classList.remove('ds-date-time-picker__bar--focus');
+      playgroundTrigger?.classList.remove('ds-date-time-picker__segment--active');
+      playgroundTimeTrigger?.classList.remove('ds-date-time-picker__segment--active');
+    }
+    function showPlaygroundPanel() {
+      hidePlaygroundTimePanel(false);
+      playgroundPanel.style.display = '';
+      playgroundTrigger.setAttribute('aria-expanded', 'true');
+      setPlaygroundFocusState(playgroundTrigger);
+    }
+    function hidePlaygroundPanel(clearFocus = true) {
       playgroundPanel.style.display = 'none';
-      playgroundTrigger.classList.remove('ds-select-trigger--focus');
       playgroundTrigger.setAttribute('aria-expanded', 'false');
+      playgroundTrigger.classList.remove('ds-date-time-picker__segment--active');
+      if (clearFocus && playgroundTimePanel.style.display === 'none') clearPlaygroundFocusState();
     }
     function showPlaygroundTimePanel() {
+      hidePlaygroundPanel(false);
       playgroundTimePanel.style.display = '';
-      playgroundTimeTrigger.classList.add('ds-select-trigger--focus');
       playgroundTimeTrigger.setAttribute('aria-expanded', 'true');
+      setPlaygroundFocusState(playgroundTimeTrigger);
     }
-    function hidePlaygroundTimePanel() {
+    function hidePlaygroundTimePanel(clearFocus = true) {
       playgroundTimePanel.style.display = 'none';
-      playgroundTimeTrigger.classList.remove('ds-select-trigger--focus');
       playgroundTimeTrigger.setAttribute('aria-expanded', 'false');
+      playgroundTimeTrigger.classList.remove('ds-date-time-picker__segment--active');
+      if (clearFocus && playgroundPanel.style.display === 'none') clearPlaygroundFocusState();
     }
 
     playgroundTrigger?.addEventListener('focus', showPlaygroundPanel);
@@ -714,11 +822,9 @@
 
     document.addEventListener('click', (event) => {
       const target = event.target;
-      if (!(target instanceof Element)) return;
-      if (!playgroundTrigger.contains(target) && !playgroundPanel.contains(target)) {
+      if (!(target instanceof Element) || !playgroundRoot) return;
+      if (!playgroundRoot.contains(target)) {
         hidePlaygroundPanel();
-      }
-      if (!playgroundTimeTrigger.contains(target) && !playgroundTimePanel.contains(target)) {
         hidePlaygroundTimePanel();
       }
     });
@@ -746,8 +852,8 @@
     });
 
     playgroundTriggerHover?.addEventListener('click', () => {
-      const isHover = playgroundTrigger.classList.toggle('ds-select-trigger--hover');
-      playgroundTriggerHover.classList.toggle('is-active', isHover);
+      const isHover = playgroundBar?.classList.toggle('ds-date-time-picker__bar--hover');
+      playgroundTriggerHover.classList.toggle('is-active', Boolean(isHover));
     });
   </script>
 </body>
