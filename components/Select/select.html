@@ -98,7 +98,10 @@
       transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
     }
     .ds-select-trigger:hover { border-color: var(--color-neutral-n100); }
-    .ds-select-trigger--hover { border-color: var(--color-neutral-n100); }
+    .ds-select-trigger--hover {
+      background: var(--color-neutral-n30);
+      border-color: var(--color-neutral-n100);
+    }
     .ds-select-trigger--subtle {
       background: transparent;
       border-color: var(--color-neutral-n30);
@@ -928,6 +931,12 @@
               <a href="../Select/select.html" class="nav-link active">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><polyline points="8,10 12,14 16,10"/></svg>
                 Select
+              </a>
+            </li>
+            <li>
+              <a href="../Inline edit/inline-edit.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Inline Edit
               </a>
             </li>
           </ul>
