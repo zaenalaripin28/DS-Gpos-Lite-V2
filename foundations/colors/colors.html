@@ -258,7 +258,25 @@
         border-color: rgba(6, 182, 212, 0.2);
         color: var(--color-secondary-300);
       }
+
+      /* ── Hero Banner ── */
+      .ds-hero-banner { position:relative; overflow:hidden; }
+      .ds-hero-banner::before { content:''; position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px); background-size:40px 40px; pointer-events:none; z-index:0; }
+      .ds-hero-banner > * { position:relative; z-index:1; }
+      .hero-feat-card { transition:transform 160ms cubic-bezier(0.25,0.46,0.45,0.94),box-shadow 160ms cubic-bezier(0.25,0.46,0.45,0.94),border-color 160ms ease; }
+      .hero-feat-card:hover { transform:translateY(-3px); border-color:var(--color-blue-b75) !important; box-shadow:0 12px 32px rgba(9,30,66,0.11),0 3px 8px rgba(9,30,66,0.06); }
+      @keyframes ds-reveal { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+      @keyframes ds-card-rise { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+      .ds-hero-banner { animation:ds-reveal 360ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+      .hero-feat-card:nth-child(1){animation:ds-card-rise 280ms 120ms cubic-bezier(0.25,0.46,0.45,0.94) both}
+      .hero-feat-card:nth-child(2){animation:ds-card-rise 280ms 152ms cubic-bezier(0.25,0.46,0.45,0.94) both}
+      .hero-feat-card:nth-child(3){animation:ds-card-rise 280ms 184ms cubic-bezier(0.25,0.46,0.45,0.94) both}
+      .hero-feat-card:nth-child(4){animation:ds-card-rise 280ms 216ms cubic-bezier(0.25,0.46,0.45,0.94) both}
 </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { b50:'#E9F2FB',b75:'#A3CBEE',b100:'#7DB5E7',b200:'#4495DD',b300:'#1E7FD6',b400:'#155996',n0:'#FFFFFF',n10:'#FAFBFB',n20:'#F5F6F7',n30:'#EBEDF0',n40:'#DFE2E6',n900:'#091E42' } } } }
+  </script>
 </head>
 <body class="page-home">
 <div id="scroll-progress" class="scroll-progress-bar"></div>
@@ -529,15 +547,62 @@
 
     <div class="content-inner">
 
-      <!-- Page Header -->
-      <header class="page-header">
-        <div class="page-header-kicker">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg>
-          Foundations
+      <!-- Hero Banner -->
+      <div class="ds-hero-banner rounded-2xl overflow-hidden flex flex-col lg:flex-row" style="background:#091E42;border:1px solid rgba(255,255,255,0.07);margin-bottom:24px;">
+        <div class="flex-1 px-8 py-10 lg:px-11 lg:py-12 flex flex-col justify-center">
+          <div class="flex items-center gap-2 mb-5">
+            <div class="flex items-center justify-center w-5 h-5 rounded-md" style="background:rgba(30,127,214,0.2);">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4495DD" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg>
+            </div>
+            <span class="text-xs font-semibold uppercase tracking-[0.1em]" style="color:#7DB5E7;">Foundations · DS GPOS Lite V2</span>
+          </div>
+          <div class="font-bold mb-3" style="font-size:2.5rem;letter-spacing:-0.035em;line-height:1.04;color:#FFFFFF;">Color System</div>
+          <p class="text-sm max-w-xs mb-8" style="color:rgba(255,255,255,0.52);line-height:1.7;">Token warna GP Lite — 6 palette inti &amp; semantic tokens untuk konsistensi visual di seluruh produk.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.10);">v2.0</span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.10);">6 Color Families</span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.10);">Semantic Tokens</span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(68,149,221,0.15);color:#7DB5E7;border-color:rgba(68,149,221,0.28);">Figma-synced</span>
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(68,149,221,0.15);color:#7DB5E7;border-color:rgba(68,149,221,0.28);">WCAG 2.1 AA</span>
+          </div>
         </div>
-        <h1>Color System</h1>
-        <p class="subtitle">Token warna GP Lite — 6 palette inti &amp; semantic tokens untuk konsistensi visual di seluruh produk</p>
-      </header>
+        <div class="lg:flex-shrink-0 p-6 flex items-center justify-center" style="background:rgba(255,255,255,0.03);border-left:1px solid rgba(255,255,255,0.07);min-width:280px;">
+          <div class="w-full rounded-2xl overflow-hidden" style="background:#FAFBFB;box-shadow:0 16px 48px rgba(0,0,0,0.32),0 2px 8px rgba(0,0,0,0.16);">
+            <div class="px-5 py-3.5 flex items-center justify-between" style="border-bottom:1px solid #EBEDF0;">
+              <span class="text-xs font-semibold uppercase tracking-[0.08em]" style="color:#505F79;">Color Preview</span>
+              <div class="flex gap-1"><span class="w-2 h-2 rounded-full" style="background:#DFE2E6;"></span><span class="w-2 h-2 rounded-full" style="background:#EBEDF0;"></span></div>
+            </div>
+            <div class="p-4 flex flex-col gap-2">
+              <div class="flex items-center gap-2"><span style="font-size:11px;color:#505F79;width:52px;flex-shrink:0;">Blue</span><div class="flex gap-1 flex-1"><div style="height:16px;flex:1;background:#E9F2FB;border-radius:3px;"></div><div style="height:16px;flex:1;background:#7DB5E7;border-radius:3px;"></div><div style="height:16px;flex:1;background:#1E7FD6;border-radius:3px;"></div><div style="height:16px;flex:1;background:#155996;border-radius:3px;"></div><div style="height:16px;flex:1;background:#124D83;border-radius:3px;"></div></div></div>
+              <div class="flex items-center gap-2"><span style="font-size:11px;color:#505F79;width:52px;flex-shrink:0;">Green</span><div class="flex gap-1 flex-1"><div style="height:16px;flex:1;background:#E6F7EF;border-radius:3px;"></div><div style="height:16px;flex:1;background:#6BCEA0;border-radius:3px;"></div><div style="height:16px;flex:1;background:#00AA5B;border-radius:3px;"></div><div style="height:16px;flex:1;background:#007740;border-radius:3px;"></div><div style="height:16px;flex:1;background:#006838;border-radius:3px;"></div></div></div>
+              <div class="flex items-center gap-2"><span style="font-size:11px;color:#505F79;width:52px;flex-shrink:0;">Red</span><div class="flex gap-1 flex-1"><div style="height:16px;flex:1;background:#FDE8E9;border-radius:3px;"></div><div style="height:16px;flex:1;background:#F47B80;border-radius:3px;"></div><div style="height:16px;flex:1;background:#EC1C24;border-radius:3px;"></div><div style="height:16px;flex:1;background:#A51419;border-radius:3px;"></div><div style="height:16px;flex:1;background:#901116;border-radius:3px;"></div></div></div>
+              <div class="flex items-center gap-2"><span style="font-size:11px;color:#505F79;width:52px;flex-shrink:0;">Neutral</span><div class="flex gap-1 flex-1"><div style="height:16px;flex:1;background:#F5F6F7;border-radius:3px;border:1px solid #EBEDF0;"></div><div style="height:16px;flex:1;background:#C2C7D0;border-radius:3px;"></div><div style="height:16px;flex:1;background:#5D6B82;border-radius:3px;"></div><div style="height:16px;flex:1;background:#243757;border-radius:3px;"></div><div style="height:16px;flex:1;background:#091E42;border-radius:3px;"></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3" style="margin-bottom:32px;">
+        <div class="hero-feat-card" style="background:#FFFFFF;border:1px solid #EBEDF0;border-radius:12px;padding:20px;">
+          <div style="width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:linear-gradient(135deg,#E9F2FB 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg></div>
+          <div style="font-size:14px;font-weight:600;color:#091E42;margin-bottom:6px;">6 Families</div>
+          <div style="font-size:12px;color:#5D6B82;line-height:1.5;">Blue · Orange · Red · Green · Purple · Neutral</div>
+        </div>
+        <div class="hero-feat-card" style="background:#FFFFFF;border:1px solid #EBEDF0;border-radius:12px;padding:20px;">
+          <div style="width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:linear-gradient(135deg,#E9F2FB 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg></div>
+          <div style="font-size:14px;font-weight:600;color:#091E42;margin-bottom:6px;">57 Tokens</div>
+          <div style="font-size:12px;color:#5D6B82;line-height:1.5;">Primitive color tokens di seluruh palette</div>
+        </div>
+        <div class="hero-feat-card" style="background:#FFFFFF;border:1px solid #EBEDF0;border-radius:12px;padding:20px;">
+          <div style="width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:linear-gradient(135deg,#E9F2FB 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg></div>
+          <div style="font-size:14px;font-weight:600;color:#091E42;margin-bottom:6px;">Semantic Layer</div>
+          <div style="font-size:12px;color:#5D6B82;line-height:1.5;">Background · Text · Border · Icon · Elevation</div>
+        </div>
+        <div class="hero-feat-card" style="background:#FFFFFF;border:1px solid #EBEDF0;border-radius:12px;padding:20px;">
+          <div style="width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:linear-gradient(135deg,#E9F2FB 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><path d="M12 2l9 4.5V17.5L12 22l-9-4.5V6.5L12 2z"/><path d="M12 2v20M3 6.5l9 5 9-5"/></svg></div>
+          <div style="font-size:14px;font-weight:600;color:#091E42;margin-bottom:6px;">Figma-Synced</div>
+          <div style="font-size:12px;color:#5D6B82;line-height:1.5;">Semua token sinkron via tokens.css</div>
+        </div>
+      </div>
 
       <!-- Page Tab Navigation -->
       <div class="page-tabs">
