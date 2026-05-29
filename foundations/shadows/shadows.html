@@ -466,7 +466,23 @@
       .full-css-card { padding: 16px; }
       .copy-css-btn { position: static; margin-top: 14px; display: block; }
     }
+
+    /* ── Hero Banner ── */
+    .ds-hero-banner { position:relative; overflow:hidden; }
+    .ds-hero-banner::before { content:''; position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px); background-size:40px 40px; pointer-events:none; z-index:0; }
+    .ds-hero-banner > * { position:relative; z-index:1; }
+    .hero-feat-card { transition:transform 160ms cubic-bezier(0.25,0.46,0.45,0.94),box-shadow 160ms cubic-bezier(0.25,0.46,0.45,0.94),border-color 160ms ease; }
+    .hero-feat-card:hover { transform:translateY(-3px); border-color:var(--color-blue-b75) !important; box-shadow:0 12px 32px rgba(9,30,66,0.11),0 3px 8px rgba(9,30,66,0.06); }
+    @keyframes ds-reveal { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes ds-card-rise { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+    .ds-hero-banner { animation:ds-reveal 360ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .hero-feat-card:nth-child(1){animation:ds-card-rise 280ms 120ms cubic-bezier(0.25,0.46,0.45,0.94) both}
+    .hero-feat-card:nth-child(2){animation:ds-card-rise 280ms 152ms cubic-bezier(0.25,0.46,0.45,0.94) both}
+    .hero-feat-card:nth-child(3){animation:ds-card-rise 280ms 184ms cubic-bezier(0.25,0.46,0.45,0.94) both}
+    .hero-feat-card:nth-child(4){animation:ds-card-rise 280ms 216ms cubic-bezier(0.25,0.46,0.45,0.94) both}
   </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{b50:'#E9F2FB',b75:'#A3CBEE',b100:'#7DB5E7',b200:'#4495DD',b300:'#1E7FD6',b400:'#155996',n0:'#FFFFFF',n10:'#FAFBFB',n20:'#F5F6F7',n30:'#EBEDF0',n40:'#DFE2E6',n900:'#091E42'}}}}</script>
 </head>
 <body>
 <div class="container">
@@ -731,11 +747,61 @@
 
     <div class="content-inner">
 
-      <!-- ── Page Header ──────────────────────────────────────── -->
-      <header class="page-header">
-        <h1>Shadow System</h1>
-        <p class="subtitle">1 shadow token multi-layer untuk depth dan elevation yang konsisten — dirancang dengan warna brand <strong>#091E42</strong> untuk visual hierarchy yang subtil dan profesional.</p>
-      </header>
+      <!-- Hero Banner -->
+      <div class="ds-hero-banner rounded-2xl overflow-hidden flex flex-col lg:flex-row" style="background:#091E42;border:1px solid rgba(255,255,255,0.07);margin-bottom:24px;">
+        <div class="flex-1 px-8 py-10 lg:px-11 lg:py-12 flex flex-col justify-center">
+          <div class="flex items-center gap-2 mb-5">
+            <div class="flex items-center justify-center w-5 h-5 rounded-md" style="background:rgba(30,127,214,0.2);">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4495DD" stroke-width="2.5"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h12a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V7z" opacity="0.6"/></svg>
+            </div>
+            <span class="text-xs font-semibold uppercase tracking-[0.1em]" style="color:#7DB5E7;">Foundations · DS GPOS Lite V2</span>
+          </div>
+          <div class="font-bold mb-3" style="font-size:2.5rem;letter-spacing:-0.035em;line-height:1.04;color:#FFFFFF;">Shadow System</div>
+          <p class="text-sm max-w-xs mb-8" style="color:rgba(255,255,255,0.52);line-height:1.7;">1 shadow token multi-layer untuk depth dan elevation yang konsisten — dirancang dengan warna brand <strong style="color:rgba(255,255,255,0.7);">#091E42</strong>.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.10);">v2.0</span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.10);">1 Token</span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.10);">2 Layers</span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(68,149,221,0.15);color:#7DB5E7;border-color:rgba(68,149,221,0.28);">Figma-synced</span>
+          </div>
+        </div>
+        <div class="lg:flex-shrink-0 p-6 flex items-center justify-center" style="background:rgba(255,255,255,0.03);border-left:1px solid rgba(255,255,255,0.07);min-width:280px;">
+          <div class="w-full rounded-2xl overflow-hidden" style="background:#FAFBFB;box-shadow:0 16px 48px rgba(0,0,0,0.32),0 2px 8px rgba(0,0,0,0.16);">
+            <div class="px-5 py-3.5 flex items-center justify-between" style="border-bottom:1px solid #EBEDF0;">
+              <span class="text-xs font-semibold uppercase tracking-[0.08em]" style="color:#505F79;">Shadow Preview</span>
+              <div class="flex gap-1"><span class="w-2 h-2 rounded-full" style="background:#DFE2E6;"></span><span class="w-2 h-2 rounded-full" style="background:#EBEDF0;"></span></div>
+            </div>
+            <div class="p-6 flex items-center justify-center" style="background:#F5F6F7;">
+              <div style="width:120px;height:80px;background:#fff;border-radius:12px;box-shadow:0px 0px 1px 0px rgba(9,30,66,0.31),0px 8px 12px 0px rgba(9,30,66,0.15);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;">
+                <div style="font-size:10px;font-weight:700;color:#6B788E;letter-spacing:0.05em;text-transform:uppercase;">Shadow 1</div>
+                <div style="font-size:11px;color:#8993A4;">Multi-layer</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3" style="margin-bottom:32px;">
+        <div class="hero-feat-card" style="background:#FFFFFF;border:1px solid #EBEDF0;border-radius:12px;padding:20px;">
+          <div style="width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:linear-gradient(135deg,#E9F2FB 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h12a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V7z" opacity="0.6"/></svg></div>
+          <div style="font-size:14px;font-weight:600;color:#091E42;margin-bottom:6px;">1 Token</div>
+          <div style="font-size:12px;color:#5D6B82;line-height:1.5;">--shadow-1 · Drop Shadow</div>
+        </div>
+        <div class="hero-feat-card" style="background:#FFFFFF;border:1px solid #EBEDF0;border-radius:12px;padding:20px;">
+          <div style="width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:linear-gradient(135deg,#E9F2FB 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg></div>
+          <div style="font-size:14px;font-weight:600;color:#091E42;margin-bottom:6px;">Multi-Layer</div>
+          <div style="font-size:12px;color:#5D6B82;line-height:1.5;">Edge (1px) + Depth (12px blur)</div>
+        </div>
+        <div class="hero-feat-card" style="background:#FFFFFF;border:1px solid #EBEDF0;border-radius:12px;padding:20px;">
+          <div style="width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:linear-gradient(135deg,#E9F2FB 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div style="font-size:14px;font-weight:600;color:#091E42;margin-bottom:6px;">Brand Color</div>
+          <div style="font-size:12px;color:#5D6B82;line-height:1.5;">rgba(9,30,66) — warna brand</div>
+        </div>
+        <div class="hero-feat-card" style="background:#FFFFFF;border:1px solid #EBEDF0;border-radius:12px;padding:20px;">
+          <div style="width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:linear-gradient(135deg,#E9F2FB 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><path d="M12 2l9 4.5V17.5L12 22l-9-4.5V6.5L12 2z"/><path d="M12 2v20M3 6.5l9 5 9-5"/></svg></div>
+          <div style="font-size:14px;font-weight:600;color:#091E42;margin-bottom:6px;">Figma-Synced</div>
+          <div style="font-size:12px;color:#5D6B82;line-height:1.5;">Token sinkron via tokens.css</div>
+        </div>
+      </div>
 
       <!-- ══════════════════════════════════════════════════════
            SECTION 1 — SHADOW PREVIEW

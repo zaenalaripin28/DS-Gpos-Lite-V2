@@ -573,7 +573,23 @@
       .size-showcase-wrap { flex-direction: column; }
       .size-table-wrap    { min-width: auto; }
     }
+
+    /* ── Hero Banner ── */
+    .ds-hero-banner { position:relative; overflow:hidden; }
+    .ds-hero-banner::before { content:''; position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px); background-size:40px 40px; pointer-events:none; z-index:0; }
+    .ds-hero-banner > * { position:relative; z-index:1; }
+    .hero-feat-card { transition:transform 160ms cubic-bezier(0.25,0.46,0.45,0.94),box-shadow 160ms cubic-bezier(0.25,0.46,0.45,0.94),border-color 160ms ease; }
+    .hero-feat-card:hover { transform:translateY(-3px); border-color:var(--color-blue-b75) !important; box-shadow:0 12px 32px rgba(9,30,66,0.11),0 3px 8px rgba(9,30,66,0.06); }
+    @keyframes ds-reveal { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes ds-card-rise { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+    .ds-hero-banner { animation:ds-reveal 360ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .hero-feat-card:nth-child(1){animation:ds-card-rise 280ms 120ms cubic-bezier(0.25,0.46,0.45,0.94) both}
+    .hero-feat-card:nth-child(2){animation:ds-card-rise 280ms 152ms cubic-bezier(0.25,0.46,0.45,0.94) both}
+    .hero-feat-card:nth-child(3){animation:ds-card-rise 280ms 184ms cubic-bezier(0.25,0.46,0.45,0.94) both}
+    .hero-feat-card:nth-child(4){animation:ds-card-rise 280ms 216ms cubic-bezier(0.25,0.46,0.45,0.94) both}
   </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{b50:'#E9F2FB',b75:'#A3CBEE',b100:'#7DB5E7',b200:'#4495DD',b300:'#1E7FD6',b400:'#155996',n0:'#FFFFFF',n10:'#FAFBFB',n20:'#F5F6F7',n30:'#EBEDF0',n40:'#DFE2E6',n900:'#091E42'}}}}</script>
 </head>
 <body>
 <div class="container">
@@ -839,11 +855,67 @@
     <!-- ======================== CONTENT ======================== -->
     <div class="content-inner">
 
-      <!-- Page Header -->
-      <header class="page-header">
-        <h1>Icon System</h1>
-        <p class="subtitle" id="hero-subtitle">146 icon SVG tersedia dalam 3 kategori — General, Sidebar Offline, dan Sidebar Online. Semua icon dipanggil via file path &lt;img src&gt;, tanpa inline SVG.</p>
-      </header>
+      <!-- Hero Banner -->
+      <div class="ds-hero-banner rounded-2xl overflow-hidden flex flex-col lg:flex-row" style="background:#091E42;border:1px solid rgba(255,255,255,0.07);margin-bottom:24px;">
+        <div class="flex-1 px-8 py-10 lg:px-11 lg:py-12 flex flex-col justify-center">
+          <div class="flex items-center gap-2 mb-5">
+            <div class="flex items-center justify-center w-5 h-5 rounded-md" style="background:rgba(30,127,214,0.2);">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4495DD" stroke-width="2.5"><rect x="3" y="3" width="5" height="5" rx="1"/><rect x="10" y="3" width="5" height="5" rx="1"/><rect x="17" y="3" width="4" height="5" rx="1"/><rect x="3" y="10" width="5" height="5" rx="1"/><rect x="10" y="10" width="5" height="5" rx="1"/></svg>
+            </div>
+            <span class="text-xs font-semibold uppercase tracking-[0.1em]" style="color:#7DB5E7;">Foundations · DS GPOS Lite V2</span>
+          </div>
+          <div class="font-bold mb-3" style="font-size:2.5rem;letter-spacing:-0.035em;line-height:1.04;color:#FFFFFF;">Icon System</div>
+          <p class="text-sm max-w-xs mb-8" id="hero-subtitle" style="color:rgba(255,255,255,0.52);line-height:1.7;">146 icon SVG tersedia dalam 3 kategori — General, Sidebar Offline, dan Sidebar Online. Dipanggil via file path &lt;img src&gt;.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.10);">v2.0</span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.10);">146 Icons</span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.10);">3 Kategori</span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(68,149,221,0.15);color:#7DB5E7;border-color:rgba(68,149,221,0.28);">SVG · img src</span>
+          </div>
+        </div>
+        <div class="lg:flex-shrink-0 p-6 flex items-center justify-center" style="background:rgba(255,255,255,0.03);border-left:1px solid rgba(255,255,255,0.07);min-width:280px;">
+          <div class="w-full rounded-2xl overflow-hidden" style="background:#FAFBFB;box-shadow:0 16px 48px rgba(0,0,0,0.32),0 2px 8px rgba(0,0,0,0.16);">
+            <div class="px-5 py-3.5 flex items-center justify-between" style="border-bottom:1px solid #EBEDF0;">
+              <span class="text-xs font-semibold uppercase tracking-[0.08em]" style="color:#505F79;">Icon Preview</span>
+              <div class="flex gap-1"><span class="w-2 h-2 rounded-full" style="background:#DFE2E6;"></span><span class="w-2 h-2 rounded-full" style="background:#EBEDF0;"></span></div>
+            </div>
+            <div class="p-4" style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;">
+              <div style="width:32px;height:32px;border-radius:8px;background:#F5F6F7;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#505F79" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></div>
+              <div style="width:32px;height:32px;border-radius:8px;background:#F5F6F7;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#505F79" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div>
+              <div style="width:32px;height:32px;border-radius:8px;background:#E9F2FB;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="1.5"><rect x="2" y="7" width="20" height="10" rx="3"/></svg></div>
+              <div style="width:32px;height:32px;border-radius:8px;background:#F5F6F7;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#505F79" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+              <div style="width:32px;height:32px;border-radius:8px;background:#F5F6F7;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#505F79" stroke-width="1.5"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg></div>
+              <div style="width:32px;height:32px;border-radius:8px;background:#F5F6F7;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#505F79" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+              <div style="width:32px;height:32px;border-radius:8px;background:#F5F6F7;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#505F79" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+              <div style="width:32px;height:32px;border-radius:8px;background:#F5F6F7;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#505F79" stroke-width="1.5"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg></div>
+              <div style="width:32px;height:32px;border-radius:8px;background:#F5F6F7;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#505F79" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4"/></svg></div>
+              <div style="width:32px;height:32px;border-radius:8px;background:#F5F6F7;display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#505F79" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3" style="margin-bottom:32px;">
+        <div class="hero-feat-card" style="background:#FFFFFF;border:1px solid #EBEDF0;border-radius:12px;padding:20px;">
+          <div style="width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:linear-gradient(135deg,#E9F2FB 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><rect x="3" y="3" width="5" height="5" rx="1"/><rect x="10" y="3" width="5" height="5" rx="1"/><rect x="17" y="3" width="4" height="5" rx="1"/><rect x="3" y="10" width="5" height="5" rx="1"/><rect x="10" y="10" width="5" height="5" rx="1"/><rect x="17" y="10" width="4" height="5" rx="1"/></svg></div>
+          <div style="font-size:14px;font-weight:600;color:#091E42;margin-bottom:6px;">146 Icons</div>
+          <div style="font-size:12px;color:#5D6B82;line-height:1.5;">SVG siap pakai di seluruh produk</div>
+        </div>
+        <div class="hero-feat-card" style="background:#FFFFFF;border:1px solid #EBEDF0;border-radius:12px;padding:20px;">
+          <div style="width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:linear-gradient(135deg,#E9F2FB 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg></div>
+          <div style="font-size:14px;font-weight:600;color:#091E42;margin-bottom:6px;">3 Kategori</div>
+          <div style="font-size:12px;color:#5D6B82;line-height:1.5;">General · Sidebar Offline · Online</div>
+        </div>
+        <div class="hero-feat-card" style="background:#FFFFFF;border:1px solid #EBEDF0;border-radius:12px;padding:20px;">
+          <div style="width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:linear-gradient(135deg,#E9F2FB 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg></div>
+          <div style="font-size:14px;font-weight:600;color:#091E42;margin-bottom:6px;">3 Ukuran</div>
+          <div style="font-size:12px;color:#5D6B82;line-height:1.5;">16px · 20px · 24px standar</div>
+        </div>
+        <div class="hero-feat-card" style="background:#FFFFFF;border:1px solid #EBEDF0;border-radius:12px;padding:20px;">
+          <div style="width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:linear-gradient(135deg,#E9F2FB 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><polyline points="16,18 22,12 16,6"/><polyline points="8,6 2,12 8,18"/></svg></div>
+          <div style="font-size:14px;font-weight:600;color:#091E42;margin-bottom:6px;">img src</div>
+          <div style="font-size:12px;color:#5D6B82;line-height:1.5;">Dipanggil via file path SVG</div>
+        </div>
+      </div>
 
       <!-- ── Filter Bar ── -->
       <div class="filter-bar" id="filterBar">

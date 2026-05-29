@@ -336,7 +336,25 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { transition-duration: 0.01ms !important; }
     }
+
+    /* ── Hero Banner ── */
+    .ds-hero-banner { position:relative; overflow:hidden; }
+    .ds-hero-banner::before { content:''; position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px); background-size:40px 40px; pointer-events:none; z-index:0; }
+    .ds-hero-banner > * { position:relative; z-index:1; }
+    .hero-feat-card { transition:transform 160ms cubic-bezier(0.25,0.46,0.45,0.94),box-shadow 160ms cubic-bezier(0.25,0.46,0.45,0.94),border-color 160ms ease; }
+    .hero-feat-card:hover { transform:translateY(-3px); border-color:var(--color-blue-b75) !important; box-shadow:0 12px 32px rgba(9,30,66,0.11),0 3px 8px rgba(9,30,66,0.06); }
+    @keyframes ds-reveal { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes ds-card-rise { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+    .ds-hero-banner { animation:ds-reveal 360ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .hero-feat-card:nth-child(1){animation:ds-card-rise 280ms 120ms cubic-bezier(0.25,0.46,0.45,0.94) both}
+    .hero-feat-card:nth-child(2){animation:ds-card-rise 280ms 152ms cubic-bezier(0.25,0.46,0.45,0.94) both}
+    .hero-feat-card:nth-child(3){animation:ds-card-rise 280ms 184ms cubic-bezier(0.25,0.46,0.45,0.94) both}
+    .hero-feat-card:nth-child(4){animation:ds-card-rise 280ms 216ms cubic-bezier(0.25,0.46,0.45,0.94) both}
   </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { b50:'#E9F2FB',b75:'#A3CBEE',b100:'#7DB5E7',b200:'#4495DD',b300:'#1E7FD6',b400:'#155996',n0:'#FFFFFF',n10:'#FAFBFB',n20:'#F5F6F7',n30:'#EBEDF0',n40:'#DFE2E6',n900:'#091E42' } } } }
+  </script>
 </head>
 <body class="page-home">
 <div id="scroll-progress" class="scroll-progress-bar"></div>
@@ -611,15 +629,61 @@
 
     <div class="content-inner">
 
-      <!-- ── Page Header ── -->
-      <header class="page-header">
-        <div class="page-header-kicker">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
-          Foundations
+      <!-- Hero Banner -->
+      <div class="ds-hero-banner rounded-2xl overflow-hidden flex flex-col lg:flex-row" style="background:#091E42;border:1px solid rgba(255,255,255,0.07);margin-bottom:24px;">
+        <div class="flex-1 px-8 py-10 lg:px-11 lg:py-12 flex flex-col justify-center">
+          <div class="flex items-center gap-2 mb-5">
+            <div class="flex items-center justify-center w-5 h-5 rounded-md" style="background:rgba(30,127,214,0.2);">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4495DD" stroke-width="2.5"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+            </div>
+            <span class="text-xs font-semibold uppercase tracking-[0.1em]" style="color:var(--color-blue-b100);">Foundations · DS GPOS Lite V2</span>
+          </div>
+          <div class="font-bold mb-3" style="font-size:2.5rem;letter-spacing:-0.035em;line-height:1.04;color:#FFFFFF;">Typography</div>
+          <p class="text-sm max-w-xs mb-8" style="color:rgba(255,255,255,0.52);line-height:1.7;">Type scale, font family, weight, dan line height untuk hierarchy dan readability — semua menggunakan <strong style="color:rgba(255,255,255,0.7);">Poppins</strong> sebagai satu-satunya font.</p>
+          <div class="flex flex-wrap gap-2">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.10);">v2.0</span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.10);">1 Font Family</span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.10);">19 Type Styles</span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border" style="background:rgba(68,149,221,0.15);color:#7DB5E7;border-color:rgba(68,149,221,0.28);">Figma-synced</span>
+          </div>
         </div>
-        <h1>Typography</h1>
-        <p class="subtitle">Type scale, font family, weight, dan line height untuk hierarchy dan readability — semua menggunakan <strong>Poppins</strong> sebagai satu-satunya font DS GPOS Lite V2.</p>
-      </header>
+        <div class="lg:flex-shrink-0 p-6 flex items-center justify-center" style="background:rgba(255,255,255,0.03);border-left:1px solid rgba(255,255,255,0.07);min-width:280px;">
+          <div class="w-full rounded-2xl overflow-hidden" style="background:var(--color-neutral-n10);box-shadow:0 16px 48px rgba(0,0,0,0.32),0 2px 8px rgba(0,0,0,0.16);">
+            <div class="px-5 py-3.5 flex items-center justify-between" style="border-bottom:1px solid var(--color-neutral-n30);">
+              <span class="text-xs font-semibold uppercase tracking-[0.08em]" style="color:var(--color-neutral-n400);">Type Preview</span>
+              <div class="flex gap-1"><span class="w-2 h-2 rounded-full" style="background:var(--color-neutral-n40);"></span><span class="w-2 h-2 rounded-full" style="background:var(--color-neutral-n30);"></span></div>
+            </div>
+            <div class="p-5 flex flex-col gap-3">
+              <div style="font-family:'Poppins',sans-serif;font-size:22px;font-weight:700;color:var(--color-neutral-n900);line-height:1.1;letter-spacing:-0.02em;">Display</div>
+              <div style="font-family:'Poppins',sans-serif;font-size:16px;font-weight:600;color:var(--color-neutral-n700);">Header Large</div>
+              <div style="font-family:'Poppins',sans-serif;font-size:13px;font-weight:400;color:var(--color-neutral-n500);line-height:1.6;">Body text — readable dan konsisten di seluruh UI produk.</div>
+              <div style="font-family:'Poppins',sans-serif;font-size:10px;font-weight:500;color:var(--color-neutral-n300);letter-spacing:0.08em;text-transform:uppercase;">CAPTION · OVERLINE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3" style="margin-bottom:32px;">
+        <div class="hero-feat-card" style="background:var(--color-neutral-n0);border:1px solid var(--color-neutral-n30);border-radius:12px;padding:20px;">
+          <div style="width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:linear-gradient(135deg,var(--color-blue-b50) 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg></div>
+          <div style="font-size:var(--font-size-sm);font-weight:var(--font-weight-semibold);color:var(--color-neutral-n900);margin-bottom:6px;letter-spacing:-0.02em;">1 Font Family</div>
+          <div style="font-size:var(--font-size-xs);color:var(--color-neutral-n300);line-height:1.5;">Poppins — satu-satunya font di seluruh UI</div>
+        </div>
+        <div class="hero-feat-card" style="background:var(--color-neutral-n0);border:1px solid var(--color-neutral-n30);border-radius:12px;padding:20px;">
+          <div style="width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:linear-gradient(135deg,var(--color-blue-b50) 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="10" x2="16" y2="10"/><line x1="4" y1="14" x2="20" y2="14"/><line x1="4" y1="18" x2="14" y2="18"/></svg></div>
+          <div style="font-size:var(--font-size-sm);font-weight:var(--font-weight-semibold);color:var(--color-neutral-n900);margin-bottom:6px;letter-spacing:-0.02em;">19 Styles</div>
+          <div style="font-size:var(--font-size-xs);color:var(--color-neutral-n300);line-height:1.5;">Overline · Caption · Body · Title · Header · Display</div>
+        </div>
+        <div class="hero-feat-card" style="background:var(--color-neutral-n0);border:1px solid var(--color-neutral-n30);border-radius:12px;padding:20px;">
+          <div style="width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:linear-gradient(135deg,var(--color-blue-b50) 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg></div>
+          <div style="font-size:var(--font-size-sm);font-weight:var(--font-weight-semibold);color:var(--color-neutral-n900);margin-bottom:6px;letter-spacing:-0.02em;">2 Weights</div>
+          <div style="font-size:var(--font-size-xs);color:var(--color-neutral-n300);line-height:1.5;">Regular 400 &amp; Medium 500</div>
+        </div>
+        <div class="hero-feat-card" style="background:var(--color-neutral-n0);border:1px solid var(--color-neutral-n30);border-radius:12px;padding:20px;">
+          <div style="width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:linear-gradient(135deg,var(--color-blue-b50) 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><path d="M12 2l9 4.5V17.5L12 22l-9-4.5V6.5L12 2z"/><path d="M12 2v20M3 6.5l9 5 9-5"/></svg></div>
+          <div style="font-size:var(--font-size-sm);font-weight:var(--font-weight-semibold);color:var(--color-neutral-n900);margin-bottom:6px;letter-spacing:-0.02em;">Figma-Synced</div>
+          <div style="font-size:var(--font-size-xs);color:var(--color-neutral-n300);line-height:1.5;">Token sinkron dengan Figma via tokens.css</div>
+        </div>
+      </div>
 
       <!-- ══════════════════════════════════════
            SECTION 1 — FONT FAMILY
