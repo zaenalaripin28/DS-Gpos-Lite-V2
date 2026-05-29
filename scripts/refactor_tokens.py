@@ -37,9 +37,13 @@ DEFAULT_BACKUP_DIR = PROJECT_ROOT / ".refactor-backups"
 
 # Scan targets per project requirements
 SCAN_TARGETS = [
-    PROJECT_ROOT / "pages",
-    PROJECT_ROOT / "components",
     PROJECT_ROOT / "index.html",
+    PROJECT_ROOT / "components",
+    PROJECT_ROOT / "foundations",
+    PROJECT_ROOT / "pages",
+    PROJECT_ROOT / "patterns",
+    PROJECT_ROOT / "templates",
+    PROJECT_ROOT / "navigation",
 ]
 
 # Regex: optional variant/responsive/state prefixes + utility body

@@ -12,11 +12,98 @@
       theme: {
         extend: {
           colors: {
-            b50:  '#E9F2FB', b75:  '#A3CBEE', b100: '#7DB5E7', b200: '#4495DD', b300: '#1E7FD6',
-            n0:   '#FFFFFF', n10:  '#FAFBFB', n20:  '#F5F6F7', n30:  '#EBEDF0',
-            n40:  '#DFE2E6', n100: '#7A8699', n300: '#5D6B82', n500: '#42526D', n900: '#091E42',
-            g50:  '#E6F7EF', g100: '#B8E6CF', g300: '#00AA5B', g400: '#008F4E',
-            r50:  '#FDE8E9', r100: '#F9B8BB', r300: '#EC1C24',
+            primary: {
+              50:'var(--color-primary-50)',100:'var(--color-primary-100)',200:'var(--color-primary-200)',
+              300:'var(--color-primary-300)',400:'var(--color-primary-400)',500:'var(--color-primary-500)',
+              600:'var(--color-primary-600)',700:'var(--color-primary-700)',800:'var(--color-primary-800)',900:'var(--color-primary-900)',
+            },
+            secondary: {
+              50:'var(--color-secondary-50)',100:'var(--color-secondary-100)',200:'var(--color-secondary-200)',
+              300:'var(--color-secondary-300)',400:'var(--color-secondary-400)',500:'var(--color-secondary-500)',
+              600:'var(--color-secondary-600)',700:'var(--color-secondary-700)',800:'var(--color-secondary-800)',900:'var(--color-secondary-900)',
+            },
+            success: {
+              50:'var(--color-success-50)',100:'var(--color-success-100)',200:'var(--color-success-200)',
+              300:'var(--color-success-300)',400:'var(--color-success-400)',500:'var(--color-success-500)',
+              600:'var(--color-success-600)',700:'var(--color-success-700)',800:'var(--color-success-800)',900:'var(--color-success-900)',
+            },
+            warning: {
+              50:'var(--color-warning-50)',100:'var(--color-warning-100)',200:'var(--color-warning-200)',
+              300:'var(--color-warning-300)',400:'var(--color-warning-400)',500:'var(--color-warning-500)',
+              600:'var(--color-warning-600)',700:'var(--color-warning-700)',800:'var(--color-warning-800)',900:'var(--color-warning-900)',
+            },
+            error: {
+              50:'var(--color-error-50)',100:'var(--color-error-100)',200:'var(--color-error-200)',
+              300:'var(--color-error-300)',400:'var(--color-error-400)',500:'var(--color-error-500)',
+              600:'var(--color-error-600)',700:'var(--color-error-700)',800:'var(--color-error-800)',900:'var(--color-error-900)',
+            },
+            info: {
+              50:'var(--color-info-50)',100:'var(--color-info-100)',200:'var(--color-info-200)',
+              300:'var(--color-info-300)',400:'var(--color-info-400)',500:'var(--color-info-500)',
+              600:'var(--color-info-600)',700:'var(--color-info-700)',800:'var(--color-info-800)',900:'var(--color-info-900)',
+            },
+            blue: {
+              b50:'var(--color-blue-b50)',b75:'var(--color-blue-b75)',b100:'var(--color-blue-b100)',
+              b200:'var(--color-blue-b200)',b300:'var(--color-blue-b300)',b400:'var(--color-blue-b400)',b500:'var(--color-blue-b500)',
+            },
+            orange: {
+              o50:'var(--color-orange-o50)',o75:'var(--color-orange-o75)',o100:'var(--color-orange-o100)',
+              o200:'var(--color-orange-o200)',o300:'var(--color-orange-o300)',o400:'var(--color-orange-o400)',o500:'var(--color-orange-o500)',
+            },
+            red: {
+              r50:'var(--color-red-r50)',r75:'var(--color-red-r75)',r100:'var(--color-red-r100)',
+              r200:'var(--color-red-r200)',r300:'var(--color-red-r300)',r400:'var(--color-red-r400)',r500:'var(--color-red-r500)',
+            },
+            green: {
+              g50:'var(--color-green-g50)',g75:'var(--color-green-g75)',g100:'var(--color-green-g100)',
+              g200:'var(--color-green-g200)',g300:'var(--color-green-g300)',g400:'var(--color-green-g400)',g500:'var(--color-green-g500)',
+            },
+            purple: {
+              p50:'var(--color-purple-p50)',p75:'var(--color-purple-p75)',p100:'var(--color-purple-p100)',
+              p200:'var(--color-purple-p200)',p300:'var(--color-purple-p300)',p400:'var(--color-purple-p400)',p500:'var(--color-purple-p500)',
+            },
+            neutral: {
+              n0:'var(--color-neutral-n0)',n10:'var(--color-neutral-n10)',n20:'var(--color-neutral-n20)',n30:'var(--color-neutral-n30)',
+              n40:'var(--color-neutral-n40)',n50:'var(--color-neutral-n50)',n60:'var(--color-neutral-n60)',n70:'var(--color-neutral-n70)',
+              n80:'var(--color-neutral-n80)',n90:'var(--color-neutral-n90)',n100:'var(--color-neutral-n100)',n200:'var(--color-neutral-n200)',
+              n300:'var(--color-neutral-n300)',n400:'var(--color-neutral-n400)',n500:'var(--color-neutral-n500)',n600:'var(--color-neutral-n600)',
+              n700:'var(--color-neutral-n700)',n800:'var(--color-neutral-n800)',n900:'var(--color-neutral-n900)',
+            },
+            background:'var(--color-background)',surface:'var(--color-surface)',
+            border:{DEFAULT:'var(--color-border)',light:'var(--color-border-light)',brand:'var(--color-border-brand)'},
+            text:{primary:'var(--color-text-primary)',secondary:'var(--color-text-secondary)',tertiary:'var(--color-text-tertiary)',
+              disabled:'var(--color-text-disabled)',inverse:'var(--color-text-inverse)',brand:'var(--color-text-brand)',code:'var(--color-text-code)'},
+          },
+          fontFamily:{primary:['var(--font-primary)'],sans:['var(--font-primary)']},
+          fontSize:{
+            xs:'var(--font-size-xs)',sm:'var(--font-size-sm)',base:'var(--font-size-base)',lg:'var(--font-size-lg)',xl:'var(--font-size-xl)',
+            '2xl':'var(--font-size-2xl)','3xl':'var(--font-size-3xl)','4xl':'var(--font-size-4xl)','5xl':'var(--font-size-5xl)',
+            caption:'var(--text-caption-regular-size)',overline:'var(--text-overline-medium-size)',
+            'body-sm':'var(--text-body-small-regular-size)','body-md':'var(--text-body-medium-regular-size)','body-lg':'var(--text-body-large-regular-size)',
+            title:'var(--text-title-medium-size)',
+          },
+          fontWeight:{light:'var(--font-weight-light)',normal:'var(--font-weight-normal)',medium:'var(--font-weight-medium)',
+            semibold:'var(--font-weight-semibold)',bold:'var(--font-weight-bold)'},
+          lineHeight:{tight:'var(--line-height-tight)',snug:'var(--line-height-snug)',normal:'var(--line-height-normal)',
+            relaxed:'var(--line-height-relaxed)',loose:'var(--line-height-loose)',
+            'body-sm':'var(--text-body-small-regular-lh)',caption:'var(--text-caption-regular-lh)',overline:'var(--text-overline-medium-lh)'},
+          letterSpacing:{tight:'var(--letter-spacing-tight)',normal:'var(--letter-spacing-normal)',wide:'var(--letter-spacing-wide)',
+            wider:'var(--letter-spacing-wider)',overline:'var(--text-overline-medium-ls)'},
+          spacing:{
+            '0':'var(--space-0)','025':'var(--space-025)','050':'var(--space-050)','075':'var(--space-075)','100':'var(--space-100)',
+            '150':'var(--space-150)','200':'var(--space-200)','250':'var(--space-250)','300':'var(--space-300)','400':'var(--space-400)',
+            '500':'var(--space-500)','600':'var(--space-600)','800':'var(--space-800)','1000':'var(--space-1000)',
+            '1':'var(--spacing-1)','2':'var(--spacing-2)','3':'var(--spacing-3)','4':'var(--spacing-4)','5':'var(--spacing-5)',
+            '6':'var(--spacing-6)','8':'var(--spacing-8)','10':'var(--spacing-10)','12':'var(--spacing-12)',
+          },
+          borderRadius:{
+            none:'var(--border-radius-none)',sm:'var(--border-radius-sm)',md:'var(--border-radius-md)',lg:'var(--border-radius-lg)',
+            xl:'var(--border-radius-xl)','2xl':'var(--border-radius-2xl)','3xl':'var(--border-radius-3xl)',full:'var(--border-radius-full)',
+          },
+          borderWidth:{'0':'var(--border-width-0)','1':'var(--border-width-1)','2':'var(--border-width-2)','4':'var(--border-width-4)'},
+          boxShadow:{
+            '1':'var(--shadow-1)',xs:'var(--shadow-xs)',sm:'var(--shadow-sm)',md:'var(--shadow-md)',lg:'var(--shadow-lg)',
+            xl:'var(--shadow-xl)','2xl':'var(--shadow-2xl)',brand:'var(--shadow-brand)',inner:'var(--shadow-inner)',none:'var(--shadow-none)',
           },
         }
       }
@@ -1044,31 +1131,31 @@
             <div class="nav-preview-stage w-full">
               <!-- START: NAVIGATION MENU -->
               <nav class="w-full">
-                <div class="px-var-sidebar-padding-x py-var-spacing-2">
-                  <span class="block uppercase tracking-[var(--letter-spacing-overline)] text-[var(--color-text-secondary)] text-[var(--font-size-overline)] font-[var(--font-weight-medium)] mb-var-spacing-2">Navigation</span>
+                <div class="px-200 py-100">
+                  <span class="block uppercase tracking-overline text-text-secondary text-overline font-medium mb-100">Navigation</span>
                 </div>
-                <div class="h-px bg-[var(--color-border-subtle)] mx-var-sidebar-padding-x mb-var-spacing-2"></div>
-                <ul class="flex flex-col gap-var-spacing-1">
+                <div class="h-px bg-border-light mx-200 mb-100"></div>
+                <ul class="flex flex-col gap-050">
                   <li>
-                    <a href="#" class="flex items-center gap-var-spacing-2 px-var-sidebar-padding-x py-var-spacing-2 rounded-[var(--radius-md)] transition-colors hover:bg-[var(--color-surface-hover)] focus:bg-[var(--color-surface-active)] group" aria-current="page">
-                      <span class="w-[6px] h-[6px] rounded-full bg-[var(--color-accent-primary)] shrink-0 mr-var-spacing-2" aria-hidden="true"></span>
+                    <a href="#" class="flex items-center gap-100 px-200 py-100 rounded-md transition-colors hover:bg-neutral-n20 focus:bg-neutral-n30 group" aria-current="page">
+                      <span class="w-075 h-075 rounded-full bg-blue-b300 shrink-0 mr-100" aria-hidden="true"></span>
                       <div>
-                        <span class="block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Dashboard</span>
-                        <span class="block text-[var(--color-text-secondary)] text-[var(--font-size-caption)] font-[var(--font-weight-regular)]">Overview &amp; Activity</span>
+                        <span class="block text-text-primary text-body-sm font-normal leading-tight">Dashboard</span>
+                        <span class="block text-text-secondary text-caption font-normal">Overview &amp; Activity</span>
                       </div>
                     </a>
                   </li>
                   <li>
-                    <a href="#" class="flex items-center gap-var-spacing-2 px-var-sidebar-padding-x py-var-spacing-2 rounded-[var(--radius-md)] transition-colors hover:bg-[var(--color-surface-hover)] focus:bg-[var(--color-surface-active)] group">
-                      <span class="w-[6px] h-[6px] rounded-full bg-[var(--color-border-muted)] shrink-0 mr-var-spacing-2" aria-hidden="true"></span>
+                    <a href="#" class="flex items-center gap-100 px-200 py-100 rounded-md transition-colors hover:bg-neutral-n20 focus:bg-neutral-n30 group">
+                      <span class="w-075 h-075 rounded-full bg-neutral-n40 shrink-0 mr-100" aria-hidden="true"></span>
                       <div>
-                        <span class="block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Sales</span>
-                        <span class="block text-[var(--color-text-secondary)] text-[var(--font-size-caption)] font-[var(--font-weight-regular)]">POS &amp; Transactions</span>
+                        <span class="block text-text-primary text-body-sm font-normal leading-tight">Sales</span>
+                        <span class="block text-text-secondary text-caption font-normal">POS &amp; Transactions</span>
                       </div>
                     </a>
                   </li>
                 </ul>
-                <div class="h-px bg-[var(--color-border-subtle)] mx-var-sidebar-padding-x mt-var-spacing-3"></div>
+                <div class="h-px bg-border-light mx-200 mt-150"></div>
               </nav>
               <!-- END: NAVIGATION MENU -->
             </div>
@@ -1181,7 +1268,7 @@
               <div class="ds-nav-heading-snap">
                 <div class="ds-nav-heading-snap__label-row">
                   <img src="../../assets/icons/icon-chevron-left.svg" alt="section" width="12" height="12" class="ds-nav-heading-snap__lead" aria-hidden="true">
-                  <span class="block uppercase tracking-[var(--letter-spacing-overline)] text-[var(--color-text-secondary)] text-[var(--font-size-overline)] font-[var(--font-weight-medium)]">Group heading</span>
+                  <span class="block uppercase tracking-overline text-text-secondary text-overline font-medium">Group heading</span>
                 </div>
                 <button type="button" class="ds-nav-heading-snap__toggle" tabindex="-1" aria-hidden="true" aria-label="Collapse grup menu">
                   <img src="../../assets/icons/icon-chevron-left.svg" alt="collapse" width="16" height="16">
@@ -1268,8 +1355,8 @@
               <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                 <img src="../../assets/icons/icon-sidebar-offline-pos-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                 <div class="ds-nav-mainmenu-snap__body">
-                  <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Label</span>
-                  <span class="block text-[var(--color-text-secondary)] text-[var(--font-size-caption)] font-[var(--font-weight-regular)]">Description</span>
+                  <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Label</span>
+                  <span class="block text-text-secondary text-caption font-normal">Description</span>
                 </div>
                 <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
               </button>
@@ -1284,8 +1371,8 @@
               <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--hover" tabindex="-1" aria-hidden="true">
                 <img src="../../assets/icons/icon-sidebar-offline-pos-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                 <div class="ds-nav-mainmenu-snap__body">
-                  <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Label</span>
-                  <span class="block text-[var(--color-text-secondary)] text-[var(--font-size-caption)] font-[var(--font-weight-regular)]">Description</span>
+                  <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Label</span>
+                  <span class="block text-text-secondary text-caption font-normal">Description</span>
                 </div>
                 <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
               </button>
@@ -1300,8 +1387,8 @@
               <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--press" tabindex="-1" aria-hidden="true">
                 <img src="../../assets/icons/icon-sidebar-offline-pos-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                 <div class="ds-nav-mainmenu-snap__body">
-                  <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Label</span>
-                  <span class="block text-[var(--color-text-secondary)] text-[var(--font-size-caption)] font-[var(--font-weight-regular)]">Description</span>
+                  <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Label</span>
+                  <span class="block text-text-secondary text-caption font-normal">Description</span>
                 </div>
                 <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
               </button>
@@ -1316,8 +1403,8 @@
               <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--selected" tabindex="-1" aria-hidden="true">
                 <img src="../../assets/icons/icon-sidebar-offline-pos-on.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                 <div class="ds-nav-mainmenu-snap__body">
-                  <span class="ds-nav-mainmenu-snap__title block text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Label</span>
-                  <span class="block text-[var(--color-text-secondary)] text-[var(--font-size-caption)] font-[var(--font-weight-regular)]">Description</span>
+                  <span class="ds-nav-mainmenu-snap__title block text-body-sm font-normal leading-tight">Label</span>
+                  <span class="block text-text-secondary text-caption font-normal">Description</span>
                 </div>
                 <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
               </button>
@@ -1646,7 +1733,7 @@
                     <a href="#" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-news-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Berita</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Berita</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </a>
@@ -1658,7 +1745,7 @@
                     <a href="#" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-medikal-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Rekam Medis</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Rekam Medis</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </a>
@@ -1670,7 +1757,7 @@
                     <a href="#" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--selected" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-medikal-on.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Rekam Medis</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-body-sm font-normal leading-tight">Rekam Medis</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-up.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </a>
@@ -1784,7 +1871,7 @@
                 </div>
                 <div class="ds-nav-heading-snap ds-nav-heading-snap--no-icons">
                   <div class="ds-nav-heading-snap__label-row">
-                    <span class="block uppercase tracking-[var(--letter-spacing-overline)] text-[var(--color-text-secondary)] text-[var(--font-size-overline)] font-[var(--font-weight-medium)]">Terakhir Dibuka</span>
+                    <span class="block uppercase tracking-overline text-text-secondary text-overline font-medium">Terakhir Dibuka</span>
                   </div>
                 </div>
                 <ul class="ds-sidebar-nav-expand__recent" aria-label="Terakhir dibuka">
@@ -1792,8 +1879,8 @@
                     <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-dashboard-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Title</span>
-                        <span class="block text-[var(--color-text-secondary)] text-[var(--font-size-caption)] font-[var(--font-weight-regular)]">Description</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Title</span>
+                        <span class="block text-text-secondary text-caption font-normal">Description</span>
                       </div>
                     </button>
                   </li>
@@ -1801,8 +1888,8 @@
                     <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-pos-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Title</span>
-                        <span class="block text-[var(--color-text-secondary)] text-[var(--font-size-caption)] font-[var(--font-weight-regular)]">Description</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Title</span>
+                        <span class="block text-text-secondary text-caption font-normal">Description</span>
                       </div>
                     </button>
                   </li>
@@ -1810,8 +1897,8 @@
                     <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-product-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Title</span>
-                        <span class="block text-[var(--color-text-secondary)] text-[var(--font-size-caption)] font-[var(--font-weight-regular)]">Description</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Title</span>
+                        <span class="block text-text-secondary text-caption font-normal">Description</span>
                       </div>
                     </button>
                   </li>
@@ -1822,7 +1909,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-news-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Berita</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Berita</span>
                       </div>
                     </button>
                   </li>
@@ -1830,7 +1917,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-dashboard-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Dashboard</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Dashboard</span>
                       </div>
                     </button>
                   </li>
@@ -1838,7 +1925,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-pos-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Point Of Sales</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Point Of Sales</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -1867,7 +1954,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-dashboard-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Online</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Online</span>
                       </div>
                     </button>
                   </li>
@@ -1875,7 +1962,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-principal-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">GPOS Extra</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">GPOS Extra</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -1898,7 +1985,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-app-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Rekam Medis</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Rekam Medis</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -1927,7 +2014,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-belanja-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Belanja</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Belanja</span>
                       </div>
                     </button>
                   </li>
@@ -1935,7 +2022,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-product-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Produk</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Produk</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -1964,7 +2051,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-invoice-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Penjualan</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Penjualan</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -1993,7 +2080,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-inventory-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Persediaan</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Persediaan</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2028,7 +2115,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-finance-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Keuangan</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Keuangan</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2069,7 +2156,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-ledger-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Buku Besar</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Buku Besar</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2104,7 +2191,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-kas-bank-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Kas &amp; Bank</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Kas &amp; Bank</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2127,7 +2214,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-smart-forecasrting-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Pengadaan</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Pengadaan</span>
                       </div>
                     </button>
                   </li>
@@ -2135,7 +2222,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-payable-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Pembelian</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Pembelian</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2170,7 +2257,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-medikal-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Medikal</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Medikal</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2199,7 +2286,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-megaphone-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Promosi</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Promosi</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2222,7 +2309,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-report-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Laporan</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Laporan</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2303,7 +2390,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-customer-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Kontak</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Kontak</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2342,7 +2429,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-master-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Master</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Master</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2390,7 +2477,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-company-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Perusahaan</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Perusahaan</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2419,7 +2506,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-setting-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Pengaturan</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Pengaturan</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2561,7 +2648,7 @@
                 </div>
                 <div class="ds-nav-heading-snap ds-nav-heading-snap--no-icons">
                   <div class="ds-nav-heading-snap__label-row">
-                    <span class="block uppercase tracking-[var(--letter-spacing-overline)] text-[var(--color-text-secondary)] text-[var(--font-size-overline)] font-[var(--font-weight-medium)]">Terakhir Dibuka</span>
+                    <span class="block uppercase tracking-overline text-text-secondary text-overline font-medium">Terakhir Dibuka</span>
                   </div>
                 </div>
                 <ul class="ds-sidebar-nav-expand__recent" aria-label="Terakhir dibuka">
@@ -2569,8 +2656,8 @@
                     <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-dashboard-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Title</span>
-                        <span class="block text-[var(--color-text-secondary)] text-[var(--font-size-caption)] font-[var(--font-weight-regular)]">Description</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Title</span>
+                        <span class="block text-text-secondary text-caption font-normal">Description</span>
                       </div>
                     </button>
                   </li>
@@ -2578,8 +2665,8 @@
                     <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-pos-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Title</span>
-                        <span class="block text-[var(--color-text-secondary)] text-[var(--font-size-caption)] font-[var(--font-weight-regular)]">Description</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Title</span>
+                        <span class="block text-text-secondary text-caption font-normal">Description</span>
                       </div>
                     </button>
                   </li>
@@ -2587,8 +2674,8 @@
                     <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-product-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Title</span>
-                        <span class="block text-[var(--color-text-secondary)] text-[var(--font-size-caption)] font-[var(--font-weight-regular)]">Description</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Title</span>
+                        <span class="block text-text-secondary text-caption font-normal">Description</span>
                       </div>
                     </button>
                   </li>
@@ -2599,7 +2686,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-news-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Berita</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Berita</span>
                       </div>
                     </button>
                   </li>
@@ -2607,7 +2694,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-dashboard-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Dashboard</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Dashboard</span>
                       </div>
                     </button>
                   </li>
@@ -2615,7 +2702,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-pos-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Point Of Sales</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Point Of Sales</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2644,7 +2731,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-dashboard-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Online</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Online</span>
                       </div>
                     </button>
                   </li>
@@ -2652,7 +2739,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-principal-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">GPOS Extra</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">GPOS Extra</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2675,7 +2762,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-app-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Rekam Medis</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Rekam Medis</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2704,7 +2791,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-belanja-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Belanja</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Belanja</span>
                       </div>
                     </button>
                   </li>
@@ -2712,7 +2799,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-product-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Produk</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Produk</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2741,7 +2828,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-invoice-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Penjualan</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Penjualan</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2770,7 +2857,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-inventory-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Persediaan</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Persediaan</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2805,7 +2892,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-finance-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Keuangan</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Keuangan</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2846,7 +2933,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-ledger-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Buku Besar</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Buku Besar</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2881,7 +2968,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-kas-bank-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Kas &amp; Bank</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Kas &amp; Bank</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2904,7 +2991,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-smart-forecasrting-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Pengadaan</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Pengadaan</span>
                       </div>
                     </button>
                   </li>
@@ -2912,7 +2999,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-payable-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Pembelian</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Pembelian</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2947,7 +3034,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-medikal-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Medikal</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Medikal</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2976,7 +3063,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-megaphone-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Promosi</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Promosi</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -2999,7 +3086,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-report-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Laporan</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Laporan</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -3080,7 +3167,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-customer-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Kontak</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Kontak</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -3119,7 +3206,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-master-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Master</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Master</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -3167,7 +3254,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-company-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Perusahaan</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Perusahaan</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -3196,7 +3283,7 @@
                     <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-setting-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
-                        <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Pengaturan</span>
+                        <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Pengaturan</span>
                       </div>
                       <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                     </button>
@@ -3389,7 +3476,7 @@
                   </div>
                   <div class="ds-nav-heading-snap ds-nav-heading-snap--no-icons">
                     <div class="ds-nav-heading-snap__label-row">
-                      <span class="block uppercase tracking-[var(--letter-spacing-overline)] text-[var(--color-text-secondary)] text-[var(--font-size-overline)] font-[var(--font-weight-medium)]">Terakhir Dibuka</span>
+                      <span class="block uppercase tracking-overline text-text-secondary text-overline font-medium">Terakhir Dibuka</span>
                     </div>
                   </div>
                   <ul class="ds-sidebar-nav-expand__recent" aria-label="Terakhir dibuka">
@@ -3397,8 +3484,8 @@
                       <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1" data-nav-recent>
                         <img src="../../assets/icons/icon-sidebar-offline-dashboard-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                         <div class="ds-nav-mainmenu-snap__body">
-                          <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Title</span>
-                          <span data-nav-sub class="block text-[var(--color-text-secondary)] text-[var(--font-size-caption)] font-[var(--font-weight-regular)]">Description</span>
+                          <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Title</span>
+                          <span data-nav-sub class="block text-text-secondary text-caption font-normal">Description</span>
                         </div>
                         <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                       </button>
@@ -3410,8 +3497,8 @@
                       <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf ds-nav-mainmenu-snap--selected" aria-current="page">
                         <img src="../../assets/icons/icon-sidebar-offline-dashboard-on.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" data-nav-lead aria-hidden="true">
                         <div class="ds-nav-mainmenu-snap__body">
-                          <span class="ds-nav-mainmenu-snap__title block text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Dashboard</span>
-                          <span data-nav-sub class="block text-[var(--color-text-secondary)] text-[var(--font-size-caption)] font-[var(--font-weight-regular)]">Overview &amp; Activity</span>
+                          <span class="ds-nav-mainmenu-snap__title block text-body-sm font-normal leading-tight">Dashboard</span>
+                          <span data-nav-sub class="block text-text-secondary text-caption font-normal">Overview &amp; Activity</span>
                         </div>
                         <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                       </button>
@@ -3420,8 +3507,8 @@
                       <button type="button" class="ds-nav-mainmenu-snap" aria-expanded="true" data-nav-parent>
                         <img src="../../assets/icons/icon-sidebar-offline-medikal-on.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" data-nav-lead aria-hidden="true">
                         <div class="ds-nav-mainmenu-snap__body">
-                          <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Rekam Medis</span>
-                          <span data-nav-sub class="block text-[var(--color-text-secondary)] text-[var(--font-size-caption)] font-[var(--font-weight-regular)]">Modul medis</span>
+                          <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Rekam Medis</span>
+                          <span data-nav-sub class="block text-text-secondary text-caption font-normal">Modul medis</span>
                         </div>
                         <img src="../../assets/icons/icon-chevron-up.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" data-nav-trail aria-hidden="true">
                       </button>
@@ -3446,8 +3533,8 @@
                       <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf">
                         <img src="../../assets/icons/icon-sidebar-offline-product-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" data-nav-lead aria-hidden="true">
                         <div class="ds-nav-mainmenu-snap__body">
-                          <span class="ds-nav-mainmenu-snap__title block text-[var(--color-text-primary)] text-[var(--font-size-body3)] font-[var(--font-weight-regular)] leading-[var(--line-height-tight)]">Produk</span>
-                          <span data-nav-sub class="block text-[var(--color-text-secondary)] text-[var(--font-size-caption)] font-[var(--font-weight-regular)]">Stock &amp; Catalog</span>
+                          <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Produk</span>
+                          <span data-nav-sub class="block text-text-secondary text-caption font-normal">Stock &amp; Catalog</span>
                         </div>
                         <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
                       </button>
