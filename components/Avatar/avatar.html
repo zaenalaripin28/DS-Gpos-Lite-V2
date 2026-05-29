@@ -511,6 +511,71 @@
     @media (max-width: 480px) {
       .scroll-top-btn { bottom: 16px; right: 16px; }
     }
+      .variant-copy {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--color-neutral-n30);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+    .variant-copy--inline {
+      margin: 0;
+      padding: 0;
+      border-top: none;
+      flex: 1;
+      min-width: 140px;
+      max-width: 420px;
+    }
+    .parts-grid__cell .variant-copy {
+      margin-top: 8px;
+      padding-top: 0;
+      border-top: none;
+      justify-content: center;
+    }
+    .variant-matrix__label .variant-copy {
+      margin-top: 6px;
+      padding-top: 0;
+      border-top: none;
+    }
+    .variant-copy__code {
+      flex: 1;
+      min-width: 0;
+      font-size: 10px;
+      font-family: var(--font-primary);
+      color: var(--color-blue-b300);
+      background: var(--color-neutral-n20);
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--color-neutral-n30);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .variant-copy-btn {
+      flex-shrink: 0;
+      padding: 3px 8px;
+      background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n40);
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--color-neutral-n400);
+      cursor: pointer;
+      font-family: var(--font-primary);
+      transition: all 120ms ease;
+    }
+    .variant-copy-btn:hover {
+      background: var(--color-blue-b300);
+      border-color: var(--color-blue-b300);
+      color: var(--color-neutral-n0);
+    }
+    .variant-copy-btn.copied {
+      background: var(--color-green-g300);
+      border-color: var(--color-green-g300);
+      color: var(--color-neutral-n0);
+    }
   </style>
 </head>
 <body>
@@ -960,6 +1025,7 @@
             <div style="padding:14px 16px; background:var(--color-surface);">
               <div style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary); margin-bottom:4px;">Extra Large</div>
               <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-primary);">96×96px · <code>.ds-avatar--xl</code></div>
+              <div class="variant-copy"><code class="variant-copy__code">.ds-avatar--xl</code><button type="button" class="variant-copy-btn" data-copy="&lt;div class=&quot;ds-avatar ds-avatar--xl&quot;&gt;&lt;img class=&quot;ds-avatar__image&quot; src=&quot;...&quot; alt=&quot;&quot;&gt;&lt;div class=&quot;ds-avatar__presence&quot;&gt;&lt;/div&gt;&lt;/div&gt;">Salin</button></div>
             </div>
           </div>
 
@@ -974,6 +1040,7 @@
             <div style="padding:14px 16px; background:var(--color-surface);">
               <div style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary); margin-bottom:4px;">Large</div>
               <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-primary);">40×40px · <code>.ds-avatar--lg</code></div>
+              <div class="variant-copy"><code class="variant-copy__code">.ds-avatar--lg</code><button type="button" class="variant-copy-btn" data-copy="&lt;div class=&quot;ds-avatar ds-avatar--lg&quot;&gt;&lt;img class=&quot;ds-avatar__image&quot; src=&quot;...&quot; alt=&quot;&quot;&gt;&lt;div class=&quot;ds-avatar__presence&quot;&gt;&lt;/div&gt;&lt;/div&gt;">Salin</button></div>
             </div>
           </div>
 
@@ -988,6 +1055,7 @@
             <div style="padding:14px 16px; background:var(--color-surface);">
               <div style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary); margin-bottom:4px;">Medium</div>
               <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-primary);">32×32px · <code>.ds-avatar--md</code></div>
+              <div class="variant-copy"><code class="variant-copy__code">.ds-avatar--md</code><button type="button" class="variant-copy-btn" data-copy="&lt;div class=&quot;ds-avatar ds-avatar--md&quot;&gt;&lt;img class=&quot;ds-avatar__image&quot; src=&quot;...&quot; alt=&quot;&quot;&gt;&lt;div class=&quot;ds-avatar__presence&quot;&gt;&lt;/div&gt;&lt;/div&gt;">Salin</button></div>
             </div>
           </div>
 
@@ -1002,6 +1070,7 @@
             <div style="padding:14px 16px; background:var(--color-surface);">
               <div style="font-size:13px; font-weight:600; color:var(--color-text-primary); font-family:var(--font-primary); margin-bottom:4px;">Small</div>
               <div style="font-size:11px; color:var(--color-text-tertiary); font-family:var(--font-primary);">24×24px · <code>.ds-avatar--sm</code></div>
+              <div class="variant-copy"><code class="variant-copy__code">.ds-avatar--sm</code><button type="button" class="variant-copy-btn" data-copy="&lt;div class=&quot;ds-avatar ds-avatar--sm&quot;&gt;&lt;img class=&quot;ds-avatar__image&quot; src=&quot;...&quot; alt=&quot;&quot;&gt;&lt;div class=&quot;ds-avatar__presence&quot;&gt;&lt;/div&gt;&lt;/div&gt;">Salin</button></div>
             </div>
           </div>
 
@@ -1379,6 +1448,21 @@
 
   scrollTopBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  document.querySelectorAll('.variant-copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.getAttribute('data-copy');
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(function () {
+        btn.textContent = 'Tersalin!';
+        btn.classList.add('copied');
+        setTimeout(function () {
+          btn.textContent = 'Salin';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    });
   });
 </script>
 </body>

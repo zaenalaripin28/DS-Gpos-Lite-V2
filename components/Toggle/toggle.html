@@ -378,7 +378,73 @@
       border-color: var(--color-blue-b300);
       color: var(--color-neutral-n0);
     }
-    .tw-copy-btn.copied, .copy-btn.copied {
+    .tw-copy-btn.copied,     .variant-copy {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--color-neutral-n30);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+    .variant-copy--inline {
+      margin: 0;
+      padding: 0;
+      border-top: none;
+      flex: 1;
+      min-width: 140px;
+      max-width: 420px;
+    }
+    .parts-grid__cell .variant-copy {
+      margin-top: 8px;
+      padding-top: 0;
+      border-top: none;
+      justify-content: center;
+    }
+    .variant-matrix__label .variant-copy {
+      margin-top: 6px;
+      padding-top: 0;
+      border-top: none;
+    }
+    .variant-copy__code {
+      flex: 1;
+      min-width: 0;
+      font-size: 10px;
+      font-family: var(--font-primary);
+      color: var(--color-blue-b300);
+      background: var(--color-neutral-n20);
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--color-neutral-n30);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .variant-copy-btn {
+      flex-shrink: 0;
+      padding: 3px 8px;
+      background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n40);
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--color-neutral-n400);
+      cursor: pointer;
+      font-family: var(--font-primary);
+      transition: all 120ms ease;
+    }
+    .variant-copy-btn:hover {
+      background: var(--color-blue-b300);
+      border-color: var(--color-blue-b300);
+      color: var(--color-neutral-n0);
+    }
+    .variant-copy-btn.copied {
+      background: var(--color-green-g300);
+      border-color: var(--color-green-g300);
+      color: var(--color-neutral-n0);
+    }
+
+    .copy-btn.copied {
       background: var(--color-green-g300);
       border-color: var(--color-green-g300);
       color: var(--color-neutral-n0);
@@ -433,48 +499,6 @@
       z-index: 9999; transition: width .1s linear; border-radius: 0 2px 2px 0;
       pointer-events: none;
     }
-
-    /* ── Implementation ── */
-    .impl-section { background: var(--color-surface); border: 1px solid var(--color-neutral-n30); border-radius: 12px; overflow: hidden; margin-top: 16px; margin-bottom: 32px; }
-    .impl-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 18px; border-bottom: 1px solid var(--color-neutral-n30);
-      background: var(--color-neutral-n10);
-    }
-    .impl-title { font-size: var(--font-size-xs); font-weight: var(--font-weight-bold); color: var(--color-neutral-n900); letter-spacing: -.01em; }
-    .impl-tabs { display: flex; gap: 3px; background: var(--color-neutral-n30); padding: 3px; border-radius: 8px; }
-    .impl-tab {
-      padding: 4px 12px; border-radius: 6px; border: none; background: transparent;
-      font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold);
-      cursor: pointer; color: var(--color-neutral-n300); transition: all .12s;
-      font-family: var(--font-primary);
-    }
-    .impl-tab.active { background: var(--color-neutral-n900); color: var(--color-neutral-n0); box-shadow: 0 1px 3px rgba(0,0,0,.15); }
-    .impl-pane { display: none; padding: 12px 14px; }
-    .impl-pane.active { display: block; }
-    .code-row {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 8px 12px; background: var(--color-surface);
-      border-radius: 8px; margin-bottom: 5px;
-      border: 1px solid var(--color-neutral-n30); transition: border-color .12s, box-shadow .12s;
-    }
-    .code-row:hover { border-color: var(--color-blue-b75); box-shadow: 0 1px 4px rgba(30,127,214,.08); }
-    .code-swatch { width: 20px; height: 20px; border-radius: 4px; flex-shrink: 0; border: 1px solid rgba(0,0,0,.08); }
-    .code-token-name { font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold); color: var(--color-neutral-n400); flex: 0 0 84px; letter-spacing: -.01em; }
-    .code-snippet {
-      font-size: var(--font-size-xs); color: var(--color-primary-500); flex: 1;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-      background: var(--color-blue-b50); border-radius: 4px; margin: 0 8px; padding: 2px 8px;
-    }
-    .code-copy {
-      padding: 3px 10px; background: var(--color-neutral-n20);
-      border: 1px solid var(--color-neutral-n40); border-radius: 6px;
-      font-size: .6875rem; font-weight: var(--font-weight-semibold);
-      color: var(--color-neutral-n400); cursor: pointer; flex-shrink: 0;
-      transition: all .12s; letter-spacing: .02em; font-family: var(--font-primary);
-    }
-    .code-copy:hover { background: var(--color-primary-500); border-color: var(--color-primary-500); color: var(--color-neutral-n0); }
-    .code-copy.copied { background: var(--color-green-g300); border-color: var(--color-green-g300); color: var(--color-neutral-n0); }
 
     /* ── Hero Banner ── */
     .ds-hero-banner { position: relative; overflow: hidden; }
@@ -1028,59 +1052,11 @@
           </div>
         </div>
 
-        <h3 style="font-size:15px;font-weight:600;color:var(--color-text-primary);margin:0 0 12px;font-family:var(--font-primary);">size=regular</h3>
-        <div class="impl-section">
-          <div class="impl-header">
-            <span class="impl-title">Token &amp; implementasi — regular</span>
-            <div class="impl-tabs">
-              <button type="button" class="impl-tab active" data-pane="css-regular">CSS Variables</button>
-              <button type="button" class="impl-tab" data-pane="tw-regular">Tailwind</button>
-            </div>
-          </div>
-          <div class="impl-pane active" data-pane-id="css-regular">
-            <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n500);"></span><span class="code-token-name">Track off</span><code class="code-snippet">--color-neutral-n500</code><button type="button" class="code-copy" data-copy="--color-neutral-n500">Salin</button></div>
-            <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n400);"></span><span class="code-token-name">Off hover</span><code class="code-snippet">--color-neutral-n400</code><button type="button" class="code-copy" data-copy="--color-neutral-n400">Salin</button></div>
-            <div class="code-row"><span class="code-swatch" style="background:var(--color-green-g300);"></span><span class="code-token-name">Track on</span><code class="code-snippet">--color-green-g300</code><button type="button" class="code-copy" data-copy="--color-green-g300">Salin</button></div>
-            <div class="code-row"><span class="code-swatch" style="background:var(--color-green-g200);"></span><span class="code-token-name">On hover</span><code class="code-snippet">--color-green-g200</code><button type="button" class="code-copy" data-copy="--color-green-g200">Salin</button></div>
-            <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n0);"></span><span class="code-token-name">Thumb</span><code class="code-snippet">--color-neutral-n0</code><button type="button" class="code-copy" data-copy="--color-neutral-n0">Salin</button></div>
-            <div class="code-row"><span class="code-swatch" style="background:var(--color-blue-b200);"></span><span class="code-token-name">Focus ring</span><code class="code-snippet">--color-blue-b200</code><button type="button" class="code-copy" data-copy="--color-blue-b200">Salin</button></div>
-            <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n30);"></span><span class="code-token-name">Disabled</span><code class="code-snippet">--color-neutral-n30</code><button type="button" class="code-copy" data-copy="--color-neutral-n30">Salin</button></div>
-            <div class="code-row"><span class="code-token-name">Padding</span><code class="code-snippet">--space-025</code><button type="button" class="code-copy" data-copy="--space-025">Salin</button></div>
-          </div>
-          <div class="impl-pane" data-pane-id="tw-regular">
-            <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n500);"></span><span class="code-token-name">Track off</span><code class="code-snippet">bg-neutral-n500</code><button type="button" class="code-copy" data-copy="bg-neutral-n500">Salin</button></div>
-            <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n400);"></span><span class="code-token-name">Off hover</span><code class="code-snippet">bg-neutral-n400</code><button type="button" class="code-copy" data-copy="bg-neutral-n400">Salin</button></div>
-            <div class="code-row"><span class="code-swatch" style="background:var(--color-green-g300);"></span><span class="code-token-name">Track on</span><code class="code-snippet">bg-green-g300</code><button type="button" class="code-copy" data-copy="bg-green-g300">Salin</button></div>
-            <div class="code-row"><span class="code-swatch" style="background:var(--color-green-g200);"></span><span class="code-token-name">On hover</span><code class="code-snippet">bg-green-g200</code><button type="button" class="code-copy" data-copy="bg-green-g200">Salin</button></div>
-            <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n0);"></span><span class="code-token-name">Thumb</span><code class="code-snippet">bg-neutral-n0</code><button type="button" class="code-copy" data-copy="bg-neutral-n0">Salin</button></div>
-            <div class="code-row"><span class="code-swatch" style="background:var(--color-blue-b200);"></span><span class="code-token-name">Focus ring</span><code class="code-snippet">ring-blue-b200</code><button type="button" class="code-copy" data-copy="ring-blue-b200">Salin</button></div>
-            <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n30);"></span><span class="code-token-name">Disabled</span><code class="code-snippet">bg-neutral-n30</code><button type="button" class="code-copy" data-copy="bg-neutral-n30">Salin</button></div>
-          </div>
-        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 12px;flex-wrap:wrap;"><h3 style="font-size:15px;font-weight:600;color:var(--color-text-primary);margin:0;font-family:var(--font-primary);">size=regular</h3><div class="variant-copy variant-copy--inline"><code class="variant-copy__code">label.ds-toggle</code><button type="button" class="variant-copy-btn" data-copy="<label class=&quot;ds-toggle&quot;><input type=&quot;checkbox&quot; class=&quot;ds-toggle__input&quot; role=&quot;switch&quot;><span class=&quot;ds-toggle__track&quot;><span class=&quot;ds-toggle__thumb&quot;></span></span></label>">Salin</button></div></div>
+        
 
-        <h3 style="font-size:15px;font-weight:600;color:var(--color-text-primary);margin:32px 0 12px;font-family:var(--font-primary);">size=large</h3>
-        <div class="impl-section">
-          <div class="impl-header">
-            <span class="impl-title">Token &amp; implementasi — large</span>
-            <div class="impl-tabs">
-              <button type="button" class="impl-tab active" data-pane="css-large">CSS Variables</button>
-              <button type="button" class="impl-tab" data-pane="tw-large">Tailwind</button>
-            </div>
-          </div>
-          <div class="impl-pane active" data-pane-id="css-large">
-            <div class="code-row"><span class="code-token-name">Track</span><code class="code-snippet">52×28px</code><button type="button" class="code-copy" data-copy="52×28px">Salin</button></div>
-            <div class="code-row"><span class="code-token-name">Thumb</span><code class="code-snippet">24×24px</code><button type="button" class="code-copy" data-copy="24×24px">Salin</button></div>
-            <div class="code-row"><span class="code-token-name">Travel</span><code class="code-snippet">translateX(24px)</code><button type="button" class="code-copy" data-copy="translateX(24px)">Salin</button></div>
-            <div class="code-row"><span class="code-swatch" style="background:var(--color-green-g300);"></span><span class="code-token-name">Track on</span><code class="code-snippet">--color-green-g300</code><button type="button" class="code-copy" data-copy="--color-green-g300">Salin</button></div>
-            <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n500);"></span><span class="code-token-name">Track off</span><code class="code-snippet">--color-neutral-n500</code><button type="button" class="code-copy" data-copy="--color-neutral-n500">Salin</button></div>
-          </div>
-          <div class="impl-pane" data-pane-id="tw-large">
-            <div class="code-row"><span class="code-token-name">Modifier</span><code class="code-snippet">ds-toggle--large</code><button type="button" class="code-copy" data-copy="ds-toggle--large">Salin</button></div>
-            <div class="code-row"><span class="code-swatch" style="background:var(--color-green-g300);"></span><span class="code-token-name">Track on</span><code class="code-snippet">bg-green-g300</code><button type="button" class="code-copy" data-copy="bg-green-g300">Salin</button></div>
-            <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n500);"></span><span class="code-token-name">Track off</span><code class="code-snippet">bg-neutral-n500</code><button type="button" class="code-copy" data-copy="bg-neutral-n500">Salin</button></div>
-            <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n0);"></span><span class="code-token-name">Thumb</span><code class="code-snippet">bg-neutral-n0</code><button type="button" class="code-copy" data-copy="bg-neutral-n0">Salin</button></div>
-          </div>
-        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin:32px 0 12px;flex-wrap:wrap;"><h3 style="font-size:15px;font-weight:600;color:var(--color-text-primary);margin:0;font-family:var(--font-primary);">size=large</h3><div class="variant-copy variant-copy--inline"><code class="variant-copy__code">label.ds-toggle.ds-toggle--lg</code><button type="button" class="variant-copy-btn" data-copy="<label class=&quot;ds-toggle ds-toggle--lg&quot;><input type=&quot;checkbox&quot; class=&quot;ds-toggle__input&quot; role=&quot;switch&quot;><span class=&quot;ds-toggle__track&quot;><span class=&quot;ds-toggle__thumb&quot;></span></span></label>">Salin</button></div></div>
+        
 
         <p style="font-size:13px;font-weight:600;color:var(--color-text-primary);margin:28px 0 16px;font-family:var(--font-primary);">Interaktif (native switch)</p>
         <div style="display:flex;flex-wrap:wrap;gap:32px;align-items:center;padding:20px;background:var(--color-neutral-n10);border:1px solid var(--color-border);border-radius:12px;">
@@ -1266,42 +1242,21 @@
     }, { passive: true });
   })();
 
-  function copyToken(btn, text) {
-    navigator.clipboard.writeText(text).then(function () {
-      btn.textContent = 'Tersalin!';
-      btn.classList.add('copied');
-      setTimeout(function () {
-        btn.textContent = 'Salin';
-        btn.classList.remove('copied');
-      }, 2000);
-    });
-  }
-
-  function copySnippet(btn) {
-    var text = btn.getAttribute('data-copy');
-    if (text) copyToken(btn, text);
-  }
-
-  document.querySelectorAll('.code-copy').forEach(function (btn) {
-    btn.addEventListener('click', function () { copySnippet(this); });
-  });
-
-  function initImplTabs() {
-    document.querySelectorAll('.impl-tab').forEach(function (tab) {
-      tab.addEventListener('click', function () {
-        var section = tab.closest('.impl-section');
-        if (!section) return;
-        var paneId = tab.getAttribute('data-pane');
-        section.querySelectorAll('.impl-tab').forEach(function (t) { t.classList.remove('active'); });
-        section.querySelectorAll('.impl-pane').forEach(function (p) { p.classList.remove('active'); });
-        tab.classList.add('active');
-        var pane = section.querySelector('[data-pane-id="' + paneId + '"]');
-        if (pane) pane.classList.add('active');
+  document.querySelectorAll('.variant-copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var text = btn.getAttribute('data-copy');
+      if (!text) return;
+      navigator.clipboard.writeText(text).then(function () {
+        btn.textContent = 'Tersalin!';
+        btn.classList.add('copied');
+        setTimeout(function () {
+          btn.textContent = 'Salin';
+          btn.classList.remove('copied');
+        }, 2000);
       });
     });
-  }
+  });
 
-  initImplTabs();
 
   function copyHtml() {
     navigator.clipboard.writeText(document.getElementById('html-block').textContent).then(function () {
