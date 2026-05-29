@@ -272,19 +272,19 @@
 
     <div class="content-inner">
       <section class="mb-12">
-        <div class="ds-hero-banner rounded-2xl overflow-hidden mb-3 flex flex-col lg:flex-row bg-n900" style="border:1px solid var(--color-neutral-n500);">
+        <div class="ds-hero-banner rounded-2xl overflow-hidden mb-3 flex flex-col lg:flex-row bg-neutral-n900" style="border:1px solid var(--color-neutral-n500);">
           <div class="flex-1 px-8 py-10 lg:px-11 lg:py-12">
-            <div class="text-xs font-semibold uppercase tracking-[0.1em] text-b100 mb-4">Components · DS GPOS Lite V2</div>
-            <div class="font-bold text-n0 mb-3" style="font-size:2.25rem;line-height:1.1;">Text Area</div>
+            <div class="text-xs font-semibold uppercase tracking-[0.1em] text-blue-b100 mb-4">Components · DS GPOS Lite V2</div>
+            <div class="font-bold text-neutral-n0 mb-3" style="font-size:2.25rem;line-height:1.1;">Text Area</div>
             <p class="text-sm leading-relaxed max-w-xl mb-6" style="color:var(--color-neutral-n50);">Komponen input multi-baris untuk konten panjang seperti catatan, deskripsi, dan alasan. Mengikuti semantic color token, spacing token, typography token, dan interaction pattern yang sama seperti input komponen lain.</p>
-            <div class="flex flex-wrap gap-2">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border border-b75 text-b100">Multi-line input</span>
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border border-b75 text-b100">Hover / Focus / Invalid / Disabled</span>
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border border-b75 text-b100">Figma-synced</span>
+            <div class="flex flex-wrap gap-100">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border border-blue-b75 text-blue-b100">Multi-line input</span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border border-blue-b75 text-blue-b100">Hover / Focus / Invalid / Disabled</span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border border-blue-b75 text-blue-b100">Figma-synced</span>
             </div>
           </div>
-          <div class="lg:w-96 p-6 flex items-center">
-            <div class="w-full preview-card p-4">
+          <div class="lg:w-96 p-300 flex items-center">
+            <div class="w-full preview-card p-200">
               <label class="ds-text-area">
                 <textarea class="ds-text-area__field" placeholder="Tulis catatan transaksi..."></textarea>
               </label>
@@ -296,17 +296,17 @@
       <section style="margin-bottom:48px;">
         <h2>Varian &amp; State</h2>
         <p style="color:var(--color-text-tertiary);margin-bottom:16px;">Gunakan state sesuai konteks interaksi komponen.</p>
-        <div class="grid md:grid-cols-2 gap-4">
-          <div class="preview-card p-4"><div class="text-xs mb-2 text-secondary">Default</div><label class="ds-text-area"><textarea class="ds-text-area__field" placeholder="Contoh teks"></textarea></label></div>
-          <div class="preview-card p-4"><div class="text-xs mb-2 text-secondary">Focus</div><label class="ds-text-area"><textarea class="ds-text-area__field ds-text-area__field--focus">Pengguna sedang mengetik...</textarea></label></div>
-          <div class="preview-card p-4"><div class="text-xs mb-2 text-secondary">Invalid</div><label class="ds-text-area ds-text-area--invalid"><textarea class="ds-text-area__field" placeholder="Field wajib diisi"></textarea></label></div>
-          <div class="preview-card p-4"><div class="text-xs mb-2 text-secondary">Disabled</div><label class="ds-text-area"><textarea class="ds-text-area__field" disabled>Field nonaktif</textarea></label></div>
+        <div class="grid md:grid-cols-2 gap-200">
+          <div class="preview-card p-200"><div class="text-xs mb-2 text-secondary">Default</div><label class="ds-text-area"><textarea class="ds-text-area__field" placeholder="Contoh teks"></textarea></label></div>
+          <div class="preview-card p-200"><div class="text-xs mb-2 text-secondary">Focus</div><label class="ds-text-area"><textarea class="ds-text-area__field ds-text-area__field--focus">Pengguna sedang mengetik...</textarea></label></div>
+          <div class="preview-card p-200"><div class="text-xs mb-2 text-secondary">Invalid</div><label class="ds-text-area ds-text-area--invalid"><textarea class="ds-text-area__field" placeholder="Field wajib diisi"></textarea></label></div>
+          <div class="preview-card p-200"><div class="text-xs mb-2 text-secondary">Disabled</div><label class="ds-text-area"><textarea class="ds-text-area__field" disabled>Field nonaktif</textarea></label></div>
         </div>
       </section>
 
       <section style="margin-bottom:48px;">
         <h2>Anatomy</h2>
-        <div class="preview-card p-5">
+        <div class="preview-card p-250">
           <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Informasi Anatomy</div>
           <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.6;">
             <li>A. Container: wrapper komponen dengan lebar mengikuti parent.</li>
@@ -319,7 +319,7 @@
 
       <section style="margin-bottom:48px;">
         <h2>Micro Interaction</h2>
-        <div class="preview-card p-5">
+        <div class="preview-card p-250">
           <ul style="color:var(--color-text-tertiary);font-size:13px;line-height:1.7;">
             <li>Hover: border berubah ke <code>var(--color-neutral-n100)</code>.</li>
             <li>Focus: border berubah ke <code>var(--color-blue-b300)</code> dan ring 2px <code>var(--color-blue-b200)</code>.</li>
@@ -331,15 +331,15 @@
 
       <section style="margin-bottom:48px;">
         <h2>Informasi Penggunaan</h2>
-        <div class="grid md:grid-cols-2 gap-4">
-          <div class="preview-card p-5">
+        <div class="grid md:grid-cols-2 gap-200">
+          <div class="preview-card p-250">
             <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;display:flex;align-items:center;gap:8px;">
               <img src="../../assets/icons/icon-document-text.svg" alt="" width="14" height="14">
               Section Information
             </div>
             <p style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;">Text Area digunakan saat pengguna perlu menulis input panjang (lebih dari satu baris), misalnya catatan tambahan, alasan, komentar, atau deskripsi produk.</p>
           </div>
-          <div class="preview-card p-5">
+          <div class="preview-card p-250">
             <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Aksesibilitas</div>
             <p style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;">Gunakan label yang jelas, placeholder sebagai bantuan singkat, dan state invalid dengan pesan error terpisah agar keterbacaan serta validasi tetap konsisten.</p>
           </div>
@@ -348,8 +348,8 @@
 
       <section style="margin-bottom:48px;">
         <h2>Do &amp; Don&apos;t</h2>
-        <div class="grid md:grid-cols-2 gap-4">
-          <div class="preview-card p-5">
+        <div class="grid md:grid-cols-2 gap-200">
+          <div class="preview-card p-250">
             <div style="font-weight:700;color:var(--color-green-g400);margin-bottom:8px;">Do (Lakukan)</div>
             <ul style="color:var(--color-text-tertiary);font-size:13px;line-height:1.7;">
               <li>Gunakan Text Area untuk input panjang/multi-baris.</li>
@@ -358,7 +358,7 @@
               <li>Ikuti token spacing dan typography yang sudah ada.</li>
             </ul>
           </div>
-          <div class="preview-card p-5">
+          <div class="preview-card p-250">
             <div style="font-weight:700;color:var(--color-red-r300);margin-bottom:8px;">Don&apos;t (Hindari)</div>
             <ul style="color:var(--color-text-tertiary);font-size:13px;line-height:1.7;">
               <li>Jangan pakai Text Area untuk input satu kata/sangat pendek.</li>

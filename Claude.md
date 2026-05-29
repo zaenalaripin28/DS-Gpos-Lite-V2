@@ -119,3 +119,6 @@ Preferred output:
 - old code
 + new code
 ```
+
+Never use raw Tailwind colors.
+Always use semantic token utilities.
