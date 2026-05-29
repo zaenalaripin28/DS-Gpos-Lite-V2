@@ -5,7 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shadows - Design System GPOS Lite V 2.0</title>
   <link rel="stylesheet" href="../../styles/globals.css">
+  <link rel="stylesheet" href="../../styles/enhancements.css">
   <style>
+    /* ── Scroll Progress ── */
+    .scroll-progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+      background: linear-gradient(90deg, var(--color-primary-500), var(--color-blue-b75));
+      z-index: 9999; transition: width .1s linear; border-radius: 0 2px 2px 0;
+      pointer-events: none;
+    }
     /* ============================================================
        SHADOWS PAGE — Design Token
        Shadow 1 — Multi-layer drop shadow
@@ -21,7 +29,7 @@
 
     /* ── Hero Preview ────────────────────────────────────────── */
     .shadow-preview-wrap {
-      background: #F5F6F7;
+      background: var(--color-neutral-n20);
       background-image:
         linear-gradient(45deg, #E0E4EA 25%, transparent 25%),
         linear-gradient(-45deg, #E0E4EA 25%, transparent 25%),
@@ -35,7 +43,7 @@
       align-items: center;
       justify-content: center;
       margin-bottom: 32px;
-      border: 1px solid #DFE2E6;
+      border: 1px solid var(--color-neutral-n40);
     }
     .shadow-card-demo {
       width: 200px;
@@ -52,7 +60,7 @@
     .shadow-card-demo-label {
       font-size: 11px;
       font-weight: 700;
-      color: #6B788E;
+      color: var(--color-neutral-n300);
       letter-spacing: 0.06em;
       text-transform: uppercase;
       font-family: var(--font-primary);
@@ -60,14 +68,14 @@
     .shadow-card-demo-name {
       font-size: 15px;
       font-weight: 700;
-      color: #091E42;
+      color: var(--color-neutral-n900);
       font-family: var(--font-primary);
     }
 
     /* ── Token Header Card ───────────────────────────────────── */
     .token-header-card {
-      background: #fff;
-      border: 1px solid #DFE2E6;
+      background: var(--color-neutral-n0);
+      border: 1px solid var(--color-neutral-n40);
       border-radius: 12px;
       padding: 20px 24px;
       display: flex;
@@ -96,12 +104,12 @@
     .token-name-big {
       font-size: 18px;
       font-weight: 700;
-      color: #091E42;
+      color: var(--color-neutral-n900);
       font-family: var(--font-primary);
     }
     .token-sub {
       font-size: 12px;
-      color: #6B788E;
+      color: var(--color-neutral-n300);
       font-family: var(--font-primary);
     }
     .multilayer-badge {
@@ -121,15 +129,15 @@
 
     /* ── Layer Anatomy Table ─────────────────────────────────── */
     .anatomy-section {
-      background: #fff;
-      border: 1px solid #DFE2E6;
+      background: var(--color-neutral-n0);
+      border: 1px solid var(--color-neutral-n40);
       border-radius: 12px;
       overflow: hidden;
       margin-bottom: 24px;
     }
     .anatomy-header {
       padding: 16px 24px;
-      border-bottom: 1px solid #EBEDF0;
+      border-bottom: 1px solid var(--color-neutral-n30);
       display: flex;
       align-items: center;
       gap: 10px;
@@ -137,14 +145,14 @@
     .anatomy-header-title {
       font-size: 13px;
       font-weight: 700;
-      color: #091E42;
+      color: var(--color-neutral-n900);
       font-family: var(--font-primary);
       text-transform: uppercase;
       letter-spacing: 0.06em;
     }
     .layer-count {
-      background: #F5F6F7;
-      color: #42526D;
+      background: var(--color-neutral-n20);
+      color: var(--color-neutral-n500);
       font-size: 11px;
       font-weight: 700;
       padding: 2px 8px;
@@ -156,31 +164,31 @@
       border-collapse: collapse;
     }
     .anatomy-table thead tr {
-      background: #F8FAFC;
+      background: var(--color-neutral-n10);
     }
     .anatomy-table th {
       padding: 10px 20px;
       font-size: 11px;
       font-weight: 700;
-      color: #6B788E;
+      color: var(--color-neutral-n300);
       text-align: left;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      border-bottom: 1px solid #EBEDF0;
+      border-bottom: 1px solid var(--color-neutral-n30);
       font-family: var(--font-primary);
       white-space: nowrap;
     }
     .anatomy-table td {
       padding: 14px 20px;
       font-size: 13px;
-      color: #354764;
-      border-bottom: 1px solid #F5F6F7;
+      color: var(--color-neutral-n600);
+      border-bottom: 1px solid var(--color-neutral-n20);
       font-family: var(--font-primary);
     }
     .anatomy-table tr:last-child td { border-bottom: none; }
     .anatomy-table td:first-child {
       font-weight: 700;
-      color: #091E42;
+      color: var(--color-neutral-n900);
     }
     .layer-num {
       display: inline-flex;
@@ -277,9 +285,9 @@
       border-radius: 12px;
       padding: 18px 20px;
     }
-    .info-card-usage { background: #EBF5FF; border: 1px solid #A3CBEE; }
-    .info-card-best  { background: #E6F7EF; border: 1px solid #6BCEA0; }
-    .info-card-avoid { background: #FDE8E9; border: 1px solid #F7A2A5; }
+    .info-card-usage { background: var(--color-blue-b50); border: 1px solid var(--color-blue-b75); }
+    .info-card-best  { background: var(--color-green-g50); border: 1px solid var(--color-green-g100); }
+    .info-card-avoid { background: var(--color-red-r50); border: 1px solid var(--color-red-r75); }
 
     .info-card-head {
       font-size: 11.5px;
@@ -289,14 +297,14 @@
       margin-bottom: 12px;
       font-family: var(--font-primary);
     }
-    .info-card-usage .info-card-head { color: #155996; }
-    .info-card-best  .info-card-head { color: #007740; }
-    .info-card-avoid .info-card-head { color: #A51419; }
+    .info-card-usage .info-card-head { color: var(--color-blue-b400); }
+    .info-card-best  .info-card-head { color: var(--color-green-g400); }
+    .info-card-avoid .info-card-head { color: var(--color-red-r400); }
 
     .info-card ul { margin: 0; padding-left: 16px; list-style: disc; }
     .info-card li {
       font-size: 13px;
-      color: #243757;
+      color: var(--color-neutral-n700);
       margin-bottom: 6px;
       line-height: 1.5;
       font-family: var(--font-primary);
@@ -312,8 +320,8 @@
 
     /* ── Implementation Code Section ─────────────────────────── */
     .impl-section {
-      background: #fff;
-      border: 1px solid #DFE2E6;
+      background: var(--color-neutral-n0);
+      border: 1px solid var(--color-neutral-n40);
       border-radius: 12px;
       overflow: hidden;
       margin-bottom: 40px;
@@ -323,21 +331,22 @@
       align-items: center;
       justify-content: space-between;
       padding: 18px 24px;
-      border-bottom: 1px solid #EBEDF0;
+      border-bottom: 1px solid var(--color-neutral-n30);
+      background: var(--color-neutral-n10);
       flex-wrap: wrap;
       gap: 12px;
     }
     .impl-title {
       font-size: 15px;
       font-weight: 600;
-      color: #091E42;
+      color: var(--color-neutral-n900);
       font-family: var(--font-primary);
       margin: 0;
     }
     .impl-toggle {
       display: flex;
       gap: 4px;
-      background: #F5F6F7;
+      background: var(--color-neutral-n30);
       padding: 4px;
       border-radius: 8px;
     }
@@ -349,11 +358,11 @@
       cursor: pointer;
       font-size: 13px;
       font-weight: 500;
-      color: #6B788E;
+      color: var(--color-neutral-n300);
       font-family: var(--font-primary);
       transition: all 0.15s ease;
     }
-    .impl-tab-btn.active { background: #091E42; color: #fff; }
+    .impl-tab-btn.active { background: var(--color-neutral-n900); color: var(--color-neutral-n0); }
 
     /* Tailwind impl */
     .impl-body { padding: 4px 0; }
@@ -363,17 +372,17 @@
       align-items: center;
       gap: 16px;
       padding: 14px 24px;
-      border-bottom: 1px solid #F5F6F7;
+      border-bottom: 1px solid var(--color-neutral-n20);
       transition: background 0.1s;
       flex-wrap: wrap;
     }
     .impl-row:last-child { border-bottom: none; }
-    .impl-row:hover { background: #F8FAFC; }
+    .impl-row:hover { background: var(--color-neutral-n10); }
 
     .impl-token-name {
       font-size: 13px;
       font-weight: 700;
-      color: #091E42;
+      color: var(--color-neutral-n900);
       width: 110px;
       flex-shrink: 0;
       font-family: var(--font-primary);
@@ -381,27 +390,27 @@
     .impl-code-text {
       flex: 1;
       font-size: 12.5px;
-      color: #354764;
+      color: var(--color-neutral-n600);
       font-family: var(--font-primary);
       min-width: 0;
     }
     .impl-copy {
       padding: 5px 14px;
       border-radius: 6px;
-      border: 1px solid #DFE2E6;
-      background: #fff;
+      border: 1px solid var(--color-neutral-n40);
+      background: var(--color-neutral-n0);
       cursor: pointer;
       font-size: 11.5px;
       font-weight: 600;
-      color: #505F79;
+      color: var(--color-neutral-n400);
       font-family: var(--font-primary);
       letter-spacing: 0.03em;
       white-space: nowrap;
       transition: all 0.15s ease;
       flex-shrink: 0;
     }
-    .impl-copy:hover  { border-color: #1E7FD6; color: #1E7FD6; background: #E9F2FB; }
-    .impl-copy.copied { background: #E9F2FB; color: #1E7FD6; border-color: #1E7FD6; }
+    .impl-copy:hover  { border-color: var(--color-primary-500); color: var(--color-primary-500); background: var(--color-blue-b50); }
+    .impl-copy.copied { background: var(--color-blue-b50); color: var(--color-primary-500); border-color: var(--color-primary-500); }
 
     /* Config block inside impl */
     .impl-config-wrap {
@@ -485,6 +494,7 @@
   <script>tailwind.config={theme:{extend:{colors:{b50:'#E9F2FB',b75:'#A3CBEE',b100:'#7DB5E7',b200:'#4495DD',b300:'#1E7FD6',b400:'#155996',n0:'#FFFFFF',n10:'#FAFBFB',n20:'#F5F6F7',n30:'#EBEDF0',n40:'#DFE2E6',n900:'#091E42'}}}}</script>
 </head>
 <body>
+<div class="scroll-progress-bar" id="scroll-progress"></div>
 <div class="container">
 
   <!-- Mobile overlay -->
@@ -1080,6 +1090,16 @@
 
 <script src="../../scripts/script.js"></script>
 <script>
+/* Scroll progress */
+(function() {
+  const bar = document.getElementById('scroll-progress');
+  if (!bar) return;
+  window.addEventListener('scroll', function() {
+    const s = document.documentElement;
+    const pct = (s.scrollTop / (s.scrollHeight - s.clientHeight)) * 100;
+    bar.style.width = Math.min(pct, 100) + '%';
+  }, { passive: true });
+})();
 /* ============================================================
    Shadows Page — Impl Toggle & Copy Buttons
    ============================================================ */

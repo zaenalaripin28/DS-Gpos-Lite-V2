@@ -5,7 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Grid & Layout - Design System GPOS Lite V 2.0</title>
   <link rel="stylesheet" href="../../styles/globals.css">
+  <link rel="stylesheet" href="../../styles/enhancements.css">
   <style>
+    /* ── Scroll Progress ── */
+    .scroll-progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+      background: linear-gradient(90deg, var(--color-primary-500), var(--color-blue-b75));
+      z-index: 9999; transition: width .1s linear; border-radius: 0 2px 2px 0;
+      pointer-events: none;
+    }
     /* ============================================================
        GRID PAGE — Local CSS
        Source: DS GPOS Lite Figma → Grid & Layout Tokens
@@ -41,21 +49,23 @@
       gap: 6px;
       padding: 6px 16px;
       border-radius: 999px;
-      border: 1.5px solid #DFE2E6;
-      background: #fff;
+      border: 1.5px solid var(--color-neutral-n40);
+      background: var(--color-neutral-n0);
       cursor: pointer;
       font-size: 14px;
       font-weight: 500;
-      color: #505F79;
+      color: var(--color-neutral-n400);
       font-family: var(--font-primary);
       transition: all 0.15s ease;
       white-space: nowrap;
+      box-shadow: 0 1px 2px rgba(0,0,0,.04);
     }
-    .filter-tab:hover { border-color: #1E7FD6; color: #1E7FD6; }
+    .filter-tab:hover { border-color: var(--color-primary-500); color: var(--color-primary-500); background: var(--color-blue-b50); }
     .filter-tab.active {
-      background: #1E7FD6;
-      border-color: #1E7FD6;
-      color: #fff;
+      background: var(--color-primary-500);
+      border-color: var(--color-primary-500);
+      color: var(--color-neutral-n0);
+      box-shadow: 0 2px 6px rgba(30,127,214,.3);
     }
     .tab-dot {
       width: 8px; height: 8px;
@@ -81,18 +91,20 @@
     .section-title {
       font-size: 22px;
       font-weight: 700;
-      color: #091E42;
+      color: var(--color-neutral-n900);
       font-family: var(--font-primary);
       margin: 0;
+      letter-spacing: -0.02em;
     }
     .token-count {
-      background: #F5F6F7;
-      color: #42526D;
+      background: var(--color-neutral-n20);
+      color: var(--color-neutral-n500);
       font-size: 12px;
       font-weight: 600;
       padding: 2px 10px;
       border-radius: 999px;
       font-family: var(--font-primary);
+      border: 1px solid var(--color-neutral-n30);
     }
     .cat-badge {
       font-size: 11px;
@@ -103,14 +115,14 @@
       text-transform: uppercase;
       font-family: var(--font-primary);
     }
-    .badge-sm  { background: #E9F2FB; color: #155996; border: 1px solid #7DB5E7; }
-    .badge-md  { background: #E9F2FB; color: #1E7FD6; border: 1px solid #A3CBEE; }
-    .badge-lg  { background: #EEF7FF; color: #115188; border: 1px solid #155996; }
-    .badge-xl  { background: #E9F0FA; color: #124D83; border: 1px solid #124D83; }
+    .badge-sm  { background: var(--color-blue-b50); color: var(--color-blue-b400); border: 1px solid var(--color-blue-b100); }
+    .badge-md  { background: var(--color-blue-b50); color: var(--color-primary-500); border: 1px solid var(--color-blue-b75); }
+    .badge-lg  { background: var(--color-blue-b50); color: var(--color-blue-b400); border: 1px solid var(--color-blue-b400); }
+    .badge-xl  { background: var(--color-blue-b50); color: var(--color-blue-b400); border: 1px solid var(--color-blue-b400); }
 
     .section-desc {
       font-size: 14px;
-      color: #42526D;
+      color: var(--color-neutral-n500);
       margin-bottom: 24px;
       line-height: 1.6;
       font-family: var(--font-primary);
@@ -118,11 +130,12 @@
 
     /* ── Spec Card ───────────────────────────────────────────── */
     .spec-card {
-      background: #fff;
-      border: 1px solid #DFE2E6;
+      background: var(--color-neutral-n0);
+      border: 1px solid var(--color-neutral-n30);
       border-radius: 12px;
       overflow: hidden;
       margin-bottom: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.04);
     }
 
     .spec-card-header {
@@ -130,15 +143,15 @@
       align-items: center;
       justify-content: space-between;
       padding: 14px 20px;
-      border-bottom: 1px solid #EBEDF0;
-      background: #FAFBFC;
+      border-bottom: 1px solid var(--color-neutral-n30);
+      background: var(--color-neutral-n10);
       flex-wrap: wrap;
       gap: 8px;
     }
     .spec-card-title {
       font-size: 15px;
       font-weight: 700;
-      color: #091E42;
+      color: var(--color-neutral-n900);
       font-family: var(--font-primary);
       margin: 0;
     }
@@ -152,31 +165,31 @@
       text-transform: uppercase;
     }
     .badge-fluid {
-      background: #E6F7EF;
-      color: #007740;
-      border: 1px solid #6BCEA0;
+      background: var(--color-green-g50);
+      color: var(--color-green-g400);
+      border: 1px solid var(--color-green-g100);
     }
     .badge-fixed {
-      background: #EEF7FF;
-      color: #124D83;
-      border: 1px solid #A3CBEE;
+      background: var(--color-blue-b50);
+      color: var(--color-blue-b400);
+      border: 1px solid var(--color-blue-b75);
     }
 
     /* Spec meta row */
     .spec-meta-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      border-bottom: 1px solid #EBEDF0;
+      border-bottom: 1px solid var(--color-neutral-n30);
     }
     .spec-meta-item {
       padding: 12px 20px;
-      border-right: 1px solid #F0F1F3;
+      border-right: 1px solid var(--color-neutral-n20);
     }
     .spec-meta-item:last-child { border-right: none; }
     .spec-meta-label {
       font-size: 10.5px;
       font-weight: 700;
-      color: #6B788E;
+      color: var(--color-neutral-n300);
       text-transform: uppercase;
       letter-spacing: 0.07em;
       font-family: var(--font-primary);
@@ -185,20 +198,20 @@
     .spec-meta-value {
       font-size: 20px;
       font-weight: 700;
-      color: #091E42;
+      color: var(--color-neutral-n900);
       font-family: var(--font-primary);
       line-height: 1.2;
     }
     .spec-meta-sub {
       font-size: 11px;
-      color: #8590A2;
+      color: var(--color-neutral-n200);
       font-family: var(--font-primary);
       margin-top: 2px;
     }
 
     /* Grid Visual Preview */
     .grid-preview-wrap {
-      background: #E8E8E8;
+      background: var(--color-neutral-n30);
       padding: 20px 20px 16px;
       overflow-x: auto;
     }
@@ -211,15 +224,15 @@
     .device-frame { display: flex; flex-direction: column; align-items: center; gap: 6px; }
     .device-label {
       font-size: 10.5px;
-      color: #505F79;
+      color: var(--color-neutral-n400);
       font-family: var(--font-primary);
       font-weight: 500;
       text-align: center;
       line-height: 1.3;
     }
     .device-screen {
-      background: #fff;
-      border: 1.5px solid #B8BFC9;
+      background: var(--color-neutral-n0);
+      border: 1.5px solid var(--color-neutral-n100);
       border-radius: 3px;
       box-sizing: border-box;
       display: flex;
@@ -236,17 +249,17 @@
     }
     .col-block {
       flex: 1;
-      background: #C8DBEF;
+      background: var(--color-blue-b75);
       border-radius: 1px;
       min-width: 0;
     }
     .device-size {
       font-size: 9px;
-      color: #8590A2;
+      color: var(--color-neutral-n200);
       font-family: var(--font-primary);
       text-align: center;
       padding: 3px 0 4px;
-      border-top: 1px solid #EBEDF0;
+      border-top: 1px solid var(--color-neutral-n30);
     }
 
     /* ── Info Cards ──────────────────────────────────────────── */
@@ -390,6 +403,66 @@
     .page-header h1     { font-family: var(--font-primary); }
     .page-header .subtitle { font-family: var(--font-primary); }
 
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+    }
+
+    /* ── Sidebar dark theme ── */
+    .page-home .sidebar { background-color: var(--sidebar-bg); }
+    .page-home .sidebar-header { background-color: var(--sidebar-header-bg); border-bottom-color: var(--sidebar-border); }
+    .page-home .sidebar-brand-text .logo    { color: var(--sidebar-logo-color); }
+    .page-home .sidebar-brand-text .version { color: var(--sidebar-version-color); }
+    .page-home .sidebar-close-btn          { color: var(--sidebar-link-color); }
+    .page-home .sidebar-close-btn:hover    { color: var(--color-text-inverse); background: transparent; }
+    .page-home .sidebar-search { border-bottom-color: var(--sidebar-border); }
+    .page-home .search-input {
+      background-color: var(--sidebar-search-bg);
+      border-color: var(--sidebar-search-border);
+      color: var(--sidebar-link-color);
+    }
+    .page-home .search-input::placeholder { color: var(--sidebar-section-title); }
+    .page-home .search-input:focus {
+      border-color: var(--color-primary-500);
+      background-color: var(--sidebar-link-hover-bg);
+      color: var(--sidebar-link-hover-color);
+      box-shadow: 0 0 0 3px rgba(30, 127, 214, 0.15);
+    }
+    .page-home .nav-scroll { scrollbar-color: var(--sidebar-border) transparent; }
+    .page-home .nav-scroll::-webkit-scrollbar-thumb { background: var(--sidebar-border); }
+    .page-home .nav-title { color: var(--sidebar-section-title); }
+    .page-home .nav-link {
+      color: var(--sidebar-link-color);
+      border-left: 2px solid transparent;
+      border-radius: var(--border-radius-md);
+    }
+    .page-home .nav-link:hover {
+      background-color: var(--sidebar-link-hover-bg);
+      color: var(--sidebar-link-hover-color);
+      border-left-color: rgba(30, 127, 214, 0.5);
+    }
+    .page-home .nav-link.active {
+      background-color: var(--sidebar-link-active-bg);
+      color: var(--sidebar-link-active-color);
+      border-left-color: var(--sidebar-link-active-border);
+    }
+    .page-home .nav-link svg        { opacity: 0.6; }
+    .page-home .nav-link:hover svg,
+    .page-home .nav-link.active svg { opacity: 1; }
+    .page-home .sidebar-footer {
+      background-color: var(--sidebar-header-bg);
+      border-top-color: var(--sidebar-border);
+    }
+    .page-home .system-status-indicator { color: var(--color-success-400); }
+    .page-home .status-dot-live {
+      background: var(--color-success-400);
+      box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.25);
+    }
+    .page-home .tailwind-badge {
+      background: rgba(6, 182, 212, 0.08);
+      border-color: rgba(6, 182, 212, 0.2);
+      color: var(--color-secondary-300);
+    }
+
     @media (max-width: 640px) {
       .spec-meta-grid { grid-template-columns: repeat(2, 1fr); }
       .spec-meta-item:nth-child(2) { border-right: none; }
@@ -415,7 +488,8 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script>tailwind.config={theme:{extend:{colors:{b50:'#E9F2FB',b75:'#A3CBEE',b100:'#7DB5E7',b200:'#4495DD',b300:'#1E7FD6',b400:'#155996',n0:'#FFFFFF',n10:'#FAFBFB',n20:'#F5F6F7',n30:'#EBEDF0',n40:'#DFE2E6',n900:'#091E42'}}}}</script>
 </head>
-<body>
+<body class="page-home">
+<div id="scroll-progress" class="scroll-progress-bar"></div>
 <div class="container">
 
   <!-- Mobile overlay -->
@@ -652,6 +726,10 @@
     </div>
 
     <div class="sidebar-footer">
+      <div class="system-status-indicator">
+        <div class="status-dot-live"></div>
+        <span>v2.0 — All Systems Active</span>
+      </div>
       <div class="tailwind-badge">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 6C9.33 6 7.67 7.33 7 10c1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35.98 1 2.09 2.15 4.59 2.15C19.67 12 21.33 10.67 22 8c-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C15.61 7.15 14.5 6 12 6zm-7 6c-2.67 0-4.33 1.33-5 4 1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35C6.39 17.15 7.5 18 10 18c2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C8.61 12.85 7.5 12 5 12z"/></svg>
         Built with Tailwind CSS
@@ -668,10 +746,15 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
       <div class="breadcrumb">
-        <a href="../../index.html">Home</a><span class="breadcrumb-sep">/</span><a href="#">Foundations</a><span class="breadcrumb-sep">/</span><span class="current">Grid &amp; Layout</span>
+        <span class="topbar-section-label">Foundations</span>
+        <span class="breadcrumb-sep-slash">/</span>
+        <span class="current">Grid &amp; Layout</span>
       </div>
       <div class="topbar-actions">
-        <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="topbar-link" target="_blank">GitHub</a>
+        <a href="https://github.com/zaenalaripin28/DS-Gpos-Lite-V2" class="topbar-link" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub
+        </a>
         <span class="version-badge">v2.0</span>
       </div>
     </div>
@@ -1546,6 +1629,18 @@
         p.classList.toggle('active', p.dataset.panel === target);
       });
     });
+  })();
+
+  /* ── Scroll progress ── */
+  (function () {
+    var bar = document.getElementById('scroll-progress');
+    if (!bar) return;
+    var updateProgress = function () {
+      var docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      bar.style.width = docHeight > 0 ? (window.scrollY / docHeight * 100) + '%' : '0%';
+    };
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
   })();
 </script>
 </body>
