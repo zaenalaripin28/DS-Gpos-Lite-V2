@@ -111,7 +111,7 @@
   </script>
   <style>
     /* ================================================================
-       DS Lozenge — token-based (Lozenge/figma/Lozenge-components.png)
+       DS Lozenge — token-based
        appearance: default | inprogress | moved | new | removed | success
        style: subtle (default) | bold (.ds-lozenge--bold)
     ================================================================ */
@@ -396,9 +396,87 @@
     [data-theme="dark"] .variant-matrix__cell,
     [data-theme="dark"] .variant-matrix__head { background: #0F1D30; border-color: #1A2E48; }
     [data-theme="dark"] .variant-matrix__label { background: #080F1E; border-color: #1A2E48; }
+
+    .scroll-progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+      background: linear-gradient(90deg, var(--color-primary-500), var(--color-blue-b75));
+      z-index: 9999; transition: width .1s linear; border-radius: 0 2px 2px 0;
+      pointer-events: none;
+    }
+    .impl-section { background: var(--color-surface); border: 1px solid var(--color-neutral-n30); border-radius: 12px; overflow: hidden; }
+    .impl-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 18px; border-bottom: 1px solid var(--color-neutral-n30);
+      background: var(--color-neutral-n10);
+    }
+    .impl-title { font-size: var(--font-size-xs); font-weight: var(--font-weight-bold); color: var(--color-neutral-n900); letter-spacing: -.01em; }
+    .impl-tabs { display: flex; gap: 3px; background: var(--color-neutral-n30); padding: 3px; border-radius: 8px; }
+    .impl-tab {
+      padding: 4px 12px; border-radius: 6px; border: none; background: transparent;
+      font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold);
+      cursor: pointer; color: var(--color-neutral-n300); transition: all .12s;
+      font-family: var(--font-primary);
+    }
+    .impl-tab.active { background: var(--color-neutral-n900); color: var(--color-neutral-n0); box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+    .impl-pane { display: none; padding: 12px 14px; }
+    .impl-pane.active { display: block; }
+    .code-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 12px; background: var(--color-surface);
+      border-radius: 8px; margin-bottom: 5px;
+      border: 1px solid var(--color-neutral-n30); transition: border-color .12s, box-shadow .12s;
+    }
+    .code-row:hover { border-color: var(--color-blue-b75); box-shadow: 0 1px 4px rgba(30,127,214,.08); }
+    .code-swatch { width: 20px; height: 20px; border-radius: 4px; flex-shrink: 0; border: 1px solid rgba(0,0,0,.08); }
+    .code-token-name { font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold); color: var(--color-neutral-n400); flex: 0 0 84px; letter-spacing: -.01em; }
+    .code-snippet {
+      font-size: var(--font-size-xs); color: var(--color-primary-500); flex: 1;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      background: var(--color-blue-b50); border-radius: 4px; margin: 0 8px; padding: 2px 8px;
+    }
+    .code-copy {
+      padding: 3px 10px; background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n40); border-radius: 6px;
+      font-size: .6875rem; font-weight: var(--font-weight-semibold);
+      color: var(--color-neutral-n400); cursor: pointer; flex-shrink: 0;
+      transition: all .12s; letter-spacing: .02em; font-family: var(--font-primary);
+    }
+    .code-copy:hover { background: var(--color-primary-500); border-color: var(--color-primary-500); color: var(--color-neutral-n0); }
+    .code-copy.copied { background: var(--color-green-g300); border-color: var(--color-green-g300); color: var(--color-neutral-n0); }
+    .variant-impl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin-top: 16px; }
+    .ds-hero-banner { position: relative; overflow: hidden; }
+    .ds-hero-banner::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px; pointer-events: none; z-index: 0;
+    }
+    .ds-hero-banner > * { position: relative; z-index: 1; }
+    .hero-feat-card {
+      transition: transform 160ms cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 160ms cubic-bezier(0.25,0.46,0.45,0.94), border-color 160ms ease;
+    }
+    .hero-feat-card:hover {
+      transform: translateY(-3px); border-color: var(--color-blue-b75) !important;
+      box-shadow: 0 12px 32px rgba(9,30,66,0.11), 0 3px 8px rgba(9,30,66,0.06);
+    }
+    @keyframes ds-reveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes ds-card-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .ds-hero-banner { animation: ds-reveal 360ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .hero-feat-card:nth-child(1) { animation: ds-card-rise 280ms 120ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .hero-feat-card:nth-child(2) { animation: ds-card-rise 280ms 152ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .hero-feat-card:nth-child(3) { animation: ds-card-rise 280ms 184ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .hero-feat-card:nth-child(4) { animation: ds-card-rise 280ms 216ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    @media (max-width: 640px) {
+      .variant-matrix { grid-template-columns: 1fr !important; }
+      .variant-matrix__cell:nth-child(3n+4) { border-right: none; }
+      .usage-info-grid,
+      .usage-grid-2 { grid-template-columns: 1fr !important; }
+      .ds-hero-banner { flex-direction: column !important; }
+      .ds-hero-banner > div:last-child { border-left: none !important; border-top: 1px solid rgba(255,255,255,0.07); }
+    }
   </style>
 </head>
 <body>
+<div id="scroll-progress" class="scroll-progress-bar"></div>
 <div class="container">
   <div id="sidebar-overlay" class="sidebar-overlay"></div>
   <aside class="sidebar" id="sidebar">
@@ -653,11 +731,104 @@
     <div class="content-inner">
 
       <section class="mb-12">
-        <h2 style="border:none;background:none;padding:0;margin-bottom:12px;">Lozenge</h2>
-        <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:640px;margin-bottom:24px;">
-          Label status berbentuk rounded rectangle untuk menandai kategori atau status item (mis. di tabel, kartu, atau daftar). Referensi: <code>Lozenge/figma/Lozenge-components.png</code>.
-        </p>
 
+        <div class="ds-hero-banner rounded-2xl overflow-hidden mb-3 flex flex-col lg:flex-row bg-neutral-n900" style="border: 1px solid rgba(255,255,255,0.07);">
+
+          <div class="flex-1 px-8 py-10 lg:px-11 lg:py-12 flex flex-col justify-center">
+            <div class="flex items-center gap-100 mb-5">
+              <div class="flex items-center justify-center w-5 h-5 rounded-md bg-blue-b300/20">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4495DD" stroke-width="2.5"><rect x="4" y="7" width="16" height="10" rx="2"/></svg>
+              </div>
+              <span class="text-xs font-semibold uppercase tracking-[0.1em] text-blue-b100">Components · DS GPOS Lite V2</span>
+            </div>
+
+            <div class="font-bold text-neutral-n0 mb-3" style="font-size:2.5rem; letter-spacing:-0.035em; line-height:1.04;">Lozenge</div>
+
+            <p class="text-sm leading-relaxed max-w-xs mb-8" style="color: rgba(255,255,255,0.52); line-height: 1.7;">
+              Label status berbentuk rounded rectangle untuk menandai kategori atau status item di tabel, kartu, atau daftar. Enam appearance dengan gaya subtle dan bold berbasis semantic tokens.
+            </p>
+
+            <div class="flex flex-wrap gap-100">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.10);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="4" y="7" width="16" height="10" rx="2"/></svg>
+                6 appearance
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.10);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 12h16M12 4v16" opacity="0.4"/><path d="M8 8l8 8M16 8l-8 8"/></svg>
+                Subtle · Bold
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.10);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                Overline type
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(68,149,221,0.15); color:#7DB5E7; border-color:rgba(68,149,221,0.28);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                Token-based
+              </span>
+            </div>
+          </div>
+
+          <div class="lg:w-80 lg:flex-shrink-0 p-300 flex items-center justify-center" style="background: rgba(255,255,255,0.03); border-left: 1px solid rgba(255,255,255,0.07);">
+            <div class="w-full rounded-2xl overflow-hidden" style="background: var(--color-neutral-n10); box-shadow: 0 16px 48px rgba(0,0,0,0.32), 0 2px 8px rgba(0,0,0,0.16);">
+              <div class="px-250 py-3.5 flex items-center justify-between" style="border-bottom: 1px solid var(--color-border);">
+                <span class="text-xs font-semibold uppercase tracking-[0.08em]" style="color: var(--color-text-tertiary);">Live Preview</span>
+                <div class="flex items-center gap-050">
+                  <span class="w-2 h-2 rounded-full" style="background:var(--color-neutral-n40);"></span>
+                  <span class="w-2 h-2 rounded-full" style="background:var(--color-neutral-n30);"></span>
+                  <span class="w-2 h-2 rounded-full" style="background:var(--color-neutral-n20);"></span>
+                </div>
+              </div>
+              <div class="p-250 flex flex-wrap items-center gap-100">
+                <span class="ds-lozenge ds-lozenge--default">DEFAULT</span>
+                <span class="ds-lozenge ds-lozenge--inprogress">IN PROGRESS</span>
+                <span class="ds-lozenge ds-lozenge--moved">MOVED</span>
+                <span class="ds-lozenge ds-lozenge--new">NEW</span>
+                <span class="ds-lozenge ds-lozenge--removed">REMOVED</span>
+                <span class="ds-lozenge ds-lozenge--success ds-lozenge--bold">DONE</span>
+              </div>
+              <div class="px-250 pb-250 text-xs" style="color: var(--color-text-tertiary); line-height:1.6;">6 appearance · Subtle &amp; bold dari semantic tokens</div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-150">
+
+          <div class="hero-feat-card bg-neutral-n0 rounded-xl p-250 border border-neutral-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, var(--color-blue-b50) 0%, rgba(163,203,238,0.3) 100%); border: 1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><rect x="4" y="7" width="16" height="10" rx="2"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-neutral-n900 mb-1.5 tracking-[-0.02em]">6 Appearance</div>
+            <div class="text-xs leading-relaxed" style="color: var(--color-text-tertiary);">Default · In progress · Moved · New · Removed · Success</div>
+          </div>
+
+          <div class="hero-feat-card bg-neutral-n0 rounded-xl p-250 border border-neutral-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, var(--color-blue-b50) 0%, rgba(163,203,238,0.3) 100%); border: 1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><path d="M4 12h16"/><path d="M12 4v16" opacity="0.35"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-neutral-n900 mb-1.5 tracking-[-0.02em]">Subtle &amp; Bold</div>
+            <div class="text-xs leading-relaxed" style="color: var(--color-text-tertiary);">Subtle untuk list padat; <code class="text-[10px]">--bold</code> untuk penekanan status</div>
+          </div>
+
+          <div class="hero-feat-card bg-neutral-n0 rounded-xl p-250 border border-neutral-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, var(--color-blue-b50) 0%, rgba(163,203,238,0.3) 100%); border: 1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><path d="M12 2l9 4.5V17.5L12 22l-9-4.5V6.5L12 2z"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-neutral-n900 mb-1.5 tracking-[-0.02em]">Semantic Colors</div>
+            <div class="text-xs leading-relaxed" style="color: var(--color-text-tertiary);">BG &amp; teks dari palette blue, orange, purple, red, green, neutral</div>
+          </div>
+
+          <div class="hero-feat-card bg-neutral-n0 rounded-xl p-250 border border-neutral-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, var(--color-blue-b50) 0%, rgba(163,203,238,0.3) 100%); border: 1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><path d="M4 7h16v10H4z" rx="2"/><path d="M7 11h10"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-neutral-n900 mb-1.5 tracking-[-0.02em]">Overline Typography</div>
+            <div class="text-xs leading-relaxed" style="color: var(--color-text-tertiary);">UPPERCASE · semibold · <code class="text-[10px]">border-radius-sm</code></div>
+          </div>
+
+        </div>
+
+        <h3 style="font-size:15px;font-weight:600;color:var(--color-text-primary);margin:32px 0 12px;font-family:var(--font-primary);">Appearance × style</h3>
         <div class="variant-matrix" role="table" aria-label="Varian Lozenge">
           <div class="variant-matrix__head">Subtle</div>
           <div class="variant-matrix__head">Bold</div>
@@ -687,8 +858,143 @@
           <div class="variant-matrix__cell"><span class="ds-lozenge ds-lozenge--success ds-lozenge--bold">Label</span></div>
         </div>
 
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;margin-top:16px;">
-          <img src="figma/Lozenge-components.png" alt="Referensi Figma Lozenge" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+        <h3 style="font-size:15px;font-weight:600;color:var(--color-text-primary);margin:32px 0 12px;font-family:var(--font-primary);">Token &amp; implementasi per appearance</h3>
+        <p style="font-size:13px;color:var(--color-text-tertiary);margin:0 0 4px;font-family:var(--font-primary);line-height:1.6;">Token BG dan teks per appearance — subtle (default) dan bold (<code>.ds-lozenge--bold</code>) dari class <code>.ds-lozenge--*</code> di halaman ini.</p>
+
+        <div class="variant-impl-grid">
+
+          <div class="impl-section">
+            <div class="impl-header">
+              <span class="impl-title">appearance=default</span>
+              <div class="impl-tabs">
+                <button type="button" class="impl-tab active" data-pane="css-default">CSS Variables</button>
+                <button type="button" class="impl-tab" data-pane="tw-default">Tailwind</button>
+              </div>
+            </div>
+            <div class="impl-pane active" data-pane-id="css-default">
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n20);"></span><span class="code-token-name">Subtle BG</span><code class="code-snippet">--color-neutral-n20</code><button type="button" class="code-copy" data-copy="--color-neutral-n20">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n500);"></span><span class="code-token-name">Subtle Text</span><code class="code-snippet">--color-neutral-n500</code><button type="button" class="code-copy" data-copy="--color-neutral-n500">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n500);"></span><span class="code-token-name">Bold BG</span><code class="code-snippet">--color-neutral-n500</code><button type="button" class="code-copy" data-copy="--color-neutral-n500">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n0);border:1px solid var(--color-neutral-n40);"></span><span class="code-token-name">Bold Text</span><code class="code-snippet">--color-neutral-n0</code><button type="button" class="code-copy" data-copy="--color-neutral-n0">Salin</button></div>
+            </div>
+            <div class="impl-pane" data-pane-id="tw-default">
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n20);"></span><span class="code-token-name">Subtle BG</span><code class="code-snippet">bg-neutral-n20</code><button type="button" class="code-copy" data-copy="bg-neutral-n20">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n500);"></span><span class="code-token-name">Subtle Text</span><code class="code-snippet">text-neutral-n500</code><button type="button" class="code-copy" data-copy="text-neutral-n500">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n500);"></span><span class="code-token-name">Bold BG</span><code class="code-snippet">bg-neutral-n500</code><button type="button" class="code-copy" data-copy="bg-neutral-n500">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n0);border:1px solid var(--color-neutral-n40);"></span><span class="code-token-name">Bold Text</span><code class="code-snippet">text-neutral-n0</code><button type="button" class="code-copy" data-copy="text-neutral-n0">Salin</button></div>
+            </div>
+          </div>
+
+          <div class="impl-section">
+            <div class="impl-header">
+              <span class="impl-title">appearance=inprogress</span>
+              <div class="impl-tabs">
+                <button type="button" class="impl-tab active" data-pane="css-inprogress">CSS Variables</button>
+                <button type="button" class="impl-tab" data-pane="tw-inprogress">Tailwind</button>
+              </div>
+            </div>
+            <div class="impl-pane active" data-pane-id="css-inprogress">
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-blue-b50);"></span><span class="code-token-name">Subtle BG</span><code class="code-snippet">--color-blue-b50</code><button type="button" class="code-copy" data-copy="--color-blue-b50">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-blue-b300);"></span><span class="code-token-name">Subtle Text</span><code class="code-snippet">--color-blue-b300</code><button type="button" class="code-copy" data-copy="--color-blue-b300">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-blue-b300);"></span><span class="code-token-name">Bold BG</span><code class="code-snippet">--color-blue-b300</code><button type="button" class="code-copy" data-copy="--color-blue-b300">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n0);border:1px solid var(--color-neutral-n40);"></span><span class="code-token-name">Bold Text</span><code class="code-snippet">--color-neutral-n0</code><button type="button" class="code-copy" data-copy="--color-neutral-n0">Salin</button></div>
+            </div>
+            <div class="impl-pane" data-pane-id="tw-inprogress">
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-blue-b50);"></span><span class="code-token-name">Subtle BG</span><code class="code-snippet">bg-blue-b50</code><button type="button" class="code-copy" data-copy="bg-blue-b50">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-blue-b300);"></span><span class="code-token-name">Subtle Text</span><code class="code-snippet">text-blue-b300</code><button type="button" class="code-copy" data-copy="text-blue-b300">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-blue-b300);"></span><span class="code-token-name">Bold BG</span><code class="code-snippet">bg-blue-b300</code><button type="button" class="code-copy" data-copy="bg-blue-b300">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n0);border:1px solid var(--color-neutral-n40);"></span><span class="code-token-name">Bold Text</span><code class="code-snippet">text-neutral-n0</code><button type="button" class="code-copy" data-copy="text-neutral-n0">Salin</button></div>
+            </div>
+          </div>
+
+          <div class="impl-section">
+            <div class="impl-header">
+              <span class="impl-title">appearance=moved</span>
+              <div class="impl-tabs">
+                <button type="button" class="impl-tab active" data-pane="css-moved">CSS Variables</button>
+                <button type="button" class="impl-tab" data-pane="tw-moved">Tailwind</button>
+              </div>
+            </div>
+            <div class="impl-pane active" data-pane-id="css-moved">
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-orange-o50);"></span><span class="code-token-name">Subtle BG</span><code class="code-snippet">--color-orange-o50</code><button type="button" class="code-copy" data-copy="--color-orange-o50">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-orange-o300);"></span><span class="code-token-name">Subtle Text</span><code class="code-snippet">--color-orange-o300</code><button type="button" class="code-copy" data-copy="--color-orange-o300">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-orange-o300);"></span><span class="code-token-name">Bold BG</span><code class="code-snippet">--color-orange-o300</code><button type="button" class="code-copy" data-copy="--color-orange-o300">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n900);"></span><span class="code-token-name">Bold Text</span><code class="code-snippet">--color-neutral-n900</code><button type="button" class="code-copy" data-copy="--color-neutral-n900">Salin</button></div>
+            </div>
+            <div class="impl-pane" data-pane-id="tw-moved">
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-orange-o50);"></span><span class="code-token-name">Subtle BG</span><code class="code-snippet">bg-orange-o50</code><button type="button" class="code-copy" data-copy="bg-orange-o50">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-orange-o300);"></span><span class="code-token-name">Subtle Text</span><code class="code-snippet">text-orange-o300</code><button type="button" class="code-copy" data-copy="text-orange-o300">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-orange-o300);"></span><span class="code-token-name">Bold BG</span><code class="code-snippet">bg-orange-o300</code><button type="button" class="code-copy" data-copy="bg-orange-o300">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n900);"></span><span class="code-token-name">Bold Text</span><code class="code-snippet">text-neutral-n900</code><button type="button" class="code-copy" data-copy="text-neutral-n900">Salin</button></div>
+            </div>
+          </div>
+
+          <div class="impl-section">
+            <div class="impl-header">
+              <span class="impl-title">appearance=new</span>
+              <div class="impl-tabs">
+                <button type="button" class="impl-tab active" data-pane="css-new">CSS Variables</button>
+                <button type="button" class="impl-tab" data-pane="tw-new">Tailwind</button>
+              </div>
+            </div>
+            <div class="impl-pane active" data-pane-id="css-new">
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-purple-p50);"></span><span class="code-token-name">Subtle BG</span><code class="code-snippet">--color-purple-p50</code><button type="button" class="code-copy" data-copy="--color-purple-p50">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-purple-p300);"></span><span class="code-token-name">Subtle Text</span><code class="code-snippet">--color-purple-p300</code><button type="button" class="code-copy" data-copy="--color-purple-p300">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-purple-p300);"></span><span class="code-token-name">Bold BG</span><code class="code-snippet">--color-purple-p300</code><button type="button" class="code-copy" data-copy="--color-purple-p300">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n0);border:1px solid var(--color-neutral-n40);"></span><span class="code-token-name">Bold Text</span><code class="code-snippet">--color-neutral-n0</code><button type="button" class="code-copy" data-copy="--color-neutral-n0">Salin</button></div>
+            </div>
+            <div class="impl-pane" data-pane-id="tw-new">
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-purple-p50);"></span><span class="code-token-name">Subtle BG</span><code class="code-snippet">bg-purple-p50</code><button type="button" class="code-copy" data-copy="bg-purple-p50">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-purple-p300);"></span><span class="code-token-name">Subtle Text</span><code class="code-snippet">text-purple-p300</code><button type="button" class="code-copy" data-copy="text-purple-p300">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-purple-p300);"></span><span class="code-token-name">Bold BG</span><code class="code-snippet">bg-purple-p300</code><button type="button" class="code-copy" data-copy="bg-purple-p300">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n0);border:1px solid var(--color-neutral-n40);"></span><span class="code-token-name">Bold Text</span><code class="code-snippet">text-neutral-n0</code><button type="button" class="code-copy" data-copy="text-neutral-n0">Salin</button></div>
+            </div>
+          </div>
+
+          <div class="impl-section">
+            <div class="impl-header">
+              <span class="impl-title">appearance=removed</span>
+              <div class="impl-tabs">
+                <button type="button" class="impl-tab active" data-pane="css-removed">CSS Variables</button>
+                <button type="button" class="impl-tab" data-pane="tw-removed">Tailwind</button>
+              </div>
+            </div>
+            <div class="impl-pane active" data-pane-id="css-removed">
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-red-r50);"></span><span class="code-token-name">Subtle BG</span><code class="code-snippet">--color-red-r50</code><button type="button" class="code-copy" data-copy="--color-red-r50">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-red-r300);"></span><span class="code-token-name">Subtle Text</span><code class="code-snippet">--color-red-r300</code><button type="button" class="code-copy" data-copy="--color-red-r300">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-red-r300);"></span><span class="code-token-name">Bold BG</span><code class="code-snippet">--color-red-r300</code><button type="button" class="code-copy" data-copy="--color-red-r300">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n0);border:1px solid var(--color-neutral-n40);"></span><span class="code-token-name">Bold Text</span><code class="code-snippet">--color-neutral-n0</code><button type="button" class="code-copy" data-copy="--color-neutral-n0">Salin</button></div>
+            </div>
+            <div class="impl-pane" data-pane-id="tw-removed">
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-red-r50);"></span><span class="code-token-name">Subtle BG</span><code class="code-snippet">bg-red-r50</code><button type="button" class="code-copy" data-copy="bg-red-r50">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-red-r300);"></span><span class="code-token-name">Subtle Text</span><code class="code-snippet">text-red-r300</code><button type="button" class="code-copy" data-copy="text-red-r300">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-red-r300);"></span><span class="code-token-name">Bold BG</span><code class="code-snippet">bg-red-r300</code><button type="button" class="code-copy" data-copy="bg-red-r300">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n0);border:1px solid var(--color-neutral-n40);"></span><span class="code-token-name">Bold Text</span><code class="code-snippet">text-neutral-n0</code><button type="button" class="code-copy" data-copy="text-neutral-n0">Salin</button></div>
+            </div>
+          </div>
+
+          <div class="impl-section">
+            <div class="impl-header">
+              <span class="impl-title">appearance=success</span>
+              <div class="impl-tabs">
+                <button type="button" class="impl-tab active" data-pane="css-success">CSS Variables</button>
+                <button type="button" class="impl-tab" data-pane="tw-success">Tailwind</button>
+              </div>
+            </div>
+            <div class="impl-pane active" data-pane-id="css-success">
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-green-g50);"></span><span class="code-token-name">Subtle BG</span><code class="code-snippet">--color-green-g50</code><button type="button" class="code-copy" data-copy="--color-green-g50">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-green-g300);"></span><span class="code-token-name">Subtle Text</span><code class="code-snippet">--color-green-g300</code><button type="button" class="code-copy" data-copy="--color-green-g300">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-green-g300);"></span><span class="code-token-name">Bold BG</span><code class="code-snippet">--color-green-g300</code><button type="button" class="code-copy" data-copy="--color-green-g300">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n0);border:1px solid var(--color-neutral-n40);"></span><span class="code-token-name">Bold Text</span><code class="code-snippet">--color-neutral-n0</code><button type="button" class="code-copy" data-copy="--color-neutral-n0">Salin</button></div>
+            </div>
+            <div class="impl-pane" data-pane-id="tw-success">
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-green-g50);"></span><span class="code-token-name">Subtle BG</span><code class="code-snippet">bg-green-g50</code><button type="button" class="code-copy" data-copy="bg-green-g50">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-green-g300);"></span><span class="code-token-name">Subtle Text</span><code class="code-snippet">text-green-g300</code><button type="button" class="code-copy" data-copy="text-green-g300">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-green-g300);"></span><span class="code-token-name">Bold BG</span><code class="code-snippet">bg-green-g300</code><button type="button" class="code-copy" data-copy="bg-green-g300">Salin</button></div>
+              <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n0);border:1px solid var(--color-neutral-n40);"></span><span class="code-token-name">Bold Text</span><code class="code-snippet">text-neutral-n0</code><button type="button" class="code-copy" data-copy="text-neutral-n0">Salin</button></div>
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -774,7 +1080,7 @@
             <div style="padding:10px 16px;background:var(--color-green-g50);border-bottom:2px solid var(--color-green-g100);font-weight:700;color:var(--color-green-g400);">Do — Lakukan ini</div>
             <ul style="padding:16px 20px 20px 36px;color:var(--color-text-tertiary);font-size:13px;line-height:1.7;">
               <li>Gunakan teks singkat UPPERCASE (1–2 kata), mis. <code>OPEN</code>, <code>DONE</code>.</li>
-              <li>Pilih appearance sesuai status bisnis yang sudah didefinisikan di Figma.</li>
+              <li>Pilih appearance sesuai status bisnis yang sudah didefinisikan di design system.</li>
               <li>Gunakan subtle di tabel/list; bold hanya untuk penekanan.</li>
               <li>Pertahankan padding <code>space-025</code> / <code>space-100</code> dan radius <code>border-radius-sm</code>.</li>
             </ul>
@@ -815,6 +1121,53 @@
 
 <script src="../../scripts/script.js"></script>
 <script>
+  (function () {
+    var bar = document.getElementById('scroll-progress');
+    if (!bar) return;
+    window.addEventListener('scroll', function () {
+      var scrollTop = window.scrollY;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
+    }, { passive: true });
+  })();
+
+  function copyToken(btn, text) {
+    navigator.clipboard.writeText(text).then(function () {
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () {
+        btn.textContent = 'Salin';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+
+  function copySnippet(btn) {
+    var text = btn.getAttribute('data-copy');
+    if (text) copyToken(btn, text);
+  }
+
+  document.querySelectorAll('.code-copy').forEach(function (btn) {
+    btn.addEventListener('click', function () { copySnippet(this); });
+  });
+
+  function initImplTabs() {
+    document.querySelectorAll('.impl-tab').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var section = tab.closest('.impl-section');
+        if (!section) return;
+        var paneId = tab.getAttribute('data-pane');
+        section.querySelectorAll('.impl-tab').forEach(function (t) { t.classList.remove('active'); });
+        section.querySelectorAll('.impl-pane').forEach(function (p) { p.classList.remove('active'); });
+        tab.classList.add('active');
+        var pane = section.querySelector('[data-pane-id="' + paneId + '"]');
+        if (pane) pane.classList.add('active');
+      });
+    });
+  }
+
+  initImplTabs();
+
   function copyHtml() {
     navigator.clipboard.writeText(document.getElementById('html-block').textContent).then(function () {
       var btn = document.getElementById('copy-html-btn');

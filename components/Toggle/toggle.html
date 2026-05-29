@@ -111,7 +111,7 @@
   </script>
   <style>
     /* ================================================================
-       DS Toggle — components/Toggle/figma/Toggle-component.png
+       DS Toggle — size regular · large
        size: regular (default) · large
        state: default · hover · focus · disabled
        Tokens:
@@ -425,9 +425,92 @@
       .usage-grid-2 { grid-template-columns: 1fr !important; }
       .anatomy-grid { grid-template-columns: 1fr !important; }
     }
+
+    /* ── Scroll Progress ── */
+    .scroll-progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+      background: linear-gradient(90deg, var(--color-primary-500), var(--color-blue-b75));
+      z-index: 9999; transition: width .1s linear; border-radius: 0 2px 2px 0;
+      pointer-events: none;
+    }
+
+    /* ── Implementation ── */
+    .impl-section { background: var(--color-surface); border: 1px solid var(--color-neutral-n30); border-radius: 12px; overflow: hidden; margin-top: 16px; margin-bottom: 32px; }
+    .impl-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 18px; border-bottom: 1px solid var(--color-neutral-n30);
+      background: var(--color-neutral-n10);
+    }
+    .impl-title { font-size: var(--font-size-xs); font-weight: var(--font-weight-bold); color: var(--color-neutral-n900); letter-spacing: -.01em; }
+    .impl-tabs { display: flex; gap: 3px; background: var(--color-neutral-n30); padding: 3px; border-radius: 8px; }
+    .impl-tab {
+      padding: 4px 12px; border-radius: 6px; border: none; background: transparent;
+      font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold);
+      cursor: pointer; color: var(--color-neutral-n300); transition: all .12s;
+      font-family: var(--font-primary);
+    }
+    .impl-tab.active { background: var(--color-neutral-n900); color: var(--color-neutral-n0); box-shadow: 0 1px 3px rgba(0,0,0,.15); }
+    .impl-pane { display: none; padding: 12px 14px; }
+    .impl-pane.active { display: block; }
+    .code-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 12px; background: var(--color-surface);
+      border-radius: 8px; margin-bottom: 5px;
+      border: 1px solid var(--color-neutral-n30); transition: border-color .12s, box-shadow .12s;
+    }
+    .code-row:hover { border-color: var(--color-blue-b75); box-shadow: 0 1px 4px rgba(30,127,214,.08); }
+    .code-swatch { width: 20px; height: 20px; border-radius: 4px; flex-shrink: 0; border: 1px solid rgba(0,0,0,.08); }
+    .code-token-name { font-size: var(--font-size-xs); font-weight: var(--font-weight-semibold); color: var(--color-neutral-n400); flex: 0 0 84px; letter-spacing: -.01em; }
+    .code-snippet {
+      font-size: var(--font-size-xs); color: var(--color-primary-500); flex: 1;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      background: var(--color-blue-b50); border-radius: 4px; margin: 0 8px; padding: 2px 8px;
+    }
+    .code-copy {
+      padding: 3px 10px; background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n40); border-radius: 6px;
+      font-size: .6875rem; font-weight: var(--font-weight-semibold);
+      color: var(--color-neutral-n400); cursor: pointer; flex-shrink: 0;
+      transition: all .12s; letter-spacing: .02em; font-family: var(--font-primary);
+    }
+    .code-copy:hover { background: var(--color-primary-500); border-color: var(--color-primary-500); color: var(--color-neutral-n0); }
+    .code-copy.copied { background: var(--color-green-g300); border-color: var(--color-green-g300); color: var(--color-neutral-n0); }
+
+    /* ── Hero Banner ── */
+    .ds-hero-banner { position: relative; overflow: hidden; }
+    .ds-hero-banner::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px; pointer-events: none; z-index: 0;
+    }
+    .ds-hero-banner > * { position: relative; z-index: 1; }
+    .hero-feat-card {
+      transition: transform 160ms cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 160ms cubic-bezier(0.25,0.46,0.45,0.94), border-color 160ms ease;
+    }
+    .hero-feat-card:hover {
+      transform: translateY(-3px); border-color: var(--color-blue-b75) !important;
+      box-shadow: 0 12px 32px rgba(9,30,66,0.11), 0 3px 8px rgba(9,30,66,0.06);
+    }
+    @keyframes ds-reveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes ds-card-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .ds-hero-banner { animation: ds-reveal 360ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .hero-feat-card:nth-child(1) { animation: ds-card-rise 280ms 120ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .hero-feat-card:nth-child(2) { animation: ds-card-rise 280ms 152ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .hero-feat-card:nth-child(3) { animation: ds-card-rise 280ms 184ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .hero-feat-card:nth-child(4) { animation: ds-card-rise 280ms 216ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+
+    @media (max-width: 640px) {
+      .usage-info-grid,
+      .usage-grid-2 { grid-template-columns: 1fr !important; }
+      .ds-hero-banner { flex-direction: column !important; }
+      .ds-hero-banner > div:last-child { border-left: none !important; border-top: 1px solid rgba(255,255,255,0.07); }
+      .impl-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .toggle-matrix { overflow-x: auto; }
+    }
   </style>
 </head>
 <body>
+<div id="scroll-progress" class="scroll-progress-bar"></div>
 <div class="container">
   <div id="sidebar-overlay" class="sidebar-overlay"></div>
   <aside class="sidebar" id="sidebar">
@@ -682,9 +765,102 @@
     <div class="content-inner">
 
       <section class="mb-12">
-        <h2 style="border:none;background:none;padding:0;margin-bottom:12px;">Toggle — Components</h2>
+        <div class="ds-hero-banner rounded-2xl overflow-hidden mb-3 flex flex-col lg:flex-row bg-neutral-n900" style="border: 1px solid rgba(255,255,255,0.07);">
+          <div class="flex-1 px-8 py-10 lg:px-11 lg:py-12 flex flex-col justify-center">
+            <div class="flex items-center gap-100 mb-5">
+              <div class="flex items-center justify-center w-5 h-5 rounded-md bg-blue-b300/20">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4495DD" stroke-width="2.5"><rect x="2" y="7" width="20" height="10" rx="5"/><circle cx="7" cy="12" r="3" fill="#4495DD" stroke="none"/></svg>
+              </div>
+              <span class="text-xs font-semibold uppercase tracking-[0.1em] text-blue-b100">Components · DS GPOS Lite V2</span>
+            </div>
+            <div class="font-bold text-neutral-n0 mb-3" style="font-size:2.5rem; letter-spacing:-0.035em; line-height:1.04;">Toggle</div>
+            <p class="text-sm leading-relaxed max-w-xs mb-8" style="color: rgba(255,255,255,0.52); line-height: 1.7;">
+              Switch on/off boolean dengan ikon status check/x. Dua ukuran track dan empat state interaksi berbasis semantic tokens.
+            </p>
+            <div class="flex flex-wrap gap-100">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.10);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="7" width="20" height="10" rx="5"/></svg>
+                2 ukuran
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.10);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 11l3 3L22 4"/></svg>
+                4 states
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.10);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                Status icons
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(68,149,221,0.15); color:#7DB5E7; border-color:rgba(68,149,221,0.28);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                Token-based
+              </span>
+            </div>
+          </div>
+          <div class="lg:w-80 lg:flex-shrink-0 p-300 flex items-center justify-center" style="background: rgba(255,255,255,0.03); border-left: 1px solid rgba(255,255,255,0.07);">
+            <div class="w-full rounded-2xl overflow-hidden" style="background: var(--color-neutral-n10); box-shadow: 0 16px 48px rgba(0,0,0,0.32), 0 2px 8px rgba(0,0,0,0.16);">
+              <div class="px-250 py-3.5 flex items-center justify-between" style="border-bottom: 1px solid var(--color-border);">
+                <span class="text-xs font-semibold uppercase tracking-[0.08em]" style="color: var(--color-text-tertiary);">Live Preview</span>
+                <div class="flex items-center gap-050">
+                  <span class="w-2 h-2 rounded-full" style="background:var(--color-neutral-n40);"></span>
+                  <span class="w-2 h-2 rounded-full" style="background:var(--color-neutral-n30);"></span>
+                  <span class="w-2 h-2 rounded-full" style="background:var(--color-neutral-n20);"></span>
+                </div>
+              </div>
+              <div class="p-250 flex items-center gap-200">
+                <label class="ds-toggle ds-toggle--snapshot" aria-hidden="true">
+                  <span class="ds-toggle__track">
+                    <span class="ds-toggle__icon ds-toggle__icon--on"><img src="../../assets/icons/icon-check.svg" alt="" aria-hidden="true"></span>
+                    <span class="ds-toggle__thumb"></span>
+                    <span class="ds-toggle__icon ds-toggle__icon--off"><img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"></span>
+                  </span>
+                </label>
+                <label class="ds-toggle ds-toggle--snapshot" aria-hidden="true">
+                  <span class="ds-toggle__track ds-toggle__track--on">
+                    <span class="ds-toggle__icon ds-toggle__icon--on"><img src="../../assets/icons/icon-check.svg" alt="" aria-hidden="true"></span>
+                    <span class="ds-toggle__thumb"></span>
+                    <span class="ds-toggle__icon ds-toggle__icon--off"><img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"></span>
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-150 mb-8">
+          <div class="hero-feat-card bg-neutral-n0 rounded-xl p-250 border border-neutral-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, var(--color-blue-b50) 0%, rgba(163,203,238,0.3) 100%); border: 1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><rect x="2" y="7" width="20" height="10" rx="5"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-neutral-n900 mb-1.5 tracking-[-0.02em]">Regular</div>
+            <div class="text-xs leading-relaxed" style="color: var(--color-text-tertiary);">Track 40×20px · thumb 16×16px</div>
+          </div>
+          <div class="hero-feat-card bg-neutral-n0 rounded-xl p-250 border border-neutral-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, var(--color-blue-b50) 0%, rgba(163,203,238,0.3) 100%); border: 1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="7"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-neutral-n900 mb-1.5 tracking-[-0.02em]">Large</div>
+            <div class="text-xs leading-relaxed" style="color: var(--color-text-tertiary);">Track 52×28px · thumb 24×24px</div>
+          </div>
+          <div class="hero-feat-card bg-neutral-n0 rounded-xl p-250 border border-neutral-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, var(--color-green-g50) 0%, rgba(163,203,238,0.2) 100%); border: 1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><path d="M9 11l3 3L22 4"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-neutral-n900 mb-1.5 tracking-[-0.02em]">On / Off</div>
+            <div class="text-xs leading-relaxed" style="color: var(--color-text-tertiary);">Off <code>n500</code> · On <code>g300</code></div>
+          </div>
+          <div class="hero-feat-card bg-neutral-n0 rounded-xl p-250 border border-neutral-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, var(--color-blue-b50) 0%, rgba(163,203,238,0.3) 100%); border: 1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><path d="M12 2l9 4.5V17.5L12 22l-9-4.5V6.5L12 2z"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-neutral-n900 mb-1.5 tracking-[-0.02em]">Token-based</div>
+            <div class="text-xs leading-relaxed" style="color: var(--color-text-tertiary);">Semantic color tokens DS</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Toggle — Components</h2>
         <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:720px;margin-bottom:24px;">
-          Switch on/off dengan ikon status (<code>icon-check.svg</code> · <code>icon-x-mark.svg</code>). Dua ukuran: <code>size=regular</code> (default) dan <code>size=large</code>. Empat state interaksi. Referensi: <code>Toggle/figma/Toggle-component.png</code>.
+          Switch on/off dengan ikon status (<code>icon-check.svg</code> · <code>icon-x-mark.svg</code>). Dua ukuran: <code>size=regular</code> (default) dan <code>size=large</code>. Empat state interaksi.
         </p>
 
         <div class="toggle-matrix" role="table" aria-label="Varian komponen toggle">
@@ -852,8 +1028,58 @@
           </div>
         </div>
 
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;margin-top:16px;">
-          <img src="figma/Toggle-component.png" alt="Referensi Figma Toggle components" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+        <h3 style="font-size:15px;font-weight:600;color:var(--color-text-primary);margin:0 0 12px;font-family:var(--font-primary);">size=regular</h3>
+        <div class="impl-section">
+          <div class="impl-header">
+            <span class="impl-title">Token &amp; implementasi — regular</span>
+            <div class="impl-tabs">
+              <button type="button" class="impl-tab active" data-pane="css-regular">CSS Variables</button>
+              <button type="button" class="impl-tab" data-pane="tw-regular">Tailwind</button>
+            </div>
+          </div>
+          <div class="impl-pane active" data-pane-id="css-regular">
+            <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n500);"></span><span class="code-token-name">Track off</span><code class="code-snippet">--color-neutral-n500</code><button type="button" class="code-copy" data-copy="--color-neutral-n500">Salin</button></div>
+            <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n400);"></span><span class="code-token-name">Off hover</span><code class="code-snippet">--color-neutral-n400</code><button type="button" class="code-copy" data-copy="--color-neutral-n400">Salin</button></div>
+            <div class="code-row"><span class="code-swatch" style="background:var(--color-green-g300);"></span><span class="code-token-name">Track on</span><code class="code-snippet">--color-green-g300</code><button type="button" class="code-copy" data-copy="--color-green-g300">Salin</button></div>
+            <div class="code-row"><span class="code-swatch" style="background:var(--color-green-g200);"></span><span class="code-token-name">On hover</span><code class="code-snippet">--color-green-g200</code><button type="button" class="code-copy" data-copy="--color-green-g200">Salin</button></div>
+            <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n0);"></span><span class="code-token-name">Thumb</span><code class="code-snippet">--color-neutral-n0</code><button type="button" class="code-copy" data-copy="--color-neutral-n0">Salin</button></div>
+            <div class="code-row"><span class="code-swatch" style="background:var(--color-blue-b200);"></span><span class="code-token-name">Focus ring</span><code class="code-snippet">--color-blue-b200</code><button type="button" class="code-copy" data-copy="--color-blue-b200">Salin</button></div>
+            <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n30);"></span><span class="code-token-name">Disabled</span><code class="code-snippet">--color-neutral-n30</code><button type="button" class="code-copy" data-copy="--color-neutral-n30">Salin</button></div>
+            <div class="code-row"><span class="code-token-name">Padding</span><code class="code-snippet">--space-025</code><button type="button" class="code-copy" data-copy="--space-025">Salin</button></div>
+          </div>
+          <div class="impl-pane" data-pane-id="tw-regular">
+            <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n500);"></span><span class="code-token-name">Track off</span><code class="code-snippet">bg-neutral-n500</code><button type="button" class="code-copy" data-copy="bg-neutral-n500">Salin</button></div>
+            <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n400);"></span><span class="code-token-name">Off hover</span><code class="code-snippet">bg-neutral-n400</code><button type="button" class="code-copy" data-copy="bg-neutral-n400">Salin</button></div>
+            <div class="code-row"><span class="code-swatch" style="background:var(--color-green-g300);"></span><span class="code-token-name">Track on</span><code class="code-snippet">bg-green-g300</code><button type="button" class="code-copy" data-copy="bg-green-g300">Salin</button></div>
+            <div class="code-row"><span class="code-swatch" style="background:var(--color-green-g200);"></span><span class="code-token-name">On hover</span><code class="code-snippet">bg-green-g200</code><button type="button" class="code-copy" data-copy="bg-green-g200">Salin</button></div>
+            <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n0);"></span><span class="code-token-name">Thumb</span><code class="code-snippet">bg-neutral-n0</code><button type="button" class="code-copy" data-copy="bg-neutral-n0">Salin</button></div>
+            <div class="code-row"><span class="code-swatch" style="background:var(--color-blue-b200);"></span><span class="code-token-name">Focus ring</span><code class="code-snippet">ring-blue-b200</code><button type="button" class="code-copy" data-copy="ring-blue-b200">Salin</button></div>
+            <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n30);"></span><span class="code-token-name">Disabled</span><code class="code-snippet">bg-neutral-n30</code><button type="button" class="code-copy" data-copy="bg-neutral-n30">Salin</button></div>
+          </div>
+        </div>
+
+        <h3 style="font-size:15px;font-weight:600;color:var(--color-text-primary);margin:32px 0 12px;font-family:var(--font-primary);">size=large</h3>
+        <div class="impl-section">
+          <div class="impl-header">
+            <span class="impl-title">Token &amp; implementasi — large</span>
+            <div class="impl-tabs">
+              <button type="button" class="impl-tab active" data-pane="css-large">CSS Variables</button>
+              <button type="button" class="impl-tab" data-pane="tw-large">Tailwind</button>
+            </div>
+          </div>
+          <div class="impl-pane active" data-pane-id="css-large">
+            <div class="code-row"><span class="code-token-name">Track</span><code class="code-snippet">52×28px</code><button type="button" class="code-copy" data-copy="52×28px">Salin</button></div>
+            <div class="code-row"><span class="code-token-name">Thumb</span><code class="code-snippet">24×24px</code><button type="button" class="code-copy" data-copy="24×24px">Salin</button></div>
+            <div class="code-row"><span class="code-token-name">Travel</span><code class="code-snippet">translateX(24px)</code><button type="button" class="code-copy" data-copy="translateX(24px)">Salin</button></div>
+            <div class="code-row"><span class="code-swatch" style="background:var(--color-green-g300);"></span><span class="code-token-name">Track on</span><code class="code-snippet">--color-green-g300</code><button type="button" class="code-copy" data-copy="--color-green-g300">Salin</button></div>
+            <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n500);"></span><span class="code-token-name">Track off</span><code class="code-snippet">--color-neutral-n500</code><button type="button" class="code-copy" data-copy="--color-neutral-n500">Salin</button></div>
+          </div>
+          <div class="impl-pane" data-pane-id="tw-large">
+            <div class="code-row"><span class="code-token-name">Modifier</span><code class="code-snippet">ds-toggle--large</code><button type="button" class="code-copy" data-copy="ds-toggle--large">Salin</button></div>
+            <div class="code-row"><span class="code-swatch" style="background:var(--color-green-g300);"></span><span class="code-token-name">Track on</span><code class="code-snippet">bg-green-g300</code><button type="button" class="code-copy" data-copy="bg-green-g300">Salin</button></div>
+            <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n500);"></span><span class="code-token-name">Track off</span><code class="code-snippet">bg-neutral-n500</code><button type="button" class="code-copy" data-copy="bg-neutral-n500">Salin</button></div>
+            <div class="code-row"><span class="code-swatch" style="background:var(--color-neutral-n0);"></span><span class="code-token-name">Thumb</span><code class="code-snippet">bg-neutral-n0</code><button type="button" class="code-copy" data-copy="bg-neutral-n0">Salin</button></div>
+          </div>
         </div>
 
         <p style="font-size:13px;font-weight:600;color:var(--color-text-primary);margin:28px 0 16px;font-family:var(--font-primary);">Interaktif (native switch)</p>
@@ -1029,6 +1255,54 @@
 
 <script src="../../scripts/script.js"></script>
 <script>
+  /* ── Scroll progress bar ── */
+  (function () {
+    var bar = document.getElementById('scroll-progress');
+    if (!bar) return;
+    window.addEventListener('scroll', function () {
+      var scrollTop = window.scrollY;
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + '%';
+    }, { passive: true });
+  })();
+
+  function copyToken(btn, text) {
+    navigator.clipboard.writeText(text).then(function () {
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () {
+        btn.textContent = 'Salin';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+
+  function copySnippet(btn) {
+    var text = btn.getAttribute('data-copy');
+    if (text) copyToken(btn, text);
+  }
+
+  document.querySelectorAll('.code-copy').forEach(function (btn) {
+    btn.addEventListener('click', function () { copySnippet(this); });
+  });
+
+  function initImplTabs() {
+    document.querySelectorAll('.impl-tab').forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var section = tab.closest('.impl-section');
+        if (!section) return;
+        var paneId = tab.getAttribute('data-pane');
+        section.querySelectorAll('.impl-tab').forEach(function (t) { t.classList.remove('active'); });
+        section.querySelectorAll('.impl-pane').forEach(function (p) { p.classList.remove('active'); });
+        tab.classList.add('active');
+        var pane = section.querySelector('[data-pane-id="' + paneId + '"]');
+        if (pane) pane.classList.add('active');
+      });
+    });
+  }
+
+  initImplTabs();
+
   function copyHtml() {
     navigator.clipboard.writeText(document.getElementById('html-block').textContent).then(function () {
       var btn = document.getElementById('copy-html-btn');
@@ -1037,6 +1311,7 @@
       setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
     });
   }
+
   document.querySelectorAll('.ds-toggle__input[role="switch"]').forEach(function (input) {
     input.addEventListener('change', function () {
       input.setAttribute('aria-checked', input.checked ? 'true' : 'false');
