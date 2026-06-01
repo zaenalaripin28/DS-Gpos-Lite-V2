@@ -494,6 +494,54 @@
     .demo-nav-item.active { background: #EEF7FF; color: #1E7FD6; font-weight: 600; }
     .demo-nav-item img  { width: 20px; height: 20px; }
     .demo-nav-item .nav-arrow { margin-left: auto; width: 14px; height: 14px; opacity: 0.35; }
+
+    .demo-notif-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: var(--color-neutral-n900);
+      border-radius: 8px;
+    }
+    .ds-topnav-notif {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: none;
+      border-radius: var(--border-radius-md);
+      background: transparent;
+      cursor: default;
+    }
+    .ds-topnav-notif__icon { width: 24px; height: 24px; display: block; }
+    .ds-topnav-notif__indicator {
+      position: absolute;
+      top: var(--space-025);
+      right: var(--space-025);
+      transform: translate(35%, -35%);
+      pointer-events: none;
+      line-height: 0;
+    }
+    .ds-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 20px;
+      padding: var(--space-025) var(--space-075);
+      border-radius: var(--border-radius-full);
+      font-family: var(--font-primary);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+      white-space: nowrap;
+    }
+    .ds-badge--important {
+      background-color: var(--color-red-r300);
+      color: var(--color-neutral-n0);
+    }
     .demo-sub-item {
       display: flex; align-items: center;
       padding: 7px 12px 7px 42px;
@@ -998,6 +1046,8 @@
                 Navigation Menu
               </a>
             </li>
+            <li><a href="../Top & bottom Navigation/top-bottom-nav.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="17" width="20" height="4" rx="1"/><polyline points="9,11 5,7 9,3"/><polyline points="15,11 19,7 15,3"/></svg>Top &amp; Bottom Nav</a></li>
+
           </ul>
         </div>
         <div class="nav-section">
@@ -1409,6 +1459,19 @@
             </div>
           </div>
 
+          <!-- Notification Indicator (bell + badge) -->
+          <div class="usage-card">
+            <div class="usage-card-hd">🔔 Notification Indicator</div>
+            <div class="usage-card-body" style="background:var(--color-neutral-n10);">
+              <div class="demo-notif-wrap">
+                <button type="button" class="ds-topnav-notif" aria-label="Notifikasi, 60 belum dibaca" tabindex="-1" style="pointer-events:none;">
+                  <img class="ds-topnav-notif__icon" src="../../assets/icons/icon-bell.svg" alt="" aria-hidden="true">
+                  <span class="ds-topnav-notif__indicator"><span class="ds-badge ds-badge--important">60</span></span>
+                </button>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
@@ -1689,7 +1752,7 @@ const ONLINE = [
   { name: 'Dekorasi',     off: 'icon-sidebar-online-dekorasi-off.svg',     on: 'icon-sidebar-online-dekorasi-on.svg'     },
   { name: 'Help',         off: 'icon-sidebar-online-help-off.svg',         on: 'icon-sidebar-online-help-on.svg'         },
   { name: 'Laporan',      off: 'icon-sidebar-online-laporan-off.svg',      on: 'icon-sidebar-online-laporan-on.svg'      },
-  { name: 'Notification', off: 'icon-sidebar-online-notification-off.svg', on: 'icon-sidebar-online-notification-on.svg' },
+  { name: 'Notification', off: 'icon-bell.svg', on: 'icon-bell-alert.svg' },
   { name: 'Pesanan',      off: 'icon-sidebar-online-pesanan-off.svg',      on: 'icon-sidebar-online-pesanan-on.svg'      },
   { name: 'Produk',       off: 'icon-sidebar-online-produk-off.svg',       on: 'icon-sidebar-online-produk-on.svg'       },
   { name: 'Promo',        off: 'icon-sidebar-online-promo-off.svg',        on: 'icon-sidebar-online-promo-on.svg'        },
@@ -1890,7 +1953,12 @@ var CODE_SNIPPETS = {
     '</button>\n\n' +
     '<!-- Sidebar icon Off/On -->\n' +
     '<img src="assets/icons/icon-sidebar-offline-news-off.svg" alt="berita" width="24" height="24">\n' +
-    '<img src="assets/icons/icon-sidebar-offline-news-on.svg"  alt="berita" width="24" height="24">',
+    '<img src="assets/icons/icon-sidebar-offline-news-on.svg"  alt="berita" width="24" height="24">\n\n' +
+    '<!-- Top nav notification indicator -->\n' +
+    '<button type="button" class="ds-topnav-notif" aria-label="Notifikasi, 60 belum dibaca">\n' +
+    '  <img class="ds-topnav-notif__icon" src="assets/icons/icon-bell.svg" alt="" aria-hidden="true">\n' +
+    '  <span class="ds-topnav-notif__indicator"><span class="ds-badge ds-badge--important">60</span></span>\n' +
+    '</button>',
 
   css:
     ':root {\n' +

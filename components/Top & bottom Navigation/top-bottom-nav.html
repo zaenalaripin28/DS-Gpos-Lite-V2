@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top &amp; Bottom Nav — DS GPOS Lite V2</title>
+  <link rel="stylesheet" href="../../styles/globals.css">
+  <link rel="stylesheet" href="../../styles/enhancements.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50:'var(--color-primary-50)',100:'var(--color-primary-100)',200:'var(--color-primary-200)',
+              300:'var(--color-primary-300)',400:'var(--color-primary-400)',500:'var(--color-primary-500)',
+              600:'var(--color-primary-600)',700:'var(--color-primary-700)',800:'var(--color-primary-800)',900:'var(--color-primary-900)',
+            },
+            blue: {
+              b50:'var(--color-blue-b50)',b75:'var(--color-blue-b75)',b100:'var(--color-blue-b100)',
+              b200:'var(--color-blue-b200)',b300:'var(--color-blue-b300)',b400:'var(--color-blue-b400)',b500:'var(--color-blue-b500)',
+            },
+            neutral: {
+              n0:'var(--color-neutral-n0)',n10:'var(--color-neutral-n10)',n20:'var(--color-neutral-n20)',n30:'var(--color-neutral-n30)',
+              n40:'var(--color-neutral-n40)',n50:'var(--color-neutral-n50)',n200:'var(--color-neutral-n200)',
+              n300:'var(--color-neutral-n300)',n400:'var(--color-neutral-n400)',n500:'var(--color-neutral-n500)',
+              n700:'var(--color-neutral-n700)',n800:'var(--color-neutral-n800)',n900:'var(--color-neutral-n900)',
+            },
+            green: {
+              g50:'var(--color-green-g50)',g100:'var(--color-green-g100)',g200:'var(--color-green-g200)',
+              g300:'var(--color-green-g300)',g400:'var(--color-green-g400)',
+            },
+            red: {
+              r50:'var(--color-red-r50)',r75:'var(--color-red-r75)',r100:'var(--color-red-r100)',
+              r300:'var(--color-red-r300)',r400:'var(--color-red-r400)',
+            },
+            background:'var(--color-background)',surface:'var(--color-surface)',
+            border:{DEFAULT:'var(--color-border)'},
+            text:{primary:'var(--color-text-primary)',secondary:'var(--color-text-secondary)',tertiary:'var(--color-text-tertiary)'},
+          },
+          fontFamily:{primary:['var(--font-primary)'],sans:['var(--font-primary)']},
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Logo — Figma: logo-parts.png */
+    .ds-topnav-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-050) var(--space-100);
+      border: none;
+      border-radius: var(--border-radius-md);
+      background: transparent;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color var(--transition-fast);
+    }
+    .ds-topnav-logo:hover { background-color: var(--color-neutral-n20); }
+    .ds-topnav-logo:active { background-color: var(--color-neutral-n40); }
+    .ds-topnav-logo:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+    .ds-topnav-logo--hover { background-color: var(--color-neutral-n20); }
+    .ds-topnav-logo--press { background-color: var(--color-neutral-n40); }
+    .ds-topnav-logo__img {
+      display: block;
+      height: 32px;
+      width: auto;
+      max-width: 128px;
+      object-fit: contain;
+    }
+    .logo-parts-stage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: var(--space-300);
+      padding: var(--space-250);
+      background: var(--color-neutral-n900);
+      border-radius: var(--border-radius-lg);
+    }
+    .logo-parts-states {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-100);
+      margin-bottom: var(--space-150);
+    }
+    .logo-parts-state-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .logo-parts-state-card__preview {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 88px;
+      padding: var(--space-200);
+      background: var(--color-neutral-n900);
+    }
+    .logo-parts-state-card__meta {
+      padding: 14px 16px;
+      border-top: 1px solid var(--color-border);
+    }
+    .logo-playground {
+      display: grid;
+      gap: var(--space-150);
+      max-width: 420px;
+    }
+    .logo-playground__controls {
+      display: grid;
+      gap: var(--space-075);
+    }
+    .logo-playground__control {
+      min-height: 40px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-sm);
+      background: var(--color-neutral-n0);
+      color: var(--color-neutral-n500);
+      padding: 0 var(--space-075);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+    }
+    .logo-playground__control:focus {
+      outline: none;
+      border-color: var(--color-blue-b300);
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+    .logo-playground__stage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-250);
+      background: var(--color-neutral-n900);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+    }
+    .logo-playground__hint {
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+      line-height: 1.6;
+      font-family: var(--font-primary);
+      margin: 0;
+    }
+
+    /* Notification Indicator — Figma: notification indicator-parts.png */
+    .ds-topnav-notif {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: none;
+      border-radius: var(--border-radius-md);
+      background: transparent;
+      cursor: pointer;
+      transition: background-color var(--transition-fast);
+    }
+    .ds-topnav-notif:hover { background-color: var(--color-neutral-n20); }
+    .ds-topnav-notif:active { background-color: var(--color-neutral-n40); }
+    .ds-topnav-notif:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+    .ds-topnav-notif__icon {
+      width: 24px;
+      height: 24px;
+      display: block;
+    }
+    .ds-topnav-notif__indicator {
+      position: absolute;
+      top: var(--space-025);
+      right: var(--space-025);
+      transform: translate(35%, -35%);
+      pointer-events: none;
+      line-height: 0;
+    }
+    .ds-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 20px;
+      padding: var(--space-025) var(--space-075);
+      border-radius: var(--border-radius-full);
+      font-family: var(--font-primary);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+      white-space: nowrap;
+    }
+    .ds-badge--important {
+      background-color: var(--color-red-r300);
+      color: var(--color-neutral-n0);
+    }
+    .notif-parts-stage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-250);
+      background: var(--color-neutral-n900);
+      border-radius: var(--border-radius-lg);
+    }
+    .notif-playground {
+      display: grid;
+      gap: var(--space-150);
+      max-width: 420px;
+    }
+    .notif-playground__controls {
+      display: grid;
+      gap: var(--space-075);
+    }
+
+    /* Top Navigation — Figma: top navigation.png */
+    .ds-topnav {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: var(--space-100);
+      min-height: 56px;
+      padding: var(--space-075) var(--space-150);
+      background: var(--color-neutral-n0);
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-lg);
+      font-family: var(--font-primary);
+      box-sizing: border-box;
+    }
+    .ds-topnav__start,
+    .ds-topnav__center,
+    .ds-topnav__end {
+      display: flex;
+      align-items: center;
+      gap: var(--space-100);
+      min-width: 0;
+    }
+    .ds-topnav__start { justify-content: flex-start; }
+    .ds-topnav__center { justify-content: center; }
+    .ds-topnav__end { justify-content: flex-end; }
+    .ds-topnav__menu { display: none; }
+    .ds-topnav__logo--center { display: none; }
+    .ds-topnav__notif--secondary { display: none; }
+    .ds-topnav--website {
+      grid-template-columns: 1fr auto;
+    }
+    .ds-topnav--website .ds-topnav__center { display: none; }
+    .ds-topnav--tablet .ds-topnav__menu,
+    .ds-topnav--mobile .ds-topnav__menu {
+      display: inline-flex;
+    }
+    .ds-topnav--tablet .ds-topnav__logo--start,
+    .ds-topnav--mobile .ds-topnav__logo--start {
+      display: none;
+    }
+    .ds-topnav--tablet .ds-topnav__logo--center,
+    .ds-topnav--mobile .ds-topnav__logo--center {
+      display: inline-flex;
+    }
+    .ds-topnav--tablet .ds-topnav__notif--secondary {
+      display: inline-flex;
+    }
+    .ds-topnav--mobile .ds-topnav__akses,
+    .ds-topnav--mobile .ds-topnav__notif--secondary {
+      display: none;
+    }
+    .ds-topnav-profile {
+      padding: 0;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      border-radius: var(--border-radius-full);
+      line-height: 0;
+    }
+    .ds-topnav-profile:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+    .ds-avatar {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--border-radius-full);
+      background-color: var(--color-blue-b200);
+      flex-shrink: 0;
+    }
+    .ds-avatar__image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: var(--border-radius-full);
+      object-fit: cover;
+    }
+    .ds-avatar__presence {
+      position: absolute;
+      border-radius: var(--border-radius-full);
+      background-color: var(--color-green-g300);
+      border: 2px solid var(--color-neutral-n0);
+    }
+    .ds-avatar--lg {
+      width: 40px;
+      height: 40px;
+    }
+    .ds-avatar--lg .ds-avatar__image {
+      width: 28px;
+      height: 28px;
+    }
+    .ds-avatar--lg .ds-avatar__presence {
+      width: 14px;
+      height: 14px;
+      right: -1px;
+      bottom: -1px;
+    }
+    .topnav-variants {
+      display: grid;
+      gap: var(--space-150);
+    }
+    .topnav-variant-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .topnav-variant-card__label {
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--color-border);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      font-family: var(--font-primary);
+    }
+    .topnav-variant-card__body {
+      padding: var(--space-150);
+    }
+    .topnav-playground {
+      display: grid;
+      gap: var(--space-150);
+    }
+
+    /* Footer Navigation — Figma: footer-parts.png */
+    .ds-footer-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-150);
+      width: 100%;
+      min-height: 56px;
+      padding: var(--space-100) var(--space-150);
+      background: var(--color-neutral-n0);
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-lg);
+      font-family: var(--font-primary);
+      box-sizing: border-box;
+    }
+    .ds-footer-nav__pager {
+      display: flex;
+      align-items: center;
+      gap: var(--space-100);
+      min-width: 0;
+    }
+    .ds-footer-nav__nav-btns {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-050);
+    }
+    .ds-footer-nav__page {
+      margin: 0;
+      font-size: var(--text-body-small-medium-size);
+      font-weight: var(--text-body-small-medium-weight);
+      line-height: var(--text-body-small-medium-lh);
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+    }
+    .ds-footer-nav__actions {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-100);
+      flex-shrink: 0;
+    }
+
+    /* Button — dari komponen Button (subset) */
+    .ds-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-025);
+      padding: 0 var(--space-150);
+      min-height: 32px;
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n900);
+      font-family: var(--font-primary);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--text-body-small-medium-lh);
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color var(--transition-fast);
+    }
+    .ds-btn:hover { background-color: var(--color-neutral-n30); }
+    .ds-btn:active { background-color: var(--color-neutral-n40); }
+    .ds-btn:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+    .ds-btn:disabled,
+    .ds-btn--disabled {
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n50);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .ds-btn--icon-only {
+      padding: 0 var(--space-050);
+      gap: 0;
+      min-width: 32px;
+    }
+    .ds-btn--icon-only img {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+    .ds-btn--subtle {
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n900);
+    }
+    .ds-btn--subtle:hover { background-color: var(--color-neutral-n30); }
+    .ds-btn--subtle:active { background-color: var(--color-neutral-n40); }
+    .ds-btn--primary {
+      background-color: var(--color-blue-b300);
+      color: var(--color-neutral-n0);
+    }
+    .ds-btn--primary:hover { background-color: var(--color-blue-b400); }
+    .ds-btn--primary:active { background-color: var(--color-blue-b500); }
+    .ds-btn--primary:disabled,
+    .ds-btn--primary.ds-btn--disabled {
+      background-color: var(--color-neutral-n30);
+      color: var(--color-neutral-n50);
+    }
+
+    .usage-info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-100);
+    }
+    .usage-info-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: var(--space-150);
+    }
+    .usage-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-100);
+    }
+    .code-block {
+      background: var(--color-neutral-n10);
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-sm);
+      padding: var(--space-100) var(--space-150);
+      overflow-x: auto;
+      font-family: var(--font-primary);
+      font-size: 11px;
+      line-height: 1.6;
+      color: var(--color-neutral-n700);
+    }
+    .copy-btn {
+      padding: 4px 10px;
+      background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n30);
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-neutral-n400);
+      cursor: pointer;
+      font-family: var(--font-primary);
+      flex-shrink: 0;
+    }
+    .copy-btn:hover { background: var(--color-blue-b300); border-color: var(--color-blue-b300); color: var(--color-neutral-n0); }
+    .copy-btn.copied { background: var(--color-green-g300); border-color: var(--color-green-g300); color: var(--color-neutral-n0); }
+    .tw-snippet-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--color-neutral-n30);
+    }
+    .tw-snippet-row:last-child { border-bottom: none; }
+    .tw-snippet-code {
+      flex: 1;
+      font-family: var(--font-primary);
+      font-size: 11px;
+      line-height: 1.55;
+      color: var(--color-neutral-n700);
+      word-break: break-all;
+      white-space: pre-wrap;
+    }
+    .footer-playground {
+      display: grid;
+      gap: var(--space-150);
+      max-width: 720px;
+    }
+    .footer-playground__controls {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-100);
+    }
+    .footer-playground__field {
+      display: grid;
+      gap: var(--space-050);
+    }
+    .footer-playground__label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-text-tertiary);
+      font-family: var(--font-primary);
+    }
+    .footer-playground__control {
+      min-height: 40px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-sm);
+      background: var(--color-neutral-n0);
+      color: var(--color-neutral-n500);
+      padding: 0 var(--space-075);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+    }
+    .footer-playground__control:focus {
+      outline: none;
+      border-color: var(--color-blue-b300);
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+    .footer-playground__stage {
+      padding: var(--space-200);
+      background: var(--color-neutral-n10);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+    }
+    .footer-playground__hint {
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+      line-height: 1.6;
+      font-family: var(--font-primary);
+      margin: 0;
+    }
+    section > h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: none !important;
+      background-image: linear-gradient(to right, var(--color-primary-500) 0%, rgba(30,127,214,0.18) 32%, transparent 68%) !important;
+      background-repeat: no-repeat !important;
+      background-size: 100% 1px !important;
+      background-position: left bottom !important;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--color-text-primary);
+      font-family: var(--font-primary);
+    }
+    section > h2::before {
+      content: '';
+      width: 3px;
+      height: 18px;
+      background: linear-gradient(to bottom, var(--color-primary-500), var(--color-primary-300));
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    @media (max-width: 640px) {
+      .usage-info-grid { grid-template-columns: 1fr; }
+      .usage-grid-2 { grid-template-columns: 1fr; }
+      .logo-parts-states { grid-template-columns: 1fr; }
+      .ds-topnav { grid-template-columns: 1fr; }
+      .ds-topnav__center { justify-content: flex-start; }
+      .footer-playground__controls { grid-template-columns: 1fr; }
+      .ds-footer-nav { flex-wrap: wrap; }
+      .ds-footer-nav__actions { width: 100%; justify-content: flex-end; }
+    }
+    [data-theme="dark"] .ds-footer-nav {
+      background: var(--color-surface);
+      border-color: var(--color-border);
+    }
+  </style>
+</head>
+<body>
+<div class="scroll-progress" id="scroll-progress" style="width:0%" role="progressbar" aria-hidden="true"></div>
+<div class="container">
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo-icon">GL</div>
+        <div class="sidebar-brand-text">
+          <div class="logo">GPOS Lite</div>
+          <div class="version">Design System V2.0</div>
+        </div>
+      </div>
+      <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">&#x2715;</button>
+    </div>
+    <div class="sidebar-search">
+      <input type="search" class="search-input" placeholder="&#x1F50D;  Cari token, component...">
+    </div>
+    <div class="nav-scroll">
+      <nav class="nav-menu">
+        <div class="nav-section">
+          <h3 class="nav-title">Overview</h3>
+          <ul class="nav-list">
+            <li><a href="../../index.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>Home</a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <h3 class="nav-title">Foundations</h3>
+          <ul class="nav-list">
+            <li><a href="../../foundations/colors/colors.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg>Colors</a></li>
+            <li><a href="../../foundations/typography/typography.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Typography</a></li>
+            <li><a href="../../foundations/spacing/spacing.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>Spacing</a></li>
+            <li><a href="../../foundations/shadows/shadows.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h12a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V7z" opacity="0.4"/></svg>Shadows</a></li>
+            <li><a href="../../foundations/borders/borders.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>Borders &amp; Radius</a></li>
+            <li><a href="../../foundations/grid/grid.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Grid &amp; Layout</a></li>
+            <li><a href="../../foundations/icons/icons.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="5" height="5" rx="1"/><rect x="10" y="3" width="5" height="5" rx="1"/><rect x="17" y="3" width="4" height="5" rx="1"/><rect x="3" y="10" width="5" height="5" rx="1"/><rect x="10" y="10" width="5" height="5" rx="1"/><rect x="17" y="10" width="4" height="5" rx="1"/><rect x="3" y="17" width="5" height="4" rx="1"/><rect x="10" y="17" width="5" height="4" rx="1"/><rect x="17" y="17" width="4" height="4" rx="1"/></svg>Icons</a></li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <h3 class="nav-title">Komponen</h3>
+          <ul class="nav-list">
+            <li><a href="../Button/button.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="3"/><line x1="7" y1="12" x2="17" y2="12" opacity="0.5"/></svg>Button</a></li>
+            <li><a href="../Avatar/avatar.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Avatar</a></li>
+            <li><a href="../Badge/badge.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="9" width="22" height="6" rx="3"/><circle cx="6" cy="12" r="1.5" fill="currentColor" opacity="0.5"/></svg>Badge</a></li>
+            <li><a href="../Tags/tags.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/></svg>Tags</a></li>
+            <li><a href="../Text Field/text field.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="10" rx="2"/><line x1="7" y1="11" x2="13" y2="11"/></svg>Text Field</a></li>
+            <li><a href="../Form/form.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="17" y2="12"/></svg>Form</a></li>
+            <li><a href="../Breadcrumbs/breadcrumbs.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>Breadcrumbs</a></li>
+            <li><a href="../Tabs/tabs.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="4" rx="1"/><rect x="2" y="13" width="14" height="4" rx="1"/></svg>Tabs</a></li>
+            <li><a href="../Pagination/pagination.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="10,6 4,12 10,18"/><polyline points="14,6 20,12 14,18"/></svg>Pagination</a></li>
+            <li><a href="../Toast-Banner/banner.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="8" rx="2"/></svg>Toast Banner</a></li>
+            <li><a href="../Navigation menu/navigation.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><line x1="7" y1="10" x2="17" y2="10"/><line x1="7" y1="14" x2="17" y2="14"/></svg>Navigation Menu</a></li>
+            <li>
+              <a href="top-bottom-nav.html" class="nav-link active">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="17" width="20" height="4" rx="1"/><polyline points="9,11 5,7 9,3"/><polyline points="15,11 19,7 15,3"/></svg>
+                Top &amp; Bottom Nav
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="nav-section">
+          <h3 class="nav-title">Resources</h3>
+          <ul class="nav-list">
+            <li><a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="nav-link" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>GitHub Repo</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="sidebar-footer">
+      <div class="tailwind-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 6C9.33 6 7.67 7.33 7 10c1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35.98 1 2.09 2.15 4.59 2.15C19.67 12 21.33 10.67 22 8c-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C15.61 7.15 14.5 6 12 6zm-7 6c-2.67 0-4.33 1.33-5 4 1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35C6.39 17.15 7.5 18 10 18c2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C8.61 12.85 7.5 12 5 12z"/></svg>
+        Built with tokens.css
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="breadcrumb">
+        <a href="../../index.html">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="#">Components</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="current">Top &amp; Bottom Nav</span>
+      </div>
+      <div class="topbar-actions">
+        <button type="button" class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/></svg>
+        </button>
+        <span class="version-badge">v2.0</span>
+      </div>
+    </div>
+
+    <div class="content-inner">
+      <section class="mb-12">
+        <div class="ds-hero-banner rounded-2xl overflow-hidden mb-3 flex flex-col lg:flex-row bg-neutral-n900" style="border:1px solid rgba(255,255,255,0.07);">
+          <div class="flex-1 px-8 py-10 lg:px-11 lg:py-12 flex flex-col justify-center">
+            <div class="flex items-center gap-100 mb-5">
+              <div class="flex items-center justify-center w-5 h-5 rounded-md bg-blue-b300/20">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4495DD" stroke-width="2.5"><rect x="2" y="17" width="20" height="3" rx="1"/></svg>
+              </div>
+              <span class="text-xs font-semibold uppercase tracking-[0.1em] text-blue-b100">Components · Top &amp; Bottom Nav</span>
+            </div>
+            <div class="font-bold text-neutral-n0 mb-3" style="font-size:2.5rem;letter-spacing:-0.035em;line-height:1.04;">Top &amp; Bottom Nav</div>
+            <p class="text-sm leading-relaxed max-w-sm mb-8" style="color:rgba(255,255,255,0.52);line-height:1.7;">
+              Top navigation responsif (website, tablet, mobile) dari parts logo, notifikasi, button, dan avatar. Footer navigation untuk aksi bawah halaman.
+            </p>
+          </div>
+          <div class="lg:flex-1 p-300 flex items-center justify-center" style="background:rgba(255,255,255,0.03);border-left:1px solid rgba(255,255,255,0.07);">
+            <div class="w-full max-w-lg flex flex-col gap-150">
+              <header class="ds-topnav ds-topnav--website" role="banner" aria-label="Top navigation" onclick="return false;">
+                <div class="ds-topnav__start">
+                  <button type="button" class="ds-btn ds-btn--icon-only ds-topnav__menu" aria-label="Buka menu">
+                    <img src="../../assets/icons/icon-menu.svg" alt="" aria-hidden="true">
+                  </button>
+                  <a href="#" class="ds-topnav-logo ds-topnav__logo--start" aria-label="GPOS Lite — beranda">
+                    <img class="ds-topnav-logo__img" src="../../assets/images/logo.png" alt="">
+                  </a>
+                </div>
+                <div class="ds-topnav__center">
+                  <a href="#" class="ds-topnav-logo ds-topnav__logo--center" aria-label="GPOS Lite — beranda">
+                    <img class="ds-topnav-logo__img" src="../../assets/images/logo.png" alt="">
+                  </a>
+                </div>
+                <div class="ds-topnav__end">
+                  <button type="button" class="ds-btn ds-btn--subtle ds-topnav__akses">Akses</button>
+                  <button type="button" class="ds-topnav-notif" aria-label="Notifikasi, 60 belum dibaca">
+                    <img class="ds-topnav-notif__icon" src="../../assets/icons/icon-bell.svg" alt="" aria-hidden="true">
+                    <span class="ds-topnav-notif__indicator"><span class="ds-badge ds-badge--important">60</span></span>
+                  </button>
+                  <button type="button" class="ds-topnav-notif ds-topnav__notif--secondary" aria-label="Notifikasi sekunder, 60 belum dibaca">
+                    <img class="ds-topnav-notif__icon" src="../../assets/icons/icon-bell.svg" alt="" aria-hidden="true">
+                    <span class="ds-topnav-notif__indicator"><span class="ds-badge ds-badge--important">60</span></span>
+                  </button>
+                  <button type="button" class="ds-topnav-profile" aria-label="Profil pengguna">
+                    <span class="ds-avatar ds-avatar--lg">
+                      <img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="" width="28" height="28">
+                      <span class="ds-avatar__presence" aria-hidden="true"></span>
+                    </span>
+                  </button>
+                </div>
+              </header>
+              <footer class="ds-footer-nav" aria-label="Footer navigation">
+                <div class="ds-footer-nav__pager">
+                  <div class="ds-footer-nav__nav-btns">
+                    <button type="button" class="ds-btn ds-btn--icon-only" aria-label="Halaman sebelumnya">
+                      <img src="../../assets/icons/icon-chevron-left.svg" alt="" aria-hidden="true">
+                    </button>
+                    <button type="button" class="ds-btn ds-btn--icon-only" aria-label="Halaman berikutnya">
+                      <img src="../../assets/icons/icon-chevron-right.svg" alt="" aria-hidden="true">
+                    </button>
+                  </div>
+                  <p class="ds-footer-nav__page" aria-live="polite">2/1990</p>
+                </div>
+                <div class="ds-footer-nav__actions">
+                  <button type="button" class="ds-btn ds-btn--subtle">Kembali</button>
+                  <button type="button" class="ds-btn ds-btn--primary">Simpan</button>
+                </div>
+              </footer>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Top Navigation</h2>
+        <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:640px;margin-bottom:20px;">
+          Komponen <code>&lt;TopNavigation&gt;</code> sesuai <code>figma/top navigation.png</code>. Merakit parts: logo, <code>.ds-btn</code> (Akses), notification indicator (<code>icon-bell.svg</code>), avatar (<code>assets/images/avatar.svg</code>), dan menu (<code>icon-menu.svg</code>).
+        </p>
+
+        <div class="topnav-variants" style="margin-bottom:20px;">
+          <div class="topnav-variant-card">
+            <div class="topnav-variant-card__label">variant=website</div>
+            <div class="topnav-variant-card__body">
+              <header class="ds-topnav ds-topnav--website" role="banner" aria-label="Top navigation website">
+                <div class="ds-topnav__start">
+                  <button type="button" class="ds-btn ds-btn--icon-only ds-topnav__menu" aria-label="Buka menu" tabindex="-1" style="pointer-events:none;">
+                    <img src="../../assets/icons/icon-menu.svg" alt="" aria-hidden="true">
+                  </button>
+                  <a href="#" class="ds-topnav-logo ds-topnav__logo--start" aria-label="GPOS Lite — beranda" tabindex="-1" style="pointer-events:none;">
+                    <img class="ds-topnav-logo__img" src="../../assets/images/logo.png" alt="">
+                  </a>
+                </div>
+                <div class="ds-topnav__center">
+                  <a href="#" class="ds-topnav-logo ds-topnav__logo--center" aria-label="GPOS Lite" tabindex="-1" style="pointer-events:none;">
+                    <img class="ds-topnav-logo__img" src="../../assets/images/logo.png" alt="">
+                  </a>
+                </div>
+                <div class="ds-topnav__end">
+                  <button type="button" class="ds-btn ds-btn--subtle ds-topnav__akses" tabindex="-1" style="pointer-events:none;">Akses</button>
+                  <button type="button" class="ds-topnav-notif" aria-label="Notifikasi, 60 belum dibaca" tabindex="-1" style="pointer-events:none;">
+                    <img class="ds-topnav-notif__icon" src="../../assets/icons/icon-bell.svg" alt="" aria-hidden="true">
+                    <span class="ds-topnav-notif__indicator"><span class="ds-badge ds-badge--important">60</span></span>
+                  </button>
+                  <button type="button" class="ds-topnav-notif ds-topnav__notif--secondary" aria-label="Notifikasi sekunder" tabindex="-1" style="pointer-events:none;">
+                    <img class="ds-topnav-notif__icon" src="../../assets/icons/icon-bell.svg" alt="" aria-hidden="true">
+                    <span class="ds-topnav-notif__indicator"><span class="ds-badge ds-badge--important">60</span></span>
+                  </button>
+                  <button type="button" class="ds-topnav-profile" aria-label="Profil pengguna" tabindex="-1" style="pointer-events:none;">
+                    <span class="ds-avatar ds-avatar--lg">
+                      <img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="" width="28" height="28">
+                      <span class="ds-avatar__presence" aria-hidden="true"></span>
+                    </span>
+                  </button>
+                </div>
+              </header>
+            </div>
+          </div>
+          <div class="topnav-variant-card">
+            <div class="topnav-variant-card__label">variant=tablet</div>
+            <div class="topnav-variant-card__body">
+              <header class="ds-topnav ds-topnav--tablet" role="banner" aria-label="Top navigation tablet">
+                <div class="ds-topnav__start">
+                  <button type="button" class="ds-btn ds-btn--icon-only ds-topnav__menu" aria-label="Buka menu" tabindex="-1" style="pointer-events:none;">
+                    <img src="../../assets/icons/icon-menu.svg" alt="" aria-hidden="true">
+                  </button>
+                  <a href="#" class="ds-topnav-logo ds-topnav__logo--start" tabindex="-1" style="pointer-events:none;"><img class="ds-topnav-logo__img" src="../../assets/images/logo.png" alt=""></a>
+                </div>
+                <div class="ds-topnav__center">
+                  <a href="#" class="ds-topnav-logo ds-topnav__logo--center" aria-label="GPOS Lite" tabindex="-1" style="pointer-events:none;"><img class="ds-topnav-logo__img" src="../../assets/images/logo.png" alt=""></a>
+                </div>
+                <div class="ds-topnav__end">
+                  <button type="button" class="ds-btn ds-btn--subtle ds-topnav__akses" tabindex="-1" style="pointer-events:none;">Akses</button>
+                  <button type="button" class="ds-topnav-notif" tabindex="-1" style="pointer-events:none;" aria-label="Notifikasi">
+                    <img class="ds-topnav-notif__icon" src="../../assets/icons/icon-bell.svg" alt="" aria-hidden="true">
+                    <span class="ds-topnav-notif__indicator"><span class="ds-badge ds-badge--important">60</span></span>
+                  </button>
+                  <button type="button" class="ds-topnav-notif ds-topnav__notif--secondary" tabindex="-1" style="pointer-events:none;" aria-label="Notifikasi sekunder">
+                    <img class="ds-topnav-notif__icon" src="../../assets/icons/icon-bell.svg" alt="" aria-hidden="true">
+                    <span class="ds-topnav-notif__indicator"><span class="ds-badge ds-badge--important">60</span></span>
+                  </button>
+                  <button type="button" class="ds-topnav-profile" tabindex="-1" style="pointer-events:none;" aria-label="Profil">
+                    <span class="ds-avatar ds-avatar--lg"><img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="" width="28" height="28"><span class="ds-avatar__presence" aria-hidden="true"></span></span>
+                  </button>
+                </div>
+              </header>
+            </div>
+          </div>
+          <div class="topnav-variant-card">
+            <div class="topnav-variant-card__label">variant=mobile</div>
+            <div class="topnav-variant-card__body">
+              <header class="ds-topnav ds-topnav--mobile" role="banner" aria-label="Top navigation mobile">
+                <div class="ds-topnav__start">
+                  <button type="button" class="ds-btn ds-btn--icon-only ds-topnav__menu" aria-label="Buka menu" tabindex="-1" style="pointer-events:none;">
+                    <img src="../../assets/icons/icon-menu.svg" alt="" aria-hidden="true">
+                  </button>
+                  <a href="#" class="ds-topnav-logo ds-topnav__logo--start" tabindex="-1" style="pointer-events:none;"><img class="ds-topnav-logo__img" src="../../assets/images/logo.png" alt=""></a>
+                </div>
+                <div class="ds-topnav__center">
+                  <a href="#" class="ds-topnav-logo ds-topnav__logo--center" aria-label="GPOS Lite" tabindex="-1" style="pointer-events:none;"><img class="ds-topnav-logo__img" src="../../assets/images/logo.png" alt=""></a>
+                </div>
+                <div class="ds-topnav__end">
+                  <button type="button" class="ds-btn ds-btn--subtle ds-topnav__akses" tabindex="-1" style="pointer-events:none;">Akses</button>
+                  <button type="button" class="ds-topnav-notif" tabindex="-1" style="pointer-events:none;" aria-label="Notifikasi">
+                    <img class="ds-topnav-notif__icon" src="../../assets/icons/icon-bell.svg" alt="" aria-hidden="true">
+                    <span class="ds-topnav-notif__indicator"><span class="ds-badge ds-badge--important">60</span></span>
+                  </button>
+                  <button type="button" class="ds-topnav-notif ds-topnav__notif--secondary" tabindex="-1" style="pointer-events:none;" aria-label="Notifikasi sekunder">
+                    <img class="ds-topnav-notif__icon" src="../../assets/icons/icon-bell.svg" alt="" aria-hidden="true">
+                    <span class="ds-topnav-notif__indicator"><span class="ds-badge ds-badge--important">60</span></span>
+                  </button>
+                  <button type="button" class="ds-topnav-profile" tabindex="-1" style="pointer-events:none;" aria-label="Profil">
+                    <span class="ds-avatar ds-avatar--lg"><img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="" width="28" height="28"><span class="ds-avatar__presence" aria-hidden="true"></span></span>
+                  </button>
+                </div>
+              </header>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;">
+          <div style="font-size:11px;font-weight:700;color:var(--color-text-tertiary);font-family:var(--font-primary);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Referensi Figma</div>
+          <img src="figma/top navigation.png" alt="Referensi Figma Top Navigation" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Informasi Penggunaan — Top Navigation</h2>
+        <div class="usage-info-grid">
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);font-family:var(--font-primary);">Website</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;font-family:var(--font-primary);">Logo kiri, tombol Akses, dua notification indicator, dan avatar profil di kanan. Tanpa menu hamburger.</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);font-family:var(--font-primary);">Tablet</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;font-family:var(--font-primary);">Menu <code>icon-menu.svg</code> kiri, logo tengah, aksi kanan sama seperti website.</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);font-family:var(--font-primary);">Mobile</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;font-family:var(--font-primary);">Menu + logo tengah; sembunyikan Akses dan notification kedua — sisakan satu bell + avatar.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Do &amp; Don&apos;t — Top Navigation</h2>
+        <div class="usage-grid-2">
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:10px 16px;background:var(--color-green-g50);border-bottom:2px solid var(--color-green-g100);font-weight:700;color:var(--color-green-g400);font-family:var(--font-primary);font-size:12px;">Do — Lakukan ini</div>
+            <ul style="padding:16px 20px 20px 36px;color:var(--color-text-tertiary);font-size:13px;line-height:1.7;font-family:var(--font-primary);">
+              <li>Gunakan modifier <code>.ds-topnav--website</code>, <code>--tablet</code>, atau <code>--mobile</code> sesuai breakpoint.</li>
+              <li>Rakit dari parts yang sudah didokumentasikan di halaman ini.</li>
+              <li>Tombol Akses memakai <code>.ds-btn.ds-btn--subtle</code> dari komponen Button.</li>
+              <li>Avatar dengan presence online (<code>ds-avatar--lg</code>).</li>
+            </ul>
+          </div>
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:10px 16px;background:var(--color-red-r50);border-bottom:2px solid var(--color-red-r100);font-weight:700;color:var(--color-red-r400);font-family:var(--font-primary);font-size:12px;">Don&apos;t — Hindari ini</div>
+            <ul style="padding:16px 20px 20px 36px;color:var(--color-text-tertiary);font-size:13px;line-height:1.7;font-family:var(--font-primary);">
+              <li>Jangan hardcode warna di luar token semantic.</li>
+              <li>Jangan menampilkan dua notification di mobile.</li>
+              <li>Jangan mengganti <code>icon-menu.svg</code> atau <code>icon-bell.svg</code> dengan asset lain.</li>
+              <li>Jangan menduplikasi markup parts — gunakan class yang sama.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Kode DS — Top Navigation</h2>
+        <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:640px;margin-bottom:20px;">Markup website variant — salin dan ganti modifier untuk tablet/mobile.</p>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;margin-bottom:20px;">
+          <div class="tw-snippet-row">
+            <pre class="tw-snippet-code" id="snippet-topnav-html">&lt;header class="ds-topnav ds-topnav--website" role="banner"&gt;
+  &lt;div class="ds-topnav__start"&gt;
+    &lt;a href="/" class="ds-topnav-logo ds-topnav__logo--start" aria-label="GPOS Lite — beranda"&gt;
+      &lt;img class="ds-topnav-logo__img" src="assets/images/logo.png" alt=""&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class="ds-topnav__center"&gt;...logo tengah (tablet/mobile)...&lt;/div&gt;
+  &lt;div class="ds-topnav__end"&gt;
+    &lt;button type="button" class="ds-btn ds-btn--subtle ds-topnav__akses"&gt;Akses&lt;/button&gt;
+    &lt;button type="button" class="ds-topnav-notif" aria-label="Notifikasi, 60 belum dibaca"&gt;...&lt;/button&gt;
+    &lt;button type="button" class="ds-topnav-profile" aria-label="Profil pengguna"&gt;...avatar...&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/header&gt;</pre>
+            <button type="button" class="copy-btn" data-copy-target="snippet-topnav-html" onclick="copyFromTarget(this)">Salin</button>
+          </div>
+        </div>
+        <div class="code-block" style="display:grid;gap:10px;background:var(--color-surface);border-radius:12px;padding:16px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-topnav</code><button class="copy-btn" data-copy="ds-topnav" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-topnav--website</code><button class="copy-btn" data-copy="ds-topnav ds-topnav--website" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-topnav--tablet</code><button class="copy-btn" data-copy="ds-topnav ds-topnav--tablet" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-topnav--mobile</code><button class="copy-btn" data-copy="ds-topnav ds-topnav--mobile" onclick="copyToken(this)">Salin</button></div>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Playground — Top Navigation</h2>
+        <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:640px;margin-bottom:20px;">
+          Pilih variant responsif untuk melihat perbedaan layout.
+        </p>
+        <div class="topnav-playground">
+          <div class="footer-playground__controls">
+            <label class="footer-playground__field">
+              <span class="footer-playground__label">Variant</span>
+              <select class="footer-playground__control" id="topnav-pg-variant" aria-label="Pilih variant top navigation">
+                <option value="website">Website</option>
+                <option value="tablet">Tablet</option>
+                <option value="mobile">Mobile</option>
+              </select>
+            </label>
+          </div>
+          <div class="topnav-variant-card__body" style="padding:0;border:none;background:transparent;">
+            <header class="ds-topnav ds-topnav--website" id="topnav-playground" role="banner" aria-label="Top navigation playground">
+              <div class="ds-topnav__start">
+                <button type="button" class="ds-btn ds-btn--icon-only ds-topnav__menu" aria-label="Buka menu">
+                  <img src="../../assets/icons/icon-menu.svg" alt="" aria-hidden="true">
+                </button>
+                <a href="#" class="ds-topnav-logo ds-topnav__logo--start" aria-label="GPOS Lite — beranda" onclick="return false;">
+                  <img class="ds-topnav-logo__img" src="../../assets/images/logo.png" alt="">
+                </a>
+              </div>
+              <div class="ds-topnav__center">
+                <a href="#" class="ds-topnav-logo ds-topnav__logo--center" aria-label="GPOS Lite" onclick="return false;">
+                  <img class="ds-topnav-logo__img" src="../../assets/images/logo.png" alt="">
+                </a>
+              </div>
+              <div class="ds-topnav__end">
+                <button type="button" class="ds-btn ds-btn--subtle ds-topnav__akses">Akses</button>
+                <button type="button" class="ds-topnav-notif" aria-label="Notifikasi, 60 belum dibaca">
+                  <img class="ds-topnav-notif__icon" src="../../assets/icons/icon-bell.svg" alt="" aria-hidden="true">
+                  <span class="ds-topnav-notif__indicator"><span class="ds-badge ds-badge--important">60</span></span>
+                </button>
+                <button type="button" class="ds-topnav-notif ds-topnav__notif--secondary" aria-label="Notifikasi sekunder, 60 belum dibaca">
+                  <img class="ds-topnav-notif__icon" src="../../assets/icons/icon-bell.svg" alt="" aria-hidden="true">
+                  <span class="ds-topnav-notif__indicator"><span class="ds-badge ds-badge--important">60</span></span>
+                </button>
+                <button type="button" class="ds-topnav-profile" aria-label="Profil pengguna">
+                  <span class="ds-avatar ds-avatar--lg">
+                    <img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="" width="28" height="28">
+                    <span class="ds-avatar__presence" aria-hidden="true"></span>
+                  </span>
+                </button>
+              </div>
+            </header>
+          </div>
+          <p class="logo-playground__hint" id="topnav-pg-hint">Website: logo kiri, Akses + 2 notifikasi + avatar.</p>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Logo Parts</h2>
+        <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:640px;margin-bottom:20px;">
+          Implementasi <code>&lt;Logo&gt;</code> sesuai <code>figma/logo-parts.png</code>. Asset: <code>assets/images/logo.png</code>. Tiga state: default, hover, press.
+        </p>
+
+        <div class="logo-parts-states">
+          <div class="logo-parts-state-card">
+            <div class="logo-parts-state-card__preview">
+              <a href="#" class="ds-topnav-logo" aria-label="GPOS Lite" tabindex="-1" style="pointer-events:none;">
+                <img class="ds-topnav-logo__img" src="../../assets/images/logo.png" alt="">
+              </a>
+            </div>
+            <div class="logo-parts-state-card__meta">
+              <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Default</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;"><code>.ds-topnav-logo</code> — background transparan di atas top bar gelap (<code>Color.Neutral.N900</code>).</div>
+            </div>
+          </div>
+          <div class="logo-parts-state-card">
+            <div class="logo-parts-state-card__preview">
+              <a href="#" class="ds-topnav-logo ds-topnav-logo--hover" aria-label="GPOS Lite" tabindex="-1" style="pointer-events:none;">
+                <img class="ds-topnav-logo__img" src="../../assets/images/logo.png" alt="">
+              </a>
+            </div>
+            <div class="logo-parts-state-card__meta">
+              <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Hover</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;"><code>.ds-topnav-logo--hover</code> — <code>Background.Neutral.Hover</code> → <code>Color.Neutral.N20</code>.</div>
+            </div>
+          </div>
+          <div class="logo-parts-state-card">
+            <div class="logo-parts-state-card__preview">
+              <a href="#" class="ds-topnav-logo ds-topnav-logo--press" aria-label="GPOS Lite" tabindex="-1" style="pointer-events:none;">
+                <img class="ds-topnav-logo__img" src="../../assets/images/logo.png" alt="">
+              </a>
+            </div>
+            <div class="logo-parts-state-card__meta">
+              <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Press</div>
+              <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;"><code>.ds-topnav-logo--press</code> — <code>Background.Neutral.Pressed</code> → <code>Color.Neutral.N40</code>.</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:24px;margin-bottom:20px;">
+          <div class="logo-parts-stage">
+            <a href="#" class="ds-topnav-logo" id="logo-parts-live" aria-label="GPOS Lite — beranda">
+              <img class="ds-topnav-logo__img" src="../../assets/images/logo.png" alt="">
+            </a>
+          </div>
+        </div>
+
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;">
+          <div style="font-size:11px;font-weight:700;color:var(--color-text-tertiary);font-family:var(--font-primary);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Referensi Figma</div>
+          <img src="figma/logo-parts.png" alt="Referensi Figma Logo" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Informasi Penggunaan — Logo</h2>
+        <div class="usage-info-grid">
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);font-family:var(--font-primary);">Kapan dipakai</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;font-family:var(--font-primary);">Di pojok kiri top navigation — sebagai tautan ke beranda atau dashboard utama aplikasi GPOS Lite.</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);font-family:var(--font-primary);">Asset</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;font-family:var(--font-primary);">Selalu gunakan <code>assets/images/logo.png</code> via <code>.ds-topnav-logo__img</code>. Jangan merekonstruksi wordmark dari teks atau SVG terpisah.</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);font-family:var(--font-primary);">Interaksi</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;font-family:var(--font-primary);">Bungkus dengan <code>&lt;a&gt;</code> atau <code>&lt;button&gt;</code>. Highlight hanya pada area padding logo, bukan seluruh lebar top bar.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Do &amp; Don&apos;t — Logo</h2>
+        <div class="usage-grid-2">
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:10px 16px;background:var(--color-green-g50);border-bottom:2px solid var(--color-green-g100);font-weight:700;color:var(--color-green-g400);font-family:var(--font-primary);font-size:12px;">Do — Lakukan ini</div>
+            <ul style="padding:16px 20px 20px 36px;color:var(--color-text-tertiary);font-size:13px;line-height:1.7;font-family:var(--font-primary);">
+              <li>Letakkan logo di atas latar top bar gelap (<code>neutral-n900</code>).</li>
+              <li>Gunakan state hover/press dengan token <code>n20</code> / <code>n40</code>.</li>
+              <li>Sertakan <code>aria-label</code> yang menjelaskan tujuan tautan (mis. &quot;GPOS Lite — beranda&quot;).</li>
+              <li>Pertahankan rasio aspek gambar — atur tinggi via <code>.ds-topnav-logo__img</code>.</li>
+            </ul>
+          </div>
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:10px 16px;background:var(--color-red-r50);border-bottom:2px solid var(--color-red-r100);font-weight:700;color:var(--color-red-r400);font-family:var(--font-primary);font-size:12px;">Don&apos;t — Hindari ini</div>
+            <ul style="padding:16px 20px 20px 36px;color:var(--color-text-tertiary);font-size:13px;line-height:1.7;font-family:var(--font-primary);">
+              <li>Jangan hardcode warna highlight di luar token neutral.</li>
+              <li>Jangan memotong atau menekan logo (distorsi aspect ratio).</li>
+              <li>Jangan mengganti file logo dengan versi resolusi rendah atau watermark.</li>
+              <li>Jangan menambahkan border atau shadow pada file PNG logo itu sendiri.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Kode DS — Logo</h2>
+        <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:640px;margin-bottom:20px;">Markup siap salin untuk top bar gelap.</p>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;margin-bottom:20px;">
+          <div class="tw-snippet-row">
+            <pre class="tw-snippet-code" id="snippet-logo-html">&lt;a href="/" class="ds-topnav-logo" aria-label="GPOS Lite — beranda"&gt;
+  &lt;img class="ds-topnav-logo__img" src="assets/images/logo.png" alt=""&gt;
+&lt;/a&gt;</pre>
+            <button type="button" class="copy-btn" data-copy-target="snippet-logo-html" onclick="copyFromTarget(this)">Salin</button>
+          </div>
+        </div>
+        <div class="code-block" style="display:grid;gap:10px;background:var(--color-surface);border-radius:12px;padding:16px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-topnav-logo</code><button class="copy-btn" data-copy="ds-topnav-logo" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-topnav-logo__img</code><button class="copy-btn" data-copy="ds-topnav-logo__img" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-topnav-logo--hover</code><button class="copy-btn" data-copy="ds-topnav-logo--hover" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-topnav-logo--press</code><button class="copy-btn" data-copy="ds-topnav-logo--press" onclick="copyToken(this)">Salin</button></div>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Playground — Logo</h2>
+        <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:640px;margin-bottom:20px;">
+          Pilih state untuk melihat snapshot highlight pada area logo (hover/press untuk dokumentasi; interaktif via :hover/:active pada live preview).
+        </p>
+        <div class="logo-playground">
+          <div class="logo-playground__controls">
+            <label class="footer-playground__field">
+              <span class="footer-playground__label">State</span>
+              <select class="logo-playground__control" id="logo-pg-state" aria-label="Pilih state logo">
+                <option value="default">Default</option>
+                <option value="hover">Hover</option>
+                <option value="press">Press</option>
+              </select>
+            </label>
+          </div>
+          <div class="logo-playground__stage">
+            <a href="#" class="ds-topnav-logo" id="logo-playground-btn" aria-label="GPOS Lite — beranda" onclick="return false;">
+              <img class="ds-topnav-logo__img" src="../../assets/images/logo.png" alt="">
+            </a>
+          </div>
+          <p class="logo-playground__hint" id="logo-pg-hint">Default: background transparan.</p>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Notification Indicator Parts</h2>
+        <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:640px;margin-bottom:20px;">
+          Implementasi <code>&lt;NotificationIndicator&gt;</code> sesuai <code>figma/notification indicator-parts.png</code>. Ikon <code>icon-bell.svg</code> + badge <code>.ds-badge--important</code> (lihat juga <a href="../../foundations/icons/icons.html" style="color:var(--color-blue-b300);font-weight:600;text-decoration:none;">Icons</a>).
+        </p>
+
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:32px 24px;margin-bottom:20px;">
+          <div class="notif-parts-stage">
+            <button type="button" class="ds-topnav-notif" aria-label="Notifikasi, 60 belum dibaca">
+              <img class="ds-topnav-notif__icon" src="../../assets/icons/icon-bell.svg" alt="" aria-hidden="true">
+              <span class="ds-topnav-notif__indicator"><span class="ds-badge ds-badge--important">60</span></span>
+            </button>
+          </div>
+        </div>
+
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;">
+          <div style="font-size:11px;font-weight:700;color:var(--color-text-tertiary);font-family:var(--font-primary);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Referensi Figma</div>
+          <img src="figma/notification indicator-parts.png" alt="Referensi Figma Notification Indicator" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Informasi Penggunaan — Notification</h2>
+        <div class="usage-info-grid">
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);font-family:var(--font-primary);">Kapan dipakai</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;font-family:var(--font-primary);">Di top bar kanan — membuka panel atau halaman daftar notifikasi. Badge menampilkan jumlah item belum dibaca.</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);font-family:var(--font-primary);">Komposisi</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;font-family:var(--font-primary);"><code>.ds-topnav-notif</code> + <code>icon-bell.svg</code> + <code>.ds-topnav-notif__indicator</code> berisi <code>.ds-badge--important</code>.</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);font-family:var(--font-primary);">Token warna</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;font-family:var(--font-primary);">Badge: <code>Background.Danger.Bold</code> → <code>red-r300</code>, teks <code>Text.Inverse</code> → <code>neutral-n0</code>.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Do &amp; Don&apos;t — Notification</h2>
+        <div class="usage-grid-2">
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:10px 16px;background:var(--color-green-g50);border-bottom:2px solid var(--color-green-g100);font-weight:700;color:var(--color-green-g400);font-family:var(--font-primary);font-size:12px;">Do — Lakukan ini</div>
+            <ul style="padding:16px 20px 20px 36px;color:var(--color-text-tertiary);font-size:13px;line-height:1.7;font-family:var(--font-primary);">
+              <li>Gunakan <code>icon-bell.svg</code> sebagai ikon notifikasi standar.</li>
+              <li>Perbarui <code>aria-label</code> dengan jumlah unread (mis. &quot;Notifikasi, 60 belum dibaca&quot;).</li>
+              <li>Sembunyikan badge bila count = 0.</li>
+              <li>Pakai <code>.ds-badge--important</code> untuk angka di atas ikon.</li>
+            </ul>
+          </div>
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:10px 16px;background:var(--color-red-r50);border-bottom:2px solid var(--color-red-r100);font-weight:700;color:var(--color-red-r400);font-family:var(--font-primary);font-size:12px;">Don&apos;t — Hindari ini</div>
+            <ul style="padding:16px 20px 20px 36px;color:var(--color-text-tertiary);font-size:13px;line-height:1.7;font-family:var(--font-primary);">
+              <li>Jangan hardcode warna merah di luar token danger.</li>
+              <li>Jangan menempatkan badge di tengah ikon — harus di pojok kanan atas.</li>
+              <li>Jangan menampilkan angka palsu jika tidak ada notifikasi.</li>
+              <li>Jangan mengganti bell dengan ikon sidebar notification lama.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Kode DS — Notification</h2>
+        <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:640px;margin-bottom:20px;">Markup siap salin — bell + badge count.</p>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;margin-bottom:20px;">
+          <div class="tw-snippet-row">
+            <pre class="tw-snippet-code" id="snippet-notif-html">&lt;button type="button" class="ds-topnav-notif" aria-label="Notifikasi, 60 belum dibaca"&gt;
+  &lt;img class="ds-topnav-notif__icon" src="assets/icons/icon-bell.svg" alt="" aria-hidden="true"&gt;
+  &lt;span class="ds-topnav-notif__indicator"&gt;
+    &lt;span class="ds-badge ds-badge--important"&gt;60&lt;/span&gt;
+  &lt;/span&gt;
+&lt;/button&gt;</pre>
+            <button type="button" class="copy-btn" data-copy-target="snippet-notif-html" onclick="copyFromTarget(this)">Salin</button>
+          </div>
+        </div>
+        <div class="code-block" style="display:grid;gap:10px;background:var(--color-surface);border-radius:12px;padding:16px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-topnav-notif</code><button class="copy-btn" data-copy="ds-topnav-notif" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-topnav-notif__icon</code><button class="copy-btn" data-copy="ds-topnav-notif__icon" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-topnav-notif__indicator</code><button class="copy-btn" data-copy="ds-topnav-notif__indicator" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-badge .ds-badge--important</code><button class="copy-btn" data-copy="ds-badge ds-badge--important" onclick="copyToken(this)">Salin</button></div>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Playground — Notification</h2>
+        <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:640px;margin-bottom:20px;">
+          Atur jumlah notifikasi; badge disembunyikan otomatis saat 0.
+        </p>
+        <div class="notif-playground">
+          <div class="notif-playground__controls">
+            <label class="footer-playground__field">
+              <span class="footer-playground__label">Jumlah unread</span>
+              <input type="number" class="footer-playground__control" id="notif-count" value="60" min="0" max="999">
+            </label>
+          </div>
+          <div class="notif-parts-stage">
+            <button type="button" class="ds-topnav-notif" id="notif-playground-btn" aria-label="Notifikasi, 60 belum dibaca">
+              <img class="ds-topnav-notif__icon" src="../../assets/icons/icon-bell.svg" alt="" aria-hidden="true">
+              <span class="ds-topnav-notif__indicator" id="notif-indicator-wrap"><span class="ds-badge ds-badge--important" id="notif-badge">60</span></span>
+            </button>
+          </div>
+          <p class="logo-playground__hint" id="notif-hint">60 notifikasi belum dibaca.</p>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Footer Parts</h2>
+        <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:640px;margin-bottom:20px;">
+          Implementasi <code>&lt;FooterNavigation&gt;</code> sesuai <code>figma/footer-parts.png</code>. Tombol memakai class Button DS; ikon dari <code>assets/icons</code>.
+        </p>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:32px 24px;margin-bottom:20px;">
+          <footer class="ds-footer-nav" id="footer-parts-demo" aria-label="Footer navigation demo">
+            <div class="ds-footer-nav__pager">
+              <div class="ds-footer-nav__nav-btns">
+                <button type="button" class="ds-btn ds-btn--icon-only" id="demo-prev" aria-label="Halaman sebelumnya">
+                  <img src="../../assets/icons/icon-chevron-left.svg" alt="" aria-hidden="true">
+                </button>
+                <button type="button" class="ds-btn ds-btn--icon-only" id="demo-next" aria-label="Halaman berikutnya">
+                  <img src="../../assets/icons/icon-chevron-right.svg" alt="" aria-hidden="true">
+                </button>
+              </div>
+              <p class="ds-footer-nav__page" id="demo-page-label" aria-live="polite">2/1990</p>
+            </div>
+            <div class="ds-footer-nav__actions">
+              <button type="button" class="ds-btn ds-btn--subtle">Kembali</button>
+              <button type="button" class="ds-btn ds-btn--primary">Simpan</button>
+            </div>
+          </footer>
+        </div>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;">
+          <div style="font-size:11px;font-weight:700;color:var(--color-text-tertiary);font-family:var(--font-primary);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Referensi Figma</div>
+          <img src="figma/footer-parts.png" alt="Referensi Figma Footer Navigation" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Informasi Penggunaan — Footer</h2>
+        <div class="usage-info-grid">
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);font-family:var(--font-primary);">Kapan dipakai</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;font-family:var(--font-primary);">Di bagian bawah layar wizard, drawer panjang, atau tabel dengan banyak halaman — untuk navigasi data dan aksi simpan/batal sekaligus.</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);font-family:var(--font-primary);">Komposisi</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;font-family:var(--font-primary);">Kiri: <code>ds-footer-nav__pager</code> (chevron + teks halaman). Kanan: <code>ds-footer-nav__actions</code> dengan <code>.ds-btn--subtle</code> dan <code>.ds-btn--primary</code>.</div>
+          </div>
+          <div class="usage-info-card">
+            <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);font-family:var(--font-primary);">Aksesibilitas</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;font-family:var(--font-primary);">Bungkus dengan <code>&lt;footer&gt;</code> + <code>aria-label</code>. Tombol chevron wajib <code>aria-label</code>; indikator halaman memakai <code>aria-live="polite"</code>.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Do &amp; Don&apos;t — Footer</h2>
+        <div class="usage-grid-2">
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:10px 16px;background:var(--color-green-g50);border-bottom:2px solid var(--color-green-g100);font-weight:700;color:var(--color-green-g400);font-family:var(--font-primary);font-size:12px;">Do — Lakukan ini</div>
+            <ul style="padding:16px 20px 20px 36px;color:var(--color-text-tertiary);font-size:13px;line-height:1.7;font-family:var(--font-primary);">
+              <li>Gunakan tombol <code>.ds-btn--primary</code> hanya untuk aksi utama (mis. Simpan).</li>
+              <li>Letakkan navigasi halaman di kiri dan aksi formulir di kanan.</li>
+              <li>Nonaktifkan chevron prev/next di halaman pertama/terakhir.</li>
+              <li>Gunakan ikon <code>icon-chevron-left</code> / <code>icon-chevron-right</code> dari assets.</li>
+            </ul>
+          </div>
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+            <div style="padding:10px 16px;background:var(--color-red-r50);border-bottom:2px solid var(--color-red-r100);font-weight:700;color:var(--color-red-r400);font-family:var(--font-primary);font-size:12px;">Don&apos;t — Hindari ini</div>
+            <ul style="padding:16px 20px 20px 36px;color:var(--color-text-tertiary);font-size:13px;line-height:1.7;font-family:var(--font-primary);">
+              <li>Jangan hardcode warna — semua dari token semantic.</li>
+              <li>Jangan menempatkan lebih dari satu tombol primer di footer.</li>
+              <li>Jangan mengganti chevron dengan ikon custom di luar assets/icons.</li>
+              <li>Jangan memakai footer ini untuk navigasi global aplikasi (gunakan top nav).</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Kode DS — Footer</h2>
+        <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:640px;margin-bottom:20px;">Markup siap salin — termasuk class Button dan ikon token.</p>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+          <div class="tw-snippet-row">
+            <pre class="tw-snippet-code" id="snippet-footer-html">&lt;footer class="ds-footer-nav" aria-label="Footer navigation"&gt;
+  &lt;div class="ds-footer-nav__pager"&gt;
+    &lt;div class="ds-footer-nav__nav-btns"&gt;
+      &lt;button type="button" class="ds-btn ds-btn--icon-only" aria-label="Halaman sebelumnya"&gt;
+        &lt;img src="assets/icons/icon-chevron-left.svg" alt="" aria-hidden="true"&gt;
+      &lt;/button&gt;
+      &lt;button type="button" class="ds-btn ds-btn--icon-only" aria-label="Halaman berikutnya"&gt;
+        &lt;img src="assets/icons/icon-chevron-right.svg" alt="" aria-hidden="true"&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+    &lt;p class="ds-footer-nav__page" aria-live="polite"&gt;2/1990&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="ds-footer-nav__actions"&gt;
+    &lt;button type="button" class="ds-btn ds-btn--subtle"&gt;Kembali&lt;/button&gt;
+    &lt;button type="button" class="ds-btn ds-btn--primary"&gt;Simpan&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/footer&gt;</pre>
+            <button type="button" class="copy-btn" data-copy-target="snippet-footer-html" onclick="copyFromTarget(this)">Salin</button>
+          </div>
+        </div>
+        <h3 style="font-size:16px;font-weight:600;margin:28px 0 16px;font-family:var(--font-primary);color:var(--color-text-primary);">Token Class</h3>
+        <div class="code-block" style="display:grid;gap:10px;background:var(--color-surface);border-radius:12px;padding:16px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-footer-nav</code><button class="copy-btn" data-copy="ds-footer-nav" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-footer-nav__pager</code><button class="copy-btn" data-copy="ds-footer-nav__pager" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-footer-nav__page</code><button class="copy-btn" data-copy="ds-footer-nav__page" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-footer-nav__actions</code><button class="copy-btn" data-copy="ds-footer-nav__actions" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-btn .ds-btn--subtle</code><button class="copy-btn" data-copy="ds-btn ds-btn--subtle" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-btn .ds-btn--primary</code><button class="copy-btn" data-copy="ds-btn ds-btn--primary" onclick="copyToken(this)">Salin</button></div>
+        </div>
+      </section>
+
+      <section class="mb-12">
+        <h2>Playground — Footer</h2>
+        <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:640px;margin-bottom:20px;">
+          Atur halaman aktif dan total halaman; chevron otomatis nonaktif di batas.
+        </p>
+        <div class="footer-playground">
+          <div class="footer-playground__controls">
+            <label class="footer-playground__field">
+              <span class="footer-playground__label">Halaman aktif</span>
+              <input type="number" class="footer-playground__control" id="pg-current" value="2" min="1" max="1990">
+            </label>
+            <label class="footer-playground__field">
+              <span class="footer-playground__label">Total halaman</span>
+              <input type="number" class="footer-playground__control" id="pg-total" value="1990" min="1">
+            </label>
+          </div>
+          <div class="footer-playground__stage">
+            <footer class="ds-footer-nav" id="footer-playground" aria-label="Footer navigation playground" style="max-width:100%;">
+              <div class="ds-footer-nav__pager">
+                <div class="ds-footer-nav__nav-btns">
+                  <button type="button" class="ds-btn ds-btn--icon-only" id="pg-prev" aria-label="Halaman sebelumnya">
+                    <img src="../../assets/icons/icon-chevron-left.svg" alt="" aria-hidden="true">
+                  </button>
+                  <button type="button" class="ds-btn ds-btn--icon-only" id="pg-next" aria-label="Halaman berikutnya">
+                    <img src="../../assets/icons/icon-chevron-right.svg" alt="" aria-hidden="true">
+                  </button>
+                </div>
+                <p class="ds-footer-nav__page" id="pg-label" aria-live="polite">2/1990</p>
+              </div>
+              <div class="ds-footer-nav__actions">
+                <button type="button" class="ds-btn ds-btn--subtle">Kembali</button>
+                <button type="button" class="ds-btn ds-btn--primary">Simpan</button>
+              </div>
+            </footer>
+          </div>
+          <p class="footer-playground__hint" id="pg-hint">Halaman 2 dari 1990 — chevron kiri/kiri aktif.</p>
+        </div>
+      </section>
+
+      <footer class="page-footer" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--color-border);font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-primary);">
+        DS GPOS Lite V2.0 — Top &amp; Bottom Navigation
+      </footer>
+    </div>
+  </main>
+</div>
+
+<button class="scroll-top-btn" id="scroll-top-btn" aria-label="Kembali ke atas">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18,15 12,9 6,15"/></svg>
+</button>
+
+<script src="../../scripts/script.js"></script>
+<script>
+  function copyToken(btn) {
+    var value = btn.getAttribute('data-copy') || '';
+    navigator.clipboard.writeText(value).then(function () {
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+  function copyFromTarget(btn) {
+    var id = btn.getAttribute('data-copy-target');
+    var el = id ? document.getElementById(id) : null;
+    if (!el) return;
+    navigator.clipboard.writeText(el.textContent).then(function () {
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+
+  function clampPage(n, min, max) {
+    return Math.min(Math.max(n, min), max);
+  }
+
+  function updateFooterPlayground() {
+    var currentEl = document.getElementById('pg-current');
+    var totalEl = document.getElementById('pg-total');
+    var label = document.getElementById('pg-label');
+    var prev = document.getElementById('pg-prev');
+    var next = document.getElementById('pg-next');
+    var hint = document.getElementById('pg-hint');
+    if (!currentEl || !totalEl || !label || !prev || !next || !hint) return;
+
+    var total = Math.max(1, parseInt(totalEl.value, 10) || 1);
+    var current = clampPage(parseInt(currentEl.value, 10) || 1, 1, total);
+    totalEl.value = total;
+    currentEl.value = current;
+
+    label.textContent = current + '/' + total;
+    prev.disabled = current <= 1;
+    prev.classList.toggle('ds-btn--disabled', current <= 1);
+    next.disabled = current >= total;
+    next.classList.toggle('ds-btn--disabled', current >= total);
+
+    hint.textContent = 'Halaman ' + current + ' dari ' + total + (current <= 1 ? ' — chevron kiri nonaktif.' : current >= total ? ' — chevron kanan nonaktif.' : ' — kedua chevron aktif.');
+  }
+
+  (function () {
+    var currentEl = document.getElementById('pg-current');
+    var totalEl = document.getElementById('pg-total');
+    var prev = document.getElementById('pg-prev');
+    var next = document.getElementById('pg-next');
+    if (!currentEl || !totalEl) return;
+
+    currentEl.addEventListener('input', updateFooterPlayground);
+    totalEl.addEventListener('input', updateFooterPlayground);
+    if (prev) {
+      prev.addEventListener('click', function () {
+        currentEl.value = Math.max(1, parseInt(currentEl.value, 10) - 1);
+        updateFooterPlayground();
+      });
+    }
+    if (next) {
+      next.addEventListener('click', function () {
+        var total = Math.max(1, parseInt(totalEl.value, 10) || 1);
+        currentEl.value = Math.min(total, parseInt(currentEl.value, 10) + 1);
+        updateFooterPlayground();
+      });
+    }
+    updateFooterPlayground();
+  })();
+
+  function setTopnavPlaygroundVariant(variant) {
+    var nav = document.getElementById('topnav-playground');
+    var hint = document.getElementById('topnav-pg-hint');
+    if (!nav) return;
+    nav.classList.remove('ds-topnav--website', 'ds-topnav--tablet', 'ds-topnav--mobile');
+    nav.classList.add('ds-topnav--' + variant);
+    if (!hint) return;
+    if (variant === 'tablet') {
+      hint.textContent = 'Tablet: menu kiri, logo tengah, Akses + 2 notifikasi + avatar.';
+      return;
+    }
+    if (variant === 'mobile') {
+      hint.textContent = 'Mobile: menu + logo tengah; satu notifikasi, tanpa Akses.';
+      return;
+    }
+    hint.textContent = 'Website: logo kiri, Akses + 2 notifikasi + avatar.';
+  }
+
+  (function () {
+    var control = document.getElementById('topnav-pg-variant');
+    if (!control) return;
+    control.addEventListener('change', function () {
+      setTopnavPlaygroundVariant(control.value);
+    });
+    setTopnavPlaygroundVariant(control.value);
+  })();
+
+  function updateNotifPlayground() {
+    var input = document.getElementById('notif-count');
+    var badge = document.getElementById('notif-badge');
+    var wrap = document.getElementById('notif-indicator-wrap');
+    var btn = document.getElementById('notif-playground-btn');
+    var hint = document.getElementById('notif-hint');
+    if (!input || !badge || !wrap || !btn || !hint) return;
+
+    var count = Math.max(0, parseInt(input.value, 10) || 0);
+    input.value = count;
+
+    if (count === 0) {
+      wrap.hidden = true;
+      btn.setAttribute('aria-label', 'Notifikasi');
+      hint.textContent = 'Tidak ada notifikasi — badge disembunyikan.';
+      return;
+    }
+
+    wrap.hidden = false;
+    badge.textContent = count > 99 ? '99+' : String(count);
+    btn.setAttribute('aria-label', 'Notifikasi, ' + count + ' belum dibaca');
+    hint.textContent = count + ' notifikasi belum dibaca.';
+  }
+
+  (function () {
+    var input = document.getElementById('notif-count');
+    if (!input) return;
+    input.addEventListener('input', updateNotifPlayground);
+    updateNotifPlayground();
+  })();
+
+  function setLogoPlaygroundState(state) {
+    var btn = document.getElementById('logo-playground-btn');
+    var hint = document.getElementById('logo-pg-hint');
+    if (!btn || !hint) return;
+    btn.classList.remove('ds-topnav-logo--hover', 'ds-topnav-logo--press');
+    if (state === 'hover') {
+      btn.classList.add('ds-topnav-logo--hover');
+      hint.textContent = 'Hover: Background.Neutral.Hover (N20).';
+      return;
+    }
+    if (state === 'press') {
+      btn.classList.add('ds-topnav-logo--press');
+      hint.textContent = 'Press: Background.Neutral.Pressed (N40).';
+      return;
+    }
+    hint.textContent = 'Default: background transparan.';
+  }
+
+  (function () {
+    var stateControl = document.getElementById('logo-pg-state');
+    if (!stateControl) return;
+    stateControl.addEventListener('change', function () {
+      setLogoPlaygroundState(stateControl.value);
+    });
+    setLogoPlaygroundState(stateControl.value);
+  })();
+
+  (function () {
+    var saved = localStorage.getItem('ds-theme');
+    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  })();
+  document.getElementById('dark-toggle').addEventListener('click', function () {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    localStorage.setItem('ds-theme', isDark ? 'light' : 'dark');
+  });
+</script>
+</body>
+</html>
