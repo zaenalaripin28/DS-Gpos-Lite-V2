@@ -664,55 +664,6 @@
         </div>
       </section>
       <section style="margin-bottom:48px;">
-        <h2 style="font-size:20px;font-weight:600;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--color-border);font-family:var(--font-primary);">Code — Salin Code</h2>
-        <div style="display:grid;gap:16px;">
-          <div>
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-              <span style="font-size:12px;font-weight:600;color:var(--color-text-secondary);font-family:var(--font-primary);">HTML</span>
-              <button class="copy-btn" onclick="copyCode(this, 'code-date-picker-html')">Copy</button>
-            </div>
-            <code id="code-date-picker-html" class="code-block">&lt;div class="ds-date-time-picker relative w-full max-w-[380px]"&gt;
-  &lt;div class="ds-date-time-picker__bar flex items-stretch w-full min-h-10 border border-neutral-n40 rounded-sm bg-neutral-n0 overflow-hidden"&gt;
-    &lt;button type="button" class="ds-date-time-picker__segment flex-1 min-h-10 border-none bg-transparent px-150 py-075 inline-flex items-center gap-075 text-neutral-n500" aria-haspopup="dialog" aria-expanded="false" aria-controls="date-picker-panel"&gt;
-      &lt;img src="../../assets/icons/icon-calendar-days.svg" alt="" aria-hidden="true" class="w-4 h-4"&gt;
-      &lt;span&gt;12 December 2022&lt;/span&gt;
-    &lt;/button&gt;
-    &lt;button type="button" class="ds-date-time-picker__segment ds-date-time-picker__segment--time flex-[0_0_42%] justify-end text-right min-h-10 border-none bg-transparent px-150 py-075 inline-flex items-center gap-075 text-neutral-n500" aria-haspopup="listbox" aria-expanded="true" aria-controls="time-picker-panel"&gt;
-      &lt;img src="../../assets/icons/icon-clock.svg" alt="" aria-hidden="true" class="w-4 h-4"&gt;
-      &lt;span&gt;1:00 PM&lt;/span&gt;
-    &lt;/button&gt;
-  &lt;/div&gt;
-  &lt;div id="date-picker-panel" class="ds-date-time-picker__dropdown ds-date-time-picker__dropdown--date absolute left-0 top-[calc(100%+var(--space-050))] z-10 ds-calendar" role="dialog" aria-label="Date picker calendar" hidden&gt;
-    &lt;!-- gunakan struktur month header, week header, dan day grid seperti komponen Calendar --&gt;
-  &lt;/div&gt;
-  &lt;div id="time-picker-panel" class="ds-date-time-picker__dropdown ds-date-time-picker__dropdown--time absolute right-0 top-[calc(100%+var(--space-050))] z-10 ds-time-picker" role="listbox" aria-label="Time picker list"&gt;
-    &lt;button type="button" class="ds-time-parts-item is-selected" aria-selected="true"&gt;1:00 PM&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code>
-          </div>
-          <div>
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-              <span style="font-size:12px;font-weight:600;color:var(--color-text-secondary);font-family:var(--font-primary);">CSS Tailwind Utility (langsung pakai)</span>
-              <button class="copy-btn" onclick="copyCode(this, 'code-date-picker-tailwind')">Copy</button>
-            </div>
-            <code id="code-date-picker-tailwind" class="code-block">&lt;div class="relative w-full max-w-[380px]"&gt;
-  &lt;div class="flex items-stretch w-full min-h-10 border border-neutral-n40 rounded-sm bg-neutral-n0 overflow-hidden hover:border-neutral-n100 focus-within:border-blue-b300 focus-within:shadow-[0_0_0_2px_var(--color-blue-b200)]"&gt;
-    &lt;button class="flex-1 min-h-10 border-none bg-transparent px-150 py-075 inline-flex items-center gap-075 text-neutral-n500 hover:bg-neutral-n20 focus-visible:outline-none focus-visible:shadow-[inset_0_0_0_2px_var(--color-blue-b200)]"&gt;
-      &lt;img src="../../assets/icons/icon-calendar-days.svg" class="w-4 h-4" alt="" /&gt;
-      12 December 2022
-    &lt;/button&gt;
-    &lt;button class="flex-[0_0_42%] justify-end text-right min-h-10 border-none bg-transparent px-150 py-075 inline-flex items-center gap-075 text-neutral-n500 hover:bg-neutral-n20 focus-visible:outline-none focus-visible:shadow-[inset_0_0_0_2px_var(--color-blue-b200)]"&gt;
-      &lt;img src="../../assets/icons/icon-clock.svg" class="w-4 h-4" alt="" /&gt;
-      1:00 PM
-    &lt;/button&gt;
-  &lt;/div&gt;
-  &lt;div class="absolute left-0 top-[calc(100%+var(--space-050))] z-10 ds-calendar" hidden&gt;...calendar...&lt;/div&gt;
-  &lt;div class="absolute right-0 top-[calc(100%+var(--space-050))] z-10 ds-time-picker"&gt;...time list...&lt;/div&gt;
-&lt;/div&gt;</code>
-          </div>
-        </div>
-      </section>
-      <section style="margin-bottom:48px;">
         <h2 style="font-size:20px;font-weight:600;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--color-border);font-family:var(--font-primary);">Playground</h2>
         <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;">
           <div class="playground-controls">
@@ -768,6 +719,20 @@
           </div>
         </div>
       </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Token Class</h2>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:16px;display:grid;gap:10px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-date-time-picker</code><button class="copy-btn" data-copy="ds-date-time-picker" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-date-time-picker__bar</code><button class="copy-btn" data-copy="ds-date-time-picker__bar" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-date-time-picker__segment ds-date-time-picker__segment--date</code><button class="copy-btn" data-copy="ds-date-time-picker__segment ds-date-time-picker__segment--date" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-date-time-picker__segment ds-date-time-picker__segment--time</code><button class="copy-btn" data-copy="ds-date-time-picker__segment ds-date-time-picker__segment--time" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-date-time-picker__dropdown ds-date-time-picker__dropdown--date</code><button class="copy-btn" data-copy="ds-date-time-picker__dropdown ds-date-time-picker__dropdown--date" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-date-time-picker__dropdown ds-date-time-picker__dropdown--time</code><button class="copy-btn" data-copy="ds-date-time-picker__dropdown ds-date-time-picker__dropdown--time" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-time-parts-item is-selected</code><button class="copy-btn" data-copy="ds-time-parts-item is-selected" onclick="copyToken(this)">Salin</button></div>
+        </div>
+      </section>
+
     </div>
   </main>
 </div>
@@ -842,26 +807,6 @@
         if (timeValueEl) timeValueEl.textContent = button.dataset.time || '';
       });
     });
-
-    function copyCode(btn, codeId) {
-      const el = document.getElementById(codeId);
-      const text = el ? el.innerText : '';
-      navigator.clipboard.writeText(text).catch(() => {
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-      });
-      const original = btn.textContent;
-      btn.textContent = 'Copied';
-      btn.classList.add('copied');
-      setTimeout(() => {
-        btn.textContent = original;
-        btn.classList.remove('copied');
-      }, 1200);
-    }
 
     const playgroundRoot = document.getElementById('playground-date-time-picker');
     const playgroundBar = document.getElementById('playground-bar');
@@ -958,6 +903,15 @@
       const isHover = playgroundBar?.classList.toggle('ds-date-time-picker__bar--hover');
       playgroundTriggerHover.classList.toggle('is-active', Boolean(isHover));
     });
-  </script>
+  
+  function copyToken(btn) {
+    var value = btn.getAttribute('data-copy') || '';
+    navigator.clipboard.writeText(value).then(function () {
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+</script>
 </body>
 </html>

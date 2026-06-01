@@ -1643,82 +1643,6 @@
         </div>
       </section>
 
-      <!-- TAILWIND -->
-      <section style="margin-bottom:48px;">
-        <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
-          <span style="width:3px;height:18px;background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300));border-radius:3px;flex-shrink:0;display:block;"></span>
-          Tailwind — Salin Class
-        </h2>
-        <p style="font-size:14px;color:var(--color-text-tertiary);margin-top:-12px;margin-bottom:28px;font-family:var(--font-primary);">
-          Utility class dari token warna DS (<code>n*</code>, <code>b*</code>). Gabungkan dengan struktur <code>ds-tab</code> atau pakai murni Tailwind di bawah.
-        </p>
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
-          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);">
-            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);letter-spacing:0.04em;">tailwind.config — colors sudah di-extend di halaman ini</span>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Tablist (tanpa track)</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'inline-flex items-end gap-200')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Tablist + track</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'inline-flex items-end gap-200 border-b border-neutral-n40 w-full')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Tab item — default</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'inline-flex flex-col items-center gap-0.5 px-100 py-0.5 text-sm font-medium text-neutral-n300 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-b200')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Tab item — selected</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'text-blue-b300 [&_.tab-indicator]:bg-blue-b300')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Indikator bawah (span)</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'tab-indicator block h-0.5 min-h-[2px] w-full rounded-full bg-transparent')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Indikator — selected</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'tab-indicator bg-blue-b300')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Hover indikator (default tab)</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'hover:[&_.tab-indicator]:bg-n40 active:text-neutral-n900')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Row label + badge/required</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'inline-flex items-center justify-center gap-0.5')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Asterisk wajib</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'text-red-r300 shrink-0')">Salin</button>
-          </div>
-          <div class="tw-snippet-row">
-            <code class="tw-snippet-code">Badge notifikasi</code>
-            <button type="button" class="tw-copy-btn" onclick="copyTailwind(this, 'inline-flex px-1.5 py-0.5 rounded-full text-xs bg-red-r300 text-neutral-n0')">Salin</button>
-          </div>
-        </div>
-
-        <p style="font-size:13px;font-weight:600;color:var(--color-text-primary);margin:28px 0 12px;font-family:var(--font-primary);">Blok siap pakai — tablist dengan track</p>
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
-          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);letter-spacing:0.04em;">tabs-tailwind.html</span>
-            <button class="copy-btn" id="copy-tailwind-block-btn" onclick="copyTailwindBlock()" aria-label="Salin blok Tailwind">Salin semua</button>
-          </div>
-          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-primary);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="tailwind-block">&lt;div role="tablist" aria-label="Sections" class="inline-flex items-end gap-200 border-b border-neutral-n40 w-full"&gt;
-  &lt;button type="button" role="tab" aria-selected="false"
-    class="inline-flex flex-col items-center gap-0.5 px-100 py-0.5 text-sm font-medium text-neutral-n300 rounded-sm hover:[&amp;_.tab-indicator]:bg-n40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-b200"&gt;
-    &lt;span&gt;Tab&lt;/span&gt;
-    &lt;span class="tab-indicator block h-0.5 w-full rounded-full bg-transparent" aria-hidden="true"&gt;&lt;/span&gt;
-  &lt;/button&gt;
-  &lt;button type="button" role="tab" aria-selected="true"
-    class="inline-flex flex-col items-center gap-0.5 px-100 py-0.5 text-sm font-medium text-blue-b300 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-b200"&gt;
-    &lt;span&gt;Tab&lt;/span&gt;
-    &lt;span class="tab-indicator block h-0.5 w-full rounded-full bg-blue-b300 -mb-px" aria-hidden="true"&gt;&lt;/span&gt;
-  &lt;/button&gt;
-&lt;/div&gt;</code></pre>
-        </div>
-      </section>
-
       <!-- TOKEN REFERENCE -->
       <section style="margin-bottom:48px;">
         <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
@@ -1792,57 +1716,19 @@
         </div>
       </section>
 
-      <!-- CODE -->
+      
       <section style="margin-bottom:48px;">
-        <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
-          <span style="width:3px;height:18px;background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300));border-radius:3px;flex-shrink:0;display:block;"></span>
-          Kode HTML (ds-tab)
-        </h2>
-        <p style="font-size:14px;color:var(--color-text-tertiary);margin-top:-12px;margin-bottom:28px;font-family:var(--font-primary);">
-          Copy HTML per part. Bungkus dalam <code>.ds-tablist</code> atau <code>.ds-tablist.ds-tablist--track</code>.
-        </p>
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
-          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);letter-spacing:0.04em;">tabs.html</span>
-            <button class="copy-btn" id="copy-code-btn" onclick="copyCode()" aria-label="Salin kode">Salin</button>
-          </div>
-          <pre class="code-block" id="code-block"><code><span class="code-comment">&lt;!-- Tablist + track (disarankan di atas konten) --&gt;</span>
-<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tablist ds-tablist--track"</span> <span class="code-attr">role</span>=<span class="code-string">"tablist"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Sections"</span><span class="code-tag">&gt;</span>
-  <span class="code-tag">&lt;button</span> <span class="code-attr">type</span>=<span class="code-string">"button"</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab"</span> <span class="code-attr">role</span>=<span class="code-string">"tab"</span> <span class="code-attr">aria-selected</span>=<span class="code-string">"false"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/button&gt;</span>
-  <span class="code-tag">&lt;button</span> <span class="code-attr">type</span>=<span class="code-string">"button"</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab ds-tab--selected"</span> <span class="code-attr">role</span>=<span class="code-string">"tab"</span> <span class="code-attr">aria-selected</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/button&gt;</span>
-<span class="code-tag">&lt;/div&gt;</span>
-
-<span class="code-comment">&lt;!-- part=default --&gt;</span>
-<span class="code-tag">&lt;button</span> <span class="code-attr">type</span>=<span class="code-string">"button"</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab"</span> <span class="code-attr">role</span>=<span class="code-string">"tab"</span> <span class="code-attr">aria-selected</span>=<span class="code-string">"false"</span><span class="code-tag">&gt;</span>
-  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__label"</span><span class="code-tag">&gt;</span>Tab<span class="code-tag">&lt;/span&gt;</span>
-  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__indicator"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;&lt;/span&gt;</span>
-<span class="code-tag">&lt;/button&gt;</span>
-
-<span class="code-comment">&lt;!-- part=selected --&gt;</span>
-<span class="code-tag">&lt;button</span> <span class="code-attr">type</span>=<span class="code-string">"button"</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab ds-tab--selected"</span> <span class="code-attr">role</span>=<span class="code-string">"tab"</span> <span class="code-attr">aria-selected</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>
-  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__label"</span><span class="code-tag">&gt;</span>Tab<span class="code-tag">&lt;/span&gt;</span>
-  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__indicator"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;&lt;/span&gt;</span>
-<span class="code-tag">&lt;/button&gt;</span>
-
-<span class="code-comment">&lt;!-- part=default:required --&gt;</span>
-<span class="code-tag">&lt;button</span> <span class="code-attr">type</span>=<span class="code-string">"button"</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab ds-tab--required"</span> <span class="code-attr">role</span>=<span class="code-string">"tab"</span> <span class="code-attr">aria-selected</span>=<span class="code-string">"false"</span><span class="code-tag">&gt;</span>
-  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__row"</span><span class="code-tag">&gt;</span>
-    <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__label"</span><span class="code-tag">&gt;</span>Tab<span class="code-tag">&lt;/span&gt;</span>
-    <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__required"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>*<span class="code-tag">&lt;/span&gt;</span>
-  <span class="code-tag">&lt;/span&gt;</span>
-  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__indicator"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;&lt;/span&gt;</span>
-<span class="code-tag">&lt;/button&gt;</span>
-
-<span class="code-comment">&lt;!-- part=default:notification (badge dari Badge component) --&gt;</span>
-<span class="code-tag">&lt;button</span> <span class="code-attr">type</span>=<span class="code-string">"button"</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab ds-tab--notification"</span> <span class="code-attr">role</span>=<span class="code-string">"tab"</span> <span class="code-attr">aria-selected</span>=<span class="code-string">"false"</span><span class="code-tag">&gt;</span>
-  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__row"</span><span class="code-tag">&gt;</span>
-    <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__label"</span><span class="code-tag">&gt;</span>Tab<span class="code-tag">&lt;/span&gt;</span>
-    <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__badge"</span><span class="code-tag">&gt;&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-badge ds-badge--important"</span><span class="code-tag">&gt;</span>1<span class="code-tag">&lt;/span&gt;&lt;/span&gt;</span>
-  <span class="code-tag">&lt;/span&gt;</span>
-  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-tab__indicator"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;&lt;/span&gt;</span>
-<span class="code-tag">&lt;/button&gt;</span>
-
-<span class="code-comment">&lt;!-- Static state: --hover | --press | --focus --&gt;</span></code></pre>
+        <h2>Token Class</h2>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:16px;display:grid;gap:10px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-tablist</code><button class="copy-btn" data-copy="ds-tablist" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-tablist ds-tablist--track</code><button class="copy-btn" data-copy="ds-tablist ds-tablist--track" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-tab</code><button class="copy-btn" data-copy="ds-tab" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-tab ds-tab--selected</code><button class="copy-btn" data-copy="ds-tab ds-tab--selected" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-tab ds-tab--hover</code><button class="copy-btn" data-copy="ds-tab ds-tab--hover" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-tab ds-tab--press</code><button class="copy-btn" data-copy="ds-tab ds-tab--press" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-tab ds-tab--focus</code><button class="copy-btn" data-copy="ds-tab ds-tab--focus" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-tab ds-tab--required</code><button class="copy-btn" data-copy="ds-tab ds-tab--required" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-tab ds-tab--notification</code><button class="copy-btn" data-copy="ds-tab ds-tab--notification" onclick="copyToken(this)">Salin</button></div>
         </div>
       </section>
 
@@ -1891,43 +1777,6 @@
     });
   }
 
-  function copyCode() {
-    const raw = document.getElementById('code-block').textContent;
-    navigator.clipboard.writeText(raw).then(function () {
-      const btn = document.getElementById('copy-code-btn');
-      btn.textContent = 'Tersalin!';
-      btn.classList.add('copied');
-      setTimeout(function () {
-        btn.textContent = 'Salin';
-        btn.classList.remove('copied');
-      }, 2000);
-    });
-  }
-
-  function copyTailwind(btn, text) {
-    navigator.clipboard.writeText(text).then(function () {
-      btn.textContent = 'Tersalin!';
-      btn.classList.add('copied');
-      setTimeout(function () {
-        btn.textContent = 'Salin';
-        btn.classList.remove('copied');
-      }, 2000);
-    });
-  }
-
-  function copyTailwindBlock() {
-    const raw = document.getElementById('tailwind-block').textContent;
-    navigator.clipboard.writeText(raw).then(function () {
-      const btn = document.getElementById('copy-tailwind-block-btn');
-      btn.textContent = 'Tersalin!';
-      btn.classList.add('copied');
-      setTimeout(function () {
-        btn.textContent = 'Salin semua';
-        btn.classList.remove('copied');
-      }, 2000);
-    });
-  }
-
   (function initTablist() {
     const tablist = document.getElementById('interactive-tablist');
     if (!tablist) return;
@@ -1942,6 +1791,15 @@
       });
     });
   })();
+
+  function copyToken(btn) {
+    var value = btn.getAttribute('data-copy') || '';
+    navigator.clipboard.writeText(value).then(function () {
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
 </script>
 </body>
 </html>

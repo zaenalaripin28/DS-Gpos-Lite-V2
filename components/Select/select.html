@@ -1714,6 +1714,24 @@
           </div>
         </div>
       </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Token Class</h2>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:16px;display:grid;gap:10px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-select-trigger</code><button class="copy-btn" data-copy="ds-select-trigger" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-select-trigger ds-select-trigger--hover</code><button class="copy-btn" data-copy="ds-select-trigger ds-select-trigger--hover" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-select-trigger ds-select-trigger--focus</code><button class="copy-btn" data-copy="ds-select-trigger ds-select-trigger--focus" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-select-trigger ds-select-trigger--disabled</code><button class="copy-btn" data-copy="ds-select-trigger ds-select-trigger--disabled" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-select</code><button class="copy-btn" data-copy="ds-select" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-select-scrollable</code><button class="copy-btn" data-copy="ds-select-scrollable" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-group-label ds-group-label--first</code><button class="copy-btn" data-copy="ds-group-label ds-group-label--first" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-group-label ds-group-label--default</code><button class="copy-btn" data-copy="ds-group-label ds-group-label--default" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-select-loading</code><button class="copy-btn" data-copy="ds-select-loading" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-select-empty</code><button class="copy-btn" data-copy="ds-select-empty" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-select-empty ds-select-empty--with-icon</code><button class="copy-btn" data-copy="ds-select-empty ds-select-empty--with-icon" onclick="copyToken(this)">Salin</button></div>
+        </div>
+      </section>
+
     </div>
   </main>
 </div>
@@ -1860,6 +1878,15 @@
   renderPlaygroundVariant(playgroundVariant?.value || 'default');
   renderPlaygroundState(playgroundState?.value || 'default');
   renderPlaygroundOption(playgroundOption?.value || 'default');
+
+  function copyToken(btn) {
+    var value = btn.getAttribute('data-copy') || '';
+    navigator.clipboard.writeText(value).then(function () {
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
 </script>
 </body>
 </html>

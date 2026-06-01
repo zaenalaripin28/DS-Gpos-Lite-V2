@@ -481,6 +481,20 @@
           </div>
         </div>
       </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Token Class</h2>
+        <p style="color:var(--color-text-tertiary);margin-bottom:16px;">Class token siap copy untuk seluruh varian Text Area.</p>
+        <div class="preview-card p-250" style="display:grid;gap:10px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-text-area</code><button class="copy-btn" data-copy="ds-text-area" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-text-area__field</code><button class="copy-btn" data-copy="ds-text-area__field" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-text-area__field ds-text-area__field--focus</code><button class="copy-btn" data-copy="ds-text-area__field ds-text-area__field--focus" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-text-area ds-text-area--invalid</code><button class="copy-btn" data-copy="ds-text-area ds-text-area--invalid" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-text-area__field ds-text-area__field--disabled</code><button class="copy-btn" data-copy="ds-text-area__field ds-text-area__field--disabled" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-text-area ds-text-area--compact</code><button class="copy-btn" data-copy="ds-text-area ds-text-area--compact" onclick="copyToken(this)">Salin</button></div>
+        </div>
+      </section>
+
     </div>
   </main>
 </div>
@@ -494,6 +508,14 @@
   hamburgerBtn?.addEventListener('click', openSidebar);
   sidebarClose?.addEventListener('click', closeSidebar);
   overlay?.addEventListener('click', closeSidebar);
+  function copyToken(btn) {
+    var value = btn.getAttribute('data-copy') || '';
+    navigator.clipboard.writeText(value).then(function () {
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
 </script>
 </body>
 </html>

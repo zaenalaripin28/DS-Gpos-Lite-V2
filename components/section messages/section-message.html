@@ -962,31 +962,15 @@
           </div>
         </div>
       </section>
-
       <section style="margin-bottom:48px;">
-        <h2>Code — Salin Code</h2>
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
-          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);">section-message.html — ds-section-message</span>
-            <button class="copy-btn" id="copy-html-btn" onclick="copyHtml()">Salin</button>
-          </div>
-          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-primary);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="html-block">&lt;!-- appearance=information --&gt;
-&lt;article class="ds-section-message ds-section-message--information" role="region" aria-labelledby="sm-title"&gt;
-  &lt;div class="ds-section-message__header"&gt;
-    &lt;span class="ds-section-message__icon" aria-hidden="true"&gt;&lt;/span&gt;
-    &lt;div class="ds-section-message__main"&gt;
-      &lt;h3 class="ds-section-message__title" id="sm-title"&gt;Title&lt;/h3&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class="ds-section-message__body"&gt;
-    &lt;p class="ds-section-message__description"&gt;Deskripsi pesan section.&lt;/p&gt;
-    &lt;div class="ds-section-message__actions"&gt;
-      &lt;a href="#" class="ds-section-message__action"&gt;Action link&lt;/a&gt;
-      &lt;span class="ds-section-message__action-sep" aria-hidden="true"&gt;·&lt;/span&gt;
-      &lt;a href="#" class="ds-section-message__action"&gt;Action link&lt;/a&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/article&gt;</code></pre>
+        <h2>Token Class</h2>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:16px;display:grid;gap:10px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-section-message ds-section-message--information</code><button class="copy-btn" data-copy="ds-section-message ds-section-message--information" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-section-message ds-section-message--success</code><button class="copy-btn" data-copy="ds-section-message ds-section-message--success" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-section-message ds-section-message--warning</code><button class="copy-btn" data-copy="ds-section-message ds-section-message--warning" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-section-message ds-section-message--error</code><button class="copy-btn" data-copy="ds-section-message ds-section-message--error" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-section-message ds-section-message--discovery</code><button class="copy-btn" data-copy="ds-section-message ds-section-message--discovery" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-section-message__action</code><button class="copy-btn" data-copy="ds-section-message__action" onclick="copyToken(this)">Salin</button></div>
         </div>
       </section>
 
@@ -999,9 +983,9 @@
 
 <script src="../../scripts/script.js"></script>
 <script>
-  function copyHtml() {
-    navigator.clipboard.writeText(document.getElementById('html-block').textContent).then(function () {
-      var btn = document.getElementById('copy-html-btn');
+  function copyToken(btn) {
+    var value = btn.getAttribute('data-copy') || '';
+    navigator.clipboard.writeText(value).then(function () {
       btn.textContent = 'Tersalin!';
       btn.classList.add('copied');
       setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);

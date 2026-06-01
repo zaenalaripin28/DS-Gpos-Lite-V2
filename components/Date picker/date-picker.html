@@ -465,44 +465,6 @@
       </section>
 
       <section style="margin-bottom:48px;">
-        <h2 style="font-size:20px;font-weight:600;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--color-border);font-family:var(--font-primary);">Code — Salin Code</h2>
-        <div style="display:grid;gap:16px;">
-          <div>
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-              <span style="font-size:12px;font-weight:600;color:var(--color-text-secondary);font-family:var(--font-primary);">HTML</span>
-              <button class="copy-btn" onclick="copyCode(this, 'code-date-picker-html')">Copy</button>
-            </div>
-            <code id="code-date-picker-html" class="code-block">&lt;button type="button" class="ds-select-trigger" aria-haspopup="dialog" aria-expanded="true" aria-controls="date-picker-panel"&gt;
-  &lt;span class="ds-select-trigger__value"&gt;
-    &lt;img src="../../assets/icons/icon-calendar-days.svg" alt="" aria-hidden="true" class="ds-select-trigger__icon"&gt;
-    &lt;span&gt;12 December 2022&lt;/span&gt;
-  &lt;/span&gt;
-  &lt;img src="../../assets/icons/icon-chevron-down.svg" alt="" aria-hidden="true" class="ds-select-trigger__chevron"&gt;
-&lt;/button&gt;
-
-&lt;div id="date-picker-panel" class="ds-calendar" role="dialog" aria-label="Date picker calendar"&gt;
-  &lt;!-- gunakan struktur month header, week header, dan day grid seperti komponen Calendar --&gt;
-&lt;/div&gt;</code>
-          </div>
-          <div>
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-              <span style="font-size:12px;font-weight:600;color:var(--color-text-secondary);font-family:var(--font-primary);">CSS Tailwind Utility (langsung pakai)</span>
-              <button class="copy-btn" onclick="copyCode(this, 'code-date-picker-tailwind')">Copy</button>
-            </div>
-            <code id="code-date-picker-tailwind" class="code-block">&lt;button
-  class="min-h-10 w-full max-w-80 border border-neutral-n40 rounded-sm bg-neutral-n0 px-100 py-075 flex items-center justify-between gap-100 text-sm leading-body-sm text-neutral-n200 hover:border-neutral-n100 focus-visible:outline-none focus-visible:border-blue-b300 focus-visible:shadow-[0_0_0_2px_var(--color-blue-b200)]"
-&gt;
-  &lt;span class="inline-flex items-center gap-075"&gt;
-    &lt;img src="../../assets/icons/icon-calendar-days.svg" class="w-4 h-4" alt="" /&gt;
-    12 December 2022
-  &lt;/span&gt;
-  &lt;img src="../../assets/icons/icon-chevron-down.svg" class="w-3.5 h-3.5" alt="" /&gt;
-&lt;/button&gt;</code>
-          </div>
-        </div>
-      </section>
-
-      <section style="margin-bottom:48px;">
         <h2 style="font-size:20px;font-weight:600;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--color-border);font-family:var(--font-primary);">Playground</h2>
         <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;">
           <div class="playground-controls">
@@ -539,6 +501,19 @@
           </div>
         </div>
       </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Token Class</h2>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:16px;display:grid;gap:10px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-date-picker</code><button class="copy-btn" data-copy="ds-date-picker" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-select-trigger</code><button class="copy-btn" data-copy="ds-select-trigger" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-select-trigger ds-select-trigger--hover</code><button class="copy-btn" data-copy="ds-select-trigger ds-select-trigger--hover" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-select-trigger ds-select-trigger--focus</code><button class="copy-btn" data-copy="ds-select-trigger ds-select-trigger--focus" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-calendar</code><button class="copy-btn" data-copy="ds-calendar" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-calendar-day ds-calendar-day--selected</code><button class="copy-btn" data-copy="ds-calendar-day ds-calendar-day--selected" onclick="copyToken(this)">Salin</button></div>
+        </div>
+      </section>
+
     </div>
   </main>
 
@@ -562,26 +537,6 @@
         valueEl.textContent = button.dataset.date || '';
       });
     });
-
-    function copyCode(btn, codeId) {
-      const el = document.getElementById(codeId);
-      const text = el ? el.innerText : '';
-      navigator.clipboard.writeText(text).catch(() => {
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-      });
-      const original = btn.textContent;
-      btn.textContent = 'Copied';
-      btn.classList.add('copied');
-      setTimeout(() => {
-        btn.textContent = original;
-        btn.classList.remove('copied');
-      }, 1200);
-    }
 
     const playgroundValueEl = document.getElementById('playground-value');
     const playgroundDays = document.querySelectorAll('.ds-calendar-day[data-playground-date]');
@@ -630,6 +585,15 @@
       const isHover = playgroundTrigger.classList.toggle('ds-select-trigger--hover');
       playgroundTriggerHover.classList.toggle('is-active', isHover);
     });
-  </script>
+  
+  function copyToken(btn) {
+    var value = btn.getAttribute('data-copy') || '';
+    navigator.clipboard.writeText(value).then(function () {
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+</script>
 </body>
 </html>

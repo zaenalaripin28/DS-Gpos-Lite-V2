@@ -965,6 +965,119 @@
       .ds-hero-banner { flex-direction: column !important; }
       .ds-hero-banner > div:last-child { border-left: none !important; border-top: 1px solid rgba(255,255,255,0.07); }
     }
+
+    /* ── Sidebar dark theme ── */
+    :root {
+      --sidebar-bg:                #0D1E35;
+      --sidebar-header-bg:         #0A1828;
+      --sidebar-border:            rgba(255,255,255,0.07);
+      --sidebar-logo-color:        #F1F5F9;
+      --sidebar-version-color:     rgba(241,245,249,0.45);
+      --sidebar-search-bg:         rgba(255,255,255,0.05);
+      --sidebar-search-border:     rgba(255,255,255,0.10);
+      --sidebar-section-title:     rgba(241,245,249,0.35);
+      --sidebar-link-color:        rgba(241,245,249,0.65);
+      --sidebar-link-hover-bg:     rgba(255,255,255,0.07);
+      --sidebar-link-hover-color:  #F1F5F9;
+      --sidebar-link-active-bg:    rgba(30,127,214,0.18);
+      --sidebar-link-active-color: #7DB5E7;
+      --sidebar-link-active-border:#1E7FD6;
+    }
+    .sidebar { background-color: var(--sidebar-bg); }
+    .sidebar-header { background-color: var(--sidebar-header-bg); border-bottom-color: var(--sidebar-border); }
+    .sidebar-brand-text .logo    { color: var(--sidebar-logo-color); }
+    .sidebar-brand-text .version { color: var(--sidebar-version-color); }
+    .sidebar-close-btn          { color: var(--sidebar-link-color); }
+    .sidebar-close-btn:hover    { color: #F1F5F9; background: transparent; }
+    .sidebar-search { border-bottom-color: var(--sidebar-border); }
+    .search-input {
+      background-color: var(--sidebar-search-bg);
+      border-color: var(--sidebar-search-border);
+      color: var(--sidebar-link-color);
+    }
+    .search-input::placeholder { color: var(--sidebar-section-title); }
+    .search-input:focus {
+      border-color: var(--color-primary-500);
+      background-color: var(--sidebar-link-hover-bg);
+      color: var(--sidebar-link-hover-color);
+      box-shadow: 0 0 0 3px rgba(30,127,214,0.15);
+    }
+    .nav-scroll { scrollbar-color: var(--sidebar-border) transparent; }
+    .nav-scroll::-webkit-scrollbar-thumb { background: var(--sidebar-border); }
+    .nav-title { color: var(--sidebar-section-title); }
+    .nav-link {
+      color: var(--sidebar-link-color);
+      border-left: 2px solid transparent;
+      border-radius: var(--border-radius-md);
+    }
+    .nav-link:hover {
+      background-color: var(--sidebar-link-hover-bg);
+      color: var(--sidebar-link-hover-color);
+      border-left-color: rgba(30,127,214,0.5);
+    }
+    .nav-link.active {
+      background-color: var(--sidebar-link-active-bg);
+      color: var(--sidebar-link-active-color);
+      border-left-color: var(--sidebar-link-active-border);
+    }
+    .nav-link svg        { opacity: 0.6; }
+    .nav-link:hover svg,
+    .nav-link.active svg { opacity: 1; }
+    .sidebar-footer {
+      background-color: var(--sidebar-header-bg);
+      border-top-color: var(--sidebar-border);
+    }
+    .tailwind-badge {
+      background: rgba(6,182,212,0.08);
+      border-color: rgba(6,182,212,0.2);
+      color: var(--color-secondary-300);
+    }
+    .sidebar-logo-icon {
+      background: rgba(30,127,214,0.25);
+      color: #7DB5E7;
+      border: 1px solid rgba(30,127,214,0.3);
+    }
+
+    /* ── Dark toggle button ── */
+    .dark-toggle {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; background: none;
+      border: 1px solid var(--color-border); color: var(--color-text-secondary);
+      cursor: pointer; border-radius: var(--border-radius-md);
+      transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+      flex-shrink: 0;
+    }
+    .dark-toggle:hover { background-color: var(--color-primary-50); border-color: var(--color-primary-200); color: var(--color-primary-600); }
+    .dark-toggle .icon-sun  { display: none; }
+    .dark-toggle .icon-moon { display: block; }
+    [data-theme="dark"] .dark-toggle .icon-sun  { display: block; }
+    [data-theme="dark"] .dark-toggle .icon-moon { display: none; }
+    [data-theme="dark"] .dark-toggle { border-color: #1A2E48; color: #94A3B8; }
+    [data-theme="dark"] .dark-toggle:hover { background-color: rgba(30,127,214,0.14); border-color: rgba(30,127,214,0.3); color: #7DB5E7; }
+
+    /* ── Floating topbar ── */
+    .main-content { background-color: var(--color-gray-50, #F7F8FA); }
+    .topbar {
+      margin: 12px 20px 0;
+      padding: 0 24px;
+      background-color: rgba(255,255,255,0.92) !important;
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-2xl);
+      box-shadow: var(--shadow-sm);
+      top: 12px;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+    }
+    .content-inner { padding-top: 24px; }
+    [data-theme="dark"] .topbar { background-color: rgba(7,16,29,0.95) !important; border-bottom-color: #1A2E48; }
+
+    /* ── Scroll progress (align class with other pages) ── */
+    .scroll-progress-bar {
+      position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+      background: linear-gradient(90deg, #1E7FD6 0%, #22D3EE 100%);
+      z-index: 99999; transition: width 80ms linear;
+      pointer-events: none; border-radius: 0 2px 2px 0;
+    }
   </style>
 </head>
 <body>
@@ -1209,7 +1322,9 @@
 
   <main class="main-content">
     <div class="topbar">
-      <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">☰</button>
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
       <div class="breadcrumb">
         <a href="../../index.html">Home</a>
         <span class="breadcrumb-sep">/</span>
@@ -1217,7 +1332,13 @@
         <span class="breadcrumb-sep">/</span>
         <span class="current">Tags</span>
       </div>
-      <span class="version-badge">v2.0</span>
+      <div class="topbar-actions">
+        <button type="button" class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun"  width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <span class="version-badge">v2.0</span>
+      </div>
     </div>
 
     <div class="content-inner">
@@ -2295,6 +2416,23 @@
       });
     });
   });
+
+  /* ── Dark mode toggle ── */
+  (function () {
+    var html      = document.documentElement;
+    var toggle    = document.getElementById('dark-toggle');
+    var saved     = localStorage.getItem('ds-theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      html.dataset.theme = 'dark';
+    }
+    if (toggle) {
+      toggle.addEventListener('click', function () {
+        var isDark = html.dataset.theme === 'dark';
+        html.dataset.theme = isDark ? 'light' : 'dark';
+        localStorage.setItem('ds-theme', isDark ? 'light' : 'dark');
+      });
+    }
+  })();
 </script>
 </body>
 </html>

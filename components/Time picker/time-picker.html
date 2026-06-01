@@ -511,49 +511,6 @@
       </section>
 
       <section class="mb-12">
-        <h2>Code — Salin Code</h2>
-        <div style="display:flex;flex-direction:column;gap:16px;">
-          <div>
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-              <span style="font-size:12px;font-weight:600;color:var(--color-text-secondary);font-family:var(--font-primary);">HTML</span>
-              <button class="copy-btn" onclick="copyBlock('code-timepicker-html', this)">Salin</button>
-            </div>
-            <div class="code-block"><code id="code-timepicker-html">&lt;div class="ds-time-picker"&gt;
-  &lt;button type="button" class="ds-select-trigger ds-select-trigger--focus"&gt;
-    &lt;span class="ds-select-trigger__value"&gt;1:00 PM&lt;/span&gt;
-    &lt;img src="../../assets/icons/icon-chevron-down.svg" class="ds-select-trigger__icon" alt=""&gt;
-  &lt;/button&gt;
-  &lt;div class="ds-time-picker__menu"&gt;
-    &lt;div class="time-parts-shell"&gt;
-      &lt;div class="time-parts-list"&gt;
-        &lt;button type="button" class="time-parts-item"&gt;9:00 AM&lt;/button&gt;
-        &lt;button type="button" class="time-parts-item is-selected"&gt;1:00 PM&lt;/button&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></div>
-          </div>
-          <div>
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-              <span style="font-size:12px;font-weight:600;color:var(--color-text-secondary);font-family:var(--font-primary);">Tailwind CSS</span>
-              <button class="copy-btn" onclick="copyBlock('code-timepicker-tailwind', this)">Salin</button>
-            </div>
-            <div class="code-block"><code id="code-timepicker-tailwind">&lt;div class="w-full max-w-80 relative"&gt;
-  &lt;button class="min-h-10 w-full rounded-sm border border-neutral-n40 bg-neutral-n0 px-150 py-100 text-left text-sm leading-5 text-neutral-n500 shadow-[0_0_0_2px_var(--color-blue-b200)]"&gt;
-    1:00 PM
-  &lt;/button&gt;
-  &lt;div class="mt-1 overflow-hidden rounded-md border border-blue-b300 bg-neutral-n0"&gt;
-    &lt;div class="max-h-[344px] overflow-y-auto px-200 py-150"&gt;
-      &lt;button class="block min-h-10 w-full rounded-sm px-100 py-050 text-left text-sm leading-5 text-neutral-n900 hover:bg-neutral-n20"&gt;9:00 AM&lt;/button&gt;
-      &lt;button class="block min-h-10 w-full rounded-sm bg-blue-b50 px-100 py-050 text-left text-sm font-medium leading-5 text-blue-b300"&gt;1:00 PM&lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="mb-12">
         <h2>Playground</h2>
         <div class="preview-card" style="padding:20px;">
           <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;">
@@ -590,6 +547,20 @@
         </div>
       </section>
 
+      
+      <section style="margin-bottom:48px;">
+        <h2>Token Class</h2>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:16px;display:grid;gap:10px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-time-picker</code><button class="copy-btn" data-copy="ds-time-picker" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-select-trigger</code><button class="copy-btn" data-copy="ds-select-trigger" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-select-trigger ds-select-trigger--subtle</code><button class="copy-btn" data-copy="ds-select-trigger ds-select-trigger--subtle" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-select-trigger ds-select-trigger--focus</code><button class="copy-btn" data-copy="ds-select-trigger ds-select-trigger--focus" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-select-trigger ds-select-trigger--disabled</code><button class="copy-btn" data-copy="ds-select-trigger ds-select-trigger--disabled" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.time-parts-item</code><button class="copy-btn" data-copy="time-parts-item" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.time-parts-item is-selected</code><button class="copy-btn" data-copy="time-parts-item is-selected" onclick="copyToken(this)">Salin</button></div>
+        </div>
+      </section>
+
       <footer class="page-footer" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--color-border);font-size:12px;color:var(--color-text-tertiary);">
         &copy; 2026 GPOS Lite Design System V2.0
       </footer>
@@ -611,19 +582,6 @@
       button.classList.add('is-selected');
       button.setAttribute('aria-selected', 'true');
       valueEl.textContent = button.textContent.trim();
-    });
-  }
-
-  function copyBlock(id, btn) {
-    var target = document.getElementById(id);
-    if (!target) return;
-    navigator.clipboard.writeText(target.textContent).then(function () {
-      btn.textContent = 'Tersalin!';
-      btn.classList.add('copied');
-      setTimeout(function () {
-        btn.textContent = 'Salin';
-        btn.classList.remove('copied');
-      }, 1400);
     });
   }
 
@@ -701,6 +659,15 @@
       }
     });
   })();
+
+  function copyToken(btn) {
+    var value = btn.getAttribute('data-copy') || '';
+    navigator.clipboard.writeText(value).then(function () {
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
 </script>
 </body>
 </html>

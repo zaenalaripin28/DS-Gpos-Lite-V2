@@ -1258,56 +1258,18 @@
         </div>
       </section>
 
+      
       <section style="margin-bottom:48px;">
-        <h2>Code — Salin Code</h2>
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;margin-bottom:16px;">
-          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);">calendar-component.html</span>
-            <button type="button" class="copy-btn" onclick="copyHtml('html-block-component', this)">Salin</button>
-          </div>
-          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-primary);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="html-block-component">&lt;div class="ds-calendar" role="group" aria-label="Kalender Desember 2022"&gt;
-  &lt;div class="ds-calendar__body"&gt;
-    &lt;div class="ds-calendar-month-header" role="group" aria-label="Navigasi bulan"&gt;...&lt;/div&gt;
-    &lt;div class="ds-calendar-week-header" role="row"&gt;...&lt;/div&gt;
-    &lt;div class="ds-calendar-days" role="grid"&gt;...&lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class="ds-calendar__footer"&gt;
-    &lt;button type="button" class="ds-calendar__action"&gt;Simpan&lt;/button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
-        </div>
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;margin-bottom:16px;">
-          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);">calendar-month-header.html</span>
-            <button type="button" class="copy-btn" onclick="copyHtml('html-block-month', this)">Salin</button>
-          </div>
-          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-primary);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="html-block-month">&lt;div class="ds-calendar-month-header" role="group" aria-label="Navigasi bulan"&gt;
-  &lt;button type="button" class="ds-calendar-month-header__nav" aria-label="Bulan sebelumnya"&gt;
-    &lt;img src="../../assets/icons/icon-chevron-left.svg" alt="" aria-hidden="true"&gt;
-  &lt;/button&gt;
-  &lt;h2 class="ds-calendar-month-header__label"&gt;December 2022&lt;/h2&gt;
-  &lt;button type="button" class="ds-calendar-month-header__nav" aria-label="Bulan berikutnya"&gt;
-    &lt;img src="../../assets/icons/icon-chevron-right.svg" alt="" aria-hidden="true"&gt;
-  &lt;/button&gt;
-&lt;/div&gt;</code></pre>
-        </div>
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
-          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);">calendar-week-day.html</span>
-            <button type="button" class="copy-btn" onclick="copyHtml('html-block-week-day', this)">Salin</button>
-          </div>
-          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-primary);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="html-block-week-day">&lt;div class="ds-calendar-week-header" role="row"&gt;
-  &lt;span class="ds-calendar-week-header__day" role="columnheader"&gt;SUN&lt;/span&gt;
-  &lt;span class="ds-calendar-week-header__day" role="columnheader"&gt;MON&lt;/span&gt;
-  &lt;!-- ... TUE–SAT --&gt;
-&lt;/div&gt;
-
-&lt;div class="ds-calendar-days" role="grid" aria-label="Desember 2022"&gt;
-  &lt;button type="button" class="ds-calendar-day ds-calendar-day--outside" disabled&gt;27&lt;/button&gt;
-  &lt;button type="button" class="ds-calendar-day"&gt;1&lt;/button&gt;
-  &lt;button type="button" class="ds-calendar-day ds-calendar-day--today" aria-current="date"&gt;5&lt;/button&gt;
-  &lt;button type="button" class="ds-calendar-day ds-calendar-day--selected" aria-selected="true"&gt;7&lt;/button&gt;
-&lt;/div&gt;</code></pre>
+        <h2>Token Class</h2>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:16px;display:grid;gap:10px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-calendar</code><button class="copy-btn" data-copy="ds-calendar" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-calendar-month-header</code><button class="copy-btn" data-copy="ds-calendar-month-header" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-calendar-week-header</code><button class="copy-btn" data-copy="ds-calendar-week-header" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-calendar-day</code><button class="copy-btn" data-copy="ds-calendar-day" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-calendar-day ds-calendar-day--today</code><button class="copy-btn" data-copy="ds-calendar-day ds-calendar-day--today" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-calendar-day ds-calendar-day--selected</code><button class="copy-btn" data-copy="ds-calendar-day ds-calendar-day--selected" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-calendar-day ds-calendar-day--outside</code><button class="copy-btn" data-copy="ds-calendar-day ds-calendar-day--outside" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-calendar__footer</code><button class="copy-btn" data-copy="ds-calendar__footer" onclick="copyToken(this)">Salin</button></div>
         </div>
       </section>
 
@@ -1320,14 +1282,13 @@
 
 <script src="../../scripts/script.js"></script>
 <script>
-  function copyHtml(id, btn) {
-    navigator.clipboard.writeText(document.getElementById(id).textContent).then(function () {
+
+  function copyToken(btn) {
+    var value = btn.getAttribute('data-copy') || '';
+    navigator.clipboard.writeText(value).then(function () {
       btn.textContent = 'Tersalin!';
       btn.classList.add('copied');
-      setTimeout(function () {
-        btn.textContent = 'Salin';
-        btn.classList.remove('copied');
-      }, 2000);
+      setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
     });
   }
 </script>

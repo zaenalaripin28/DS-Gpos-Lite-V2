@@ -1664,31 +1664,18 @@
           </div>
         </div>
       </section>
-
       <section style="margin-bottom:48px;">
-        <h2>Code — Salin Code</h2>
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
-          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);">flags.html — ds-flag-part</span>
-            <button class="copy-btn" id="copy-html-btn" onclick="copyHtml()">Salin</button>
-          </div>
-          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-primary);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="html-block">&lt;!-- DismissButton --&gt;
-&lt;button type="button" class="ds-flag-part ds-flag-part--dismiss" aria-label="Tutup flag"&gt;
-  &lt;img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"&gt;
-&lt;/button&gt;
-
-&lt;!-- IconButton --&gt;
-&lt;button type="button" class="ds-flag-part ds-flag-part--icon" aria-label="Perluas detail flag" aria-expanded="false"&gt;
-  &lt;img src="../../assets/icons/icon-chevron-down.svg" alt="" aria-hidden="true"&gt;
-&lt;/button&gt;
-
-&lt;!-- CustomButton --&gt;
-&lt;button type="button" class="ds-flag-part ds-flag-part--custom"&gt;No thanks&lt;/button&gt;
-
-&lt;!-- Snapshot focus (dokumentasi) --&gt;
-&lt;span class="ds-flag-part ds-flag-part--dismiss ds-flag-part--focus" aria-hidden="true"&gt;
-  &lt;img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"&gt;
-&lt;/span&gt;</code></pre>
+        <h2>Token Class</h2>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:16px;display:grid;gap:10px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-flag ds-flag--normal</code><button class="copy-btn" data-copy="ds-flag ds-flag--normal" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-flag ds-flag--success</code><button class="copy-btn" data-copy="ds-flag ds-flag--success" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-flag ds-flag--error</code><button class="copy-btn" data-copy="ds-flag ds-flag--error" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-flag ds-flag--warning</code><button class="copy-btn" data-copy="ds-flag ds-flag--warning" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-flag ds-flag--info</code><button class="copy-btn" data-copy="ds-flag ds-flag--info" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-flag ds-flag--collapsed</code><button class="copy-btn" data-copy="ds-flag ds-flag--collapsed" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-flag-part ds-flag-part--dismiss</code><button class="copy-btn" data-copy="ds-flag-part ds-flag-part--dismiss" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-flag-part ds-flag-part--icon</code><button class="copy-btn" data-copy="ds-flag-part ds-flag-part--icon" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-flag-part ds-flag-part--custom</code><button class="copy-btn" data-copy="ds-flag-part ds-flag-part--custom" onclick="copyToken(this)">Salin</button></div>
         </div>
       </section>
 
@@ -1713,9 +1700,9 @@
     });
   })();
 
-  function copyHtml() {
-    navigator.clipboard.writeText(document.getElementById('html-block').textContent).then(function () {
-      var btn = document.getElementById('copy-html-btn');
+  function copyToken(btn) {
+    var value = btn.getAttribute('data-copy') || '';
+    navigator.clipboard.writeText(value).then(function () {
       btn.textContent = 'Tersalin!';
       btn.classList.add('copied');
       setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);

@@ -1921,83 +1921,21 @@
           </table>
         </div>
       </section>
-
-      <!-- CODE -->
       <section style="margin-bottom:48px;">
-        <h2>Code Snippet</h2>
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
-          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);">text field.html — ds-text-field</span>
-            <button class="copy-btn" id="copy-html-btn" onclick="copyHtml()">Salin</button>
-          </div>
-          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-primary);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="html-block">&lt;!-- appearance=standard --&gt;
-&lt;label class="ds-text-field"&gt;
-  &lt;span class="sr-only"&gt;Email&lt;/span&gt;
-  &lt;input type="email" class="ds-text-field__input" placeholder="nama@email.com"&gt;
-&lt;/label&gt;
-
-&lt;!-- appearance=subtle + invalid --&gt;
-&lt;label class="ds-text-field ds-text-field--subtle ds-text-field--invalid"&gt;
-  &lt;input type="text" class="ds-text-field__input" value="Value" aria-invalid="true"&gt;
-&lt;/label&gt;
-
-&lt;!-- appearance=none, compact, monospaced --&gt;
-&lt;label class="ds-text-field ds-text-field--none ds-text-field--compact ds-text-field--monospaced"&gt;
-  &lt;input type="text" class="ds-text-field__input" value="abc-123"&gt;
-&lt;/label&gt;
-
-&lt;!-- disabled --&gt;
-&lt;label class="ds-text-field"&gt;
-  &lt;input type="text" class="ds-text-field__input" value="Value" disabled&gt;
-&lt;/label&gt;
-
-&lt;!-- phone number field --&gt;
-&lt;label class="ds-phone-field"&gt;
-  &lt;span class="sr-only"&gt;Nomor telepon&lt;/span&gt;
-  &lt;div class="ds-phone-field__group"&gt;
-    &lt;span class="ds-phone-field__prefix" aria-hidden="true"&gt;+62&lt;/span&gt;
-    &lt;span class="ds-phone-field__divider" aria-hidden="true"&gt;&lt;/span&gt;
-    &lt;input type="tel" class="ds-phone-field__input" placeholder="81234567890" inputmode="tel" autocomplete="tel-national"&gt;
-  &lt;/div&gt;
-&lt;/label&gt;
-
-&lt;!-- phone number — compact + invalid --&gt;
-&lt;label class="ds-phone-field ds-phone-field--compact ds-phone-field--invalid"&gt;
-  &lt;div class="ds-phone-field__group"&gt;
-    &lt;span class="ds-phone-field__prefix" aria-hidden="true"&gt;+62&lt;/span&gt;
-    &lt;span class="ds-phone-field__divider" aria-hidden="true"&gt;&lt;/span&gt;
-    &lt;input type="tel" class="ds-phone-field__input" value="123" aria-invalid="true"&gt;
-  &lt;/div&gt;
-&lt;/label&gt;
-
-&lt;!-- search select field --&gt;
-&lt;label class="ds-search-select-field"&gt;
-  &lt;div class="ds-search-select-field__group"&gt;
-    &lt;button type="button" class="ds-button-compact ds-search-select-field__chip"&gt;
-      Item Produk
-      &lt;span class="ds-search-select-field__caret"&gt;
-        &lt;svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"&gt;&lt;polyline points="6,9 12,15 18,9"&gt;&lt;/polyline&gt;&lt;/svg&gt;
-      &lt;/span&gt;
-    &lt;/button&gt;
-    &lt;input type="search" class="ds-search-select-field__input" placeholder="Cari Item Produk"&gt;
-    &lt;button type="button" class="ds-search-select-field__action" aria-label="Cari"&gt;
-      &lt;svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;&lt;circle cx="11" cy="11" r="7"&gt;&lt;/circle&gt;&lt;line x1="21" y1="21" x2="16.65" y2="16.65"&gt;&lt;/line&gt;&lt;/svg&gt;
-    &lt;/button&gt;
-  &lt;/div&gt;
-&lt;/label&gt;
-
-&lt;!-- text field with icon before &amp; after --&gt;
-&lt;label class="ds-icon-text-field"&gt;
-  &lt;div class="ds-icon-text-field__group"&gt;
-    &lt;span class="ds-icon-text-field__leading" aria-hidden="true"&gt;
-      &lt;svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"&gt;&lt;circle cx="11" cy="11" r="7"&gt;&lt;/circle&gt;&lt;line x1="21" y1="21" x2="16.65" y2="16.65"&gt;&lt;/line&gt;&lt;/svg&gt;
-    &lt;/span&gt;
-    &lt;input type="text" class="ds-icon-text-field__input" placeholder="Placeholder"&gt;
-    &lt;button type="button" class="ds-icon-text-field__trailing" aria-label="Lanjutkan"&gt;
-      &lt;svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"&gt;&lt;line x1="5" y1="12" x2="19" y2="12"&gt;&lt;/line&gt;&lt;polyline points="12,5 19,12 12,19"&gt;&lt;/polyline&gt;&lt;/svg&gt;
-    &lt;/button&gt;
-  &lt;/div&gt;
-&lt;/label&gt;</code></pre>
+        <h2>Token Class</h2>
+        <p style="font-size:14px;color:var(--color-text-tertiary);margin-top:-12px;margin-bottom:20px;font-family:var(--font-primary);">Class token siap copy untuk semua varian Text Field.</p>
+        <div style="display:grid;gap:10px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:16px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-text-field</code><button class="copy-btn" data-copy="ds-text-field" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-text-field ds-text-field--subtle</code><button class="copy-btn" data-copy="ds-text-field ds-text-field--subtle" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-text-field ds-text-field--none</code><button class="copy-btn" data-copy="ds-text-field ds-text-field--none" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-text-field ds-text-field--compact</code><button class="copy-btn" data-copy="ds-text-field ds-text-field--compact" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-text-field ds-text-field--invalid</code><button class="copy-btn" data-copy="ds-text-field ds-text-field--invalid" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-text-field ds-text-field--disabled</code><button class="copy-btn" data-copy="ds-text-field ds-text-field--disabled" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-phone-field</code><button class="copy-btn" data-copy="ds-phone-field" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-phone-field ds-phone-field--compact</code><button class="copy-btn" data-copy="ds-phone-field ds-phone-field--compact" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-phone-field ds-phone-field--invalid</code><button class="copy-btn" data-copy="ds-phone-field ds-phone-field--invalid" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-search-select-field</code><button class="copy-btn" data-copy="ds-search-select-field" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-icon-text-field</code><button class="copy-btn" data-copy="ds-icon-text-field" onclick="copyToken(this)">Salin</button></div>
         </div>
       </section>
 
@@ -2043,9 +1981,9 @@
   }, { passive: true });
   scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-  function copyHtml() {
-    navigator.clipboard.writeText(document.getElementById('html-block').textContent).then(function () {
-      var btn = document.getElementById('copy-html-btn');
+  function copyToken(btn) {
+    var value = btn.getAttribute('data-copy') || '';
+    navigator.clipboard.writeText(value).then(function () {
       btn.textContent = 'Tersalin!';
       btn.classList.add('copied');
       setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);

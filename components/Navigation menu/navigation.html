@@ -1212,19 +1212,7 @@
               <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Divider</div>
               <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);margin-bottom:6px;"><code>Divider.svg</code> · <code>color-border-subtle</code></div>
               <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Garis horizontal 2px via asset SVG. Preview memakai background <code>N0</code>.</div>
-              <div class="parts-code">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-                  <span style="font-size:11px;font-weight:600;color:var(--color-text-secondary);font-family:var(--font-primary);">CSS</span>
-                  <button type="button" class="copy-btn" onclick="copyBlock('code-divider-css', this)">Salin</button>
-                </div>
-                <div class="code-block"><code id="code-divider-css">/* Divider */
-.ds-nav-divider {
-  display: block;
-  width: 100%;
-  max-width: 240px;
-  height: auto;
-}</code></div>
-              </div>
+            </div>
             </div>
           </div>
           <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
@@ -1235,19 +1223,7 @@
               <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Dot</div>
               <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);margin-bottom:6px;"><code>dot.svg</code></div>
               <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Indikator bulat 6×6px muted. Satu varian warna untuk semua state item.</div>
-              <div class="parts-code">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-                  <span style="font-size:11px;font-weight:600;color:var(--color-text-secondary);font-family:var(--font-primary);">CSS</span>
-                  <button type="button" class="copy-btn" onclick="copyBlock('code-dot-css', this)">Salin</button>
-                </div>
-                <div class="code-block"><code id="code-dot-css">/* Dot */
-.ds-nav-dot-img {
-  display: block;
-  flex-shrink: 0;
-  width: 6px;
-  height: 6px;
-}</code></div>
-              </div>
+            </div>
             </div>
           </div>
         </div>
@@ -1278,63 +1254,7 @@
             <div style="padding:14px 16px;background:var(--color-surface);">
               <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Heading Menu</div>
               <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Overline caption + chevron lead (12px) + tombol collapse 32×32px (icon 16px).</div>
-              <div class="parts-code">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-                  <span style="font-size:11px;font-weight:600;color:var(--color-text-secondary);font-family:var(--font-primary);">CSS</span>
-                  <button type="button" class="copy-btn" onclick="copyBlock('code-heading-css', this)">Salin</button>
-                </div>
-                <div class="code-block"><code id="code-heading-css">/* Heading Menu */
-.ds-nav-heading-snap {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 280px;
-  gap: var(--space-100);
-  padding: var(--space-100) var(--space-150);
-  box-sizing: border-box;
-}
-.ds-nav-heading-snap__label-row {
-  display: flex;
-  align-items: center;
-  gap: var(--space-075);
-  min-width: 0;
-}
-.ds-nav-heading-snap__lead {
-  width: 12px;
-  height: 12px;
-  flex-shrink: 0;
-  opacity: 0.45;
-  display: block;
-}
-.ds-nav-heading-snap__toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  flex-shrink: 0;
-  padding: 0;
-  border: 1px solid var(--color-neutral-n40);
-  border-radius: var(--border-radius-sm);
-  background: var(--color-neutral-n0);
-  cursor: default;
-}
-.ds-nav-heading-snap__toggle img {
-  width: 16px;
-  height: 16px;
-  display: block;
-}
-
-/* Tanpa icon — Terakhir Dibuka */
-.ds-nav-heading-snap--no-icons .ds-nav-heading-snap__lead,
-.ds-nav-heading-snap--no-icons .ds-nav-heading-snap__toggle {
-  display: none;
-}
-.ds-nav-heading-snap--no-icons {
-  justify-content: flex-start;
-}</code></div>
-              </div>
+            </div>
             </div>
           </div>
         </div>
@@ -1415,50 +1335,7 @@
             </div>
           </div>
         </div>
-        <div class="parts-code" style="margin-top:16px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:14px 16px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-            <span style="font-size:12px;font-weight:600;color:var(--color-text-secondary);font-family:var(--font-primary);">CSS — Main Menu</span>
-            <button type="button" class="copy-btn" onclick="copyBlock('code-mainmenu-css', this)">Salin</button>
-          </div>
-          <div class="code-block"><code id="code-mainmenu-css">/* Main Menu — base (button, bukan hyperlink) */
-.ds-nav-mainmenu-snap {
-  display: flex;
-  align-items: center;
-  gap: var(--space-100);
-  width: 100%;
-  max-width: 260px;
-  padding: var(--space-100) var(--space-150);
-  border-radius: var(--border-radius-md);
-  border: none;
-  margin: 0;
-  background: transparent;
-  font: inherit;
-  color: inherit;
-  text-decoration: none;
-  text-align: left;
-  cursor: pointer;
-  box-sizing: border-box;
-  appearance: none;
-}
-.ds-nav-mainmenu-snap:hover { text-decoration: none; }
-.ds-nav-mainmenu-snap__lead,
-.ds-nav-mainmenu-snap__trail { flex-shrink: 0; display: block; object-fit: contain; }
-.ds-nav-mainmenu-snap__lead { width: 24px; height: 24px; }
-.ds-nav-mainmenu-snap__trail { width: 16px; height: 16px; margin-left: auto; }
-.ds-nav-mainmenu-snap__body { flex: 1; min-width: 0; }
-
-/* state=hover */
-.ds-nav-mainmenu-snap--hover { background: var(--color-neutral-n0); }
-
-/* state=press */
-.ds-nav-mainmenu-snap--press { background: var(--color-neutral-n30); }
-
-/* state=selected */
-.ds-nav-mainmenu-snap--selected { background: var(--color-blue-b50); }
-.ds-nav-mainmenu-snap--selected .ds-nav-mainmenu-snap__title {
-  color: var(--color-blue-b300);
-}</code></div>
-        </div>
+            </div>
       </section>
 
       <!-- PARTS: Submenu Content -->
@@ -1524,48 +1401,7 @@
             </div>
           </div>
         </div>
-        <div class="parts-code" style="margin-top:16px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:14px 16px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-            <span style="font-size:12px;font-weight:600;color:var(--color-text-secondary);font-family:var(--font-primary);">CSS — Submenu Content</span>
-            <button type="button" class="copy-btn" onclick="copyBlock('code-submenu-css', this)">Salin</button>
-          </div>
-          <div class="code-block"><code id="code-submenu-css">/* Submenu Content — base */
-.ds-nav-submenu-snap {
-  display: flex;
-  align-items: center;
-  gap: var(--space-100);
-  width: 100%;
-  max-width: 260px;
-  padding: var(--space-100) var(--space-150) var(--space-100) var(--space-250);
-  border-radius: var(--border-radius-md);
-  text-decoration: none;
-  box-sizing: border-box;
-}
-.ds-nav-submenu-snap__dot,
-.ds-nav-submenu-snap__trail { flex-shrink: 0; display: block; object-fit: contain; }
-.ds-nav-submenu-snap__trail { width: 16px; height: 16px; margin-left: auto; }
-.ds-nav-submenu-snap__label {
-  flex: 1;
-  min-width: 0;
-  font-family: var(--font-primary);
-  font-size: var(--font-size-body3);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-tight);
-  color: var(--color-text-primary);
-}
-
-/* state=hover */
-.ds-nav-submenu-snap--hover { background: var(--color-neutral-n0); }
-
-/* state=press */
-.ds-nav-submenu-snap--press { background: var(--color-neutral-n30); }
-
-/* state=selected */
-.ds-nav-submenu-snap--selected { background: var(--color-blue-b50); }
-.ds-nav-submenu-snap--selected .ds-nav-submenu-snap__label {
-  color: var(--color-blue-b300);
-}</code></div>
-        </div>
+            </div>
       </section>
 
       <!-- PARTS: Menu Search custom -->
@@ -1641,74 +1477,7 @@
             <div style="padding:14px 16px;background:var(--color-surface);">
               <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Menu Search custom</div>
               <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Placeholder caption regular · trail <code>icon-magnifying-glass.svg</code> · state rest pakai <code>icon-x-circle-outline.svg</code> untuk clear.</div>
-              <div class="parts-code">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-                  <span style="font-size:11px;font-weight:600;color:var(--color-text-secondary);font-family:var(--font-primary);">CSS</span>
-                  <button type="button" class="copy-btn" onclick="copyBlock('code-menu-search-css', this)">Salin</button>
-                </div>
-                <div class="code-block"><code id="code-menu-search-css">/* Menu Search custom — wrapper spacing */
-.ds-nav-menu-search-wrap {
-  margin: var(--space-100) 0;
-  width: 100%;
-}
-
-/* field 32px */
-.ds-nav-menu-search {
-  display: flex;
-  align-items: center;
-  gap: var(--space-075);
-  height: var(--space-400);
-  padding: 0 var(--space-100);
-  border: 1px solid var(--color-neutral-n40);
-  border-radius: var(--border-radius-md);
-  background: var(--color-neutral-n0);
-  box-sizing: border-box;
-  width: 100%;
-}
-.ds-nav-menu-search__input {
-  flex: 1;
-  min-width: 0;
-  height: 100%;
-  border: none;
-  background: transparent;
-  padding: 0;
-  font-family: var(--font-primary);
-  font-size: var(--text-caption-regular-size);
-  font-weight: var(--text-caption-regular-weight);
-  line-height: var(--text-caption-regular-lh);
-  color: var(--color-neutral-n900);
-  outline: none;
-}
-.ds-nav-menu-search__input::placeholder {
-  color: var(--color-neutral-n200);
-}
-.ds-nav-menu-search__trail {
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 16px;
-  height: 16px;
-}
-.ds-nav-menu-search__trail img {
-  width: 16px;
-  height: 16px;
-  display: block;
-}
-
-/* state=hover */
-.ds-nav-menu-search--hover {
-  background: var(--color-neutral-n10);
-  border-color: var(--color-neutral-n60);
-}
-
-/* state=focus / typing */
-.ds-nav-menu-search--focus,
-.ds-nav-menu-search--typing {
-  border-color: var(--color-blue-b300);
-  box-shadow: 0 0 0 1px var(--color-blue-b300);
-}</code></div>
-              </div>
+            </div>
             </div>
           </div>
         </div>
@@ -1792,51 +1561,7 @@
               <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Navigation Menu</div>
               <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);margin-bottom:6px;"><code>isMenu=single</code> · <code>hide</code> · <code>expand</code></div>
               <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Parent memakai Main Menu (<code>-off</code>/<code>-on</code> + chevron down/up). Child memakai Submenu Content (<code>dot.svg</code> + body3 + chevron-right).</div>
-              <div class="parts-code">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-                  <span style="font-size:11px;font-weight:600;color:var(--color-text-secondary);font-family:var(--font-primary);">CSS</span>
-                  <button type="button" class="copy-btn" onclick="copyBlock('code-nav-composed-css', this)">Salin</button>
-                </div>
-                <div class="code-block"><code id="code-nav-composed-css">/* Navigation Menu — composed layout */
-.ds-nav-composed-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-  width: 100%;
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-md);
-  overflow: hidden;
-  background: var(--color-neutral-n0);
-}
-.ds-nav-composed-panel {
-  padding: var(--space-200) var(--space-150);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-100);
-  border-right: 1px solid var(--color-border);
-}
-.ds-nav-composed-panel:last-child { border-right: none; }
-.ds-nav-composed-panel__nav {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-.ds-nav-composed__submenu {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-/* Main Menu — leaf (single, no trail chevron) */
-.ds-nav-mainmenu-snap--leaf .ds-nav-mainmenu-snap__trail {
-  display: none;
-}
-
-/* Reuse .ds-nav-mainmenu-snap and .ds-nav-submenu-snap parts */</code></div>
-              </div>
+            </div>
             </div>
           </div>
         </div>
@@ -2539,80 +2264,6 @@
           <div style="padding:14px 16px;background:var(--color-surface);">
             <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Sidebar Navigation Expand</div>
             <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;margin-bottom:6px;">Urutan: header → Menu Search → Heading Menu <code>--no-icons</code> → Main Menu (recent) → Divider → daftar menu (<code>isMenu=single</code> / <code>hide</code> / <code>expand</code>).</div>
-            <div class="parts-code">
-              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-                <span style="font-size:11px;font-weight:600;color:var(--color-text-secondary);font-family:var(--font-primary);">CSS</span>
-                <button type="button" class="copy-btn" onclick="copyBlock('code-sidebar-expand-css', this)">Salin</button>
-              </div>
-              <div class="code-block"><code id="code-sidebar-expand-css">/* Sidebar Navigation Expand — auto layout */
-.ds-sidebar-nav-expand {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 280px;
-  background: var(--color-neutral-n0);
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-md);
-  overflow: hidden;
-  box-sizing: border-box;
-}
-.ds-sidebar-nav-expand__scroll {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-100);
-  max-height: 640px;
-  padding: 0 var(--space-300) var(--space-100);
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-.ds-sidebar-nav-expand--interactive .ds-nav-mainmenu-snap:hover:not(.ds-nav-mainmenu-snap--selected),
-.ds-sidebar-nav-expand--interactive .ds-nav-submenu-snap:hover:not(.ds-nav-submenu-snap--selected) {
-  background: var(--color-neutral-n0);
-}
-.ds-sidebar-nav-expand--interactive .ds-nav-mainmenu-snap:active:not(.ds-nav-mainmenu-snap--selected),
-.ds-sidebar-nav-expand--interactive .ds-nav-submenu-snap:active:not(.ds-nav-submenu-snap--selected) {
-  background: var(--color-neutral-n30);
-}
-.ds-sidebar-nav-expand__header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-100);
-  padding: var(--space-150) 0 var(--space-050);
-}
-.ds-sidebar-nav-expand__menu,
-.ds-sidebar-nav-expand__recent {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-100);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.ds-sidebar-nav-expand__item {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-100);
-}
-.ds-sidebar-nav-expand .ds-nav-composed__submenu {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-100);
-}
-.ds-nav-submenu-snap--no-trail .ds-nav-submenu-snap__trail {
-  display: none;
-}
-
-/* Heading Menu — tanpa icon (Terakhir Dibuka) */
-.ds-nav-heading-snap--no-icons .ds-nav-heading-snap__lead,
-.ds-nav-heading-snap--no-icons .ds-nav-heading-snap__toggle {
-  display: none;
-}
-
-/* Submenu — isMenu=hide */
-.ds-nav-composed__submenu[hidden] {
-  display: none;
-}</code></div>
             </div>
           </div>
         </div>
@@ -3316,34 +2967,6 @@
           <div style="padding:14px 16px;background:var(--color-surface);">
             <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Sidebar Navigation Hide</div>
             <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;margin-bottom:6px;">Lebar rail <code>space-600</code> (48px) · padding horizontal <code>space-100</code> · klik chevron untuk toggle expand/hide.</div>
-            <div class="parts-code">
-              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-                <span style="font-size:11px;font-weight:600;color:var(--color-text-secondary);font-family:var(--font-primary);">CSS</span>
-                <button type="button" class="copy-btn" onclick="copyBlock('code-sidebar-hide-css', this)">Salin</button>
-              </div>
-              <div class="code-block"><code id="code-sidebar-hide-css">/* Sidebar Navigation Hide — modifier pada expand */
-.ds-sidebar-nav-expand--hide {
-  max-width: var(--space-600);
-  width: var(--space-600);
-}
-.ds-sidebar-nav-expand--hide .ds-sidebar-nav-expand__title,
-.ds-sidebar-nav-expand--hide .ds-nav-menu-search-wrap,
-.ds-sidebar-nav-expand--hide .ds-nav-heading-snap,
-.ds-sidebar-nav-expand--hide .ds-nav-divider,
-.ds-sidebar-nav-expand--hide .ds-sidebar-nav-expand__recent,
-.ds-sidebar-nav-expand--hide .ds-nav-mainmenu-snap__body,
-.ds-sidebar-nav-expand--hide .ds-nav-mainmenu-snap__trail,
-.ds-sidebar-nav-expand--hide .ds-nav-composed__submenu {
-  display: none;
-}
-.ds-sidebar-nav-expand--hide .ds-sidebar-nav-expand__header {
-  justify-content: center;
-}
-.ds-sidebar-nav-expand--hide .ds-nav-mainmenu-snap {
-  justify-content: center;
-  width: var(--space-400);
-  padding: var(--space-100);
-}</code></div>
             </div>
           </div>
         </div>
@@ -3552,6 +3175,22 @@
         </div>
       </section>
 
+      
+      <section style="margin-bottom:48px;">
+        <h2>Token Class</h2>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:16px;display:grid;gap:10px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-navigation-menu</code><button class="copy-btn" data-copy="ds-navigation-menu" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-navigation-menu--expand</code><button class="copy-btn" data-copy="ds-navigation-menu--expand" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-navigation-menu--hide</code><button class="copy-btn" data-copy="ds-navigation-menu--hide" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-nav-main-item</code><button class="copy-btn" data-copy="ds-nav-main-item" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-nav-main-item ds-nav-main-item--active</code><button class="copy-btn" data-copy="ds-nav-main-item ds-nav-main-item--active" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-nav-main-item ds-nav-main-item--hover</code><button class="copy-btn" data-copy="ds-nav-main-item ds-nav-main-item--hover" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-nav-submenu-item</code><button class="copy-btn" data-copy="ds-nav-submenu-item" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-nav-submenu-item ds-nav-submenu-item--active</code><button class="copy-btn" data-copy="ds-nav-submenu-item ds-nav-submenu-item--active" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-nav-search</code><button class="copy-btn" data-copy="ds-nav-search" onclick="copyToken(this)">Salin</button></div>
+        </div>
+      </section>
+
       <footer class="page-footer" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--color-border);font-size:12px;color:var(--color-text-tertiary);">
         &copy; 2026 GPOS Lite Design System V2.0 — Navigation Menu
       </footer>
@@ -3595,16 +3234,6 @@
       });
     }
   })();
-
-  function copyBlock(id, btn) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    navigator.clipboard.writeText(el.textContent).then(function () {
-      btn.textContent = 'Tersalin!';
-      btn.classList.add('copied');
-      setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
-    });
-  }
 
   var navPgActiveKey = 'main:0';
   var CHEVRON_DOWN = '../../assets/icons/icon-chevron-down.svg';
@@ -3894,6 +3523,15 @@
       mainBtn.setAttribute('aria-current', 'page');
     });
   })();
+
+  function copyToken(btn) {
+    var value = btn.getAttribute('data-copy') || '';
+    navigator.clipboard.writeText(value).then(function () {
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
 </script>
 </body>
 </html>

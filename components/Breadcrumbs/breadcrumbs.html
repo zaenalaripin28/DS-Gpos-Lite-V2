@@ -1364,48 +1364,20 @@
           </table>
         </div>
       </section>
-
-      <!-- =============================================
-           SECTION 5: CODE
-      ============================================== -->
       <section style="margin-bottom:48px;">
         <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
           <span style="width:3px;height:18px;background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300));border-radius:3px;flex-shrink:0;display:block;"></span>
-          Kode
+          Token Class
         </h2>
         <p style="font-size:14px;color:var(--color-text-tertiary);margin-top:-12px;margin-bottom:28px;font-family:var(--font-primary);">
-          Copy HTML langsung dari sini. Gunakan class <code>.ds-bc-item</code> + modifier state sebagai base.
+          Class token siap copy untuk semua state Breadcrumbs.
         </p>
-
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
-          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);letter-spacing:0.04em;">breadcrumbs.html</span>
-            <button class="copy-btn" id="copy-code-btn" onclick="copyCode()" aria-label="Salin kode">Salin</button>
-          </div>
-          <pre class="code-block" id="code-block" style="margin:0;border-radius:0;border:none;"><code><span class="code-comment">&lt;!-- state=default, truncationWidth=false --&gt;</span>
-<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-bc-item ds-bc-item--default"</span><span class="code-tag">&gt;</span>
-  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-bc-sep"</span><span class="code-tag">&gt;</span>/<span class="code-tag">&lt;/span&gt;</span>
-  <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-bc-container"</span><span class="code-tag">&gt;</span>
-    <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-bc-icon"</span><span class="code-tag">&gt;&lt;img</span> <span class="code-attr">src</span>=<span class="code-string">"icon-home.svg"</span> <span class="code-attr">alt</span>=<span class="code-string">""</span><span class="code-tag">&gt;&lt;/div&gt;</span>
-    <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-bc-text"</span><span class="code-tag">&gt;</span>Item<span class="code-tag">&lt;/span&gt;</span>
-    <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-bc-icon"</span><span class="code-tag">&gt;&lt;img</span> <span class="code-attr">src</span>=<span class="code-string">"icon-chevron-right.svg"</span> <span class="code-attr">alt</span>=<span class="code-string">""</span><span class="code-tag">&gt;&lt;/div&gt;</span>
-  <span class="code-tag">&lt;/div&gt;</span>
-<span class="code-tag">&lt;/div&gt;</span>
-
-<span class="code-comment">&lt;!-- state=default, truncationWidth=true --&gt;</span>
-<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-bc-item ds-bc-item--default"</span><span class="code-tag">&gt;</span>
-  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-bc-sep"</span><span class="code-tag">&gt;</span>/<span class="code-tag">&lt;/span&gt;</span>
-  <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-bc-container ds-bc-container--truncated"</span><span class="code-tag">&gt;</span>
-    <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-bc-icon"</span><span class="code-tag">&gt;&lt;img</span> <span class="code-attr">src</span>=<span class="code-string">"icon-home.svg"</span> <span class="code-attr">alt</span>=<span class="code-string">""</span><span class="code-tag">&gt;&lt;/div&gt;</span>
-    <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-bc-text ds-bc-text--truncated"</span><span class="code-tag">&gt;</span>Item Sale<span class="code-tag">&lt;/span&gt;</span>
-    <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-bc-icon"</span><span class="code-tag">&gt;&lt;img</span> <span class="code-attr">src</span>=<span class="code-string">"icon-chevron-right.svg"</span> <span class="code-attr">alt</span>=<span class="code-string">""</span><span class="code-tag">&gt;&lt;/div&gt;</span>
-  <span class="code-tag">&lt;/div&gt;</span>
-<span class="code-tag">&lt;/div&gt;</span>
-
-<span class="code-comment">&lt;!-- state=hover | gunakan --hover, --press, atau --focus sebagai modifier --&gt;</span>
-<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-bc-item ds-bc-item--hover"</span><span class="code-tag">&gt;</span> ... <span class="code-tag">&lt;/div&gt;</span>
-<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-bc-item ds-bc-item--press"</span><span class="code-tag">&gt;</span> ... <span class="code-tag">&lt;/div&gt;</span>
-<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-bc-item ds-bc-item--focus"</span><span class="code-tag">&gt;</span> ... <span class="code-tag">&lt;/div&gt;</span></code></pre>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:16px;display:grid;gap:10px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-bc-item ds-bc-item--default</code><button class="copy-btn" data-copy="ds-bc-item ds-bc-item--default" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-bc-item ds-bc-item--hover</code><button class="copy-btn" data-copy="ds-bc-item ds-bc-item--hover" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-bc-item ds-bc-item--press</code><button class="copy-btn" data-copy="ds-bc-item ds-bc-item--press" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-bc-item ds-bc-item--focus</code><button class="copy-btn" data-copy="ds-bc-item ds-bc-item--focus" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-bc-container ds-bc-container--truncated</code><button class="copy-btn" data-copy="ds-bc-container ds-bc-container--truncated" onclick="copyToken(this)">Salin</button></div>
         </div>
       </section>
 
@@ -1456,36 +1428,9 @@
     });
   }
 
-  function copyCode() {
-    const rawCode = [
-      '<!-- state=default, truncationWidth=false -->',
-      '<div class="ds-bc-item ds-bc-item--default">',
-      '  <span class="ds-bc-sep">/</span>',
-      '  <div class="ds-bc-container">',
-      '    <div class="ds-bc-icon"><img src="icon-home.svg" alt=""></div>',
-      '    <span class="ds-bc-text">Item</span>',
-      '    <div class="ds-bc-icon"><img src="icon-chevron-right.svg" alt=""></div>',
-      '  </div>',
-      '</div>',
-      '',
-      '<!-- state=default, truncationWidth=true -->',
-      '<div class="ds-bc-item ds-bc-item--default">',
-      '  <span class="ds-bc-sep">/</span>',
-      '  <div class="ds-bc-container ds-bc-container--truncated">',
-      '    <div class="ds-bc-icon"><img src="icon-home.svg" alt=""></div>',
-      '    <span class="ds-bc-text ds-bc-text--truncated">Item Sale</span>',
-      '    <div class="ds-bc-icon"><img src="icon-chevron-right.svg" alt=""></div>',
-      '  </div>',
-      '</div>',
-      '',
-      '<!-- Modifier state: --hover | --press | --focus -->',
-      '<div class="ds-bc-item ds-bc-item--hover"> ... </div>',
-      '<div class="ds-bc-item ds-bc-item--press"> ... </div>',
-      '<div class="ds-bc-item ds-bc-item--focus"> ... </div>',
-    ].join('\n');
-
-    navigator.clipboard.writeText(rawCode).then(function () {
-      const btn = document.getElementById('copy-code-btn');
+  function copyToken(btn) {
+    var value = btn.getAttribute('data-copy') || '';
+    navigator.clipboard.writeText(value).then(function () {
       btn.textContent = 'Tersalin!';
       btn.classList.add('copied');
       setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
