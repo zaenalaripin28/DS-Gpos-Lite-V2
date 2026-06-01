@@ -283,13 +283,15 @@
     .ds-topnav--mobile .ds-topnav__menu {
       display: inline-flex;
     }
-    .ds-topnav--tablet .ds-topnav__logo--start,
-    .ds-topnav--mobile .ds-topnav__logo--start {
+    .ds-topnav--tablet .ds-topnav__logo--start {
       display: none;
     }
-    .ds-topnav--tablet .ds-topnav__logo--center,
-    .ds-topnav--mobile .ds-topnav__logo--center {
+    .ds-topnav--tablet .ds-topnav__logo--center {
       display: inline-flex;
+    }
+    .ds-topnav--mobile .ds-topnav__logo--center,
+    .ds-topnav--mobile .ds-topnav__logo--start {
+      display: none;
     }
     .ds-topnav--mobile .ds-topnav__akses,
     .ds-topnav--mobile .ds-topnav__notif--secondary {
@@ -755,7 +757,7 @@
               <header class="ds-topnav ds-topnav--website" role="banner" aria-label="Top navigation" onclick="return false;">
                 <div class="ds-topnav__start">
                   <a href="#" class="ds-topnav-logo ds-topnav__logo--start" aria-label="GPOS Lite — beranda">
-                    <img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite">
+                    <img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite" data-ds-asset="assets/images/logos.png" data-ds-fallback="assets/images/logo-parts.svg">
                   </a>
                 </div>
                 <div class="ds-topnav__end">
@@ -811,7 +813,7 @@
               <header class="ds-topnav ds-topnav--website" role="banner" aria-label="Top navigation website">
                 <div class="ds-topnav__start">
                   <a href="#" class="ds-topnav-logo ds-topnav__logo--start" aria-label="GPOS Lite — beranda" tabindex="-1" style="pointer-events:none;">
-                    <img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite">
+                    <img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite" data-ds-asset="assets/images/logos.png" data-ds-fallback="assets/images/logo-parts.svg">
                   </a>
                 </div>
                 <div class="ds-topnav__end">
@@ -842,10 +844,10 @@
                   <button type="button" class="ds-btn ds-btn--icon-only ds-topnav__menu" aria-label="Buka menu" tabindex="-1" style="pointer-events:none;">
                     <img src="../../assets/icons/icon-menu.svg" alt="" aria-hidden="true">
                   </button>
-                  <a href="#" class="ds-topnav-logo ds-topnav__logo--start" tabindex="-1" style="pointer-events:none;"><img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite"></a>
+                  <a href="#" class="ds-topnav-logo ds-topnav__logo--start" tabindex="-1" style="pointer-events:none;"><img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite" data-ds-asset="assets/images/logos.png" data-ds-fallback="assets/images/logo-parts.svg"></a>
                 </div>
                 <div class="ds-topnav__center">
-                  <a href="#" class="ds-topnav-logo ds-topnav__logo--center" aria-label="GPOS Lite" tabindex="-1" style="pointer-events:none;"><img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite"></a>
+                  <a href="#" class="ds-topnav-logo ds-topnav__logo--center" aria-label="GPOS Lite" tabindex="-1" style="pointer-events:none;"><img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite" data-ds-asset="assets/images/logos.png" data-ds-fallback="assets/images/logo-parts.svg"></a>
                 </div>
                 <div class="ds-topnav__end">
                   <button type="button" class="ds-btn ds-btn--subtle ds-topnav__akses" tabindex="-1" style="pointer-events:none;">Akses</button>
@@ -872,11 +874,8 @@
                   <button type="button" class="ds-btn ds-btn--icon-only ds-topnav__menu" aria-label="Buka menu" tabindex="-1" style="pointer-events:none;">
                     <img src="../../assets/icons/icon-menu.svg" alt="" aria-hidden="true">
                   </button>
-                  <a href="#" class="ds-topnav-logo ds-topnav__logo--start" tabindex="-1" style="pointer-events:none;"><img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite"></a>
                 </div>
-                <div class="ds-topnav__center">
-                  <a href="#" class="ds-topnav-logo ds-topnav__logo--center" aria-label="GPOS Lite" tabindex="-1" style="pointer-events:none;"><img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite"></a>
-                </div>
+                <div class="ds-topnav__center" aria-hidden="true"></div>
                 <div class="ds-topnav__end">
                   <button type="button" class="ds-btn ds-btn--subtle ds-topnav__akses" tabindex="-1" style="pointer-events:none;">Akses</button>
                   <button type="button" class="ds-topnav-notif" tabindex="-1" style="pointer-events:none;" aria-label="Notifikasi">
@@ -910,7 +909,7 @@
           </div>
           <div class="usage-info-card">
             <div style="font-weight:700;margin-bottom:8px;color:var(--color-text-primary);font-family:var(--font-primary);">Mobile</div>
-            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;font-family:var(--font-primary);">Menu + logo tengah; sembunyikan Akses dan notification kedua — sisakan satu bell + avatar.</div>
+            <div style="font-size:12px;color:var(--color-text-tertiary);line-height:1.6;font-family:var(--font-primary);">Menu kiri saja — tanpa logo. Sembunyikan Akses dan notification kedua; sisakan satu bell + avatar.</div>
           </div>
         </div>
       </section>
@@ -992,19 +991,20 @@
               </select>
             </label>
           </div>
-          <div class="topnav-variant-card__body" style="padding:0;border:none;background:transparent;">
+          <div class="topnav-variant-card">
+            <div class="topnav-variant-card__body">
             <header class="ds-topnav ds-topnav--website" id="topnav-playground" role="banner" aria-label="Top navigation playground">
               <div class="ds-topnav__start">
                 <button type="button" class="ds-btn ds-btn--icon-only ds-topnav__menu" aria-label="Buka menu">
                   <img src="../../assets/icons/icon-menu.svg" alt="" aria-hidden="true">
                 </button>
                 <a href="#" class="ds-topnav-logo ds-topnav__logo--start" aria-label="GPOS Lite — beranda" onclick="return false;">
-                  <img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite">
+                  <img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite" data-ds-asset="assets/images/logos.png" data-ds-fallback="assets/images/logo-parts.svg">
                 </a>
               </div>
               <div class="ds-topnav__center">
                 <a href="#" class="ds-topnav-logo ds-topnav__logo--center" aria-label="GPOS Lite" onclick="return false;">
-                  <img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite">
+                  <img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite" data-ds-asset="assets/images/logos.png" data-ds-fallback="assets/images/logo-parts.svg">
                 </a>
               </div>
               <div class="ds-topnav__end">
@@ -1025,6 +1025,7 @@
                 </button>
               </div>
             </header>
+            </div>
           </div>
           <p class="logo-playground__hint" id="topnav-pg-hint">Website: logo kiri, Akses + 2 notifikasi + avatar.</p>
         </div>
@@ -1040,7 +1041,7 @@
           <div class="logo-parts-state-card">
             <div class="logo-parts-state-card__preview">
               <a href="#" class="ds-topnav-logo" aria-label="GPOS Lite" tabindex="-1" style="pointer-events:none;">
-                <img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite">
+                <img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite" data-ds-asset="assets/images/logos.png" data-ds-fallback="assets/images/logo-parts.svg">
               </a>
             </div>
             <div class="logo-parts-state-card__meta">
@@ -1051,7 +1052,7 @@
           <div class="logo-parts-state-card">
             <div class="logo-parts-state-card__preview">
               <a href="#" class="ds-topnav-logo ds-topnav-logo--hover" aria-label="GPOS Lite" tabindex="-1" style="pointer-events:none;">
-                <img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite">
+                <img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite" data-ds-asset="assets/images/logos.png" data-ds-fallback="assets/images/logo-parts.svg">
               </a>
             </div>
             <div class="logo-parts-state-card__meta">
@@ -1062,7 +1063,7 @@
           <div class="logo-parts-state-card">
             <div class="logo-parts-state-card__preview">
               <a href="#" class="ds-topnav-logo ds-topnav-logo--press" aria-label="GPOS Lite" tabindex="-1" style="pointer-events:none;">
-                <img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite">
+                <img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite" data-ds-asset="assets/images/logos.png" data-ds-fallback="assets/images/logo-parts.svg">
               </a>
             </div>
             <div class="logo-parts-state-card__meta">
@@ -1075,7 +1076,7 @@
         <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:24px;margin-bottom:20px;">
           <div class="logo-parts-stage">
             <a href="#" class="ds-topnav-logo" id="logo-parts-live" aria-label="GPOS Lite — beranda">
-              <img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite">
+              <img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite" data-ds-asset="assets/images/logos.png" data-ds-fallback="assets/images/logo-parts.svg">
             </a>
           </div>
         </div>
@@ -1161,7 +1162,7 @@
           </div>
           <div class="logo-playground__stage">
             <a href="#" class="ds-topnav-logo" id="logo-playground-btn" aria-label="GPOS Lite — beranda" onclick="return false;">
-              <img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite">
+              <img class="ds-topnav-logo__img" src="../../assets/images/logos.png" width="306" height="141" alt="GPOS Lite" data-ds-asset="assets/images/logos.png" data-ds-fallback="assets/images/logo-parts.svg">
             </a>
           </div>
           <p class="logo-playground__hint" id="logo-pg-hint">Default: background transparan.</p>
@@ -1427,6 +1428,33 @@
 
 <script src="../../scripts/script.js"></script>
 <script>
+  (function () {
+    function getDsAssetBase() {
+      var link = document.querySelector('link[href*="globals.css"]');
+      if (!link) return '';
+      return link.href.replace(/styles\/globals\.css.*$/, '');
+    }
+    function resolveTopnavLogos() {
+      var base = getDsAssetBase();
+      if (!base) return;
+      document.querySelectorAll('img.ds-topnav-logo__img[data-ds-asset]').forEach(function (img) {
+        var asset = img.getAttribute('data-ds-asset') || 'assets/images/logos.png';
+        var fallback = img.getAttribute('data-ds-fallback') || 'assets/images/logo-parts.svg';
+        img.src = base + asset;
+        img.onerror = function () {
+          if (img.dataset.fallbackApplied === 'true') return;
+          img.dataset.fallbackApplied = 'true';
+          img.src = base + fallback;
+        };
+      });
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', resolveTopnavLogos);
+    } else {
+      resolveTopnavLogos();
+    }
+  })();
+
   function copyToken(btn) {
     var value = btn.getAttribute('data-copy') || '';
     navigator.clipboard.writeText(value).then(function () {
@@ -1510,7 +1538,7 @@
       return;
     }
     if (variant === 'mobile') {
-      hint.textContent = 'Mobile: menu + logo tengah; satu notifikasi, tanpa Akses.';
+      hint.textContent = 'Mobile: menu kiri, tanpa logo; satu notifikasi + avatar, tanpa Akses.';
       return;
     }
     hint.textContent = 'Website: logo kiri, Akses + 2 notifikasi + avatar.';
