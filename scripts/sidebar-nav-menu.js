@@ -61,7 +61,7 @@
     }, { passive: true });
   }
 
-  function ensureModalLinkInSidebar() {
+  function ensureComponentLinksInSidebar() {
     var componentSections = document.querySelectorAll('.nav-section--menu');
     if (!componentSections.length) return;
 
@@ -72,34 +72,47 @@
       var navList = section.querySelector('.nav-list');
       if (!navList) return;
 
-      var hasModal = navList.querySelector('a[href*="/Modal/modal.html"]');
-      if (hasModal) return;
-
       var buttonLink = navList.querySelector('a[href*="/Button/button.html"]');
       var modalHref = '../Modal/modal.html';
       if (buttonLink && buttonLink.getAttribute('href')) {
         modalHref = buttonLink.getAttribute('href').replace('/Button/button.html', '/Modal/modal.html');
       }
-
-      var modalItem = document.createElement('li');
-      var modalLink = document.createElement('a');
-      modalLink.href = modalHref;
-      modalLink.className = 'nav-link';
-      modalLink.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="13" y2="13"/></svg>Modal';
-      modalItem.appendChild(modalLink);
-
       var popupItem = navList.querySelector('a[href*="/Popup/popup.html"]');
       var popupLi = popupItem ? popupItem.closest('li') : null;
+      var modalItem = navList.querySelector('a[href*="/Modal/modal.html"]') ? null : document.createElement('li');
+      if (modalItem) {
+        var modalLink = document.createElement('a');
+        modalLink.href = modalHref;
+        modalLink.className = 'nav-link';
+        modalLink.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="13" y2="13"/></svg>Modal';
+        modalItem.appendChild(modalLink);
+      }
+
+      var tourguideHref = '../Tourguide/tourguide.html';
+      if (buttonLink && buttonLink.getAttribute('href')) {
+        tourguideHref = buttonLink.getAttribute('href').replace('/Button/button.html', '/Tourguide/tourguide.html');
+      }
+      var tourguideItem = navList.querySelector('a[href*="/Tourguide/tourguide.html"]') ? null : document.createElement('li');
+      if (tourguideItem) {
+        var tourguideLink = document.createElement('a');
+        tourguideLink.href = tourguideHref;
+        tourguideLink.className = 'nav-link';
+        tourguideLink.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/><path d="M21 12h-3"/><path d="M6 12H3"/></svg>Tourguide';
+        tourguideItem.appendChild(tourguideLink);
+      }
+
       if (popupLi && popupLi.parentNode === navList) {
-        navList.insertBefore(modalItem, popupLi);
+        if (modalItem) navList.insertBefore(modalItem, popupLi);
+        if (tourguideItem) navList.insertBefore(tourguideItem, popupLi);
       } else {
-        navList.appendChild(modalItem);
+        if (modalItem) navList.appendChild(modalItem);
+        if (tourguideItem) navList.appendChild(tourguideItem);
       }
     });
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    ensureModalLinkInSidebar();
+    ensureComponentLinksInSidebar();
     restoreSectionStates();
 
     document.querySelectorAll('.nav-section--menu .nav-menu-toggle').forEach(function (btn) {

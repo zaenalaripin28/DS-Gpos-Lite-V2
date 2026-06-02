@@ -7,20 +7,89 @@
   <link rel="stylesheet" href="../../styles/globals.css">
   <link rel="stylesheet" href="../../styles/enhancements.css">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            blue: {
+              b50:'var(--color-blue-b50)',b75:'var(--color-blue-b75)',b100:'var(--color-blue-b100)',
+              b200:'var(--color-blue-b200)',b300:'var(--color-blue-b300)',b400:'var(--color-blue-b400)',b500:'var(--color-blue-b500)',
+            },
+            orange: {
+              o50:'var(--color-orange-o50)',o200:'var(--color-orange-o200)',o300:'var(--color-orange-o300)',o400:'var(--color-orange-o400)',o500:'var(--color-orange-o500)',
+            },
+            red: {
+              r50:'var(--color-red-r50)',r300:'var(--color-red-r300)',r400:'var(--color-red-r400)',r500:'var(--color-red-r500)',
+            },
+            green: {
+              g50:'var(--color-green-g50)',g300:'var(--color-green-g300)',g400:'var(--color-green-g400)',g500:'var(--color-green-g500)',
+            },
+            neutral: {
+              n0:'var(--color-neutral-n0)',n10:'var(--color-neutral-n10)',n20:'var(--color-neutral-n20)',n30:'var(--color-neutral-n30)',
+              n40:'var(--color-neutral-n40)',n50:'var(--color-neutral-n50)',n60:'var(--color-neutral-n60)',n70:'var(--color-neutral-n70)',
+              n80:'var(--color-neutral-n80)',n90:'var(--color-neutral-n90)',n100:'var(--color-neutral-n100)',n200:'var(--color-neutral-n200)',
+              n300:'var(--color-neutral-n300)',n400:'var(--color-neutral-n400)',n500:'var(--color-neutral-n500)',n600:'var(--color-neutral-n600)',
+              n700:'var(--color-neutral-n700)',n800:'var(--color-neutral-n800)',n900:'var(--color-neutral-n900)',
+            },
+            background:'var(--color-background)',surface:'var(--color-surface)',
+            border:{DEFAULT:'var(--color-border)',light:'var(--color-border-light)'},
+            text:{primary:'var(--color-text-primary)',secondary:'var(--color-text-secondary)',tertiary:'var(--color-text-tertiary)'},
+          },
+          fontFamily:{primary:['var(--font-primary)'],sans:['var(--font-primary)']},
+          fontSize:{
+            xs:'var(--font-size-xs)',sm:'var(--font-size-sm)',base:'var(--font-size-base)',lg:'var(--font-size-lg)',xl:'var(--font-size-xl)',
+            '2xl':'var(--font-size-2xl)',caption:'var(--text-caption-regular-size)',
+            'body-sm':'var(--text-body-small-regular-size)','body-md':'var(--text-body-medium-regular-size)',
+          },
+          fontWeight:{normal:'var(--font-weight-normal)',medium:'var(--font-weight-medium)',semibold:'var(--font-weight-semibold)',bold:'var(--font-weight-bold)'},
+          lineHeight:{tight:'var(--line-height-tight)',normal:'var(--line-height-normal)',relaxed:'var(--line-height-relaxed)',loose:'var(--line-height-loose)'},
+          letterSpacing:{tight:'var(--letter-spacing-tight)',normal:'var(--letter-spacing-normal)',wide:'var(--letter-spacing-wide)'},
+          spacing:{
+            '025':'var(--space-025)','050':'var(--space-050)','075':'var(--space-075)','100':'var(--space-100)',
+            '150':'var(--space-150)','200':'var(--space-200)','250':'var(--space-250)','300':'var(--space-300)',
+            '400':'var(--space-400)','500':'var(--space-500)',
+            '1':'var(--spacing-1)','1.5':'6px','2':'var(--spacing-2)','3':'var(--spacing-3)','4':'var(--spacing-4)',
+            '5':'var(--spacing-5)','6':'var(--spacing-6)','8':'var(--spacing-8)','10':'var(--spacing-10)','12':'var(--spacing-12)',
+          },
+          borderRadius:{
+            none:'var(--border-radius-none)',sm:'var(--border-radius-sm)',md:'var(--border-radius-md)',
+            lg:'var(--border-radius-lg)',xl:'var(--border-radius-xl)','2xl':'var(--border-radius-2xl)',full:'var(--border-radius-full)',
+          },
+          boxShadow:{
+            '1':'var(--shadow-1)',xs:'var(--shadow-xs)',sm:'var(--shadow-sm)',md:'var(--shadow-md)',lg:'var(--shadow-lg)',
+          },
+        }
+      }
+    }
+  </script>
   <style>
+    /* ── Hero Banner ── */
+    .ds-hero-banner {
+      position: relative;
+      overflow: hidden;
+    }
+    .ds-hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(68,149,221,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .ds-hero-banner > * { position: relative; z-index: 1; }
+
+    /* ── Section layout ── */
     .modal-section {
       margin-bottom: var(--space-500);
     }
-
-    .modal-section h2 {
-      margin: 0 0 var(--space-200);
+    .modal-section > h2 {
+      margin: 0 0 var(--space-100);
       font-family: var(--font-primary);
       font-size: var(--font-size-xl);
       font-weight: var(--font-weight-semibold);
       color: var(--color-text-primary);
     }
-
-    .modal-section p {
+    .modal-section > p {
       margin: 0 0 var(--space-300);
       font-family: var(--font-primary);
       font-size: var(--text-body-medium-regular-size);
@@ -29,81 +98,21 @@
       color: var(--color-text-secondary);
     }
 
-    .modal-demo-card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--border-radius-xl);
-      box-shadow: var(--shadow-1);
-      overflow: hidden;
-    }
-
-    .modal-demo-body {
-      min-height: 280px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: var(--space-300);
-      background: var(--color-neutral-n20);
-    }
-
-    .modal-shell {
-      width: min(560px, 100%);
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--border-radius-lg);
-      box-shadow: var(--shadow-md);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .modal-shell__header {
-      padding: var(--space-200) var(--space-300);
-      border-bottom: 1px solid var(--color-border-light);
-      font-family: var(--font-primary);
-      font-size: var(--font-size-base);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-text-primary);
-    }
-
-    .modal-shell__content {
-      padding: var(--space-300);
-      font-family: var(--font-primary);
-      font-size: var(--text-body-medium-regular-size);
-      font-weight: var(--text-body-medium-regular-weight);
-      line-height: var(--text-body-medium-regular-lh);
-      color: var(--color-text-secondary);
-    }
-
-    .modal-footer {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: var(--space-100);
-      padding: var(--space-200) var(--space-300);
-      border-top: 1px solid var(--color-border-light);
-      background: var(--color-surface);
-      box-shadow: var(--shadow-xs);
-    }
-
-    .modal-variant-stack {
-      display: grid;
-      gap: var(--space-250);
-      padding: var(--space-300);
-      background: var(--color-neutral-n20);
-    }
-
-    .modal-variant-item {
+    /* ── Per-variant card ── */
+    .modal-variant-card {
       border: 1px solid var(--color-border-light);
-      border-radius: var(--border-radius-lg);
+      border-radius: var(--border-radius-xl);
       background: var(--color-neutral-n0);
       box-shadow: var(--shadow-xs);
       overflow: hidden;
+      margin-bottom: var(--space-200);
     }
+    .modal-variant-card:last-child { margin-bottom: 0; }
 
-    .modal-variant-label {
+    .modal-variant-card__label {
       margin: 0;
       padding: var(--space-150) var(--space-200);
+      background: var(--color-neutral-n10);
       border-bottom: 1px solid var(--color-border-light);
       font-family: var(--font-primary);
       font-size: var(--text-caption-medium-size);
@@ -111,17 +120,24 @@
       color: var(--color-text-secondary);
       text-transform: uppercase;
       letter-spacing: var(--letter-spacing-wide);
-      background: var(--color-neutral-n10);
     }
 
+    .modal-variant-card__preview {
+      padding: var(--space-300);
+      background: var(--color-neutral-n20);
+    }
+
+    /* ── Footer preview ── */
     .modal-footer-container {
       background: var(--color-neutral-n0);
-      padding: 24px 24px 24px 24px;
+      padding: 24px;
       display: flex;
       align-items: center;
       width: 100%;
+      border-radius: var(--border-radius-md);
+      border: 1px solid var(--color-border-light);
+      box-shadow: var(--shadow-xs);
     }
-
     .modal-footer-actions {
       margin-left: auto;
       display: flex;
@@ -129,6 +145,7 @@
       gap: var(--space-100);
     }
 
+    /* ── Buttons ── */
     .ds-btn {
       border: none;
       border-radius: var(--border-radius-md);
@@ -148,33 +165,28 @@
       white-space: nowrap;
       transition: background-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
     }
-
     .ds-btn:focus-visible {
       outline: none;
       box-shadow: 0 0 0 2px var(--color-blue-b200);
     }
-
     .ds-btn--subtle {
       background-color: transparent;
       color: var(--color-neutral-n900);
     }
     .ds-btn--subtle:hover { background-color: var(--color-neutral-n20); }
     .ds-btn--subtle:active { background-color: var(--color-neutral-n40); }
-
     .ds-btn--primary {
       background-color: var(--color-blue-b300);
       color: var(--color-neutral-n0);
     }
     .ds-btn--primary:hover { background-color: var(--color-blue-b400); }
     .ds-btn--primary:active { background-color: var(--color-blue-b500); }
-
     .ds-btn--warning {
-      background-color: var(--color-orange-o300);
-      color: var(--color-neutral-n0);
+      background-color: var(--color-orange-o200);
+      color: var(--color-neutral-n900);
     }
-    .ds-btn--warning:hover { background-color: var(--color-orange-o400); }
-    .ds-btn--warning:active { background-color: var(--color-orange-o500); }
-
+    .ds-btn--warning:hover { background-color: var(--color-orange-o300); }
+    .ds-btn--warning:active { background-color: var(--color-orange-o300); }
     .ds-btn--danger {
       background-color: var(--color-red-r300);
       color: var(--color-neutral-n0);
@@ -182,11 +194,11 @@
     .ds-btn--danger:hover { background-color: var(--color-red-r400); }
     .ds-btn--danger:active { background-color: var(--color-red-r500); }
 
+    /* ── Code Card ── */
     .code-card {
       border-top: 1px solid var(--color-border-light);
       background: var(--color-neutral-n900);
     }
-
     .code-card__head {
       display: flex;
       align-items: center;
@@ -194,7 +206,6 @@
       padding: var(--space-150) var(--space-200);
       border-bottom: 1px solid var(--color-neutral-n700);
     }
-
     .code-card__title {
       margin: 0;
       font-family: var(--font-primary);
@@ -202,9 +213,8 @@
       font-weight: var(--font-weight-medium);
       color: var(--color-neutral-n50);
     }
-
     .copy-btn {
-      border: 1px solid var(--color-border);
+      border: 1px solid rgba(255,255,255,0.12);
       background: var(--color-neutral-n800);
       color: var(--color-neutral-n40);
       border-radius: var(--border-radius-md);
@@ -212,19 +222,21 @@
       font-family: var(--font-primary);
       font-size: var(--text-caption-medium-size);
       cursor: pointer;
+      transition: background-color var(--transition-fast), color var(--transition-fast);
     }
-
     .copy-btn:hover {
       background: var(--color-neutral-n700);
       color: var(--color-neutral-n10);
     }
-
+    .copy-btn.copied {
+      background: var(--color-neutral-n700);
+      color: var(--color-green-g300);
+    }
     .code-card pre {
       margin: 0;
       padding: var(--space-250);
       overflow-x: auto;
     }
-
     .code-card code {
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
       font-size: 12px;
@@ -234,13 +246,7 @@
       white-space: pre;
     }
 
-    .modal-header-list {
-      display: grid;
-      gap: var(--space-150);
-      padding: var(--space-300);
-      background: var(--color-neutral-n20);
-    }
-
+    /* ── Modal Header ── */
     .modal-header-item {
       display: flex;
       align-items: center;
@@ -251,29 +257,24 @@
       border-radius: var(--border-radius-lg);
       background: var(--color-neutral-n0);
       box-shadow: var(--shadow-xs);
-      text-align: left;
     }
-
     .modal-header-item__title {
       margin: 0;
       padding: 0;
       display: inline-flex;
       align-items: center;
       align-self: center;
-      vertical-align: middle;
       font-family: var(--font-primary);
       font-size: var(--font-size-lg);
       font-weight: var(--font-weight-normal);
       line-height: var(--line-height-loose);
       color: var(--color-text-primary);
     }
-
     .modal-header-icon {
       width: 24px;
       height: 24px;
       flex-shrink: 0;
       align-self: center;
-      padding: 0;
       display: none;
       -webkit-mask-position: center;
       -webkit-mask-repeat: no-repeat;
@@ -282,19 +283,266 @@
       mask-repeat: no-repeat;
       mask-size: 24px 24px;
     }
-
     .modal-header-icon--warning {
       display: inline-block;
       -webkit-mask-image: url('../../assets/icons/icon-solid-exclamation-triangle.svg');
       mask-image: url('../../assets/icons/icon-solid-exclamation-triangle.svg');
       background: var(--color-orange-o300);
     }
-
     .modal-header-icon--danger {
       display: inline-block;
       -webkit-mask-image: url('../../assets/icons/icon-solid-exclamation-triangle.svg');
       mask-image: url('../../assets/icons/icon-solid-exclamation-triangle.svg');
       background: var(--color-red-r300);
+    }
+
+    /* ── Modal Body Text ── */
+    .modal-body-text-short {
+      font-family: var(--font-primary);
+      font-size: var(--text-body-medium-regular-size);
+      font-weight: var(--text-body-medium-regular-weight);
+      line-height: var(--text-body-medium-regular-lh);
+      color: var(--color-text-secondary);
+      margin: 0;
+      padding: 0 24px;
+    }
+    .modal-body-text-long {
+      max-height: 180px;
+      overflow-y: auto;
+      font-family: var(--font-primary);
+      font-size: var(--text-body-medium-regular-size);
+      font-weight: var(--text-body-medium-regular-weight);
+      line-height: var(--text-body-medium-regular-lh);
+      color: var(--color-text-secondary);
+      margin: 0;
+      padding: 0 24px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-neutral-n50) transparent;
+    }
+    .modal-body-text-long::-webkit-scrollbar { width: 8px; }
+    .modal-body-text-long::-webkit-scrollbar-thumb {
+      background: var(--color-neutral-n50);
+      border-radius: var(--border-radius-full);
+    }
+
+    /* ── Modal Composition ── */
+    .modal-composition-stage {
+      display: grid;
+      gap: var(--space-300);
+      padding: var(--space-300);
+      background: var(--color-blue-b500);
+      border-radius: var(--border-radius-xl);
+    }
+    .modal-composition-item {
+      border-radius: var(--border-radius-lg);
+      background: var(--color-neutral-n0);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+    .modal-composition-item__label {
+      margin: 0;
+      padding: var(--space-100) var(--space-150);
+      background: var(--color-blue-b50);
+      border-bottom: 1px solid var(--color-border-light);
+      font-family: var(--font-primary);
+      font-size: var(--text-caption-medium-size);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--text-caption-medium-lh);
+      color: var(--color-blue-b400);
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-wide);
+    }
+    .modal-composition-body {
+      padding: 0;
+      display: grid;
+      gap: 0;
+    }
+    .modal-composition-body .modal-header-item {
+      border: none;
+      border-radius: var(--border-radius-none);
+      box-shadow: none;
+    }
+    .modal-composition-body .modal-footer-container {
+      border: none;
+      border-top: 1px solid var(--color-border-light);
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    /* ── Size modifiers ── */
+    .modal-size-xs { max-width: 360px; }
+    .modal-size-sm { max-width: 520px; }
+    .modal-size-md { max-width: 640px; }
+    .modal-size-lg { max-width: 800px; }
+
+    /* ── Do / Don't ── */
+    .modal-guideline-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-200);
+    }
+    .modal-guideline-card {
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--border-radius-lg);
+      background: var(--color-neutral-n0);
+      box-shadow: var(--shadow-xs);
+      overflow: hidden;
+    }
+    .modal-guideline-card__title {
+      margin: 0;
+      padding: var(--space-150) var(--space-200);
+      font-family: var(--font-primary);
+      font-size: var(--text-caption-medium-size);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--text-caption-medium-lh);
+      letter-spacing: var(--letter-spacing-wide);
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--color-border-light);
+    }
+    .modal-guideline-card--do .modal-guideline-card__title {
+      color: var(--color-green-g400);
+      background: var(--color-green-g50);
+    }
+    .modal-guideline-card--dont .modal-guideline-card__title {
+      color: var(--color-red-r400);
+      background: var(--color-red-r50);
+    }
+    .modal-guideline-list {
+      margin: 0;
+      padding: var(--space-200) var(--space-250);
+      list-style: none;
+      display: grid;
+      gap: var(--space-100);
+    }
+    .modal-guideline-list li {
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+      font-weight: var(--text-body-small-regular-weight);
+      line-height: var(--text-body-small-regular-lh);
+      color: var(--color-text-secondary);
+      position: relative;
+      padding-left: var(--space-200);
+    }
+    .modal-guideline-list li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: var(--border-radius-full);
+      position: absolute;
+      left: 0;
+      top: 7px;
+    }
+    .modal-guideline-card--do .modal-guideline-list li::before {
+      background: var(--color-green-g300);
+    }
+    .modal-guideline-card--dont .modal-guideline-list li::before {
+      background: var(--color-red-r300);
+    }
+
+    /* ── Parts Table ── */
+    .modal-parts-table-wrap {
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--border-radius-lg);
+      background: var(--color-neutral-n0);
+      box-shadow: var(--shadow-xs);
+      overflow: hidden;
+      margin-bottom: var(--space-300);
+    }
+    .modal-parts-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+      color: var(--color-text-primary);
+    }
+    .modal-parts-table th,
+    .modal-parts-table td {
+      text-align: left;
+      padding: var(--space-150) var(--space-200);
+      border-bottom: 1px solid var(--color-border-light);
+      vertical-align: top;
+    }
+    .modal-parts-table th {
+      background: var(--color-neutral-n10);
+      color: var(--color-text-secondary);
+      font-size: var(--text-caption-medium-size);
+      font-weight: var(--font-weight-semibold);
+      letter-spacing: var(--letter-spacing-wide);
+      text-transform: uppercase;
+    }
+    .modal-parts-table tr:last-child td { border-bottom: none; }
+
+    /* ── Playground ── */
+    .modal-playground {
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--border-radius-xl);
+      background: var(--color-neutral-n0);
+      box-shadow: var(--shadow-xs);
+      overflow: hidden;
+    }
+    .modal-playground-controls {
+      padding: var(--space-200);
+      border-bottom: 1px solid var(--color-border-light);
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-150);
+    }
+    .modal-playground-field {
+      display: grid;
+      gap: var(--space-050);
+    }
+    .modal-playground-field label {
+      font-family: var(--font-primary);
+      font-size: var(--text-caption-medium-size);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--text-caption-medium-lh);
+      color: var(--color-text-secondary);
+    }
+    .modal-playground-field select {
+      appearance: none;
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-md);
+      background: var(--color-surface);
+      color: var(--color-text-primary);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+      line-height: var(--text-body-small-regular-lh);
+      padding: var(--space-100) var(--space-150);
+    }
+    .modal-playground-preview {
+      padding: var(--space-250);
+      background: var(--color-blue-b500);
+      min-height: 120px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .modal-guideline-grid {
+        grid-template-columns: 1fr;
+      }
+      .modal-playground-controls {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 640px) {
+      .modal-composition-stage {
+        overflow-x: auto;
+        padding: var(--space-200);
+        gap: var(--space-200);
+      }
+      .modal-composition-item {
+        min-width: 280px;
+      }
+      .modal-variant-card__preview {
+        padding: var(--space-200);
+      }
+      .ds-hero-banner .flex-1 { padding: 24px 20px !important; }
+      .ds-hero-banner [style*="font-size:2.5rem"] { font-size: 1.75rem !important; }
+      .ds-hero-banner .lg\\:w-80 { display: none; }
+    }
+    @media (max-width: 480px) {
+      .ds-hero-banner .flex-1 { padding: 20px 16px !important; }
+      .ds-hero-banner [style*="font-size:2.5rem"] { font-size: 1.5rem !important; }
     }
   </style>
 </head>
@@ -336,34 +584,83 @@
             </li>
           </ul>
         </div>
+
         <div class="nav-section nav-section--menu is-open">
           <button type="button" class="nav-menu-toggle" aria-expanded="true">
             <h3 class="nav-title">Foundations</h3>
             <img src="../../assets/icons/icon-chevron-mini-down.svg" alt="" class="nav-menu-toggle__chevron" aria-hidden="true">
           </button>
           <ul class="nav-list">
-            <li><a href="../../foundations/colors/colors.html" class="nav-link">Colors</a></li>
-            <li><a href="../../foundations/typography/typography.html" class="nav-link">Typography</a></li>
-            <li><a href="../../foundations/spacing/spacing.html" class="nav-link">Spacing</a></li>
-            <li><a href="../../foundations/shadows/shadows.html" class="nav-link">Shadows</a></li>
+            <li><a href="../../foundations/colors/colors.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg>Colors</a></li>
+            <li><a href="../../foundations/typography/typography.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Typography</a></li>
+            <li><a href="../../foundations/spacing/spacing.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="9" y1="4" x2="9" y2="20"/><line x1="15" y1="4" x2="15" y2="20"/></svg>Spacing</a></li>
+            <li><a href="../../foundations/shadows/shadows.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="16" height="16" rx="2"/><rect x="5" y="5" width="16" height="16" rx="2" opacity="0.4"/></svg>Shadows</a></li>
+            <li><a href="../../foundations/borders/borders.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>Borders</a></li>
+            <li><a href="../../foundations/grid/grid.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Grid</a></li>
+            <li><a href="../../foundations/icons/icons.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>Icons</a></li>
           </ul>
         </div>
+
         <div class="nav-section nav-section--menu is-open">
           <button type="button" class="nav-menu-toggle" aria-expanded="true">
             <h3 class="nav-title">Komponen</h3>
             <img src="../../assets/icons/icon-chevron-mini-down.svg" alt="" class="nav-menu-toggle__chevron" aria-hidden="true">
           </button>
           <ul class="nav-list">
-            <li><a href="../Button/button.html" class="nav-link">Button</a></li>
-            <li><a href="../Modal/modal.html" class="nav-link active">Modal</a></li>
-            <li><a href="../Popup/popup.html" class="nav-link">Popup</a></li>
+            <li><a href="../Button/button.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="3"/><line x1="7" y1="12" x2="17" y2="12" opacity="0.5"/></svg>Button</a></li>
+            <li><a href="../Avatar/avatar.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Avatar</a></li>
+            <li><a href="../Badge/badge.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="9" width="22" height="6" rx="3"/><circle cx="6" cy="12" r="1.5" fill="currentColor" opacity="0.5"/></svg>Badge</a></li>
+            <li><a href="../Tags/tags.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/></svg>Tags</a></li>
+            <li><a href="../Lozenge/lozenge.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="7" width="16" height="10" rx="2"/></svg>Lozenge</a></li>
+            <li><a href="../Checkbox/checkbox.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg>Checkbox</a></li>
+            <li><a href="../Radio/radio.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg>Radio</a></li>
+            <li><a href="../Toggle/toggle.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="5"/><circle cx="7" cy="12" r="3" fill="currentColor" stroke="none"/></svg>Toggle</a></li>
+            <li><a href="../Text Field/text field.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="10" rx="2"/><line x1="7" y1="11" x2="13" y2="11"/></svg>Text Field</a></li>
+            <li><a href="../Text Area/text area.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="16" height="14" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg>Text Area</a></li>
+            <li><a href="../Form/form.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="13" y2="16"/></svg>Form</a></li>
+            <li><a href="../Flags/flags.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>Flags</a></li>
+            <li><a href="../section messages/section-message.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="14" y2="13"/></svg>Section Message</a></li>
+            <li><a href="../Breadcrumbs/breadcrumbs.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/><line x1="3" y1="12" x2="15" y2="12" opacity="0.4"/></svg>Breadcrumbs</a></li>
+            <li><a href="../Tabs/tabs.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="4" rx="1"/><rect x="2" y="13" width="14" height="4" rx="1"/></svg>Tabs</a></li>
+            <li><a href="../Pagination/pagination.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="10,6 4,12 10,18"/><polyline points="14,6 20,12 14,18"/><line x1="11.5" y1="12" x2="12.5" y2="12" opacity="0.55"/></svg>Pagination</a></li>
+            <li><a href="../Modal/modal.html" class="nav-link active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="13" y2="13"/></svg>Modal</a></li>
+            <li><a href="../Popup/popup.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="8,10 12,14 16,10"/></svg>Popup</a></li>
+            <li><a href="../Table/table.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="1"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="9" y1="4" x2="9" y2="20"/><line x1="15" y1="4" x2="15" y2="20"/></svg>Table</a></li>
+            <li><a href="../Calendar/calendar.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Calendar</a></li>
+            <li><a href="../Time picker/time-picker.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><polyline points="12,7 12,12 16,14"/></svg>Time Picker</a></li>
+            <li><a href="../Date picker/date-picker.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="14" x2="8" y2="14"/><line x1="12" y1="14" x2="12" y2="14"/><line x1="16" y1="14" x2="16" y2="14"/></svg>Date Picker</a></li>
+            <li><a href="../Date time picker/date time picker.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><circle cx="12" cy="15" r="2"/><line x1="12" y1="12" x2="12" y2="15"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Date Time Picker</a></li>
+            <li><a href="../Toast-Banner/banner.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="8" rx="2"/><circle cx="6" cy="12" r="1" fill="currentColor" stroke="none"/><line x1="10" y1="12" x2="18" y2="12"/></svg>Toast Banner</a></li>
+            <li><a href="../dropdown/dropdown.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="10" x2="17" y2="10"/><line x1="7" y1="14" x2="17" y2="14"/></svg>Dropdown Button</a></li>
+            <li><a href="../Select/select.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><polyline points="8,10 12,14 16,10"/></svg>Select</a></li>
+            <li><a href="../Inline edit/inline-edit.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Inline Edit</a></li>
+            <li><a href="../Navigation menu/navigation.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><line x1="7" y1="10" x2="17" y2="10"/><line x1="7" y1="14" x2="17" y2="14"/></svg>Navigation Menu</a></li>
+            <li><a href="../Top & bottom Navigation/top-bottom-nav.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="17" width="20" height="4" rx="1"/><polyline points="9,11 5,7 9,3"/><polyline points="15,11 19,7 15,3"/></svg>Top &amp; Bottom Nav</a></li>
+          </ul>
+        </div>
+
+        <div class="nav-section nav-section--menu is-open">
+          <button type="button" class="nav-menu-toggle" aria-expanded="true">
+            <h3 class="nav-title">Resources</h3>
+            <img src="../../assets/icons/icon-chevron-mini-down.svg" alt="" class="nav-menu-toggle__chevron" aria-hidden="true">
+          </button>
+          <ul class="nav-list">
+            <li>
+              <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="nav-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                GitHub Repo
+              </a>
+            </li>
           </ul>
         </div>
       </nav>
     </div>
 
     <div class="sidebar-footer">
-      <div class="tailwind-badge">Built with tokens.css</div>
+      <div class="tailwind-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 6C9.33 6 7.67 7.33 7 10c1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35.98 1 2.09 2.15 4.59 2.15C19.67 12 21.33 10.67 22 8c-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C15.61 7.15 14.5 6 12 6zm-7 6c-2.67 0-4.33 1.33-5 4 1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35C6.39 17.15 7.5 18 10 18c2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C8.61 12.85 7.5 12 5 12z"/></svg>
+        Built with tokens.css
+      </div>
     </div>
   </aside>
 
@@ -383,66 +680,117 @@
     </div>
 
     <div class="content-inner">
+
+      <!-- ── Hero Banner ── -->
+      <section class="mb-12">
+        <div class="ds-hero-banner rounded-2xl overflow-hidden mb-3 flex flex-col lg:flex-row bg-neutral-n900" style="border: 1px solid rgba(255,255,255,0.07);">
+          <div class="flex-1 px-8 py-10 lg:px-11 lg:py-12 flex flex-col justify-center">
+
+            <div class="flex items-center gap-100 mb-5">
+              <div class="flex items-center justify-center w-5 h-5 rounded-md" style="background:rgba(68,149,221,0.2);">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4495DD" stroke-width="2.5"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="13" y2="13"/></svg>
+              </div>
+              <span class="text-xs font-semibold uppercase tracking-[0.1em] text-blue-b100">Components · DS GPOS Lite V2</span>
+            </div>
+
+            <div class="font-bold text-neutral-n0 mb-3" style="font-size:2.5rem; letter-spacing:-0.035em; line-height:1.04;">Modal</div>
+
+            <p class="text-sm leading-relaxed max-w-xs mb-8" style="color:rgba(255,255,255,0.52); line-height:1.7;">
+              Overlay dialog yang memerlukan perhatian pengguna sebelum melanjutkan. Mendukung 3 appearance (default, warning, danger), teks pendek/panjang, dan 4 ukuran.
+            </p>
+
+            <div class="flex flex-wrap gap-100">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.10);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+                v2.0
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.10);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="5" width="18" height="14" rx="2"/></svg>
+                3 appearance
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.10);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+                4 size
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+           1. MODAL FOOTER
+      ══════════════════════════════════════ -->
       <section class="modal-section">
         <h2>Modal Footer</h2>
-        <p>Footer modal dipisah menjadi 3 variant: default, warning, dan danger.</p>
+        <p>Footer modal dipisah menjadi 3 variant: default, warning, dan danger. Masing-masing memiliki kode HTML siap copy.</p>
 
-        <div class="modal-demo-card">
-          <div class="modal-variant-stack">
-            <div class="modal-variant-item">
-              <p class="modal-variant-label">Variant Default</p>
-              <div class="modal-footer-container">
-                <div class="modal-footer-actions">
-                  <button type="button" class="ds-btn ds-btn--subtle">Batal</button>
-                  <button type="button" class="ds-btn ds-btn--primary">Simpan</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="modal-variant-item">
-              <p class="modal-variant-label">Variant Warning</p>
-              <div class="modal-footer-container">
-                <div class="modal-footer-actions">
-                  <button type="button" class="ds-btn ds-btn--subtle">Batal</button>
-                  <button type="button" class="ds-btn ds-btn--warning">Review</button>
-                </div>
-              </div>
-            </div>
-
-            <div class="modal-variant-item">
-              <p class="modal-variant-label">Variant Danger</p>
-              <div class="modal-footer-container">
-                <div class="modal-footer-actions">
-                  <button type="button" class="ds-btn ds-btn--subtle">Batal</button>
-                  <button type="button" class="ds-btn ds-btn--danger">Hapus</button>
-                </div>
+        <!-- Variant Default -->
+        <div class="modal-variant-card">
+          <p class="modal-variant-card__label">Variant Default</p>
+          <div class="modal-variant-card__preview">
+            <div class="modal-footer-container">
+              <div class="modal-footer-actions">
+                <button type="button" class="ds-btn ds-btn--subtle">Batal</button>
+                <button type="button" class="ds-btn ds-btn--primary">Simpan</button>
               </div>
             </div>
           </div>
-
           <div class="code-card">
             <div class="code-card__head">
-              <p class="code-card__title">HTML siap copy — Modal Footer</p>
-              <button type="button" id="copy-modal-footer-code" class="copy-btn">Copy</button>
+              <p class="code-card__title">HTML — Variant Default</p>
+              <button type="button" class="copy-btn" data-copy-target="code-footer-default">Copy</button>
             </div>
-            <pre><code id="modal-footer-code">&lt;!-- Variant Default --&gt;
-&lt;div class="modal-footer-container"&gt;
+            <pre><code id="code-footer-default">&lt;div class="modal-footer-container"&gt;
   &lt;div class="modal-footer-actions"&gt;
     &lt;button type="button" class="ds-btn ds-btn--subtle"&gt;Batal&lt;/button&gt;
     &lt;button type="button" class="ds-btn ds-btn--primary"&gt;Simpan&lt;/button&gt;
   &lt;/div&gt;
-&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
 
-&lt;!-- Variant Warning --&gt;
-&lt;div class="modal-footer-container"&gt;
+        <!-- Variant Warning -->
+        <div class="modal-variant-card">
+          <p class="modal-variant-card__label">Variant Warning</p>
+          <div class="modal-variant-card__preview">
+            <div class="modal-footer-container">
+              <div class="modal-footer-actions">
+                <button type="button" class="ds-btn ds-btn--subtle">Batal</button>
+                <button type="button" class="ds-btn ds-btn--warning">Review</button>
+              </div>
+            </div>
+          </div>
+          <div class="code-card">
+            <div class="code-card__head">
+              <p class="code-card__title">HTML — Variant Warning</p>
+              <button type="button" class="copy-btn" data-copy-target="code-footer-warning">Copy</button>
+            </div>
+            <pre><code id="code-footer-warning">&lt;div class="modal-footer-container"&gt;
   &lt;div class="modal-footer-actions"&gt;
     &lt;button type="button" class="ds-btn ds-btn--subtle"&gt;Batal&lt;/button&gt;
     &lt;button type="button" class="ds-btn ds-btn--warning"&gt;Review&lt;/button&gt;
   &lt;/div&gt;
-&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
 
-&lt;!-- Variant Danger --&gt;
-&lt;div class="modal-footer-container"&gt;
+        <!-- Variant Danger -->
+        <div class="modal-variant-card">
+          <p class="modal-variant-card__label">Variant Danger</p>
+          <div class="modal-variant-card__preview">
+            <div class="modal-footer-container">
+              <div class="modal-footer-actions">
+                <button type="button" class="ds-btn ds-btn--subtle">Batal</button>
+                <button type="button" class="ds-btn ds-btn--danger">Hapus</button>
+              </div>
+            </div>
+          </div>
+          <div class="code-card">
+            <div class="code-card__head">
+              <p class="code-card__title">HTML — Variant Danger</p>
+              <button type="button" class="copy-btn" data-copy-target="code-footer-danger">Copy</button>
+            </div>
+            <pre><code id="code-footer-danger">&lt;div class="modal-footer-container"&gt;
   &lt;div class="modal-footer-actions"&gt;
     &lt;button type="button" class="ds-btn ds-btn--subtle"&gt;Batal&lt;/button&gt;
     &lt;button type="button" class="ds-btn ds-btn--danger"&gt;Hapus&lt;/button&gt;
@@ -452,46 +800,352 @@
         </div>
       </section>
 
+      <!-- ══════════════════════════════════════
+           2. MODAL HEADER
+      ══════════════════════════════════════ -->
       <section class="modal-section">
         <h2>Modal Header</h2>
         <p>Header modal dengan appearance default, warning, dan danger menggunakan token + existing icon.</p>
 
-        <div class="modal-demo-card">
-          <div class="modal-header-list">
+        <!-- Appearance Default -->
+        <div class="modal-variant-card">
+          <p class="modal-variant-card__label">Appearance Default</p>
+          <div class="modal-variant-card__preview">
             <div class="modal-header-item">
               <span class="modal-header-item__title">Modal dialog</span>
             </div>
+          </div>
+          <div class="code-card">
+            <div class="code-card__head">
+              <p class="code-card__title">HTML — Appearance Default</p>
+              <button type="button" class="copy-btn" data-copy-target="code-header-default">Copy</button>
+            </div>
+            <pre><code id="code-header-default">&lt;div class="modal-header-item"&gt;
+  &lt;span class="modal-header-item__title"&gt;Modal dialog&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- Appearance Warning -->
+        <div class="modal-variant-card">
+          <p class="modal-variant-card__label">Appearance Warning</p>
+          <div class="modal-variant-card__preview">
             <div class="modal-header-item">
               <span class="modal-header-icon modal-header-icon--warning" aria-hidden="true"></span>
               <span class="modal-header-item__title">Modal dialog</span>
             </div>
+          </div>
+          <div class="code-card">
+            <div class="code-card__head">
+              <p class="code-card__title">HTML — Appearance Warning</p>
+              <button type="button" class="copy-btn" data-copy-target="code-header-warning">Copy</button>
+            </div>
+            <pre><code id="code-header-warning">&lt;div class="modal-header-item"&gt;
+  &lt;span class="modal-header-icon modal-header-icon--warning" aria-hidden="true"&gt;&lt;/span&gt;
+  &lt;span class="modal-header-item__title"&gt;Modal dialog&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- Appearance Danger -->
+        <div class="modal-variant-card">
+          <p class="modal-variant-card__label">Appearance Danger</p>
+          <div class="modal-variant-card__preview">
             <div class="modal-header-item">
               <span class="modal-header-icon modal-header-icon--danger" aria-hidden="true"></span>
               <span class="modal-header-item__title">Modal dialog</span>
             </div>
           </div>
-
           <div class="code-card">
             <div class="code-card__head">
-              <p class="code-card__title">HTML siap copy — Modal Header</p>
-              <button type="button" id="copy-modal-header-code" class="copy-btn">Copy</button>
+              <p class="code-card__title">HTML — Appearance Danger</p>
+              <button type="button" class="copy-btn" data-copy-target="code-header-danger">Copy</button>
             </div>
-            <pre><code id="modal-header-code">&lt;!-- appearance=default --&gt;
-&lt;div class="modal-header-item"&gt;
-  &lt;p class="modal-header-item__title"&gt;Modal dialog&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;!-- appearance=warning --&gt;
-&lt;div class="modal-header-item"&gt;
-  &lt;span class="modal-header-icon modal-header-icon--warning" aria-hidden="true"&gt;&lt;/span&gt;
-  &lt;p class="modal-header-item__title"&gt;Modal dialog&lt;/p&gt;
-&lt;/div&gt;
-
-&lt;!-- appearance=danger --&gt;
-&lt;div class="modal-header-item"&gt;
+            <pre><code id="code-header-danger">&lt;div class="modal-header-item"&gt;
   &lt;span class="modal-header-icon modal-header-icon--danger" aria-hidden="true"&gt;&lt;/span&gt;
-  &lt;p class="modal-header-item__title"&gt;Modal dialog&lt;/p&gt;
+  &lt;span class="modal-header-item__title"&gt;Modal dialog&lt;/span&gt;
 &lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+           3. MODAL BODY TEXT
+      ══════════════════════════════════════ -->
+      <section class="modal-section">
+        <h2>Modal Body Text</h2>
+        <p>Part text body untuk modal dengan versi short dan long (scroll in viewport).</p>
+
+        <!-- Text Short -->
+        <div class="modal-variant-card">
+          <p class="modal-variant-card__label">Text Short</p>
+          <div class="modal-variant-card__preview">
+            <p class="modal-body-text-short" style="padding: 0;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam finibus est quam, eu suscipit mi aliquet vel. Praesent nec sollicitudin nulla. Duis quis justo eget ex tincidunt pretium.</p>
+          </div>
+          <div class="code-card">
+            <div class="code-card__head">
+              <p class="code-card__title">HTML — Text Short</p>
+              <button type="button" class="copy-btn" data-copy-target="code-body-short">Copy</button>
+            </div>
+            <pre><code id="code-body-short">&lt;p class="modal-body-text-short"&gt;
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+&lt;/p&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- Text Long (shouldScrollInViewport) -->
+        <div class="modal-variant-card">
+          <p class="modal-variant-card__label">Text Long — shouldScrollInViewport</p>
+          <div class="modal-variant-card__preview">
+            <p class="modal-body-text-long" style="padding: 0;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam finibus est quam, eu suscipit mi aliquet vel. Praesent nec sollicitudin nulla. Duis quis justo eget ex tincidunt pretium. Praesent maximus urna a libero fringilla rhoncus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In consectetur sapien sit amet ante semper mollis. Quisque blandit eu purus placerat gravida. Morbi gravida turpis a mi aliquet scelerisque. Phasellus tristique ut sapien et condimentum. Quisque aliquam risus eros, vel feugiat urna porta et. Sed et enim nisi. Proin ornare erat eu ligula elementum, ac pharetra mi malesuada. Nunc vitae justo pellentesque, gravida nisi id, ultrices eros. Aenean eu purus turpis. Cras nec lorem vel massa consequat sagittis sed et metus. Donec eget arcu bibendum, faucibus sem ut, tristique mauris.</p>
+          </div>
+          <div class="code-card">
+            <div class="code-card__head">
+              <p class="code-card__title">HTML — Text Long</p>
+              <button type="button" class="copy-btn" data-copy-target="code-body-long">Copy</button>
+            </div>
+            <pre><code id="code-body-long">&lt;p class="modal-body-text-long"&gt;
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+&lt;/p&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+           4. MODAL COMPONENT
+      ══════════════════════════════════════ -->
+      <section class="modal-section">
+        <h2>Modal Component</h2>
+        <p>Komposisi modal utuh untuk appearance default, warning, dan danger dengan kombinasi size dan body text existing.</p>
+
+        <!-- Default SM -->
+        <div class="modal-variant-card">
+          <p class="modal-variant-card__label">Default · Text Short · Size SM</p>
+          <div class="modal-variant-card__preview">
+            <div class="modal-composition-stage">
+              <article class="modal-composition-item modal-size-sm">
+                <p class="modal-composition-item__label">Default · SM</p>
+                <div class="modal-composition-body">
+                  <div class="modal-header-item"><span class="modal-header-item__title">Modal dialog</span></div>
+                  <p class="modal-body-text-short" style="padding: 24px 24px 16px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam finibus est quam, eu suscipit mi aliquet vel.</p>
+                  <div class="modal-footer-container">
+                    <div class="modal-footer-actions">
+                      <button type="button" class="ds-btn ds-btn--subtle">Cancel</button>
+                      <button type="button" class="ds-btn ds-btn--primary">Confirm</button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+          <div class="code-card">
+            <div class="code-card__head">
+              <p class="code-card__title">HTML — Default · SM</p>
+              <button type="button" class="copy-btn" data-copy-target="code-comp-default">Copy</button>
+            </div>
+            <pre><code id="code-comp-default">&lt;article class="modal-composition-item modal-size-sm"&gt;
+  &lt;div class="modal-composition-body"&gt;
+    &lt;div class="modal-header-item"&gt;
+      &lt;span class="modal-header-item__title"&gt;Modal dialog&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;p class="modal-body-text-short"&gt;...text short...&lt;/p&gt;
+    &lt;div class="modal-footer-container"&gt;
+      &lt;div class="modal-footer-actions"&gt;
+        &lt;button type="button" class="ds-btn ds-btn--subtle"&gt;Cancel&lt;/button&gt;
+        &lt;button type="button" class="ds-btn ds-btn--primary"&gt;Confirm&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- Warning MD -->
+        <div class="modal-variant-card">
+          <p class="modal-variant-card__label">Warning · Text Medium · Size MD</p>
+          <div class="modal-variant-card__preview">
+            <div class="modal-composition-stage">
+              <article class="modal-composition-item modal-size-md">
+                <p class="modal-composition-item__label">Warning · MD</p>
+                <div class="modal-composition-body">
+                  <div class="modal-header-item">
+                    <span class="modal-header-icon modal-header-icon--warning" aria-hidden="true"></span>
+                    <span class="modal-header-item__title">Modal dialog</span>
+                  </div>
+                  <p class="modal-body-text-short" style="padding: 24px 24px 16px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam finibus est quam, eu suscipit mi aliquet vel. Praesent nec sollicitudin nulla. Duis quis justo eget ex tincidunt pretium.</p>
+                  <div class="modal-footer-container">
+                    <div class="modal-footer-actions">
+                      <button type="button" class="ds-btn ds-btn--subtle">Cancel</button>
+                      <button type="button" class="ds-btn ds-btn--warning">Confirm</button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+          <div class="code-card">
+            <div class="code-card__head">
+              <p class="code-card__title">HTML — Warning · MD</p>
+              <button type="button" class="copy-btn" data-copy-target="code-comp-warning">Copy</button>
+            </div>
+            <pre><code id="code-comp-warning">&lt;article class="modal-composition-item modal-size-md"&gt;
+  &lt;div class="modal-composition-body"&gt;
+    &lt;div class="modal-header-item"&gt;
+      &lt;span class="modal-header-icon modal-header-icon--warning" aria-hidden="true"&gt;&lt;/span&gt;
+      &lt;span class="modal-header-item__title"&gt;Modal dialog&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;p class="modal-body-text-short"&gt;...text medium...&lt;/p&gt;
+    &lt;div class="modal-footer-container"&gt;
+      &lt;div class="modal-footer-actions"&gt;
+        &lt;button type="button" class="ds-btn ds-btn--subtle"&gt;Cancel&lt;/button&gt;
+        &lt;button type="button" class="ds-btn ds-btn--warning"&gt;Confirm&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+          </div>
+        </div>
+
+        <!-- Danger LG -->
+        <div class="modal-variant-card">
+          <p class="modal-variant-card__label">Danger · Text Long · Size LG</p>
+          <div class="modal-variant-card__preview">
+            <div class="modal-composition-stage">
+              <article class="modal-composition-item modal-size-lg">
+                <p class="modal-composition-item__label">Danger · LG</p>
+                <div class="modal-composition-body">
+                  <div class="modal-header-item">
+                    <span class="modal-header-icon modal-header-icon--danger" aria-hidden="true"></span>
+                    <span class="modal-header-item__title">Modal dialog</span>
+                  </div>
+                  <p class="modal-body-text-long" style="padding: 24px 24px 16px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam finibus est quam, eu suscipit mi aliquet vel. Praesent nec sollicitudin nulla. Duis quis justo eget ex tincidunt pretium. Praesent maximus urna a libero fringilla rhoncus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In consectetur sapien sit amet ante semper mollis. Quisque blandit eu purus placerat gravida. Morbi gravida turpis a mi aliquet scelerisque.</p>
+                  <div class="modal-footer-container">
+                    <div class="modal-footer-actions">
+                      <button type="button" class="ds-btn ds-btn--subtle">Cancel</button>
+                      <button type="button" class="ds-btn ds-btn--danger">Confirm</button>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+          <div class="code-card">
+            <div class="code-card__head">
+              <p class="code-card__title">HTML — Danger · LG</p>
+              <button type="button" class="copy-btn" data-copy-target="code-comp-danger">Copy</button>
+            </div>
+            <pre><code id="code-comp-danger">&lt;article class="modal-composition-item modal-size-lg"&gt;
+  &lt;div class="modal-composition-body"&gt;
+    &lt;div class="modal-header-item"&gt;
+      &lt;span class="modal-header-icon modal-header-icon--danger" aria-hidden="true"&gt;&lt;/span&gt;
+      &lt;span class="modal-header-item__title"&gt;Modal dialog&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;p class="modal-body-text-long"&gt;...text long...&lt;/p&gt;
+    &lt;div class="modal-footer-container"&gt;
+      &lt;div class="modal-footer-actions"&gt;
+        &lt;button type="button" class="ds-btn ds-btn--subtle"&gt;Cancel&lt;/button&gt;
+        &lt;button type="button" class="ds-btn ds-btn--danger"&gt;Confirm&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+           5. DO AND DON'T
+      ══════════════════════════════════════ -->
+      <section class="modal-section">
+        <h2>Do and Don't</h2>
+        <p>Panduan penggunaan modal agar konten konsisten dan action tetap jelas.</p>
+        <div class="modal-guideline-grid">
+          <article class="modal-guideline-card modal-guideline-card--do">
+            <p class="modal-guideline-card__title">Do</p>
+            <ul class="modal-guideline-list">
+              <li>Gunakan text short untuk konfirmasi sederhana agar pengguna cepat mengambil keputusan.</li>
+              <li>Gunakan appearance warning atau danger hanya untuk aksi yang berisiko.</li>
+              <li>Pastikan tombol utama berada di kanan dan tombol batal menggunakan subtle.</li>
+              <li>Gunakan text long yang dapat di-scroll untuk penjelasan panjang.</li>
+            </ul>
+          </article>
+          <article class="modal-guideline-card modal-guideline-card--dont">
+            <p class="modal-guideline-card__title">Don't</p>
+            <ul class="modal-guideline-list">
+              <li>Jangan menampilkan lebih dari dua aksi utama pada footer modal.</li>
+              <li>Jangan memakai danger untuk aksi non-destruktif.</li>
+              <li>Jangan menaruh teks panjang tanpa scroll area.</li>
+              <li>Jangan ubah urutan hierarchy header, body, dan footer.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+           6. PLAYGROUND
+      ══════════════════════════════════════ -->
+      <section class="modal-section">
+        <h2>Playground</h2>
+        <p>Playground dibangun dari komponen parts: header, body text, dan footer. Pilih kombinasi dan salin kode HTML-nya.</p>
+
+        <div class="modal-parts-table-wrap">
+          <table class="modal-parts-table">
+            <thead>
+              <tr>
+                <th>Part</th>
+                <th>Class</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Header</td>
+                <td><code>.modal-header-item</code>, <code>.modal-header-icon--*</code></td>
+              </tr>
+              <tr>
+                <td>Body</td>
+                <td><code>.modal-body-text-short</code>, <code>.modal-body-text-long</code></td>
+              </tr>
+              <tr>
+                <td>Footer</td>
+                <td><code>.modal-footer-container</code>, <code>.modal-footer-actions</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="modal-playground">
+          <div class="modal-playground-controls">
+            <div class="modal-playground-field">
+              <label for="modal-pg-appearance">Appearance</label>
+              <select id="modal-pg-appearance">
+                <option value="default">Default</option>
+                <option value="warning">Warning</option>
+                <option value="danger">Danger</option>
+              </select>
+            </div>
+            <div class="modal-playground-field">
+              <label for="modal-pg-text">Body Text</label>
+              <select id="modal-pg-text">
+                <option value="short">Short</option>
+                <option value="long">Long</option>
+              </select>
+            </div>
+            <div class="modal-playground-field">
+              <label for="modal-pg-size">Size</label>
+              <select id="modal-pg-size">
+                <option value="sm">SM</option>
+                <option value="md">MD</option>
+                <option value="lg">LG</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-playground-preview" id="modal-playground-preview"></div>
+          <div class="code-card">
+            <div class="code-card__head">
+              <p class="code-card__title">HTML siap copy — Modal Playground</p>
+              <button type="button" class="copy-btn" data-copy-target="modal-playground-code">Copy</button>
+            </div>
+            <pre><code id="modal-playground-code"></code></pre>
           </div>
         </div>
       </section>
@@ -501,26 +1155,86 @@
 
 <script>
   (function () {
-    var copyBtn = document.getElementById('copy-modal-footer-code');
-    var codeEl = document.getElementById('modal-footer-code');
-    var copyHeaderBtn = document.getElementById('copy-modal-header-code');
-    var codeHeaderEl = document.getElementById('modal-header-code');
+    'use strict';
 
-    function bindCopy(button, source) {
-      if (!button || !source) return;
-      button.addEventListener('click', function () {
+    var shortText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam finibus est quam, eu suscipit mi aliquet vel. Praesent nec sollicitudin nulla.';
+    var longText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam finibus est quam, eu suscipit mi aliquet vel. Praesent nec sollicitudin nulla. Duis quis justo eget ex tincidunt pretium. Praesent maximus urna a libero fringilla rhoncus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; In consectetur sapien sit amet ante semper mollis. Quisque blandit eu purus placerat gravida.';
+
+    /* Generic copy-btn handler */
+    document.querySelectorAll('.copy-btn[data-copy-target]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var targetId = btn.getAttribute('data-copy-target');
+        var source = document.getElementById(targetId);
+        if (!source) return;
         navigator.clipboard.writeText(source.textContent || '').then(function () {
-          var original = button.textContent;
-          button.textContent = 'Copied';
+          var original = btn.textContent;
+          btn.textContent = 'Copied!';
+          btn.classList.add('copied');
           setTimeout(function () {
-            button.textContent = original;
+            btn.textContent = original;
+            btn.classList.remove('copied');
           }, 1400);
         });
       });
+    });
+
+    /* Playground */
+    var modalPgAppearance = document.getElementById('modal-pg-appearance');
+    var modalPgText = document.getElementById('modal-pg-text');
+    var modalPgSize = document.getElementById('modal-pg-size');
+    var modalPgPreview = document.getElementById('modal-playground-preview');
+    var modalPgCodeEl = document.getElementById('modal-playground-code');
+
+    function getActionClass(a) {
+      if (a === 'warning') return 'ds-btn--warning';
+      if (a === 'danger') return 'ds-btn--danger';
+      return 'ds-btn--primary';
+    }
+    function getIconHtml(a) {
+      if (a === 'warning') return '<span class="modal-header-icon modal-header-icon--warning" aria-hidden="true"></span>';
+      if (a === 'danger')  return '<span class="modal-header-icon modal-header-icon--danger" aria-hidden="true"></span>';
+      return '';
+    }
+    function getSizeClass(s) {
+      if (s === 'md') return 'modal-size-md';
+      if (s === 'lg') return 'modal-size-lg';
+      return 'modal-size-sm';
     }
 
-    bindCopy(copyBtn, codeEl);
-    bindCopy(copyHeaderBtn, codeHeaderEl);
+    function renderPlayground() {
+      if (!modalPgAppearance || !modalPgPreview || !modalPgCodeEl) return;
+      var appearance = modalPgAppearance.value || 'default';
+      var textMode   = modalPgText.value || 'short';
+      var size       = modalPgSize.value || 'sm';
+
+      var sizeClass  = getSizeClass(size);
+      var actionClass = getActionClass(appearance);
+      var iconHtml   = getIconHtml(appearance);
+      var bodyClass  = textMode === 'long' ? 'modal-body-text-long' : 'modal-body-text-short';
+      var bodyText   = textMode === 'long' ? longText : shortText;
+
+      var html = ''
+        + '<article class="modal-composition-item ' + sizeClass + '">'
+        +   '<div class="modal-composition-body">'
+        +     '<div class="modal-header-item">' + iconHtml + '<span class="modal-header-item__title">Modal dialog</span></div>'
+        +     '<p class="' + bodyClass + '" style="padding:24px 24px 16px;">' + bodyText + '</p>'
+        +     '<div class="modal-footer-container"><div class="modal-footer-actions">'
+        +       '<button type="button" class="ds-btn ds-btn--subtle">Cancel</button>'
+        +       '<button type="button" class="ds-btn ' + actionClass + '">Confirm</button>'
+        +     '</div></div>'
+        +   '</div>'
+        + '</article>';
+
+      modalPgPreview.innerHTML = html;
+      modalPgCodeEl.textContent = html;
+    }
+
+    if (modalPgAppearance && modalPgText && modalPgSize) {
+      renderPlayground();
+      modalPgAppearance.addEventListener('change', renderPlayground);
+      modalPgText.addEventListener('change', renderPlayground);
+      modalPgSize.addEventListener('change', renderPlayground);
+    }
   })();
 </script>
 <script src="../../scripts/sidebar-nav-menu.js"></script>

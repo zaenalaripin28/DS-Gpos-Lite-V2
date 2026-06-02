@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tourguide — DS GPOS Lite V2</title>
+  <link rel="stylesheet" href="../../styles/globals.css">
+  <link rel="stylesheet" href="../../styles/enhancements.css">
+  <style>
+    .tourguide-section { margin-bottom: var(--space-500); }
+    .tourguide-section h2 {
+      margin: 0 0 var(--space-150);
+      font-family: var(--font-primary);
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+    }
+    .tourguide-section p {
+      margin: 0 0 var(--space-250);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-medium-regular-size);
+      line-height: var(--text-body-medium-regular-lh);
+      color: var(--color-text-secondary);
+    }
+    .tourguide-card {
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--border-radius-xl);
+      overflow: hidden;
+      background: var(--color-neutral-n0);
+      box-shadow: var(--shadow-xs);
+    }
+    .tourguide-card__head {
+      padding: var(--space-150) var(--space-200);
+      border-bottom: 1px solid var(--color-border-light);
+      background: var(--color-neutral-n10);
+      font-family: var(--font-primary);
+      font-size: var(--text-caption-medium-size);
+      color: var(--color-text-secondary);
+    }
+    .tourguide-preview {
+      padding: var(--space-250);
+      background: var(--color-neutral-n900);
+    }
+    .spotlight-state-list {
+      border: 1px solid color-mix(in srgb, var(--color-neutral-n0) 14%, transparent);
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+    }
+    .spotlight-state-list__row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: var(--space-200);
+      padding: var(--space-150) var(--space-200);
+      border-bottom: 1px solid color-mix(in srgb, var(--color-neutral-n0) 10%, transparent);
+      background: color-mix(in srgb, var(--color-neutral-n900) 85%, transparent);
+    }
+    .spotlight-state-list__row:last-child { border-bottom: none; }
+    .spotlight-state-list__state {
+      font-family: var(--font-primary);
+      font-size: var(--text-caption-medium-size);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-neutral-n50);
+      white-space: nowrap;
+    }
+    .ds-btn-spotlight {
+      border: none;
+      border-radius: var(--border-radius-md);
+      background: color-mix(in srgb, var(--color-neutral-n500) 16%, transparent);
+      color: var(--color-neutral-n0);
+      font-family: var(--font-primary);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--text-body-small-medium-lh);
+      min-height: 32px;
+      padding: var(--space-075) var(--space-150);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .ds-btn-spotlight--hover { background: color-mix(in srgb, var(--color-neutral-n500) 25%, transparent); }
+    .ds-btn-spotlight--focus {
+      background: color-mix(in srgb, var(--color-neutral-n500) 16%, transparent);
+      box-shadow: 0 0 0 2px var(--color-primary-500);
+    }
+    .ds-btn-spotlight--press { background: color-mix(in srgb, var(--color-neutral-n500) 35%, transparent); }
+    .ds-btn-onboarding-replay {
+      border: none;
+      border-radius: var(--border-radius-md);
+      background: color-mix(in srgb, var(--color-neutral-n500) 16%, transparent);
+      color: var(--color-neutral-n0);
+      font-family: var(--font-primary);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--text-body-small-medium-lh);
+      min-height: 32px;
+      padding: var(--space-075) var(--space-150);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-100);
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .ds-btn-onboarding-replay img {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      display: block;
+      /* color/icon/inverse → Icon.Inverse */
+      filter: brightness(0) invert(1);
+    }
+    .ds-btn-onboarding-replay--hover {
+      background: color-mix(in srgb, var(--color-neutral-n500) 25%, transparent);
+    }
+    .ds-btn-onboarding-replay--focus {
+      background: color-mix(in srgb, var(--color-neutral-n500) 16%, transparent);
+      box-shadow: 0 0 0 2px var(--color-primary-500);
+    }
+    .ds-btn-onboarding-replay--press {
+      background: color-mix(in srgb, var(--color-neutral-n500) 35%, transparent);
+    }
+    .tourguide-parts-table-wrap {
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--border-radius-lg);
+      background: var(--color-neutral-n0);
+      box-shadow: var(--shadow-xs);
+      overflow: hidden;
+      margin-bottom: var(--space-250);
+    }
+    .tourguide-parts-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+      color: var(--color-text-primary);
+    }
+    .tourguide-parts-table th,
+    .tourguide-parts-table td {
+      text-align: left;
+      padding: var(--space-150) var(--space-200);
+      border-bottom: 1px solid var(--color-border-light);
+      vertical-align: top;
+    }
+    .tourguide-parts-table th {
+      background: var(--color-neutral-n10);
+      color: var(--color-text-secondary);
+      font-size: var(--text-caption-medium-size);
+      font-weight: var(--font-weight-semibold);
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-wide);
+    }
+    .tourguide-parts-table tr:last-child td { border-bottom: none; }
+    .tourguide-component-stage {
+      position: relative;
+      min-height: 320px;
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      background: var(--color-neutral-n900);
+      border: 1px solid color-mix(in srgb, var(--color-neutral-n0) 10%, transparent);
+    }
+    .tourguide-component-stage__overlay {
+      position: absolute;
+      inset: 0;
+      background: color-mix(in srgb, var(--color-neutral-n800) 50%, transparent);
+    }
+    .tourguide-component-stage__target {
+      position: absolute;
+      top: 56px;
+      left: 56px;
+      width: 120px;
+      height: 68px;
+      border-radius: var(--border-radius-md);
+      border: 2px solid var(--color-blue-b300);
+      background: color-mix(in srgb, var(--color-neutral-n900) 80%, transparent);
+      z-index: 2;
+    }
+    .ds-tourguide {
+      position: absolute;
+      left: 56px;
+      top: 140px;
+      width: 292px;
+      border-radius: var(--border-radius-sm);
+      background: var(--color-blue-b300);
+      box-shadow: var(--shadow-md);
+      color: var(--color-neutral-n0);
+      z-index: 3;
+      overflow: hidden;
+    }
+    .ds-tourguide__body {
+      padding: var(--space-150) var(--space-150) var(--space-100);
+    }
+    .ds-tourguide__title {
+      margin: 0 0 var(--space-050);
+      font-family: var(--font-primary);
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--line-height-snug);
+      color: var(--color-neutral-n0);
+    }
+    .ds-tourguide__text {
+      margin: 0;
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+      line-height: var(--text-body-small-regular-lh);
+      color: var(--color-text-inverse);
+    }
+    .ds-tourguide__footer {
+      display: flex;
+      align-items: center;
+      gap: var(--space-100);
+      padding: 0 var(--space-150) var(--space-150);
+    }
+    .ds-tourguide__progress {
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-medium-size);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--text-body-small-medium-lh);
+      color: var(--color-neutral-n0);
+      margin-right: auto;
+    }
+    .ds-spotlight-card {
+      width: 100%;
+      max-width: 560px;
+      border: 1px solid color-mix(in srgb, var(--color-neutral-n0) 12%, transparent);
+      border-radius: var(--border-radius-md);
+      background: var(--color-blue-b300);
+      box-shadow: var(--shadow-md);
+      color: var(--color-neutral-n0);
+      overflow: hidden;
+    }
+    .ds-spotlight-card__head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-100);
+      padding: var(--space-200);
+    }
+    .ds-spotlight-card__title {
+      margin: 0;
+      font-family: var(--font-primary);
+      font-size: var(--text-header-small-medium-size);
+      font-weight: var(--text-header-small-medium-weight);
+      line-height: var(--text-header-small-medium-lh);
+      color: var(--color-neutral-n0);
+    }
+    .ds-spotlight-card__close {
+      border: none;
+      padding: 0;
+      background: transparent;
+      width: 24px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .ds-spotlight-card__close img {
+      width: 24px;
+      height: 24px;
+      display: block;
+      filter: brightness(0) invert(1);
+    }
+    .ds-spotlight-card__body {
+      margin: 0;
+      padding: 0 var(--space-200) var(--space-200);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+      font-weight: var(--text-body-small-regular-weight);
+      line-height: var(--text-body-small-regular-lh);
+      color: var(--color-text-inverse);
+    }
+    .ds-spotlight-card__footer {
+      display: flex;
+      align-items: center;
+      gap: var(--space-100);
+      padding: 0 var(--space-200) var(--space-200);
+    }
+    .tourguide-guideline-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-150);
+      margin-top: var(--space-250);
+    }
+    .tourguide-guideline-card {
+      border-radius: var(--border-radius-lg);
+      border: 1px solid var(--color-border-light);
+      background: var(--color-neutral-n0);
+      padding: var(--space-200);
+    }
+    .tourguide-guideline-card__title {
+      margin: 0 0 var(--space-100);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-medium-size);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+    }
+    .tourguide-guideline-list {
+      margin: 0;
+      padding-left: var(--space-200);
+      display: grid;
+      gap: var(--space-075);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+      line-height: var(--text-body-small-regular-lh);
+      color: var(--color-text-secondary);
+    }
+    .tourguide-playground {
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--border-radius-xl);
+      background: var(--color-neutral-n0);
+      overflow: hidden;
+      box-shadow: var(--shadow-xs);
+    }
+    .tourguide-playground__controls {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-150);
+      padding: var(--space-200);
+      border-bottom: 1px solid var(--color-border-light);
+    }
+    .tourguide-playground__field {
+      display: grid;
+      gap: var(--space-050);
+    }
+    .tourguide-playground__field label {
+      font-family: var(--font-primary);
+      font-size: var(--text-caption-medium-size);
+      color: var(--color-text-secondary);
+    }
+    .tourguide-playground__field select {
+      appearance: none;
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-md);
+      background: var(--color-surface);
+      color: var(--color-text-primary);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+      padding: var(--space-100) var(--space-150);
+    }
+    .tourguide-playground__preview {
+      padding: var(--space-250);
+      background: var(--color-neutral-n900);
+    }
+    @media (max-width: 768px) {
+      .tourguide-guideline-grid,
+      .tourguide-playground__controls {
+        grid-template-columns: 1fr;
+      }
+      .ds-tourguide {
+        width: calc(100% - 24px);
+        left: 12px;
+        top: 132px;
+      }
+      .tourguide-component-stage__target {
+        left: 12px;
+      }
+    }
+    .code-card {
+      border-top: 1px solid var(--color-border-light);
+      background: var(--color-neutral-n900);
+    }
+    .code-card__head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-100);
+      padding: var(--space-150) var(--space-200);
+      border-bottom: 1px solid var(--color-neutral-n700);
+    }
+    .code-card__title {
+      margin: 0;
+      font-family: var(--font-primary);
+      font-size: var(--text-caption-medium-size);
+      color: var(--color-neutral-n50);
+    }
+    .copy-btn {
+      border: 1px solid color-mix(in srgb, var(--color-neutral-n0) 12%, transparent);
+      background: var(--color-neutral-n800);
+      color: var(--color-neutral-n40);
+      border-radius: var(--border-radius-md);
+      padding: var(--space-075) var(--space-150);
+      font-family: var(--font-primary);
+      font-size: var(--text-caption-medium-size);
+      cursor: pointer;
+    }
+    .copy-btn:hover {
+      background: var(--color-neutral-n700);
+      color: var(--color-neutral-n10);
+    }
+    .copy-btn.copied { color: var(--color-green-g300); }
+    .code-card pre { margin: 0; padding: var(--space-250); overflow-x: auto; }
+    .code-card code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--color-neutral-n20);
+      white-space: pre;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo-icon">GL</div>
+        <div class="sidebar-brand-text">
+          <div class="logo">GPOS Lite</div>
+          <div class="version">Design System V2.0</div>
+        </div>
+      </div>
+      <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">&#x2715;</button>
+    </div>
+
+    <div class="sidebar-search">
+      <input type="search" class="search-input" placeholder="&#x1F50D;  Cari token, component...">
+    </div>
+
+    <div class="nav-scroll">
+      <nav class="nav-menu">
+        <div class="nav-section nav-section--menu is-open">
+          <button type="button" class="nav-menu-toggle" aria-expanded="true">
+            <h3 class="nav-title">Overview</h3>
+            <img src="../../assets/icons/icon-chevron-mini-down.svg" alt="" class="nav-menu-toggle__chevron" aria-hidden="true">
+          </button>
+          <ul class="nav-list">
+            <li>
+              <a href="../../index.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+                Home
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="nav-section nav-section--menu is-open">
+          <button type="button" class="nav-menu-toggle" aria-expanded="true">
+            <h3 class="nav-title">Foundations</h3>
+            <img src="../../assets/icons/icon-chevron-mini-down.svg" alt="" class="nav-menu-toggle__chevron" aria-hidden="true">
+          </button>
+          <ul class="nav-list">
+            <li><a href="../../foundations/colors/colors.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg>Colors</a></li>
+            <li><a href="../../foundations/typography/typography.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Typography</a></li>
+            <li><a href="../../foundations/spacing/spacing.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="9" y1="4" x2="9" y2="20"/><line x1="15" y1="4" x2="15" y2="20"/></svg>Spacing</a></li>
+            <li><a href="../../foundations/shadows/shadows.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="16" height="16" rx="2"/><rect x="5" y="5" width="16" height="16" rx="2" opacity="0.4"/></svg>Shadows</a></li>
+            <li><a href="../../foundations/borders/borders.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>Borders</a></li>
+            <li><a href="../../foundations/grid/grid.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Grid</a></li>
+            <li><a href="../../foundations/icons/icons.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>Icons</a></li>
+          </ul>
+        </div>
+
+        <div class="nav-section nav-section--menu is-open">
+          <button type="button" class="nav-menu-toggle" aria-expanded="true">
+            <h3 class="nav-title">Komponen</h3>
+            <img src="../../assets/icons/icon-chevron-mini-down.svg" alt="" class="nav-menu-toggle__chevron" aria-hidden="true">
+          </button>
+          <ul class="nav-list">
+            <li><a href="../Button/button.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="3"/><line x1="7" y1="12" x2="17" y2="12" opacity="0.5"/></svg>Button</a></li>
+            <li><a href="../Avatar/avatar.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Avatar</a></li>
+            <li><a href="../Badge/badge.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="9" width="22" height="6" rx="3"/><circle cx="6" cy="12" r="1.5" fill="currentColor" opacity="0.5"/></svg>Badge</a></li>
+            <li><a href="../Tags/tags.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/></svg>Tags</a></li>
+            <li><a href="../Lozenge/lozenge.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="7" width="16" height="10" rx="2"/></svg>Lozenge</a></li>
+            <li><a href="../Checkbox/checkbox.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg>Checkbox</a></li>
+            <li><a href="../Radio/radio.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg>Radio</a></li>
+            <li><a href="../Toggle/toggle.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="5"/><circle cx="7" cy="12" r="3" fill="currentColor" stroke="none"/></svg>Toggle</a></li>
+            <li><a href="../Text Field/text field.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="10" rx="2"/><line x1="7" y1="11" x2="13" y2="11"/></svg>Text Field</a></li>
+            <li><a href="../Text Area/text area.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="16" height="14" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg>Text Area</a></li>
+            <li><a href="../Form/form.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="13" y2="16"/></svg>Form</a></li>
+            <li><a href="../Flags/flags.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>Flags</a></li>
+            <li><a href="../section messages/section-message.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="14" y2="13"/></svg>Section Message</a></li>
+            <li><a href="../Breadcrumbs/breadcrumbs.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/><line x1="3" y1="12" x2="15" y2="12" opacity="0.4"/></svg>Breadcrumbs</a></li>
+            <li><a href="../Tabs/tabs.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="4" rx="1"/><rect x="2" y="13" width="14" height="4" rx="1"/></svg>Tabs</a></li>
+            <li><a href="../Pagination/pagination.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="10,6 4,12 10,18"/><polyline points="14,6 20,12 14,18"/><line x1="11.5" y1="12" x2="12.5" y2="12" opacity="0.55"/></svg>Pagination</a></li>
+            <li><a href="../Modal/modal.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="13" y2="13"/></svg>Modal</a></li>
+            <li><a href="../Tourguide/tourguide.html" class="nav-link active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/><path d="M21 12h-3"/><path d="M6 12H3"/></svg>Tourguide</a></li>
+            <li><a href="../Popup/popup.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="8,10 12,14 16,10"/></svg>Popup</a></li>
+            <li><a href="../Table/table.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="1"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="9" y1="4" x2="9" y2="20"/><line x1="15" y1="4" x2="15" y2="20"/></svg>Table</a></li>
+            <li><a href="../Calendar/calendar.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Calendar</a></li>
+            <li><a href="../Time picker/time-picker.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><polyline points="12,7 12,12 16,14"/></svg>Time Picker</a></li>
+            <li><a href="../Date picker/date-picker.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="14" x2="8" y2="14"/><line x1="12" y1="14" x2="12" y2="14"/><line x1="16" y1="14" x2="16" y2="14"/></svg>Date Picker</a></li>
+            <li><a href="../Date time picker/date time picker.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><circle cx="12" cy="15" r="2"/><line x1="12" y1="12" x2="12" y2="15"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Date Time Picker</a></li>
+            <li><a href="../Toast-Banner/banner.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="8" rx="2"/><circle cx="6" cy="12" r="1" fill="currentColor" stroke="none"/><line x1="10" y1="12" x2="18" y2="12"/></svg>Toast Banner</a></li>
+            <li><a href="../dropdown/dropdown.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="10" x2="17" y2="10"/><line x1="7" y1="14" x2="17" y2="14"/></svg>Dropdown Button</a></li>
+            <li><a href="../Select/select.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><polyline points="8,10 12,14 16,10"/></svg>Select</a></li>
+            <li><a href="../Inline edit/inline-edit.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Inline Edit</a></li>
+            <li><a href="../Navigation menu/navigation.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><line x1="7" y1="10" x2="17" y2="10"/><line x1="7" y1="14" x2="17" y2="14"/></svg>Navigation Menu</a></li>
+            <li><a href="../Top & bottom Navigation/top-bottom-nav.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="17" width="20" height="4" rx="1"/><polyline points="9,11 5,7 9,3"/><polyline points="15,11 19,7 15,3"/></svg>Top &amp; Bottom Nav</a></li>
+          </ul>
+        </div>
+
+        <div class="nav-section nav-section--menu is-open">
+          <button type="button" class="nav-menu-toggle" aria-expanded="true">
+            <h3 class="nav-title">Resources</h3>
+            <img src="../../assets/icons/icon-chevron-mini-down.svg" alt="" class="nav-menu-toggle__chevron" aria-hidden="true">
+          </button>
+          <ul class="nav-list">
+            <li>
+              <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="nav-link" target="_blank" rel="noopener">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                GitHub Repo
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="tailwind-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 6C9.33 6 7.67 7.33 7 10c1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35.98 1 2.09 2.15 4.59 2.15C19.67 12 21.33 10.67 22 8c-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C15.61 7.15 14.5 6 12 6zm-7 6c-2.67 0-4.33 1.33-5 4 1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35C6.39 17.15 7.5 18 10 18c2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C8.61 12.85 7.5 12 5 12z"/></svg>
+        Built with tokens.css
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="breadcrumb">
+        <a href="../../index.html">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="#">Components</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="current">Tourguide</span>
+      </div>
+      <div class="topbar-actions"><span class="version-badge">v2.0</span></div>
+    </div>
+
+    <div class="content-inner">
+      <section class="tourguide-section">
+        <h2>Tourguide — Button Spotlight (Part)</h2>
+        <p>State: default, hover, focus, press.</p>
+        <div class="tourguide-card">
+          <div class="tourguide-card__head">Referensi: Button (Spotlight)</div>
+          <div class="tourguide-preview">
+            <div class="spotlight-state-list">
+              <div class="spotlight-state-list__row">
+                <button type="button" class="ds-btn-spotlight">Label</button>
+                <span class="spotlight-state-list__state">state=default</span>
+              </div>
+              <div class="spotlight-state-list__row">
+                <button type="button" class="ds-btn-spotlight ds-btn-spotlight--hover">Label</button>
+                <span class="spotlight-state-list__state">state=hover</span>
+              </div>
+              <div class="spotlight-state-list__row">
+                <button type="button" class="ds-btn-spotlight ds-btn-spotlight--focus">Label</button>
+                <span class="spotlight-state-list__state">state=focus</span>
+              </div>
+              <div class="spotlight-state-list__row">
+                <button type="button" class="ds-btn-spotlight ds-btn-spotlight--press">Label</button>
+                <span class="spotlight-state-list__state">state=press</span>
+              </div>
+            </div>
+          </div>
+          <div class="code-card">
+            <div class="code-card__head">
+              <p class="code-card__title">DS code siap copy — Button Spotlight</p>
+              <button type="button" class="copy-btn" data-copy-target="code-tourguide-spotlight">Copy</button>
+            </div>
+            <pre><code id="code-tourguide-spotlight">&lt;button type="button" class="ds-btn-spotlight"&gt;Label&lt;/button&gt;
+&lt;button type="button" class="ds-btn-spotlight ds-btn-spotlight--hover"&gt;...&lt;/button&gt;
+&lt;button type="button" class="ds-btn-spotlight ds-btn-spotlight--focus"&gt;...&lt;/button&gt;
+&lt;button type="button" class="ds-btn-spotlight ds-btn-spotlight--press"&gt;...&lt;/button&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="tourguide-section">
+        <h2>Tourguide — Button (Onboarding Replay) Part</h2>
+        <p>Menggunakan token dan warna existing dari Button Spotlight (Part).</p>
+        <div class="tourguide-card">
+          <div class="tourguide-card__head">Referensi: Button (Onboarding replay)</div>
+          <div class="tourguide-preview">
+            <div class="spotlight-state-list">
+              <div class="spotlight-state-list__row">
+                <button type="button" class="ds-btn-onboarding-replay">
+                  <img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="arrowuturnleft" width="24" height="24">
+                  <span>Replay</span>
+                </button>
+                <span class="spotlight-state-list__state">state=default</span>
+              </div>
+              <div class="spotlight-state-list__row">
+                <button type="button" class="ds-btn-onboarding-replay ds-btn-onboarding-replay--hover">
+                  <img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="arrowuturnleft" width="24" height="24">
+                  <span>Replay</span>
+                </button>
+                <span class="spotlight-state-list__state">state=hover</span>
+              </div>
+              <div class="spotlight-state-list__row">
+                <button type="button" class="ds-btn-onboarding-replay ds-btn-onboarding-replay--focus">
+                  <img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="arrowuturnleft" width="24" height="24">
+                  <span>Replay</span>
+                </button>
+                <span class="spotlight-state-list__state">state=focus</span>
+              </div>
+              <div class="spotlight-state-list__row">
+                <button type="button" class="ds-btn-onboarding-replay ds-btn-onboarding-replay--press">
+                  <img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="arrowuturnleft" width="24" height="24">
+                  <span>Replay</span>
+                </button>
+                <span class="spotlight-state-list__state">state=press</span>
+              </div>
+            </div>
+          </div>
+          <div class="code-card">
+            <div class="code-card__head">
+              <p class="code-card__title">DS code siap copy — Onboarding Replay</p>
+              <button type="button" class="copy-btn" data-copy-target="code-tourguide-onboarding-replay">Copy</button>
+            </div>
+            <pre><code id="code-tourguide-onboarding-replay">&lt;button type="button" class="ds-btn-onboarding-replay"&gt;
+  &lt;img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="arrowuturnleft" width="24" height="24"&gt;
+  &lt;span&gt;Replay&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;button type="button" class="ds-btn-onboarding-replay ds-btn-onboarding-replay--hover"&gt;...&lt;/button&gt;
+&lt;button type="button" class="ds-btn-onboarding-replay ds-btn-onboarding-replay--focus"&gt;...&lt;/button&gt;
+&lt;button type="button" class="ds-btn-onboarding-replay ds-btn-onboarding-replay--press"&gt;...&lt;/button&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="tourguide-section">
+        <h2>Tourguide — Spotlight Card Part</h2>
+        <p>Card konten spotlight memakai token existing, icon existing, shadow existing, serta action button dari part Tourguide yang sudah ada.</p>
+        <div class="tourguide-card">
+          <div class="tourguide-card__head">Referensi: Spotlight Card</div>
+          <div class="tourguide-preview">
+            <div class="ds-spotlight-card">
+              <div class="ds-spotlight-card__head">
+                <h3 class="ds-spotlight-card__title">Title</h3>
+                <button type="button" class="ds-spotlight-card__close" aria-label="Tutup spotlight">
+                  <img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true">
+                </button>
+              </div>
+              <p class="ds-spotlight-card__body">Quickly switch between your most recent projects by selecting the project name and icon.</p>
+              <div class="ds-spotlight-card__footer">
+                <span class="ds-tourguide__progress">1/3</span>
+                <button type="button" class="ds-btn-spotlight">Dismiss</button>
+                <button type="button" class="ds-btn-onboarding-replay"><img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="arrowuturnleft" width="24" height="24"><span>Next</span></button>
+              </div>
+            </div>
+          </div>
+          <div class="code-card">
+            <div class="code-card__head">
+              <p class="code-card__title">DS code siap copy — Spotlight Card Part</p>
+              <button type="button" class="copy-btn" data-copy-target="code-tourguide-spotlight-card">Copy</button>
+            </div>
+            <pre><code id="code-tourguide-spotlight-card">&lt;div class="ds-spotlight-card"&gt;
+  &lt;div class="ds-spotlight-card__head"&gt;
+    &lt;h3 class="ds-spotlight-card__title"&gt;Title&lt;/h3&gt;
+    &lt;button type="button" class="ds-spotlight-card__close" aria-label="Tutup spotlight"&gt;
+      &lt;img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+  &lt;p class="ds-spotlight-card__body"&gt;Quickly switch between your most recent projects by selecting the project name and icon.&lt;/p&gt;
+  &lt;div class="ds-spotlight-card__footer"&gt;
+    &lt;span class="ds-tourguide__progress"&gt;1/3&lt;/span&gt;
+    &lt;button type="button" class="ds-btn-spotlight"&gt;Dismiss&lt;/button&gt;
+    &lt;button type="button" class="ds-btn-onboarding-replay"&gt;
+      &lt;img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="arrowuturnleft" width="24" height="24"&gt;
+      &lt;span&gt;Next&lt;/span&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="tourguide-section">
+        <h2>Tourguide — Component</h2>
+        <p>Komponen tourguide menggabungkan overlay, target highlight, body konten, progress, dan action dari part yang sudah ada.</p>
+
+        <div class="tourguide-parts-table-wrap">
+          <table class="tourguide-parts-table">
+            <thead>
+              <tr>
+                <th>Part</th>
+                <th>Class / Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Overlay blanded</td>
+                <td><code>.tourguide-component-stage__overlay</code> → <code>color/neutral/N800</code> 50%</td>
+              </tr>
+              <tr>
+                <td>Target highlight</td>
+                <td><code>.tourguide-component-stage__target</code></td>
+              </tr>
+              <tr>
+                <td>Action secondary</td>
+                <td><code>.ds-btn-spotlight</code></td>
+              </tr>
+              <tr>
+                <td>Action primary replay</td>
+                <td><code>.ds-btn-onboarding-replay</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tourguide-playground">
+          <div class="tourguide-playground__controls">
+            <div class="tourguide-playground__field">
+              <label for="tg-spotlight-state">State tombol Dismiss</label>
+              <select id="tg-spotlight-state">
+                <option value="default">Default</option>
+                <option value="hover">Hover</option>
+                <option value="focus">Focus</option>
+                <option value="press">Press</option>
+              </select>
+            </div>
+            <div class="tourguide-playground__field">
+              <label for="tg-replay-state">State tombol Replay</label>
+              <select id="tg-replay-state">
+                <option value="default">Default</option>
+                <option value="hover">Hover</option>
+                <option value="focus">Focus</option>
+                <option value="press">Press</option>
+              </select>
+            </div>
+          </div>
+          <div class="tourguide-playground__preview">
+            <div class="tourguide-component-stage">
+              <div class="tourguide-component-stage__overlay"></div>
+              <div class="tourguide-component-stage__target" aria-hidden="true"></div>
+              <article class="ds-tourguide" aria-label="Tourguide">
+                <div class="ds-tourguide__body">
+                  <h3 class="ds-tourguide__title">Title</h3>
+                  <p class="ds-tourguide__text">Quickly switch between your most recent projects by selecting the project name and icon.</p>
+                </div>
+                <div class="ds-tourguide__footer">
+                  <span class="ds-tourguide__progress">1/3</span>
+                  <button id="tg-btn-dismiss" type="button" class="ds-btn-spotlight">Dismiss</button>
+                  <button id="tg-btn-replay" type="button" class="ds-btn-onboarding-replay"><img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="arrowuturnleft" width="24" height="24"><span>Replay</span></button>
+                </div>
+              </article>
+            </div>
+          </div>
+          <div class="code-card">
+            <div class="code-card__head">
+              <p class="code-card__title">HTML siap copy — Tourguide Component</p>
+              <button type="button" class="copy-btn" data-copy-target="code-tourguide-component">Copy</button>
+            </div>
+            <pre><code id="code-tourguide-component">&lt;div class="tourguide-component-stage"&gt;
+  &lt;div class="tourguide-component-stage__overlay"&gt;&lt;/div&gt;
+  &lt;div class="tourguide-component-stage__target" aria-hidden="true"&gt;&lt;/div&gt;
+  &lt;article class="ds-tourguide" aria-label="Tourguide"&gt;
+    &lt;div class="ds-tourguide__body"&gt;
+      &lt;h3 class="ds-tourguide__title"&gt;Title&lt;/h3&gt;
+      &lt;p class="ds-tourguide__text"&gt;Quickly switch between your most recent projects by selecting the project name and icon.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="ds-tourguide__footer"&gt;
+      &lt;span class="ds-tourguide__progress"&gt;1/3&lt;/span&gt;
+      &lt;button type="button" class="ds-btn-spotlight"&gt;Dismiss&lt;/button&gt;
+      &lt;button type="button" class="ds-btn-onboarding-replay"&gt;
+        &lt;img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="arrowuturnleft" width="24" height="24"&gt;
+        &lt;span&gt;Replay&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/article&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+
+        <div class="tourguide-guideline-grid">
+          <article class="tourguide-guideline-card">
+            <p class="tourguide-guideline-card__title">Do</p>
+            <ul class="tourguide-guideline-list">
+              <li>Gunakan judul singkat dan instruksi satu kalimat agar cepat dipahami.</li>
+              <li>Pastikan target highlight berada tepat di elemen yang dijelaskan.</li>
+              <li>Gunakan progress (contoh: 1/3) untuk memberi konteks langkah.</li>
+              <li>Pertahankan kontras overlay agar fokus tetap di area tourguide.</li>
+            </ul>
+          </article>
+          <article class="tourguide-guideline-card">
+            <p class="tourguide-guideline-card__title">Don't</p>
+            <ul class="tourguide-guideline-list">
+              <li>Jangan menaruh lebih dari dua tombol aksi dalam satu step.</li>
+              <li>Jangan gunakan teks instruksi yang panjang atau multi-paragraf.</li>
+              <li>Jangan ubah warna di luar token dan warna existing komponen.</li>
+              <li>Jangan menutup elemen target dengan panel tourguide.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<script src="../../scripts/script.js"></script>
+<script>
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var id = btn.getAttribute('data-copy-target');
+      var code = document.getElementById(id);
+      if (!code) return;
+      navigator.clipboard.writeText(code.textContent).then(function () {
+        btn.textContent = 'Copied';
+        btn.classList.add('copied');
+        setTimeout(function () {
+          btn.textContent = 'Copy';
+          btn.classList.remove('copied');
+        }, 1500);
+      });
+    });
+  });
+
+  (function () {
+    var spotlightSelect = document.getElementById('tg-spotlight-state');
+    var replaySelect = document.getElementById('tg-replay-state');
+    var spotlightBtn = document.getElementById('tg-btn-dismiss');
+    var replayBtn = document.getElementById('tg-btn-replay');
+    if (!spotlightSelect || !replaySelect || !spotlightBtn || !replayBtn) return;
+
+    function setState(button, baseClass, state) {
+      button.className = baseClass;
+      if (state && state !== 'default') {
+        button.classList.add(baseClass + '--' + state);
+      }
+    }
+
+    function syncStates() {
+      setState(spotlightBtn, 'ds-btn-spotlight', spotlightSelect.value);
+      setState(replayBtn, 'ds-btn-onboarding-replay', replaySelect.value);
+    }
+
+    spotlightSelect.addEventListener('change', syncStates);
+    replaySelect.addEventListener('change', syncStates);
+    syncStates();
+  })();
+</script>
+<script src="../../scripts/sidebar-nav-menu.js"></script>
+</body>
+</html>
