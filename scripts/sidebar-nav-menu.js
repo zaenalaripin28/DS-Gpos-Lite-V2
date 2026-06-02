@@ -101,6 +101,29 @@
         tourguideItem.appendChild(tourguideLink);
       }
 
+      var pageHeaderHref = '../Page Header/page-header.html';
+      if (buttonLink && buttonLink.getAttribute('href')) {
+        pageHeaderHref = buttonLink.getAttribute('href').replace('/Button/button.html', '/Page Header/page-header.html');
+      }
+      var pageHeaderItem = navList.querySelector('a[href*="/Page Header/page-header.html"]') ? null : document.createElement('li');
+      if (pageHeaderItem) {
+        var pageHeaderLink = document.createElement('a');
+        pageHeaderLink.href = pageHeaderHref;
+        pageHeaderLink.className = 'nav-link';
+        pageHeaderLink.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="5" rx="1"/><rect x="3" y="13" width="11" height="5" rx="1"/><line x1="17" y1="15" x2="21" y2="15"/><line x1="17" y1="18" x2="21" y2="18"/></svg>Page Header';
+        pageHeaderItem.appendChild(pageHeaderLink);
+      }
+
+      var breadcrumbsLi = navList.querySelector('a[href*="/Breadcrumbs/breadcrumbs.html"]');
+      breadcrumbsLi = breadcrumbsLi ? breadcrumbsLi.closest('li') : null;
+      var tabsLi = navList.querySelector('a[href*="/Tabs/tabs.html"]');
+      tabsLi = tabsLi ? tabsLi.closest('li') : null;
+
+      if (breadcrumbsLi && pageHeaderItem && breadcrumbsLi.parentNode === navList) {
+        if (tabsLi) navList.insertBefore(pageHeaderItem, tabsLi);
+        else breadcrumbsLi.insertAdjacentElement('afterend', pageHeaderItem);
+      }
+
       if (popupLi && popupLi.parentNode === navList) {
         if (modalItem) navList.insertBefore(modalItem, popupLi);
         if (tourguideItem) navList.insertBefore(tourguideItem, popupLi);
