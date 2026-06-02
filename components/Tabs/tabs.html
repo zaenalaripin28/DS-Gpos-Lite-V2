@@ -424,24 +424,6 @@
       pointer-events: none; border-radius: 0 2px 2px 0;
     }
 
-    .dark-toggle {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 32px; height: 32px; background: none;
-      border: 1px solid var(--color-border); color: var(--color-text-secondary);
-      cursor: pointer; border-radius: var(--border-radius-md);
-      transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
-      flex-shrink: 0;
-    }
-    .dark-toggle:hover {
-      background-color: var(--color-primary-50);
-      border-color: var(--color-primary-200);
-      color: var(--color-primary-600);
-    }
-    .dark-toggle .icon-sun  { display: none; }
-    .dark-toggle .icon-moon { display: block; }
-    [data-theme="dark"] .dark-toggle .icon-sun  { display: block; }
-    [data-theme="dark"] .dark-toggle .icon-moon { display: none; }
-
     .scroll-top-btn {
       position: fixed; bottom: 28px; right: 28px; width: 40px; height: 40px;
       background: var(--color-primary-500); color: var(--color-neutral-n0); border: none;
@@ -454,12 +436,6 @@
     }
     .scroll-top-btn.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
     .scroll-top-btn:hover { background-color: var(--color-primary-600); }
-
-    .topbar {
-      background-color: rgba(255, 255, 255, 0.9) !important;
-      backdrop-filter: blur(12px) !important;
-      -webkit-backdrop-filter: blur(12px) !important;
-    }
 
     .copy-btn {
       padding: 4px 10px; background: var(--color-neutral-n20);
@@ -498,7 +474,7 @@
       .content-inner > section.mb-12,
       .scroll-progress,
       .scroll-top-btn,
-      .dark-toggle { animation: none !important; transition: none !important; }
+      .scroll-top-btn { animation: none !important; transition: none !important; }
     }
 
     /* ── Token table ── */
@@ -544,15 +520,11 @@
     [data-theme="dark"] .usage-grid-2 > div { background-color:#0F1D30 !important; border-color:#1A2E48 !important; }
     [data-theme="dark"] .usage-info-card { background-color:#0F1D30 !important; border-color:#1A2E48 !important; }
     [data-theme="dark"] .usage-info-card div[style] { color:#94A3B8 !important; }
-    [data-theme="dark"] .topbar { background-color:rgba(8,15,30,0.92) !important; border-bottom-color:#1A2E48 !important; }
     [data-theme="dark"] .page-footer { border-top-color:#1A2E48 !important; color:#94A3B8 !important; }
     [data-theme="dark"] .token-table th { background:#0F1D30 !important; border-bottom-color:#1A2E48 !important; color:#64748B !important; }
     [data-theme="dark"] .token-table td { border-bottom-color:#1A2E48 !important; color:#94A3B8 !important; }
     [data-theme="dark"] .token-table tr:hover td { background:rgba(255,255,255,0.03) !important; }
     [data-theme="dark"] .ds-group-label-pill { background-color:#0F1D30 !important; border-color:#1A2E48 !important; color:#94A3B8 !important; }
-    [data-theme="dark"] .dark-toggle { border-color:#1A2E48; color:#94A3B8; }
-    [data-theme="dark"] .dark-toggle:hover { background-color:rgba(30,127,214,0.14); border-color:rgba(30,127,214,0.3); color:#7DB5E7; }
-
     @media (max-width:480px) { .scroll-top-btn { bottom:16px; right:16px; } }
 
     .anatomy-label {
@@ -592,7 +564,7 @@
     [data-theme="dark"] .anatomy-grid > div > div:last-child { background: #0F1D30 !important; border-top-color: #1A2E48 !important; }
   </style>
 </head>
-<body>
+<body class="page-home">
 
 <div class="scroll-progress" id="scroll-progress" style="width:0%" role="progressbar" aria-hidden="true"></div>
 
@@ -877,10 +849,6 @@
         <span class="current">Tabs</span>
       </div>
       <div class="topbar-actions">
-        <button type="button" class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
-          <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          <svg class="icon-sun"  width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        </button>
         <span class="version-badge">v2.0</span>
       </div>
     </div>
@@ -1784,18 +1752,6 @@
   scrollTopBtn.addEventListener('click', function () {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
-
-  const darkToggle = document.getElementById('dark-toggle');
-  const savedTheme = localStorage.getItem('ds-theme');
-  if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
-  if (darkToggle) {
-    darkToggle.addEventListener('click', function () {
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      const next = isDark ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('ds-theme', next);
-    });
-  }
 
   (function initTablist() {
     const tablist = document.getElementById('interactive-tablist');

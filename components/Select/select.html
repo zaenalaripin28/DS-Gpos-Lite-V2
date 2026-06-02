@@ -847,6 +847,19 @@
     @media (prefers-reduced-motion: reduce) {
       .ds-select-loading__spinner { animation: none; }
     }
+    .dark-toggle {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; background: none;
+      border: 1px solid var(--color-border); color: var(--color-text-secondary);
+      cursor: pointer; border-radius: var(--border-radius-md);
+      transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+      flex-shrink: 0;
+    }
+    .dark-toggle:hover { background-color: var(--color-primary-50); border-color: var(--color-primary-200); color: var(--color-primary-600); }
+    .dark-toggle .icon-sun  { display: none; }
+    .dark-toggle .icon-moon { display: block; }
+    [data-theme="dark"] .dark-toggle .icon-sun  { display: block; }
+    [data-theme="dark"] .dark-toggle .icon-moon { display: none; }
   </style>
 </head>
 <body>
@@ -1107,7 +1120,13 @@
     <div class="topbar">
       <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
       <div class="breadcrumb"><a href="../../index.html">Home</a><span class="breadcrumb-sep">/</span><a href="#">Components</a><span class="breadcrumb-sep">/</span><span class="current">Select</span></div>
-      <div class="topbar-actions"><span class="version-badge">v2.0</span></div>
+      <div class="topbar-actions">
+        <button type="button" class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <span class="version-badge">v2.0</span>
+      </div>
     </div>
 
     <div class="content-inner">
@@ -1760,8 +1779,8 @@
   const overlay = document.getElementById('sidebar-overlay');
   const hamburgerBtn = document.getElementById('hamburger-btn');
   const sidebarClose = document.getElementById('sidebar-close');
-  function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('active'); }
-  function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('active'); }
+  function openSidebar() { sidebar.classList.add('mobile-open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+  function closeSidebar() { sidebar.classList.remove('mobile-open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
   hamburgerBtn?.addEventListener('click', openSidebar);
   sidebarClose?.addEventListener('click', closeSidebar);
   overlay?.addEventListener('click', closeSidebar);
@@ -1907,6 +1926,17 @@
       setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
     });
   }
+
+  /* Dark mode */
+  (function () {
+    var saved = localStorage.getItem('ds-theme');
+    if (saved === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+  })();
+  document.getElementById('dark-toggle').addEventListener('click', function () {
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    localStorage.setItem('ds-theme', isDark ? 'light' : 'dark');
+  });
 </script>
   <script src="../../scripts/sidebar-nav-menu.js"></script>
 </body>

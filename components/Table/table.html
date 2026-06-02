@@ -35,51 +35,452 @@
     }
   </script>
   <style>
-  /* ── Table Sort Order (Figma: Sort order) ── */
+  /* ── Table Sort Order (assets/icons: sortOrder=*) ── */
   .ds-table-sort {
     display: inline-flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
+    min-width: 44px;
+    min-height: 44px;
     padding: var(--space-050) calc(var(--space-050) + var(--space-025) / 2);
     box-sizing: border-box;
     line-height: 0;
+    border-radius: var(--border-radius-md);
   }
-  .ds-table-sort__chevron {
+  .ds-table-sort:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 var(--border-width-2) var(--color-blue-b200);
+  }
+  .ds-table-sort__icon {
     display: block;
-    width: 8px;
-    height: 6px;
-    background-color: var(--color-neutral-n50);
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-size: contain;
-    mask-size: contain;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    object-fit: contain;
   }
-  .ds-table-sort__chevron--up {
-    -webkit-mask-image: url('../../assets/icons/icon-chevron-mini-up.svg');
-    mask-image: url('../../assets/icons/icon-chevron-mini-up.svg');
-    margin-bottom: calc(var(--space-025) * -1);
+
+  /* ── Table Header Cell (Figma: Cell / Table header) ── */
+  .ds-table-header-cell {
+    display: flex;
+    align-items: center;
+    gap: var(--space-050);
+    width: 100%;
+    box-sizing: border-box;
+    padding: var(--space-050) calc(var(--space-050) + var(--space-025) / 2);
+    border-bottom: var(--border-width-1) solid var(--color-border);
+    font-family: var(--font-primary);
+    background: transparent;
   }
-  .ds-table-sort__chevron--down {
-    -webkit-mask-image: url('../../assets/icons/icon-chevron-mini-down.svg');
-    mask-image: url('../../assets/icons/icon-chevron-mini-down.svg');
-    margin-top: calc(var(--space-025) * -1);
+  .ds-table-header-cell__label {
+    min-width: 0;
+    font-size: var(--text-body-small-medium-size);
+    line-height: var(--text-body-small-medium-lh);
+    font-weight: var(--text-body-small-medium-weight);
+    color: var(--color-text-primary);
   }
-  .ds-table-sort--asc .ds-table-sort__chevron--up {
-    background-color: var(--color-text-primary);
+  .ds-table-header-cell__checkbox-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-width: 44px;
+    min-height: 44px;
+    cursor: pointer;
   }
-  .ds-table-sort--desc .ds-table-sort__chevron--down {
-    background-color: var(--color-text-primary);
+  .ds-table-header-cell__checkbox-input:focus-visible + .ds-table-header-cell__checkbox {
+    outline: none;
+    box-shadow: 0 0 0 var(--border-width-2) var(--color-blue-b200);
   }
-  .ds-table-sort--on-dark .ds-table-sort__chevron {
-    background-color: var(--color-neutral-n300);
+  .ds-table-header-cell__checkbox-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
-  .ds-table-sort--on-dark.ds-table-sort--asc .ds-table-sort__chevron--up,
-  .ds-table-sort--on-dark.ds-table-sort--desc .ds-table-sort__chevron--down {
-    background-color: var(--color-neutral-n0);
+  .ds-table-header-cell__checkbox {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    border: var(--border-width-1) solid var(--color-neutral-n200);
+    border-radius: var(--border-radius-sm);
+    background: transparent;
+    box-sizing: border-box;
+  }
+  .ds-table-header-cell--empty {
+    min-height: 24px;
+  }
+  .ds-table-header-cell-preview {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  /* ── Table Cell / Master (Figma: Cell / Master) ── */
+  .ds-table-cell {
+    display: flex;
+    align-items: center;
+    gap: var(--space-100);
+    width: 100%;
+    box-sizing: border-box;
+    padding: var(--space-100) var(--space-150);
+    background: transparent;
+    border-bottom: var(--border-width-1) solid var(--color-border);
+    font-family: var(--font-primary);
+  }
+  .ds-table-cell--hover {
+    background: var(--color-neutral-n20);
+  }
+  .ds-table-cell--focused {
+    background: transparent;
+    box-shadow: inset 0 0 0 var(--border-width-2) var(--color-blue-b200);
+  }
+  .ds-table-cell__icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+  .ds-table-cell__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-025);
+    min-width: 0;
+  }
+  .ds-table-cell__text {
+    font-size: var(--text-body-small-medium-size);
+    line-height: var(--text-body-small-medium-lh);
+    font-weight: var(--text-body-small-medium-weight);
+    color: var(--color-text-primary);
+  }
+  .ds-table-cell__description {
+    font-size: var(--text-body-small-regular-size);
+    line-height: var(--text-body-small-regular-lh);
+    font-weight: var(--text-body-small-regular-weight);
+    color: var(--color-neutral-n300);
+  }
+  .ds-table-cell-preview {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  /* ── Table Cell / Icon (Figma: Cell / Icon) ── */
+  .ds-table-cell-icon {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: var(--space-100) var(--space-150);
+    background: transparent;
+    border-bottom: var(--border-width-1) solid var(--color-border);
+  }
+  .ds-table-cell-icon__group {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-100);
+  }
+  .ds-table-cell-icon__icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+  .ds-table-cell-icon-preview {
+    width: 100%;
+    max-width: 320px;
+  }
+
+  /* ── Table Column parts (shared) ── */
+  .ds-table-col-preview {
+    width: 100%;
+    max-width: 200px;
+    min-width: 0;
+  }
+  .ds-table-col-text,
+  .ds-table-col-link,
+  .ds-table-col-status,
+  .ds-table-col-icon,
+  .ds-table-col-checkbox {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  .ds-table-col__header {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: var(--space-050) calc(var(--space-050) + var(--space-025) / 2);
+    border-bottom: var(--border-width-1) solid var(--color-border);
+    font-family: var(--font-primary);
+    font-size: var(--text-body-small-medium-size);
+    line-height: var(--text-body-small-medium-lh);
+    font-weight: var(--text-body-small-medium-weight);
+    color: var(--color-text-primary);
+    background: transparent;
+  }
+  .ds-table-col__row {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: var(--space-100) var(--space-150);
+    border-bottom: var(--border-width-1) solid var(--color-border);
+    font-family: var(--font-primary);
+    background: transparent;
+  }
+  .ds-table-col-checkbox--hover,
+  .ds-table-col-text--hover,
+  .ds-table-col-link--hover,
+  .ds-table-col-status--hover,
+  .ds-table-col-icon--hover {
+    background: var(--color-neutral-n20);
+  }
+  .ds-table-col-text--focused {
+    background: transparent;
+    box-shadow: inset 0 0 0 var(--border-width-2) var(--color-blue-b200);
+  }
+
+  /* Column / Checkbox */
+  .ds-table-col-checkbox__row {
+    justify-content: center;
+  }
+  .ds-table-col-checkbox__wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-width: 44px;
+    min-height: 44px;
+    cursor: pointer;
+  }
+  .ds-table-col-checkbox__input:focus-visible + .ds-table-col-checkbox__box {
+    outline: none;
+    box-shadow: 0 0 0 var(--border-width-2) var(--color-blue-b200);
+  }
+  .ds-table-col-checkbox__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .ds-table-col-checkbox__box {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    border: var(--border-width-1) solid var(--color-neutral-n200);
+    border-radius: var(--border-radius-sm);
+    background: transparent;
+    box-sizing: border-box;
+  }
+
+  /* Column / Text */
+  .ds-table-col-text__label {
+    font-size: var(--text-body-small-medium-size);
+    line-height: var(--text-body-small-medium-lh);
+    font-weight: var(--text-body-small-medium-weight);
+    color: var(--color-text-primary);
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  /* Column / Link */
+  .ds-table-col-link__anchor {
+    font-size: var(--text-body-small-medium-size);
+    line-height: var(--text-body-small-medium-lh);
+    font-weight: var(--text-body-small-medium-weight);
+    color: var(--color-blue-b300);
+    text-decoration: none;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+  .ds-table-col-link__anchor:hover {
+    color: var(--color-blue-b400);
+    text-decoration: underline;
+  }
+  .ds-table-col-link__anchor:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 var(--border-width-2) var(--color-blue-b200);
+    border-radius: var(--border-radius-sm);
+  }
+
+  /* Column / Status — lozenge (from Lozenge component) */
+  .ds-lozenge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-025) var(--space-100);
+    border-radius: var(--border-radius-sm);
+    font-family: var(--font-primary);
+    font-size: var(--text-overline-medium-size);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--text-overline-medium-lh);
+    letter-spacing: var(--text-overline-medium-ls);
+    text-transform: var(--text-overline-medium-transform);
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+  .ds-lozenge--default {
+    background-color: var(--color-neutral-n20);
+    color: var(--color-neutral-n500);
+  }
+
+  /* Column / Icon */
+  .ds-table-col-icon__row {
+    justify-content: center;
+  }
+  .ds-table-col-icon__group {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-100);
+  }
+  .ds-table-col-icon__icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+
+  /* ── Table Component (composed) ── */
+  .ds-table-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-200);
+    width: 100%;
+  }
+  .ds-table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    max-width: 100%;
+    border-radius: var(--border-radius-md);
+  }
+  .ds-table-scroll:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 var(--border-width-2) var(--color-blue-b200);
+  }
+  .ds-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;
+    font-family: var(--font-primary);
+  }
+  .ds-table--data {
+    min-width: 36rem;
+  }
+  .ds-table thead th.ds-table-col-text,
+  .ds-table thead th.ds-table-col-link,
+  .ds-table thead th.ds-table-col-status,
+  .ds-table thead th.ds-table-col-icon {
+    box-sizing: border-box;
+    padding: var(--space-050) calc(var(--space-050) + var(--space-025) / 2);
+    border-bottom: var(--border-width-1) solid var(--color-border);
+    font-family: var(--font-primary);
+    font-size: var(--text-body-small-medium-size);
+    line-height: var(--text-body-small-medium-lh);
+    font-weight: var(--text-body-small-medium-weight);
+    color: var(--color-text-primary);
+    background: transparent;
+    text-align: left;
+    vertical-align: middle;
+  }
+  .ds-table thead th.ds-table-header-cell--checkbox {
+    justify-content: center;
+    text-align: center;
+  }
+  .ds-table--sticky-head thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--color-surface);
+  }
+  td.ds-table-col-checkbox,
+  td.ds-table-col-text,
+  td.ds-table-col-link,
+  td.ds-table-col-status,
+  td.ds-table-col-icon {
+    box-sizing: border-box;
+    padding: var(--space-100) var(--space-150);
+    border-bottom: var(--border-width-1) solid var(--color-border);
+    background: transparent;
+    vertical-align: middle;
+  }
+  td.ds-table-col-checkbox,
+  td.ds-table-col-icon {
+    text-align: center;
+  }
+  .ds-table--row-hover tbody tr:hover td {
+    background: var(--color-neutral-n20);
+  }
+  .ds-table-footer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding-top: var(--space-150);
+  }
+  .ds-pagination {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-050);
+    font-family: var(--font-primary);
+  }
+  .ds-pagination__item {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    border: none;
+    background: transparent;
+    border-radius: var(--border-radius-md);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-body-small-medium-size);
+    font-weight: var(--text-body-small-medium-weight);
+    line-height: var(--text-body-small-medium-lh);
+    color: var(--color-neutral-n300);
+    transition: background-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
+    cursor: pointer;
+  }
+  .ds-pagination__item img {
+    width: 16px;
+    height: 16px;
+    opacity: 0.75;
+  }
+  .ds-pagination__item:hover {
+    color: var(--color-blue-b300);
+    background: var(--color-neutral-n20);
+  }
+  .ds-pagination__item:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 var(--border-width-2) var(--color-blue-b200);
+  }
+  .ds-pagination__item--active {
+    background: var(--color-blue-b50);
+    color: var(--color-blue-b300);
+  }
+  .ds-pagination__item--active:hover {
+    background: var(--color-blue-b50);
+    color: var(--color-blue-b300);
+  }
+  .ds-pagination__item--ellipsis {
+    cursor: default;
+    pointer-events: none;
+  }
+  .usage-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-200);
+  }
+  @media (max-width: 640px) {
+    .usage-grid-2 { grid-template-columns: 1fr; }
   }
 
   .ds-table-part-states { display: grid; gap: var(--space-100); }
@@ -116,24 +517,130 @@
     min-height: 40px;
     padding: var(--space-100);
     border-radius: var(--border-radius-md);
-    background: var(--color-neutral-n900);
+    background: transparent;
   }
   @media (max-width: 640px) {
     .ds-table-part-state { grid-template-columns: minmax(0, 1fr); }
   }
 
-  .preview-card { border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface); }
-  .section-caption { color: var(--color-text-tertiary); font-size: 13px; line-height: 1.6; font-family: var(--font-primary); }
+  .preview-card {
+    border: var(--border-width-1) solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    background: var(--color-surface);
+  }
+  .section-caption {
+    color: var(--color-text-tertiary);
+    font-size: var(--text-body-small-regular-size);
+    line-height: var(--text-body-small-regular-lh);
+    font-family: var(--font-primary);
+    margin: 0;
+  }
+  .table-playground__controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-150);
+    margin-bottom: var(--space-200);
+  }
+  .table-playground__label {
+    font-size: var(--text-body-small-medium-size);
+    font-weight: var(--text-body-small-medium-weight);
+    line-height: var(--text-body-small-medium-lh);
+    color: var(--color-text-primary);
+    font-family: var(--font-primary);
+  }
+  .table-playground__select {
+    min-height: 44px;
+    min-width: 5.5rem;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    padding: var(--space-050) var(--space-100);
+    border: var(--border-width-1) solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    background: var(--color-surface);
+    color: var(--color-text-primary);
+  }
+  .table-playground__select:focus {
+    outline: none;
+    border-color: var(--color-blue-b300);
+    box-shadow: 0 0 0 var(--border-width-2) var(--color-blue-b200);
+  }
+  .ds-usage-card {
+    background: var(--color-surface);
+    border: var(--border-width-1) solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+  }
+  .ds-usage-card__head {
+    padding: var(--space-100) var(--space-150);
+    font-weight: var(--font-weight-bold);
+    font-family: var(--font-primary);
+    border-bottom: var(--border-width-2) solid transparent;
+  }
+  .ds-usage-card__head--do {
+    background: var(--color-green-g50);
+    border-bottom-color: var(--color-green-g100);
+    color: var(--color-green-g400);
+  }
+  .ds-usage-card__head--dont {
+    background: var(--color-red-r50);
+    border-bottom-color: var(--color-red-r100);
+    color: var(--color-red-r400);
+  }
+  .ds-usage-card__list {
+    margin: 0;
+    padding: var(--space-150) var(--space-200) var(--space-200) var(--space-400);
+    color: var(--color-text-tertiary);
+    font-size: var(--text-body-small-regular-size);
+    line-height: var(--line-height-relaxed);
+    font-family: var(--font-primary);
+  }
+  .skip-link {
+    position: absolute;
+    left: var(--space-150);
+    top: -120%;
+    z-index: 10000;
+    padding: var(--space-100) var(--space-150);
+    background: var(--color-surface);
+    color: var(--color-text-primary);
+    border: var(--border-width-1) solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: none;
+    box-shadow: var(--shadow-md);
+  }
+  .skip-link:focus {
+    top: var(--space-150);
+    outline: none;
+    box-shadow: 0 0 0 var(--border-width-2) var(--color-blue-b200), var(--shadow-md);
+  }
 
   .code-block {
     margin: 0;
     padding: var(--space-200);
     overflow-x: auto;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
     font-family: var(--font-mono, ui-monospace, monospace);
     font-size: 12px;
     line-height: 1.6;
     color: var(--color-text-code);
     background: var(--color-neutral-n20);
+  }
+  .code-block code {
+    display: block;
+    min-width: 0;
+    white-space: pre;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
   }
   .code-tag { color: var(--color-blue-b400); }
   .code-attr { color: var(--color-blue-b300); }
@@ -154,11 +661,6 @@
   }
   .ds-hero-banner > * { position: relative; z-index: 1; }
 
-  .scroll-progress {
-    position: fixed; top: 0; left: 0; height: 2px;
-    background: linear-gradient(90deg, var(--color-primary-500) 0%, var(--color-info-300) 100%);
-    z-index: 99999; transition: width 80ms linear; pointer-events: none;
-  }
   .dark-toggle {
     display: inline-flex; align-items: center; justify-content: center;
     width: 32px; height: 32px; background: none; border: 1px solid var(--color-border);
@@ -169,7 +671,13 @@
   [data-theme="dark"] .dark-toggle .icon-sun { display: block; }
   [data-theme="dark"] .dark-toggle .icon-moon { display: none; }
   .scroll-top-btn {
-    position: fixed; bottom: 28px; right: 28px; width: 40px; height: 40px;
+    position: fixed;
+    bottom: calc(var(--space-300) + env(safe-area-inset-bottom, 0px));
+    right: calc(var(--space-300) + env(safe-area-inset-right, 0px));
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
     background: var(--color-primary-500); color: var(--color-neutral-n0); border: none;
     border-radius: var(--border-radius-full); cursor: pointer; display: flex;
     align-items: center; justify-content: center; opacity: 0; transform: translateY(12px);
@@ -182,11 +690,354 @@
     border: 1px solid var(--color-neutral-n30); border-radius: var(--border-radius-sm);
     color: var(--color-blue-b300);
   }
+
+  /* ── Page chrome (align foundations/colors) ── */
+  .page-home .main-content {
+    width: calc(100% - var(--sidebar-width));
+    max-width: calc(100% - var(--sidebar-width));
+    min-width: 0;
+    overflow-x: clip;
+    box-sizing: border-box;
+  }
+  .page-home .content-inner {
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .page-home .ds-doc-section,
+  .page-home .preview-card,
+  .page-home .ds-doc-blocks,
+  .page-home .ds-table-wrapper,
+  .page-home .ds-table-scroll,
+  .page-home .token-panel,
+  .page-home .code-panel,
+  .page-home .usage-grid-2,
+  .page-home .ds-usage-card {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .scroll-progress-bar {
+    position: fixed; top: 0; left: var(--sidebar-width); right: 0; height: 3px; width: 0%;
+    background: linear-gradient(90deg, var(--color-primary-500), var(--color-blue-b75));
+    z-index: 9999; transition: width 80ms linear; pointer-events: none;
+  }
+  .page-home .sidebar { background-color: var(--sidebar-bg); }
+  .page-home .sidebar-header { background-color: var(--sidebar-header-bg); border-bottom-color: var(--sidebar-border); }
+  .page-home .sidebar-brand-text .logo { color: var(--sidebar-logo-color); }
+  .page-home .sidebar-brand-text .version { color: var(--sidebar-version-color); }
+  .page-home .sidebar-close-btn { color: var(--sidebar-link-color); }
+  .page-home .sidebar-search { border-bottom-color: var(--sidebar-border); }
+  .page-home .search-input {
+    background-color: var(--sidebar-search-bg);
+    border-color: var(--sidebar-search-border);
+    color: var(--sidebar-link-color);
+  }
+  .page-home .search-input::placeholder { color: var(--sidebar-section-title); }
+  .page-home .search-input:focus {
+    border-color: var(--color-primary-500);
+    background-color: var(--sidebar-link-hover-bg);
+    color: var(--sidebar-link-hover-color);
+    box-shadow: 0 0 0 3px rgba(30, 127, 214, 0.15);
+  }
+  .page-home .nav-title { color: var(--sidebar-section-title); }
+  .page-home .nav-link {
+    color: var(--sidebar-link-color);
+    border-left: 2px solid transparent;
+    border-radius: var(--border-radius-md);
+  }
+  .page-home .nav-link:hover {
+    background-color: var(--sidebar-link-hover-bg);
+    color: var(--sidebar-link-hover-color);
+    border-left-color: rgba(30, 127, 214, 0.5);
+  }
+  .page-home .nav-link.active {
+    background-color: var(--sidebar-link-active-bg);
+    color: var(--sidebar-link-active-color);
+    border-left-color: var(--sidebar-link-active-border);
+  }
+  .page-home .nav-link svg { opacity: 0.6; }
+  .page-home .nav-link:hover svg,
+  .page-home .nav-link.active svg { opacity: 1; }
+  .page-home .sidebar-footer {
+    background-color: var(--sidebar-header-bg);
+    border-top-color: var(--sidebar-border);
+  }
+  .page-home .system-status-indicator { color: var(--color-success-400); }
+  .page-home .status-dot-live {
+    background: var(--color-success-400);
+    box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.25);
+  }
+  .page-home .tailwind-badge {
+    background: rgba(6, 182, 212, 0.08);
+    border-color: rgba(6, 182, 212, 0.2);
+    color: var(--color-secondary-300);
+  }
+  .topbar-section-label {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-tertiary);
+    letter-spacing: 0.02em;
+  }
+  .breadcrumb-sep-slash { color: var(--color-neutral-n200); margin: 0 6px; }
+  .topbar-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: var(--font-size-xs); font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary); text-decoration: none;
+    padding: 6px 10px; border-radius: var(--border-radius-md);
+    border: 1px solid var(--color-border);
+  }
+  .topbar-link:hover {
+    color: var(--color-primary-500);
+    border-color: var(--color-blue-b75);
+    background: var(--color-blue-b50);
+  }
+  .page-jump-nav {
+    display: flex; flex-wrap: wrap; gap: var(--space-050);
+    margin-bottom: var(--space-300);
+    padding-bottom: var(--space-150);
+    border-bottom: 1px solid var(--color-neutral-n30);
+  }
+  .page-jump-nav a {
+    padding: 6px 14px; border-radius: 9999px;
+    border: 1.5px solid var(--color-neutral-n40);
+    background: var(--color-surface);
+    font-size: var(--font-size-xs); font-weight: var(--font-weight-medium);
+    color: var(--color-neutral-n400); text-decoration: none;
+    transition: all 0.15s ease;
+  }
+  .page-jump-nav a:hover {
+    border-color: var(--color-primary-500);
+    color: var(--color-primary-500);
+    background: var(--color-blue-b50);
+  }
+  .page-jump-nav a:focus-visible {
+    outline: none;
+    border-color: var(--color-primary-500);
+    color: var(--color-primary-500);
+    background: var(--color-blue-b50);
+    box-shadow: 0 0 0 var(--border-width-2) var(--color-blue-b200);
+  }
+  .ds-doc-section {
+    margin-bottom: var(--space-400);
+    scroll-margin-top: 88px;
+  }
+  .ds-doc-section__head { margin-bottom: var(--space-150); }
+  .ds-doc-section__title-row {
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-100);
+    margin-bottom: var(--space-050);
+  }
+  .ds-doc-section__title {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-neutral-n900);
+    letter-spacing: -0.02em;
+  }
+  .ds-doc-section__badge {
+    font-size: 0.6875rem; font-weight: var(--font-weight-semibold);
+    color: var(--color-neutral-n500);
+    background: var(--color-neutral-n20);
+    padding: 3px 10px; border-radius: 9999px;
+    border: 1px solid var(--color-neutral-n30);
+  }
+  .ds-doc-blocks {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    gap: var(--space-200);
+    margin-top: var(--space-200);
+    min-width: 0;
+  }
+  .ds-doc-blocks > * {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .token-panel, .code-panel {
+    border: var(--border-width-1) solid var(--color-neutral-n30);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    background: var(--color-surface);
+    min-width: 0;
+    max-width: 100%;
+  }
+  .token-panel__head, .code-panel__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-100);
+    padding: var(--space-100) var(--space-150);
+    background: var(--color-neutral-n10);
+    border-bottom: var(--border-width-1) solid var(--color-neutral-n30);
+  }
+  .token-panel__title {
+    margin: 0;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-neutral-n900);
+  }
+  .code-panel__file {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-neutral-n500);
+    min-width: 0;
+    word-break: break-all;
+  }
+  .token-panel__body {
+    padding: var(--space-100) var(--space-150) var(--space-150);
+    display: grid;
+    gap: var(--space-100);
+  }
+  .token-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-100);
+    min-width: 0;
+  }
+  .token-row code {
+    font-size: 11px;
+    min-width: 0;
+    flex: 1 1 auto;
+    word-break: break-all;
+  }
+  .copy-btn {
+    flex-shrink: 0;
+    padding: 4px 12px;
+    background: var(--color-neutral-n20);
+    border: 1px solid var(--color-neutral-n40);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.6875rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-neutral-n500);
+    cursor: pointer;
+    font-family: var(--font-primary);
+    transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+  }
+  .copy-btn:hover {
+    background: var(--color-primary-500);
+    border-color: var(--color-primary-500);
+    color: var(--color-neutral-n0);
+  }
+  .preview-card {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+  .preview-card--table {
+    overflow: visible;
+  }
+  .preview-card--table .ds-table-scroll {
+    max-width: 100%;
+  }
+  .ds-table-footer {
+    justify-content: flex-end;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .ds-pagination { flex-wrap: wrap; justify-content: flex-end; }
+  @media (max-width: 1024px) {
+    .ds-doc-blocks { grid-template-columns: 1fr; }
+    .usage-grid-2 { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .page-home .main-content {
+      width: 100%;
+      max-width: 100%;
+    }
+    .scroll-progress-bar { left: 0; }
+    .ds-table-part-state {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .ds-table-col-preview {
+      max-width: 100%;
+    }
+  }
+  @media (max-width: 640px) {
+    .page-home .content-inner {
+      padding-left: var(--space-150);
+      padding-right: var(--space-150);
+    }
+    .preview-card.p-250 {
+      padding: var(--space-150) !important;
+    }
+    .ds-doc-section__title {
+      font-size: var(--font-size-base);
+    }
+    .ds-table-part-state {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-100);
+    }
+    .ds-table-part-state__preview {
+      padding: var(--space-075);
+      min-height: auto;
+    }
+    .ds-table-col-preview {
+      max-width: 100%;
+    }
+    .token-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .token-row .copy-btn {
+      align-self: flex-start;
+      min-height: 44px;
+      padding: var(--space-050) var(--space-150);
+    }
+    .code-panel__head {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .code-panel__head .copy-btn {
+      align-self: flex-start;
+      min-height: 44px;
+      padding: var(--space-050) var(--space-150);
+    }
+    .code-block {
+      padding: var(--space-150);
+      font-size: 11px;
+    }
+    .table-playground__controls {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .table-playground__select {
+      width: 100%;
+    }
+    .ds-usage-card__list {
+      padding: var(--space-150) var(--space-150) var(--space-200) var(--space-250);
+      font-size: var(--font-size-sm);
+    }
+    .usage-grid-2 {
+      gap: var(--space-150);
+    }
+    .ds-hero-banner .font-bold { font-size: var(--font-size-2xl) !important; }
+    .page-jump-nav { gap: var(--space-050); }
+    .page-jump-nav a {
+      min-height: 44px;
+      padding: var(--space-050) var(--space-100);
+      font-size: var(--font-size-xs);
+      display: inline-flex;
+      align-items: center;
+    }
+    .topbar-link span { display: none; }
+    .breadcrumb { font-size: var(--font-size-xs); }
+    th.ds-table-col-icon, th.ds-table-col-link, th.ds-table-col-status { white-space: nowrap; }
+    .ds-table--data { min-width: 32rem; }
+    .ds-table-footer { justify-content: center; }
+    .ds-pagination { justify-content: center; width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+  }
   </style>
 </head>
-<body>
+<body class="page-home">
 
-<div class="scroll-progress" id="scroll-progress" style="width:0%" role="progressbar" aria-hidden="true"></div>
+<a href="#main-content" class="skip-link">Lewati ke konten utama</a>
+
+<div id="scroll-progress" class="scroll-progress-bar" role="progressbar" aria-hidden="true"></div>
 
 <div class="container">
   <div id="sidebar-overlay" class="sidebar-overlay"></div>
@@ -281,6 +1132,10 @@
       </nav>
     </div>
     <div class="sidebar-footer">
+      <div class="system-status-indicator">
+        <div class="status-dot-live"></div>
+        <span>v2.0 — All Systems Active</span>
+      </div>
       <div class="tailwind-badge">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 6C9.33 6 7.67 7.33 7 10c1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35.98 1 2.09 2.15 4.59 2.15C19.67 12 21.33 10.67 22 8c-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C15.61 7.15 14.5 6 12 6zm-7 6c-2.67 0-4.33 1.33-5 4 1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35C6.39 17.15 7.5 18 10 18c2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C8.61 12.85 7.5 12 5 12z"/></svg>
         Built with tokens.css
@@ -288,19 +1143,21 @@
     </div>
   </aside>
 
-  <main class="main-content">
+  <main id="main-content" class="main-content">
     <div class="topbar">
       <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
       <div class="breadcrumb">
-        <a href="../../index.html">Home</a>
-        <span class="breadcrumb-sep">/</span>
-        <a href="#">Components</a>
-        <span class="breadcrumb-sep">/</span>
+        <span class="topbar-section-label">Components</span>
+        <span class="breadcrumb-sep-slash">/</span>
         <span class="current">Table</span>
       </div>
       <div class="topbar-actions">
+        <a href="https://github.com/zaenalaripin28/DS-Gpos-Lite-V2" class="topbar-link" target="_blank" rel="noopener noreferrer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          <span>GitHub</span>
+        </a>
         <button type="button" class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
           <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
           <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -320,44 +1177,59 @@
               <span class="text-xs font-semibold uppercase tracking-[0.1em] text-blue-b100">Components · DS GPOS Lite V2</span>
             </div>
             <div class="font-bold text-neutral-n0 mb-3" style="font-size:2.5rem; letter-spacing:-0.035em; line-height:1.04;">Table</div>
-            <p class="text-sm leading-relaxed max-w-xs mb-8" style="color:rgba(255,255,255,0.52); line-height:1.7;">
-              Komponen tabel dengan sort order indicator untuk header kolom. Tiga state: default, ascending, descending.
+            <p class="text-sm leading-relaxed max-w-md mb-8" style="color:rgba(255,255,255,0.52); line-height:1.7;">
+              Parts tabel (sort, header, cell, kolom) dan komponen lengkap dengan pagination. Semua token dari <code style="color:var(--color-blue-b100);background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.12);">tokens.css</code>.
             </p>
           </div>
           <div class="lg:w-80 lg:flex-shrink-0 p-250 flex items-center justify-center" style="background:rgba(255,255,255,0.03); border-left:1px solid rgba(255,255,255,0.07);">
             <div class="flex items-center gap-100">
-              <span class="ds-table-sort ds-table-sort--on-dark" aria-hidden="true">
-                <span class="ds-table-sort__chevron ds-table-sort__chevron--up"></span>
-                <span class="ds-table-sort__chevron ds-table-sort__chevron--down"></span>
+              <span class="ds-table-sort" aria-hidden="true">
+                <img class="ds-table-sort__icon" src="../../assets/icons/sortOrder%20=default.svg" alt="" width="16" height="16">
               </span>
-              <span class="ds-table-sort ds-table-sort--asc ds-table-sort--on-dark" aria-hidden="true">
-                <span class="ds-table-sort__chevron ds-table-sort__chevron--up"></span>
-                <span class="ds-table-sort__chevron ds-table-sort__chevron--down"></span>
+              <span class="ds-table-sort ds-table-sort--asc" aria-hidden="true">
+                <img class="ds-table-sort__icon" src="../../assets/icons/sortOrder=ascending.svg" alt="" width="16" height="16">
               </span>
-              <span class="ds-table-sort ds-table-sort--desc ds-table-sort--on-dark" aria-hidden="true">
-                <span class="ds-table-sort__chevron ds-table-sort__chevron--up"></span>
-                <span class="ds-table-sort__chevron ds-table-sort__chevron--down"></span>
+              <span class="ds-table-sort ds-table-sort--desc" aria-hidden="true">
+                <img class="ds-table-sort__icon" src="../../assets/icons/sortOrder=descending.svg" alt="" width="16" height="16">
               </span>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="table-sort-order-part" style="margin-bottom:48px;">
-        <h2>Sort Order Part</h2>
-        <p class="section-caption" style="margin-bottom:16px;">Indikator urutan kolom tabel (<code>Sort order</code>). Padding <code>var(--space-050)</code> vertikal · <code>calc(var(--space-050) + var(--space-025) / 2)</code> horizontal (4px × 5px). Ref: <code>Sort order-part.png</code>.</p>
+      <nav class="page-jump-nav" aria-label="Navigasi bagian Table">
+        <a href="#table-sort-order-part">Sort</a>
+        <a href="#table-header-part">Header</a>
+        <a href="#table-cell-part">Cell</a>
+        <a href="#table-cell-icon-part">Cell Icon</a>
+        <a href="#table-col-checkbox-part">Col Checkbox</a>
+        <a href="#table-col-text-part">Col Text</a>
+        <a href="#table-col-link-part">Col Link</a>
+        <a href="#table-col-status-part">Col Status</a>
+        <a href="#table-col-icon-part">Col Icon</a>
+        <a href="#table-component-part">Component</a>
+        <a href="#table-usage">Guide</a>
+      </nav>
+
+      <section id="table-sort-order-part" class="ds-doc-section">
+        <div class="ds-doc-section__head">
+          <div class="ds-doc-section__title-row">
+            <h2 class="ds-doc-section__title">Sort Order Part</h2>
+            <span class="ds-doc-section__badge">Part</span>
+          </div>
+          <p class="section-caption">Indikator urutan kolom dari <code>assets/icons</code>: <code>sortOrder =default.svg</code>, <code>sortOrder=ascending.svg</code>, <code>sortOrder=descending.svg</code>.</p>
+        </div>
         <div class="preview-card p-250">
           <div class="ds-table-part-states" role="list">
             <div class="ds-table-part-state" role="listitem">
               <div class="ds-table-part-state__meta">
                 <span class="ds-table-part-state__name">Default</span>
                 <span class="ds-table-part-state__class">.ds-table-sort</span>
-                <span class="ds-table-part-state__token">sortOrder=default · Color.Neutral.N50</span>
+                <span class="ds-table-part-state__token">sortOrder=default</span>
               </div>
               <div class="ds-table-part-state__preview">
-                <span class="ds-table-sort ds-table-sort--on-dark" aria-hidden="true">
-                  <span class="ds-table-sort__chevron ds-table-sort__chevron--up"></span>
-                  <span class="ds-table-sort__chevron ds-table-sort__chevron--down"></span>
+                <span class="ds-table-sort" aria-hidden="true">
+                  <img class="ds-table-sort__icon" src="../../assets/icons/sortOrder%20=default.svg" alt="" width="16" height="16">
                 </span>
               </div>
             </div>
@@ -365,12 +1237,11 @@
               <div class="ds-table-part-state__meta">
                 <span class="ds-table-part-state__name">Ascending</span>
                 <span class="ds-table-part-state__class">.ds-table-sort--asc</span>
-                <span class="ds-table-part-state__token">sortOrder=ascending · arrow up active</span>
+                <span class="ds-table-part-state__token">sortOrder=ascending</span>
               </div>
               <div class="ds-table-part-state__preview">
-                <span class="ds-table-sort ds-table-sort--asc ds-table-sort--on-dark" aria-hidden="true">
-                  <span class="ds-table-sort__chevron ds-table-sort__chevron--up"></span>
-                  <span class="ds-table-sort__chevron ds-table-sort__chevron--down"></span>
+                <span class="ds-table-sort ds-table-sort--asc" aria-hidden="true">
+                  <img class="ds-table-sort__icon" src="../../assets/icons/sortOrder=ascending.svg" alt="" width="16" height="16">
                 </span>
               </div>
             </div>
@@ -378,66 +1249,954 @@
               <div class="ds-table-part-state__meta">
                 <span class="ds-table-part-state__name">Descending</span>
                 <span class="ds-table-part-state__class">.ds-table-sort--desc</span>
-                <span class="ds-table-part-state__token">sortOrder=descending · arrow down active</span>
+                <span class="ds-table-part-state__token">sortOrder=descending</span>
               </div>
               <div class="ds-table-part-state__preview">
-                <span class="ds-table-sort ds-table-sort--desc ds-table-sort--on-dark" aria-hidden="true">
-                  <span class="ds-table-sort__chevron ds-table-sort__chevron--up"></span>
-                  <span class="ds-table-sort__chevron ds-table-sort__chevron--down"></span>
+                <span class="ds-table-sort ds-table-sort--desc" aria-hidden="true">
+                  <img class="ds-table-sort__icon" src="../../assets/icons/sortOrder=descending.svg" alt="" width="16" height="16">
                 </span>
               </div>
             </div>
           </div>
         </div>
-        <div style="margin-top:16px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:20px;">
-          <div style="font-size:11px;font-weight:700;color:var(--color-text-tertiary);font-family:var(--font-primary);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Referensi Figma</div>
-          <img src="figma/Sort order-part.png" alt="Referensi Figma Sort order" style="max-width:100%;height:auto;border-radius:8px;border:1px solid var(--color-neutral-n30);">
-        </div>
-      </section>
-
-      <section style="margin-bottom:48px;">
-        <h2>Kode DS</h2>
-        <p class="section-caption" style="margin-bottom:16px;">Salin markup siap pakai. Semua kelas memakai token dari <code>tokens.css</code>.</p>
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
-          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
-            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);">table-sort.html</span>
-            <button class="copy-btn" id="copy-code-btn" type="button" aria-label="Salin kode">Salin</button>
+        <div class="ds-doc-blocks">
+          <div class="token-panel">
+            <div class="token-panel__head"><h3 class="token-panel__title">Token Class</h3></div>
+            <div class="token-panel__body">
+              <div class="token-row"><code>.ds-table-sort</code><button class="copy-btn" type="button" data-copy="ds-table-sort" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-sort--asc</code><button class="copy-btn" type="button" data-copy="ds-table-sort ds-table-sort--asc" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-sort--desc</code><button class="copy-btn" type="button" data-copy="ds-table-sort ds-table-sort--desc" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-sort__icon</code><button class="copy-btn" type="button" data-copy="ds-table-sort__icon" onclick="copyToken(this)">Salin</button></div>
+            </div>
           </div>
-          <pre class="code-block" id="code-block"><code><span class="code-comment">&lt;!-- Sort order: default --&gt;</span>
+          <div class="code-panel">
+            <div class="code-panel__head">
+              <span class="code-panel__file">table-sort.html</span>
+              <button class="copy-btn" id="copy-code-btn" type="button" aria-label="Salin kode sort order">Salin</button>
+            </div>
+            <pre class="code-block" id="code-block"><code><span class="code-comment">&lt;!-- Sort order: default --&gt;</span>
 <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-sort"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>
-  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-sort__chevron ds-table-sort__chevron--up"</span><span class="code-tag">&gt;&lt;/span&gt;</span>
-  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-sort__chevron ds-table-sort__chevron--down"</span><span class="code-tag">&gt;&lt;/span&gt;</span>
+  <span class="code-tag">&lt;img</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-sort__icon"</span> <span class="code-attr">src</span>=<span class="code-string">"assets/icons/sortOrder =default.svg"</span> <span class="code-attr">alt</span>=<span class="code-string">""</span> <span class="code-attr">width</span>=<span class="code-string">"16"</span> <span class="code-attr">height</span>=<span class="code-string">"16"</span><span class="code-tag">&gt;</span>
 <span class="code-tag">&lt;/span&gt;</span>
 
-<span class="code-comment">&lt;!-- Sort order: ascending --&gt;</span>
-<span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-sort ds-table-sort--asc"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/span&gt;</span>
+<span class="code-comment">&lt;!-- Sort order: ascending (sortOrder=ascending.svg) --&gt;</span>
+<span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-sort ds-table-sort--asc"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;img</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-sort__icon"</span> <span class="code-attr">src</span>=<span class="code-string">"assets/icons/sortOrder=ascending.svg"</span> <span class="code-attr">alt</span>=<span class="code-string">""</span> <span class="code-attr">width</span>=<span class="code-string">"16"</span> <span class="code-attr">height</span>=<span class="code-string">"16"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;/span&gt;</span>
 
-<span class="code-comment">&lt;!-- Sort order: descending --&gt;</span>
-<span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-sort ds-table-sort--desc"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/span&gt;</span>
+<span class="code-comment">&lt;!-- Sort order: descending (sortOrder=descending.svg) --&gt;</span>
+<span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-sort ds-table-sort--desc"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;img</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-sort__icon"</span> <span class="code-attr">src</span>=<span class="code-string">"assets/icons/sortOrder=descending.svg"</span> <span class="code-attr">alt</span>=<span class="code-string">""</span> <span class="code-attr">width</span>=<span class="code-string">"16"</span> <span class="code-attr">height</span>=<span class="code-string">"16"</span><span class="code-tag">&gt;</span>
+<span class="code-tag">&lt;/span&gt;</span>
 
-<span class="code-comment">&lt;!-- Di table header (dark) --&gt;</span>
-<span class="code-tag">&lt;th</span> <span class="code-attr">scope</span>=<span class="code-string">"col"</span><span class="code-tag">&gt;</span>
-  Title
-  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-sort ds-table-sort--asc ds-table-sort--on-dark"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/span&gt;</span>
+<span class="code-comment">&lt;!-- Di table header --&gt;</span>
+<span class="code-tag">&lt;th</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-header-cell"</span> <span class="code-attr">scope</span>=<span class="code-string">"col"</span> <span class="code-attr">aria-sort</span>=<span class="code-string">"ascending"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-header-cell__label"</span><span class="code-tag">&gt;</span>Title<span class="code-tag">&lt;/span&gt;</span>
+  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-sort ds-table-sort--asc"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/span&gt;</span>
 <span class="code-tag">&lt;/th&gt;</span></code></pre>
+          </div>
         </div>
       </section>
 
-      <section style="margin-bottom:48px;">
-        <h2>Token Class</h2>
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:16px;display:grid;gap:10px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-table-sort</code><button class="copy-btn" type="button" data-copy="ds-table-sort" onclick="copyToken(this)">Salin</button></div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-table-sort--asc</code><button class="copy-btn" type="button" data-copy="ds-table-sort ds-table-sort--asc" onclick="copyToken(this)">Salin</button></div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-table-sort--desc</code><button class="copy-btn" type="button" data-copy="ds-table-sort ds-table-sort--desc" onclick="copyToken(this)">Salin</button></div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-table-sort--on-dark</code><button class="copy-btn" type="button" data-copy="ds-table-sort ds-table-sort--on-dark" onclick="copyToken(this)">Salin</button></div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-table-sort__chevron</code><button class="copy-btn" type="button" data-copy="ds-table-sort__chevron" onclick="copyToken(this)">Salin</button></div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-table-sort__chevron--up</code><button class="copy-btn" type="button" data-copy="ds-table-sort__chevron ds-table-sort__chevron--up" onclick="copyToken(this)">Salin</button></div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-table-sort__chevron--down</code><button class="copy-btn" type="button" data-copy="ds-table-sort__chevron ds-table-sort__chevron--down" onclick="copyToken(this)">Salin</button></div>
+      <section id="table-header-part" class="ds-doc-section">
+        <div class="ds-doc-section__head">
+          <div class="ds-doc-section__title-row">
+            <h2 class="ds-doc-section__title">Table Header Part</h2>
+            <span class="ds-doc-section__badge">Part</span>
+          </div>
+          <p class="section-caption">Sel header kolom — typography body small medium, border bawah. Variant default: label lalu sort order langsung setelah teks.</p>
+        </div>
+        <div class="preview-card p-250">
+          <div class="ds-table-part-states" role="list">
+            <div class="ds-table-part-state" role="listitem">
+              <div class="ds-table-part-state__meta">
+                <span class="ds-table-part-state__name">Default</span>
+                <span class="ds-table-part-state__class">.ds-table-header-cell</span>
+                <span class="ds-table-part-state__token">content=default · label + sort order</span>
+              </div>
+              <div class="ds-table-part-state__preview">
+                <div class="ds-table-header-cell-preview">
+                  <div class="ds-table-header-cell" role="columnheader">
+                    <span class="ds-table-header-cell__label">Title</span>
+                    <span class="ds-table-sort" aria-hidden="true">
+                      <img class="ds-table-sort__icon" src="../../assets/icons/sortOrder%20=default.svg" alt="" width="16" height="16">
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ds-table-part-state" role="listitem">
+              <div class="ds-table-part-state__meta">
+                <span class="ds-table-part-state__name">Empty</span>
+                <span class="ds-table-part-state__class">.ds-table-header-cell--empty</span>
+                <span class="ds-table-part-state__token">content=empty · border only</span>
+              </div>
+              <div class="ds-table-part-state__preview">
+                <div class="ds-table-header-cell-preview">
+                  <div class="ds-table-header-cell ds-table-header-cell--empty" role="columnheader" aria-label="Kolom kosong"></div>
+                </div>
+              </div>
+            </div>
+            <div class="ds-table-part-state" role="listitem">
+              <div class="ds-table-part-state__meta">
+                <span class="ds-table-part-state__name">Checkbox</span>
+                <span class="ds-table-part-state__class">.ds-table-header-cell + __checkbox</span>
+                <span class="ds-table-part-state__token">content=checkbox · select-all slot</span>
+              </div>
+              <div class="ds-table-part-state__preview">
+                <div class="ds-table-header-cell-preview">
+                  <div class="ds-table-header-cell" role="columnheader">
+                    <label class="ds-table-header-cell__checkbox-wrap">
+                      <input type="checkbox" class="ds-table-header-cell__checkbox-input" aria-label="Pilih semua baris">
+                      <span class="ds-table-header-cell__checkbox" aria-hidden="true"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-doc-blocks">
+          <div class="token-panel">
+            <div class="token-panel__head"><h3 class="token-panel__title">Token Class</h3></div>
+            <div class="token-panel__body">
+              <div class="token-row"><code>.ds-table-header-cell</code><button class="copy-btn" type="button" data-copy="ds-table-header-cell" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-header-cell--empty</code><button class="copy-btn" type="button" data-copy="ds-table-header-cell ds-table-header-cell--empty" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-header-cell__label</code><button class="copy-btn" type="button" data-copy="ds-table-header-cell__label" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-header-cell__checkbox</code><button class="copy-btn" type="button" data-copy="ds-table-header-cell__checkbox" onclick="copyToken(this)">Salin</button></div>
+            </div>
+          </div>
+          <div class="code-panel">
+            <div class="code-panel__head">
+              <span class="code-panel__file">table-header.html</span>
+              <button class="copy-btn" id="copy-header-code-btn" type="button" aria-label="Salin kode table header">Salin</button>
+            </div>
+            <pre class="code-block" id="code-block-header"><code><span class="code-comment">&lt;!-- Header: default (title + sort) --&gt;</span>
+<span class="code-tag">&lt;th</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-header-cell"</span> <span class="code-attr">scope</span>=<span class="code-string">"col"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-header-cell__label"</span><span class="code-tag">&gt;</span>Title<span class="code-tag">&lt;/span&gt;</span>
+  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-sort"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;img</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-sort__icon"</span> <span class="code-attr">src</span>=<span class="code-string">"assets/icons/sortOrder =default.svg"</span> <span class="code-attr">alt</span>=<span class="code-string">""</span> <span class="code-attr">width</span>=<span class="code-string">"16"</span> <span class="code-attr">height</span>=<span class="code-string">"16"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;/span&gt;</span>
+<span class="code-tag">&lt;/th&gt;</span>
+
+<span class="code-comment">&lt;!-- Header: empty --&gt;</span>
+<span class="code-tag">&lt;th</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-header-cell ds-table-header-cell--empty"</span> <span class="code-attr">scope</span>=<span class="code-string">"col"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Kolom kosong"</span><span class="code-tag">&gt;&lt;/th&gt;</span>
+
+<span class="code-comment">&lt;!-- Header: checkbox (select all) --&gt;</span>
+<span class="code-tag">&lt;th</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-header-cell"</span> <span class="code-attr">scope</span>=<span class="code-string">"col"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;label</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-header-cell__checkbox-wrap"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;input</span> <span class="code-attr">type</span>=<span class="code-string">"checkbox"</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-header-cell__checkbox-input"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Pilih semua baris"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-header-cell__checkbox"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;&lt;/span&gt;</span>
+  <span class="code-tag">&lt;/label&gt;</span>
+<span class="code-tag">&lt;/th&gt;</span>
+
+<span class="code-comment">&lt;!-- Header: sorted ascending --&gt;</span>
+<span class="code-tag">&lt;th</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-header-cell"</span> <span class="code-attr">scope</span>=<span class="code-string">"col"</span> <span class="code-attr">aria-sort</span>=<span class="code-string">"ascending"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-header-cell__label"</span><span class="code-tag">&gt;</span>Title<span class="code-tag">&lt;/span&gt;</span>
+  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-sort ds-table-sort--asc"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;img</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-sort__icon"</span> <span class="code-attr">src</span>=<span class="code-string">"assets/icons/sortOrder=ascending.svg"</span> <span class="code-attr">alt</span>=<span class="code-string">""</span> <span class="code-attr">width</span>=<span class="code-string">"16"</span> <span class="code-attr">height</span>=<span class="code-string">"16"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;/span&gt;</span>
+<span class="code-tag">&lt;/th&gt;</span></code></pre>
+          </div>
         </div>
       </section>
+
+      <section id="table-cell-part" class="ds-doc-section">
+        <div class="ds-doc-section__head">
+          <div class="ds-doc-section__title-row">
+            <h2 class="ds-doc-section__title">Cell Part</h2>
+            <span class="ds-doc-section__badge">Part</span>
+          </div>
+          <p class="section-caption">Sel body tabel (<code>Cell / Master</code>) — lead icon, teks utama body small medium, deskripsi body small regular (<code>Text.Subtle</code>).</p>
+        </div>
+        <div class="preview-card p-250">
+          <div class="ds-table-part-states" role="list">
+            <div class="ds-table-part-state" role="listitem">
+              <div class="ds-table-part-state__meta">
+                <span class="ds-table-part-state__name">Default</span>
+                <span class="ds-table-part-state__class">.ds-table-cell</span>
+                <span class="ds-table-part-state__token">Background — transparent · Border.Subtle</span>
+              </div>
+              <div class="ds-table-part-state__preview">
+                <div class="ds-table-cell-preview">
+                  <div class="ds-table-cell">
+                    <img class="ds-table-cell__icon" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true">
+                    <div class="ds-table-cell__content">
+                      <span class="ds-table-cell__text">Text</span>
+                      <span class="ds-table-cell__description">Description</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ds-table-part-state" role="listitem">
+              <div class="ds-table-part-state__meta">
+                <span class="ds-table-part-state__name">Hover</span>
+                <span class="ds-table-part-state__class">.ds-table-cell--hover</span>
+                <span class="ds-table-part-state__token">Background.Neutral.Hover (N20)</span>
+              </div>
+              <div class="ds-table-part-state__preview">
+                <div class="ds-table-cell-preview">
+                  <div class="ds-table-cell ds-table-cell--hover">
+                    <img class="ds-table-cell__icon" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true">
+                    <div class="ds-table-cell__content">
+                      <span class="ds-table-cell__text">Text</span>
+                      <span class="ds-table-cell__description">Description</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ds-table-part-state" role="listitem">
+              <div class="ds-table-part-state__meta">
+                <span class="ds-table-part-state__name">Focused</span>
+                <span class="ds-table-part-state__class">.ds-table-cell--focused</span>
+                <span class="ds-table-part-state__token">Border.Focused (B200)</span>
+              </div>
+              <div class="ds-table-part-state__preview">
+                <div class="ds-table-cell-preview">
+                  <div class="ds-table-cell ds-table-cell--focused">
+                    <img class="ds-table-cell__icon" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true">
+                    <div class="ds-table-cell__content">
+                      <span class="ds-table-cell__text">Text</span>
+                      <span class="ds-table-cell__description">Description</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-doc-blocks">
+          <div class="token-panel">
+            <div class="token-panel__head"><h3 class="token-panel__title">Token Class</h3></div>
+            <div class="token-panel__body">
+              <div class="token-row"><code>.ds-table-cell</code><button class="copy-btn" type="button" data-copy="ds-table-cell" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-cell--hover</code><button class="copy-btn" type="button" data-copy="ds-table-cell ds-table-cell--hover" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-cell--focused</code><button class="copy-btn" type="button" data-copy="ds-table-cell ds-table-cell--focused" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-cell__icon</code><button class="copy-btn" type="button" data-copy="ds-table-cell__icon" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-cell__text</code><button class="copy-btn" type="button" data-copy="ds-table-cell__text" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-cell__description</code><button class="copy-btn" type="button" data-copy="ds-table-cell__description" onclick="copyToken(this)">Salin</button></div>
+            </div>
+          </div>
+          <div class="code-panel">
+            <div class="code-panel__head">
+              <span class="code-panel__file">table-cell.html</span>
+              <button class="copy-btn" id="copy-cell-code-btn" type="button" aria-label="Salin kode table cell">Salin</button>
+            </div>
+            <pre class="code-block" id="code-block-cell"><code><span class="code-comment">&lt;!-- Cell: default --&gt;</span>
+<span class="code-tag">&lt;td</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-cell"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;img</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-cell__icon"</span> <span class="code-attr">src</span>=<span class="code-string">"assets/icons/icon-shopping-bag.svg"</span> <span class="code-attr">alt</span>=<span class="code-string">""</span> <span class="code-attr">width</span>=<span class="code-string">"24"</span> <span class="code-attr">height</span>=<span class="code-string">"24"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-cell__content"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-cell__text"</span><span class="code-tag">&gt;</span>Text<span class="code-tag">&lt;/span&gt;</span>
+    <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-cell__description"</span><span class="code-tag">&gt;</span>Description<span class="code-tag">&lt;/span&gt;</span>
+  <span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;/td&gt;</span>
+
+<span class="code-comment">&lt;!-- Cell: hover --&gt;</span>
+<span class="code-tag">&lt;td</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-cell ds-table-cell--hover"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/td&gt;</span>
+
+<span class="code-comment">&lt;!-- Cell: focused --&gt;</span>
+<span class="code-tag">&lt;td</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-cell ds-table-cell--focused"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/td&gt;</span></code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="table-cell-icon-part" class="ds-doc-section">
+        <div class="ds-doc-section__head">
+          <div class="ds-doc-section__title-row">
+            <h2 class="ds-doc-section__title">Cell Icon Part</h2>
+            <span class="ds-doc-section__badge">Part</span>
+          </div>
+          <p class="section-caption">Sel tabel khusus ikon (<code>Cell / Icon</code>) — grup ikon horizontal 24px, gap <code>var(--space-100)</code>.</p>
+        </div>
+        <div class="preview-card p-250">
+          <div class="ds-table-part-states" role="list">
+            <div class="ds-table-part-state" role="listitem">
+              <div class="ds-table-part-state__meta">
+                <span class="ds-table-part-state__name">Default</span>
+                <span class="ds-table-part-state__class">.ds-table-cell-icon</span>
+                <span class="ds-table-part-state__token">content=icon · gap Space.100</span>
+              </div>
+              <div class="ds-table-part-state__preview">
+                <div class="ds-table-cell-icon-preview">
+                  <div class="ds-table-cell-icon">
+                    <div class="ds-table-cell-icon__group">
+                      <img class="ds-table-cell-icon__icon" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true">
+                      <img class="ds-table-cell-icon__icon" src="../../assets/icons/icon-pencil.svg" alt="" width="24" height="24" aria-hidden="true">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-doc-blocks">
+          <div class="token-panel">
+            <div class="token-panel__head"><h3 class="token-panel__title">Token Class</h3></div>
+            <div class="token-panel__body">
+              <div class="token-row"><code>.ds-table-cell-icon</code><button class="copy-btn" type="button" data-copy="ds-table-cell-icon" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-cell-icon__group</code><button class="copy-btn" type="button" data-copy="ds-table-cell-icon__group" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-cell-icon__icon</code><button class="copy-btn" type="button" data-copy="ds-table-cell-icon__icon" onclick="copyToken(this)">Salin</button></div>
+            </div>
+          </div>
+          <div class="code-panel">
+            <div class="code-panel__head">
+              <span class="code-panel__file">table-cell-icon.html</span>
+              <button class="copy-btn" id="copy-cell-icon-code-btn" type="button" aria-label="Salin kode table cell icon">Salin</button>
+            </div>
+            <pre class="code-block" id="code-block-cell-icon"><code><span class="code-comment">&lt;!-- Cell / Icon --&gt;</span>
+<span class="code-tag">&lt;td</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-cell-icon"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-cell-icon__group"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;img</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-cell-icon__icon"</span> <span class="code-attr">src</span>=<span class="code-string">"assets/icons/icon-shopping-bag.svg"</span> <span class="code-attr">alt</span>=<span class="code-string">""</span> <span class="code-attr">width</span>=<span class="code-string">"24"</span> <span class="code-attr">height</span>=<span class="code-string">"24"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;img</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-cell-icon__icon"</span> <span class="code-attr">src</span>=<span class="code-string">"assets/icons/icon-pencil.svg"</span> <span class="code-attr">alt</span>=<span class="code-string">""</span> <span class="code-attr">width</span>=<span class="code-string">"24"</span> <span class="code-attr">height</span>=<span class="code-string">"24"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;/td&gt;</span></code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="table-col-checkbox-part" class="ds-doc-section">
+        <div class="ds-doc-section__head">
+          <div class="ds-doc-section__title-row">
+            <h2 class="ds-doc-section__title">Column Checkbox Part</h2>
+            <span class="ds-doc-section__badge">Part</span>
+          </div>
+          <p class="section-caption">Kolom seleksi baris (<code>Column / Checkbox</code>) — checkbox 16px, sel rata tengah.</p>
+        </div>
+        <div class="preview-card p-250">
+          <div class="ds-table-part-states" role="list">
+            <div class="ds-table-part-state" role="listitem">
+              <div class="ds-table-part-state__meta">
+                <span class="ds-table-part-state__name">Default</span>
+                <span class="ds-table-part-state__class">.ds-table-col-checkbox</span>
+                <span class="ds-table-part-state__token">checkbox 16px · center</span>
+              </div>
+              <div class="ds-table-part-state__preview">
+                <div class="ds-table-col-preview">
+                  <div class="ds-table-col-checkbox" role="presentation">
+                    <div class="ds-table-col__row ds-table-col-checkbox__row">
+                      <label class="ds-table-col-checkbox__wrap">
+                        <input type="checkbox" class="ds-table-col-checkbox__input" aria-label="Pilih baris">
+                        <span class="ds-table-col-checkbox__box" aria-hidden="true"></span>
+                      </label>
+                    </div>
+                    <div class="ds-table-col__row ds-table-col-checkbox__row">
+                      <label class="ds-table-col-checkbox__wrap">
+                        <input type="checkbox" class="ds-table-col-checkbox__input" aria-label="Pilih baris">
+                        <span class="ds-table-col-checkbox__box" aria-hidden="true"></span>
+                      </label>
+                    </div>
+                    <div class="ds-table-col__row ds-table-col-checkbox__row">
+                      <label class="ds-table-col-checkbox__wrap">
+                        <input type="checkbox" class="ds-table-col-checkbox__input" aria-label="Pilih baris">
+                        <span class="ds-table-col-checkbox__box" aria-hidden="true"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ds-table-part-state" role="listitem">
+              <div class="ds-table-part-state__meta">
+                <span class="ds-table-part-state__name">Hover</span>
+                <span class="ds-table-part-state__class">.ds-table-col-checkbox--hover</span>
+                <span class="ds-table-part-state__token">Background.Neutral.Hover (N20)</span>
+              </div>
+              <div class="ds-table-part-state__preview">
+                <div class="ds-table-col-preview">
+                  <div class="ds-table-col-checkbox" role="presentation">
+                    <div class="ds-table-col__row ds-table-col-checkbox__row ds-table-col-checkbox--hover">
+                      <label class="ds-table-col-checkbox__wrap">
+                        <input type="checkbox" class="ds-table-col-checkbox__input" aria-label="Pilih baris">
+                        <span class="ds-table-col-checkbox__box" aria-hidden="true"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-doc-blocks">
+          <div class="token-panel">
+            <div class="token-panel__head"><h3 class="token-panel__title">Token Class</h3></div>
+            <div class="token-panel__body">
+              <div class="token-row"><code>.ds-table-col-checkbox</code><button class="copy-btn" type="button" data-copy="ds-table-col-checkbox" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-col-checkbox--hover</code><button class="copy-btn" type="button" data-copy="ds-table-col-checkbox ds-table-col-checkbox--hover" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-col-checkbox__box</code><button class="copy-btn" type="button" data-copy="ds-table-col-checkbox__box" onclick="copyToken(this)">Salin</button></div>
+            </div>
+          </div>
+          <div class="code-panel">
+            <div class="code-panel__head">
+              <span class="code-panel__file">table-col-checkbox.html</span>
+              <button class="copy-btn" id="copy-col-checkbox-code-btn" type="button" aria-label="Salin kode column checkbox">Salin</button>
+            </div>
+            <pre class="code-block" id="code-block-col-checkbox"><code><span class="code-comment">&lt;!-- Column / Checkbox — body cell --&gt;</span>
+<span class="code-tag">&lt;td</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-checkbox"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;label</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-checkbox__wrap"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;input</span> <span class="code-attr">type</span>=<span class="code-string">"checkbox"</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-checkbox__input"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Pilih baris"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-checkbox__box"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;&lt;/span&gt;</span>
+  <span class="code-tag">&lt;/label&gt;</span>
+<span class="code-tag">&lt;/td&gt;</span>
+
+<span class="code-comment">&lt;!-- Column / Checkbox — hover --&gt;</span>
+<span class="code-tag">&lt;td</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-checkbox ds-table-col-checkbox--hover"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/td&gt;</span></code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="table-col-text-part" class="ds-doc-section">
+        <div class="ds-doc-section__head">
+          <div class="ds-doc-section__title-row">
+            <h2 class="ds-doc-section__title">Column Text Part</h2>
+            <span class="ds-doc-section__badge">Part</span>
+          </div>
+          <p class="section-caption">Kolom teks (<code>Column / Text</code>) — header <code>Title</code> + sel body teks primary.</p>
+        </div>
+        <div class="preview-card p-250">
+          <div class="ds-table-part-states" role="list">
+            <div class="ds-table-part-state" role="listitem">
+              <div class="ds-table-part-state__meta">
+                <span class="ds-table-part-state__name">Default</span>
+                <span class="ds-table-part-state__class">.ds-table-col-text</span>
+                <span class="ds-table-part-state__token">Text.Primary · Body.Small.Medium</span>
+              </div>
+              <div class="ds-table-part-state__preview">
+                <div class="ds-table-col-preview">
+                  <div class="ds-table-col-text" role="presentation">
+                    <div class="ds-table-col__header">Title</div>
+                    <div class="ds-table-col__row"><span class="ds-table-col-text__label">Text</span></div>
+                    <div class="ds-table-col__row"><span class="ds-table-col-text__label">Text</span></div>
+                    <div class="ds-table-col__row"><span class="ds-table-col-text__label">Text</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ds-table-part-state" role="listitem">
+              <div class="ds-table-part-state__meta">
+                <span class="ds-table-part-state__name">Hover</span>
+                <span class="ds-table-part-state__class">.ds-table-col-text--hover</span>
+                <span class="ds-table-part-state__token">Background.Neutral.Hover (N20)</span>
+              </div>
+              <div class="ds-table-part-state__preview">
+                <div class="ds-table-col-preview">
+                  <div class="ds-table-col-text" role="presentation">
+                    <div class="ds-table-col__header">Title</div>
+                    <div class="ds-table-col__row ds-table-col-text--hover"><span class="ds-table-col-text__label">Text</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ds-table-part-state" role="listitem">
+              <div class="ds-table-part-state__meta">
+                <span class="ds-table-part-state__name">Focused</span>
+                <span class="ds-table-part-state__class">.ds-table-col-text--focused</span>
+                <span class="ds-table-part-state__token">Border.Focused (B200)</span>
+              </div>
+              <div class="ds-table-part-state__preview">
+                <div class="ds-table-col-preview">
+                  <div class="ds-table-col-text" role="presentation">
+                    <div class="ds-table-col__header">Title</div>
+                    <div class="ds-table-col__row ds-table-col-text--focused"><span class="ds-table-col-text__label">Text</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-doc-blocks">
+          <div class="token-panel">
+            <div class="token-panel__head"><h3 class="token-panel__title">Token Class</h3></div>
+            <div class="token-panel__body">
+              <div class="token-row"><code>.ds-table-col-text</code><button class="copy-btn" type="button" data-copy="ds-table-col-text" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-col-text--hover</code><button class="copy-btn" type="button" data-copy="ds-table-col-text ds-table-col-text--hover" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-col-text--focused</code><button class="copy-btn" type="button" data-copy="ds-table-col-text ds-table-col-text--focused" onclick="copyToken(this)">Salin</button></div>
+            </div>
+          </div>
+          <div class="code-panel">
+            <div class="code-panel__head">
+              <span class="code-panel__file">table-col-text.html</span>
+              <button class="copy-btn" id="copy-col-text-code-btn" type="button" aria-label="Salin kode column text">Salin</button>
+            </div>
+            <pre class="code-block" id="code-block-col-text"><code><span class="code-comment">&lt;!-- Column / Text — header --&gt;</span>
+<span class="code-tag">&lt;th</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-text"</span> <span class="code-attr">scope</span>=<span class="code-string">"col"</span><span class="code-tag">&gt;</span>Title<span class="code-tag">&lt;/th&gt;</span>
+
+<span class="code-comment">&lt;!-- Column / Text — body --&gt;</span>
+<span class="code-tag">&lt;td</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-text"</span><span class="code-tag">&gt;</span>Text<span class="code-tag">&lt;/td&gt;</span>
+
+<span class="code-comment">&lt;!-- Column / Text — hover --&gt;</span>
+<span class="code-tag">&lt;td</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-text ds-table-col-text--hover"</span><span class="code-tag">&gt;</span>Text<span class="code-tag">&lt;/td&gt;</span>
+
+<span class="code-comment">&lt;!-- Column / Text — focused --&gt;</span>
+<span class="code-tag">&lt;td</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-text ds-table-col-text--focused"</span><span class="code-tag">&gt;</span>Text<span class="code-tag">&lt;/td&gt;</span></code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="table-col-link-part" class="ds-doc-section">
+        <div class="ds-doc-section__head">
+          <div class="ds-doc-section__title-row">
+            <h2 class="ds-doc-section__title">Column Link Part</h2>
+            <span class="ds-doc-section__badge">Part</span>
+          </div>
+          <p class="section-caption">Kolom tautan (<code>Column / Link</code>) — teks link <code>var(--color-blue-b300)</code>.</p>
+        </div>
+        <div class="preview-card p-250">
+          <div class="ds-table-part-states" role="list">
+            <div class="ds-table-part-state" role="listitem">
+              <div class="ds-table-part-state__meta">
+                <span class="ds-table-part-state__name">Default</span>
+                <span class="ds-table-part-state__class">.ds-table-col-link</span>
+                <span class="ds-table-part-state__token">Text.Link · B300</span>
+              </div>
+              <div class="ds-table-part-state__preview">
+                <div class="ds-table-col-preview">
+                  <div class="ds-table-col-link" role="presentation">
+                    <div class="ds-table-col__header">Title</div>
+                    <div class="ds-table-col__row"><a class="ds-table-col-link__anchor" href="#">Text</a></div>
+                    <div class="ds-table-col__row"><a class="ds-table-col-link__anchor" href="#">Text</a></div>
+                    <div class="ds-table-col__row"><a class="ds-table-col-link__anchor" href="#">Text</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ds-table-part-state" role="listitem">
+              <div class="ds-table-part-state__meta">
+                <span class="ds-table-part-state__name">Hover</span>
+                <span class="ds-table-part-state__class">.ds-table-col-link--hover</span>
+                <span class="ds-table-part-state__token">Background.Neutral.Hover (N20)</span>
+              </div>
+              <div class="ds-table-part-state__preview">
+                <div class="ds-table-col-preview">
+                  <div class="ds-table-col-link" role="presentation">
+                    <div class="ds-table-col__header">Title</div>
+                    <div class="ds-table-col__row ds-table-col-link--hover"><a class="ds-table-col-link__anchor" href="#">Text</a></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-doc-blocks">
+          <div class="token-panel">
+            <div class="token-panel__head"><h3 class="token-panel__title">Token Class</h3></div>
+            <div class="token-panel__body">
+              <div class="token-row"><code>.ds-table-col-link</code><button class="copy-btn" type="button" data-copy="ds-table-col-link" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-col-link--hover</code><button class="copy-btn" type="button" data-copy="ds-table-col-link ds-table-col-link--hover" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-col-link__anchor</code><button class="copy-btn" type="button" data-copy="ds-table-col-link__anchor" onclick="copyToken(this)">Salin</button></div>
+            </div>
+          </div>
+          <div class="code-panel">
+            <div class="code-panel__head">
+              <span class="code-panel__file">table-col-link.html</span>
+              <button class="copy-btn" id="copy-col-link-code-btn" type="button" aria-label="Salin kode column link">Salin</button>
+            </div>
+            <pre class="code-block" id="code-block-col-link"><code><span class="code-comment">&lt;!-- Column / Link — header --&gt;</span>
+<span class="code-tag">&lt;th</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-link"</span> <span class="code-attr">scope</span>=<span class="code-string">"col"</span><span class="code-tag">&gt;</span>Title<span class="code-tag">&lt;/th&gt;</span>
+
+<span class="code-comment">&lt;!-- Column / Link — body --&gt;</span>
+<span class="code-tag">&lt;td</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-link"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;a</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-link__anchor"</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span><span class="code-tag">&gt;</span>Text<span class="code-tag">&lt;/a&gt;</span>
+<span class="code-tag">&lt;/td&gt;</span>
+
+<span class="code-comment">&lt;!-- Column / Link — hover --&gt;</span>
+<span class="code-tag">&lt;td</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-link ds-table-col-link--hover"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/td&gt;</span></code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="table-col-status-part" class="ds-doc-section">
+        <div class="ds-doc-section__head">
+          <div class="ds-doc-section__title-row">
+            <h2 class="ds-doc-section__title">Column Status Part</h2>
+            <span class="ds-doc-section__badge">Part</span>
+          </div>
+          <p class="section-caption">Kolom status (<code>Column / Status</code>) — memakai <code>.ds-lozenge</code> dari komponen Lozenge.</p>
+        </div>
+        <div class="preview-card p-250">
+          <div class="ds-table-part-states" role="list">
+            <div class="ds-table-part-state" role="listitem">
+              <div class="ds-table-part-state__meta">
+                <span class="ds-table-part-state__name">Default</span>
+                <span class="ds-table-part-state__class">.ds-table-col-status</span>
+                <span class="ds-table-part-state__token">.ds-lozenge--default</span>
+              </div>
+              <div class="ds-table-part-state__preview">
+                <div class="ds-table-col-preview">
+                  <div class="ds-table-col-status" role="presentation">
+                    <div class="ds-table-col__header">Title</div>
+                    <div class="ds-table-col__row"><span class="ds-lozenge ds-lozenge--default">LABEL</span></div>
+                    <div class="ds-table-col__row"><span class="ds-lozenge ds-lozenge--default">LABEL</span></div>
+                    <div class="ds-table-col__row"><span class="ds-lozenge ds-lozenge--default">LABEL</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ds-table-part-state" role="listitem">
+              <div class="ds-table-part-state__meta">
+                <span class="ds-table-part-state__name">Hover</span>
+                <span class="ds-table-part-state__class">.ds-table-col-status--hover</span>
+                <span class="ds-table-part-state__token">Background.Neutral.Hover (N20)</span>
+              </div>
+              <div class="ds-table-part-state__preview">
+                <div class="ds-table-col-preview">
+                  <div class="ds-table-col-status" role="presentation">
+                    <div class="ds-table-col__header">Title</div>
+                    <div class="ds-table-col__row ds-table-col-status--hover"><span class="ds-lozenge ds-lozenge--default">LABEL</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-doc-blocks">
+          <div class="token-panel">
+            <div class="token-panel__head"><h3 class="token-panel__title">Token Class</h3></div>
+            <div class="token-panel__body">
+              <div class="token-row"><code>.ds-table-col-status</code><button class="copy-btn" type="button" data-copy="ds-table-col-status" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-col-status--hover</code><button class="copy-btn" type="button" data-copy="ds-table-col-status ds-table-col-status--hover" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-lozenge--default</code><button class="copy-btn" type="button" data-copy="ds-lozenge ds-lozenge--default" onclick="copyToken(this)">Salin</button></div>
+            </div>
+          </div>
+          <div class="code-panel">
+            <div class="code-panel__head">
+              <span class="code-panel__file">table-col-status.html</span>
+              <button class="copy-btn" id="copy-col-status-code-btn" type="button" aria-label="Salin kode column status">Salin</button>
+            </div>
+            <pre class="code-block" id="code-block-col-status"><code><span class="code-comment">&lt;!-- Column / Status — header --&gt;</span>
+<span class="code-tag">&lt;th</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-status"</span> <span class="code-attr">scope</span>=<span class="code-string">"col"</span><span class="code-tag">&gt;</span>Title<span class="code-tag">&lt;/th&gt;</span>
+
+<span class="code-comment">&lt;!-- Column / Status — body (Lozenge) --&gt;</span>
+<span class="code-tag">&lt;td</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-status"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-lozenge ds-lozenge--default"</span><span class="code-tag">&gt;</span>LABEL<span class="code-tag">&lt;/span&gt;</span>
+<span class="code-tag">&lt;/td&gt;</span>
+
+<span class="code-comment">&lt;!-- Column / Status — hover --&gt;</span>
+<span class="code-tag">&lt;td</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-status ds-table-col-status--hover"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/td&gt;</span></code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="table-col-icon-part" class="ds-doc-section">
+        <div class="ds-doc-section__head">
+          <div class="ds-doc-section__title-row">
+            <h2 class="ds-doc-section__title">Column Icon Part</h2>
+            <span class="ds-doc-section__badge">Part</span>
+          </div>
+          <p class="section-caption">Kolom aksi ikon (<code>Column / Icon</code>) — dua ikon 24px rata tengah, gap <code>var(--space-100)</code>.</p>
+        </div>
+        <div class="preview-card p-250">
+          <div class="ds-table-part-states" role="list">
+            <div class="ds-table-part-state" role="listitem">
+              <div class="ds-table-part-state__meta">
+                <span class="ds-table-part-state__name">Default</span>
+                <span class="ds-table-part-state__class">.ds-table-col-icon</span>
+                <span class="ds-table-part-state__token">icon 24px · gap Space.100</span>
+              </div>
+              <div class="ds-table-part-state__preview">
+                <div class="ds-table-col-preview">
+                  <div class="ds-table-col-icon" role="presentation">
+                    <div class="ds-table-col__header">Title</div>
+                    <div class="ds-table-col__row ds-table-col-icon__row">
+                      <div class="ds-table-col-icon__group">
+                        <img class="ds-table-col-icon__icon" src="../../assets/icons/icon-lock-closed.svg" alt="" width="24" height="24" aria-hidden="true">
+                        <img class="ds-table-col-icon__icon" src="../../assets/icons/icon-pencil.svg" alt="" width="24" height="24" aria-hidden="true">
+                      </div>
+                    </div>
+                    <div class="ds-table-col__row ds-table-col-icon__row">
+                      <div class="ds-table-col-icon__group">
+                        <img class="ds-table-col-icon__icon" src="../../assets/icons/icon-lock-closed.svg" alt="" width="24" height="24" aria-hidden="true">
+                        <img class="ds-table-col-icon__icon" src="../../assets/icons/icon-pencil.svg" alt="" width="24" height="24" aria-hidden="true">
+                      </div>
+                    </div>
+                    <div class="ds-table-col__row ds-table-col-icon__row">
+                      <div class="ds-table-col-icon__group">
+                        <img class="ds-table-col-icon__icon" src="../../assets/icons/icon-lock-closed.svg" alt="" width="24" height="24" aria-hidden="true">
+                        <img class="ds-table-col-icon__icon" src="../../assets/icons/icon-pencil.svg" alt="" width="24" height="24" aria-hidden="true">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ds-table-part-state" role="listitem">
+              <div class="ds-table-part-state__meta">
+                <span class="ds-table-part-state__name">Hover</span>
+                <span class="ds-table-part-state__class">.ds-table-col-icon--hover</span>
+                <span class="ds-table-part-state__token">Background.Neutral.Hover (N20)</span>
+              </div>
+              <div class="ds-table-part-state__preview">
+                <div class="ds-table-col-preview">
+                  <div class="ds-table-col-icon" role="presentation">
+                    <div class="ds-table-col__header">Title</div>
+                    <div class="ds-table-col__row ds-table-col-icon__row ds-table-col-icon--hover">
+                      <div class="ds-table-col-icon__group">
+                        <img class="ds-table-col-icon__icon" src="../../assets/icons/icon-lock-closed.svg" alt="" width="24" height="24" aria-hidden="true">
+                        <img class="ds-table-col-icon__icon" src="../../assets/icons/icon-pencil.svg" alt="" width="24" height="24" aria-hidden="true">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-doc-blocks">
+          <div class="token-panel">
+            <div class="token-panel__head"><h3 class="token-panel__title">Token Class</h3></div>
+            <div class="token-panel__body">
+              <div class="token-row"><code>.ds-table-col-icon</code><button class="copy-btn" type="button" data-copy="ds-table-col-icon" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-col-icon--hover</code><button class="copy-btn" type="button" data-copy="ds-table-col-icon ds-table-col-icon--hover" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-col-icon__group</code><button class="copy-btn" type="button" data-copy="ds-table-col-icon__group" onclick="copyToken(this)">Salin</button></div>
+            </div>
+          </div>
+          <div class="code-panel">
+            <div class="code-panel__head">
+              <span class="code-panel__file">table-col-icon.html</span>
+              <button class="copy-btn" id="copy-col-icon-code-btn" type="button" aria-label="Salin kode column icon">Salin</button>
+            </div>
+            <pre class="code-block" id="code-block-col-icon"><code><span class="code-comment">&lt;!-- Column / Icon — header --&gt;</span>
+<span class="code-tag">&lt;th</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-icon"</span> <span class="code-attr">scope</span>=<span class="code-string">"col"</span><span class="code-tag">&gt;</span>Title<span class="code-tag">&lt;/th&gt;</span>
+
+<span class="code-comment">&lt;!-- Column / Icon — body --&gt;</span>
+<span class="code-tag">&lt;td</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-icon"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-icon__group"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;img</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-icon__icon"</span> <span class="code-attr">src</span>=<span class="code-string">"assets/icons/icon-lock-closed.svg"</span> <span class="code-attr">alt</span>=<span class="code-string">""</span> <span class="code-attr">width</span>=<span class="code-string">"24"</span> <span class="code-attr">height</span>=<span class="code-string">"24"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;img</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-icon__icon"</span> <span class="code-attr">src</span>=<span class="code-string">"assets/icons/icon-pencil.svg"</span> <span class="code-attr">alt</span>=<span class="code-string">""</span> <span class="code-attr">width</span>=<span class="code-string">"24"</span> <span class="code-attr">height</span>=<span class="code-string">"24"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;/td&gt;</span>
+
+<span class="code-comment">&lt;!-- Column / Icon — hover --&gt;</span>
+<span class="code-tag">&lt;td</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-icon ds-table-col-icon--hover"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/td&gt;</span></code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="table-component-part" class="ds-doc-section">
+        <div class="ds-doc-section__head">
+          <div class="ds-doc-section__title-row">
+            <h2 class="ds-doc-section__title">Table Component</h2>
+            <span class="ds-doc-section__badge">Component</span>
+          </div>
+          <p class="section-caption">Komponen tabel lengkap (<code>Table component</code>) — menyusun header, kolom checkbox / icon / link / status, dan pagination dari parts di halaman ini.</p>
+        </div>
+        <div class="preview-card preview-card--table p-250">
+          <div class="table-playground__controls">
+            <label for="table-playground-rows" class="table-playground__label">Jumlah baris</label>
+            <select id="table-playground-rows" class="table-playground__select" aria-label="Jumlah baris playground">
+              <option value="3">3</option>
+              <option value="5" selected>5</option>
+            </select>
+          </div>
+          <div class="ds-table-wrapper" id="table-playground-root">
+            <div class="ds-table-scroll" tabindex="0" role="region" aria-label="Pratinjau tabel — geser horizontal pada layar sempit">
+              <table class="ds-table ds-table--row-hover ds-table--sticky-head ds-table--data" id="table-playground" aria-label="Tabel data contoh">
+                <thead>
+                  <tr>
+                    <th class="ds-table-header-cell ds-table-header-cell--checkbox" scope="col">
+                      <label class="ds-table-header-cell__checkbox-wrap">
+                        <input type="checkbox" class="ds-table-header-cell__checkbox-input" aria-label="Pilih semua baris">
+                        <span class="ds-table-header-cell__checkbox" aria-hidden="true"></span>
+                      </label>
+                    </th>
+                    <th class="ds-table-col-icon" scope="col">Title</th>
+                    <th class="ds-table-col-link" scope="col">Title</th>
+                    <th class="ds-table-col-status" scope="col">Title</th>
+                    <th class="ds-table-col-link" scope="col">Title</th>
+                  </tr>
+                </thead>
+                <tbody id="table-playground-tbody">
+                  <tr data-playground-row>
+                    <td class="ds-table-col-checkbox">
+                      <label class="ds-table-col-checkbox__wrap">
+                        <input type="checkbox" class="ds-table-col-checkbox__input" aria-label="Pilih baris 1">
+                        <span class="ds-table-col-checkbox__box" aria-hidden="true"></span>
+                      </label>
+                    </td>
+                    <td class="ds-table-col-icon">
+                      <div class="ds-table-col-icon__group">
+                        <img class="ds-table-col-icon__icon" src="../../assets/icons/icon-pencil.svg" alt="" width="24" height="24" aria-hidden="true">
+                      </div>
+                    </td>
+                    <td class="ds-table-col-link"><a class="ds-table-col-link__anchor" href="#">Text</a></td>
+                    <td class="ds-table-col-status"><span class="ds-lozenge ds-lozenge--default">LABEL</span></td>
+                    <td class="ds-table-col-link"><a class="ds-table-col-link__anchor" href="#">Text</a></td>
+                  </tr>
+                  <tr data-playground-row>
+                    <td class="ds-table-col-checkbox">
+                      <label class="ds-table-col-checkbox__wrap">
+                        <input type="checkbox" class="ds-table-col-checkbox__input" aria-label="Pilih baris 2">
+                        <span class="ds-table-col-checkbox__box" aria-hidden="true"></span>
+                      </label>
+                    </td>
+                    <td class="ds-table-col-icon">
+                      <div class="ds-table-col-icon__group">
+                        <img class="ds-table-col-icon__icon" src="../../assets/icons/icon-pencil.svg" alt="" width="24" height="24" aria-hidden="true">
+                      </div>
+                    </td>
+                    <td class="ds-table-col-link"><a class="ds-table-col-link__anchor" href="#">Text</a></td>
+                    <td class="ds-table-col-status"><span class="ds-lozenge ds-lozenge--default">LABEL</span></td>
+                    <td class="ds-table-col-link"><a class="ds-table-col-link__anchor" href="#">Text</a></td>
+                  </tr>
+                  <tr data-playground-row>
+                    <td class="ds-table-col-checkbox">
+                      <label class="ds-table-col-checkbox__wrap">
+                        <input type="checkbox" class="ds-table-col-checkbox__input" aria-label="Pilih baris 3">
+                        <span class="ds-table-col-checkbox__box" aria-hidden="true"></span>
+                      </label>
+                    </td>
+                    <td class="ds-table-col-icon">
+                      <div class="ds-table-col-icon__group">
+                        <img class="ds-table-col-icon__icon" src="../../assets/icons/icon-pencil.svg" alt="" width="24" height="24" aria-hidden="true">
+                      </div>
+                    </td>
+                    <td class="ds-table-col-link"><a class="ds-table-col-link__anchor" href="#">Text</a></td>
+                    <td class="ds-table-col-status"><span class="ds-lozenge ds-lozenge--default">LABEL</span></td>
+                    <td class="ds-table-col-link"><a class="ds-table-col-link__anchor" href="#">Text</a></td>
+                  </tr>
+                  <tr data-playground-row>
+                    <td class="ds-table-col-checkbox">
+                      <label class="ds-table-col-checkbox__wrap">
+                        <input type="checkbox" class="ds-table-col-checkbox__input" aria-label="Pilih baris 4">
+                        <span class="ds-table-col-checkbox__box" aria-hidden="true"></span>
+                      </label>
+                    </td>
+                    <td class="ds-table-col-icon">
+                      <div class="ds-table-col-icon__group">
+                        <img class="ds-table-col-icon__icon" src="../../assets/icons/icon-pencil.svg" alt="" width="24" height="24" aria-hidden="true">
+                      </div>
+                    </td>
+                    <td class="ds-table-col-link"><a class="ds-table-col-link__anchor" href="#">Text</a></td>
+                    <td class="ds-table-col-status"><span class="ds-lozenge ds-lozenge--default">LABEL</span></td>
+                    <td class="ds-table-col-link"><a class="ds-table-col-link__anchor" href="#">Text</a></td>
+                  </tr>
+                  <tr data-playground-row>
+                    <td class="ds-table-col-checkbox">
+                      <label class="ds-table-col-checkbox__wrap">
+                        <input type="checkbox" class="ds-table-col-checkbox__input" aria-label="Pilih baris 5">
+                        <span class="ds-table-col-checkbox__box" aria-hidden="true"></span>
+                      </label>
+                    </td>
+                    <td class="ds-table-col-icon">
+                      <div class="ds-table-col-icon__group">
+                        <img class="ds-table-col-icon__icon" src="../../assets/icons/icon-pencil.svg" alt="" width="24" height="24" aria-hidden="true">
+                      </div>
+                    </td>
+                    <td class="ds-table-col-link"><a class="ds-table-col-link__anchor" href="#">Text</a></td>
+                    <td class="ds-table-col-status"><span class="ds-lozenge ds-lozenge--default">LABEL</span></td>
+                    <td class="ds-table-col-link"><a class="ds-table-col-link__anchor" href="#">Text</a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="ds-table-footer">
+              <nav class="ds-pagination" aria-label="Pagination tabel">
+                <button type="button" class="ds-pagination__item" aria-label="Halaman sebelumnya">
+                  <img src="../../assets/icons/icon-chevron-left.svg" alt="" aria-hidden="true">
+                </button>
+                <button type="button" class="ds-pagination__item ds-pagination__item--active" aria-current="page">1</button>
+                <button type="button" class="ds-pagination__item">2</button>
+                <button type="button" class="ds-pagination__item">3</button>
+                <button type="button" class="ds-pagination__item">4</button>
+                <button type="button" class="ds-pagination__item">5</button>
+                <span class="ds-pagination__item ds-pagination__item--ellipsis" aria-hidden="true">...</span>
+                <button type="button" class="ds-pagination__item">20</button>
+                <button type="button" class="ds-pagination__item" aria-label="Halaman berikutnya">
+                  <img src="../../assets/icons/icon-chevron-right.svg" alt="" aria-hidden="true">
+                </button>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <div class="ds-doc-blocks">
+          <div class="token-panel">
+            <div class="token-panel__head"><h3 class="token-panel__title">Token Class</h3></div>
+            <div class="token-panel__body">
+              <div class="token-row"><code>.ds-table</code><button class="copy-btn" type="button" data-copy="ds-table ds-table--row-hover" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-wrapper</code><button class="copy-btn" type="button" data-copy="ds-table-wrapper" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-scroll</code><button class="copy-btn" type="button" data-copy="ds-table-scroll" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table--sticky-head</code><button class="copy-btn" type="button" data-copy="ds-table--sticky-head" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-table-footer</code><button class="copy-btn" type="button" data-copy="ds-table-footer" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-pagination</code><button class="copy-btn" type="button" data-copy="ds-pagination" onclick="copyToken(this)">Salin</button></div>
+              <div class="token-row"><code>.ds-pagination__item--active</code><button class="copy-btn" type="button" data-copy="ds-pagination__item ds-pagination__item--active" onclick="copyToken(this)">Salin</button></div>
+            </div>
+          </div>
+          <div class="code-panel">
+            <div class="code-panel__head">
+              <span class="code-panel__file">table-component.html</span>
+              <button class="copy-btn" id="copy-table-component-code-btn" type="button" aria-label="Salin kode table component">Salin</button>
+            </div>
+            <pre class="code-block" id="code-block-table-component"><code><span class="code-comment">&lt;!-- Table component --&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-wrapper"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-scroll"</span> <span class="code-attr">tabindex</span>=<span class="code-string">"0"</span> <span class="code-attr">role</span>=<span class="code-string">"region"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Tabel data"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;table</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table ds-table--row-hover ds-table--sticky-head ds-table--data"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Tabel data"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;thead&gt;</span>
+      <span class="code-tag">&lt;tr&gt;</span>
+        <span class="code-tag">&lt;th</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-header-cell ds-table-header-cell--checkbox"</span> <span class="code-attr">scope</span>=<span class="code-string">"col"</span><span class="code-tag">&gt;</span>
+          <span class="code-tag">&lt;label</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-header-cell__checkbox-wrap"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/label&gt;</span>
+        <span class="code-tag">&lt;/th&gt;</span>
+        <span class="code-tag">&lt;th</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-icon"</span> <span class="code-attr">scope</span>=<span class="code-string">"col"</span><span class="code-tag">&gt;</span>Title<span class="code-tag">&lt;/th&gt;</span>
+        <span class="code-tag">&lt;th</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-link"</span> <span class="code-attr">scope</span>=<span class="code-string">"col"</span><span class="code-tag">&gt;</span>Title<span class="code-tag">&lt;/th&gt;</span>
+        <span class="code-tag">&lt;th</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-status"</span> <span class="code-attr">scope</span>=<span class="code-string">"col"</span><span class="code-tag">&gt;</span>Title<span class="code-tag">&lt;/th&gt;</span>
+        <span class="code-tag">&lt;th</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-link"</span> <span class="code-attr">scope</span>=<span class="code-string">"col"</span><span class="code-tag">&gt;</span>Title<span class="code-tag">&lt;/th&gt;</span>
+      <span class="code-tag">&lt;/tr&gt;</span>
+    <span class="code-tag">&lt;/thead&gt;</span>
+    <span class="code-tag">&lt;tbody&gt;</span>
+      <span class="code-tag">&lt;tr&gt;</span>
+        <span class="code-tag">&lt;td</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-checkbox"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/td&gt;</span>
+        <span class="code-tag">&lt;td</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-icon"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/td&gt;</span>
+        <span class="code-tag">&lt;td</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-link"</span><span class="code-tag">&gt;&lt;a</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-link__anchor"</span> <span class="code-attr">href</span>=<span class="code-string">"#"</span><span class="code-tag">&gt;</span>Text<span class="code-tag">&lt;/a&gt;&lt;/td&gt;</span>
+        <span class="code-tag">&lt;td</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-status"</span><span class="code-tag">&gt;&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-lozenge ds-lozenge--default"</span><span class="code-tag">&gt;</span>LABEL<span class="code-tag">&lt;/span&gt;&lt;/td&gt;</span>
+        <span class="code-tag">&lt;td</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-col-link"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/td&gt;</span>
+      <span class="code-tag">&lt;/tr&gt;</span>
+    <span class="code-tag">&lt;/tbody&gt;</span>
+  <span class="code-tag">&lt;/table&gt;</span>
+  <span class="code-tag">&lt;/div&gt;</span>
+  <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-table-footer"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;nav</span> <span class="code-attr">class</span>=<span class="code-string">"ds-pagination"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Pagination"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/nav&gt;</span>
+  <span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;/div&gt;</span></code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="table-usage" class="ds-doc-section">
+        <div class="ds-doc-section__head">
+          <div class="ds-doc-section__title-row">
+            <h2 class="ds-doc-section__title">Do &amp; Don&apos;t</h2>
+            <span class="ds-doc-section__badge">Guide</span>
+          </div>
+        </div>
+        <div class="usage-grid-2">
+          <div class="ds-usage-card">
+            <div class="ds-usage-card__head ds-usage-card__head--do">Do — Lakukan ini</div>
+            <ul class="ds-usage-card__list">
+              <li>Susun tabel dari parts: <code>ds-table-header-cell</code>, kolom checkbox/link/status/icon, dan <code>ds-pagination</code>.</li>
+              <li>Bungkus tabel lebar dengan <code>.ds-table-scroll</code>; header tetap terbaca via <code>.ds-table--sticky-head</code>.</li>
+              <li>Gunakan <code>&lt;table&gt;</code>, <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, serta <code>scope</code> / <code>aria-label</code> yang jelas.</li>
+              <li>Hover baris: <code>ds-table--row-hover</code> (background <code>var(--color-neutral-n20)</code>).</li>
+              <li>Status pakai <code>.ds-lozenge</code>; link pakai <code>.ds-table-col-link__anchor</code> (token B300).</li>
+              <li>Pastikan area sentuh checkbox &amp; pagination ≥ 44px pada mobile.</li>
+            </ul>
+          </div>
+          <div class="ds-usage-card">
+            <div class="ds-usage-card__head ds-usage-card__head--dont">Don&apos;t — Hindari ini</div>
+            <ul class="ds-usage-card__list">
+              <li>Jangan hardcode warna — gunakan token dari <code>tokens.css</code>.</li>
+              <li>Jangan mengganti struktur kolom per baris (urutan sel harus konsisten).</li>
+              <li>Jangan membuat tabel hanya dari <code>&lt;div&gt;</code> tanpa semantik tabel.</li>
+              <li>Jangan membiarkan tabel lebar memecah layout — hindari scroll horizontal di seluruh halaman.</li>
+              <li>Jangan menaruh aksi utama di lozenge — gunakan Button atau ikon kolom aksi.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+
 
       <footer class="page-footer" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--color-border);font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-primary);">
-        DS GPOS Lite V2.0 — Table · Sort order part
+        DS GPOS Lite V2.0 — Table · parts &amp; table component
       </footer>
     </div>
   </main>
@@ -487,6 +2246,65 @@
       setTimeout(function () { btn.textContent = 'Salin'; }, 2000);
     });
   });
+
+  document.getElementById('copy-header-code-btn').addEventListener('click', function () {
+    var code = document.getElementById('code-block-header').innerText;
+    navigator.clipboard.writeText(code).then(function () {
+      var btn = document.getElementById('copy-header-code-btn');
+      btn.textContent = 'Tersalin!';
+      setTimeout(function () { btn.textContent = 'Salin'; }, 2000);
+    });
+  });
+
+  document.getElementById('copy-cell-code-btn').addEventListener('click', function () {
+    var code = document.getElementById('code-block-cell').innerText;
+    navigator.clipboard.writeText(code).then(function () {
+      var btn = document.getElementById('copy-cell-code-btn');
+      btn.textContent = 'Tersalin!';
+      setTimeout(function () { btn.textContent = 'Salin'; }, 2000);
+    });
+  });
+
+  document.getElementById('copy-cell-icon-code-btn').addEventListener('click', function () {
+    var code = document.getElementById('code-block-cell-icon').innerText;
+    navigator.clipboard.writeText(code).then(function () {
+      var btn = document.getElementById('copy-cell-icon-code-btn');
+      btn.textContent = 'Tersalin!';
+      setTimeout(function () { btn.textContent = 'Salin'; }, 2000);
+    });
+  });
+
+  function bindCopyCode(btnId, blockId) {
+    document.getElementById(btnId).addEventListener('click', function () {
+      var code = document.getElementById(blockId).innerText;
+      navigator.clipboard.writeText(code).then(function () {
+        var btn = document.getElementById(btnId);
+        btn.textContent = 'Tersalin!';
+        setTimeout(function () { btn.textContent = 'Salin'; }, 2000);
+      });
+    });
+  }
+  bindCopyCode('copy-col-checkbox-code-btn', 'code-block-col-checkbox');
+  bindCopyCode('copy-col-text-code-btn', 'code-block-col-text');
+  bindCopyCode('copy-col-link-code-btn', 'code-block-col-link');
+  bindCopyCode('copy-col-status-code-btn', 'code-block-col-status');
+  bindCopyCode('copy-col-icon-code-btn', 'code-block-col-icon');
+  bindCopyCode('copy-table-component-code-btn', 'code-block-table-component');
+
+  (function () {
+    var rowSelect = document.getElementById('table-playground-rows');
+    var rows = document.querySelectorAll('#table-playground-tbody [data-playground-row]');
+    function syncPlaygroundRows() {
+      var count = parseInt(rowSelect.value, 10) || 5;
+      rows.forEach(function (row, index) {
+        row.hidden = index >= count;
+      });
+    }
+    if (rowSelect) {
+      rowSelect.addEventListener('change', syncPlaygroundRows);
+      syncPlaygroundRows();
+    }
+  })();
 </script>
 <script src="../../scripts/sidebar-nav-menu.js"></script>
 </body>

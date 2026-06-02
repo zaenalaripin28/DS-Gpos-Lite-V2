@@ -451,7 +451,8 @@
     [data-theme="dark"] .anatomy-grid > div > div:last-child { background: #0F1D30 !important; border-top-color: #1A2E48 !important; }
   </style>
 </head>
-<body>
+<body class="page-home">
+<div id="scroll-progress" class="scroll-progress-bar"></div>
 <div class="container">
   <div id="sidebar-overlay" class="sidebar-overlay"></div>
   <aside class="sidebar" id="sidebar">
@@ -706,7 +707,14 @@
       </nav>
     </div>
     <div class="sidebar-footer">
-      <div class="tailwind-badge">Built with tokens.css</div>
+      <div class="system-status-indicator">
+        <div class="status-dot-live"></div>
+        <span>v2.0 — All Systems Active</span>
+      </div>
+      <div class="tailwind-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 6C9.33 6 7.67 7.33 7 10c1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35.98 1 2.09 2.15 4.59 2.15C19.67 12 21.33 10.67 22 8c-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C15.61 7.15 14.5 6 12 6zm-7 6c-2.67 0-4.33 1.33-5 4 1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35C6.39 17.15 7.5 18 10 18c2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C8.61 12.85 7.5 12 5 12z"/></svg>
+        Built with Tailwind CSS
+      </div>
     </div>
   </aside>
 
@@ -716,21 +724,72 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
       <div class="breadcrumb">
-        <a href="../../index.html">Home</a>
-        <span class="breadcrumb-sep">/</span>
-        <a href="#">Components</a>
-        <span class="breadcrumb-sep">/</span>
+        <span class="topbar-section-label">Components</span>
+        <span class="breadcrumb-sep-slash">/</span>
         <span class="current">Section Message</span>
       </div>
       <div class="topbar-actions">
+        <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="topbar-link" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub
+        </a>
         <span class="version-badge">v2.0</span>
       </div>
     </div>
 
     <div class="content-inner">
 
+      <!-- ── Section Hero ── -->
+      <div class="ds-hero-banner rounded-2xl overflow-hidden flex flex-col lg:flex-row" style="background:#091E42;border:1px solid rgba(255,255,255,0.07);margin-bottom:24px;">
+        <div class="flex-1 px-8 py-10 lg:px-11 lg:py-12 flex flex-col justify-center">
+          <div class="flex items-center gap-100 mb-5">
+            <div class="flex items-center justify-center w-5 h-5 rounded-md" style="background:rgba(30,127,214,0.2);">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4495DD" stroke-width="2.5"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="14" y2="13"/></svg>
+            </div>
+            <span class="text-xs font-semibold uppercase tracking-[0.1em]" style="color:#7DB5E7;">Components · DS GPOS Lite V2</span>
+          </div>
+          <div class="font-bold mb-3" style="font-size:2.5rem;letter-spacing:-0.035em;line-height:1.04;color:#FFFFFF;">Section Message</div>
+          <p class="text-sm max-w-xs mb-8" style="color:rgba(255,255,255,0.52);line-height:1.7;">Blok pesan kontekstual di dalam halaman — bukan notifikasi sementara. 4 appearance dengan ikon semantik, judul, deskripsi, dan action link.</p>
+          <div class="flex flex-wrap gap-100">
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.10);">v2.0</span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.10);">4 Appearances</span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.45);border-color:rgba(255,255,255,0.10);">Action Links</span>
+            <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(68,149,221,0.15);color:#7DB5E7;border-color:rgba(68,149,221,0.28);">Semantic Icons</span>
+          </div>
+        </div>
+        <div class="hidden lg:flex lg:flex-shrink-0 p-300 items-center justify-center" style="background:rgba(255,255,255,0.03);border-left:1px solid rgba(255,255,255,0.07);min-width:260px;">
+          <div class="w-full flex flex-col gap-2">
+            <div style="border-radius:8px;padding:12px 14px;background:#E6F7EF;border-left:3px solid #00AA5B;"><div style="font-size:11px;font-weight:700;color:#006838;">✓ Success — Title</div><div style="font-size:10px;color:#006838;margin-top:2px;opacity:0.8;">Action completed successfully.</div></div>
+            <div style="border-radius:8px;padding:12px 14px;background:#E9F2FB;border-left:3px solid #1E7FD6;"><div style="font-size:11px;font-weight:700;color:#124D83;">ℹ Information — Title</div><div style="font-size:10px;color:#124D83;margin-top:2px;opacity:0.8;">Some helpful context about this page.</div></div>
+            <div style="border-radius:8px;padding:12px 14px;background:#FDE8E9;border-left:3px solid #EC1C24;"><div style="font-size:11px;font-weight:700;color:#901116;">✕ Error — Title</div><div style="font-size:10px;color:#901116;margin-top:2px;opacity:0.8;">Something went wrong, please try again.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-150" style="margin-bottom:32px;">
+        <div class="hero-feat-card" style="background:#FFFFFF;border:1px solid #EBEDF0;border-radius:12px;padding:20px;">
+          <div style="width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:linear-gradient(135deg,#E9F2FB 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="14" y2="13"/></svg></div>
+          <div style="font-size:14px;font-weight:600;color:#091E42;margin-bottom:6px;">4 Appearances</div>
+          <div style="font-size:12px;color:#5D6B82;line-height:1.5;">Information · Success · Warning · Error</div>
+        </div>
+        <div class="hero-feat-card" style="background:#FFFFFF;border:1px solid #EBEDF0;border-radius:12px;padding:20px;">
+          <div style="width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:linear-gradient(135deg,#E9F2FB 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="16" r="0.5" fill="#1E7FD6" stroke="none"/></svg></div>
+          <div style="font-size:14px;font-weight:600;color:#091E42;margin-bottom:6px;">Semantic Icons</div>
+          <div style="font-size:12px;color:#5D6B82;line-height:1.5;">Ikon sesuai konteks pesan</div>
+        </div>
+        <div class="hero-feat-card" style="background:#FFFFFF;border:1px solid #EBEDF0;border-radius:12px;padding:20px;">
+          <div style="width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:linear-gradient(135deg,#E9F2FB 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></div>
+          <div style="font-size:14px;font-weight:600;color:#091E42;margin-bottom:6px;">Action Links</div>
+          <div style="font-size:12px;color:#5D6B82;line-height:1.5;">Satu atau dua action link</div>
+        </div>
+        <div class="hero-feat-card" style="background:#FFFFFF;border:1px solid #EBEDF0;border-radius:12px;padding:20px;">
+          <div style="width:36px;height:36px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;background:linear-gradient(135deg,#E9F2FB 0%,rgba(163,203,238,0.3) 100%);border:1px solid rgba(30,127,214,0.12);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><path d="M12 2l9 4.5V17.5L12 22l-9-4.5V6.5L12 2z"/></svg></div>
+          <div style="font-size:14px;font-weight:600;color:#091E42;margin-bottom:6px;">In-page Only</div>
+          <div style="font-size:12px;color:#5D6B82;line-height:1.5;">Bukan notifikasi floating</div>
+        </div>
+      </div>
+
       <section class="mb-12">
-        <h2 style="border:none;background:none;padding:0;margin-bottom:12px;">Section Message</h2>
+        <h2>Section Message</h2>
         <p style="color:var(--color-text-tertiary);font-family:var(--font-primary);font-size:14px;line-height:1.7;max-width:720px;margin-bottom:24px;">
           Blok pesan kontekstual dengan latar subtle, ikon semantik, judul, deskripsi, dan tautan aksi opsional. Dipakai di dalam section halaman — bukan notifikasi sementara. Referensi: <code>section messages/figma/section message-components.png</code>.
         </p>
@@ -1021,5 +1080,6 @@
   }
 </script>
   <script src="../../scripts/sidebar-nav-menu.js"></script>
+  <script>(function(){var b=document.getElementById('scroll-progress');if(!b)return;window.addEventListener('scroll',function(){var p=(window.scrollY/(document.documentElement.scrollHeight-window.innerHeight))*100;b.style.width=Math.min(p,100)+'%';},{passive:true});})();</script>
 </body>
 </html>

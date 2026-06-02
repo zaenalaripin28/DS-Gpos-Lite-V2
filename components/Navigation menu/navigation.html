@@ -816,6 +816,7 @@
     section > h2 {
       font-size: 20px;
       font-weight: 600;
+      letter-spacing: -0.01em;
       margin-bottom: 24px;
       padding-bottom: 16px;
       border-bottom: none !important;
@@ -830,6 +831,14 @@
       font-family: var(--font-primary);
     }
     section > h2::before { display: none; }
+
+    /* section-level token panel spacing */
+    .section-tokens { margin-top: var(--space-300); }
+
+    @media (max-width: 640px) {
+      .ds-hero-title { font-size: clamp(1.5rem, 6vw, 2.5rem) !important; }
+      .section-tokens .nav-token-groups { grid-template-columns: 1fr; }
+    }
 
     .variant-grid > div,
     .parts-grid {
@@ -978,6 +987,152 @@
       .scroll-top-btn { animation: none !important; transition: none !important; }
     }
 
+    /* ── Doc page responsive ── */
+    .page-home .main-content {
+      min-width: 0;
+      overflow-x: clip;
+      box-sizing: border-box;
+    }
+    .page-home .content-inner {
+      min-width: 0;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    .variant-grid {
+      min-width: 0;
+      max-width: 100%;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .variant-grid > div {
+      min-width: 0;
+      max-width: 100%;
+    }
+    .nav-variant-card__preview {
+      padding: var(--space-200) var(--space-150);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100px;
+      background: var(--color-neutral-n0);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .nav-variant-card__preview--stage {
+      padding: var(--space-200) var(--space-150);
+      background: var(--color-neutral-n20);
+      background-image: radial-gradient(circle, rgba(9, 30, 66, 0.04) 1.5px, transparent 1.5px);
+      background-size: 18px 18px;
+    }
+    .nav-component-stage {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+    }
+    .nav-component-stage .ds-sidebar-nav-expand {
+      max-width: min(280px, 100%);
+      width: 100%;
+      margin: 0 auto;
+    }
+    .ds-nav-composed-grid {
+      min-width: 0;
+      max-width: 100%;
+      width: 100%;
+    }
+    .ds-nav-composed-panel__nav .ds-nav-mainmenu-snap,
+    .ds-nav-composed-panel__nav .ds-nav-submenu-snap {
+      width: 100%;
+      max-width: 100%;
+    }
+    .nav-token-panel {
+      border: var(--border-width-1) solid var(--color-border);
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      background: var(--color-surface);
+      min-width: 0;
+      max-width: 100%;
+    }
+    .nav-token-panel__head {
+      padding: var(--space-100) var(--space-150);
+      background: var(--color-neutral-n10);
+      border-bottom: var(--border-width-1) solid var(--color-border);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text-primary);
+      font-family: var(--font-primary);
+    }
+    .nav-token-panel__body {
+      padding: var(--space-100) var(--space-150) var(--space-150);
+      display: grid;
+      gap: var(--space-100);
+    }
+    .nav-token-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-100);
+      min-width: 0;
+    }
+    .nav-token-row code {
+      min-width: 0;
+      flex: 1 1 auto;
+      word-break: break-all;
+    }
+    .nav-token-groups {
+      display: grid;
+      gap: var(--space-200);
+      min-width: 0;
+    }
+    .ds-usage-card {
+      background: var(--color-surface);
+      border: var(--border-width-1) solid var(--color-border);
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      min-width: 0;
+    }
+    .ds-usage-card__head {
+      padding: var(--space-100) var(--space-150);
+      font-weight: var(--font-weight-bold);
+      font-family: var(--font-primary);
+      font-size: var(--font-size-sm);
+      border-bottom: var(--border-width-2) solid transparent;
+    }
+    .ds-usage-card__head--do {
+      background: var(--color-green-g50);
+      border-bottom-color: var(--color-green-g100);
+      color: var(--color-green-g400);
+    }
+    .ds-usage-card__head--dont {
+      background: var(--color-red-r50);
+      border-bottom-color: var(--color-red-r100);
+      color: var(--color-red-r300);
+    }
+    .ds-usage-card__list {
+      margin: 0;
+      padding: var(--space-150) var(--space-200) var(--space-200) var(--space-400);
+      color: var(--color-text-tertiary);
+      font-size: var(--text-body-small-regular-size);
+      line-height: var(--line-height-relaxed);
+      font-family: var(--font-primary);
+    }
+    .nav-playground__stage {
+      max-width: min(280px, 100%);
+    }
+    .nav-playground__stage-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .nav-playground__field {
+      min-width: 0;
+    }
+    @media (max-width: 1024px) {
+      .usage-grid-2 { grid-template-columns: 1fr; }
+      .usage-info-grid { grid-template-columns: 1fr 1fr; }
+    }
+
     @media (max-width: 900px) {
       .usage-info-grid { grid-template-columns: 1fr 1fr; }
       .ds-nav-composed-grid { grid-template-columns: 1fr; }
@@ -991,11 +1146,64 @@
       .parts-grid--4 .parts-grid__cell:nth-last-child(-n+2) { border-bottom: none; }
     }
     @media (max-width: 640px) {
+      .page-home .content-inner {
+        padding-left: var(--space-150);
+        padding-right: var(--space-150);
+      }
       .usage-info-grid { grid-template-columns: 1fr; }
       .parts-grid--2,
       .parts-grid--4 { grid-template-columns: 1fr; }
       .parts-grid__cell { border-right: none !important; }
       .parts-grid__cell:last-child { border-bottom: none; }
+      .variant-grid {
+        grid-template-columns: 1fr !important;
+        max-width: 100% !important;
+        gap: var(--space-150) !important;
+      }
+      .nav-variant-card__preview,
+      .nav-variant-card__preview--stage {
+        padding: var(--space-150) var(--space-100);
+        min-height: auto;
+      }
+      .nav-playground__toolbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .nav-playground__field {
+        width: 100%;
+        min-width: 0;
+      }
+      .nav-playground__control {
+        min-height: 44px;
+        font-size: var(--font-size-base);
+        width: 100%;
+      }
+      .nav-playground__check {
+        min-height: 44px;
+      }
+      .nav-token-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .nav-token-row .copy-btn {
+        align-self: flex-start;
+        min-height: 44px;
+        padding: var(--space-050) var(--space-150);
+      }
+      .ds-usage-card__list {
+        padding: var(--space-150) var(--space-150) var(--space-200) var(--space-250);
+      }
+      .usage-info-card[style*="grid-column"] {
+        grid-column: auto !important;
+      }
+      .variant-grid[style*="max-width"] {
+        max-width: 100% !important;
+      }
+      .ds-nav-mainmenu-snap,
+      .ds-nav-submenu-snap,
+      .ds-nav-heading-snap {
+        max-width: 100%;
+      }
     }
   </style>
 </head>
@@ -1136,7 +1344,7 @@
               </div>
               <span class="text-xs font-semibold uppercase tracking-[0.1em] text-blue-b100">Components · DS GPOS Lite V2</span>
             </div>
-            <div class="font-bold text-neutral-n0 mb-3" style="font-size:2.5rem;letter-spacing:-0.035em;line-height:1.04;">Navigation Menu</div>
+            <div class="ds-hero-title font-bold text-neutral-n0 mb-3" style="font-size:clamp(1.5rem,5vw,2.5rem);letter-spacing:-0.035em;line-height:1.04;">Navigation Menu</div>
             <p class="text-sm leading-relaxed max-w-xs mb-8" style="color:rgba(255,255,255,0.52);line-height:1.7;">
               Menu navigasi vertikal sidebar — parts atomik + komposisi Navigation Menu (Main Menu + Submenu Content).
             </p>
@@ -1215,7 +1423,7 @@
 
       <!-- PARTS: Divider & Dot -->
       <section style="margin-bottom:48px;">
-        <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
+        <h2>
           <span style="width:3px;height:18px;background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300));border-radius:3px;flex-shrink:0;display:block;"></span>
           Component Parts — Divider &amp; Dot
         </h2>
@@ -1250,12 +1458,12 @@
 
       <!-- PARTS: Heading Menu -->
       <section style="margin-bottom:48px;">
-        <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
+        <h2>
           <span style="width:3px;height:18px;background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300));border-radius:3px;flex-shrink:0;display:block;"></span>
           Component Parts — Heading Menu
         </h2>
         <p style="font-size:14px;color:var(--color-text-tertiary);margin-top:-12px;margin-bottom:28px;font-family:var(--font-primary);max-width:640px;">
-          Label grup uppercase dengan icon dari <a href="../../foundations/icons/icons.html" style="color:var(--color-primary-500);">Icons</a> — <code>icon-chevron-left.svg</code> (lead + collapse toggle).
+          Label grup uppercase dengan icon dari <code>assets/icons</code> — <code>icon-chevron-left.svg</code> (lead + collapse toggle).
         </p>
         <div style="display:grid;grid-template-columns:1fr;gap:16px;max-width:480px;" class="variant-grid">
           <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
@@ -1274,6 +1482,17 @@
               <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Heading Menu</div>
               <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Overline caption + chevron lead (12px) + tombol collapse 32×32px (icon 16px).</div>
             </div>
+          </div>
+        </div>
+        <div class="section-tokens">
+          <div class="nav-token-groups">
+            <div class="nav-token-panel">
+              <div class="nav-token-panel__head">Token Class — Heading Menu</div>
+              <div class="nav-token-panel__body">
+                <div class="nav-token-row"><code>.ds-nav-heading-snap</code><button class="copy-btn" type="button" data-copy="ds-nav-heading-snap" onclick="copyToken(this)">Salin</button></div>
+                <div class="nav-token-row"><code>.ds-nav-heading-snap--no-icons</code><button class="copy-btn" type="button" data-copy="ds-nav-heading-snap ds-nav-heading-snap--no-icons" onclick="copyToken(this)">Salin</button></div>
+                <div class="nav-token-row"><code>.ds-nav-heading-snap__toggle</code><button class="copy-btn" type="button" data-copy="ds-nav-heading-snap__toggle" onclick="copyToken(this)">Salin</button></div>
+              </div>
             </div>
           </div>
         </div>
@@ -1281,7 +1500,7 @@
 
       <!-- PARTS: Main Menu states -->
       <section style="margin-bottom:48px;">
-        <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
+        <h2>
           <span style="width:3px;height:18px;background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300));border-radius:3px;flex-shrink:0;display:block;"></span>
           Component Parts — Main Menu
         </h2>
@@ -1354,12 +1573,25 @@
             </div>
           </div>
         </div>
+        <div class="section-tokens">
+          <div class="nav-token-groups">
+            <div class="nav-token-panel">
+              <div class="nav-token-panel__head">Token Class — Main Menu</div>
+              <div class="nav-token-panel__body">
+                <div class="nav-token-row"><code>.ds-nav-mainmenu-snap</code><button class="copy-btn" type="button" data-copy="ds-nav-mainmenu-snap" onclick="copyToken(this)">Salin</button></div>
+                <div class="nav-token-row"><code>.ds-nav-mainmenu-snap--hover</code><button class="copy-btn" type="button" data-copy="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--hover" onclick="copyToken(this)">Salin</button></div>
+                <div class="nav-token-row"><code>.ds-nav-mainmenu-snap--press</code><button class="copy-btn" type="button" data-copy="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--press" onclick="copyToken(this)">Salin</button></div>
+                <div class="nav-token-row"><code>.ds-nav-mainmenu-snap--selected</code><button class="copy-btn" type="button" data-copy="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--selected" onclick="copyToken(this)">Salin</button></div>
+                <div class="nav-token-row"><code>.ds-nav-mainmenu-snap--leaf</code><button class="copy-btn" type="button" data-copy="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" onclick="copyToken(this)">Salin</button></div>
+              </div>
             </div>
+          </div>
+        </div>
       </section>
 
       <!-- PARTS: Submenu Content -->
       <section style="margin-bottom:48px;">
-        <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
+        <h2>
           <span style="width:3px;height:18px;background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300));border-radius:3px;flex-shrink:0;display:block;"></span>
           Component Parts — Submenu Content
         </h2>
@@ -1369,11 +1601,10 @@
         <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;" class="variant-grid">
           <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
             <div style="padding:24px;display:flex;justify-content:center;min-height:100px;background:var(--color-neutral-n0);">
-              <a href="#" class="ds-nav-submenu-snap" tabindex="-1" aria-hidden="true">
+              <button type="button" class="ds-nav-submenu-snap" tabindex="-1" aria-hidden="true">
                 <img src="../../assets/icons/dot.svg" width="6" height="6" alt="" class="ds-nav-dot-img ds-nav-submenu-snap__dot" aria-hidden="true">
                 <span class="ds-nav-submenu-snap__label">Releases</span>
-                <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-submenu-snap__trail" aria-hidden="true">
-              </a>
+                <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-submenu-snap__trail" aria-hidden="true"></button>
             </div>
             <div style="padding:14px 16px;background:var(--color-surface);">
               <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">state=default</div>
@@ -1382,11 +1613,10 @@
           </div>
           <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
             <div style="padding:24px;display:flex;justify-content:center;min-height:100px;background:var(--color-neutral-n0);">
-              <a href="#" class="ds-nav-submenu-snap ds-nav-submenu-snap--hover" tabindex="-1" aria-hidden="true">
+              <button type="button" class="ds-nav-submenu-snap ds-nav-submenu-snap--hover" tabindex="-1" aria-hidden="true">
                 <img src="../../assets/icons/dot.svg" width="6" height="6" alt="" class="ds-nav-dot-img ds-nav-submenu-snap__dot" aria-hidden="true">
                 <span class="ds-nav-submenu-snap__label">Releases</span>
-                <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-submenu-snap__trail" aria-hidden="true">
-              </a>
+                <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-submenu-snap__trail" aria-hidden="true"></button>
             </div>
             <div style="padding:14px 16px;background:var(--color-surface);">
               <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">state=hover</div>
@@ -1395,11 +1625,10 @@
           </div>
           <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
             <div style="padding:24px;display:flex;justify-content:center;min-height:100px;background:var(--color-neutral-n0);">
-              <a href="#" class="ds-nav-submenu-snap ds-nav-submenu-snap--press" tabindex="-1" aria-hidden="true">
+              <button type="button" class="ds-nav-submenu-snap ds-nav-submenu-snap--press" tabindex="-1" aria-hidden="true">
                 <img src="../../assets/icons/dot.svg" width="6" height="6" alt="" class="ds-nav-dot-img ds-nav-submenu-snap__dot" aria-hidden="true">
                 <span class="ds-nav-submenu-snap__label">Releases</span>
-                <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-submenu-snap__trail" aria-hidden="true">
-              </a>
+                <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-submenu-snap__trail" aria-hidden="true"></button>
             </div>
             <div style="padding:14px 16px;background:var(--color-surface);">
               <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">state=press</div>
@@ -1408,11 +1637,10 @@
           </div>
           <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
             <div style="padding:24px;display:flex;justify-content:center;min-height:100px;background:var(--color-neutral-n0);">
-              <a href="#" class="ds-nav-submenu-snap ds-nav-submenu-snap--selected" tabindex="-1" aria-hidden="true">
+              <button type="button" class="ds-nav-submenu-snap ds-nav-submenu-snap--selected" tabindex="-1" aria-hidden="true">
                 <img src="../../assets/icons/dot.svg" width="6" height="6" alt="" class="ds-nav-dot-img ds-nav-submenu-snap__dot" aria-hidden="true">
                 <span class="ds-nav-submenu-snap__label">Releases</span>
-                <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-submenu-snap__trail" aria-hidden="true">
-              </a>
+                <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-submenu-snap__trail" aria-hidden="true"></button>
             </div>
             <div style="padding:14px 16px;background:var(--color-surface);">
               <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">state=selected</div>
@@ -1420,17 +1648,29 @@
             </div>
           </div>
         </div>
+        <div class="section-tokens">
+          <div class="nav-token-groups">
+            <div class="nav-token-panel">
+              <div class="nav-token-panel__head">Token Class — Submenu Content</div>
+              <div class="nav-token-panel__body">
+                <div class="nav-token-row"><code>.ds-nav-submenu-snap</code><button class="copy-btn" type="button" data-copy="ds-nav-submenu-snap" onclick="copyToken(this)">Salin</button></div>
+                <div class="nav-token-row"><code>.ds-nav-submenu-snap--hover</code><button class="copy-btn" type="button" data-copy="ds-nav-submenu-snap ds-nav-submenu-snap--hover" onclick="copyToken(this)">Salin</button></div>
+                <div class="nav-token-row"><code>.ds-nav-submenu-snap--selected</code><button class="copy-btn" type="button" data-copy="ds-nav-submenu-snap ds-nav-submenu-snap--selected" onclick="copyToken(this)">Salin</button></div>
+                <div class="nav-token-row"><code>.ds-nav-submenu-snap--no-trail</code><button class="copy-btn" type="button" data-copy="ds-nav-submenu-snap ds-nav-submenu-snap--no-trail" onclick="copyToken(this)">Salin</button></div>
+              </div>
             </div>
+          </div>
+        </div>
       </section>
 
       <!-- PARTS: Menu Search custom -->
       <section style="margin-bottom:48px;">
-        <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
+        <h2>
           <span style="width:3px;height:18px;background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300));border-radius:3px;flex-shrink:0;display:block;"></span>
           Component Parts — Menu Search custom
         </h2>
         <p style="font-size:14px;color:var(--color-text-tertiary);margin-top:-12px;margin-bottom:28px;font-family:var(--font-primary);max-width:640px;">
-          Field pencarian menu sidebar — tinggi <code>space-400</code> (32px) dengan jarak vertikal <code>space-100</code> (8px). Typography caption regular. Icon dari <a href="../../foundations/icons/icons.html" style="color:var(--color-primary-500);">Icons</a>.
+          Field pencarian menu sidebar — tinggi <code>space-400</code> (32px) dengan jarak vertikal <code>space-100</code> (8px). Typography caption regular. Icon dari <code>assets/icons</code>.
         </p>
         <div style="display:grid;grid-template-columns:1fr;gap:16px;max-width:520px;" class="variant-grid">
           <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
@@ -1504,12 +1744,12 @@
 
       <!-- PARTS: Navigation Menu (composed) -->
       <section style="margin-bottom:48px;">
-        <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
+        <h2>
           <span style="width:3px;height:18px;background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300));border-radius:3px;flex-shrink:0;display:block;"></span>
           Component Parts — Navigation Menu
         </h2>
         <p style="font-size:14px;color:var(--color-text-tertiary);margin-top:-12px;margin-bottom:28px;font-family:var(--font-primary);max-width:720px;">
-          Komposisi sidebar dari <strong style="color:var(--color-text-secondary);font-weight:600;">Main Menu</strong> + <strong style="color:var(--color-text-secondary);font-weight:600;">Submenu Content</strong>. Icon Sidebar Offline/Online dari <a href="../../foundations/icons/icons.html" style="color:var(--color-primary-500);">Icons</a>.
+          Komposisi sidebar dari <strong style="color:var(--color-text-secondary);font-weight:600;">Main Menu</strong> + <strong style="color:var(--color-text-secondary);font-weight:600;">Submenu Content</strong>. Icon Sidebar Offline/Online dari <code>assets/icons</code>.
         </p>
         <div style="display:grid;grid-template-columns:1fr;gap:16px;" class="variant-grid">
           <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
@@ -1518,58 +1758,52 @@
                 <div class="ds-nav-composed-panel">
                   <span class="ds-nav-composed-panel__tag">isMenu=single</span>
                   <div class="ds-nav-composed-panel__nav">
-                    <a href="#" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1" aria-hidden="true">
+                    <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-news-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
                         <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Berita</span>
                       </div>
-                      <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
-                    </a>
+                      <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true"></button>
                   </div>
                 </div>
                 <div class="ds-nav-composed-panel">
                   <span class="ds-nav-composed-panel__tag">isMenu=hide</span>
                   <div class="ds-nav-composed-panel__nav">
-                    <a href="#" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
+                    <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-medikal-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
                         <span class="ds-nav-mainmenu-snap__title block text-text-primary text-body-sm font-normal leading-tight">Rekam Medis</span>
                       </div>
-                      <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
-                    </a>
+                      <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true"></button>
                   </div>
                 </div>
                 <div class="ds-nav-composed-panel">
                   <span class="ds-nav-composed-panel__tag">isMenu=expand</span>
                   <div class="ds-nav-composed-panel__nav">
-                    <a href="#" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--selected" tabindex="-1" aria-hidden="true">
+                    <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--selected" tabindex="-1" aria-hidden="true">
                       <img src="../../assets/icons/icon-sidebar-offline-medikal-on.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
                       <div class="ds-nav-mainmenu-snap__body">
                         <span class="ds-nav-mainmenu-snap__title block text-body-sm font-normal leading-tight">Rekam Medis</span>
                       </div>
-                      <img src="../../assets/icons/icon-chevron-up.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
-                    </a>
+                      <img src="../../assets/icons/icon-chevron-up.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true"></button>
                     <ul class="ds-nav-composed__submenu">
                       <li>
-                        <a href="#" class="ds-nav-submenu-snap" tabindex="-1" aria-hidden="true">
+                        <button type="button" class="ds-nav-submenu-snap" tabindex="-1" aria-hidden="true">
                           <img src="../../assets/icons/dot.svg" width="6" height="6" alt="" class="ds-nav-dot-img ds-nav-submenu-snap__dot" aria-hidden="true">
                           <span class="ds-nav-submenu-snap__label">Fitur &amp; Keuntungan</span>
-                          <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-submenu-snap__trail" aria-hidden="true">
-                        </a>
+                          <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-submenu-snap__trail" aria-hidden="true"></button>
                       </li>
                       <li>
-                        <a href="#" class="ds-nav-submenu-snap" tabindex="-1" aria-hidden="true">
+                        <button type="button" class="ds-nav-submenu-snap" tabindex="-1" aria-hidden="true">
                           <img src="../../assets/icons/dot.svg" width="6" height="6" alt="" class="ds-nav-dot-img ds-nav-submenu-snap__dot" aria-hidden="true">
                           <span class="ds-nav-submenu-snap__label">Data Dokter</span>
-                          <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-submenu-snap__trail" aria-hidden="true">
-                        </a>
+                          <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-submenu-snap__trail" aria-hidden="true"></button>
                       </li>
                       <li>
-                        <a href="#" class="ds-nav-submenu-snap" tabindex="-1" aria-hidden="true">
+                        <button type="button" class="ds-nav-submenu-snap" tabindex="-1" aria-hidden="true">
                           <img src="../../assets/icons/dot.svg" width="6" height="6" alt="" class="ds-nav-dot-img ds-nav-submenu-snap__dot" aria-hidden="true">
                           <span class="ds-nav-submenu-snap__label">Laporan Rekam Medis</span>
-                          <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-submenu-snap__trail" aria-hidden="true">
-                        </a>
+                          <img src="../../assets/icons/icon-chevron-right.svg" width="16" height="16" alt="" class="ds-nav-submenu-snap__trail" aria-hidden="true"></button>
                       </li>
                     </ul>
                   </div>
@@ -1581,6 +1815,18 @@
               <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);margin-bottom:6px;"><code>isMenu=single</code> · <code>hide</code> · <code>expand</code></div>
               <div style="font-size:11px;color:var(--color-text-tertiary);font-family:var(--font-primary);line-height:1.5;">Parent memakai Main Menu (<code>-off</code>/<code>-on</code> + chevron down/up). Child memakai Submenu Content (<code>dot.svg</code> + body3 + chevron-right).</div>
             </div>
+          </div>
+        </div>
+        <div class="section-tokens">
+          <div class="nav-token-groups">
+            <div class="nav-token-panel">
+              <div class="nav-token-panel__head">Token Class — Navigation Menu (komposisi)</div>
+              <div class="nav-token-panel__body">
+                <div class="nav-token-row"><code>.ds-nav-composed-grid</code><button class="copy-btn" type="button" data-copy="ds-nav-composed-grid" onclick="copyToken(this)">Salin</button></div>
+                <div class="nav-token-row"><code>.ds-nav-composed__submenu</code><button class="copy-btn" type="button" data-copy="ds-nav-composed__submenu" onclick="copyToken(this)">Salin</button></div>
+                <div class="nav-token-row"><code>.ds-nav-menu-search</code><button class="copy-btn" type="button" data-copy="ds-nav-menu-search" onclick="copyToken(this)">Salin</button></div>
+                <div class="nav-token-row"><code>.ds-nav-divider</code><button class="copy-btn" type="button" data-copy="ds-nav-divider" onclick="copyToken(this)">Salin</button></div>
+              </div>
             </div>
           </div>
         </div>
@@ -1588,7 +1834,7 @@
 
       <!-- COMPONENT: Sidebar Navigation Expand -->
       <section style="margin-bottom:48px;">
-        <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
+        <h2>
           <span style="width:3px;height:18px;background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300));border-radius:3px;flex-shrink:0;display:block;"></span>
           Component — Sidebar Navigation Expand
         </h2>
@@ -1596,7 +1842,8 @@
           Komposisi sidebar GPOS Lite dari parts: header <strong style="color:var(--color-text-secondary);font-weight:600;">Menu Search</strong>, <strong style="color:var(--color-text-secondary);font-weight:600;">Heading Menu</strong> (<code>--no-icons</code> untuk &quot;Terakhir Dibuka&quot;), <strong style="color:var(--color-text-secondary);font-weight:600;">Divider</strong>, <strong style="color:var(--color-text-secondary);font-weight:600;">Main Menu</strong>, dan <strong style="color:var(--color-text-secondary);font-weight:600;">Submenu Content</strong>.
         </p>
         <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
-          <div style="padding:32px 24px;display:flex;justify-content:center;background:var(--color-neutral-n20);background-image:radial-gradient(circle,rgba(9,30,66,0.04) 1.5px,transparent 1.5px);background-size:18px 18px;">
+          <div class="nav-variant-card__preview nav-variant-card__preview--stage">
+            <div class="nav-component-stage">
             <div class="ds-sidebar-nav-expand ds-sidebar-nav-expand--interactive" id="nav-sidebar-expand" aria-label="Sidebar navigation expand">
               <div class="ds-sidebar-nav-expand__scroll">
                 <div class="ds-sidebar-nav-expand__header">
@@ -2279,6 +2526,7 @@
                 </ul>
               </div>
             </div>
+            </div>
           </div>
           <div style="padding:14px 16px;background:var(--color-surface);">
             <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Sidebar Navigation Expand</div>
@@ -2291,7 +2539,7 @@
 
       <!-- COMPONENT: Sidebar Navigation Hide -->
       <section style="margin-bottom:48px;">
-        <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
+        <h2>
           <span style="width:3px;height:18px;background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300));border-radius:3px;flex-shrink:0;display:block;"></span>
           Component — Sidebar Navigation Hide
         </h2>
@@ -2299,7 +2547,8 @@
           Varian collapsed dari <strong style="color:var(--color-text-secondary);font-weight:600;">Sidebar Navigation Expand</strong> — modifier <code>ds-sidebar-nav-expand--hide</code>. Label, search, heading, divider, dan submenu disembunyikan; hanya icon Main Menu + tombol expand (<code>icon-chevron-right.svg</code>).
         </p>
         <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
-          <div style="padding:32px 24px;display:flex;justify-content:center;background:var(--color-neutral-n20);background-image:radial-gradient(circle,rgba(9,30,66,0.04) 1.5px,transparent 1.5px);background-size:18px 18px;">
+          <div class="nav-variant-card__preview nav-variant-card__preview--stage">
+            <div class="nav-component-stage">
             <div class="ds-sidebar-nav-expand ds-sidebar-nav-expand--hide ds-sidebar-nav-expand--interactive" id="nav-sidebar-hide" aria-label="Sidebar navigation hide">
               <div class="ds-sidebar-nav-expand__scroll">
                 <div class="ds-sidebar-nav-expand__header">
@@ -2982,6 +3231,7 @@
                 </ul>
               </div>
             </div>
+            </div>
           </div>
           <div style="padding:14px 16px;background:var(--color-surface);">
             <div style="font-size:13px;font-weight:600;color:var(--color-text-primary);font-family:var(--font-primary);margin-bottom:4px;">Sidebar Navigation Hide</div>
@@ -2989,10 +3239,23 @@
             </div>
           </div>
         </div>
+        <div class="section-tokens">
+          <div class="nav-token-groups">
+            <div class="nav-token-panel">
+              <div class="nav-token-panel__head">Token Class — Sidebar Navigation Expand / Hide</div>
+              <div class="nav-token-panel__body">
+                <div class="nav-token-row"><code>.ds-sidebar-nav-expand</code><button class="copy-btn" type="button" data-copy="ds-sidebar-nav-expand" onclick="copyToken(this)">Salin</button></div>
+                <div class="nav-token-row"><code>.ds-sidebar-nav-expand--hide</code><button class="copy-btn" type="button" data-copy="ds-sidebar-nav-expand ds-sidebar-nav-expand--hide" onclick="copyToken(this)">Salin</button></div>
+                <div class="nav-token-row"><code>.ds-sidebar-nav-expand--interactive</code><button class="copy-btn" type="button" data-copy="ds-sidebar-nav-expand ds-sidebar-nav-expand--interactive" onclick="copyToken(this)">Salin</button></div>
+                <div class="nav-token-row"><code>.ds-sidebar-nav-expand__menu</code><button class="copy-btn" type="button" data-copy="ds-sidebar-nav-expand__menu" onclick="copyToken(this)">Salin</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section style="margin-bottom:48px;">
-        <h2 style="font-size:20px;font-weight:600;margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--color-border);display:flex;align-items:center;gap:12px;color:var(--color-text-primary);letter-spacing:-0.01em;font-family:var(--font-primary);">
+        <h2>
           <span style="width:3px;height:18px;background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300));border-radius:3px;flex-shrink:0;display:block;"></span>
           Informasi Penggunaan
         </h2>
@@ -3045,13 +3308,13 @@
           Panduan implementasi navigation menu yang konsisten dengan anatomy parts dan token DS.
         </p>
         <div class="usage-grid-2">
-          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
-            <div style="padding:10px 16px;background:var(--color-green-g50);border-bottom:2px solid var(--color-green-g100);font-weight:700;color:var(--color-green-g400);font-family:var(--font-primary);font-size:12px;">Do — Lakukan ini</div>
-            <ul style="padding:16px 20px 20px 36px;color:var(--color-text-tertiary);font-size:13px;line-height:1.7;font-family:var(--font-primary);">
+          <div class="ds-usage-card">
+            <div class="ds-usage-card__head ds-usage-card__head--do">Do — Lakukan ini</div>
+            <ul class="ds-usage-card__list">
               <li>Letakkan Menu Search custom di atas daftar menu — tinggi <code>space-400</code>, jarak atas/bawah <code>space-100</code>.</li>
               <li>Susun urutan: Menu Search → Heading Menu → Divider → Main Menu → Submenu Content → Divider penutup.</li>
               <li>Satu item <code>state=selected</code> per section pada Main Menu atau Submenu Content.</li>
-              <li>Submenu Content: gunakan part Dot + typography body3 regular + chevron dari <a href="../../foundations/icons/icons.html" style="color:var(--color-primary-500);">Icons</button>.</li>
+              <li>Submenu Content: gunakan part Dot + typography body3 regular + chevron dari <code>assets/icons</code>.</li>
               <li>Navigation Menu: rakit Main Menu + Submenu Content — <code>isMenu=single</code> tanpa submenu, <code>hide</code>/<code>expand</code> dengan chevron down/up.</li>
               <li>Parent expandable: icon Sidebar Offline <code>-off</code> (collapsed) / <code>-on</code> (expanded). Leaf single tanpa chevron trail.</li>
               <li>Tambahkan <code>icon-chevron-right.svg</code> sebagai trail icon pada setiap Main Menu item.</li>
@@ -3059,9 +3322,9 @@
               <li>Set <code>aria-current="page"</code> pada item Main Menu yang sedang aktif.</li>
             </ul>
           </div>
-          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
-            <div style="padding:10px 16px;background:var(--color-red-r50);border-bottom:2px solid var(--color-red-r100);font-weight:700;color:var(--color-red-r300);font-family:var(--font-primary);font-size:12px;">Don&apos;t — Hindari ini</div>
-            <ul style="padding:16px 20px 20px 36px;color:var(--color-text-tertiary);font-size:13px;line-height:1.7;font-family:var(--font-primary);">
+          <div class="ds-usage-card">
+            <div class="ds-usage-card__head ds-usage-card__head--dont">Don&apos;t — Hindari ini</div>
+            <ul class="ds-usage-card__list">
               <li>Jangan campur chevron-right pada parent yang expandable — gunakan chevron-down/up.</li>
               <li>Jangan render Submenu Content saat <code>isMenu=hide</code>.</li>
               <li>Gunakan <code>icon-magnifying-glass.svg</code> untuk Menu Search default–typing; <code>icon-x-circle-outline.svg</code> pada state rest.</li>
@@ -3195,21 +3458,6 @@
       </section>
 
       
-      <section style="margin-bottom:48px;">
-        <h2>Token Class</h2>
-        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:16px;display:grid;gap:10px;">
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-navigation-menu</code><button class="copy-btn" data-copy="ds-navigation-menu" onclick="copyToken(this)">Salin</button></div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-navigation-menu--expand</code><button class="copy-btn" data-copy="ds-navigation-menu--expand" onclick="copyToken(this)">Salin</button></div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-navigation-menu--hide</code><button class="copy-btn" data-copy="ds-navigation-menu--hide" onclick="copyToken(this)">Salin</button></div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-nav-main-item</code><button class="copy-btn" data-copy="ds-nav-main-item" onclick="copyToken(this)">Salin</button></div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-nav-main-item ds-nav-main-item--active</code><button class="copy-btn" data-copy="ds-nav-main-item ds-nav-main-item--active" onclick="copyToken(this)">Salin</button></div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-nav-main-item ds-nav-main-item--hover</code><button class="copy-btn" data-copy="ds-nav-main-item ds-nav-main-item--hover" onclick="copyToken(this)">Salin</button></div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-nav-submenu-item</code><button class="copy-btn" data-copy="ds-nav-submenu-item" onclick="copyToken(this)">Salin</button></div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-nav-submenu-item ds-nav-submenu-item--active</code><button class="copy-btn" data-copy="ds-nav-submenu-item ds-nav-submenu-item--active" onclick="copyToken(this)">Salin</button></div>
-          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-nav-search</code><button class="copy-btn" data-copy="ds-nav-search" onclick="copyToken(this)">Salin</button></div>
-        </div>
-      </section>
-
       <footer class="page-footer" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--color-border);font-size:12px;color:var(--color-text-tertiary);">
         &copy; 2026 GPOS Lite Design System V2.0 — Navigation Menu
       </footer>
@@ -3551,6 +3799,19 @@
       setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
     });
   }
+
+  /* Hamburger / sidebar / overlay */
+  (function () {
+    var hamburger = document.getElementById('hamburger-btn');
+    var sidebar = document.getElementById('sidebar');
+    var overlay = document.getElementById('sidebar-overlay');
+    var closeBtn = document.getElementById('sidebar-close');
+    function openSidebar() { sidebar.classList.add('mobile-open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeSidebar() { sidebar.classList.remove('mobile-open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
+    if (hamburger) hamburger.addEventListener('click', openSidebar);
+    if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+    if (overlay) overlay.addEventListener('click', closeSidebar);
+  })();
 </script>
   <script src="../../scripts/sidebar-nav-menu.js"></script>
 </body>

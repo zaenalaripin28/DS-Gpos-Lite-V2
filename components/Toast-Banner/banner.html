@@ -1439,8 +1439,8 @@
   const hamburgerBtn   = document.getElementById('hamburger-btn');
   const sidebarClose   = document.getElementById('sidebar-close');
 
-  function openSidebar()  { sidebar.classList.add('open'); overlay.classList.add('active'); }
-  function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('active'); }
+  function openSidebar()  { sidebar.classList.add('mobile-open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+  function closeSidebar() { sidebar.classList.remove('mobile-open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
 
   hamburgerBtn.addEventListener('click', openSidebar);
   sidebarClose.addEventListener('click', closeSidebar);

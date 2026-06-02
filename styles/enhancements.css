@@ -604,12 +604,16 @@
 
 /* Section headings — lighter SaaS hierarchy */
 .page-home section > h2 {
-  border-bottom: none;
-  padding-bottom: 0;
-  margin-bottom: var(--spacing-3);
+  border-bottom: none !important;
+  padding-bottom: var(--spacing-4);
+  margin-bottom: var(--spacing-6);
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
   letter-spacing: -0.02em;
+  background-image: linear-gradient(to right, var(--color-primary-500) 0%, rgba(30,127,214,0.18) 32%, transparent 68%);
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  background-position: left bottom;
 }
 
 .page-home section > h2::before {
@@ -790,107 +794,254 @@
 }
 
 /* ============================================================
+   17. GLOBAL ROUNDED SIDEBAR + TOPBAR (all pages)
+   ============================================================ */
+
+/* Rounded sidebar panel — applies to all pages, matches page-home style */
+.sidebar {
+  margin: var(--spacing-3);
+  height: calc(100vh - var(--spacing-6));
+  border-radius: var(--border-radius-2xl);
+  border-right: none !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.32), 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+/* Sidebar scrollbar — visible on dark background */
+.nav-scroll {
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+.nav-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.nav-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.nav-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+}
+.nav-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.32);
+}
+
+/* Adjust main-content left margin for rounded sidebar with its margin */
+.main-content {
+  margin-left: calc(var(--sidebar-width) + var(--spacing-6));
+}
+
+/* Rounded floating topbar — matches page-home style */
+.topbar {
+  margin: var(--spacing-3) var(--spacing-5) 0 !important;
+  padding: 0 var(--spacing-6) !important;
+  border: 1px solid var(--topbar-border) !important;
+  border-bottom: 1px solid var(--topbar-border) !important;
+  border-radius: var(--border-radius-2xl) !important;
+  box-shadow: var(--shadow-sm) !important;
+  background-color: var(--topbar-bg) !important;
+  top: var(--spacing-3) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+}
+
+/* Dark mode topbar */
+[data-theme="dark"] .topbar {
+  background-color: var(--color-surface) !important;
+  border-color: var(--color-border) !important;
+}
+
+/* ============================================================
+   17b. MOBILE RESPONSIVE — ROUNDED OVERRIDES
+   ============================================================ */
+
+@media (max-width: 768px) {
+  /* Sidebar resets to full-height on mobile (slides in from left) */
+  .sidebar {
+    margin: 0;
+    height: 100vh;
+    border-radius: 0;
+    box-shadow: var(--shadow-2xl);
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  .topbar {
+    margin: var(--spacing-2) var(--spacing-3) 0 !important;
+    top: var(--spacing-2) !important;
+    border-radius: var(--border-radius-xl) !important;
+  }
+}
+
+/* ============================================================
+   18. HERO BANNER — MOBILE RESPONSIVE
+   ============================================================ */
+
+.ds-hero-banner {
+  min-height: 200px;
+}
+
+@media (max-width: 768px) {
+  .ds-hero-banner {
+    flex-direction: column !important;
+  }
+
+  .ds-hero-banner > div:last-child {
+    border-left: none !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    min-height: 140px;
+  }
+
+  .ds-hero-banner .font-bold[style*="2.5rem"] {
+    font-size: 1.75rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .ds-hero-banner > div:first-child {
+    padding: var(--spacing-6) var(--spacing-5) !important;
+  }
+
+  .ds-hero-banner .font-bold[style*="2.5rem"] {
+    font-size: 1.5rem !important;
+  }
+}
+
+/* ============================================================
+   19. SECTION H2 — CONSISTENT GRADIENT UNDERLINE
+   ============================================================ */
+
+section > h2 {
+  border-bottom: none !important;
+  background-image: linear-gradient(to right, var(--color-primary-500) 0%, rgba(30,127,214,0.18) 32%, transparent 68%) !important;
+  background-repeat: no-repeat !important;
+  background-size: 100% 1px !important;
+  background-position: left bottom !important;
+}
+
+/* ============================================================
+   20. SCROLL PROGRESS + BACK TO TOP — GLOBAL
+   ============================================================ */
+
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-primary-500) 0%, var(--color-primary-300) 100%);
+  z-index: 99999;
+  transition: width 80ms linear;
+  pointer-events: none;
+  border-radius: 0 2px 2px 0;
+}
+
+.scroll-top-btn {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  width: 40px; height: 40px;
+  background: var(--color-primary-500);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(30,127,214,0.38);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 200ms ease, transform 200ms ease, background-color 150ms ease;
+  z-index: 200;
+  pointer-events: none;
+}
+.scroll-top-btn.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.scroll-top-btn:hover { background-color: var(--color-primary-600); }
+
+/* ============================================================
    14. HOME PAGE — SIDEBAR INSET ROUNDED PANEL (light, ref-matched)
    ============================================================ */
 
 /*
-   Pattern: sidebar sits inside the layout column — not overlaying content.
-   Inset margin creates gap from all screen edges.
-   border-radius gives the rounded panel shape from the UI reference.
-   position:fixed keeps it sticky while page scrolls, main-content
-   margin-left unchanged so sidebar never covers content.
+   Sidebar — dark floating panel.
+   Only layout/shape rules here; colors use the dark sidebar tokens from globals.css.
 */
 .page-home .sidebar {
   margin: var(--spacing-3);
   height: calc(100vh - var(--spacing-6));
   border-radius: var(--border-radius-2xl);
-  background-color: var(--color-surface);
+  background-color: var(--sidebar-bg);
   border-right: none;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.32), 0 2px 8px rgba(0, 0, 0, 0.18);
   overflow: hidden;
 }
 
 .page-home .sidebar-header {
-  background-color: var(--color-surface);
-  border-bottom-color: var(--color-gray-100);
+  background-color: var(--sidebar-header-bg);
+  border-bottom-color: var(--sidebar-border);
 }
 
-.page-home .sidebar-brand-text .logo    { color: var(--color-text-primary); }
-.page-home .sidebar-brand-text .version { color: var(--color-text-tertiary); }
-.page-home .sidebar-close-btn          { color: var(--color-text-secondary); }
-.page-home .sidebar-close-btn:hover    { color: var(--color-text-primary); background: var(--color-gray-100); border-radius: var(--border-radius-md); }
+.page-home .sidebar-brand-text .logo    { color: var(--sidebar-logo-color); }
+.page-home .sidebar-brand-text .version { color: var(--sidebar-version-color); }
+.page-home .sidebar-close-btn          { color: var(--sidebar-link-color); }
+.page-home .sidebar-close-btn:hover    { color: var(--color-text-inverse); background: rgba(255,255,255,0.08); border-radius: var(--border-radius-md); }
 
 /* Search */
-.page-home .sidebar-search { border-bottom-color: var(--color-gray-100); }
+.page-home .sidebar-search { border-bottom-color: var(--sidebar-border); }
 
 .page-home .search-input {
-  background-color: var(--color-gray-50);
-  border-color: var(--color-gray-200);
-  color: var(--color-text-secondary);
+  background-color: var(--sidebar-search-bg);
+  border-color: var(--sidebar-search-border);
+  color: var(--sidebar-link-color);
 }
 
-.page-home .search-input::placeholder { color: var(--color-text-tertiary); }
+.page-home .search-input::placeholder { color: var(--sidebar-section-title); }
 
 .page-home .search-input:focus {
-  background-color: var(--color-primary-50);
-  border-color: var(--color-primary-300);
-  color: var(--color-text-primary);
-  box-shadow: 0 0 0 3px rgba(30, 127, 214, 0.10);
+  background-color: rgba(30, 127, 214, 0.08);
+  border-color: var(--color-primary-500);
+  color: #CBD5E1;
+  box-shadow: 0 0 0 3px rgba(30, 127, 214, 0.15);
 }
 
-/* Scrollbar — light */
+/* Scrollbar — dark */
 .page-home .nav-scroll {
-  scrollbar-color: var(--color-gray-200) transparent;
+  scrollbar-color: var(--sidebar-border) transparent;
 }
 
 .page-home .nav-scroll::-webkit-scrollbar-thumb {
-  background: var(--color-gray-200);
+  background: var(--sidebar-border);
 }
 
 /* Section titles */
-.page-home .nav-title { color: var(--color-text-tertiary); }
+.page-home .nav-title { color: var(--sidebar-section-title); }
 
-/* Nav links — rounded pill, light surface */
+/* Nav links — dark sidebar style */
 .page-home .nav-link {
-  color: var(--color-text-secondary);
-  border-left: none;
-  border-radius: var(--border-radius-lg);
+  color: var(--sidebar-link-color);
+  border-left: 2px solid transparent;
+  border-radius: var(--border-radius-md);
 }
 
 .page-home .nav-link:hover {
-  background-color: var(--color-gray-100);
-  color: var(--color-text-primary);
-  border-left-color: transparent;
+  background-color: var(--sidebar-link-hover-bg);
+  color: var(--sidebar-link-hover-color);
+  border-left-color: rgba(30, 127, 214, 0.5);
 }
 
 .page-home .nav-link.active {
-  background-color: var(--color-primary-50);
-  color: var(--color-primary-700);
-  border-left-color: transparent;
+  background-color: var(--sidebar-link-active-bg);
+  color: var(--sidebar-link-active-color);
+  border-left-color: var(--sidebar-link-active-border);
   font-weight: var(--font-weight-medium);
 }
 
-.page-home .nav-link svg          { opacity: 0.45; }
+.page-home .nav-link svg          { opacity: 0.6; }
 .page-home .nav-link:hover svg,
 .page-home .nav-link.active svg   { opacity: 1; }
 
 /* Sidebar footer */
 .page-home .sidebar-footer {
-  background-color: var(--color-gray-50);
-  border-top-color: var(--color-gray-100);
-}
-
-.page-home .system-status-indicator { color: var(--color-success-600); }
-
-.page-home .status-dot-live {
-  background: var(--color-success-500);
-  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
-}
-
-.page-home .tailwind-badge {
-  background: var(--color-secondary-50);
-  border-color: var(--color-secondary-100);
-  color: var(--color-secondary-700);
+  background-color: var(--sidebar-header-bg);
+  border-top-color: var(--sidebar-border);
 }
 
 /* Topbar — mobile responsive */

@@ -1611,6 +1611,19 @@
     document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
     localStorage.setItem('ds-theme', isDark ? 'light' : 'dark');
   });
+
+  /* Hamburger / sidebar / overlay */
+  (function () {
+    var hamburger = document.getElementById('hamburger-btn');
+    var sidebar = document.getElementById('sidebar');
+    var overlay = document.getElementById('sidebar-overlay');
+    var closeBtn = document.getElementById('sidebar-close');
+    function openSidebar() { sidebar.classList.add('mobile-open'); overlay.classList.add('active'); document.body.style.overflow = 'hidden'; }
+    function closeSidebar() { sidebar.classList.remove('mobile-open'); overlay.classList.remove('active'); document.body.style.overflow = ''; }
+    if (hamburger) hamburger.addEventListener('click', openSidebar);
+    if (closeBtn) closeBtn.addEventListener('click', closeSidebar);
+    if (overlay) overlay.addEventListener('click', closeSidebar);
+  })();
 </script>
   <script src="../../scripts/sidebar-nav-menu.js"></script>
 </body>

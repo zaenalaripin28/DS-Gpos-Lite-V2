@@ -124,13 +124,11 @@ pre code {
   display: flex;
   flex-direction: column;
   position: fixed;
-  height: calc(100vh - 24px);
-  top: 12px;
-  left: 12px;
+  height: 100vh;
+  top: 0;
+  left: 0;
   z-index: var(--z-fixed);
-  border: 1px solid var(--sidebar-border);
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14), 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-right: 1px solid var(--sidebar-border);
   transition: transform var(--transition-slow);
   overflow: hidden;
 }
@@ -469,7 +467,7 @@ pre code {
    ============================================================ */
 
 .main-content {
-  margin-left: calc(var(--sidebar-width) + 24px);
+  margin-left: var(--sidebar-width);
   flex: 1;
   background-color: var(--color-background);
   min-height: 100vh;
@@ -1065,11 +1063,6 @@ section > h2::before {
 
 @media (max-width: 768px) {
   .sidebar {
-    left: 0;
-    top: 0;
-    height: 100vh;
-    border-radius: 0 16px 16px 0;
-    border-left: none;
     transform: translateX(-100%);
     box-shadow: none;
   }
