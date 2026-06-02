@@ -120,5 +120,52 @@ Preferred output:
 + new code
 ```
 
+## Foundation Documentation Rules
+
+### Existing Foundation
+
+* Foundations already exist and are the source of truth.
+* Never recreate foundations.
+* Never generate new foundation examples unless explicitly requested.
+* Never create new design tokens.
+* Never modify existing design tokens.
+* Never modify Tailwind configuration unless explicitly requested.
+
+### Foundation Examples
+
+* Use existing implementation as the source of truth.
+* Code examples must reflect the actual implementation shown on the page.
+* Do not invent alternative code examples.
+* Do not generate placeholder code.
+* Do not generate hypothetical implementations.
+
+### Foundation Page Changes
+
+* Preserve existing layout.
+* Preserve existing hierarchy.
+* Preserve existing navigation.
+* Preserve existing styling.
+* Preserve existing responsiveness.
+* Preserve existing section structure.
+* Do not redesign foundation pages.
+* Do not refactor unrelated code.
+
+### Reusability
+
+* Reuse existing components whenever possible.
+* Reuse existing tokens whenever possible.
+* Reuse existing utilities whenever possible.
+* Avoid duplicate implementations.
+
+### Documentation Features
+
+When adding documentation features (Code Copy, Code Preview, Code Block, Playground, Usage Example):
+
+* Attach them to the existing implementation.
+* Do not create new examples when an existing example is available.
+* Display the actual code used by the example.
+* Keep documentation synchronized with the implementation.
+
+
 Never use raw Tailwind colors.
 Always use semantic token utilities.
