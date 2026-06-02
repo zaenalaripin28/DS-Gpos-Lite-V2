@@ -6,79 +6,192 @@
   <title>Tourguide — DS GPOS Lite V2</title>
   <link rel="stylesheet" href="../../styles/globals.css">
   <link rel="stylesheet" href="../../styles/enhancements.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50:'var(--color-primary-50)',100:'var(--color-primary-100)',200:'var(--color-primary-200)',
+              300:'var(--color-primary-300)',400:'var(--color-primary-400)',500:'var(--color-primary-500)',
+              600:'var(--color-primary-600)',700:'var(--color-primary-700)',800:'var(--color-primary-800)',900:'var(--color-primary-900)',
+            },
+            blue: {
+              b50:'var(--color-blue-b50)',b75:'var(--color-blue-b75)',b100:'var(--color-blue-b100)',
+              b200:'var(--color-blue-b200)',b300:'var(--color-blue-b300)',b400:'var(--color-blue-b400)',b500:'var(--color-blue-b500)',
+            },
+            green: {
+              g50:'var(--color-green-g50)',g75:'var(--color-green-g75)',g100:'var(--color-green-g100)',
+              g200:'var(--color-green-g200)',g300:'var(--color-green-g300)',g400:'var(--color-green-g400)',g500:'var(--color-green-g500)',
+            },
+            neutral: {
+              n0:'var(--color-neutral-n0)',n10:'var(--color-neutral-n10)',n20:'var(--color-neutral-n20)',n30:'var(--color-neutral-n30)',
+              n40:'var(--color-neutral-n40)',n50:'var(--color-neutral-n50)',n60:'var(--color-neutral-n60)',n70:'var(--color-neutral-n70)',
+              n80:'var(--color-neutral-n80)',n90:'var(--color-neutral-n90)',n100:'var(--color-neutral-n100)',n200:'var(--color-neutral-n200)',
+              n300:'var(--color-neutral-n300)',n400:'var(--color-neutral-n400)',n500:'var(--color-neutral-n500)',n600:'var(--color-neutral-n600)',
+              n700:'var(--color-neutral-n700)',n800:'var(--color-neutral-n800)',n900:'var(--color-neutral-n900)',
+            },
+            background:'var(--color-background)',surface:'var(--color-surface)',
+            border:{DEFAULT:'var(--color-border)',light:'var(--color-border-light)',brand:'var(--color-border-brand)'},
+            text:{primary:'var(--color-text-primary)',secondary:'var(--color-text-secondary)',tertiary:'var(--color-text-tertiary)',
+              disabled:'var(--color-text-disabled)',inverse:'var(--color-text-inverse)',brand:'var(--color-text-brand)'},
+          },
+          fontFamily:{primary:['var(--font-primary)'],sans:['var(--font-primary)']},
+          fontSize:{
+            xs:'var(--font-size-xs)',sm:'var(--font-size-sm)',base:'var(--font-size-base)',lg:'var(--font-size-lg)',xl:'var(--font-size-xl)',
+            '2xl':'var(--font-size-2xl)','3xl':'var(--font-size-3xl)',
+            caption:'var(--text-caption-regular-size)',
+            'body-sm':'var(--text-body-small-regular-size)','body-md':'var(--text-body-medium-regular-size)',
+          },
+          fontWeight:{normal:'var(--font-weight-normal)',medium:'var(--font-weight-medium)',semibold:'var(--font-weight-semibold)',bold:'var(--font-weight-bold)'},
+          lineHeight:{snug:'var(--line-height-snug)',normal:'var(--line-height-normal)',relaxed:'var(--line-height-relaxed)',
+            'body-sm':'var(--text-body-small-regular-lh)'},
+          letterSpacing:{wide:'var(--letter-spacing-wide)',wider:'var(--letter-spacing-wider)'},
+          spacing:{
+            '0':'var(--space-0)','025':'var(--space-025)','050':'var(--space-050)','075':'var(--space-075)','100':'var(--space-100)',
+            '150':'var(--space-150)','200':'var(--space-200)','250':'var(--space-250)','300':'var(--space-300)','400':'var(--space-400)',
+            '500':'var(--space-500)','600':'var(--space-600)',
+          },
+          borderRadius:{
+            none:'var(--border-radius-none)',sm:'var(--border-radius-sm)',md:'var(--border-radius-md)',lg:'var(--border-radius-lg)',
+            xl:'var(--border-radius-xl)','2xl':'var(--border-radius-2xl)',full:'var(--border-radius-full)',
+          },
+          boxShadow:{
+            xs:'var(--shadow-xs)',sm:'var(--shadow-sm)',md:'var(--shadow-md)',lg:'var(--shadow-lg)',xl:'var(--shadow-xl)',
+          },
+        }
+      }
+    }
+  </script>
   <style>
-    .tourguide-section { margin-bottom: var(--space-500); }
-    .tourguide-section h2 {
-      margin: 0 0 var(--space-150);
-      font-family: var(--font-primary);
-      font-size: var(--font-size-xl);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-text-primary);
+    /* ── Scroll progress ── */
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; height: 2px;
+      background: linear-gradient(90deg, #1E7FD6 0%, #22D3EE 100%);
+      z-index: 99999; transition: width 80ms linear; pointer-events: none;
+      border-radius: 0 2px 2px 0;
     }
-    .tourguide-section p {
-      margin: 0 0 var(--space-250);
-      font-family: var(--font-primary);
-      font-size: var(--text-body-medium-regular-size);
-      line-height: var(--text-body-medium-regular-lh);
-      color: var(--color-text-secondary);
+
+    /* ── Hero banner grid bg ── */
+    .ds-hero-banner { position: relative; overflow: hidden; }
+    .ds-hero-banner::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px; pointer-events: none; z-index: 0;
     }
-    .tourguide-card {
+    .ds-hero-banner > * { position: relative; z-index: 1; }
+
+    /* ── Feature cards ── */
+    .hero-feat-card {
+      transition: transform 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  box-shadow 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  border-color 160ms ease;
+    }
+    .hero-feat-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--color-blue-b75) !important;
+      box-shadow: 0 12px 32px rgba(9,30,66,0.11), 0 3px 8px rgba(9,30,66,0.06);
+    }
+
+    /* ── Entrance animation ── */
+    @keyframes ds-reveal {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .content-inner > section.mb-12 {
+      animation: ds-reveal 400ms 60ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+
+    /* ── Dark toggle ── */
+    .dark-toggle {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; background: none;
+      border: 1px solid var(--color-border); color: var(--color-text-secondary);
+      cursor: pointer; border-radius: var(--border-radius-md);
+      transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+      flex-shrink: 0;
+    }
+    .dark-toggle:hover { background-color: var(--color-primary-50); border-color: var(--color-primary-200); color: var(--color-primary-600); }
+    .dark-toggle .icon-sun  { display: none; }
+    .dark-toggle .icon-moon { display: block; }
+    [data-theme="dark"] .dark-toggle .icon-sun  { display: block; }
+    [data-theme="dark"] .dark-toggle .icon-moon { display: none; }
+
+    /* ── Section title accent line ── */
+    .section-heading {
+      font-size: 20px; font-weight: 600; margin-bottom: 24px;
+      padding-bottom: 16px; border-bottom: 1px solid var(--color-border);
+      display: flex; align-items: center; gap: 12px;
+      color: var(--color-text-primary); letter-spacing: -0.01em;
+      font-family: var(--font-primary);
+    }
+    .section-heading__accent {
+      width: 3px; height: 18px; flex-shrink: 0; display: block; border-radius: 3px;
+      background: linear-gradient(to bottom, var(--color-primary-500), var(--color-primary-300));
+    }
+
+    /* ── Part card ── */
+    .part-card {
       border: 1px solid var(--color-border-light);
       border-radius: var(--border-radius-xl);
       overflow: hidden;
       background: var(--color-neutral-n0);
       box-shadow: var(--shadow-xs);
+      margin-bottom: var(--space-400);
     }
-    .tourguide-card__head {
+    .part-card__head {
       padding: var(--space-150) var(--space-200);
       border-bottom: 1px solid var(--color-border-light);
       background: var(--color-neutral-n10);
       font-family: var(--font-primary);
       font-size: var(--text-caption-medium-size);
       color: var(--color-text-secondary);
+      display: flex; align-items: center; gap: var(--space-100);
     }
-    .tourguide-preview {
+    .part-card__label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--color-blue-b300); font-family: var(--font-primary);
+    }
+    .part-card__preview {
       padding: var(--space-250);
       background: var(--color-neutral-n900);
     }
-    .spotlight-state-list {
+
+    /* ── State list ── */
+    .state-list {
       border: 1px solid color-mix(in srgb, var(--color-neutral-n0) 14%, transparent);
       border-radius: var(--border-radius-lg);
       overflow: hidden;
     }
-    .spotlight-state-list__row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      gap: var(--space-200);
+    .state-list__row {
+      display: grid; grid-template-columns: 1fr auto;
+      align-items: center; gap: var(--space-200);
       padding: var(--space-150) var(--space-200);
       border-bottom: 1px solid color-mix(in srgb, var(--color-neutral-n0) 10%, transparent);
       background: color-mix(in srgb, var(--color-neutral-n900) 85%, transparent);
     }
-    .spotlight-state-list__row:last-child { border-bottom: none; }
-    .spotlight-state-list__state {
+    .state-list__row:last-child { border-bottom: none; }
+    .state-list__label {
       font-family: var(--font-primary);
       font-size: var(--text-caption-medium-size);
       font-weight: var(--font-weight-semibold);
       color: var(--color-neutral-n50);
       white-space: nowrap;
     }
+
+    /* ── DS component classes (kept from original) ── */
     .ds-btn-spotlight {
-      border: none;
-      border-radius: var(--border-radius-md);
+      border: none; border-radius: var(--border-radius-md);
       background: color-mix(in srgb, var(--color-neutral-n500) 16%, transparent);
       color: var(--color-neutral-n0);
-      font-family: var(--font-primary);
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-medium);
-      line-height: var(--text-body-small-medium-lh);
-      min-height: 32px;
-      padding: var(--space-075) var(--space-150);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      white-space: nowrap;
-      cursor: pointer;
+      font-family: var(--font-primary); font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium); line-height: var(--text-body-small-medium-lh);
+      min-height: 32px; padding: var(--space-075) var(--space-150);
+      display: inline-flex; align-items: center; justify-content: center;
+      white-space: nowrap; cursor: pointer;
     }
     .ds-btn-spotlight--hover { background: color-mix(in srgb, var(--color-neutral-n500) 25%, transparent); }
     .ds-btn-spotlight--focus {
@@ -86,131 +199,80 @@
       box-shadow: 0 0 0 2px var(--color-primary-500);
     }
     .ds-btn-spotlight--press { background: color-mix(in srgb, var(--color-neutral-n500) 35%, transparent); }
+
     .ds-btn-onboarding-replay {
-      border: none;
-      border-radius: var(--border-radius-md);
+      border: none; border-radius: var(--border-radius-md);
       background: color-mix(in srgb, var(--color-neutral-n500) 16%, transparent);
       color: var(--color-neutral-n0);
-      font-family: var(--font-primary);
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-medium);
-      line-height: var(--text-body-small-medium-lh);
-      min-height: 32px;
-      padding: var(--space-075) var(--space-150);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: var(--space-100);
-      white-space: nowrap;
-      cursor: pointer;
+      font-family: var(--font-primary); font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium); line-height: var(--text-body-small-medium-lh);
+      min-height: 32px; padding: var(--space-075) var(--space-150);
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: var(--space-100); white-space: nowrap; cursor: pointer;
     }
-    .ds-btn-onboarding-replay img {
-      width: 24px;
-      height: 24px;
-      flex-shrink: 0;
-      display: block;
-      /* color/icon/inverse → Icon.Inverse */
-      filter: brightness(0) invert(1);
-    }
-    .ds-btn-onboarding-replay--hover {
-      background: color-mix(in srgb, var(--color-neutral-n500) 25%, transparent);
-    }
+    .ds-btn-onboarding-replay img { width: 24px; height: 24px; flex-shrink: 0; display: block; filter: brightness(0) invert(1); }
+    .ds-btn-onboarding-replay--hover { background: color-mix(in srgb, var(--color-neutral-n500) 25%, transparent); }
     .ds-btn-onboarding-replay--focus {
       background: color-mix(in srgb, var(--color-neutral-n500) 16%, transparent);
       box-shadow: 0 0 0 2px var(--color-primary-500);
     }
-    .ds-btn-onboarding-replay--press {
-      background: color-mix(in srgb, var(--color-neutral-n500) 35%, transparent);
+    .ds-btn-onboarding-replay--press { background: color-mix(in srgb, var(--color-neutral-n500) 35%, transparent); }
+
+    .ds-spotlight-card {
+      width: 100%; max-width: 560px;
+      border: 1px solid color-mix(in srgb, var(--color-neutral-n0) 12%, transparent);
+      border-radius: var(--border-radius-md);
+      background: var(--color-blue-b300); box-shadow: var(--shadow-md);
+      color: var(--color-neutral-n0); overflow: hidden;
     }
-    .tourguide-parts-table-wrap {
-      border: 1px solid var(--color-border-light);
-      border-radius: var(--border-radius-lg);
-      background: var(--color-neutral-n0);
-      box-shadow: var(--shadow-xs);
-      overflow: hidden;
-      margin-bottom: var(--space-250);
+    .ds-spotlight-card__head {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: var(--space-100); padding: var(--space-200);
     }
-    .tourguide-parts-table {
-      width: 100%;
-      border-collapse: collapse;
+    .ds-spotlight-card__title {
+      margin: 0; font-family: var(--font-primary);
+      font-size: var(--text-header-small-medium-size);
+      font-weight: var(--text-header-small-medium-weight);
+      line-height: var(--text-header-small-medium-lh); color: var(--color-neutral-n0);
+    }
+    .ds-spotlight-card__close {
+      border: none; padding: 0; background: transparent;
+      width: 24px; height: 24px; display: inline-flex; align-items: center;
+      justify-content: center; cursor: pointer; flex-shrink: 0;
+    }
+    .ds-spotlight-card__close img { width: 24px; height: 24px; display: block; filter: brightness(0) invert(1); }
+    .ds-spotlight-card__body {
+      margin: 0; padding: 0 var(--space-200) var(--space-200);
       font-family: var(--font-primary);
       font-size: var(--text-body-small-regular-size);
-      color: var(--color-text-primary);
+      font-weight: var(--text-body-small-regular-weight);
+      line-height: var(--text-body-small-regular-lh); color: var(--color-text-inverse);
     }
-    .tourguide-parts-table th,
-    .tourguide-parts-table td {
-      text-align: left;
-      padding: var(--space-150) var(--space-200);
-      border-bottom: 1px solid var(--color-border-light);
-      vertical-align: top;
+    .ds-spotlight-card__footer {
+      display: flex; align-items: center; gap: var(--space-100);
+      padding: 0 var(--space-200) var(--space-200);
     }
-    .tourguide-parts-table th {
-      background: var(--color-neutral-n10);
-      color: var(--color-text-secondary);
-      font-size: var(--text-caption-medium-size);
-      font-weight: var(--font-weight-semibold);
-      text-transform: uppercase;
-      letter-spacing: var(--letter-spacing-wide);
-    }
-    .tourguide-parts-table tr:last-child td { border-bottom: none; }
-    .tourguide-component-stage {
-      position: relative;
-      min-height: 320px;
-      border-radius: var(--border-radius-lg);
-      overflow: hidden;
-      background: var(--color-neutral-n900);
-      border: 1px solid color-mix(in srgb, var(--color-neutral-n0) 10%, transparent);
-    }
-    .tourguide-component-stage__overlay {
-      position: absolute;
-      inset: 0;
-      background: color-mix(in srgb, var(--color-neutral-n800) 50%, transparent);
-    }
-    .tourguide-component-stage__target {
-      position: absolute;
-      top: 56px;
-      left: 56px;
-      width: 120px;
-      height: 68px;
-      border-radius: var(--border-radius-md);
-      border: 2px solid var(--color-blue-b300);
-      background: color-mix(in srgb, var(--color-neutral-n900) 80%, transparent);
-      z-index: 2;
-    }
+
     .ds-tourguide {
-      position: absolute;
-      left: 56px;
-      top: 140px;
-      width: 292px;
+      position: absolute; left: 56px; top: 140px; width: 292px;
       border-radius: var(--border-radius-sm);
-      background: var(--color-blue-b300);
-      box-shadow: var(--shadow-md);
-      color: var(--color-neutral-n0);
-      z-index: 3;
-      overflow: hidden;
+      background: var(--color-blue-b300); box-shadow: var(--shadow-md);
+      color: var(--color-neutral-n0); z-index: 3; overflow: hidden;
     }
-    .ds-tourguide__body {
-      padding: var(--space-150) var(--space-150) var(--space-100);
-    }
+    .ds-tourguide__body { padding: var(--space-150) var(--space-150) var(--space-100); }
     .ds-tourguide__title {
-      margin: 0 0 var(--space-050);
-      font-family: var(--font-primary);
-      font-size: var(--font-size-xl);
-      font-weight: var(--font-weight-semibold);
-      line-height: var(--line-height-snug);
-      color: var(--color-neutral-n0);
+      margin: 0 0 var(--space-050); font-family: var(--font-primary);
+      font-size: var(--font-size-xl); font-weight: var(--font-weight-semibold);
+      line-height: var(--line-height-snug); color: var(--color-neutral-n0);
     }
     .ds-tourguide__text {
-      margin: 0;
-      font-family: var(--font-primary);
+      margin: 0; font-family: var(--font-primary);
       font-size: var(--text-body-small-regular-size);
       line-height: var(--text-body-small-regular-lh);
-      color: var(--color-text-inverse);
+      color: var(--color-text-inverse) !important;
     }
     .ds-tourguide__footer {
-      display: flex;
-      align-items: center;
-      gap: var(--space-100);
+      display: flex; align-items: center; gap: var(--space-100);
       padding: 0 var(--space-150) var(--space-150);
     }
     .ds-tourguide__progress {
@@ -218,191 +280,168 @@
       font-size: var(--text-body-small-medium-size);
       font-weight: var(--font-weight-medium);
       line-height: var(--text-body-small-medium-lh);
-      color: var(--color-neutral-n0);
-      margin-right: auto;
+      color: var(--color-neutral-n0); margin-right: auto;
     }
-    .ds-spotlight-card {
-      width: 100%;
-      max-width: 560px;
-      border: 1px solid color-mix(in srgb, var(--color-neutral-n0) 12%, transparent);
-      border-radius: var(--border-radius-md);
-      background: var(--color-blue-b300);
-      box-shadow: var(--shadow-md);
-      color: var(--color-neutral-n0);
-      overflow: hidden;
+
+    /* ── Component stage ── */
+    .tourguide-component-stage {
+      position: relative; min-height: 320px;
+      border-radius: var(--border-radius-lg); overflow: hidden;
+      background: var(--color-neutral-n900);
+      border: 1px solid color-mix(in srgb, var(--color-neutral-n0) 10%, transparent);
     }
-    .ds-spotlight-card__head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: var(--space-100);
-      padding: var(--space-200);
+    .tourguide-component-stage__overlay {
+      position: absolute; inset: 0;
+      background: color-mix(in srgb, var(--color-neutral-n800) 50%, transparent);
     }
-    .ds-spotlight-card__title {
-      margin: 0;
-      font-family: var(--font-primary);
-      font-size: var(--text-header-small-medium-size);
-      font-weight: var(--text-header-small-medium-weight);
-      line-height: var(--text-header-small-medium-lh);
-      color: var(--color-neutral-n0);
+    .tourguide-component-stage__target {
+      position: absolute; top: 56px; left: 56px;
+      width: 120px; height: 68px; border-radius: var(--border-radius-md);
+      border: 2px solid var(--color-blue-b300);
+      background: color-mix(in srgb, var(--color-neutral-n900) 80%, transparent);
+      z-index: 2;
     }
-    .ds-spotlight-card__close {
-      border: none;
-      padding: 0;
-      background: transparent;
-      width: 24px;
-      height: 24px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      flex-shrink: 0;
+
+    /* ── Anatomy table ── */
+    .anatomy-table-wrap {
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--border-radius-lg);
+      background: var(--color-neutral-n0);
+      box-shadow: var(--shadow-xs); overflow: hidden;
+      margin-bottom: var(--space-250);
     }
-    .ds-spotlight-card__close img {
-      width: 24px;
-      height: 24px;
-      display: block;
-      filter: brightness(0) invert(1);
-    }
-    .ds-spotlight-card__body {
-      margin: 0;
-      padding: 0 var(--space-200) var(--space-200);
+    .anatomy-table {
+      width: 100%; border-collapse: collapse;
       font-family: var(--font-primary);
       font-size: var(--text-body-small-regular-size);
-      font-weight: var(--text-body-small-regular-weight);
-      line-height: var(--text-body-small-regular-lh);
-      color: var(--color-text-inverse);
-    }
-    .ds-spotlight-card__footer {
-      display: flex;
-      align-items: center;
-      gap: var(--space-100);
-      padding: 0 var(--space-200) var(--space-200);
-    }
-    .tourguide-guideline-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--space-150);
-      margin-top: var(--space-250);
-    }
-    .tourguide-guideline-card {
-      border-radius: var(--border-radius-lg);
-      border: 1px solid var(--color-border-light);
-      background: var(--color-neutral-n0);
-      padding: var(--space-200);
-    }
-    .tourguide-guideline-card__title {
-      margin: 0 0 var(--space-100);
-      font-family: var(--font-primary);
-      font-size: var(--text-body-small-medium-size);
-      font-weight: var(--font-weight-semibold);
       color: var(--color-text-primary);
     }
-    .tourguide-guideline-list {
-      margin: 0;
-      padding-left: var(--space-200);
-      display: grid;
-      gap: var(--space-075);
-      font-family: var(--font-primary);
-      font-size: var(--text-body-small-regular-size);
-      line-height: var(--text-body-small-regular-lh);
-      color: var(--color-text-secondary);
+    .anatomy-table th, .anatomy-table td {
+      text-align: left; padding: var(--space-150) var(--space-200);
+      border-bottom: 1px solid var(--color-border-light); vertical-align: top;
     }
-    .tourguide-playground {
+    .anatomy-table th {
+      background: var(--color-neutral-n10); color: var(--color-text-secondary);
+      font-size: var(--text-caption-medium-size); font-weight: var(--font-weight-semibold);
+      text-transform: uppercase; letter-spacing: var(--letter-spacing-wide);
+    }
+    .anatomy-table tr:last-child td { border-bottom: none; }
+
+    /* ── Playground ── */
+    .tg-playground {
       border: 1px solid var(--color-border-light);
       border-radius: var(--border-radius-xl);
       background: var(--color-neutral-n0);
-      overflow: hidden;
-      box-shadow: var(--shadow-xs);
+      overflow: hidden; box-shadow: var(--shadow-xs);
+      margin-bottom: var(--space-250);
     }
-    .tourguide-playground__controls {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--space-150);
-      padding: var(--space-200);
+    .tg-playground__controls {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-150); padding: var(--space-200);
       border-bottom: 1px solid var(--color-border-light);
     }
-    .tourguide-playground__field {
-      display: grid;
-      gap: var(--space-050);
-    }
-    .tourguide-playground__field label {
+    .tg-playground__field { display: grid; gap: var(--space-050); }
+    .tg-playground__field label {
       font-family: var(--font-primary);
-      font-size: var(--text-caption-medium-size);
-      color: var(--color-text-secondary);
+      font-size: var(--text-caption-medium-size); color: var(--color-text-secondary);
     }
-    .tourguide-playground__field select {
-      appearance: none;
-      border: 1px solid var(--color-border);
-      border-radius: var(--border-radius-md);
-      background: var(--color-surface);
-      color: var(--color-text-primary);
-      font-family: var(--font-primary);
+    .tg-playground__field select {
+      appearance: none; border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-md); background: var(--color-surface);
+      color: var(--color-text-primary); font-family: var(--font-primary);
       font-size: var(--text-body-small-regular-size);
       padding: var(--space-100) var(--space-150);
     }
-    .tourguide-playground__preview {
-      padding: var(--space-250);
-      background: var(--color-neutral-n900);
+    .tg-playground__preview { padding: var(--space-250); background: var(--color-neutral-n900); }
+
+    /* ── Guideline grid ── */
+    .guideline-grid {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-150); margin-top: var(--space-250);
     }
-    @media (max-width: 768px) {
-      .tourguide-guideline-grid,
-      .tourguide-playground__controls {
-        grid-template-columns: 1fr;
-      }
-      .ds-tourguide {
-        width: calc(100% - 24px);
-        left: 12px;
-        top: 132px;
-      }
-      .tourguide-component-stage__target {
-        left: 12px;
-      }
+    .guideline-card {
+      border-radius: var(--border-radius-lg); border: 1px solid var(--color-border-light);
+      background: var(--color-neutral-n0); padding: var(--space-200);
     }
+    .guideline-card__title {
+      margin: 0 0 var(--space-100); font-family: var(--font-primary);
+      font-size: var(--text-body-small-medium-size); font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+    }
+    .guideline-list {
+      margin: 0; padding-left: var(--space-200); display: grid; gap: var(--space-075);
+      font-family: var(--font-primary); font-size: var(--text-body-small-regular-size);
+      line-height: var(--text-body-small-regular-lh); color: var(--color-text-secondary);
+    }
+
+    /* ── Code block ── */
     .code-card {
       border-top: 1px solid var(--color-border-light);
-      background: var(--color-neutral-n900);
+      background: #0F172A;
     }
     .code-card__head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--space-100);
-      padding: var(--space-150) var(--space-200);
-      border-bottom: 1px solid var(--color-neutral-n700);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: var(--space-100); padding: var(--space-150) var(--space-200);
+      border-bottom: 1px solid #1E2D45;
     }
     .code-card__title {
-      margin: 0;
-      font-family: var(--font-primary);
-      font-size: var(--text-caption-medium-size);
-      color: var(--color-neutral-n50);
+      margin: 0; font-family: var(--font-primary);
+      font-size: var(--text-caption-medium-size); color: #94A3B8;
     }
     .copy-btn {
-      border: 1px solid color-mix(in srgb, var(--color-neutral-n0) 12%, transparent);
-      background: var(--color-neutral-n800);
-      color: var(--color-neutral-n40);
-      border-radius: var(--border-radius-md);
-      padding: var(--space-075) var(--space-150);
-      font-family: var(--font-primary);
-      font-size: var(--text-caption-medium-size);
-      cursor: pointer;
+      padding: 4px 10px; background: #1E2D45; border: 1px solid #2D3F55;
+      border-radius: 6px; font-size: 11px; font-weight: 600;
+      color: #94A3B8; cursor: pointer;
+      transition: all 120ms ease; font-family: var(--font-primary); letter-spacing: 0.02em;
     }
-    .copy-btn:hover {
-      background: var(--color-neutral-n700);
-      color: var(--color-neutral-n10);
-    }
-    .copy-btn.copied { color: var(--color-green-g300); }
+    .copy-btn:hover { background: var(--color-blue-b300); border-color: var(--color-blue-b300); color: #fff; }
+    .copy-btn.copied { background: var(--color-green-g300); border-color: var(--color-green-g300); color: #fff; }
     .code-card pre { margin: 0; padding: var(--space-250); overflow-x: auto; }
     .code-card code {
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 12px;
-      line-height: 1.6;
-      color: var(--color-neutral-n20);
-      white-space: pre;
+      font-size: 12px; line-height: 1.7; color: #CBD5E1; white-space: pre;
     }
+    .c-tag    { color: #7DB5E7; }
+    .c-attr   { color: #A3CBEE; }
+    .c-str    { color: #86EFAC; }
+    .c-cmt    { color: #475569; }
+
+    /* ── Code inline chip ── */
+    code.chip {
+      font-family: var(--font-primary) !important; font-size: 11px; font-weight: 500;
+      padding: 2px 7px; background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n30); border-radius: 4px;
+      color: var(--color-blue-b300); letter-spacing: 0.01em; line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .guideline-grid, .tg-playground__controls { grid-template-columns: 1fr; }
+      .ds-tourguide { width: calc(100% - 24px); left: 12px; top: 132px; }
+      .tourguide-component-stage__target { left: 12px; }
+    }
+
+    /* ── Dark mode ── */
+    [data-theme="dark"] body { background-color: #080F1E; color: #CBD5E1; }
+    [data-theme="dark"] .main-content { background-color: #080F1E; }
+    [data-theme="dark"] .part-card { background: #0F172A; border-color: #1E2D45; }
+    [data-theme="dark"] .part-card__head { background: #1E2D45; border-color: #2D3F55; color: #94A3B8; }
+    [data-theme="dark"] .anatomy-table-wrap { background: #0F172A; border-color: #1E2D45; }
+    [data-theme="dark"] .anatomy-table th { background: #1E2D45; color: #94A3B8; border-color: #2D3F55; }
+    [data-theme="dark"] .anatomy-table td { border-color: #2D3F55; color: #CBD5E1; }
+    [data-theme="dark"] .tg-playground { background: #0F172A; border-color: #1E2D45; }
+    [data-theme="dark"] .tg-playground__controls { border-color: #2D3F55; }
+    [data-theme="dark"] .tg-playground__field select { background: #1E2D45; border-color: #2D3F55; color: #CBD5E1; }
+    [data-theme="dark"] .guideline-card { background: #0F172A; border-color: #1E2D45; }
+    [data-theme="dark"] .guideline-card__title { color: #F1F5F9; }
+    [data-theme="dark"] .guideline-list { color: #94A3B8; }
+    [data-theme="dark"] .hero-feat-card { background: #0F172A !important; border-color: #1E2D45 !important; }
+    [data-theme="dark"] .hero-feat-card:hover { border-color: var(--color-blue-b200) !important; }
+    [data-theme="dark"] .hero-feat-card .text-neutral-n900 { color: #F1F5F9 !important; }
+    [data-theme="dark"] .section-heading { color: #F1F5F9; border-color: #1E2D45; }
   </style>
 </head>
 <body>
+<div class="scroll-progress" id="scroll-progress"></div>
 <div class="container">
   <div id="sidebar-overlay" class="sidebar-overlay"></div>
   <aside class="sidebar" id="sidebar">
@@ -530,108 +569,273 @@
         <span class="breadcrumb-sep">/</span>
         <span class="current">Tourguide</span>
       </div>
-      <div class="topbar-actions"><span class="version-badge">v2.0</span></div>
+      <div class="topbar-actions">
+        <button class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode">
+          <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          <svg class="icon-sun"  width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <span class="version-badge">v2.0</span>
+      </div>
     </div>
 
     <div class="content-inner">
-      <section class="tourguide-section">
-        <h2>Tourguide — Button Spotlight (Part)</h2>
-        <p>State: default, hover, focus, press.</p>
-        <div class="tourguide-card">
-          <div class="tourguide-card__head">Referensi: Button (Spotlight)</div>
-          <div class="tourguide-preview">
-            <div class="spotlight-state-list">
-              <div class="spotlight-state-list__row">
+
+      <!-- ============================================================
+           HERO — Component Overview Banner
+      ============================================================= -->
+      <section class="mb-12">
+
+        <div class="ds-hero-banner rounded-2xl overflow-hidden mb-3 flex flex-col lg:flex-row bg-neutral-n900" style="border: 1px solid rgba(255,255,255,0.07);">
+
+          <!-- Left: metadata -->
+          <div class="flex-1 px-8 py-10 lg:px-11 lg:py-12 flex flex-col justify-center">
+            <div class="flex items-center gap-100 mb-5">
+              <div class="flex items-center justify-center w-5 h-5 rounded-md" style="background: rgba(68,149,221,0.2);">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4495DD" stroke-width="2.5"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/><path d="M21 12h-3"/><path d="M6 12H3"/></svg>
+              </div>
+              <span class="text-xs font-semibold uppercase tracking-[0.1em] text-blue-b100">Components · DS GPOS Lite V2</span>
+            </div>
+
+            <div class="font-bold text-neutral-n0 mb-3" style="font-size:2.5rem; letter-spacing:-0.035em; line-height:1.04;">Tourguide</div>
+
+            <p class="text-sm leading-relaxed max-w-xs mb-8" style="color: rgba(255,255,255,0.52); line-height: 1.7;">
+              Komponen guided tour interaktif dengan spotlight overlay, tooltip langkah, progress step, dan action button. Digunakan untuk onboarding pengguna baru ke fitur-fitur produk.
+            </p>
+
+            <div class="flex flex-wrap gap-100">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.10);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+                v2.0
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.10);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+                3 parts
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.10);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="2" width="20" height="20" rx="3"/><path d="M7 12h10M12 7v10" opacity="0.6"/></svg>
+                Dark overlay
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(68,149,221,0.15); color:#7DB5E7; border-color:rgba(68,149,221,0.28);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                Figma-synced
+              </span>
+            </div>
+          </div>
+
+          <!-- Right: live mini preview -->
+          <div class="lg:w-96 lg:flex-shrink-0 p-300 flex items-center justify-center" style="background: rgba(255,255,255,0.03); border-left: 1px solid rgba(255,255,255,0.07);">
+            <div class="w-full rounded-2xl overflow-hidden" style="background: var(--color-neutral-n800); box-shadow: 0 16px 48px rgba(0,0,0,0.32), 0 2px 8px rgba(0,0,0,0.16); border: 1px solid rgba(255,255,255,0.08);">
+              <div class="px-250 py-3.5 flex items-center justify-between" style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+                <span class="text-xs font-semibold uppercase tracking-[0.08em]" style="color: rgba(255,255,255,0.35);">Live Preview</span>
+                <div class="flex items-center gap-050">
+                  <span class="w-2 h-2 rounded-full" style="background:rgba(255,255,255,0.12);"></span>
+                  <span class="w-2 h-2 rounded-full" style="background:rgba(255,255,255,0.08);"></span>
+                  <span class="w-2 h-2 rounded-full" style="background:rgba(255,255,255,0.05);"></span>
+                </div>
+              </div>
+              <div class="p-200 flex flex-col gap-150">
+                <!-- Mini spotlight card preview -->
+                <div style="border-radius:6px; background:var(--color-blue-b300); padding:10px 12px; box-shadow:var(--shadow-sm);">
+                  <div style="font-size:11px; font-weight:600; color:#fff; margin-bottom:4px; font-family:var(--font-primary);">Tour Step — Title</div>
+                  <div style="font-size:10px; color:rgba(255,255,255,0.72); line-height:1.5; font-family:var(--font-primary); margin-bottom:8px;">Quickly switch between your most recent projects.</div>
+                  <div class="flex items-center gap-050">
+                    <span style="font-size:10px; color:rgba(255,255,255,0.6); font-family:var(--font-primary); margin-right:auto; font-weight:500;">1/3</span>
+                    <button style="border:none; background:rgba(255,255,255,0.14); color:#fff; border-radius:4px; font-size:10px; padding:3px 8px; font-family:var(--font-primary); cursor:default;">Dismiss</button>
+                    <button style="border:none; background:rgba(255,255,255,0.22); color:#fff; border-radius:4px; font-size:10px; padding:3px 8px; font-family:var(--font-primary); cursor:default;">Next →</button>
+                  </div>
+                </div>
+                <!-- Mini target highlight -->
+                <div style="border-radius:6px; border:1.5px solid var(--color-blue-b300); background:rgba(255,255,255,0.04); padding:8px 12px; display:flex; align-items:center; gap:8px;">
+                  <div style="width:8px; height:8px; border-radius:50%; background:var(--color-blue-b300);"></div>
+                  <span style="font-size:10px; color:rgba(255,255,255,0.5); font-family:var(--font-primary);">Target highlight</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-150">
+
+          <div class="hero-feat-card bg-neutral-n0 rounded-xl p-250 border border-neutral-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, var(--color-blue-b50) 0%, rgba(163,203,238,0.3) 100%); border: 1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><rect x="2" y="7" width="20" height="10" rx="3"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-neutral-n900 mb-1.5 tracking-[-0.02em]">Button Spotlight</div>
+            <div class="text-xs leading-relaxed" style="color: var(--color-text-tertiary);">Tombol aksi dismiss pada overlay tourguide</div>
+          </div>
+
+          <div class="hero-feat-card bg-neutral-n0 rounded-xl p-250 border border-neutral-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, var(--color-blue-b50) 0%, rgba(163,203,238,0.3) 100%); border: 1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><path d="M9 14l-4-4 4-4"/><path d="M5 10h11a4 4 0 010 8h-1"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-neutral-n900 mb-1.5 tracking-[-0.02em]">Onboarding Replay</div>
+            <div class="text-xs leading-relaxed" style="color: var(--color-text-tertiary);">Tombol aksi dengan ikon untuk next/replay</div>
+          </div>
+
+          <div class="hero-feat-card bg-neutral-n0 rounded-xl p-250 border border-neutral-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, var(--color-blue-b50) 0%, rgba(163,203,238,0.3) 100%); border: 1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="13" y2="13"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-neutral-n900 mb-1.5 tracking-[-0.02em]">Spotlight Card</div>
+            <div class="text-xs leading-relaxed" style="color: var(--color-text-tertiary);">Card konten dengan judul, body, dan footer</div>
+          </div>
+
+          <div class="hero-feat-card bg-neutral-n0 rounded-xl p-250 border border-neutral-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background: linear-gradient(135deg, var(--color-blue-b50) 0%, rgba(163,203,238,0.3) 100%); border: 1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/><path d="M21 12h-3"/><path d="M6 12H3"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-neutral-n900 mb-1.5 tracking-[-0.02em]">Tourguide Component</div>
+            <div class="text-xs leading-relaxed" style="color: var(--color-text-tertiary);">Overlay + target highlight + tooltip lengkap</div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ============================================================
+           SECTION 1 — Button Spotlight (Part)
+      ============================================================= -->
+      <section style="margin-bottom: 48px;">
+        <h2 class="section-heading">
+          <span class="section-heading__accent"></span>
+          Button Spotlight
+          <span class="inline-flex items-center px-2 py-050 rounded-full text-xs font-semibold" style="background:var(--color-blue-b50); color:var(--color-blue-b300); letter-spacing:0.04em; margin-left:auto;">Part</span>
+        </h2>
+        <p class="text-body-sm mb-6" style="color:var(--color-text-secondary); line-height:var(--text-body-small-regular-lh); max-width:600px;">Tombol aksi sekunder pada area spotlight overlay. Menggunakan warna <code class="chip">color-mix(N500, 16%)</code> sebagai background dengan teks putih.</p>
+
+        <div class="part-card">
+          <div class="part-card__head">
+            <span class="part-card__label">ds-btn-spotlight</span>
+            <span style="color:var(--color-text-tertiary); font-size:11px;">4 states · default / hover / focus / press</span>
+          </div>
+          <div class="part-card__preview">
+            <div class="state-list">
+              <div class="state-list__row">
                 <button type="button" class="ds-btn-spotlight">Label</button>
-                <span class="spotlight-state-list__state">state=default</span>
+                <span class="state-list__label">state=default</span>
               </div>
-              <div class="spotlight-state-list__row">
+              <div class="state-list__row">
                 <button type="button" class="ds-btn-spotlight ds-btn-spotlight--hover">Label</button>
-                <span class="spotlight-state-list__state">state=hover</span>
+                <span class="state-list__label">state=hover</span>
               </div>
-              <div class="spotlight-state-list__row">
+              <div class="state-list__row">
                 <button type="button" class="ds-btn-spotlight ds-btn-spotlight--focus">Label</button>
-                <span class="spotlight-state-list__state">state=focus</span>
+                <span class="state-list__label">state=focus</span>
               </div>
-              <div class="spotlight-state-list__row">
+              <div class="state-list__row">
                 <button type="button" class="ds-btn-spotlight ds-btn-spotlight--press">Label</button>
-                <span class="spotlight-state-list__state">state=press</span>
+                <span class="state-list__label">state=press</span>
               </div>
             </div>
           </div>
           <div class="code-card">
             <div class="code-card__head">
-              <p class="code-card__title">DS code siap copy — Button Spotlight</p>
-              <button type="button" class="copy-btn" data-copy-target="code-tourguide-spotlight">Copy</button>
+              <p class="code-card__title">.ds — Button Spotlight · siap copy</p>
+              <button type="button" class="copy-btn" data-copy-target="code-spotlight">Copy</button>
             </div>
-            <pre><code id="code-tourguide-spotlight">&lt;button type="button" class="ds-btn-spotlight"&gt;Label&lt;/button&gt;
-&lt;button type="button" class="ds-btn-spotlight ds-btn-spotlight--hover"&gt;...&lt;/button&gt;
-&lt;button type="button" class="ds-btn-spotlight ds-btn-spotlight--focus"&gt;...&lt;/button&gt;
-&lt;button type="button" class="ds-btn-spotlight ds-btn-spotlight--press"&gt;...&lt;/button&gt;</code></pre>
+            <pre><code id="code-spotlight"><span class="c-cmt">&lt;!-- Default --&gt;</span>
+<span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-btn-spotlight"</span><span class="c-tag">&gt;</span>Label<span class="c-tag">&lt;/button&gt;</span>
+
+<span class="c-cmt">&lt;!-- Hover --&gt;</span>
+<span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-btn-spotlight ds-btn-spotlight--hover"</span><span class="c-tag">&gt;</span>Label<span class="c-tag">&lt;/button&gt;</span>
+
+<span class="c-cmt">&lt;!-- Focus --&gt;</span>
+<span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-btn-spotlight ds-btn-spotlight--focus"</span><span class="c-tag">&gt;</span>Label<span class="c-tag">&lt;/button&gt;</span>
+
+<span class="c-cmt">&lt;!-- Press --&gt;</span>
+<span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-btn-spotlight ds-btn-spotlight--press"</span><span class="c-tag">&gt;</span>Label<span class="c-tag">&lt;/button&gt;</span></code></pre>
           </div>
         </div>
       </section>
 
-      <section class="tourguide-section">
-        <h2>Tourguide — Button (Onboarding Replay) Part</h2>
-        <p>Menggunakan token dan warna existing dari Button Spotlight (Part).</p>
-        <div class="tourguide-card">
-          <div class="tourguide-card__head">Referensi: Button (Onboarding replay)</div>
-          <div class="tourguide-preview">
-            <div class="spotlight-state-list">
-              <div class="spotlight-state-list__row">
+      <!-- ============================================================
+           SECTION 2 — Button Onboarding Replay (Part)
+      ============================================================= -->
+      <section style="margin-bottom: 48px;">
+        <h2 class="section-heading">
+          <span class="section-heading__accent"></span>
+          Button Onboarding Replay
+          <span class="inline-flex items-center px-2 py-050 rounded-full text-xs font-semibold" style="background:var(--color-blue-b50); color:var(--color-blue-b300); letter-spacing:0.04em; margin-left:auto;">Part</span>
+        </h2>
+        <p class="text-body-sm mb-6" style="color:var(--color-text-secondary); line-height:var(--text-body-small-regular-lh); max-width:600px;">Tombol aksi primer dengan ikon untuk navigasi next/replay. Menggunakan token dan warna yang sama dengan Button Spotlight, ditambahkan slot ikon <code class="chip">filter: brightness(0) invert(1)</code>.</p>
+
+        <div class="part-card">
+          <div class="part-card__head">
+            <span class="part-card__label">ds-btn-onboarding-replay</span>
+            <span style="color:var(--color-text-tertiary); font-size:11px;">4 states · icon + label</span>
+          </div>
+          <div class="part-card__preview">
+            <div class="state-list">
+              <div class="state-list__row">
                 <button type="button" class="ds-btn-onboarding-replay">
-                  <img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="arrowuturnleft" width="24" height="24">
+                  <img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="" aria-hidden="true" width="24" height="24">
                   <span>Replay</span>
                 </button>
-                <span class="spotlight-state-list__state">state=default</span>
+                <span class="state-list__label">state=default</span>
               </div>
-              <div class="spotlight-state-list__row">
+              <div class="state-list__row">
                 <button type="button" class="ds-btn-onboarding-replay ds-btn-onboarding-replay--hover">
-                  <img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="arrowuturnleft" width="24" height="24">
+                  <img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="" aria-hidden="true" width="24" height="24">
                   <span>Replay</span>
                 </button>
-                <span class="spotlight-state-list__state">state=hover</span>
+                <span class="state-list__label">state=hover</span>
               </div>
-              <div class="spotlight-state-list__row">
+              <div class="state-list__row">
                 <button type="button" class="ds-btn-onboarding-replay ds-btn-onboarding-replay--focus">
-                  <img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="arrowuturnleft" width="24" height="24">
+                  <img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="" aria-hidden="true" width="24" height="24">
                   <span>Replay</span>
                 </button>
-                <span class="spotlight-state-list__state">state=focus</span>
+                <span class="state-list__label">state=focus</span>
               </div>
-              <div class="spotlight-state-list__row">
+              <div class="state-list__row">
                 <button type="button" class="ds-btn-onboarding-replay ds-btn-onboarding-replay--press">
-                  <img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="arrowuturnleft" width="24" height="24">
+                  <img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="" aria-hidden="true" width="24" height="24">
                   <span>Replay</span>
                 </button>
-                <span class="spotlight-state-list__state">state=press</span>
+                <span class="state-list__label">state=press</span>
               </div>
             </div>
           </div>
           <div class="code-card">
             <div class="code-card__head">
-              <p class="code-card__title">DS code siap copy — Onboarding Replay</p>
-              <button type="button" class="copy-btn" data-copy-target="code-tourguide-onboarding-replay">Copy</button>
+              <p class="code-card__title">.ds — Onboarding Replay · siap copy</p>
+              <button type="button" class="copy-btn" data-copy-target="code-onboarding-replay">Copy</button>
             </div>
-            <pre><code id="code-tourguide-onboarding-replay">&lt;button type="button" class="ds-btn-onboarding-replay"&gt;
-  &lt;img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="arrowuturnleft" width="24" height="24"&gt;
-  &lt;span&gt;Replay&lt;/span&gt;
-&lt;/button&gt;
+            <pre><code id="code-onboarding-replay"><span class="c-cmt">&lt;!-- Default --&gt;</span>
+<span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-btn-onboarding-replay"</span><span class="c-tag">&gt;</span>
+  <span class="c-tag">&lt;img</span> <span class="c-attr">src=</span><span class="c-str">"assets/icons/icon-arrow-uturn-left.svg"</span> <span class="c-attr">alt=</span><span class="c-str">""</span> <span class="c-attr">aria-hidden=</span><span class="c-str">"true"</span> <span class="c-attr">width=</span><span class="c-str">"24"</span> <span class="c-attr">height=</span><span class="c-str">"24"</span><span class="c-tag">&gt;</span>
+  <span class="c-tag">&lt;span&gt;</span>Replay<span class="c-tag">&lt;/span&gt;</span>
+<span class="c-tag">&lt;/button&gt;</span>
 
-&lt;button type="button" class="ds-btn-onboarding-replay ds-btn-onboarding-replay--hover"&gt;...&lt;/button&gt;
-&lt;button type="button" class="ds-btn-onboarding-replay ds-btn-onboarding-replay--focus"&gt;...&lt;/button&gt;
-&lt;button type="button" class="ds-btn-onboarding-replay ds-btn-onboarding-replay--press"&gt;...&lt;/button&gt;</code></pre>
+<span class="c-cmt">&lt;!-- Hover --&gt;</span>
+<span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-btn-onboarding-replay ds-btn-onboarding-replay--hover"</span><span class="c-tag">&gt;</span>...<span class="c-tag">&lt;/button&gt;</span>
+
+<span class="c-cmt">&lt;!-- Focus --&gt;</span>
+<span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-btn-onboarding-replay ds-btn-onboarding-replay--focus"</span><span class="c-tag">&gt;</span>...<span class="c-tag">&lt;/button&gt;</span>
+
+<span class="c-cmt">&lt;!-- Press --&gt;</span>
+<span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-btn-onboarding-replay ds-btn-onboarding-replay--press"</span><span class="c-tag">&gt;</span>...<span class="c-tag">&lt;/button&gt;</span></code></pre>
           </div>
         </div>
       </section>
 
-      <section class="tourguide-section">
-        <h2>Tourguide — Spotlight Card Part</h2>
-        <p>Card konten spotlight memakai token existing, icon existing, shadow existing, serta action button dari part Tourguide yang sudah ada.</p>
-        <div class="tourguide-card">
-          <div class="tourguide-card__head">Referensi: Spotlight Card</div>
-          <div class="tourguide-preview">
+      <!-- ============================================================
+           SECTION 3 — Spotlight Card (Part)
+      ============================================================= -->
+      <section style="margin-bottom: 48px;">
+        <h2 class="section-heading">
+          <span class="section-heading__accent"></span>
+          Spotlight Card
+          <span class="inline-flex items-center px-2 py-050 rounded-full text-xs font-semibold" style="background:var(--color-blue-b50); color:var(--color-blue-b300); letter-spacing:0.04em; margin-left:auto;">Part</span>
+        </h2>
+        <p class="text-body-sm mb-6" style="color:var(--color-text-secondary); line-height:var(--text-body-small-regular-lh); max-width:600px;">Card konten spotlight — menggabungkan title, body, dan footer dengan action button dari parts yang sudah ada. Background menggunakan <code class="chip">--color-blue-b300</code> dengan border transparan.</p>
+
+        <div class="part-card">
+          <div class="part-card__head">
+            <span class="part-card__label">ds-spotlight-card</span>
+            <span style="color:var(--color-text-tertiary); font-size:11px;">head · body · footer</span>
+          </div>
+          <div class="part-card__preview">
             <div class="ds-spotlight-card">
               <div class="ds-spotlight-card__head">
                 <h3 class="ds-spotlight-card__title">Title</h3>
@@ -643,72 +847,98 @@
               <div class="ds-spotlight-card__footer">
                 <span class="ds-tourguide__progress">1/3</span>
                 <button type="button" class="ds-btn-spotlight">Dismiss</button>
-                <button type="button" class="ds-btn-onboarding-replay"><img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="arrowuturnleft" width="24" height="24"><span>Next</span></button>
+                <button type="button" class="ds-btn-onboarding-replay">
+                  <img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="" aria-hidden="true" width="24" height="24">
+                  <span>Next</span>
+                </button>
               </div>
             </div>
           </div>
           <div class="code-card">
             <div class="code-card__head">
-              <p class="code-card__title">DS code siap copy — Spotlight Card Part</p>
-              <button type="button" class="copy-btn" data-copy-target="code-tourguide-spotlight-card">Copy</button>
+              <p class="code-card__title">.ds — Spotlight Card · siap copy</p>
+              <button type="button" class="copy-btn" data-copy-target="code-spotlight-card">Copy</button>
             </div>
-            <pre><code id="code-tourguide-spotlight-card">&lt;div class="ds-spotlight-card"&gt;
-  &lt;div class="ds-spotlight-card__head"&gt;
-    &lt;h3 class="ds-spotlight-card__title"&gt;Title&lt;/h3&gt;
-    &lt;button type="button" class="ds-spotlight-card__close" aria-label="Tutup spotlight"&gt;
-      &lt;img src="../../assets/icons/icon-x-mark.svg" alt="" aria-hidden="true"&gt;
-    &lt;/button&gt;
-  &lt;/div&gt;
-  &lt;p class="ds-spotlight-card__body"&gt;Quickly switch between your most recent projects by selecting the project name and icon.&lt;/p&gt;
-  &lt;div class="ds-spotlight-card__footer"&gt;
-    &lt;span class="ds-tourguide__progress"&gt;1/3&lt;/span&gt;
-    &lt;button type="button" class="ds-btn-spotlight"&gt;Dismiss&lt;/button&gt;
-    &lt;button type="button" class="ds-btn-onboarding-replay"&gt;
-      &lt;img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="arrowuturnleft" width="24" height="24"&gt;
-      &lt;span&gt;Next&lt;/span&gt;
-    &lt;/button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+            <pre><code id="code-spotlight-card"><span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-spotlight-card"</span><span class="c-tag">&gt;</span>
+
+  <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-spotlight-card__head"</span><span class="c-tag">&gt;</span>
+    <span class="c-tag">&lt;h3</span> <span class="c-attr">class=</span><span class="c-str">"ds-spotlight-card__title"</span><span class="c-tag">&gt;</span>Title<span class="c-tag">&lt;/h3&gt;</span>
+    <span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-spotlight-card__close"</span> <span class="c-attr">aria-label=</span><span class="c-str">"Tutup spotlight"</span><span class="c-tag">&gt;</span>
+      <span class="c-tag">&lt;img</span> <span class="c-attr">src=</span><span class="c-str">"assets/icons/icon-x-mark.svg"</span> <span class="c-attr">alt=</span><span class="c-str">""</span> <span class="c-attr">aria-hidden=</span><span class="c-str">"true"</span><span class="c-tag">&gt;</span>
+    <span class="c-tag">&lt;/button&gt;</span>
+  <span class="c-tag">&lt;/div&gt;</span>
+
+  <span class="c-tag">&lt;p</span> <span class="c-attr">class=</span><span class="c-str">"ds-spotlight-card__body"</span><span class="c-tag">&gt;</span>Deskripsi langkah tour.<span class="c-tag">&lt;/p&gt;</span>
+
+  <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-spotlight-card__footer"</span><span class="c-tag">&gt;</span>
+    <span class="c-tag">&lt;span</span> <span class="c-attr">class=</span><span class="c-str">"ds-tourguide__progress"</span><span class="c-tag">&gt;</span>1/3<span class="c-tag">&lt;/span&gt;</span>
+    <span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-btn-spotlight"</span><span class="c-tag">&gt;</span>Dismiss<span class="c-tag">&lt;/button&gt;</span>
+    <span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-btn-onboarding-replay"</span><span class="c-tag">&gt;</span>
+      <span class="c-tag">&lt;img</span> <span class="c-attr">src=</span><span class="c-str">"assets/icons/icon-arrow-uturn-left.svg"</span> <span class="c-attr">alt=</span><span class="c-str">""</span> <span class="c-attr">aria-hidden=</span><span class="c-str">"true"</span> <span class="c-attr">width=</span><span class="c-str">"24"</span> <span class="c-attr">height=</span><span class="c-str">"24"</span><span class="c-tag">&gt;</span>
+      <span class="c-tag">&lt;span&gt;</span>Next<span class="c-tag">&lt;/span&gt;</span>
+    <span class="c-tag">&lt;/button&gt;</span>
+  <span class="c-tag">&lt;/div&gt;</span>
+
+<span class="c-tag">&lt;/div&gt;</span></code></pre>
           </div>
         </div>
       </section>
 
-      <section class="tourguide-section">
-        <h2>Tourguide — Component</h2>
-        <p>Komponen tourguide menggabungkan overlay, target highlight, body konten, progress, dan action dari part yang sudah ada.</p>
+      <!-- ============================================================
+           SECTION 4 — Tourguide Component
+      ============================================================= -->
+      <section style="margin-bottom: 48px;">
+        <h2 class="section-heading">
+          <span class="section-heading__accent"></span>
+          Tourguide Component
+          <span class="inline-flex items-center px-2 py-050 rounded-full text-xs font-semibold" style="background:rgba(0,170,91,0.1); color:var(--color-green-g300); letter-spacing:0.04em; margin-left:auto;">Component</span>
+        </h2>
+        <p class="text-body-sm mb-6" style="color:var(--color-text-secondary); line-height:var(--text-body-small-regular-lh); max-width:600px;">Komponen utama yang menggabungkan overlay, target highlight, tooltip body, progress, dan action parts menjadi satu unit tourguide yang lengkap.</p>
 
-        <div class="tourguide-parts-table-wrap">
-          <table class="tourguide-parts-table">
+        <!-- Anatomy table -->
+        <div class="anatomy-table-wrap">
+          <table class="anatomy-table">
             <thead>
               <tr>
                 <th>Part</th>
-                <th>Class / Source</th>
+                <th>Class</th>
+                <th>Token / Source</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>Overlay blanded</td>
-                <td><code>.tourguide-component-stage__overlay</code> → <code>color/neutral/N800</code> 50%</td>
+                <td><code class="chip">.tourguide-component-stage__overlay</code></td>
+                <td><code class="chip">color/neutral/N800</code> 50%</td>
               </tr>
               <tr>
                 <td>Target highlight</td>
-                <td><code>.tourguide-component-stage__target</code></td>
+                <td><code class="chip">.tourguide-component-stage__target</code></td>
+                <td><code class="chip">--color-blue-b300</code> border 2px</td>
               </tr>
               <tr>
-                <td>Action secondary</td>
-                <td><code>.ds-btn-spotlight</code></td>
+                <td>Tooltip wrapper</td>
+                <td><code class="chip">.ds-tourguide</code></td>
+                <td><code class="chip">--color-blue-b300</code> bg, <code class="chip">--shadow-md</code></td>
               </tr>
               <tr>
-                <td>Action primary replay</td>
-                <td><code>.ds-btn-onboarding-replay</code></td>
+                <td>Action sekunder</td>
+                <td><code class="chip">.ds-btn-spotlight</code></td>
+                <td>Part — Button Spotlight</td>
+              </tr>
+              <tr>
+                <td>Action primer</td>
+                <td><code class="chip">.ds-btn-onboarding-replay</code></td>
+                <td>Part — Onboarding Replay</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="tourguide-playground">
-          <div class="tourguide-playground__controls">
-            <div class="tourguide-playground__field">
+        <!-- Interactive playground -->
+        <div class="tg-playground">
+          <div class="tg-playground__controls">
+            <div class="tg-playground__field">
               <label for="tg-spotlight-state">State tombol Dismiss</label>
               <select id="tg-spotlight-state">
                 <option value="default">Default</option>
@@ -717,7 +947,7 @@
                 <option value="press">Press</option>
               </select>
             </div>
-            <div class="tourguide-playground__field">
+            <div class="tg-playground__field">
               <label for="tg-replay-state">State tombol Replay</label>
               <select id="tg-replay-state">
                 <option value="default">Default</option>
@@ -727,7 +957,7 @@
               </select>
             </div>
           </div>
-          <div class="tourguide-playground__preview">
+          <div class="tg-playground__preview">
             <div class="tourguide-component-stage">
               <div class="tourguide-component-stage__overlay"></div>
               <div class="tourguide-component-stage__target" aria-hidden="true"></div>
@@ -739,50 +969,62 @@
                 <div class="ds-tourguide__footer">
                   <span class="ds-tourguide__progress">1/3</span>
                   <button id="tg-btn-dismiss" type="button" class="ds-btn-spotlight">Dismiss</button>
-                  <button id="tg-btn-replay" type="button" class="ds-btn-onboarding-replay"><img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="arrowuturnleft" width="24" height="24"><span>Replay</span></button>
+                  <button id="tg-btn-replay" type="button" class="ds-btn-onboarding-replay">
+                    <img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="" aria-hidden="true" width="24" height="24">
+                    <span>Replay</span>
+                  </button>
                 </div>
               </article>
             </div>
           </div>
           <div class="code-card">
             <div class="code-card__head">
-              <p class="code-card__title">HTML siap copy — Tourguide Component</p>
+              <p class="code-card__title">.ds — Tourguide Component · siap copy</p>
               <button type="button" class="copy-btn" data-copy-target="code-tourguide-component">Copy</button>
             </div>
-            <pre><code id="code-tourguide-component">&lt;div class="tourguide-component-stage"&gt;
-  &lt;div class="tourguide-component-stage__overlay"&gt;&lt;/div&gt;
-  &lt;div class="tourguide-component-stage__target" aria-hidden="true"&gt;&lt;/div&gt;
-  &lt;article class="ds-tourguide" aria-label="Tourguide"&gt;
-    &lt;div class="ds-tourguide__body"&gt;
-      &lt;h3 class="ds-tourguide__title"&gt;Title&lt;/h3&gt;
-      &lt;p class="ds-tourguide__text"&gt;Quickly switch between your most recent projects by selecting the project name and icon.&lt;/p&gt;
-    &lt;/div&gt;
-    &lt;div class="ds-tourguide__footer"&gt;
-      &lt;span class="ds-tourguide__progress"&gt;1/3&lt;/span&gt;
-      &lt;button type="button" class="ds-btn-spotlight"&gt;Dismiss&lt;/button&gt;
-      &lt;button type="button" class="ds-btn-onboarding-replay"&gt;
-        &lt;img src="../../assets/icons/icon-arrow-uturn-left.svg" alt="arrowuturnleft" width="24" height="24"&gt;
-        &lt;span&gt;Replay&lt;/span&gt;
-      &lt;/button&gt;
-    &lt;/div&gt;
-  &lt;/article&gt;
-&lt;/div&gt;</code></pre>
+            <pre><code id="code-tourguide-component"><span class="c-cmt">&lt;!-- Overlay wrapper --&gt;</span>
+<span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"tourguide-component-stage"</span><span class="c-tag">&gt;</span>
+
+  <span class="c-cmt">&lt;!-- Dark overlay --&gt;</span>
+  <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"tourguide-component-stage__overlay"</span><span class="c-tag">&gt;&lt;/div&gt;</span>
+
+  <span class="c-cmt">&lt;!-- Target highlight (posisikan via CSS absolute/top/left) --&gt;</span>
+  <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"tourguide-component-stage__target"</span> <span class="c-attr">aria-hidden=</span><span class="c-str">"true"</span><span class="c-tag">&gt;&lt;/div&gt;</span>
+
+  <span class="c-cmt">&lt;!-- Tooltip --&gt;</span>
+  <span class="c-tag">&lt;article</span> <span class="c-attr">class=</span><span class="c-str">"ds-tourguide"</span> <span class="c-attr">aria-label=</span><span class="c-str">"Tourguide"</span><span class="c-tag">&gt;</span>
+    <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-tourguide__body"</span><span class="c-tag">&gt;</span>
+      <span class="c-tag">&lt;h3</span> <span class="c-attr">class=</span><span class="c-str">"ds-tourguide__title"</span><span class="c-tag">&gt;</span>Title<span class="c-tag">&lt;/h3&gt;</span>
+      <span class="c-tag">&lt;p</span> <span class="c-attr">class=</span><span class="c-str">"ds-tourguide__text"</span><span class="c-tag">&gt;</span>Deskripsi singkat langkah ini.<span class="c-tag">&lt;/p&gt;</span>
+    <span class="c-tag">&lt;/div&gt;</span>
+    <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-tourguide__footer"</span><span class="c-tag">&gt;</span>
+      <span class="c-tag">&lt;span</span> <span class="c-attr">class=</span><span class="c-str">"ds-tourguide__progress"</span><span class="c-tag">&gt;</span>1/3<span class="c-tag">&lt;/span&gt;</span>
+      <span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-btn-spotlight"</span><span class="c-tag">&gt;</span>Dismiss<span class="c-tag">&lt;/button&gt;</span>
+      <span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-btn-onboarding-replay"</span><span class="c-tag">&gt;</span>
+        <span class="c-tag">&lt;img</span> <span class="c-attr">src=</span><span class="c-str">"assets/icons/icon-arrow-uturn-left.svg"</span> <span class="c-attr">alt=</span><span class="c-str">""</span> <span class="c-attr">aria-hidden=</span><span class="c-str">"true"</span> <span class="c-attr">width=</span><span class="c-str">"24"</span> <span class="c-attr">height=</span><span class="c-str">"24"</span><span class="c-tag">&gt;</span>
+        <span class="c-tag">&lt;span&gt;</span>Replay<span class="c-tag">&lt;/span&gt;</span>
+      <span class="c-tag">&lt;/button&gt;</span>
+    <span class="c-tag">&lt;/div&gt;</span>
+  <span class="c-tag">&lt;/article&gt;</span>
+
+<span class="c-tag">&lt;/div&gt;</span></code></pre>
           </div>
         </div>
 
-        <div class="tourguide-guideline-grid">
-          <article class="tourguide-guideline-card">
-            <p class="tourguide-guideline-card__title">Do</p>
-            <ul class="tourguide-guideline-list">
+        <!-- Do / Don't guidelines -->
+        <div class="guideline-grid">
+          <article class="guideline-card">
+            <p class="guideline-card__title">Do</p>
+            <ul class="guideline-list">
               <li>Gunakan judul singkat dan instruksi satu kalimat agar cepat dipahami.</li>
               <li>Pastikan target highlight berada tepat di elemen yang dijelaskan.</li>
               <li>Gunakan progress (contoh: 1/3) untuk memberi konteks langkah.</li>
               <li>Pertahankan kontras overlay agar fokus tetap di area tourguide.</li>
             </ul>
           </article>
-          <article class="tourguide-guideline-card">
-            <p class="tourguide-guideline-card__title">Don't</p>
-            <ul class="tourguide-guideline-list">
+          <article class="guideline-card">
+            <p class="guideline-card__title">Don't</p>
+            <ul class="guideline-list">
               <li>Jangan menaruh lebih dari dua tombol aksi dalam satu step.</li>
               <li>Jangan gunakan teks instruksi yang panjang atau multi-paragraf.</li>
               <li>Jangan ubah warna di luar token dan warna existing komponen.</li>
@@ -790,20 +1032,48 @@
             </ul>
           </article>
         </div>
+
       </section>
-    </div>
+
+    </div><!-- /.content-inner -->
   </main>
 </div>
 
 <script src="../../scripts/script.js"></script>
 <script>
+  /* ── Scroll progress ── */
+  (function () {
+    var bar = document.getElementById('scroll-progress');
+    if (!bar) return;
+    window.addEventListener('scroll', function () {
+      var total = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (total > 0 ? (window.scrollY / total) * 100 : 0) + '%';
+    }, { passive: true });
+  })();
+
+  /* ── Dark mode toggle ── */
+  (function () {
+    var btn = document.getElementById('dark-toggle');
+    if (!btn) return;
+    var html = document.documentElement;
+    var stored = localStorage.getItem('ds-theme');
+    if (stored) html.setAttribute('data-theme', stored);
+    btn.addEventListener('click', function () {
+      var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('ds-theme', next);
+    });
+  })();
+
+  /* ── Copy buttons — strip HTML tags from code blocks ── */
   document.querySelectorAll('.copy-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var id = btn.getAttribute('data-copy-target');
-      var code = document.getElementById(id);
-      if (!code) return;
-      navigator.clipboard.writeText(code.textContent).then(function () {
-        btn.textContent = 'Copied';
+      var el = document.getElementById(id);
+      if (!el) return;
+      var text = el.innerText || el.textContent;
+      navigator.clipboard.writeText(text).then(function () {
+        btn.textContent = 'Copied!';
         btn.classList.add('copied');
         setTimeout(function () {
           btn.textContent = 'Copy';
@@ -813,28 +1083,27 @@
     });
   });
 
+  /* ── Playground state switcher ── */
   (function () {
-    var spotlightSelect = document.getElementById('tg-spotlight-state');
-    var replaySelect = document.getElementById('tg-replay-state');
-    var spotlightBtn = document.getElementById('tg-btn-dismiss');
-    var replayBtn = document.getElementById('tg-btn-replay');
-    if (!spotlightSelect || !replaySelect || !spotlightBtn || !replayBtn) return;
+    var spotlightSel = document.getElementById('tg-spotlight-state');
+    var replaySel    = document.getElementById('tg-replay-state');
+    var dismissBtn   = document.getElementById('tg-btn-dismiss');
+    var replayBtn    = document.getElementById('tg-btn-replay');
+    if (!spotlightSel || !replaySel || !dismissBtn || !replayBtn) return;
 
-    function setState(button, baseClass, state) {
-      button.className = baseClass;
-      if (state && state !== 'default') {
-        button.classList.add(baseClass + '--' + state);
-      }
+    function applyState(btn, base, state) {
+      btn.className = base;
+      if (state && state !== 'default') btn.classList.add(base + '--' + state);
     }
 
-    function syncStates() {
-      setState(spotlightBtn, 'ds-btn-spotlight', spotlightSelect.value);
-      setState(replayBtn, 'ds-btn-onboarding-replay', replaySelect.value);
+    function sync() {
+      applyState(dismissBtn, 'ds-btn-spotlight',        spotlightSel.value);
+      applyState(replayBtn,  'ds-btn-onboarding-replay', replaySel.value);
     }
 
-    spotlightSelect.addEventListener('change', syncStates);
-    replaySelect.addEventListener('change', syncStates);
-    syncStates();
+    spotlightSel.addEventListener('change', sync);
+    replaySel.addEventListener('change', sync);
+    sync();
   })();
 </script>
 <script src="../../scripts/sidebar-nav-menu.js"></script>
