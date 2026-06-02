@@ -61,7 +61,45 @@
     }, { passive: true });
   }
 
+  function ensureModalLinkInSidebar() {
+    var componentSections = document.querySelectorAll('.nav-section--menu');
+    if (!componentSections.length) return;
+
+    componentSections.forEach(function (section) {
+      var title = section.querySelector('.nav-title');
+      if (!title || title.textContent.trim().toLowerCase() !== 'komponen') return;
+
+      var navList = section.querySelector('.nav-list');
+      if (!navList) return;
+
+      var hasModal = navList.querySelector('a[href*="/Modal/modal.html"]');
+      if (hasModal) return;
+
+      var buttonLink = navList.querySelector('a[href*="/Button/button.html"]');
+      var modalHref = '../Modal/modal.html';
+      if (buttonLink && buttonLink.getAttribute('href')) {
+        modalHref = buttonLink.getAttribute('href').replace('/Button/button.html', '/Modal/modal.html');
+      }
+
+      var modalItem = document.createElement('li');
+      var modalLink = document.createElement('a');
+      modalLink.href = modalHref;
+      modalLink.className = 'nav-link';
+      modalLink.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="13" y2="13"/></svg>Modal';
+      modalItem.appendChild(modalLink);
+
+      var popupItem = navList.querySelector('a[href*="/Popup/popup.html"]');
+      var popupLi = popupItem ? popupItem.closest('li') : null;
+      if (popupLi && popupLi.parentNode === navList) {
+        navList.insertBefore(modalItem, popupLi);
+      } else {
+        navList.appendChild(modalItem);
+      }
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
+    ensureModalLinkInSidebar();
     restoreSectionStates();
 
     document.querySelectorAll('.nav-section--menu .nav-menu-toggle').forEach(function (btn) {

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modal — DS GPOS Lite V2</title>
+  <link rel="stylesheet" href="../../styles/globals.css">
+  <link rel="stylesheet" href="../../styles/enhancements.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .modal-section {
+      margin-bottom: var(--space-500);
+    }
+
+    .modal-section h2 {
+      margin: 0 0 var(--space-200);
+      font-family: var(--font-primary);
+      font-size: var(--font-size-xl);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+    }
+
+    .modal-section p {
+      margin: 0 0 var(--space-300);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-medium-regular-size);
+      font-weight: var(--text-body-medium-regular-weight);
+      line-height: var(--text-body-medium-regular-lh);
+      color: var(--color-text-secondary);
+    }
+
+    .modal-demo-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-xl);
+      box-shadow: var(--shadow-1);
+      overflow: hidden;
+    }
+
+    .modal-demo-body {
+      min-height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-300);
+      background: var(--color-neutral-n20);
+    }
+
+    .modal-shell {
+      width: min(560px, 100%);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-lg);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .modal-shell__header {
+      padding: var(--space-200) var(--space-300);
+      border-bottom: 1px solid var(--color-border-light);
+      font-family: var(--font-primary);
+      font-size: var(--font-size-base);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+    }
+
+    .modal-shell__content {
+      padding: var(--space-300);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-medium-regular-size);
+      font-weight: var(--text-body-medium-regular-weight);
+      line-height: var(--text-body-medium-regular-lh);
+      color: var(--color-text-secondary);
+    }
+
+    .modal-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: var(--space-100);
+      padding: var(--space-200) var(--space-300);
+      border-top: 1px solid var(--color-border-light);
+      background: var(--color-surface);
+      box-shadow: var(--shadow-xs);
+    }
+
+    .modal-variant-stack {
+      display: grid;
+      gap: var(--space-250);
+      padding: var(--space-300);
+      background: var(--color-neutral-n20);
+    }
+
+    .modal-variant-item {
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--border-radius-lg);
+      background: var(--color-neutral-n0);
+      box-shadow: var(--shadow-xs);
+      overflow: hidden;
+    }
+
+    .modal-variant-label {
+      margin: 0;
+      padding: var(--space-150) var(--space-200);
+      border-bottom: 1px solid var(--color-border-light);
+      font-family: var(--font-primary);
+      font-size: var(--text-caption-medium-size);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-secondary);
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-wide);
+      background: var(--color-neutral-n10);
+    }
+
+    .modal-footer-container {
+      background: var(--color-neutral-n0);
+      padding: 24px 24px 24px 24px;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+
+    .modal-footer-actions {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: var(--space-100);
+    }
+
+    .ds-btn {
+      border: none;
+      border-radius: var(--border-radius-md);
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n900);
+      font-family: var(--font-primary);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--text-body-small-medium-lh);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-025);
+      padding: 0 var(--space-150);
+      min-height: 32px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .ds-btn:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+
+    .ds-btn--subtle {
+      background-color: transparent;
+      color: var(--color-neutral-n900);
+    }
+    .ds-btn--subtle:hover { background-color: var(--color-neutral-n20); }
+    .ds-btn--subtle:active { background-color: var(--color-neutral-n40); }
+
+    .ds-btn--primary {
+      background-color: var(--color-blue-b300);
+      color: var(--color-neutral-n0);
+    }
+    .ds-btn--primary:hover { background-color: var(--color-blue-b400); }
+    .ds-btn--primary:active { background-color: var(--color-blue-b500); }
+
+    .ds-btn--warning {
+      background-color: var(--color-orange-o300);
+      color: var(--color-neutral-n0);
+    }
+    .ds-btn--warning:hover { background-color: var(--color-orange-o400); }
+    .ds-btn--warning:active { background-color: var(--color-orange-o500); }
+
+    .ds-btn--danger {
+      background-color: var(--color-red-r300);
+      color: var(--color-neutral-n0);
+    }
+    .ds-btn--danger:hover { background-color: var(--color-red-r400); }
+    .ds-btn--danger:active { background-color: var(--color-red-r500); }
+
+    .code-card {
+      border-top: 1px solid var(--color-border-light);
+      background: var(--color-neutral-n900);
+    }
+
+    .code-card__head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-150) var(--space-200);
+      border-bottom: 1px solid var(--color-neutral-n700);
+    }
+
+    .code-card__title {
+      margin: 0;
+      font-family: var(--font-primary);
+      font-size: var(--text-caption-medium-size);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-neutral-n50);
+    }
+
+    .copy-btn {
+      border: 1px solid var(--color-border);
+      background: var(--color-neutral-n800);
+      color: var(--color-neutral-n40);
+      border-radius: var(--border-radius-md);
+      padding: var(--space-075) var(--space-150);
+      font-family: var(--font-primary);
+      font-size: var(--text-caption-medium-size);
+      cursor: pointer;
+    }
+
+    .copy-btn:hover {
+      background: var(--color-neutral-n700);
+      color: var(--color-neutral-n10);
+    }
+
+    .code-card pre {
+      margin: 0;
+      padding: var(--space-250);
+      overflow-x: auto;
+    }
+
+    .code-card code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      color: var(--color-neutral-n20);
+      display: block;
+      white-space: pre;
+    }
+
+    .modal-header-list {
+      display: grid;
+      gap: var(--space-150);
+      padding: var(--space-300);
+      background: var(--color-neutral-n20);
+    }
+
+    .modal-header-item {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: var(--space-100);
+      padding: 24px 0 24px 24px;
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--border-radius-lg);
+      background: var(--color-neutral-n0);
+      box-shadow: var(--shadow-xs);
+      text-align: left;
+    }
+
+    .modal-header-item__title {
+      margin: 0;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      align-self: center;
+      vertical-align: middle;
+      font-family: var(--font-primary);
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-normal);
+      line-height: var(--line-height-loose);
+      color: var(--color-text-primary);
+    }
+
+    .modal-header-icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      align-self: center;
+      padding: 0;
+      display: none;
+      -webkit-mask-position: center;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-size: 24px 24px;
+      mask-position: center;
+      mask-repeat: no-repeat;
+      mask-size: 24px 24px;
+    }
+
+    .modal-header-icon--warning {
+      display: inline-block;
+      -webkit-mask-image: url('../../assets/icons/icon-solid-exclamation-triangle.svg');
+      mask-image: url('../../assets/icons/icon-solid-exclamation-triangle.svg');
+      background: var(--color-orange-o300);
+    }
+
+    .modal-header-icon--danger {
+      display: inline-block;
+      -webkit-mask-image: url('../../assets/icons/icon-solid-exclamation-triangle.svg');
+      mask-image: url('../../assets/icons/icon-solid-exclamation-triangle.svg');
+      background: var(--color-red-r300);
+    }
+  </style>
+</head>
+<body>
+<div class="scroll-progress" id="scroll-progress" style="width:0%" role="progressbar" aria-hidden="true"></div>
+
+<div class="container">
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo-icon">GL</div>
+        <div class="sidebar-brand-text">
+          <div class="logo">GPOS Lite</div>
+          <div class="version">Design System V2.0</div>
+        </div>
+      </div>
+      <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">&#x2715;</button>
+    </div>
+
+    <div class="sidebar-search">
+      <input type="search" class="search-input" placeholder="&#x1F50D;  Cari token, component...">
+    </div>
+
+    <div class="nav-scroll">
+      <nav class="nav-menu">
+        <div class="nav-section nav-section--menu is-open">
+          <button type="button" class="nav-menu-toggle" aria-expanded="true">
+            <h3 class="nav-title">Overview</h3>
+            <img src="../../assets/icons/icon-chevron-mini-down.svg" alt="" class="nav-menu-toggle__chevron" aria-hidden="true">
+          </button>
+          <ul class="nav-list">
+            <li>
+              <a href="../../index.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+                Home
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="nav-section nav-section--menu is-open">
+          <button type="button" class="nav-menu-toggle" aria-expanded="true">
+            <h3 class="nav-title">Foundations</h3>
+            <img src="../../assets/icons/icon-chevron-mini-down.svg" alt="" class="nav-menu-toggle__chevron" aria-hidden="true">
+          </button>
+          <ul class="nav-list">
+            <li><a href="../../foundations/colors/colors.html" class="nav-link">Colors</a></li>
+            <li><a href="../../foundations/typography/typography.html" class="nav-link">Typography</a></li>
+            <li><a href="../../foundations/spacing/spacing.html" class="nav-link">Spacing</a></li>
+            <li><a href="../../foundations/shadows/shadows.html" class="nav-link">Shadows</a></li>
+          </ul>
+        </div>
+        <div class="nav-section nav-section--menu is-open">
+          <button type="button" class="nav-menu-toggle" aria-expanded="true">
+            <h3 class="nav-title">Komponen</h3>
+            <img src="../../assets/icons/icon-chevron-mini-down.svg" alt="" class="nav-menu-toggle__chevron" aria-hidden="true">
+          </button>
+          <ul class="nav-list">
+            <li><a href="../Button/button.html" class="nav-link">Button</a></li>
+            <li><a href="../Modal/modal.html" class="nav-link active">Modal</a></li>
+            <li><a href="../Popup/popup.html" class="nav-link">Popup</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="sidebar-footer">
+      <div class="tailwind-badge">Built with tokens.css</div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="breadcrumb">
+        <a href="../../index.html">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="#">Components</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="current">Modal</span>
+      </div>
+      <div class="topbar-actions"><span class="version-badge">v2.0</span></div>
+    </div>
+
+    <div class="content-inner">
+      <section class="modal-section">
+        <h2>Modal Footer</h2>
+        <p>Footer modal dipisah menjadi 3 variant: default, warning, dan danger.</p>
+
+        <div class="modal-demo-card">
+          <div class="modal-variant-stack">
+            <div class="modal-variant-item">
+              <p class="modal-variant-label">Variant Default</p>
+              <div class="modal-footer-container">
+                <div class="modal-footer-actions">
+                  <button type="button" class="ds-btn ds-btn--subtle">Batal</button>
+                  <button type="button" class="ds-btn ds-btn--primary">Simpan</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-variant-item">
+              <p class="modal-variant-label">Variant Warning</p>
+              <div class="modal-footer-container">
+                <div class="modal-footer-actions">
+                  <button type="button" class="ds-btn ds-btn--subtle">Batal</button>
+                  <button type="button" class="ds-btn ds-btn--warning">Review</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-variant-item">
+              <p class="modal-variant-label">Variant Danger</p>
+              <div class="modal-footer-container">
+                <div class="modal-footer-actions">
+                  <button type="button" class="ds-btn ds-btn--subtle">Batal</button>
+                  <button type="button" class="ds-btn ds-btn--danger">Hapus</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="code-card">
+            <div class="code-card__head">
+              <p class="code-card__title">HTML siap copy — Modal Footer</p>
+              <button type="button" id="copy-modal-footer-code" class="copy-btn">Copy</button>
+            </div>
+            <pre><code id="modal-footer-code">&lt;!-- Variant Default --&gt;
+&lt;div class="modal-footer-container"&gt;
+  &lt;div class="modal-footer-actions"&gt;
+    &lt;button type="button" class="ds-btn ds-btn--subtle"&gt;Batal&lt;/button&gt;
+    &lt;button type="button" class="ds-btn ds-btn--primary"&gt;Simpan&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Variant Warning --&gt;
+&lt;div class="modal-footer-container"&gt;
+  &lt;div class="modal-footer-actions"&gt;
+    &lt;button type="button" class="ds-btn ds-btn--subtle"&gt;Batal&lt;/button&gt;
+    &lt;button type="button" class="ds-btn ds-btn--warning"&gt;Review&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Variant Danger --&gt;
+&lt;div class="modal-footer-container"&gt;
+  &lt;div class="modal-footer-actions"&gt;
+    &lt;button type="button" class="ds-btn ds-btn--subtle"&gt;Batal&lt;/button&gt;
+    &lt;button type="button" class="ds-btn ds-btn--danger"&gt;Hapus&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="modal-section">
+        <h2>Modal Header</h2>
+        <p>Header modal dengan appearance default, warning, dan danger menggunakan token + existing icon.</p>
+
+        <div class="modal-demo-card">
+          <div class="modal-header-list">
+            <div class="modal-header-item">
+              <p class="modal-header-item__title">Modal dialog</p>
+            </div>
+            <div class="modal-header-item">
+              <span class="modal-header-icon modal-header-icon--warning" aria-hidden="true"></span>
+              <p class="modal-header-item__title">Modal dialog</p>
+            </div>
+            <div class="modal-header-item">
+              <span class="modal-header-icon modal-header-icon--danger" aria-hidden="true"></span>
+              <p class="modal-header-item__title">Modal dialog</p>
+            </div>
+          </div>
+
+          <div class="code-card">
+            <div class="code-card__head">
+              <p class="code-card__title">HTML siap copy — Modal Header</p>
+              <button type="button" id="copy-modal-header-code" class="copy-btn">Copy</button>
+            </div>
+            <pre><code id="modal-header-code">&lt;!-- appearance=default --&gt;
+&lt;div class="modal-header-item"&gt;
+  &lt;p class="modal-header-item__title"&gt;Modal dialog&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- appearance=warning --&gt;
+&lt;div class="modal-header-item"&gt;
+  &lt;span class="modal-header-icon modal-header-icon--warning" aria-hidden="true"&gt;&lt;/span&gt;
+  &lt;p class="modal-header-item__title"&gt;Modal dialog&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;!-- appearance=danger --&gt;
+&lt;div class="modal-header-item"&gt;
+  &lt;span class="modal-header-icon modal-header-icon--danger" aria-hidden="true"&gt;&lt;/span&gt;
+  &lt;p class="modal-header-item__title"&gt;Modal dialog&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<script>
+  (function () {
+    var copyBtn = document.getElementById('copy-modal-footer-code');
+    var codeEl = document.getElementById('modal-footer-code');
+    var copyHeaderBtn = document.getElementById('copy-modal-header-code');
+    var codeHeaderEl = document.getElementById('modal-header-code');
+
+    function bindCopy(button, source) {
+      if (!button || !source) return;
+      button.addEventListener('click', function () {
+        navigator.clipboard.writeText(source.textContent || '').then(function () {
+          var original = button.textContent;
+          button.textContent = 'Copied';
+          setTimeout(function () {
+            button.textContent = original;
+          }, 1400);
+        });
+      });
+    }
+
+    bindCopy(copyBtn, codeEl);
+    bindCopy(copyHeaderBtn, codeHeaderEl);
+  })();
+</script>
+<script src="../../scripts/sidebar-nav-menu.js"></script>
+</body>
+</html>

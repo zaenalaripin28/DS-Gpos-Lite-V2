@@ -7,30 +7,86 @@
   <link rel="stylesheet" href="../../styles/globals.css">
   <link rel="stylesheet" href="../../styles/enhancements.css">
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            blue: {
+              b50:'var(--color-blue-b50)',b75:'var(--color-blue-b75)',b100:'var(--color-blue-b100)',
+              b200:'var(--color-blue-b200)',b300:'var(--color-blue-b300)',b400:'var(--color-blue-b400)',b500:'var(--color-blue-b500)',
+            },
+            neutral: {
+              n0:'var(--color-neutral-n0)',n10:'var(--color-neutral-n10)',n20:'var(--color-neutral-n20)',n30:'var(--color-neutral-n30)',
+              n40:'var(--color-neutral-n40)',n50:'var(--color-neutral-n50)',n60:'var(--color-neutral-n60)',n70:'var(--color-neutral-n70)',
+              n80:'var(--color-neutral-n80)',n90:'var(--color-neutral-n90)',n100:'var(--color-neutral-n100)',n200:'var(--color-neutral-n200)',
+              n300:'var(--color-neutral-n300)',n400:'var(--color-neutral-n400)',n500:'var(--color-neutral-n500)',n600:'var(--color-neutral-n600)',
+              n700:'var(--color-neutral-n700)',n800:'var(--color-neutral-n800)',n900:'var(--color-neutral-n900)',
+            },
+            background:'var(--color-background)',surface:'var(--color-surface)',
+            border:{DEFAULT:'var(--color-border)',light:'var(--color-border-light)'},
+            text:{primary:'var(--color-text-primary)',secondary:'var(--color-text-secondary)',tertiary:'var(--color-text-tertiary)'},
+          },
+          fontFamily:{primary:['var(--font-primary)'],sans:['var(--font-primary)']},
+          fontSize:{
+            xs:'var(--font-size-xs)',sm:'var(--font-size-sm)',base:'var(--font-size-base)',lg:'var(--font-size-lg)',xl:'var(--font-size-xl)',
+            '2xl':'var(--font-size-2xl)',caption:'var(--text-caption-regular-size)',overline:'var(--text-overline-medium-size)',
+            'body-sm':'var(--text-body-small-regular-size)',
+          },
+          fontWeight:{medium:'var(--font-weight-medium)',semibold:'var(--font-weight-semibold)',bold:'var(--font-weight-bold)'},
+          spacing:{
+            '025':'var(--space-025)','050':'var(--space-050)','075':'var(--space-075)','100':'var(--space-100)',
+            '150':'var(--space-150)','200':'var(--space-200)','250':'var(--space-250)','300':'var(--space-300)',
+            '400':'var(--space-400)','500':'var(--space-500)',
+            '1':'var(--spacing-1)','1.5':'6px','2':'var(--spacing-2)','3':'var(--spacing-3)','4':'var(--spacing-4)',
+            '5':'var(--spacing-5)','6':'var(--spacing-6)','8':'var(--spacing-8)','9':'36px','10':'var(--spacing-10)',
+          },
+          borderRadius:{
+            none:'var(--border-radius-none)',sm:'var(--border-radius-sm)',md:'var(--border-radius-md)',
+            lg:'var(--border-radius-lg)',xl:'var(--border-radius-xl)','2xl':'var(--border-radius-2xl)',full:'var(--border-radius-full)',
+          },
+        }
+      }
+    }
+  </script>
   <style>
-    .popup-part-chip {
+    /* ================================================================
+       DS Popup — token-based styles
+    ================================================================ */
+
+    /* ── Shared Component Button ── */
+    .ds-btn {
+      border: none;
+      border-radius: var(--border-radius-md);
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n900);
+      font-family: var(--font-primary);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 40px;
-      padding: 0 var(--space-200);
-      border: 1px solid var(--color-blue-b300);
-      border-radius: var(--border-radius-full);
-      background: var(--color-neutral-n900);
-      color: var(--color-purple-p300);
-      font-family: var(--font-primary);
-      font-size: var(--text-body-small-regular-size);
-      font-weight: var(--text-body-small-regular-weight);
-      line-height: var(--text-body-small-regular-lh);
-      box-shadow: var(--shadow-none);
+      padding: 0 var(--space-150);
+      min-height: 32px;
+      cursor: pointer;
+      white-space: nowrap;
     }
 
+    .ds-btn-default-selected {
+      background-color: var(--color-blue-b50);
+      color: var(--color-blue-b300);
+      border: 1px solid rgba(30, 127, 214, 0.2);
+    }
+
+    .popup-anchor-btn { min-width: unset; }
+
+    /* ── Popup Part Tokens ── */
     .popup-part-panel {
       width: 147px;
       height: 44px;
       border-radius: 6px;
       background: var(--color-neutral-n10);
-      box-shadow: var(--shadow-2xl);
+      box-shadow: var(--shadow-1);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -45,31 +101,12 @@
       font-size: var(--text-body-small-regular-size);
       font-weight: var(--text-body-small-regular-weight);
       line-height: var(--text-body-small-regular-lh);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .popup-demo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: var(--space-300);
-      align-items: start;
-    }
-
-    .popup-demo-item {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-150);
-    }
-
-    .popup-demo-item h3 {
-      margin: 0;
-      font-family: var(--font-primary);
-      font-size: var(--text-body-small-regular-size);
-      font-weight: var(--font-weight-semibold);
-      line-height: var(--text-body-small-regular-lh);
-      color: var(--color-text-secondary);
-      text-transform: capitalize;
-    }
-
+    /* ── Anchor Wrap ── */
     .popup-anchor-wrap {
       display: flex;
       flex-direction: column;
@@ -77,29 +114,198 @@
       gap: var(--space-100);
     }
 
-    .popup-anchor-wrap--left {
-      align-items: flex-start;
+    .popup-anchor-wrap--left   { align-items: flex-start; }
+    .popup-anchor-wrap--center { align-items: center; }
+    .popup-anchor-wrap--right  { align-items: flex-end; }
+
+    /* ── Hero banner ── */
+    .ds-hero-banner {
+      position: relative;
+      overflow: hidden;
+    }
+    .ds-hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ds-hero-banner > * { position: relative; z-index: 1; }
+
+    /* ── Feature card hover ── */
+    .hero-feat-card {
+      transition: transform 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  box-shadow 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  border-color 160ms ease;
+    }
+    .hero-feat-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--color-blue-b75) !important;
+      box-shadow: 0 12px 32px rgba(9,30,66,0.11), 0 3px 8px rgba(9,30,66,0.06);
     }
 
-    .popup-anchor-wrap--center {
-      align-items: center;
-    }
-
-    .popup-anchor-wrap--right {
-      align-items: flex-end;
-    }
-
-    .popup-section-title {
-      margin: var(--space-400) 0 var(--space-200);
-      font-family: var(--font-primary);
-      font-size: var(--font-size-lg);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-text-primary);
-    }
-
-    .popup-playground {
+    /* ── Demo grid ── */
+    .popup-demo-grid {
       display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: var(--space-200);
+    }
+
+    /* ── Individual position card ── */
+    .popup-pos-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  box-shadow 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  border-color 160ms ease;
+    }
+    .popup-pos-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(30,127,214,0.22);
+      box-shadow: 0 12px 32px rgba(9,30,66,0.11), 0 3px 8px rgba(9,30,66,0.06);
+    }
+
+    .popup-pos-card__preview {
+      min-height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-300) var(--space-200);
+      background-color: var(--color-neutral-n900);
+      background-image: radial-gradient(circle, rgba(9,30,66,0.055) 1.5px, transparent 1.5px);
+      background-size: 18px 18px;
+    }
+
+    .popup-pos-card__footer {
+      padding: 14px 16px;
+      background: var(--color-surface);
+      border-top: 2px solid var(--color-neutral-n30);
+    }
+
+    .popup-pos-card__name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-text-primary);
+      font-family: var(--font-primary);
+      margin-bottom: 4px;
+      text-transform: capitalize;
+    }
+
+    .popup-pos-card__desc {
+      font-size: 11px;
+      color: var(--color-text-tertiary);
+      font-family: var(--font-primary);
+      line-height: 1.5;
+    }
+
+    /* ── Staggered card entrance ── */
+    @keyframes ds-card-rise {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .popup-demo-grid .popup-pos-card:nth-child(1) { animation: ds-card-rise 260ms 0ms   cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .popup-demo-grid .popup-pos-card:nth-child(2) { animation: ds-card-rise 260ms 32ms  cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .popup-demo-grid .popup-pos-card:nth-child(3) { animation: ds-card-rise 260ms 64ms  cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .popup-demo-grid .popup-pos-card:nth-child(4) { animation: ds-card-rise 260ms 96ms  cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .popup-demo-grid .popup-pos-card:nth-child(5) { animation: ds-card-rise 260ms 128ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .popup-demo-grid .popup-pos-card:nth-child(6) { animation: ds-card-rise 260ms 160ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+
+    /* ── Hero entrance ── */
+    @keyframes ds-reveal {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .content-inner > section.mb-12 {
+      animation: ds-reveal 400ms 60ms cubic-bezier(0.25,0.46,0.45,0.94) both;
+    }
+
+    /* ── Section h2 gradient bottom ── */
+    section > h2 {
+      border-bottom: none !important;
+      background-image: linear-gradient(to right, var(--color-primary-500) 0%, rgba(30,127,214,0.18) 32%, transparent 68%) !important;
+      background-repeat: no-repeat !important;
+      background-size: 100% 1px !important;
+      background-position: left bottom !important;
+    }
+
+    /* ── Do/Don't cards hover ── */
+    .usage-grid-2 > div {
+      transition: transform 160ms cubic-bezier(0.25,0.46,0.45,0.94),
+                  box-shadow 160ms cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .usage-grid-2 > div:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(9,30,66,0.09);
+    }
+
+    /* ── code element polish ── */
+    code {
+      font-family: var(--font-primary) !important;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 7px;
+      background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n30);
+      border-radius: 4px;
+      color: var(--color-blue-b300);
+      letter-spacing: 0.01em;
+      line-height: 1.6;
+    }
+
+    /* ── Parts Table ── */
+    .popup-table-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .popup-parts-table {
+      width: 100%;
+      min-width: 480px;
+      border-collapse: collapse;
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+    }
+
+    .popup-parts-table th,
+    .popup-parts-table td {
+      padding: var(--space-150) var(--space-250);
+      border-bottom: 1px solid var(--color-border-light);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .popup-parts-table th {
+      background: var(--color-neutral-n20);
+      color: var(--color-text-secondary);
+      font-weight: var(--font-weight-semibold);
+      font-size: var(--text-caption-medium-size);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .popup-parts-table tbody tr:last-child td { border-bottom: none; }
+    .popup-parts-table tbody tr:hover td {
+      background: var(--color-neutral-n20);
+      transition: background var(--transition-fast);
+    }
+    .popup-parts-table td:first-child {
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text-primary);
+      white-space: nowrap;
+    }
+
+    /* ── Playground ── */
+    .popup-playground {
+      padding: var(--space-300);
+      display: grid;
+      gap: var(--space-250);
     }
 
     .popup-playground__controls {
@@ -116,9 +322,10 @@
 
     .popup-playground__field-label {
       font-family: var(--font-primary);
-      font-size: var(--text-body-small-regular-size);
+      font-size: var(--text-caption-medium-size);
       font-weight: var(--font-weight-semibold);
       color: var(--color-text-secondary);
+      letter-spacing: 0.02em;
     }
 
     .popup-playground__control {
@@ -130,135 +337,208 @@
       padding: var(--space-100) var(--space-150);
       font-family: var(--font-primary);
       font-size: var(--text-body-small-regular-size);
-      line-height: var(--text-body-small-regular-lh);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
     }
 
     .popup-playground__control:focus {
       outline: none;
       border-color: var(--color-blue-b300);
-      box-shadow: 0 0 0 2px var(--color-blue-b200);
+      box-shadow: 0 0 0 3px rgba(30,127,214,0.12);
     }
 
     .popup-playground__hint {
       margin: 0;
       font-family: var(--font-primary);
-      font-size: var(--text-body-small-regular-size);
+      font-size: var(--text-caption-regular-size);
       color: var(--color-text-tertiary);
       line-height: var(--text-body-small-regular-lh);
     }
 
     .popup-playground__stage {
-      min-height: 160px;
+      min-height: 180px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: var(--space-300);
+      padding: var(--space-400);
       border-radius: var(--border-radius-lg);
-      background: var(--color-neutral-n900);
+      background-color: var(--color-neutral-n900);
+      background-image: radial-gradient(circle, rgba(9,30,66,0.055) 1.5px, transparent 1.5px);
+      background-size: 18px 18px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .popup-parts-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-family: var(--font-primary);
-      font-size: var(--text-body-small-regular-size);
-    }
-
-    .popup-parts-table th,
-    .popup-parts-table td {
-      padding: var(--space-150) var(--space-200);
-      border-bottom: 1px solid var(--color-border);
-      text-align: left;
-      vertical-align: top;
-    }
-
-    .popup-parts-table th {
-      background: var(--color-neutral-n20);
-      color: var(--color-text-secondary);
-      font-weight: var(--font-weight-semibold);
-    }
-
+    /* ── Do / Don't ── */
     .usage-grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: var(--space-250);
+      gap: var(--space-200);
     }
 
-    @media (max-width: 768px) {
-      .popup-playground__controls {
-        grid-template-columns: 1fr;
-      }
-
-      .usage-grid-2 {
-        grid-template-columns: 1fr;
-      }
+    .usage-card {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
     }
 
-    .ds-btn {
-      border: none;
-      border-radius: var(--border-radius-md);
-      background-color: var(--color-neutral-n20);
-      color: var(--color-neutral-n900);
-      font-family: var(--font-primary);
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-medium);
-      line-height: var(--text-body-small-medium-lh);
-      display: inline-flex;
+    .usage-card__header {
+      display: flex;
       align-items: center;
-      justify-content: center;
-      gap: var(--space-025);
-      padding: 0 var(--space-150);
-      min-height: 32px;
-      cursor: pointer;
-      box-shadow: var(--shadow-none);
-      white-space: nowrap;
+      gap: var(--space-100);
+      padding: var(--space-150) var(--space-200);
     }
 
-    .ds-btn-default-selected {
-      background-color: var(--color-blue-b50);
-      color: var(--color-blue-b300);
-      border-color: var(--color-border);
-      box-shadow: var(--shadow-none);
+    .usage-card__header--do   { background: var(--color-green-g50);  border-bottom: 2px solid var(--color-green-g200); }
+    .usage-card__header--dont { background: var(--color-red-r50);   border-bottom: 2px solid var(--color-red-r75); }
+
+    .usage-card__icon {
+      width: 16px; height: 16px;
+      border-radius: var(--border-radius-full);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 10px; font-weight: var(--font-weight-bold); line-height: 1;
+    }
+    .usage-card__icon--do   { background: var(--color-green-g300); color: var(--color-neutral-n0); }
+    .usage-card__icon--dont { background: var(--color-red-r300);   color: var(--color-neutral-n0); }
+
+    .usage-card__header-label {
+      font-family: var(--font-primary);
+      font-size: var(--text-overline-medium-size);
+      font-weight: var(--font-weight-bold);
+      letter-spacing: var(--text-overline-medium-ls);
+      text-transform: uppercase;
+    }
+    .usage-card__header-label--do   { color: var(--color-green-g400); }
+    .usage-card__header-label--dont { color: var(--color-red-r400); }
+
+    .usage-card__list {
+      margin: 0; padding: var(--space-200) var(--space-250);
+      display: flex; flex-direction: column; gap: var(--space-100);
+      background: var(--color-surface); list-style: none;
     }
 
-    .popup-anchor-btn {
-      min-width: unset;
+    .usage-card__list li {
+      display: flex; align-items: flex-start; gap: var(--space-100);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+      color: var(--color-text-secondary);
+      line-height: var(--text-body-small-regular-lh);
     }
 
-    .popup-anchor-btn--left {
-      margin-left: 0;
+    .usage-card__list li::before {
+      content: ''; width: 4px; height: 4px;
+      border-radius: var(--border-radius-full);
+      flex-shrink: 0; margin-top: 8px;
+    }
+    .usage-card__list--do li::before   { background: var(--color-green-g300); }
+    .usage-card__list--dont li::before { background: var(--color-red-r300); }
+
+    /* ── Code Section ── */
+    .popup-code-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: var(--space-150) var(--space-200);
+      background: var(--color-neutral-n800);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
 
-    .popup-anchor-btn--center {
-      margin-left: 0;
-      margin-right: 0;
+    .popup-code-header__label {
+      display: flex; align-items: center; gap: var(--space-100);
+      font-family: var(--font-primary);
+      font-size: var(--text-caption-medium-size);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-neutral-n60);
     }
 
-    .popup-anchor-btn--right {
-      margin-left: 0;
-    }
-
-    @media (max-width: 1024px) {
-      .popup-demo-grid {
-        grid-template-columns: 1fr;
-      }
+    .popup-code-header__dot {
+      width: 8px; height: 8px;
+      border-radius: var(--border-radius-full);
+      background: var(--color-blue-b200);
     }
 
     .copy-btn {
-      border: 1px solid var(--color-border);
-      background: var(--color-neutral-n0);
-      color: var(--color-text-primary);
+      display: inline-flex; align-items: center; gap: var(--space-075);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: var(--color-neutral-n60);
       border-radius: var(--border-radius-md);
-      padding: var(--space-100) var(--space-200);
+      padding: var(--space-075) var(--space-150);
       font-family: var(--font-primary);
-      font-size: var(--text-body-small-regular-size);
-      font-weight: var(--text-body-small-regular-weight);
-      line-height: var(--text-body-small-regular-lh);
+      font-size: var(--text-caption-medium-size);
+      font-weight: var(--font-weight-medium);
       cursor: pointer;
+      transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+    }
+    .copy-btn:hover { background: rgba(255,255,255,0.1); color: var(--color-neutral-n10); border-color: rgba(255,255,255,0.2); }
+    .copy-btn.copied { border-color: rgba(0,170,91,0.4); background: rgba(0,170,91,0.1); color: var(--color-green-g300); }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .popup-demo-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 900px) {
+      .usage-grid-2 { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 768px) {
+      .popup-demo-grid { grid-template-columns: 1fr 1fr; }
+      .popup-playground__controls { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .popup-demo-grid { grid-template-columns: 1fr; }
+      .popup-playground__controls { grid-template-columns: 1fr; }
+      .popup-playground { padding: var(--space-200); }
+      .popup-playground__stage { min-height: 140px; padding: var(--space-300) var(--space-200); }
+      .popup-pos-card__preview { min-height: 90px; padding: var(--space-200); }
+      .usage-card__list { padding: var(--space-150) var(--space-200); }
     }
 
-    .copy-btn:hover {
-      background: var(--color-neutral-n20);
+    /* ── Mobile (≤480px) ── */
+    @media (max-width: 480px) {
+      /* Hero banner */
+      .ds-hero-banner .flex-1 { padding: 24px 20px !important; }
+      .ds-hero-banner [style*="font-size:2.5rem"] { font-size: 1.75rem !important; }
+
+      /* Hero right panel hidden on very small screens */
+      .ds-hero-banner .lg\\:w-80 { display: none; }
+
+      /* Feature cards: force single col */
+      .ds-hero-banner ~ div,
+      section .grid { grid-template-columns: 1fr !important; gap: var(--space-150) !important; }
+
+      /* Parts table */
+      .popup-parts-table th,
+      .popup-parts-table td { padding: var(--space-100) var(--space-150); font-size: 11px; }
+
+      /* Playground */
+      .popup-playground { padding: var(--space-150); gap: var(--space-150); }
+      .popup-playground__controls { grid-template-columns: 1fr; gap: var(--space-150); }
+      .popup-playground__stage { min-height: 120px; padding: var(--space-200) var(--space-150); }
+
+      /* Usage cards */
+      .usage-card__header { padding: var(--space-100) var(--space-150); }
+      .usage-card__list { padding: var(--space-150); gap: var(--space-075); }
+
+      /* Code block */
+      pre { font-size: 11px !important; overflow-x: auto !important; }
+
+      /* Section headings */
+      section > h2 { font-size: 16px !important; }
+      section > p { font-size: 13px !important; }
+
+      /* Breadcrumb truncation */
+      .breadcrumb { font-size: 11px; }
+      .breadcrumb a:not(:last-child):not(:first-child) { display: none; }
+    }
+
+    /* ── Tiny (≤360px) ── */
+    @media (max-width: 360px) {
+      .ds-hero-banner .flex-1 { padding: 20px 16px !important; }
+      .ds-hero-banner [style*="font-size:2.5rem"] { font-size: 1.5rem !important; }
+      .popup-pos-card__preview { min-height: 80px; padding: var(--space-150); }
+      .popup-pos-card__footer { padding: 10px 12px; }
+      .popup-pos-card__name { font-size: 12px; }
+      .popup-playground { padding: var(--space-100); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition-duration: 0ms !important; animation: none !important; }
     }
   </style>
 </head>
@@ -392,122 +672,306 @@
     </div>
 
     <div class="content-inner">
-      <section style="margin-bottom: var(--space-400);">
-        <h1 style="margin-bottom: var(--space-150);">Popup</h1>
-        <p style="margin-bottom: 0;">Popup part sesuai referensi Figma.</p>
-      </section>
 
-      <section style="margin-bottom: var(--space-500);">
-        <h2 style="font-size: var(--font-size-2xl); margin-bottom: var(--space-200);">Popup Part</h2>
-        <h3 class="popup-section-title">Top</h3>
-        <div class="popup-demo-grid" style="margin-bottom: var(--space-400);">
-          <div class="popup-demo-item">
-            <h3>top left</h3>
-            <div class="popup-anchor-wrap popup-anchor-wrap--left">
-              <div class="popup-part-panel">
-                <p class="popup-part-text">Hello how are you</p>
+      <!-- =====================================================
+           HERO — Component Overview Banner
+      ====================================================== -->
+      <section class="mb-12">
+
+        <!-- Dark hero banner -->
+        <div class="ds-hero-banner rounded-2xl overflow-hidden mb-3 flex flex-col lg:flex-row bg-neutral-n900" style="border: 1px solid rgba(255,255,255,0.07);">
+
+          <!-- Left: Metadata -->
+          <div class="flex-1 px-8 py-10 lg:px-11 lg:py-12 flex flex-col justify-center">
+
+            <div class="flex items-center gap-100 mb-5">
+              <div class="flex items-center justify-center w-5 h-5 rounded-md" style="background:rgba(68,149,221,0.2);">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#4495DD" stroke-width="2.5"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="8,10 12,14 16,10"/></svg>
               </div>
-              <button type="button" class="ds-btn ds-btn-default-selected popup-anchor-btn">Label</button>
+              <span class="text-xs font-semibold uppercase tracking-[0.1em] text-blue-b100">Components · DS GPOS Lite V2</span>
+            </div>
+
+            <div class="font-bold text-neutral-n0 mb-3" style="font-size:2.5rem; letter-spacing:-0.035em; line-height:1.04;">Popup</div>
+
+            <p class="text-sm leading-relaxed max-w-xs mb-8" style="color:rgba(255,255,255,0.52); line-height:1.7;">
+              Overlay kontekstual yang muncul di sekitar elemen trigger. Mendukung 6 posisi (top/bottom × left/center/right) untuk menyesuaikan ruang layar.
+            </p>
+
+            <div class="flex flex-wrap gap-100">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.10);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+                v2.0
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.10);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="8,10 12,14 16,10"/></svg>
+                6 posisi
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.45); border-color:rgba(255,255,255,0.10);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="7" width="20" height="10" rx="3"/></svg>
+                Top &amp; Bottom
+              </span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(68,149,221,0.15); color:#7DB5E7; border-color:rgba(68,149,221,0.28);">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                Figma-synced
+              </span>
+              <span class="inline-flex items-center px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:rgba(68,149,221,0.15); color:#7DB5E7; border-color:rgba(68,149,221,0.28);">Token-based</span>
+            </div>
+
+          </div>
+
+          <!-- Right: Live mini preview -->
+          <div class="lg:w-80 lg:flex-shrink-0 p-300 flex items-center justify-center" style="background:rgba(255,255,255,0.03); border-left:1px solid rgba(255,255,255,0.07);">
+            <div class="w-full rounded-2xl overflow-hidden" style="background:var(--color-neutral-n10); box-shadow:0 16px 48px rgba(0,0,0,0.32), 0 2px 8px rgba(0,0,0,0.16);">
+              <div class="px-250 py-3.5 flex items-center justify-between" style="border-bottom:1px solid var(--color-border);">
+                <span class="text-xs font-semibold uppercase tracking-[0.08em]" style="color:var(--color-text-tertiary);">6 Posisi</span>
+                <div class="flex items-center gap-050">
+                  <span class="w-2 h-2 rounded-full" style="background:var(--color-neutral-n40);"></span>
+                  <span class="w-2 h-2 rounded-full" style="background:var(--color-neutral-n30);"></span>
+                  <span class="w-2 h-2 rounded-full" style="background:var(--color-neutral-n20);"></span>
+                </div>
+              </div>
+              <div class="p-200 flex flex-col gap-150">
+                <div style="font-size:11px; font-weight:500; color:var(--color-text-tertiary); letter-spacing:0.04em; margin-bottom:4px;">Top</div>
+                <div style="display:flex; gap:8px; justify-content:space-between;">
+                  <div style="display:flex; flex-direction:column; align-items:flex-start; gap:5px;">
+                    <div style="width:70px; height:22px; border-radius:4px; background:var(--color-neutral-n0); box-shadow:var(--shadow-1); display:flex; align-items:center; justify-content:center;"><span style="font-size:9px; color:var(--color-neutral-n900); font-family:var(--font-primary);">Hello…</span></div>
+                    <div style="height:16px; padding:0 6px; background:var(--color-blue-b50); border:1px solid rgba(30,127,214,0.2); border-radius:4px; display:flex; align-items:center;"><span style="font-size:9px; color:var(--color-blue-b300); font-family:var(--font-primary);">Label</span></div>
+                  </div>
+                  <div style="display:flex; flex-direction:column; align-items:center; gap:5px;">
+                    <div style="width:70px; height:22px; border-radius:4px; background:var(--color-neutral-n0); box-shadow:var(--shadow-1); display:flex; align-items:center; justify-content:center;"><span style="font-size:9px; color:var(--color-neutral-n900); font-family:var(--font-primary);">Hello…</span></div>
+                    <div style="height:16px; padding:0 6px; background:var(--color-blue-b50); border:1px solid rgba(30,127,214,0.2); border-radius:4px; display:flex; align-items:center;"><span style="font-size:9px; color:var(--color-blue-b300); font-family:var(--font-primary);">Label</span></div>
+                  </div>
+                  <div style="display:flex; flex-direction:column; align-items:flex-end; gap:5px;">
+                    <div style="width:70px; height:22px; border-radius:4px; background:var(--color-neutral-n0); box-shadow:var(--shadow-1); display:flex; align-items:center; justify-content:center;"><span style="font-size:9px; color:var(--color-neutral-n900); font-family:var(--font-primary);">Hello…</span></div>
+                    <div style="height:16px; padding:0 6px; background:var(--color-blue-b50); border:1px solid rgba(30,127,214,0.2); border-radius:4px; display:flex; align-items:center;"><span style="font-size:9px; color:var(--color-blue-b300); font-family:var(--font-primary);">Label</span></div>
+                  </div>
+                </div>
+                <div style="font-size:11px; font-weight:500; color:var(--color-text-tertiary); letter-spacing:0.04em; margin-bottom:4px; margin-top:4px;">Bottom</div>
+                <div style="display:flex; gap:8px; justify-content:space-between;">
+                  <div style="display:flex; flex-direction:column; align-items:flex-start; gap:5px;">
+                    <div style="height:16px; padding:0 6px; background:var(--color-blue-b50); border:1px solid rgba(30,127,214,0.2); border-radius:4px; display:flex; align-items:center;"><span style="font-size:9px; color:var(--color-blue-b300); font-family:var(--font-primary);">Label</span></div>
+                    <div style="width:70px; height:22px; border-radius:4px; background:var(--color-neutral-n0); box-shadow:var(--shadow-1); display:flex; align-items:center; justify-content:center;"><span style="font-size:9px; color:var(--color-neutral-n900); font-family:var(--font-primary);">Hello…</span></div>
+                  </div>
+                  <div style="display:flex; flex-direction:column; align-items:center; gap:5px;">
+                    <div style="height:16px; padding:0 6px; background:var(--color-blue-b50); border:1px solid rgba(30,127,214,0.2); border-radius:4px; display:flex; align-items:center;"><span style="font-size:9px; color:var(--color-blue-b300); font-family:var(--font-primary);">Label</span></div>
+                    <div style="width:70px; height:22px; border-radius:4px; background:var(--color-neutral-n0); box-shadow:var(--shadow-1); display:flex; align-items:center; justify-content:center;"><span style="font-size:9px; color:var(--color-neutral-n900); font-family:var(--font-primary);">Hello…</span></div>
+                  </div>
+                  <div style="display:flex; flex-direction:column; align-items:flex-end; gap:5px;">
+                    <div style="height:16px; padding:0 6px; background:var(--color-blue-b50); border:1px solid rgba(30,127,214,0.2); border-radius:4px; display:flex; align-items:center;"><span style="font-size:9px; color:var(--color-blue-b300); font-family:var(--font-primary);">Label</span></div>
+                    <div style="width:70px; height:22px; border-radius:4px; background:var(--color-neutral-n0); box-shadow:var(--shadow-1); display:flex; align-items:center; justify-content:center;"><span style="font-size:9px; color:var(--color-neutral-n900); font-family:var(--font-primary);">Hello…</span></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="popup-demo-item">
-            <h3>top center</h3>
-            <div class="popup-anchor-wrap popup-anchor-wrap--center">
-              <div class="popup-part-panel">
-                <p class="popup-part-text">Hello how are you</p>
-              </div>
-              <button type="button" class="ds-btn ds-btn-default-selected popup-anchor-btn">Label</button>
-            </div>
-          </div>
-          <div class="popup-demo-item">
-            <h3>top right</h3>
-            <div class="popup-anchor-wrap popup-anchor-wrap--right">
-              <div class="popup-part-panel">
-                <p class="popup-part-text">Hello how are you</p>
-              </div>
-              <button type="button" class="ds-btn ds-btn-default-selected popup-anchor-btn">Label</button>
-            </div>
-          </div>
+
         </div>
 
-        <h3 class="popup-section-title">Bottom</h3>
+        <!-- Feature cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-150">
+
+          <div class="hero-feat-card bg-neutral-n0 rounded-xl p-250 border border-neutral-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background:linear-gradient(135deg,var(--color-blue-b50) 0%,rgba(163,203,238,0.3) 100%); border:1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="8,10 12,14 16,10"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-neutral-n900 mb-1.5 tracking-[-0.02em]">6 Posisi</div>
+            <div class="text-xs leading-relaxed" style="color:var(--color-text-tertiary);">top-left · top-center · top-right · bottom-left · bottom-center · bottom-right</div>
+          </div>
+
+          <div class="hero-feat-card bg-neutral-n0 rounded-xl p-250 border border-neutral-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background:linear-gradient(135deg,var(--color-blue-b50) 0%,rgba(163,203,238,0.3) 100%); border:1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><rect x="2" y="7" width="20" height="10" rx="3"/><line x1="12" y1="7" x2="12" y2="17" opacity="0.4"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-neutral-n900 mb-1.5 tracking-[-0.02em]">1 Panel</div>
+            <div class="text-xs leading-relaxed" style="color:var(--color-text-tertiary);">147×44px · shadow-1 · padding 12px · bg neutral-n10</div>
+          </div>
+
+          <div class="hero-feat-card bg-neutral-n0 rounded-xl p-250 border border-neutral-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background:linear-gradient(135deg,var(--color-blue-b50) 0%,rgba(163,203,238,0.3) 100%); border:1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><path d="M12 2l9 4.5V17.5L12 22l-9-4.5V6.5L12 2z"/><path d="M12 2v20M3 6.5l9 5 9-5"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-neutral-n900 mb-1.5 tracking-[-0.02em]">Figma-Synced</div>
+            <div class="text-xs leading-relaxed" style="color:var(--color-text-tertiary);">Semua ukuran sesuai Figma via tokens.css</div>
+          </div>
+
+          <div class="hero-feat-card bg-neutral-n0 rounded-xl p-250 border border-neutral-n30 cursor-default">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center mb-4" style="background:linear-gradient(135deg,var(--color-blue-b50) 0%,rgba(163,203,238,0.3) 100%); border:1px solid rgba(30,127,214,0.12);">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1E7FD6" stroke-width="2.5"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+            </div>
+            <div class="text-sm font-semibold text-neutral-n900 mb-1.5 tracking-[-0.02em]">Token-based</div>
+            <div class="text-xs leading-relaxed" style="color:var(--color-text-tertiary);">Warna, spacing, shadow dari design tokens</div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- =====================================================
+           SECTION: POPUP PART
+      ====================================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:8px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Popup Part
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:0; margin-bottom:28px; font-family:var(--font-primary);">Kombinasi panel + trigger dalam 6 posisi. Panel dan button dihubungkan oleh <code>popup-anchor-wrap</code>.</p>
+
+        <!-- Top group label -->
+        <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--color-text-tertiary); margin-bottom:12px; font-family:var(--font-primary);">Top</div>
+
+        <div class="popup-demo-grid" style="margin-bottom:24px;">
+
+          <div class="popup-pos-card">
+            <div class="popup-pos-card__preview">
+              <div class="popup-anchor-wrap popup-anchor-wrap--left">
+                <div class="popup-part-panel"><p class="popup-part-text">Hello how are you</p></div>
+                <button type="button" class="ds-btn ds-btn-default-selected popup-anchor-btn">Label</button>
+              </div>
+            </div>
+            <div class="popup-pos-card__footer">
+              <div class="popup-pos-card__name">top left</div>
+              <div class="popup-pos-card__desc"><code>popup-anchor-wrap--left</code></div>
+            </div>
+          </div>
+
+          <div class="popup-pos-card">
+            <div class="popup-pos-card__preview">
+              <div class="popup-anchor-wrap popup-anchor-wrap--center">
+                <div class="popup-part-panel"><p class="popup-part-text">Hello how are you</p></div>
+                <button type="button" class="ds-btn ds-btn-default-selected popup-anchor-btn">Label</button>
+              </div>
+            </div>
+            <div class="popup-pos-card__footer">
+              <div class="popup-pos-card__name">top center</div>
+              <div class="popup-pos-card__desc"><code>popup-anchor-wrap--center</code></div>
+            </div>
+          </div>
+
+          <div class="popup-pos-card">
+            <div class="popup-pos-card__preview">
+              <div class="popup-anchor-wrap popup-anchor-wrap--right">
+                <div class="popup-part-panel"><p class="popup-part-text">Hello how are you</p></div>
+                <button type="button" class="ds-btn ds-btn-default-selected popup-anchor-btn">Label</button>
+              </div>
+            </div>
+            <div class="popup-pos-card__footer">
+              <div class="popup-pos-card__name">top right</div>
+              <div class="popup-pos-card__desc"><code>popup-anchor-wrap--right</code></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom group label -->
+        <div style="font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--color-text-tertiary); margin-bottom:12px; font-family:var(--font-primary);">Bottom</div>
+
         <div class="popup-demo-grid">
-          <div class="popup-demo-item">
-            <h3>bottom left</h3>
-            <div class="popup-anchor-wrap popup-anchor-wrap--left">
-              <button type="button" class="ds-btn ds-btn-default-selected popup-anchor-btn">Label</button>
-              <div class="popup-part-panel">
-                <p class="popup-part-text">Hello how are you</p>
+
+          <div class="popup-pos-card">
+            <div class="popup-pos-card__preview">
+              <div class="popup-anchor-wrap popup-anchor-wrap--left">
+                <button type="button" class="ds-btn ds-btn-default-selected popup-anchor-btn">Label</button>
+                <div class="popup-part-panel"><p class="popup-part-text">Hello how are you</p></div>
               </div>
+            </div>
+            <div class="popup-pos-card__footer">
+              <div class="popup-pos-card__name">bottom left</div>
+              <div class="popup-pos-card__desc"><code>popup-anchor-wrap--left</code></div>
             </div>
           </div>
-          <div class="popup-demo-item">
-            <h3>bottom center</h3>
-            <div class="popup-anchor-wrap popup-anchor-wrap--center">
-              <button type="button" class="ds-btn ds-btn-default-selected popup-anchor-btn">Label</button>
-              <div class="popup-part-panel">
-                <p class="popup-part-text">Hello how are you</p>
+
+          <div class="popup-pos-card">
+            <div class="popup-pos-card__preview">
+              <div class="popup-anchor-wrap popup-anchor-wrap--center">
+                <button type="button" class="ds-btn ds-btn-default-selected popup-anchor-btn">Label</button>
+                <div class="popup-part-panel"><p class="popup-part-text">Hello how are you</p></div>
               </div>
+            </div>
+            <div class="popup-pos-card__footer">
+              <div class="popup-pos-card__name">bottom center</div>
+              <div class="popup-pos-card__desc"><code>popup-anchor-wrap--center</code></div>
             </div>
           </div>
-          <div class="popup-demo-item">
-            <h3>bottom right</h3>
-            <div class="popup-anchor-wrap popup-anchor-wrap--right">
-              <button type="button" class="ds-btn ds-btn-default-selected popup-anchor-btn">Label</button>
-              <div class="popup-part-panel">
-                <p class="popup-part-text">Hello how are you</p>
+
+          <div class="popup-pos-card">
+            <div class="popup-pos-card__preview">
+              <div class="popup-anchor-wrap popup-anchor-wrap--right">
+                <button type="button" class="ds-btn ds-btn-default-selected popup-anchor-btn">Label</button>
+                <div class="popup-part-panel"><p class="popup-part-text">Hello how are you</p></div>
               </div>
             </div>
+            <div class="popup-pos-card__footer">
+              <div class="popup-pos-card__name">bottom right</div>
+              <div class="popup-pos-card__desc"><code>popup-anchor-wrap--right</code></div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- =====================================================
+           SECTION: PARTS TABLE
+      ====================================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:8px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Parts
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:0; margin-bottom:28px; font-family:var(--font-primary);">Daftar elemen penyusun komponen Popup beserta class dan spesifikasi token-nya.</p>
+
+        <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+          <div class="popup-table-scroll">
+            <table class="popup-parts-table">
+              <thead>
+                <tr>
+                  <th>Part</th>
+                  <th>Class</th>
+                  <th>Spesifikasi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Panel</td>
+                  <td><code>popup-part-panel</code></td>
+                  <td>147×44px · padding <code>var(--space-150)</code> · shadow <code>var(--shadow-1)</code></td>
+                </tr>
+                <tr>
+                  <td>Teks</td>
+                  <td><code>popup-part-text</code></td>
+                  <td>Body small regular · warna <code>var(--color-neutral-n900)</code></td>
+                </tr>
+                <tr>
+                  <td>Trigger</td>
+                  <td><code>ds-btn ds-btn-default-selected</code></td>
+                  <td>Button label anchor · padding dari komponen Button</td>
+                </tr>
+                <tr>
+                  <td>Wrapper</td>
+                  <td><code>popup-anchor-wrap</code></td>
+                  <td>Gap <code>var(--space-100)</code> (8px) antara panel dan button</td>
+                </tr>
+                <tr>
+                  <td>Posisi</td>
+                  <td><code>popup-anchor-wrap--left|center|right</code></td>
+                  <td>Top: panel di atas button · Bottom: button di atas panel</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
 
-      <section style="margin-bottom: var(--space-500);">
-        <h2 style="font-size: var(--font-size-2xl); margin-bottom: var(--space-200);">Parts</h2>
-        <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--border-radius-lg); overflow:hidden;">
-          <table class="popup-parts-table">
-            <thead>
-              <tr>
-                <th>Part</th>
-                <th>Class</th>
-                <th>Spesifikasi</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Panel</td>
-                <td><code>popup-part-panel</code></td>
-                <td>147×44px · padding <code>var(--space-150)</code> · shadow <code>var(--shadow-2xl)</code></td>
-              </tr>
-              <tr>
-                <td>Teks</td>
-                <td><code>popup-part-text</code></td>
-                <td>Body small regular · warna <code>var(--color-neutral-n900)</code></td>
-              </tr>
-              <tr>
-                <td>Trigger</td>
-                <td><code>ds-btn ds-btn-default-selected</code></td>
-                <td>Button label anchor · padding dari komponen Button</td>
-              </tr>
-              <tr>
-                <td>Wrapper</td>
-                <td><code>popup-anchor-wrap</code></td>
-                <td>Gap <code>var(--space-100)</code> (8px) antara panel dan button</td>
-              </tr>
-              <tr>
-                <td>Posisi</td>
-                <td><code>popup-anchor-wrap--left|center|right</code></td>
-                <td>Top: panel di atas button · Bottom: button di atas panel</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
+      <!-- =====================================================
+           SECTION: PLAYGROUND
+      ====================================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:8px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Playground
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:0; margin-bottom:28px; font-family:var(--font-primary);">Gabungkan parts popup + button untuk preview posisi secara interaktif.</p>
 
-      <section style="margin-bottom: var(--space-500);">
-        <h2 style="font-size: var(--font-size-2xl); margin-bottom: var(--space-200);">Playground</h2>
-        <p style="margin:0 0 var(--space-200); font-family:var(--font-primary); font-size:var(--text-body-small-regular-size); color:var(--color-text-tertiary);">Gabungkan parts popup + button untuk preview posisi.</p>
-        <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--border-radius-lg); padding:var(--space-250);">
+        <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
           <div class="popup-playground">
             <div class="popup-playground__controls">
               <div class="popup-playground__field">
@@ -531,30 +995,40 @@
               </div>
             </div>
             <p class="popup-playground__hint">Preview memakai <code>popup-part-panel</code>, <code>popup-part-text</code>, dan <code>ds-btn ds-btn-default-selected</code>.</p>
-            <div class="popup-playground__stage" id="popup-pg-stage"></div>
+            <div class="popup-playground__stage" id="popup-pg-stage" aria-live="polite"></div>
           </div>
         </div>
       </section>
 
-      <section style="margin-bottom: var(--space-500);">
-        <h2 style="font-size: var(--font-size-2xl); margin-bottom: var(--space-200);">Do &amp; Don&apos;t</h2>
+      <!-- =====================================================
+           SECTION: DO & DON'T
+      ====================================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:8px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Do &amp; Don&apos;t
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:0; margin-bottom:28px; font-family:var(--font-primary);">Panduan penggunaan komponen Popup yang benar.</p>
+
         <div class="usage-grid-2">
-          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--border-radius-lg); overflow:hidden;">
-            <div style="padding:var(--space-150) var(--space-200); background:var(--color-green-g50); border-bottom:2px solid var(--color-green-g200);">
-              <span style="font-size:var(--font-size-xs); font-weight:var(--font-weight-bold); color:var(--color-green-g400); font-family:var(--font-primary); text-transform:uppercase;">Do — Lakukan ini</span>
+          <div class="usage-card">
+            <div class="usage-card__header usage-card__header--do">
+              <span class="usage-card__icon usage-card__icon--do" aria-hidden="true">✓</span>
+              <span class="usage-card__header-label usage-card__header-label--do">Do — Lakukan ini</span>
             </div>
-            <ul style="margin:0; padding:var(--space-200) var(--space-250); color:var(--color-text-tertiary); font-family:var(--font-primary); font-size:var(--text-body-small-regular-size); line-height:var(--text-body-small-regular-lh);">
+            <ul class="usage-card__list usage-card__list--do">
               <li>Pakai jarak 8px (<code>var(--space-100)</code>) antara panel popup dan button.</li>
               <li>Pertahankan ukuran panel 147×44px dan padding teks 12px.</li>
               <li>Pilih posisi top/bottom + left/center/right sesuai ruang layar.</li>
               <li>Gunakan <code>ds-btn ds-btn-default-selected</code> sebagai trigger label.</li>
             </ul>
           </div>
-          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--border-radius-lg); overflow:hidden;">
-            <div style="padding:var(--space-150) var(--space-200); background:var(--color-red-r50); border-bottom:2px solid var(--color-red-r100);">
-              <span style="font-size:var(--font-size-xs); font-weight:var(--font-weight-bold); color:var(--color-red-r400); font-family:var(--font-primary); text-transform:uppercase;">Don&apos;t — Hindari ini</span>
+          <div class="usage-card">
+            <div class="usage-card__header usage-card__header--dont">
+              <span class="usage-card__icon usage-card__icon--dont" aria-hidden="true">✕</span>
+              <span class="usage-card__header-label usage-card__header-label--dont">Don&apos;t — Hindari ini</span>
             </div>
-            <ul style="margin:0; padding:var(--space-200) var(--space-250); color:var(--color-text-tertiary); font-family:var(--font-primary); font-size:var(--text-body-small-regular-size); line-height:var(--text-body-small-regular-lh);">
+            <ul class="usage-card__list usage-card__list--dont">
               <li>Jangan hardcode warna di luar token semantic.</li>
               <li>Jangan ubah margin panel-button dari 8px.</li>
               <li>Jangan pakai teks panjang yang memecah ukuran panel 147×44px.</li>
@@ -564,12 +1038,28 @@
         </div>
       </section>
 
-      <section style="margin-bottom: var(--space-500);">
-        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: var(--space-150); gap: var(--space-200);">
-          <h2 style="font-size: var(--font-size-2xl); margin: 0;">Kode DS</h2>
-          <button type="button" id="copy-popup-code-btn" class="copy-btn">Copy code</button>
-        </div>
-        <pre style="margin:0;"><code id="popup-code-snippet">&lt;!-- Top Left --&gt;
+      <!-- =====================================================
+           SECTION: KODE DS
+      ====================================================== -->
+      <section style="margin-bottom:48px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:8px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
+          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
+          Kode DS
+        </h2>
+        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:0; margin-bottom:28px; font-family:var(--font-primary);">Copy dan gunakan langsung di project Anda.</p>
+
+        <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; overflow:hidden;">
+          <div class="popup-code-header">
+            <span class="popup-code-header__label">
+              <span class="popup-code-header__dot"></span>
+              HTML
+            </span>
+            <button type="button" id="copy-popup-code-btn" class="copy-btn" aria-label="Salin kode">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              Copy code
+            </button>
+          </div>
+          <pre style="margin:0; border-radius:0; border:none; overflow-x:auto;"><code id="popup-code-snippet">&lt;!-- Top Left --&gt;
 &lt;div class="popup-anchor-wrap popup-anchor-wrap--left"&gt;
   &lt;div class="popup-part-panel"&gt;
     &lt;p class="popup-part-text"&gt;Hello how are you&lt;/p&gt;
@@ -616,7 +1106,9 @@
     &lt;p class="popup-part-text"&gt;Hello how are you&lt;/p&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
+        </div>
       </section>
+
     </div>
   </main>
 </div>
@@ -647,11 +1139,12 @@
     if (copyBtn && codeSnippet) {
       copyBtn.addEventListener('click', function () {
         navigator.clipboard.writeText(codeSnippet.textContent || '').then(function () {
-          const defaultText = copyBtn.textContent;
-          copyBtn.textContent = 'Copied';
+          copyBtn.textContent = 'Copied!';
+          copyBtn.classList.add('copied');
           setTimeout(function () {
-            copyBtn.textContent = defaultText;
-          }, 1600);
+            copyBtn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg> Copy code';
+            copyBtn.classList.remove('copied');
+          }, 1800);
         });
       });
     }
