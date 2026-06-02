@@ -1361,6 +1361,31 @@
         </div>
       </section>
 
+      <section style="margin-bottom:48px;">
+        <h2>Code — Salin Code</h2>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);">calendar.html</span>
+            <button class="copy-btn" id="copy-html-btn" onclick="copyHtml()">Salin</button>
+          </div>
+          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-primary);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="html-block">&lt;div class="ds-calendar"&gt;
+  &lt;div class="ds-calendar-month-header"&gt;
+    &lt;button type="button" class="ds-calendar-nav" aria-label="Bulan sebelumnya"&gt;‹&lt;/button&gt;
+    &lt;span class="ds-calendar-month-label"&gt;December 2022&lt;/span&gt;
+    &lt;button type="button" class="ds-calendar-nav" aria-label="Bulan berikutnya"&gt;›&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="ds-calendar-week-header"&gt;
+    &lt;span&gt;Su&lt;/span&gt;&lt;span&gt;Mo&lt;/span&gt;&lt;span&gt;Tu&lt;/span&gt;&lt;span&gt;We&lt;/span&gt;&lt;span&gt;Th&lt;/span&gt;&lt;span&gt;Fr&lt;/span&gt;&lt;span&gt;Sa&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class="ds-calendar-days"&gt;
+    &lt;button type="button" class="ds-calendar-day"&gt;10&lt;/button&gt;
+    &lt;button type="button" class="ds-calendar-day ds-calendar-day--selected"&gt;11&lt;/button&gt;
+    &lt;button type="button" class="ds-calendar-day ds-calendar-day--today"&gt;12&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
       <footer class="page-footer" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--color-border);font-size:12px;color:var(--color-text-tertiary);">
         &copy; 2026 GPOS Lite Design System V2.0
       </footer>
@@ -1374,6 +1399,15 @@
   function copyToken(btn) {
     var value = btn.getAttribute('data-copy') || '';
     navigator.clipboard.writeText(value).then(function () {
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+
+  function copyHtml() {
+    navigator.clipboard.writeText(document.getElementById('html-block').textContent).then(function () {
+      var btn = document.getElementById('copy-html-btn');
       btn.textContent = 'Tersalin!';
       btn.classList.add('copied');
       setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);

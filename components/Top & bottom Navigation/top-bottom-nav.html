@@ -796,7 +796,32 @@
                   </button>
                 </div>
               </header>
-              <footer class="ds-footer-nav" aria-label="Footer navigation">
+              
+
+      <section style="margin-bottom:48px;">
+        <h2>Code — Salin Code</h2>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);">top-bottom-nav.html</span>
+            <button class="copy-btn" id="copy-html-btn" onclick="copyHtml()">Salin</button>
+          </div>
+          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-primary);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="html-block">&lt;!-- Token classes --&gt;
+ds-topnav
+ds-topnav ds-topnav--website
+ds-topnav ds-topnav--tablet
+ds-topnav ds-topnav--mobile
+ds-topnav-logo
+ds-topnav-logo__img
+ds-topnav-logo--hover
+ds-topnav-logo--press
+ds-topnav-notif
+ds-topnav-notif__icon
+ds-topnav-notif__indicator
+ds-badge ds-badge--important</code></pre>
+        </div>
+      </section>
+
+      <footer class="ds-footer-nav" aria-label="Footer navigation">
                 <div class="ds-footer-nav__pager">
                   <div class="ds-footer-nav__nav-btns">
                     <button type="button" class="ds-btn ds-btn--icon-only" aria-label="Halaman sebelumnya">
@@ -1625,6 +1650,16 @@
     if (overlay) overlay.addEventListener('click', closeSidebar);
   })();
 </script>
-  <script src="../../scripts/sidebar-nav-menu.js"></script>
+  <script src="../../scripts/sidebar-nav-menu.js">
+
+  function copyHtml() {
+    navigator.clipboard.writeText(document.getElementById('html-block').textContent).then(function () {
+      var btn = document.getElementById('copy-html-btn');
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+</script>
 </body>
 </html>

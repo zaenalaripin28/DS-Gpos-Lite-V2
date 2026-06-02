@@ -904,6 +904,27 @@
         </div>
       </section>
 
+      
+
+      <section style="margin-bottom:48px;">
+        <h2>Code — Salin Code</h2>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);">inline-edit.html</span>
+            <button class="copy-btn" id="copy-html-btn" onclick="copyHtml()">Salin</button>
+          </div>
+          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-primary);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="html-block">&lt;!-- Token classes --&gt;
+ds-inline-edit
+ds-inline-edit ds-inline-edit--default
+ds-inline-edit ds-inline-edit--hover
+ds-inline-edit ds-inline-edit--press
+ds-inline-edit ds-inline-edit--focus
+ds-inline-edit ds-inline-edit--disabled
+ds-inline-edit__input
+ds-inline-edit__action</code></pre>
+        </div>
+      </section>
+
       <footer class="page-footer" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--color-border);font-size:12px;color:var(--color-text-tertiary);">
         &copy; 2026 GPOS Lite Design System V2.0
       </footer>
@@ -1074,6 +1095,16 @@
     if (overlay) overlay.addEventListener('click', closeSidebar);
   })();
 </script>
-  <script src="../../scripts/sidebar-nav-menu.js"></script>
+  <script src="../../scripts/sidebar-nav-menu.js">
+
+  function copyHtml() {
+    navigator.clipboard.writeText(document.getElementById('html-block').textContent).then(function () {
+      var btn = document.getElementById('copy-html-btn');
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+</script>
 </body>
 </html>

@@ -698,6 +698,14 @@
     }
     .variant-copy-btn:hover { background: var(--color-blue-b300); border-color: var(--color-blue-b300); color: var(--color-neutral-n0); }
     .variant-copy-btn.copied { background: var(--color-green-g300); border-color: var(--color-green-g300); color: var(--color-neutral-n0); }
+    .copy-btn {
+      padding: 4px 10px; background: var(--color-neutral-n20); border: 1px solid var(--color-neutral-n30);
+      border-radius: 6px; font-size: 11px; font-weight: 600; color: var(--color-neutral-n400);
+      cursor: pointer; font-family: var(--font-primary);
+      transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+    }
+    .copy-btn:hover { background: var(--color-blue-b300); border-color: var(--color-blue-b300); color: var(--color-neutral-n0); }
+    .copy-btn.copied { background: var(--color-green-g300); border-color: var(--color-green-g300); color: var(--color-neutral-n0); }
 
 /* ================================================================
        Page-specific responsive overrides
@@ -5381,6 +5389,42 @@
       </section>
 
 
+      <!-- CODE COPY -->
+      <section style="margin-bottom:48px;">
+        <h2>Code — Salin Code</h2>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);">button.html</span>
+            <button class="copy-btn" id="copy-html-btn" onclick="copyHtml()">Salin</button>
+          </div>
+          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-primary);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="html-block">&lt;!-- Default --&gt;
+&lt;button type="button" class="ds-btn"&gt;Label&lt;/button&gt;
+
+&lt;!-- Primary --&gt;
+&lt;button type="button" class="ds-btn ds-btn--primary"&gt;Label&lt;/button&gt;
+
+&lt;!-- Subtle --&gt;
+&lt;button type="button" class="ds-btn ds-btn--subtle"&gt;Label&lt;/button&gt;
+
+&lt;!-- Link --&gt;
+&lt;button type="button" class="ds-btn ds-btn--link"&gt;Label&lt;/button&gt;
+
+&lt;!-- Danger --&gt;
+&lt;button type="button" class="ds-btn ds-btn--danger"&gt;Label&lt;/button&gt;
+
+&lt;!-- Warning --&gt;
+&lt;button type="button" class="ds-btn ds-btn--warning"&gt;Label&lt;/button&gt;
+
+&lt;!-- Compact --&gt;
+&lt;button type="button" class="ds-btn ds-btn--compact"&gt;Label&lt;/button&gt;
+
+&lt;!-- Icon only --&gt;
+&lt;button type="button" class="ds-btn ds-btn--icon-only" aria-label="Action"&gt;
+  &lt;svg ...&gt;&lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+        </div>
+      </section>
+
       <!-- FOOTER -->
       <footer class="page-footer">
         <div class="footer-left">
@@ -5415,6 +5459,15 @@
       });
     });
   });
+
+  function copyHtml() {
+    navigator.clipboard.writeText(document.getElementById('html-block').textContent).then(function () {
+      var btn = document.getElementById('copy-html-btn');
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
 
   /* ── Sidebar ── */
   const sidebar   = document.getElementById('sidebar');

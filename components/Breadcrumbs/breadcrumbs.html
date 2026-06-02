@@ -1374,6 +1374,29 @@
         </div>
       </section>
 
+      <section style="margin-bottom:48px;">
+        <h2>Code — Salin Code</h2>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);">breadcrumbs.html</span>
+            <button class="copy-btn" id="copy-html-btn" onclick="copyHtml()">Salin</button>
+          </div>
+          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-primary);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="html-block">&lt;nav class="ds-bc-container" aria-label="Breadcrumb"&gt;
+  &lt;button class="ds-bc-item ds-bc-item--default" type="button"&gt;
+    &lt;span class="ds-bc-text"&gt;Dashboard&lt;/span&gt;
+    &lt;span class="ds-bc-sep" aria-hidden="true"&gt;/&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;button class="ds-bc-item ds-bc-item--hover" type="button"&gt;
+    &lt;span class="ds-bc-text"&gt;Transaksi&lt;/span&gt;
+    &lt;span class="ds-bc-sep" aria-hidden="true"&gt;/&lt;/span&gt;
+  &lt;/button&gt;
+  &lt;span class="ds-bc-item ds-bc-item--focus" aria-current="page"&gt;
+    &lt;span class="ds-bc-text"&gt;Detail&lt;/span&gt;
+  &lt;/span&gt;
+&lt;/nav&gt;</code></pre>
+        </div>
+      </section>
+
       <!-- FOOTER -->
       <footer class="page-footer" style="margin-top:64px;padding-top:24px;border-top:1px solid var(--color-border);display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-primary);">
         <div>&copy; 2026 <strong style="color:var(--color-text-secondary);">GPOS Lite Design System V2.0</strong></div>
@@ -1413,6 +1436,15 @@
   function copyToken(btn) {
     var value = btn.getAttribute('data-copy') || '';
     navigator.clipboard.writeText(value).then(function () {
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+
+  function copyHtml() {
+    navigator.clipboard.writeText(document.getElementById('html-block').textContent).then(function () {
+      var btn = document.getElementById('copy-html-btn');
       btn.textContent = 'Tersalin!';
       btn.classList.add('copied');
       setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);

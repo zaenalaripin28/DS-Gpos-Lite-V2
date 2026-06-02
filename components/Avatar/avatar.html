@@ -674,6 +674,20 @@
       border-color: var(--color-green-g300);
       color: var(--color-neutral-n0);
     }
+    .copy-btn {
+      padding: 4px 10px;
+      background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n30);
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-neutral-n400);
+      cursor: pointer;
+      font-family: var(--font-primary);
+      transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+    }
+    .copy-btn:hover { background: var(--color-blue-b300); border-color: var(--color-blue-b300); color: var(--color-neutral-n0); }
+    .copy-btn.copied { background: var(--color-green-g300); border-color: var(--color-green-g300); color: var(--color-neutral-n0); }
   </style>
 </head>
 <body>
@@ -1510,6 +1524,27 @@
         </div>
       </section>
 
+      <section style="margin-bottom:48px;">
+        <h2>Code — Salin Code</h2>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);">avatar.html</span>
+            <button class="copy-btn" id="copy-html-btn" onclick="copyHtml()">Salin</button>
+          </div>
+          <pre style="margin:0;padding:16px 20px;overflow-x:auto;font-family:var(--font-primary);font-size:11px;line-height:1.6;color:var(--color-neutral-n700);background:var(--color-neutral-n10);"><code id="html-block">&lt;!-- Avatar XL --&gt;
+&lt;div class="ds-avatar ds-avatar--xl"&gt;
+  &lt;img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt=""&gt;
+  &lt;div class="ds-avatar__presence"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Avatar MD --&gt;
+&lt;div class="ds-avatar ds-avatar--md"&gt;
+  &lt;img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt=""&gt;
+  &lt;div class="ds-avatar__presence"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
       <!-- =====================================================
            FOOTER
       ====================================================== -->
@@ -1578,6 +1613,15 @@
       });
     });
   });
+
+  function copyHtml() {
+    navigator.clipboard.writeText(document.getElementById('html-block').textContent).then(function () {
+      var btn = document.getElementById('copy-html-btn');
+      btn.textContent = 'Tersalin!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
 </script>
   <script src="../../scripts/sidebar-nav-menu.js"></script>
 </body>

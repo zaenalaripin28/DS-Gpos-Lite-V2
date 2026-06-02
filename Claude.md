@@ -166,6 +166,14 @@ When adding documentation features (Code Copy, Code Preview, Code Block, Playgro
 * Display the actual code used by the example.
 * Keep documentation synchronized with the implementation.
 
+### Tailwind Rules
+
+Tailwind CSS only.
+Do not use Mantine.
+Do not use Bootstrap.
+Do not use external UI libraries.
+Do not use React components.
+Do not use inline styles unless explicitly required.
 
 Never use raw Tailwind colors.
 Always use semantic token utilities.
