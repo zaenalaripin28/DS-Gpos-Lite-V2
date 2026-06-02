@@ -354,16 +354,47 @@
       padding: 0 var(--space-050);     /* 4px H (px-1) */
       gap: 0;
     }
+    .ds-btn--icon-only:hover  { background-color: var(--color-neutral-n40); }  /* Background.Neutral.Bold.Hover */
+    .ds-btn--icon-only:active { background-color: var(--color-neutral-n60); }  /* Background.Neutral.Bold.Pressed */
     .ds-btn--icon-only.ds-btn--compact {
       padding: var(--space-025);       /* 2px all (p-0.5) */
     }
+    .ds-btn--icon-only:focus-visible,
+    .ds-btn--icon-only.ds-btn--focus {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-primary-500);
+    }
     .ds-btn--icon-only:disabled,
     .ds-btn--icon-only.ds-btn--disabled {
-      background-color: var(--color-neutral-n40);   /* Background.Disable → N40 */
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n50);
+      cursor: not-allowed;
+      pointer-events: none;
     }
     .ds-btn--icon-only:disabled path,
     .ds-btn--icon-only.ds-btn--disabled path {
-      fill: var(--color-neutral-n70);               /* Icon.Disable → N70 */
+      stroke: var(--color-neutral-n50);
+    }
+    .ds-btn--icon-only.ds-btn--hover { background-color: var(--color-neutral-n40); }
+    .ds-btn--icon-only.ds-btn--press { background-color: var(--color-neutral-n60); }
+    .ds-btn--icon-only[aria-pressed="true"] {
+      background-color: var(--color-blue-b50);
+      color: var(--color-blue-b300);
+    }
+    .ds-btn--icon-only.ds-btn--primary:hover,
+    .ds-btn--icon-only.ds-btn--primary.ds-btn--hover { background-color: var(--color-blue-b400); color: var(--color-neutral-n0); }
+    .ds-btn--icon-only.ds-btn--primary:active,
+    .ds-btn--icon-only.ds-btn--primary.ds-btn--press { background-color: var(--color-blue-b500); color: var(--color-neutral-n0); }
+    .ds-btn--icon-only.ds-btn--primary:focus-visible,
+    .ds-btn--icon-only.ds-btn--primary.ds-btn--focus { box-shadow: 0 0 0 2px var(--color-blue-b200); }
+    .ds-btn--icon-only.ds-btn--primary:disabled,
+    .ds-btn--icon-only.ds-btn--primary.ds-btn--disabled {
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n50);
+    }
+    .ds-btn--icon-only.ds-btn--primary[aria-pressed="true"] {
+      background-color: var(--color-blue-b50);
+      color: var(--color-blue-b300);
     }
 
     /* ── Loading modifier ── */
@@ -551,6 +582,54 @@
     .ds-btn.ds-btn-warning-compact { min-height: 24px; }
     .ds-btn-default-icon-only,
     .ds-btn.ds-btn-default-icon-only { padding: 0 var(--space-050); gap: 0; }
+    .ds-btn-default-icon-only-hover,
+    .ds-btn.ds-btn-default-icon-only-hover { background-color: var(--color-neutral-n40); }
+    .ds-btn-default-icon-only-press,
+    .ds-btn.ds-btn-default-icon-only-press { background-color: var(--color-neutral-n60); }
+    .ds-btn-default-icon-only-focus,
+    .ds-btn.ds-btn-default-icon-only-focus { outline: none; box-shadow: 0 0 0 2px var(--color-primary-500); }
+    .ds-btn-default-icon-only-disabled,
+    .ds-btn.ds-btn-default-icon-only-disabled,
+    .ds-btn-default-icon-only-disabled:disabled {
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n50);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .ds-btn-default-icon-only-selected,
+    .ds-btn.ds-btn-default-icon-only-selected,
+    .ds-btn-default-icon-only-selected[aria-pressed="true"] {
+      background-color: var(--color-blue-b50);
+      color: var(--color-blue-b300);
+    }
+    .ds-btn-primary-compact-default,
+    .ds-btn.ds-btn-primary-compact-default {
+      background-color: var(--color-blue-b300);
+      color: var(--color-neutral-n0);
+      min-height: 24px;
+    }
+    .ds-btn-primary-compact-hover,
+    .ds-btn.ds-btn-primary-compact-hover { background-color: var(--color-blue-b400); color: var(--color-neutral-n0); min-height: 24px; }
+    .ds-btn-primary-compact-press,
+    .ds-btn.ds-btn-primary-compact-press { background-color: var(--color-blue-b500); color: var(--color-neutral-n0); min-height: 24px; }
+    .ds-btn-primary-compact-focus,
+    .ds-btn.ds-btn-primary-compact-focus { box-shadow: 0 0 0 2px var(--color-blue-b200); min-height: 24px; }
+    .ds-btn-primary-compact-disabled,
+    .ds-btn.ds-btn-primary-compact-disabled,
+    .ds-btn-primary-compact-disabled:disabled {
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n50);
+      cursor: not-allowed;
+      pointer-events: none;
+      min-height: 24px;
+    }
+    .ds-btn-primary-compact-selected,
+    .ds-btn.ds-btn-primary-compact-selected,
+    .ds-btn-primary-compact-selected[aria-pressed="true"] {
+      background-color: var(--color-blue-b50);
+      color: var(--color-blue-b300);
+      min-height: 24px;
+    }
     .ds-btn-primary-icon-only,
     .ds-btn.ds-btn-primary-icon-only { padding: 0 var(--space-050); gap: 0; }
     .ds-btn-subtle-icon-only,
@@ -1005,7 +1084,17 @@
       --sidebar-link-active-color: #7DB5E7;
       --sidebar-link-active-border:#1E7FD6;
     }
-    .sidebar { background-color: var(--sidebar-bg); }
+    .sidebar {
+      background-color: var(--sidebar-bg);
+      margin: 12px;
+      height: calc(100vh - 24px);
+      border-radius: var(--border-radius-2xl);
+      border-right: none;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.22), 0 1px 6px rgba(0,0,0,0.14);
+    }
+    @media (max-width: 768px) {
+      .sidebar { margin: 0; height: 100vh; border-radius: 0; box-shadow: var(--shadow-2xl); }
+    }
     .sidebar-header { background-color: var(--sidebar-header-bg); border-bottom-color: var(--sidebar-border); }
     .sidebar-brand-text .logo    { color: var(--sidebar-logo-color); }
     .sidebar-brand-text .version { color: var(--sidebar-version-color); }
@@ -1243,8 +1332,11 @@
 
     <div class="nav-scroll">
       <nav class="nav-menu">
-        <div class="nav-section">
-          <h3 class="nav-title">Overview</h3>
+        <div class="nav-section nav-section--menu is-open">
+          <button type="button" class="nav-menu-toggle" aria-expanded="true">
+            <h3 class="nav-title">Overview</h3>
+            <img src="../../assets/icons/icon-chevron-mini-down.svg" alt="" class="nav-menu-toggle__chevron" aria-hidden="true">
+          </button>
           <ul class="nav-list">
             <li>
               <a href="../../index.html" class="nav-link">
@@ -1254,8 +1346,11 @@
             </li>
           </ul>
         </div>
-        <div class="nav-section">
-          <h3 class="nav-title">Foundations</h3>
+        <div class="nav-section nav-section--menu is-open">
+          <button type="button" class="nav-menu-toggle" aria-expanded="true">
+            <h3 class="nav-title">Foundations</h3>
+            <img src="../../assets/icons/icon-chevron-mini-down.svg" alt="" class="nav-menu-toggle__chevron" aria-hidden="true">
+          </button>
           <ul class="nav-list">
             <li>
               <a href="../../foundations/colors/colors.html" class="nav-link">
@@ -1301,8 +1396,11 @@
             </li>
           </ul>
         </div>
-        <div class="nav-section">
-          <h3 class="nav-title">Komponen</h3>
+        <div class="nav-section nav-section--menu is-open">
+          <button type="button" class="nav-menu-toggle" aria-expanded="true">
+            <h3 class="nav-title">Komponen</h3>
+            <img src="../../assets/icons/icon-chevron-mini-down.svg" alt="" class="nav-menu-toggle__chevron" aria-hidden="true">
+          </button>
           <ul class="nav-list">
             <li>
               <a href="../Button/button.html" class="nav-link active">
@@ -1400,7 +1498,13 @@
                 Pagination
               </a>
             </li>
-            <li>
+                        <li>
+              <a href="../Table/table.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="1"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="9" y1="4" x2="9" y2="20"/><line x1="15" y1="4" x2="15" y2="20"/></svg>
+                Table
+              </a>
+            </li>
+<li>
               <a href="../Calendar/calendar.html" class="nav-link">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                 Calendar
@@ -1447,8 +1551,11 @@
 
           </ul>
         </div>
-        <div class="nav-section">
-          <h3 class="nav-title">Resources</h3>
+        <div class="nav-section nav-section--menu is-open">
+          <button type="button" class="nav-menu-toggle" aria-expanded="true">
+            <h3 class="nav-title">Resources</h3>
+            <img src="../../assets/icons/icon-chevron-mini-down.svg" alt="" class="nav-menu-toggle__chevron" aria-hidden="true">
+          </button>
           <ul class="nav-list">
             <li>
               <a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="nav-link" target="_blank" rel="noopener">
@@ -1486,10 +1593,6 @@
         <span class="current">Button</span>
       </div>
       <div class="topbar-actions">
-        <button type="button" class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
-          <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          <svg class="icon-sun"  width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        </button>
         <span class="version-badge">v2.0</span>
       </div>
     </div>
@@ -2129,9 +2232,7 @@
           <tbody>
       <tr style="border-bottom:1px solid var(--color-border);">
         <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Default</td>
-        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" tabindex="-1" style="pointer-events:none;" aria-label="Ikon">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-</button></td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" tabindex="-1" style="pointer-events:none;" aria-label="Ikon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button></td>
         <td style="padding:12px 16px;">
           <div class="variant-copy variant-copy--table">
             <code class="variant-copy__code">.ds-btn-default-icon-only-default</code>
@@ -2141,9 +2242,7 @@
       </tr>
       <tr style="border-bottom:1px solid var(--color-border);">
         <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Hover</td>
-        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" tabindex="-1" style="pointer-events:none;" aria-label="Ikon">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-</button></td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only ds-btn--hover" tabindex="-1" style="pointer-events:none;" aria-label="Ikon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button></td>
         <td style="padding:12px 16px;">
           <div class="variant-copy variant-copy--table">
             <code class="variant-copy__code">.ds-btn-default-icon-only-hover</code>
@@ -2153,9 +2252,7 @@
       </tr>
       <tr style="border-bottom:1px solid var(--color-border);">
         <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Press</td>
-        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" tabindex="-1" style="pointer-events:none;" aria-label="Ikon">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-</button></td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only ds-btn--press" tabindex="-1" style="pointer-events:none;" aria-label="Ikon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button></td>
         <td style="padding:12px 16px;">
           <div class="variant-copy variant-copy--table">
             <code class="variant-copy__code">.ds-btn-default-icon-only-press</code>
@@ -2165,9 +2262,7 @@
       </tr>
       <tr style="border-bottom:1px solid var(--color-border);">
         <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Focus</td>
-        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" tabindex="-1" style="pointer-events:none;" aria-label="Ikon">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-</button></td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only ds-btn--focus" tabindex="-1" style="pointer-events:none;" aria-label="Ikon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button></td>
         <td style="padding:12px 16px;">
           <div class="variant-copy variant-copy--table">
             <code class="variant-copy__code">.ds-btn-default-icon-only-focus</code>
@@ -2177,25 +2272,21 @@
       </tr>
       <tr style="border-bottom:1px solid var(--color-border);">
         <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Disabled</td>
-        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" tabindex="-1" style="pointer-events:none;" aria-label="Ikon">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-</button></td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" disabled tabindex="-1" style="pointer-events:none;" aria-label="Ikon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button></td>
         <td style="padding:12px 16px;">
           <div class="variant-copy variant-copy--table">
-            <code class="variant-copy__code">.ds-btn-default-icon-only-disabled</code>
-            <button type="button" class="variant-copy-btn" data-copy="ds-btn ds-btn-default-icon-only-disabled">Salin</button>
+            <code class="variant-copy__code">.ds-btn-default-compact-disabled</code>
+            <button type="button" class="variant-copy-btn" data-copy="ds-btn ds-btn-default-compact-disabled">Salin</button>
           </div>
         </td>
       </tr>
       <tr>
         <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Selected</td>
-        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" tabindex="-1" style="pointer-events:none;" aria-label="Ikon">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-</button></td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" aria-pressed="true" tabindex="-1" style="pointer-events:none;" aria-label="Ikon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button></td>
         <td style="padding:12px 16px;">
           <div class="variant-copy variant-copy--table">
-            <code class="variant-copy__code">.ds-btn-default-icon-only-selected</code>
-            <button type="button" class="variant-copy-btn" data-copy="ds-btn ds-btn-default-icon-only-selected">Salin</button>
+            <code class="variant-copy__code">.ds-btn-default-compact-selected</code>
+            <button type="button" class="variant-copy-btn" data-copy="ds-btn ds-btn-default-compact-selected">Salin</button>
           </div>
         </td>
       </tr>
@@ -2238,9 +2329,7 @@
           <tbody>
       <tr style="border-bottom:1px solid var(--color-border);">
         <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Default</td>
-        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" tabindex="-1" style="pointer-events:none;" aria-label="Ikon">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-</button></td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only ds-btn--compact" tabindex="-1" style="pointer-events:none;" aria-label="Ikon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button></td>
         <td style="padding:12px 16px;">
           <div class="variant-copy variant-copy--table">
             <code class="variant-copy__code">.ds-btn-default-icon-only-default</code>
@@ -2250,9 +2339,7 @@
       </tr>
       <tr style="border-bottom:1px solid var(--color-border);">
         <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Hover</td>
-        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" tabindex="-1" style="pointer-events:none;" aria-label="Ikon">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-</button></td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only ds-btn--compact ds-btn--hover" tabindex="-1" style="pointer-events:none;" aria-label="Ikon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button></td>
         <td style="padding:12px 16px;">
           <div class="variant-copy variant-copy--table">
             <code class="variant-copy__code">.ds-btn-default-icon-only-hover</code>
@@ -2262,9 +2349,7 @@
       </tr>
       <tr style="border-bottom:1px solid var(--color-border);">
         <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Press</td>
-        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" tabindex="-1" style="pointer-events:none;" aria-label="Ikon">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-</button></td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only ds-btn--compact ds-btn--press" tabindex="-1" style="pointer-events:none;" aria-label="Ikon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button></td>
         <td style="padding:12px 16px;">
           <div class="variant-copy variant-copy--table">
             <code class="variant-copy__code">.ds-btn-default-icon-only-press</code>
@@ -2274,9 +2359,7 @@
       </tr>
       <tr style="border-bottom:1px solid var(--color-border);">
         <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Focus</td>
-        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" tabindex="-1" style="pointer-events:none;" aria-label="Ikon">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-</button></td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only ds-btn--compact ds-btn--focus" tabindex="-1" style="pointer-events:none;" aria-label="Ikon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button></td>
         <td style="padding:12px 16px;">
           <div class="variant-copy variant-copy--table">
             <code class="variant-copy__code">.ds-btn-default-icon-only-focus</code>
@@ -2286,25 +2369,21 @@
       </tr>
       <tr style="border-bottom:1px solid var(--color-border);">
         <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Disabled</td>
-        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" tabindex="-1" style="pointer-events:none;" aria-label="Ikon">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-</button></td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only ds-btn--compact" disabled tabindex="-1" style="pointer-events:none;" aria-label="Ikon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button></td>
         <td style="padding:12px 16px;">
           <div class="variant-copy variant-copy--table">
-            <code class="variant-copy__code">.ds-btn-default-icon-only-disabled</code>
-            <button type="button" class="variant-copy-btn" data-copy="ds-btn ds-btn-default-icon-only-disabled">Salin</button>
+            <code class="variant-copy__code">.ds-btn-default-compact-disabled</code>
+            <button type="button" class="variant-copy-btn" data-copy="ds-btn ds-btn-default-compact-disabled">Salin</button>
           </div>
         </td>
       </tr>
       <tr>
         <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Selected</td>
-        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" tabindex="-1" style="pointer-events:none;" aria-label="Ikon">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-</button></td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only ds-btn--compact" aria-pressed="true" tabindex="-1" style="pointer-events:none;" aria-label="Ikon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button></td>
         <td style="padding:12px 16px;">
           <div class="variant-copy variant-copy--table">
-            <code class="variant-copy__code">.ds-btn-default-icon-only-selected</code>
-            <button type="button" class="variant-copy-btn" data-copy="ds-btn ds-btn-default-icon-only-selected">Salin</button>
+            <code class="variant-copy__code">.ds-btn-default-compact-selected</code>
+            <button type="button" class="variant-copy-btn" data-copy="ds-btn ds-btn-default-compact-selected">Salin</button>
           </div>
         </td>
       </tr>
@@ -2614,73 +2693,61 @@
           <tbody>
       <tr style="border-bottom:1px solid var(--color-border);">
         <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Default</td>
-        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" tabindex="-1" style="pointer-events:none;" aria-label="Ikon">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-</button></td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only ds-btn--primary" tabindex="-1" style="pointer-events:none;" aria-label="Ikon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button></td>
         <td style="padding:12px 16px;">
           <div class="variant-copy variant-copy--table">
-            <code class="variant-copy__code">.ds-btn-default-icon-only-default</code>
-            <button type="button" class="variant-copy-btn" data-copy="ds-btn ds-btn-default-icon-only-default">Salin</button>
+            <code class="variant-copy__code">.ds-btn-primary-compact-default</code>
+            <button type="button" class="variant-copy-btn" data-copy="ds-btn ds-btn-primary-compact-default">Salin</button>
           </div>
         </td>
       </tr>
       <tr style="border-bottom:1px solid var(--color-border);">
         <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Hover</td>
-        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" tabindex="-1" style="pointer-events:none;" aria-label="Ikon">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-</button></td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only ds-btn--primary ds-btn--hover" tabindex="-1" style="pointer-events:none;" aria-label="Ikon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button></td>
         <td style="padding:12px 16px;">
           <div class="variant-copy variant-copy--table">
-            <code class="variant-copy__code">.ds-btn-default-icon-only-hover</code>
-            <button type="button" class="variant-copy-btn" data-copy="ds-btn ds-btn-default-icon-only-hover">Salin</button>
+            <code class="variant-copy__code">.ds-btn-primary-compact-hover</code>
+            <button type="button" class="variant-copy-btn" data-copy="ds-btn ds-btn-primary-compact-hover">Salin</button>
           </div>
         </td>
       </tr>
       <tr style="border-bottom:1px solid var(--color-border);">
         <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Press</td>
-        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" tabindex="-1" style="pointer-events:none;" aria-label="Ikon">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-</button></td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only ds-btn--primary ds-btn--press" tabindex="-1" style="pointer-events:none;" aria-label="Ikon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button></td>
         <td style="padding:12px 16px;">
           <div class="variant-copy variant-copy--table">
-            <code class="variant-copy__code">.ds-btn-default-icon-only-press</code>
-            <button type="button" class="variant-copy-btn" data-copy="ds-btn ds-btn-default-icon-only-press">Salin</button>
+            <code class="variant-copy__code">.ds-btn-primary-compact-press</code>
+            <button type="button" class="variant-copy-btn" data-copy="ds-btn ds-btn-primary-compact-press">Salin</button>
           </div>
         </td>
       </tr>
       <tr style="border-bottom:1px solid var(--color-border);">
         <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Focus</td>
-        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" tabindex="-1" style="pointer-events:none;" aria-label="Ikon">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-</button></td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only ds-btn--primary ds-btn--focus" tabindex="-1" style="pointer-events:none;" aria-label="Ikon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button></td>
         <td style="padding:12px 16px;">
           <div class="variant-copy variant-copy--table">
-            <code class="variant-copy__code">.ds-btn-default-icon-only-focus</code>
-            <button type="button" class="variant-copy-btn" data-copy="ds-btn ds-btn-default-icon-only-focus">Salin</button>
+            <code class="variant-copy__code">.ds-btn-primary-compact-focus</code>
+            <button type="button" class="variant-copy-btn" data-copy="ds-btn ds-btn-primary-compact-focus">Salin</button>
           </div>
         </td>
       </tr>
       <tr style="border-bottom:1px solid var(--color-border);">
         <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Disabled</td>
-        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" tabindex="-1" style="pointer-events:none;" aria-label="Ikon">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-</button></td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only ds-btn--primary" disabled tabindex="-1" style="pointer-events:none;" aria-label="Ikon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button></td>
         <td style="padding:12px 16px;">
           <div class="variant-copy variant-copy--table">
-            <code class="variant-copy__code">.ds-btn-default-icon-only-disabled</code>
-            <button type="button" class="variant-copy-btn" data-copy="ds-btn ds-btn-default-icon-only-disabled">Salin</button>
+            <code class="variant-copy__code">.ds-btn-primary-compact-disabled</code>
+            <button type="button" class="variant-copy-btn" data-copy="ds-btn ds-btn-primary-compact-disabled">Salin</button>
           </div>
         </td>
       </tr>
       <tr>
         <td style="padding:12px 16px; color:var(--color-text-primary); font-weight:500;">Selected</td>
-        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only" tabindex="-1" style="pointer-events:none;" aria-label="Ikon">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
-</button></td>
+        <td style="padding:12px 16px;"><button type="button" class="ds-btn ds-btn--icon-only ds-btn--primary" aria-pressed="true" tabindex="-1" style="pointer-events:none;" aria-label="Ikon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg></button></td>
         <td style="padding:12px 16px;">
           <div class="variant-copy variant-copy--table">
-            <code class="variant-copy__code">.ds-btn-default-icon-only-selected</code>
-            <button type="button" class="variant-copy-btn" data-copy="ds-btn ds-btn-default-icon-only-selected">Salin</button>
+            <code class="variant-copy__code">.ds-btn-primary-compact-selected</code>
+            <button type="button" class="variant-copy-btn" data-copy="ds-btn ds-btn-primary-compact-selected">Salin</button>
           </div>
         </td>
       </tr>
@@ -5452,5 +5519,6 @@
 
 </script>
 
+  <script src="../../scripts/sidebar-nav-menu.js"></script>
 </body>
 </html>

@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dropdown Button — DS GPOS Lite V2</title>
+  <link rel="stylesheet" href="../../styles/globals.css">
+  <link rel="stylesheet" href="../../styles/enhancements.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50:'var(--color-primary-50)',100:'var(--color-primary-100)',200:'var(--color-primary-200)',
+              300:'var(--color-primary-300)',400:'var(--color-primary-400)',500:'var(--color-primary-500)',
+              600:'var(--color-primary-600)',700:'var(--color-primary-700)',800:'var(--color-primary-800)',900:'var(--color-primary-900)',
+            },
+            blue: {
+              b50:'var(--color-blue-b50)',b75:'var(--color-blue-b75)',b100:'var(--color-blue-b100)',
+              b200:'var(--color-blue-b200)',b300:'var(--color-blue-b300)',b400:'var(--color-blue-b400)',b500:'var(--color-blue-b500)',
+            },
+            neutral: {
+              n0:'var(--color-neutral-n0)',n10:'var(--color-neutral-n10)',n20:'var(--color-neutral-n20)',n30:'var(--color-neutral-n30)',
+              n40:'var(--color-neutral-n40)',n50:'var(--color-neutral-n50)',n300:'var(--color-neutral-n300)',n500:'var(--color-neutral-n500)',
+              n800:'var(--color-neutral-n800)',n900:'var(--color-neutral-n900)',
+            },
+            green: { g50:'var(--color-green-g50)',g400:'var(--color-green-g400)' },
+            red: { r50:'var(--color-red-r50)',r300:'var(--color-red-r300)' },
+            background:'var(--color-background)',surface:'var(--color-surface)',
+            border:{DEFAULT:'var(--color-border)'},
+            text:{primary:'var(--color-text-primary)',secondary:'var(--color-text-secondary)',tertiary:'var(--color-text-tertiary)'},
+          },
+          fontFamily:{primary:['var(--font-primary)'],sans:['var(--font-primary)']},
+          spacing:{
+            '100':'var(--space-100)','200':'var(--space-200)','300':'var(--space-300)',
+          },
+          borderRadius:{md:'var(--border-radius-md)',lg:'var(--border-radius-lg)'},
+        }
+      }
+    }
+  </script>
+  <style>
+  /* ── Dropdown Item (Figma: DropdownItem) ── */
+  .ds-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-100);
+    width: 100%;
+    min-height: 40px;
+    padding: var(--space-100) var(--space-200);
+    border-radius: var(--border-radius-md);
+    border: none;
+    margin: 0;
+    background: transparent;
+    font-family: var(--font-primary);
+    font-size: var(--text-body-small-regular-size);
+    line-height: var(--text-body-small-regular-lh);
+    font-weight: var(--text-body-small-regular-weight);
+    color: var(--color-text-primary);
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    appearance: none;
+    -webkit-appearance: none;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+  }
+  .ds-dropdown-item:hover { text-decoration: none; }
+  .ds-dropdown-item__lead,
+  .ds-dropdown-item__trail {
+    flex-shrink: 0;
+    display: block;
+    object-fit: contain;
+  }
+  .ds-dropdown-item__lead { width: 24px; height: 24px; }
+  .ds-dropdown-item__trail { width: 16px; height: 16px; margin-left: auto; }
+  .ds-dropdown-item__label {
+    flex: 1;
+    min-width: 0;
+  }
+  /* Background.Neutral.Hover → Color.Neutral.N20 */
+  .ds-dropdown-item--hover { background: var(--color-neutral-n20); }
+  /* Background.Neutral.Bold.Pressed → Color.Neutral.N60 */
+  .ds-dropdown-item--pressed { background: var(--color-neutral-n60); }
+  /* Background.Selected → Color.Blue.B50 */
+  .ds-dropdown-item--selected {
+    background: var(--color-blue-b50);
+    color: var(--color-blue-b300);
+  }
+  /* Background.Accent.Blue.Subtler → Color.Blue.B75 */
+  .ds-dropdown-item--selected-hover {
+    background: var(--color-blue-b75);
+    color: var(--color-blue-b300);
+  }
+  /* Background.Accent.Blue.Subtle → Color.Blue.B200 */
+  .ds-dropdown-item--selected-pressed {
+    background: var(--color-blue-b200);
+    color: var(--color-neutral-n0);
+  }
+  .ds-dropdown-item--disabled {
+    color: var(--color-text-disabled);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .ds-dropdown-item--no-trail .ds-dropdown-item__trail { display: none; }
+  .ds-dropdown-item--no-lead .ds-dropdown-item__lead { display: none; }
+
+  /* DropdownItemRadio — radio slot + label */
+  .ds-dropdown-item__radio {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-neutral-n50);
+    border-radius: var(--border-radius-full);
+    background: var(--color-neutral-n0);
+    box-sizing: border-box;
+  }
+  .ds-dropdown-item__radio::after {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: var(--border-radius-full);
+    background: transparent;
+  }
+  .ds-dropdown-item--selected .ds-dropdown-item__radio,
+  .ds-dropdown-item--selected-hover .ds-dropdown-item__radio,
+  .ds-dropdown-item--selected-pressed .ds-dropdown-item__radio {
+    border-color: var(--color-blue-b300);
+    background: var(--color-blue-b300);
+  }
+  .ds-dropdown-item--selected .ds-dropdown-item__radio::after,
+  .ds-dropdown-item--selected-hover .ds-dropdown-item__radio::after,
+  .ds-dropdown-item--selected-pressed .ds-dropdown-item__radio::after {
+    background: var(--color-neutral-n0);
+  }
+
+  /* DropdownItemCheckbox — checkbox slot + label */
+  .ds-dropdown-item__checkbox {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-neutral-n50);
+    border-radius: var(--border-radius-sm);
+    background: var(--color-neutral-n0);
+    box-sizing: border-box;
+  }
+  .ds-dropdown-item__checkbox-icon {
+    width: 12px;
+    height: 12px;
+    display: none;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
+  .ds-dropdown-item--selected .ds-dropdown-item__checkbox,
+  .ds-dropdown-item--selected-hover .ds-dropdown-item__checkbox,
+  .ds-dropdown-item--selected-pressed .ds-dropdown-item__checkbox {
+    border-color: var(--color-blue-b300);
+    background: var(--color-blue-b300);
+  }
+  .ds-dropdown-item--selected .ds-dropdown-item__checkbox-icon,
+  .ds-dropdown-item--selected-hover .ds-dropdown-item__checkbox-icon,
+  .ds-dropdown-item--selected-pressed .ds-dropdown-item__checkbox-icon {
+    display: block;
+  }
+
+  .ds-dropdown-part-group-title {
+    margin: var(--space-200) 0 var(--space-075);
+    font-family: var(--font-primary);
+    font-size: var(--text-caption-semibold-size, 11px);
+    line-height: var(--text-caption-semibold-lh, 1.4);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+  }
+  .ds-dropdown-part-group-title:first-child { margin-top: 0; }
+
+  .ds-dropdown-menu {
+    display: grid;
+    gap: var(--space-050);
+    width: 100%;
+    max-width: 280px;
+    padding: var(--space-075);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    background: var(--color-neutral-n0);
+    box-shadow: var(--shadow-md);
+  }
+  .ds-dropdown-menu--scrollable {
+    max-height: calc(2 * var(--space-075) + 5 * 40px + 4 * var(--space-050) + 20px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-neutral-n50) transparent;
+  }
+  .ds-dropdown-menu--scrollable::-webkit-scrollbar { width: 8px; }
+  .ds-dropdown-menu--scrollable::-webkit-scrollbar-track { background: transparent; }
+  .ds-dropdown-menu--scrollable::-webkit-scrollbar-thumb {
+    background: var(--color-neutral-n50);
+    border-radius: var(--border-radius-full);
+  }
+  .ds-dropdown-menu-part-preview { max-width: 280px; }
+  .ds-dropdown-list { display: grid; gap: var(--space-050); max-width: 320px; }
+
+  .ds-dropdown-part-states { display: grid; gap: var(--space-100); }
+  .ds-dropdown-part-state {
+    display: grid;
+    grid-template-columns: minmax(168px, 220px) minmax(0, 1fr);
+    gap: var(--space-200);
+    align-items: center;
+  }
+  .ds-dropdown-part-state__meta {
+    display: grid;
+    gap: var(--space-050);
+    font-family: var(--font-primary);
+  }
+  .ds-dropdown-part-state__name {
+    font-size: var(--text-body-small-regular-size);
+    line-height: var(--text-body-small-regular-lh);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+  }
+  .ds-dropdown-part-state__class {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    font-family: var(--font-mono, ui-monospace, monospace);
+  }
+  .ds-dropdown-part-state__token {
+    font-size: 11px;
+    color: var(--color-blue-b400);
+    line-height: 1.45;
+  }
+  .ds-dropdown-part-state__preview {
+    max-width: 320px;
+  }
+  @media (max-width: 640px) {
+    .ds-dropdown-part-state { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  .preview-card { border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface); }
+  .section-caption { color: var(--color-text-tertiary); font-size: 13px; line-height: 1.6; font-family: var(--font-primary); }
+
+  .code-block {
+    margin: 0;
+    padding: var(--space-200);
+    overflow-x: auto;
+    font-family: var(--font-mono, ui-monospace, monospace);
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--color-text-code);
+    background: var(--color-neutral-n20);
+  }
+  .code-tag { color: var(--color-blue-b400); }
+  .code-attr { color: var(--color-blue-b300); }
+  .code-string { color: var(--color-green-g400); }
+  .code-comment { color: var(--color-text-tertiary); }
+
+  /* Button (from components/Button) — trigger dropdown */
+  .ds-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-025);
+    padding: 0 var(--space-150);
+    min-height: 32px;
+    background-color: var(--color-neutral-n20);
+    color: var(--color-neutral-n900);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--text-body-small-medium-lh);
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+  }
+  .ds-btn:hover { background-color: var(--color-neutral-n30); }
+  .ds-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--color-blue-b200);
+  }
+  .ds-btn--icon-only {
+    padding: 0 var(--space-050);
+    gap: 0;
+  }
+  .ds-btn[aria-expanded="true"] {
+    background-color: var(--color-blue-b50);
+    color: var(--color-blue-b300);
+  }
+
+  /* Dropdown Button — trigger + panel */
+  .ds-dropdown {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-050);
+  }
+  .ds-dropdown-btn--icon-only {
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
+    min-height: 32px;
+    padding: 0;
+    border-radius: var(--border-radius-md);
+  }
+  .ds-dropdown-btn--icon-only img {
+    width: 16px;
+    height: 16px;
+    display: block;
+    object-fit: contain;
+  }
+  .ds-dropdown-btn__chevron {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    display: block;
+    object-fit: contain;
+    transition: transform var(--transition-fast);
+  }
+  .ds-dropdown-btn[aria-expanded="true"] .ds-dropdown-btn__chevron {
+    transform: rotate(180deg);
+  }
+  .ds-dropdown .ds-dropdown-menu {
+    min-width: 100%;
+    box-sizing: border-box;
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+  }
+  .ds-dropdown-menu[hidden] { display: none; }
+  .ds-dropdown-menu:not([hidden]) {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .ds-dropdown-showcase {
+    padding: var(--space-300);
+    background: var(--color-neutral-n20);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    min-height: 88px;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .ds-dropdown-playground { display: grid; gap: var(--space-200); }
+  .ds-dropdown-playground__controls {
+    display: grid;
+    gap: var(--space-100);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ds-dropdown-playground__field {
+    display: grid;
+    gap: var(--space-050);
+  }
+  .ds-dropdown-playground__field-label {
+    font-size: 12px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-tertiary);
+    font-family: var(--font-primary);
+  }
+  .ds-dropdown-playground__control {
+    min-height: 44px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-md);
+    background: var(--color-neutral-n0);
+    color: var(--color-text-primary);
+    padding: 0 var(--space-100);
+    font-family: var(--font-primary);
+    font-size: var(--text-body-small-regular-size);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+  .ds-dropdown-playground__control:focus {
+    outline: none;
+    border-color: var(--color-blue-b300);
+    box-shadow: 0 0 0 2px var(--color-blue-b200);
+  }
+  .ds-dropdown-playground__hint {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--color-text-tertiary);
+    font-family: var(--font-primary);
+  }
+  .ds-dropdown-playground__stage {
+    padding: var(--space-400) var(--space-300);
+    background: linear-gradient(180deg, var(--color-neutral-n20) 0%, var(--color-neutral-n0) 100%);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-100);
+  }
+  .ds-dropdown-playground__status {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding: 0 var(--space-100);
+    border-radius: var(--border-radius-full);
+    font-size: 11px;
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-family: var(--font-primary);
+    background: var(--color-neutral-n30);
+    color: var(--color-text-secondary);
+  }
+  .ds-dropdown-playground__status.is-open {
+    background: var(--color-blue-b50);
+    color: var(--color-blue-b300);
+  }
+  .ds-dropdown-playground__field.is-hidden { display: none; }
+  @media (max-width: 640px) {
+    .ds-dropdown-playground__controls { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ds-btn,
+    .ds-dropdown-btn__chevron,
+    .ds-dropdown .ds-dropdown-menu,
+    .ds-dropdown-playground__control {
+      transition: none;
+    }
+  }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo-icon">GL</div>
+        <div class="sidebar-brand-text">
+          <div class="logo">GPOS Lite</div>
+          <div class="version">Design System V2.0</div>
+        </div>
+      </div>
+      <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">&#x2715;</button>
+    </div>
+    <div class="sidebar-search"><input type="search" class="search-input" placeholder="&#x1F50D;  Cari token, component..."></div>
+    <div class="nav-scroll">
+      <nav class="nav-menu">
+        <div class="nav-section nav-section--menu is-open">
+          <button type="button" class="nav-menu-toggle" aria-expanded="true"><h3 class="nav-title">Overview</h3><img src="../../assets/icons/icon-chevron-mini-down.svg" alt="" class="nav-menu-toggle__chevron" aria-hidden="true"></button>
+          <ul class="nav-list">
+            <li><a href="../../index.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>Home</a></li>
+          </ul>
+        </div>
+        <div class="nav-section nav-section--menu is-open">
+          <button type="button" class="nav-menu-toggle" aria-expanded="true"><h3 class="nav-title">Foundations</h3><img src="../../assets/icons/icon-chevron-mini-down.svg" alt="" class="nav-menu-toggle__chevron" aria-hidden="true"></button>
+          <ul class="nav-list">
+            <li><a href="../../foundations/colors/colors.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg>Colors</a></li>
+            <li><a href="../../foundations/typography/typography.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Typography</a></li>
+            <li><a href="../../foundations/spacing/spacing.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>Spacing</a></li>
+            <li><a href="../../foundations/shadows/shadows.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h12a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V7z" opacity="0.4"/></svg>Shadows</a></li>
+            <li><a href="../../foundations/borders/borders.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>Borders &amp; Radius</a></li>
+            <li><a href="../../foundations/grid/grid.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Grid &amp; Layout</a></li>
+            <li><a href="../../foundations/icons/icons.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="5" height="5" rx="1"/><rect x="10" y="3" width="5" height="5" rx="1"/><rect x="17" y="3" width="4" height="5" rx="1"/><rect x="3" y="10" width="5" height="5" rx="1"/><rect x="10" y="10" width="5" height="5" rx="1"/><rect x="17" y="10" width="4" height="5" rx="1"/><rect x="3" y="17" width="5" height="4" rx="1"/><rect x="10" y="17" width="5" height="4" rx="1"/><rect x="17" y="17" width="4" height="4" rx="1"/></svg>Icons</a></li>
+          </ul>
+        </div>
+        <div class="nav-section nav-section--menu is-open">
+          <button type="button" class="nav-menu-toggle" aria-expanded="true"><h3 class="nav-title">Komponen</h3><img src="../../assets/icons/icon-chevron-mini-down.svg" alt="" class="nav-menu-toggle__chevron" aria-hidden="true"></button>
+          <ul class="nav-list">
+            <li><a href="../Button/button.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="3"/><line x1="7" y1="12" x2="17" y2="12" opacity="0.5"/></svg>Button</a></li>
+            <li><a href="../Avatar/avatar.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Avatar</a></li>
+            <li><a href="../Badge/badge.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="9" width="22" height="6" rx="3"/><circle cx="6" cy="12" r="1.5" fill="currentColor" opacity="0.5"/></svg>Badge</a></li>
+            <li><a href="../Tags/tags.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/></svg>Tags</a></li>
+            <li><a href="../Checkbox/checkbox.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg>Checkbox</a></li>
+            <li><a href="../Select/select.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><polyline points="8,10 12,14 16,10"/></svg>Select</a></li>
+            <li><a href="dropdown.html" class="nav-link active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="10" x2="17" y2="10"/><line x1="7" y1="14" x2="17" y2="14"/></svg>Dropdown Button</a></li>
+            <li><a href="../Toast-Banner/banner.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="8" rx="2"/><circle cx="6" cy="12" r="1" fill="currentColor" stroke="none"/><line x1="10" y1="12" x2="18" y2="12"/></svg>Toast Banner</a></li>
+            <li><a href="../Navigation menu/navigation.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><line x1="7" y1="10" x2="17" y2="10"/><line x1="7" y1="14" x2="17" y2="14"/></svg>Navigation Menu</a></li>
+            <li><a href="../Tabs/tabs.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="4" rx="1"/><rect x="2" y="13" width="14" height="4" rx="1"/></svg>Tabs</a></li>
+            <li><a href="../Table/table.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="1"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="9" y1="4" x2="9" y2="20"/><line x1="15" y1="4" x2="15" y2="20"/></svg>Table</a></li>
+            <li><a href="../Top & bottom Navigation/top-bottom-nav.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="17" width="20" height="4" rx="1"/><polyline points="9,11 5,7 9,3"/><polyline points="15,11 19,7 15,3"/></svg>Top &amp; Bottom Nav</a></li>
+          </ul>
+        </div>
+        <div class="nav-section nav-section--menu is-open">
+          <button type="button" class="nav-menu-toggle" aria-expanded="true"><h3 class="nav-title">Resources</h3><img src="../../assets/icons/icon-chevron-mini-down.svg" alt="" class="nav-menu-toggle__chevron" aria-hidden="true"></button>
+          <ul class="nav-list">
+            <li><a href="https://github.com/zaenalaripin28/gpos-lite-design-system" class="nav-link" target="_blank" rel="noopener"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>GitHub Repo</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="sidebar-footer">
+      <div class="tailwind-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 6C9.33 6 7.67 7.33 7 10c1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35.98 1 2.09 2.15 4.59 2.15C19.67 12 21.33 10.67 22 8c-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C15.61 7.15 14.5 6 12 6zm-7 6c-2.67 0-4.33 1.33-5 4 1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35C6.39 17.15 7.5 18 10 18c2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C8.61 12.85 7.5 12 5 12z"/></svg>
+        Built with tokens.css
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <div class="breadcrumb"><a href="../../index.html">Home</a><span class="breadcrumb-sep">/</span><a href="#">Components</a><span class="breadcrumb-sep">/</span><span class="current">Dropdown Button</span></div>
+      <div class="topbar-actions"><span class="version-badge">v2.0</span></div>
+    </div>
+
+    <div class="content-inner">
+      <section class="mb-12">
+        <div class="ds-hero-banner rounded-2xl overflow-hidden mb-3 flex flex-col lg:flex-row bg-neutral-n900" style="border:1px solid var(--color-neutral-n500);">
+          <div class="flex-1 px-8 py-10 lg:px-11 lg:py-12">
+            <div class="text-xs font-semibold uppercase tracking-[0.1em] text-blue-b100 mb-4">Components · DS GPOS Lite V2</div>
+            <div class="font-bold text-neutral-n0 mb-3" style="font-size:2.25rem;line-height:1.1;">Dropdown Button</div>
+            <p class="text-sm leading-relaxed max-w-xl mb-6" style="color:var(--color-neutral-n50);">Trigger <code>.ds-btn</code> + panel <code>.ds-dropdown-menu</code> dengan item parts (default, checkbox, radio). State open memakai <code>aria-expanded</code> dan token <code>Background.Selected</code>.</p>
+            <div class="flex flex-wrap gap-100">
+              <span class="inline-flex items-center px-2.5 py-050 rounded-full text-xs font-semibold border border-blue-b75 text-blue-b100">Default</span>
+              <span class="inline-flex items-center px-2.5 py-050 rounded-full text-xs font-semibold border border-blue-b75 text-blue-b100">Icon only</span>
+            </div>
+          </div>
+          <div class="lg:w-96 p-300 flex items-center">
+            <div class="ds-dropdown">
+              <button type="button" class="ds-btn ds-dropdown-btn" aria-haspopup="menu" aria-expanded="true" tabindex="-1">
+                Choices
+                <img class="ds-dropdown-btn__chevron" src="../../assets/icons/icon-chevron-mini-down.svg" alt="" width="16" height="16" aria-hidden="true">
+              </button>
+              <div class="ds-dropdown-menu" role="menu" aria-label="Pilihan">
+                <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+                <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="dropdown-button-default" style="margin-bottom:48px;">
+        <h2>Dropdown Button Default</h2>
+        <p class="section-caption" style="margin-bottom:16px;">Trigger label + chevron down, menu tertutup. Ref: <code>Dropdown-button.png</code>.</p>
+        <div class="preview-card p-250">
+          <div class="ds-dropdown-showcase">
+          <div class="ds-dropdown">
+            <button type="button" class="ds-btn ds-dropdown-btn" aria-haspopup="menu" aria-expanded="false" tabindex="-1">
+              Choices
+              <img class="ds-dropdown-btn__chevron" src="../../assets/icons/icon-chevron-mini-down.svg" alt="" width="16" height="16" aria-hidden="true">
+            </button>
+            <div class="ds-dropdown-menu" role="menu" aria-label="Menu default" hidden>
+              <button type="button" class="ds-dropdown-item" role="menuitem" tabindex="-1"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+              <button type="button" class="ds-dropdown-item" role="menuitem" tabindex="-1"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+              <button type="button" class="ds-dropdown-item" role="menuitem" tabindex="-1"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+            </div>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="dropdown-button-icon-only" style="margin-bottom:48px;">
+        <h2>Dropdown Button Icon Only</h2>
+        <p class="section-caption" style="margin-bottom:16px;">Trigger <code>.ds-btn--icon-only</code> dengan <code>icon-ellipsis-vertical.svg</code>. Ref: <code>Dropdown-3.png</code>.</p>
+        <div class="preview-card p-250">
+          <div class="ds-dropdown-showcase">
+          <div class="ds-dropdown">
+            <button type="button" class="ds-btn ds-btn--icon-only ds-dropdown-btn ds-dropdown-btn--icon-only" aria-haspopup="menu" aria-expanded="false" aria-label="Menu pilihan" tabindex="-1">
+              <img src="../../assets/icons/icon-ellipsis-vertical.svg" alt="" width="16" height="16" aria-hidden="true">
+            </button>
+            <div class="ds-dropdown-menu" role="menu" aria-label="Menu default" hidden>
+              <button type="button" class="ds-dropdown-item" role="menuitem" tabindex="-1"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+              <button type="button" class="ds-dropdown-item" role="menuitem" tabindex="-1"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+            </div>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="dropdown-button-open" style="margin-bottom:48px;">
+        <h2>Dropdown Button Open</h2>
+        <p class="section-caption" style="margin-bottom:16px;">State open: <code>aria-expanded="true"</code>, chevron rotate, menu checkbox. Ref: <code>dropdown-checkbox-open-component.png</code>.</p>
+        <div class="preview-card p-250">
+          <div class="ds-dropdown-showcase">
+          <div class="ds-dropdown">
+            <button type="button" class="ds-btn ds-dropdown-btn" aria-haspopup="menu" aria-expanded="true" tabindex="-1">
+              Choices
+              <img class="ds-dropdown-btn__chevron" src="../../assets/icons/icon-chevron-mini-down.svg" alt="" width="16" height="16" aria-hidden="true">
+            </button>
+            <div class="ds-dropdown-menu" role="menu" aria-label="Menu checkbox">
+              <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+            </div>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="dropdown-button-icon-only-open" style="margin-bottom:48px;">
+        <h2>Dropdown Button Icon Only Open</h2>
+        <p class="section-caption" style="margin-bottom:16px;">Trigger 32×32px (<code>.ds-dropdown-btn--icon-only</code>) + menu radio scrollable. Ref: <code>icononly-radio-open-component.png</code>.</p>
+        <div class="preview-card p-250">
+          <div class="ds-dropdown-showcase">
+          <div class="ds-dropdown">
+            <button type="button" class="ds-btn ds-btn--icon-only ds-dropdown-btn ds-dropdown-btn--icon-only" aria-haspopup="menu" aria-expanded="true" aria-label="Menu pilihan" tabindex="-1">
+              <img src="../../assets/icons/icon-ellipsis-vertical.svg" alt="" width="16" height="16" aria-hidden="true">
+            </button>
+            <div class="ds-dropdown-menu ds-dropdown-menu--scrollable" role="menu" aria-label="Menu radio scrollable">
+              <button type="button" class="ds-dropdown-item ds-dropdown-item--selected" role="menuitemradio" aria-checked="true" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+            </div>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="dropdown-item-part" style="margin-bottom:48px;">
+        <h2>Dropdown Item Part</h2>
+        <p class="section-caption" style="margin-bottom:16px;">State visual mengikuti semantic background token. Urutan: default → hover → pressed → selected → selected hover → selected pressed.</p>
+        <div class="preview-card p-250">
+          <div class="ds-dropdown-part-states" role="list">
+            <div class="ds-dropdown-part-state" role="listitem">
+              <div class="ds-dropdown-part-state__meta">
+                <span class="ds-dropdown-part-state__name">Default</span>
+                <span class="ds-dropdown-part-state__class">.ds-dropdown-item</span>
+                <span class="ds-dropdown-part-state__token">Background — transparent</span>
+              </div>
+              <div class="ds-dropdown-part-state__preview">
+                <button type="button" class="ds-dropdown-item" tabindex="-1">
+                  <img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true">
+                  <span class="ds-dropdown-item__label">Option</span>
+                  <img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true">
+                </button>
+              </div>
+            </div>
+            <div class="ds-dropdown-part-state" role="listitem">
+              <div class="ds-dropdown-part-state__meta">
+                <span class="ds-dropdown-part-state__name">Hover</span>
+                <span class="ds-dropdown-part-state__class">.ds-dropdown-item--hover</span>
+                <span class="ds-dropdown-part-state__token">Background.Neutral.Hover</span>
+              </div>
+              <div class="ds-dropdown-part-state__preview">
+                <button type="button" class="ds-dropdown-item ds-dropdown-item--hover" tabindex="-1">
+                  <img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true">
+                  <span class="ds-dropdown-item__label">Option</span>
+                  <img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true">
+                </button>
+              </div>
+            </div>
+            <div class="ds-dropdown-part-state" role="listitem">
+              <div class="ds-dropdown-part-state__meta">
+                <span class="ds-dropdown-part-state__name">Pressed</span>
+                <span class="ds-dropdown-part-state__class">.ds-dropdown-item--pressed</span>
+                <span class="ds-dropdown-part-state__token">Background.Neutral.Bold.Pressed</span>
+              </div>
+              <div class="ds-dropdown-part-state__preview">
+                <button type="button" class="ds-dropdown-item ds-dropdown-item--pressed" tabindex="-1">
+                  <img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true">
+                  <span class="ds-dropdown-item__label">Option</span>
+                  <img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true">
+                </button>
+              </div>
+            </div>
+            <div class="ds-dropdown-part-state" role="listitem">
+              <div class="ds-dropdown-part-state__meta">
+                <span class="ds-dropdown-part-state__name">Selected</span>
+                <span class="ds-dropdown-part-state__class">.ds-dropdown-item--selected</span>
+                <span class="ds-dropdown-part-state__token">Background.Selected</span>
+              </div>
+              <div class="ds-dropdown-part-state__preview">
+                <button type="button" class="ds-dropdown-item ds-dropdown-item--selected" tabindex="-1">
+                  <img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true">
+                  <span class="ds-dropdown-item__label">Option</span>
+                  <img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true">
+                </button>
+              </div>
+            </div>
+            <div class="ds-dropdown-part-state" role="listitem">
+              <div class="ds-dropdown-part-state__meta">
+                <span class="ds-dropdown-part-state__name">Selected Hover</span>
+                <span class="ds-dropdown-part-state__class">.ds-dropdown-item--selected-hover</span>
+                <span class="ds-dropdown-part-state__token">Background.Accent.Blue.Subtler</span>
+              </div>
+              <div class="ds-dropdown-part-state__preview">
+                <button type="button" class="ds-dropdown-item ds-dropdown-item--selected-hover" tabindex="-1">
+                  <img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true">
+                  <span class="ds-dropdown-item__label">Option</span>
+                  <img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true">
+                </button>
+              </div>
+            </div>
+            <div class="ds-dropdown-part-state" role="listitem">
+              <div class="ds-dropdown-part-state__meta">
+                <span class="ds-dropdown-part-state__name">Selected Pressed</span>
+                <span class="ds-dropdown-part-state__class">.ds-dropdown-item--selected-pressed</span>
+                <span class="ds-dropdown-part-state__token">Background.Accent.Blue.Subtle</span>
+              </div>
+              <div class="ds-dropdown-part-state__preview">
+                <button type="button" class="ds-dropdown-item ds-dropdown-item--selected-pressed" tabindex="-1">
+                  <img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true">
+                  <span class="ds-dropdown-item__label">Option</span>
+                  <img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true">
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="dropdown-item-radio-part" style="margin-bottom:48px;">
+        <h2>Dropdown Item Radio Part</h2>
+        <p class="section-caption" style="margin-bottom:16px;">Varian <code>DropdownItemRadio</code> dengan radio slot untuk single-select. State background sama dengan default item; <code>isSelected=true</code> mengaktifkan indikator radio.</p>
+        <div class="preview-card p-250">
+          <p class="ds-dropdown-part-group-title">isSelected = false</p>
+          <div class="ds-dropdown-part-states" role="list">
+            <div class="ds-dropdown-part-state" role="listitem">
+              <div class="ds-dropdown-part-state__meta">
+                <span class="ds-dropdown-part-state__name">Default</span>
+                <span class="ds-dropdown-part-state__class">.ds-dropdown-item</span>
+                <span class="ds-dropdown-part-state__token">Background — transparent</span>
+              </div>
+              <div class="ds-dropdown-part-state__preview">
+                <button type="button" class="ds-dropdown-item" tabindex="-1">
+                  <span class="ds-dropdown-item__radio" aria-hidden="true"></span>
+                  <span class="ds-dropdown-item__label">Option</span>
+                </button>
+              </div>
+            </div>
+            <div class="ds-dropdown-part-state" role="listitem">
+              <div class="ds-dropdown-part-state__meta">
+                <span class="ds-dropdown-part-state__name">Hover</span>
+                <span class="ds-dropdown-part-state__class">.ds-dropdown-item--hover</span>
+                <span class="ds-dropdown-part-state__token">Background.Neutral.Hover</span>
+              </div>
+              <div class="ds-dropdown-part-state__preview">
+                <button type="button" class="ds-dropdown-item ds-dropdown-item--hover" tabindex="-1">
+                  <span class="ds-dropdown-item__radio" aria-hidden="true"></span>
+                  <span class="ds-dropdown-item__label">Option</span>
+                </button>
+              </div>
+            </div>
+            <div class="ds-dropdown-part-state" role="listitem">
+              <div class="ds-dropdown-part-state__meta">
+                <span class="ds-dropdown-part-state__name">Pressed</span>
+                <span class="ds-dropdown-part-state__class">.ds-dropdown-item--pressed</span>
+                <span class="ds-dropdown-part-state__token">Background.Neutral.Bold.Pressed</span>
+              </div>
+              <div class="ds-dropdown-part-state__preview">
+                <button type="button" class="ds-dropdown-item ds-dropdown-item--pressed" tabindex="-1">
+                  <span class="ds-dropdown-item__radio" aria-hidden="true"></span>
+                  <span class="ds-dropdown-item__label">Option</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <p class="ds-dropdown-part-group-title">isSelected = true</p>
+          <div class="ds-dropdown-part-states" role="list">
+            <div class="ds-dropdown-part-state" role="listitem">
+              <div class="ds-dropdown-part-state__meta">
+                <span class="ds-dropdown-part-state__name">Selected</span>
+                <span class="ds-dropdown-part-state__class">.ds-dropdown-item--selected</span>
+                <span class="ds-dropdown-part-state__token">Background.Selected</span>
+              </div>
+              <div class="ds-dropdown-part-state__preview">
+                <button type="button" class="ds-dropdown-item ds-dropdown-item--selected" tabindex="-1">
+                  <span class="ds-dropdown-item__radio" aria-hidden="true"></span>
+                  <span class="ds-dropdown-item__label">Option</span>
+                </button>
+              </div>
+            </div>
+            <div class="ds-dropdown-part-state" role="listitem">
+              <div class="ds-dropdown-part-state__meta">
+                <span class="ds-dropdown-part-state__name">Selected Hover</span>
+                <span class="ds-dropdown-part-state__class">.ds-dropdown-item--selected-hover</span>
+                <span class="ds-dropdown-part-state__token">Background.Accent.Blue.Subtler</span>
+              </div>
+              <div class="ds-dropdown-part-state__preview">
+                <button type="button" class="ds-dropdown-item ds-dropdown-item--selected-hover" tabindex="-1">
+                  <span class="ds-dropdown-item__radio" aria-hidden="true"></span>
+                  <span class="ds-dropdown-item__label">Option</span>
+                </button>
+              </div>
+            </div>
+            <div class="ds-dropdown-part-state" role="listitem">
+              <div class="ds-dropdown-part-state__meta">
+                <span class="ds-dropdown-part-state__name">Selected Pressed</span>
+                <span class="ds-dropdown-part-state__class">.ds-dropdown-item--selected-pressed</span>
+                <span class="ds-dropdown-part-state__token">Background.Accent.Blue.Subtle</span>
+              </div>
+              <div class="ds-dropdown-part-state__preview">
+                <button type="button" class="ds-dropdown-item ds-dropdown-item--selected-pressed" tabindex="-1">
+                  <span class="ds-dropdown-item__radio" aria-hidden="true"></span>
+                  <span class="ds-dropdown-item__label">Option</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="dropdown-item-checkbox-part" style="margin-bottom:48px;">
+        <h2>Dropdown Item Checkbox Part</h2>
+        <p class="section-caption" style="margin-bottom:16px;">Varian <code>DropdownItemCheckbox</code> dengan checkbox slot untuk multi-select. State background sama dengan default item; <code>isSelected=true</code> menampilkan ikon check.</p>
+        <div class="preview-card p-250">
+          <p class="ds-dropdown-part-group-title">isSelected = false</p>
+          <div class="ds-dropdown-part-states" role="list">
+            <div class="ds-dropdown-part-state" role="listitem">
+              <div class="ds-dropdown-part-state__meta">
+                <span class="ds-dropdown-part-state__name">Default</span>
+                <span class="ds-dropdown-part-state__class">.ds-dropdown-item</span>
+                <span class="ds-dropdown-part-state__token">Background — transparent</span>
+              </div>
+              <div class="ds-dropdown-part-state__preview">
+                <button type="button" class="ds-dropdown-item" tabindex="-1">
+                  <span class="ds-dropdown-item__checkbox" aria-hidden="true"></span>
+                  <span class="ds-dropdown-item__label">Option</span>
+                </button>
+              </div>
+            </div>
+            <div class="ds-dropdown-part-state" role="listitem">
+              <div class="ds-dropdown-part-state__meta">
+                <span class="ds-dropdown-part-state__name">Hover</span>
+                <span class="ds-dropdown-part-state__class">.ds-dropdown-item--hover</span>
+                <span class="ds-dropdown-part-state__token">Background.Neutral.Hover</span>
+              </div>
+              <div class="ds-dropdown-part-state__preview">
+                <button type="button" class="ds-dropdown-item ds-dropdown-item--hover" tabindex="-1">
+                  <span class="ds-dropdown-item__checkbox" aria-hidden="true"></span>
+                  <span class="ds-dropdown-item__label">Option</span>
+                </button>
+              </div>
+            </div>
+            <div class="ds-dropdown-part-state" role="listitem">
+              <div class="ds-dropdown-part-state__meta">
+                <span class="ds-dropdown-part-state__name">Pressed</span>
+                <span class="ds-dropdown-part-state__class">.ds-dropdown-item--pressed</span>
+                <span class="ds-dropdown-part-state__token">Background.Neutral.Bold.Pressed</span>
+              </div>
+              <div class="ds-dropdown-part-state__preview">
+                <button type="button" class="ds-dropdown-item ds-dropdown-item--pressed" tabindex="-1">
+                  <span class="ds-dropdown-item__checkbox" aria-hidden="true"></span>
+                  <span class="ds-dropdown-item__label">Option</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <p class="ds-dropdown-part-group-title">isSelected = true</p>
+          <div class="ds-dropdown-part-states" role="list">
+            <div class="ds-dropdown-part-state" role="listitem">
+              <div class="ds-dropdown-part-state__meta">
+                <span class="ds-dropdown-part-state__name">Selected</span>
+                <span class="ds-dropdown-part-state__class">.ds-dropdown-item--selected</span>
+                <span class="ds-dropdown-part-state__token">Background.Selected</span>
+              </div>
+              <div class="ds-dropdown-part-state__preview">
+                <button type="button" class="ds-dropdown-item ds-dropdown-item--selected" tabindex="-1">
+                  <span class="ds-dropdown-item__checkbox" aria-hidden="true">
+                    <img class="ds-dropdown-item__checkbox-icon" src="../../assets/icons/icon-check.svg" alt="" width="12" height="12">
+                  </span>
+                  <span class="ds-dropdown-item__label">Option</span>
+                </button>
+              </div>
+            </div>
+            <div class="ds-dropdown-part-state" role="listitem">
+              <div class="ds-dropdown-part-state__meta">
+                <span class="ds-dropdown-part-state__name">Selected Hover</span>
+                <span class="ds-dropdown-part-state__class">.ds-dropdown-item--selected-hover</span>
+                <span class="ds-dropdown-part-state__token">Background.Accent.Blue.Subtler</span>
+              </div>
+              <div class="ds-dropdown-part-state__preview">
+                <button type="button" class="ds-dropdown-item ds-dropdown-item--selected-hover" tabindex="-1">
+                  <span class="ds-dropdown-item__checkbox" aria-hidden="true">
+                    <img class="ds-dropdown-item__checkbox-icon" src="../../assets/icons/icon-check.svg" alt="" width="12" height="12">
+                  </span>
+                  <span class="ds-dropdown-item__label">Option</span>
+                </button>
+              </div>
+            </div>
+            <div class="ds-dropdown-part-state" role="listitem">
+              <div class="ds-dropdown-part-state__meta">
+                <span class="ds-dropdown-part-state__name">Selected Pressed</span>
+                <span class="ds-dropdown-part-state__class">.ds-dropdown-item--selected-pressed</span>
+                <span class="ds-dropdown-part-state__token">Background.Accent.Blue.Subtle</span>
+              </div>
+              <div class="ds-dropdown-part-state__preview">
+                <button type="button" class="ds-dropdown-item ds-dropdown-item--selected-pressed" tabindex="-1">
+                  <span class="ds-dropdown-item__checkbox" aria-hidden="true">
+                    <img class="ds-dropdown-item__checkbox-icon" src="../../assets/icons/icon-check.svg" alt="" width="12" height="12">
+                  </span>
+                  <span class="ds-dropdown-item__label">Option</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="dropdown-menu-default-part" style="margin-bottom:48px;">
+        <h2>Dropdown Menu Default Part</h2>
+        <p class="section-caption" style="margin-bottom:16px;">Panel <code>&lt;Menu&gt; / Default</code> — daftar <code>DropdownItem</code> (lead + label + chevron). Ref: <code>Default-part.png</code>.</p>
+        <div class="preview-card p-250">
+          <p class="ds-dropdown-part-group-title" style="margin-top:0;">.ds-dropdown-menu</p>
+          <div class="ds-dropdown-menu-part-preview">
+            <div class="ds-dropdown-menu" role="menu" aria-label="Menu default">
+              <button type="button" class="ds-dropdown-item" role="menuitem" tabindex="-1"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+              <button type="button" class="ds-dropdown-item" role="menuitem" tabindex="-1"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+              <button type="button" class="ds-dropdown-item" role="menuitem" tabindex="-1"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+              <button type="button" class="ds-dropdown-item" role="menuitem" tabindex="-1"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+              <button type="button" class="ds-dropdown-item" role="menuitem" tabindex="-1"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+              <button type="button" class="ds-dropdown-item" role="menuitem" tabindex="-1"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="dropdown-menu-default-scrollable-part" style="margin-bottom:48px;">
+        <h2>Dropdown Menu Default (Scrollable) Part</h2>
+        <p class="section-caption" style="margin-bottom:16px;">Varian scroll dengan <code>max-height</code> dan scrollbar token. Ref: <code>Default (Scrollable)-part.png</code>.</p>
+        <div class="preview-card p-250">
+          <p class="ds-dropdown-part-group-title" style="margin-top:0;">.ds-dropdown-menu.ds-dropdown-menu--scrollable</p>
+          <div class="ds-dropdown-menu-part-preview">
+            <div class="ds-dropdown-menu ds-dropdown-menu--scrollable" role="menu" aria-label="Menu default scrollable">
+              <button type="button" class="ds-dropdown-item" role="menuitem" tabindex="-1"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+              <button type="button" class="ds-dropdown-item" role="menuitem" tabindex="-1"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+              <button type="button" class="ds-dropdown-item" role="menuitem" tabindex="-1"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+              <button type="button" class="ds-dropdown-item" role="menuitem" tabindex="-1"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+              <button type="button" class="ds-dropdown-item" role="menuitem" tabindex="-1"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+              <button type="button" class="ds-dropdown-item" role="menuitem" tabindex="-1"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+              <button type="button" class="ds-dropdown-item" role="menuitem" tabindex="-1"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+              <button type="button" class="ds-dropdown-item" role="menuitem" tabindex="-1"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+              <button type="button" class="ds-dropdown-item" role="menuitem" tabindex="-1"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="dropdown-menu-checkbox-part" style="margin-bottom:48px;">
+        <h2>Dropdown Menu Checkbox Part</h2>
+        <p class="section-caption" style="margin-bottom:16px;">Panel <code>&lt;Menu&gt; / Checkboxes</code> — daftar <code>DropdownItemCheckbox</code>. Ref: <code>Checkboxes-part.png</code>.</p>
+        <div class="preview-card p-250">
+          <p class="ds-dropdown-part-group-title" style="margin-top:0;">.ds-dropdown-menu</p>
+          <div class="ds-dropdown-menu-part-preview">
+            <div class="ds-dropdown-menu" role="menu" aria-label="Menu checkbox">
+              <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="dropdown-menu-checkbox-scrollable-part" style="margin-bottom:48px;">
+        <h2>Dropdown Menu Checkbox (Scrollable) Part</h2>
+        <p class="section-caption" style="margin-bottom:16px;">Checkbox menu dengan scroll. Ref: <code>Checkboxes (Scrollable)-part.png</code>.</p>
+        <div class="preview-card p-250">
+          <p class="ds-dropdown-part-group-title" style="margin-top:0;">.ds-dropdown-menu.ds-dropdown-menu--scrollable</p>
+          <div class="ds-dropdown-menu-part-preview">
+            <div class="ds-dropdown-menu ds-dropdown-menu--scrollable" role="menu" aria-label="Menu checkbox scrollable">
+              <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="dropdown-menu-radio-part" style="margin-bottom:48px;">
+        <h2>Dropdown Menu Radio Part</h2>
+        <p class="section-caption" style="margin-bottom:16px;">Panel <code>&lt;Menu&gt; / Radios</code> — satu opsi <code>--selected</code>. Ref: <code>Radios-part.png</code>.</p>
+        <div class="preview-card p-250">
+          <p class="ds-dropdown-part-group-title" style="margin-top:0;">.ds-dropdown-menu</p>
+          <div class="ds-dropdown-menu-part-preview">
+            <div class="ds-dropdown-menu" role="menu" aria-label="Menu radio">
+              <button type="button" class="ds-dropdown-item ds-dropdown-item--selected" role="menuitemradio" aria-checked="true" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="dropdown-menu-radio-scrollable-part" style="margin-bottom:48px;">
+        <h2>Dropdown Menu Radio (Scrollable) Part</h2>
+        <p class="section-caption" style="margin-bottom:16px;">Radio menu dengan scroll. Ref: <code>Radios (Scrollable)-part.png</code>.</p>
+        <div class="preview-card p-250">
+          <p class="ds-dropdown-part-group-title" style="margin-top:0;">.ds-dropdown-menu.ds-dropdown-menu--scrollable</p>
+          <div class="ds-dropdown-menu-part-preview">
+            <div class="ds-dropdown-menu ds-dropdown-menu--scrollable" role="menu" aria-label="Menu radio scrollable">
+              <button type="button" class="ds-dropdown-item ds-dropdown-item--selected" role="menuitemradio" aria-checked="true" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+              <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false" tabindex="-1"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Anatomy</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-200">
+        <div class="preview-card p-250">
+          <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">DropdownItem</div>
+          <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;font-family:var(--font-primary);">
+            <li><strong>A. Lead icon</strong> — <code>24×24px</code>, asset dari <code>assets/icons</code>.</li>
+            <li><strong>B. Label</strong> — body small regular (<code>--text-body-small-regular-*</code>).</li>
+            <li><strong>C. Trail icon</strong> — chevron kanan <code>16×16px</code>, <code>margin-left: auto</code>.</li>
+            <li><strong>Container</strong> — padding <code>var(--space-100) var(--space-200)</code>, radius <code>var(--border-radius-md)</code>.</li>
+          </ul>
+        </div>
+        <div class="preview-card p-250">
+          <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">DropdownItemRadio</div>
+          <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;font-family:var(--font-primary);">
+            <li><strong>A. Radio slot</strong> — <code>16×16px</code>, border radius full, dot saat selected.</li>
+            <li><strong>B. Label</strong> — body small regular, tanpa trailing chevron.</li>
+            <li><strong>Container</strong> — padding &amp; radius sama dengan DropdownItem default.</li>
+          </ul>
+        </div>
+        <div class="preview-card p-250">
+          <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">DropdownItemCheckbox</div>
+          <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;font-family:var(--font-primary);">
+            <li><strong>A. Checkbox slot</strong> — <code>16×16px</code>, radius <code>var(--border-radius-sm)</code>, <code>icon-check.svg</code> saat selected.</li>
+            <li><strong>B. Label</strong> — body small regular, tanpa trailing chevron.</li>
+            <li><strong>Container</strong> — padding &amp; radius sama dengan DropdownItem default.</li>
+          </ul>
+        </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Informasi Penggunaan</h2>
+        <div class="grid md:grid-cols-2 gap-200">
+          <div class="preview-card p-250">
+            <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Kapan digunakan</div>
+            <p style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;font-family:var(--font-primary);">Dropdown Item adalah unit baris pada panel menu dropdown (action menu, select list, dll.). Gunakan saat satu aksi atau opsi per baris membutuhkan ikon konteks dan indikator drill-down (chevron). Untuk navigasi sidebar aplikasi, gunakan komponen <strong>Navigation Menu</strong>.</p>
+          </div>
+          <div class="preview-card p-250">
+            <div style="font-size:12px;font-weight:700;color:var(--color-blue-b400);letter-spacing:0.04em;text-transform:uppercase;">Token &amp; layout</div>
+            <ul style="margin-top:10px;color:var(--color-text-tertiary);font-size:13px;line-height:1.65;font-family:var(--font-primary);">
+              <li>Padding vertikal <code>var(--space-100)</code> (8px), horizontal <code>var(--space-200)</code> (16px).</li>
+              <li>Radius <code>var(--border-radius-md)</code> (8px).</li>
+              <li>Gap antar slot <code>var(--space-100)</code>.</li>
+              <li>Bungkus beberapa item dalam <code>.ds-dropdown-menu</code> dengan gap <code>var(--space-050)</code>.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Do &amp; Don&apos;t</h2>
+        <div class="grid md:grid-cols-2 gap-200">
+          <div class="preview-card p-250">
+            <div style="font-weight:700;color:var(--color-green-g400);margin-bottom:8px;font-family:var(--font-primary);">Do (Lakukan)</div>
+            <ul style="color:var(--color-text-tertiary);font-size:13px;line-height:1.7;font-family:var(--font-primary);">
+              <li>Gunakan ikon lead yang relevan dengan label menu.</li>
+              <li>Pertahankan label singkat (1–3 kata) agar mudah discan.</li>
+              <li>Tampilkan chevron kanan hanya jika item membuka submenu atau halaman berikutnya.</li>
+              <li>Kelompokkan item dalam <code>.ds-dropdown-menu</code> per konteks panel dropdown.</li>
+            </ul>
+          </div>
+          <div class="preview-card p-250">
+            <div style="font-weight:700;color:var(--color-red-r300);margin-bottom:8px;font-family:var(--font-primary);">Don&apos;t (Hindari)</div>
+            <ul style="color:var(--color-text-tertiary);font-size:13px;line-height:1.7;font-family:var(--font-primary);">
+              <li>Jangan hardcode warna di luar token semantic.</li>
+              <li>Jangan ubah padding/radius di luar spesifikasi 8×16px dan 8px radius.</li>
+              <li>Jangan memakai ikon eksternal di luar <code>assets/icons</code>.</li>
+              <li>Jangan menaruh terlalu banyak teks sehingga chevron terdorong keluar viewport.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Playground</h2>
+        <p class="section-caption" style="margin-bottom:16px;">Klik trigger untuk toggle <strong>Default → Open</strong> atau <strong>Icon only → Icon only Open</strong>. Pilih varian menu part di bawah.</p>
+        <div class="preview-card p-250">
+          <div class="ds-dropdown-playground">
+            <div class="ds-dropdown-playground__controls">
+              <div class="ds-dropdown-playground__field">
+                <span class="ds-dropdown-playground__field-label">Trigger</span>
+                <select id="dropdown-pg-trigger" class="ds-dropdown-playground__control" aria-label="Trigger">
+                  <option value="default">Dropdown Button Default</option>
+                  <option value="icon-only">Dropdown Button Icon Only</option>
+                </select>
+              </div>
+              <div class="ds-dropdown-playground__field">
+                <span class="ds-dropdown-playground__field-label">Menu part</span>
+                <select id="dropdown-pg-menu" class="ds-dropdown-playground__control" aria-label="Menu part">
+                  <option value="default-scrollable">Menu Default (Scrollable)</option>
+                  <option value="checkbox">Menu Checkbox</option>
+                  <option value="checkbox-scrollable">Menu Checkbox (Scrollable)</option>
+                  <option value="radio">Menu Radio</option>
+                  <option value="radio-scrollable">Menu Radio (Scrollable)</option>
+                </select>
+              </div>
+              <div class="ds-dropdown-playground__field" id="dropdown-pg-label-wrap">
+                <span class="ds-dropdown-playground__field-label">Label trigger</span>
+                <input type="text" id="dropdown-pg-label" class="ds-dropdown-playground__control" value="Choices" aria-label="Label trigger">
+              </div>
+            </div>
+            <p class="ds-dropdown-playground__hint">Klik tombol trigger di area preview untuk membuka/menutup panel menu.</p>
+            <div class="ds-dropdown-playground__stage">
+              <span id="dropdown-pg-status" class="ds-dropdown-playground__status" aria-live="polite">Tertutup</span>
+              <div id="dropdown-pg-root" class="ds-dropdown"></div>
+            </div>
+          </div>
+        </div>
+        <template id="dropdown-pg-menu-default-scroll">
+          <button type="button" class="ds-dropdown-item" role="menuitem"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+          <button type="button" class="ds-dropdown-item" role="menuitem"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+          <button type="button" class="ds-dropdown-item" role="menuitem"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+          <button type="button" class="ds-dropdown-item" role="menuitem"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+          <button type="button" class="ds-dropdown-item" role="menuitem"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+          <button type="button" class="ds-dropdown-item" role="menuitem"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+          <button type="button" class="ds-dropdown-item" role="menuitem"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+          <button type="button" class="ds-dropdown-item" role="menuitem"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+          <button type="button" class="ds-dropdown-item" role="menuitem"><img class="ds-dropdown-item__lead" src="../../assets/icons/icon-shopping-bag.svg" alt="" width="24" height="24" aria-hidden="true"><span class="ds-dropdown-item__label">Option</span><img class="ds-dropdown-item__trail" src="../../assets/icons/icon-chevron-right.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+        </template>
+        <template id="dropdown-pg-menu-checkbox">
+          <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+        </template>
+        <template id="dropdown-pg-menu-checkbox-scroll">
+          <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemcheckbox" aria-checked="false"><span class="ds-dropdown-item__checkbox" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+        </template>
+        <template id="dropdown-pg-menu-radio">
+          <button type="button" class="ds-dropdown-item ds-dropdown-item--selected" role="menuitemradio" aria-checked="true"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+        </template>
+        <template id="dropdown-pg-menu-radio-scroll">
+          <button type="button" class="ds-dropdown-item ds-dropdown-item--selected" role="menuitemradio" aria-checked="true"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+          <button type="button" class="ds-dropdown-item" role="menuitemradio" aria-checked="false"><span class="ds-dropdown-item__radio" aria-hidden="true"></span><span class="ds-dropdown-item__label">Option</span></button>
+        </template>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Kode DS</h2>
+        <p class="section-caption" style="margin-bottom:16px;">Salin markup siap pakai. Semua kelas memakai token dari <code>tokens.css</code>.</p>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;">
+          <div style="padding:12px 20px;background:var(--color-neutral-n20);border-bottom:1px solid var(--color-neutral-n30);display:flex;align-items:center;justify-content:space-between;">
+            <span style="font-size:12px;font-weight:700;color:var(--color-neutral-n500);font-family:var(--font-primary);">dropdown-item.html</span>
+            <button class="copy-btn" id="copy-code-btn" type="button" aria-label="Salin kode">Salin</button>
+          </div>
+          <pre class="code-block" id="code-block"><code><span class="code-comment">&lt;!-- Dropdown Button (closed) --&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-dropdown"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;button</span> <span class="code-attr">type</span>=<span class="code-string">"button"</span> <span class="code-attr">class</span>=<span class="code-string">"ds-btn ds-dropdown-btn"</span> <span class="code-attr">aria-haspopup</span>=<span class="code-string">"menu"</span> <span class="code-attr">aria-expanded</span>=<span class="code-string">"false"</span><span class="code-tag">&gt;</span>
+    Choices
+    <span class="code-tag">&lt;img</span> <span class="code-attr">class</span>=<span class="code-string">"ds-dropdown-btn__chevron"</span> <span class="code-attr">src</span>=<span class="code-string">"assets/icons/icon-chevron-mini-down.svg"</span> <span class="code-attr">alt</span>=<span class="code-string">""</span> <span class="code-attr">width</span>=<span class="code-string">"16"</span> <span class="code-attr">height</span>=<span class="code-string">"16"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;/button&gt;</span>
+  <span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-dropdown-menu"</span> <span class="code-attr">role</span>=<span class="code-string">"menu"</span> <span class="code-attr">hidden</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/div&gt;</span>
+<span class="code-tag">&lt;/div&gt;</span>
+
+<span class="code-comment">&lt;!-- Icon only open + radio scrollable menu --&gt;</span>
+<span class="code-tag">&lt;button</span> <span class="code-attr">class</span>=<span class="code-string">"ds-btn ds-btn--icon-only ds-dropdown-btn"</span> <span class="code-attr">aria-expanded</span>=<span class="code-string">"true"</span> <span class="code-attr">aria-label</span>=<span class="code-string">"Menu pilihan"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/button&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-dropdown-menu ds-dropdown-menu--scrollable"</span> <span class="code-attr">role</span>=<span class="code-string">"menu"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/div&gt;</span>
+
+<span class="code-comment">&lt;!-- Menu dropdown (action menu) --&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-dropdown-menu"</span> <span class="code-attr">role</span>=<span class="code-string">"menu"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;button</span> <span class="code-attr">type</span>=<span class="code-string">"button"</span> <span class="code-attr">class</span>=<span class="code-string">"ds-dropdown-item"</span> <span class="code-attr">role</span>=<span class="code-string">"menuitem"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;img</span> <span class="code-attr">class</span>=<span class="code-string">"ds-dropdown-item__lead"</span> <span class="code-attr">src</span>=<span class="code-string">"assets/icons/icon-shopping-bag.svg"</span> <span class="code-attr">alt</span>=<span class="code-string">""</span> <span class="code-attr">width</span>=<span class="code-string">"24"</span> <span class="code-attr">height</span>=<span class="code-string">"24"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-dropdown-item__label"</span><span class="code-tag">&gt;</span>Option<span class="code-tag">&lt;/span&gt;</span>
+    <span class="code-tag">&lt;img</span> <span class="code-attr">class</span>=<span class="code-string">"ds-dropdown-item__trail"</span> <span class="code-attr">src</span>=<span class="code-string">"assets/icons/icon-chevron-right.svg"</span> <span class="code-attr">alt</span>=<span class="code-string">""</span> <span class="code-attr">width</span>=<span class="code-string">"16"</span> <span class="code-attr">height</span>=<span class="code-string">"16"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;/button&gt;</span>
+<span class="code-tag">&lt;/div&gt;</span>
+
+<span class="code-comment">&lt;!-- State: selected hover --&gt;</span>
+<span class="code-tag">&lt;button</span> <span class="code-attr">class</span>=<span class="code-string">"ds-dropdown-item ds-dropdown-item--selected-hover"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/button&gt;</span>
+
+<span class="code-comment">&lt;!-- State: selected pressed --&gt;</span>
+<span class="code-tag">&lt;button</span> <span class="code-attr">class</span>=<span class="code-string">"ds-dropdown-item ds-dropdown-item--selected-pressed"</span><span class="code-tag">&gt;</span>...<span class="code-tag">&lt;/button&gt;</span>
+
+<span class="code-comment">&lt;!-- DropdownItemRadio --&gt;</span>
+<span class="code-tag">&lt;button</span> <span class="code-attr">type</span>=<span class="code-string">"button"</span> <span class="code-attr">class</span>=<span class="code-string">"ds-dropdown-item ds-dropdown-item--selected"</span> <span class="code-attr">role</span>=<span class="code-string">"menuitemradio"</span> <span class="code-attr">aria-checked</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-dropdown-item__radio"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;&lt;/span&gt;</span>
+  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-dropdown-item__label"</span><span class="code-tag">&gt;</span>Option<span class="code-tag">&lt;/span&gt;</span>
+<span class="code-tag">&lt;/button&gt;</span>
+
+<span class="code-comment">&lt;!-- DropdownItemCheckbox --&gt;</span>
+<span class="code-tag">&lt;button</span> <span class="code-attr">type</span>=<span class="code-string">"button"</span> <span class="code-attr">class</span>=<span class="code-string">"ds-dropdown-item ds-dropdown-item--selected"</span> <span class="code-attr">role</span>=<span class="code-string">"menuitemcheckbox"</span> <span class="code-attr">aria-checked</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-dropdown-item__checkbox"</span> <span class="code-attr">aria-hidden</span>=<span class="code-string">"true"</span><span class="code-tag">&gt;</span>
+    <span class="code-tag">&lt;img</span> <span class="code-attr">class</span>=<span class="code-string">"ds-dropdown-item__checkbox-icon"</span> <span class="code-attr">src</span>=<span class="code-string">"assets/icons/icon-check.svg"</span> <span class="code-attr">alt</span>=<span class="code-string">""</span> <span class="code-attr">width</span>=<span class="code-string">"12"</span> <span class="code-attr">height</span>=<span class="code-string">"12"</span><span class="code-tag">&gt;</span>
+  <span class="code-tag">&lt;/span&gt;</span>
+  <span class="code-tag">&lt;span</span> <span class="code-attr">class</span>=<span class="code-string">"ds-dropdown-item__label"</span><span class="code-tag">&gt;</span>Option<span class="code-tag">&lt;/span&gt;</span>
+<span class="code-tag">&lt;/button&gt;</span>
+
+<span class="code-comment">&lt;!-- Menu / Default (scrollable) --&gt;</span>
+<span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-string">"ds-dropdown-menu ds-dropdown-menu--scrollable"</span> <span class="code-attr">role</span>=<span class="code-string">"menu"</span><span class="code-tag">&gt;</span>
+  <span class="code-comment">&lt;!-- ulangi DropdownItem / Checkbox / Radio --&gt;</span>
+<span class="code-tag">&lt;/div&gt;</span></code></pre>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2>Token Class</h2>
+        <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:12px;padding:16px;display:grid;gap:10px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-dropdown</code><button class="copy-btn" type="button" data-copy="ds-dropdown" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-dropdown-btn</code><button class="copy-btn" type="button" data-copy="ds-btn ds-dropdown-btn" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-dropdown-btn--icon-only</code><button class="copy-btn" type="button" data-copy="ds-btn ds-btn--icon-only ds-dropdown-btn ds-dropdown-btn--icon-only" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-dropdown-btn__chevron</code><button class="copy-btn" type="button" data-copy="ds-dropdown-btn__chevron" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-dropdown-menu</code><button class="copy-btn" type="button" data-copy="ds-dropdown-menu" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-dropdown-menu--scrollable</code><button class="copy-btn" type="button" data-copy="ds-dropdown-menu ds-dropdown-menu--scrollable" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-dropdown-item</code><button class="copy-btn" type="button" data-copy="ds-dropdown-item" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-dropdown-item__lead</code><button class="copy-btn" type="button" data-copy="ds-dropdown-item__lead" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-dropdown-item__label</code><button class="copy-btn" type="button" data-copy="ds-dropdown-item__label" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-dropdown-item__trail</code><button class="copy-btn" type="button" data-copy="ds-dropdown-item__trail" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-dropdown-item--selected-hover</code><button class="copy-btn" type="button" data-copy="ds-dropdown-item ds-dropdown-item--selected-hover" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-dropdown-item--selected-pressed</code><button class="copy-btn" type="button" data-copy="ds-dropdown-item ds-dropdown-item--selected-pressed" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-dropdown-item__radio</code><button class="copy-btn" type="button" data-copy="ds-dropdown-item__radio" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-dropdown-item__checkbox</code><button class="copy-btn" type="button" data-copy="ds-dropdown-item__checkbox" onclick="copyToken(this)">Salin</button></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;"><code>.ds-dropdown-item__checkbox-icon</code><button class="copy-btn" type="button" data-copy="ds-dropdown-item__checkbox-icon" onclick="copyToken(this)">Salin</button></div>
+        </div>
+      </section>
+
+      <footer class="page-footer" style="margin-top:48px;padding-top:24px;border-top:1px solid var(--color-border);font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-primary);">
+        DS GPOS Lite V2.0 — Dropdown Button · item &amp; menu parts · button refs (Dropdown-button, open components)
+      </footer>
+    </div>
+  </main>
+</div>
+
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebar-overlay');
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const sidebarClose = document.getElementById('sidebar-close');
+  function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('active'); }
+  function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('active'); }
+  hamburgerBtn?.addEventListener('click', openSidebar);
+  sidebarClose?.addEventListener('click', closeSidebar);
+  overlay?.addEventListener('click', closeSidebar);
+
+  const pgRoot = document.getElementById('dropdown-pg-root');
+  const pgTrigger = document.getElementById('dropdown-pg-trigger');
+  const pgMenu = document.getElementById('dropdown-pg-menu');
+  const pgLabel = document.getElementById('dropdown-pg-label');
+  const pgLabelWrap = document.getElementById('dropdown-pg-label-wrap');
+  const pgStatus = document.getElementById('dropdown-pg-status');
+  const chevronSrc = '../../assets/icons/icon-chevron-mini-down.svg';
+  const ellipsisSrc = '../../assets/icons/icon-ellipsis-vertical.svg';
+  let pgIsOpen = false;
+
+  const pgMenuMap = {
+    'default-scrollable': { template: 'dropdown-pg-menu-default-scroll', scrollable: true },
+    'checkbox': { template: 'dropdown-pg-menu-checkbox', scrollable: false },
+    'checkbox-scrollable': { template: 'dropdown-pg-menu-checkbox-scroll', scrollable: true },
+    'radio': { template: 'dropdown-pg-menu-radio', scrollable: false },
+    'radio-scrollable': { template: 'dropdown-pg-menu-radio-scroll', scrollable: true }
+  };
+
+  function getMenuConfig() {
+    return pgMenuMap[pgMenu?.value || 'default-scrollable'] || pgMenuMap['default-scrollable'];
+  }
+
+  function renderDropdownPlayground() {
+    if (!pgRoot) return;
+    const triggerType = pgTrigger?.value || 'default';
+    const label = (pgLabel?.value || 'Choices').trim() || 'Choices';
+    const menuConfig = getMenuConfig();
+    const menuTpl = document.getElementById(menuConfig.template);
+
+    if (pgLabelWrap) {
+      pgLabelWrap.classList.toggle('is-hidden', triggerType === 'icon-only');
+    }
+    if (pgStatus) {
+      pgStatus.textContent = pgIsOpen ? 'Terbuka' : 'Tertutup';
+      pgStatus.classList.toggle('is-open', pgIsOpen);
+    }
+
+    let triggerHtml = '';
+    if (triggerType === 'icon-only') {
+      triggerHtml = '<button type="button" id="dropdown-pg-trigger-btn" class="ds-btn ds-btn--icon-only ds-dropdown-btn ds-dropdown-btn--icon-only" aria-haspopup="menu" aria-expanded="' + (pgIsOpen ? 'true' : 'false') + '" aria-label="Menu pilihan"><img src="' + ellipsisSrc + '" alt="" width="16" height="16" aria-hidden="true"></button>';
+    } else {
+      triggerHtml = '<button type="button" id="dropdown-pg-trigger-btn" class="ds-btn ds-dropdown-btn" aria-haspopup="menu" aria-expanded="' + (pgIsOpen ? 'true' : 'false') + '">' + label + '<img class="ds-dropdown-btn__chevron" src="' + chevronSrc + '" alt="" width="16" height="16" aria-hidden="true"></button>';
+    }
+
+    const menuClass = 'ds-dropdown-menu' + (menuConfig.scrollable ? ' ds-dropdown-menu--scrollable' : '');
+    pgRoot.innerHTML = triggerHtml + '<div class="' + menuClass + '" role="menu" aria-label="Playground menu"' + (pgIsOpen ? '' : ' hidden') + '></div>';
+
+    const menuEl = pgRoot.querySelector('.ds-dropdown-menu');
+    if (menuEl && menuTpl) {
+      menuEl.appendChild(menuTpl.content.cloneNode(true));
+    }
+
+    const triggerBtn = document.getElementById('dropdown-pg-trigger-btn');
+    triggerBtn?.addEventListener('click', function () {
+      pgIsOpen = !pgIsOpen;
+      renderDropdownPlayground();
+    });
+  }
+
+  pgTrigger?.addEventListener('change', function () {
+    pgIsOpen = false;
+    renderDropdownPlayground();
+  });
+  pgMenu?.addEventListener('change', function () {
+    pgIsOpen = false;
+    renderDropdownPlayground();
+  });
+  pgLabel?.addEventListener('input', renderDropdownPlayground);
+  renderDropdownPlayground();
+
+  function copyToken(btn) {
+    const value = btn.getAttribute('data-copy') || '';
+    navigator.clipboard.writeText(value).then(function () {
+      btn.textContent = 'Tersalin!';
+      setTimeout(function () { btn.textContent = 'Salin'; }, 2000);
+    });
+  }
+
+  function copyCode() {
+    const block = document.getElementById('code-block');
+    const btn = document.getElementById('copy-code-btn');
+    if (!block || !btn) return;
+    navigator.clipboard.writeText(block.innerText).then(function () {
+      btn.textContent = 'Tersalin!';
+      setTimeout(function () { btn.textContent = 'Salin'; }, 2000);
+    });
+  }
+  document.getElementById('copy-code-btn')?.addEventListener('click', copyCode);
+</script>
+  <script src="../../scripts/sidebar-nav-menu.js"></script>
+</body>
+</html>

@@ -124,11 +124,13 @@ pre code {
   display: flex;
   flex-direction: column;
   position: fixed;
-  height: 100vh;
-  top: 0;
-  left: 0;
+  height: calc(100vh - 24px);
+  top: 12px;
+  left: 12px;
   z-index: var(--z-fixed);
-  border-right: 1px solid var(--sidebar-border);
+  border: 1px solid var(--sidebar-border);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14), 0 2px 8px rgba(0, 0, 0, 0.08);
   transition: transform var(--transition-slow);
   overflow: hidden;
 }
@@ -300,6 +302,47 @@ pre code {
 .nav-link svg { flex-shrink: 0; opacity: 0.6; }
 .nav-link:hover svg, .nav-link.active svg { opacity: 1; }
 
+.nav-link--sub {
+  padding-left: calc(var(--space-200) + var(--space-100));
+  font-size: var(--font-size-xs);
+}
+
+/* Sidebar — collapsible nav sections */
+.nav-section--menu .nav-menu-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 var(--space-100);
+  margin-bottom: var(--space-100);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+.nav-section--menu .nav-menu-toggle .nav-title {
+  margin-bottom: 0;
+  padding: 0;
+}
+
+.nav-section--menu .nav-menu-toggle__chevron {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  opacity: 0.55;
+  transition: transform var(--transition-fast);
+}
+
+.nav-section--menu:not(.is-open) .nav-list {
+  display: none;
+}
+
+.nav-section--menu.is-open .nav-menu-toggle__chevron {
+  transform: rotate(180deg);
+}
+
 .sidebar-footer {
   padding: var(--spacing-3) var(--spacing-4);
   border-top: 1px solid var(--sidebar-border);
@@ -426,7 +469,7 @@ pre code {
    ============================================================ */
 
 .main-content {
-  margin-left: var(--sidebar-width);
+  margin-left: calc(var(--sidebar-width) + 24px);
   flex: 1;
   background-color: var(--color-background);
   min-height: 100vh;
@@ -1022,6 +1065,11 @@ section > h2::before {
 
 @media (max-width: 768px) {
   .sidebar {
+    left: 0;
+    top: 0;
+    height: 100vh;
+    border-radius: 0 16px 16px 0;
+    border-left: none;
     transform: translateX(-100%);
     box-shadow: none;
   }
