@@ -119,9 +119,29 @@
       var tabsLi = navList.querySelector('a[href*="/Tabs/tabs.html"]');
       tabsLi = tabsLi ? tabsLi.closest('li') : null;
 
+      var pageLayoutHref = '../Page layout/page-layout.html';
+      if (buttonLink && buttonLink.getAttribute('href')) {
+        pageLayoutHref = buttonLink.getAttribute('href').replace('/Button/button.html', '/Page layout/page-layout.html');
+      }
+      var pageLayoutItem = navList.querySelector('a[href*="/Page layout/page-layout.html"]') ? null : document.createElement('li');
+      if (pageLayoutItem) {
+        var pageLayoutLink = document.createElement('a');
+        pageLayoutLink.href = pageLayoutHref;
+        pageLayoutLink.className = 'nav-link';
+        pageLayoutLink.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><line x1="3" y1="12" x2="21" y2="12" stroke-dasharray="2 2"/></svg>Page Layout';
+        pageLayoutItem.appendChild(pageLayoutLink);
+      }
+
       if (breadcrumbsLi && pageHeaderItem && breadcrumbsLi.parentNode === navList) {
         if (tabsLi) navList.insertBefore(pageHeaderItem, tabsLi);
         else breadcrumbsLi.insertAdjacentElement('afterend', pageHeaderItem);
+      }
+
+      if (pageHeaderItem && pageLayoutItem && pageHeaderItem.parentNode === navList) {
+        pageHeaderItem.insertAdjacentElement('afterend', pageLayoutItem);
+      } else if (breadcrumbsLi && pageLayoutItem && breadcrumbsLi.parentNode === navList) {
+        if (tabsLi) navList.insertBefore(pageLayoutItem, tabsLi);
+        else breadcrumbsLi.insertAdjacentElement('afterend', pageLayoutItem);
       }
 
       if (popupLi && popupLi.parentNode === navList) {

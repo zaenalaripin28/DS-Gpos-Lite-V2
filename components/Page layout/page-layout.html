@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Layout — DS GPOS Lite V2</title>
+  <link rel="stylesheet" href="../../styles/globals.css">
+  <link rel="stylesheet" href="../../styles/enhancements.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50:'var(--color-primary-50)',100:'var(--color-primary-100)',200:'var(--color-primary-200)',
+              300:'var(--color-primary-300)',400:'var(--color-primary-400)',500:'var(--color-primary-500)',
+              600:'var(--color-primary-600)',700:'var(--color-primary-700)',800:'var(--color-primary-800)',900:'var(--color-primary-900)',
+            },
+            blue: {
+              b50:'var(--color-blue-b50)',b75:'var(--color-blue-b75)',b100:'var(--color-blue-b100)',
+              b200:'var(--color-blue-b200)',b300:'var(--color-blue-b300)',b400:'var(--color-blue-b400)',b500:'var(--color-blue-b500)',
+            },
+            green: {
+              g50:'var(--color-green-g50)',g100:'var(--color-green-g100)',g300:'var(--color-green-g300)',g400:'var(--color-green-g400)',
+            },
+            red: {
+              r50:'var(--color-red-r50)',r100:'var(--color-red-r100)',r300:'var(--color-red-r300)',r400:'var(--color-red-r400)',
+            },
+            neutral: {
+              n0:'var(--color-neutral-n0)',n10:'var(--color-neutral-n10)',n20:'var(--color-neutral-n20)',n30:'var(--color-neutral-n30)',
+              n40:'var(--color-neutral-n40)',n50:'var(--color-neutral-n50)',n200:'var(--color-neutral-n200)',
+              n300:'var(--color-neutral-n300)',n500:'var(--color-neutral-n500)',n900:'var(--color-neutral-n900)',
+            },
+            background:'var(--color-background)',surface:'var(--color-surface)',
+            border:{DEFAULT:'var(--color-border)',light:'var(--color-border-light)'},
+            text:{primary:'var(--color-text-primary)',secondary:'var(--color-text-secondary)',tertiary:'var(--color-text-tertiary)'},
+          },
+          fontFamily:{primary:['var(--font-primary)'],sans:['var(--font-primary)']},
+          spacing:{
+            '050':'var(--space-050)','075':'var(--space-075)','100':'var(--space-100)',
+            '150':'var(--space-150)','200':'var(--space-200)','250':'var(--space-250)','300':'var(--space-300)',
+          },
+          borderRadius:{sm:'var(--border-radius-sm)',md:'var(--border-radius-md)',lg:'var(--border-radius-lg)',xl:'var(--border-radius-xl)','2xl':'var(--border-radius-2xl)'},
+          boxShadow:{xs:'var(--shadow-xs)',sm:'var(--shadow-sm)',md:'var(--shadow-md)'},
+        }
+      }
+    }
+  </script>
+  <style>
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; height: 2px;
+      background: linear-gradient(90deg, var(--color-blue-b300) 0%, var(--color-primary-300) 100%);
+      z-index: 99999; transition: width 80ms linear; pointer-events: none;
+    }
+    .ds-hero-banner { position: relative; overflow: hidden; }
+    .ds-hero-banner::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        linear-gradient(color-mix(in srgb, var(--color-neutral-n0) 3%, transparent) 1px, transparent 1px),
+        linear-gradient(90deg, color-mix(in srgb, var(--color-neutral-n0) 3%, transparent) 1px, transparent 1px);
+      background-size: 40px 40px; pointer-events: none; z-index: 0;
+    }
+    .ds-hero-banner > * { position: relative; z-index: 1; }
+    .hero-feat-card {
+      transition: transform 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  box-shadow 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 160ms ease;
+    }
+    .hero-feat-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--color-blue-b75) !important;
+      box-shadow: var(--shadow-md);
+    }
+    .dark-toggle {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; background: none;
+      border: 1px solid var(--color-border); color: var(--color-text-secondary);
+      cursor: pointer; border-radius: var(--border-radius-md);
+      transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+    }
+    .dark-toggle:hover { background-color: var(--color-primary-50); border-color: var(--color-primary-200); color: var(--color-primary-600); }
+    .dark-toggle .icon-sun  { display: none; }
+    .dark-toggle .icon-moon { display: block; }
+    [data-theme="dark"] .dark-toggle .icon-sun  { display: block; }
+    [data-theme="dark"] .dark-toggle .icon-moon { display: none; }
+    .section-heading {
+      font-size: 20px; font-weight: 600; margin-bottom: 24px;
+      padding-bottom: 16px; border-bottom: 1px solid var(--color-border);
+      display: flex; align-items: center; gap: 12px;
+      color: var(--color-text-primary); letter-spacing: -0.01em;
+      font-family: var(--font-primary);
+    }
+    .section-heading__accent {
+      width: 3px; height: 18px; flex-shrink: 0; display: block; border-radius: 3px;
+      background: linear-gradient(to bottom, var(--color-primary-500), var(--color-primary-300));
+    }
+    code.chip {
+      font-family: var(--font-primary) !important; font-size: 11px; font-weight: 500;
+      padding: 2px 7px; background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n30); border-radius: 4px;
+      color: var(--color-blue-b300);
+    }
+
+    /* Grid landasan — dari foundations/grid (tidak divisualkan) */
+    :root {
+      --grid-columns-lg: 12;
+      --grid-margin: 24px;
+      --grid-gutter: 16px;
+    }
+
+    /* ── Page Layout shell ── */
+    .ds-page-layout {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      min-height: 520px;
+      background: var(--color-background);
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      font-family: var(--font-primary);
+      box-sizing: border-box;
+    }
+    .ds-page-layout__body {
+      display: flex;
+      flex: 1;
+      min-height: 0;
+      align-items: stretch;
+    }
+    .ds-page-layout__aside {
+      flex-shrink: 0;
+      width: 280px;
+      min-width: 0;
+      border-right: 1px solid var(--color-border);
+      background: var(--color-neutral-n0);
+      position: relative;
+    }
+    .ds-page-layout__aside .ds-sidebar-nav-expand {
+      max-width: none;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 0;
+    }
+    .ds-page-layout__aside .ds-sidebar-nav-expand__scroll {
+      max-height: none;
+      min-height: 100%;
+    }
+    .ds-page-layout__nav-sub {
+      display: none;
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: var(--color-neutral-n0);
+    }
+    .ds-page-layout--submenu-on .ds-page-layout__nav-main { visibility: hidden; pointer-events: none; }
+    .ds-page-layout--submenu-on .ds-page-layout__nav-sub { display: flex; }
+    .ds-page-layout__nav-back {
+      width: 100%;
+      max-width: none;
+      border: none;
+      background: transparent;
+      cursor: default;
+      padding: var(--space-100) 0 var(--space-050);
+    }
+    .ds-page-layout__main {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      background: var(--color-neutral-n10);
+    }
+    .ds-page-layout__content {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(var(--grid-columns-lg), minmax(0, 1fr));
+      gap: var(--grid-gutter);
+      padding: var(--grid-margin);
+      align-content: start;
+      box-sizing: border-box;
+    }
+    .ds-page-layout__content > * { grid-column: 1 / -1; }
+    .ds-page-layout__table-wrap { min-height: 0; flex: 1; display: flex; flex-direction: column; }
+    .ds-page-layout__footer {
+      flex-shrink: 0;
+      border-top: 1px solid var(--color-border);
+      background: var(--color-neutral-n0);
+    }
+
+    .pl-variant-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-200);
+      margin-bottom: var(--space-300);
+    }
+    @media (max-width: 1100px) { .pl-variant-grid { grid-template-columns: 1fr; } }
+    .pl-variant-card {
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--border-radius-xl);
+      overflow: hidden;
+      background: var(--color-neutral-n0);
+      box-shadow: var(--shadow-xs);
+    }
+    .pl-variant-card__label {
+      padding: var(--space-100) var(--space-150);
+      font-size: var(--text-caption-medium-size);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-secondary);
+      background: var(--color-neutral-n10);
+      border-bottom: 1px solid var(--color-border-light);
+      font-family: var(--font-primary);
+    }
+    .pl-variant-card__body { overflow-x: auto; }
+
+    .pl-playground {
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--border-radius-xl);
+      background: var(--color-neutral-n0);
+      overflow: hidden;
+      box-shadow: var(--shadow-xs);
+      margin-bottom: var(--space-300);
+    }
+    .pl-playground__controls {
+      display: grid;
+      grid-template-columns: minmax(0, 280px);
+      gap: var(--space-150);
+      padding: var(--space-200);
+      border-bottom: 1px solid var(--color-border-light);
+      background: var(--color-neutral-n10);
+    }
+    .pl-playground__field { display: grid; gap: var(--space-050); }
+    .pl-playground__field label {
+      font-family: var(--font-primary);
+      font-size: var(--text-caption-medium-size);
+      color: var(--color-text-secondary);
+    }
+    .pl-playground__field select {
+      appearance: none;
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-md);
+      background: var(--color-surface);
+      color: var(--color-text-primary);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+      padding: var(--space-100) var(--space-150);
+    }
+    .pl-playground__stage { overflow-x: auto; background: var(--color-neutral-n20); padding: var(--space-200); }
+
+    .anatomy-table-wrap {
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--border-radius-lg);
+      background: var(--color-neutral-n0);
+      overflow: hidden;
+      margin-bottom: var(--space-200);
+    }
+    .anatomy-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+      color: var(--color-text-primary);
+    }
+    .anatomy-table th, .anatomy-table td {
+      text-align: left;
+      padding: var(--space-150) var(--space-200);
+      border-bottom: 1px solid var(--color-border-light);
+      vertical-align: top;
+    }
+    .anatomy-table th {
+      background: var(--color-neutral-n10);
+      color: var(--color-text-secondary);
+      font-size: var(--text-caption-medium-size);
+      font-weight: var(--font-weight-semibold);
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-wide);
+    }
+    .anatomy-table tr:last-child td { border-bottom: none; }
+
+    .guideline-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-150);
+      margin-bottom: var(--space-300);
+    }
+    @media (max-width: 768px) { .guideline-grid { grid-template-columns: 1fr; } }
+    .guideline-card {
+      border-radius: var(--border-radius-lg);
+      border: 1px solid var(--color-border-light);
+      background: var(--color-neutral-n0);
+      padding: var(--space-200);
+    }
+    .guideline-card__title {
+      margin: 0 0 var(--space-100);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-medium-size);
+      font-weight: var(--font-weight-semibold);
+    }
+    .guideline-list {
+      margin: 0;
+      padding-left: var(--space-200);
+      display: grid;
+      gap: var(--space-075);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+      line-height: var(--text-body-small-regular-lh);
+      color: var(--color-text-secondary);
+    }
+
+    /* ── Top nav (subset) ── */
+    .ds-topnav {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: var(--space-100); min-height: 56px;
+      padding: var(--space-075) var(--space-150);
+      background: var(--color-neutral-n0);
+      border-bottom: 1px solid var(--color-border);
+      box-sizing: border-box;
+    }
+    .ds-topnav__start, .ds-topnav__end { display: flex; align-items: center; gap: var(--space-100); }
+    .ds-topnav-logo { display: inline-flex; align-items: center; padding: var(--space-050) var(--space-100); border: none; background: transparent; }
+    .ds-topnav-logo__img { display: block; height: 32px; width: auto; object-fit: contain; }
+    .ds-topnav-notif {
+      position: relative; display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; padding: 0; border: none; border-radius: var(--border-radius-md);
+      background: transparent; cursor: default;
+    }
+    .ds-topnav-notif__icon { width: 24px; height: 24px; display: block; }
+    .ds-topnav-notif__indicator {
+      position: absolute; top: var(--space-025); right: var(--space-025);
+      transform: translate(35%, -35%); pointer-events: none;
+    }
+    .ds-topnav-profile { border: none; background: transparent; padding: 0; cursor: default; }
+    .ds-badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 20px; padding: var(--space-025) var(--space-075);
+      border-radius: var(--border-radius-full);
+      font-family: var(--font-primary); font-size: var(--font-size-xs); line-height: 1.5;
+    }
+    .ds-badge--important { background-color: var(--color-red-r300); color: var(--color-neutral-n0); }
+    .ds-avatar { position: relative; display: inline-flex; }
+    .ds-avatar--lg { width: 32px; height: 32px; }
+    .ds-avatar__image { width: 100%; height: 100%; border-radius: var(--border-radius-full); object-fit: cover; display: block; }
+    .ds-avatar__presence {
+      position: absolute; bottom: 0; right: 0; width: 10px; height: 10px;
+      border-radius: var(--border-radius-full); background: var(--color-green-g300);
+      border: 2px solid var(--color-neutral-n0); box-sizing: border-box;
+    }
+
+    /* ── Sidebar nav (subset) ── */
+    .ds-sidebar-nav-expand {
+      display: flex; flex-direction: column; width: 100%; max-width: 280px;
+      background: var(--color-neutral-n0); overflow: hidden; box-sizing: border-box;
+    }
+    .ds-sidebar-nav-expand__scroll {
+      display: flex; flex-direction: column; gap: var(--space-100);
+      padding: 0 var(--space-300) var(--space-100);
+      overflow-y: auto; box-sizing: border-box;
+    }
+    .ds-sidebar-nav-expand__header {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: var(--space-100); padding: var(--space-150) 0 var(--space-050);
+    }
+    .ds-sidebar-nav-expand__title {
+      font-family: var(--font-primary); font-size: var(--font-size-body2);
+      font-weight: var(--font-weight-semibold); color: var(--color-text-primary);
+    }
+    .ds-sidebar-nav-expand__collapse {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; padding: 0;
+      border: 1px solid var(--color-neutral-n40); border-radius: var(--border-radius-sm);
+      background: var(--color-neutral-n0); cursor: default;
+    }
+    .ds-sidebar-nav-expand__collapse img { width: 16px; height: 16px; display: block; }
+    .ds-nav-menu-search-wrap { width: 100%; margin: 0; }
+    .ds-nav-menu-search {
+      display: flex; align-items: center; gap: var(--space-075);
+      height: var(--space-400); padding: 0 var(--space-100);
+      border: 1px solid var(--color-neutral-n40); border-radius: var(--border-radius-md);
+      background: var(--color-neutral-n0); width: 100%; box-sizing: border-box;
+    }
+    .ds-nav-menu-search__input {
+      flex: 1; min-width: 0; border: none; background: transparent; padding: 0;
+      font-family: var(--font-primary); font-size: var(--text-caption-regular-size);
+      color: var(--color-neutral-n900); outline: none;
+    }
+    .ds-nav-menu-search__input::placeholder { color: var(--color-neutral-n200); }
+    .ds-nav-menu-search__trail { flex-shrink: 0; width: 16px; height: 16px; }
+    .ds-nav-menu-search__trail img { width: 16px; height: 16px; display: block; }
+    .ds-nav-heading-snap {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; padding: var(--space-075) 0 var(--space-050); box-sizing: border-box;
+    }
+    .ds-nav-heading-snap--no-icons .ds-nav-heading-snap__toggle { display: none; }
+    .ds-nav-heading-snap__label-row { display: flex; align-items: center; gap: var(--space-075); min-width: 0; }
+    .ds-nav-heading-snap__lead { width: 12px; height: 12px; flex-shrink: 0; opacity: 0.45; }
+    .ds-sidebar-nav-expand__menu,
+    .ds-sidebar-nav-expand__recent {
+      display: flex; flex-direction: column; gap: var(--space-100);
+      margin: 0; padding: 0; list-style: none;
+    }
+    .ds-sidebar-nav-expand__item { display: flex; flex-direction: column; gap: var(--space-100); }
+    .ds-nav-mainmenu-snap,
+    .ds-nav-submenu-snap {
+      display: flex; align-items: center; gap: var(--space-100);
+      width: 100%; min-height: 40px; padding: var(--space-050) var(--space-100);
+      border: none; border-radius: var(--border-radius-md);
+      background: transparent; cursor: default; box-sizing: border-box; text-align: left;
+    }
+    .ds-nav-mainmenu-snap__lead, .ds-nav-submenu-snap__dot { flex-shrink: 0; width: 24px; height: 24px; }
+    .ds-nav-submenu-snap__dot { width: 6px; height: 6px; margin-left: var(--space-100); }
+    .ds-nav-mainmenu-snap__body { flex: 1; min-width: 0; }
+    .ds-nav-mainmenu-snap__title {
+      font-family: var(--font-primary); font-size: var(--font-size-body3);
+      font-weight: var(--font-weight-regular); color: var(--color-text-primary);
+    }
+    .ds-nav-submenu-snap__label {
+      flex: 1; font-family: var(--font-primary); font-size: var(--font-size-body3);
+      color: var(--color-text-primary);
+    }
+    .ds-nav-mainmenu-snap__trail { width: 16px; height: 16px; margin-left: auto; flex-shrink: 0; }
+    .ds-nav-mainmenu-snap--leaf .ds-nav-mainmenu-snap__trail { display: none; }
+    .ds-nav-divider { width: 100%; max-width: none; margin: 0; display: block; }
+    .ds-nav-composed__submenu { display: none; }
+    .ds-nav-mainmenu-snap--selected { background: var(--color-blue-b50); }
+    .ds-nav-mainmenu-snap--selected .ds-nav-mainmenu-snap__title { color: var(--color-blue-b300); }
+    .ds-nav-submenu-snap--selected { background: var(--color-blue-b50); }
+    .ds-nav-submenu-snap--selected .ds-nav-submenu-snap__label { color: var(--color-blue-b300); }
+
+    /* ── Banner (subset) ── */
+    .ds-banner {
+      display: flex; align-items: center; width: 100%;
+      padding: var(--space-150); border-radius: var(--border-radius-lg);
+      gap: var(--space-050); font-family: var(--font-primary);
+    }
+    .ds-banner__icon { flex-shrink: 0; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; }
+    .ds-banner__text { flex: 1; font-size: var(--font-size-sm); font-weight: var(--font-weight-medium); line-height: var(--line-height-snug); }
+    .ds-banner--success { background-color: var(--color-green-g300); }
+    .ds-banner--success .ds-banner__text { color: var(--color-neutral-n0); }
+    .ds-banner--success .ds-banner__icon path { fill: var(--color-neutral-n0); }
+
+    /* ── Page header (subset) ── */
+    .ds-page-header { display: flex; flex-direction: column; gap: var(--space-200); width: 100%; }
+    .ds-page-header__row {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: var(--space-200); flex-wrap: wrap;
+    }
+    .ds-page-header__start { display: flex; flex-direction: column; gap: var(--space-100); flex: 1; min-width: 0; }
+    .ds-page-header__title {
+      margin: 0; font-size: var(--text-header-small-medium-size);
+      font-weight: var(--text-header-small-medium-weight);
+      line-height: var(--text-header-small-medium-lh); color: var(--color-neutral-n900);
+    }
+    .ds-page-header__actions { display: flex; align-items: center; gap: var(--space-100); flex-shrink: 0; flex-wrap: wrap; }
+    .ds-page-header__row--toolbar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-100); flex-wrap: wrap; }
+    .ds-page-header__toolbar { display: flex; align-items: center; gap: var(--space-100); flex: 1; min-width: 0; flex-wrap: wrap; }
+    .ds-page-header__search { flex: 1; min-width: min(100%, 200px); max-width: 400px; }
+    .ds-page-header__filter { flex-shrink: 0; }
+    .ds-page-header__table-action { flex-shrink: 0; }
+    .ds-bc-container { display: flex; align-items: center; gap: 2px; flex-wrap: wrap; }
+    .ds-bc-item {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; background: none; border: none; padding: 0; cursor: default; font-family: var(--font-primary);
+    }
+    .ds-bc-sep, .ds-bc-text { font-size: 12px; font-family: var(--font-primary); }
+    .ds-bc-item--default .ds-bc-sep, .ds-bc-item--default .ds-bc-text { color: var(--color-blue-b300); }
+    .ds-bc-item--focus .ds-bc-text { color: var(--color-neutral-n300); }
+
+    /* ── Button / select / dropdown (subset) ── */
+    .ds-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: var(--space-025); padding: 0 var(--space-150); min-height: 32px;
+      background-color: var(--color-neutral-n20); color: var(--color-neutral-n900);
+      font-family: var(--font-primary); font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium); border-radius: 6px; border: none;
+      cursor: default; white-space: nowrap;
+    }
+    .ds-btn--primary { background-color: var(--color-blue-b300); color: var(--color-neutral-n0); }
+    .ds-btn--subtle { background: transparent; color: var(--color-neutral-n500); }
+    .ds-btn--icon-only { padding: 0 var(--space-050); min-width: 32px; }
+    .ds-btn img { width: 16px; height: 16px; display: block; }
+    .ds-select-component { display: grid; gap: 0; width: 100%; }
+    .ds-select-trigger {
+      min-height: 40px; width: 100%;
+      border: 1px solid var(--color-neutral-n40); border-radius: 6px;
+      background: var(--color-neutral-n0); color: var(--color-neutral-n500);
+      padding: var(--space-075) var(--space-100);
+      display: flex; align-items: center; justify-content: space-between; gap: var(--space-100);
+      font-family: var(--font-primary); font-size: var(--font-size-sm); cursor: default;
+    }
+    .ds-select-trigger__icon { width: 16px; height: 16px; flex-shrink: 0; }
+    .ds-dropdown-btn__chevron { width: 16px; height: 16px; }
+
+    /* ── Table (subset) ── */
+    .ds-table-wrapper { width: 100%; }
+    .ds-table-scroll { overflow-x: auto; }
+    .ds-table {
+      width: 100%; border-collapse: collapse; table-layout: auto;
+      font-family: var(--font-primary); min-width: 32rem;
+    }
+    .ds-table thead th {
+      padding: var(--space-050) var(--space-100);
+      border-bottom: 1px solid var(--color-border);
+      font-size: var(--text-body-small-medium-size);
+      font-weight: var(--text-body-small-medium-weight);
+      color: var(--color-text-primary); text-align: left; background: var(--color-surface);
+    }
+    .ds-table tbody td {
+      padding: var(--space-100) var(--space-150);
+      border-bottom: 1px solid var(--color-border);
+      vertical-align: middle;
+    }
+    .ds-table--row-hover tbody tr:hover td { background: var(--color-neutral-n20); }
+    .ds-table-header-cell__checkbox-wrap,
+    .ds-table-col-checkbox__wrap { display: inline-flex; align-items: center; justify-content: center; }
+    .ds-table-header-cell__checkbox,
+    .ds-table-col-checkbox__box {
+      width: 16px; height: 16px; border: 1px solid var(--color-neutral-n40);
+      border-radius: var(--border-radius-sm); display: block;
+    }
+    .ds-table-header-cell__checkbox-input,
+    .ds-table-col-checkbox__input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .ds-table-col-link__anchor { color: var(--color-blue-b300); text-decoration: none; font-size: var(--font-size-sm); }
+    .ds-lozenge {
+      display: inline-flex; padding: var(--space-025) var(--space-100);
+      border-radius: var(--border-radius-sm);
+      font-size: var(--text-overline-medium-size); font-weight: var(--font-weight-semibold);
+      text-transform: uppercase; background: var(--color-neutral-n20); color: var(--color-neutral-n500);
+    }
+    .ds-table-col-icon__group { display: flex; justify-content: center; }
+    .ds-table-col-icon__icon { width: 24px; height: 24px; }
+
+    /* ── Footer nav (subset) ── */
+    .ds-footer-nav {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: var(--space-150); min-height: 56px;
+      padding: var(--space-100) var(--space-150);
+      background: var(--color-neutral-n0); box-sizing: border-box;
+    }
+    .ds-footer-nav__actions { display: inline-flex; align-items: center; gap: var(--space-100); }
+  </style>
+</head>
+<body>
+<div class="scroll-progress" id="scroll-progress"></div>
+<div class="container">
+  <div id="sidebar-overlay" class="sidebar-overlay"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">
+        <div class="sidebar-logo-icon">GL</div>
+        <div class="sidebar-brand-text">
+          <div class="logo">GPOS Lite</div>
+          <div class="version">Design System V2.0</div>
+        </div>
+      </div>
+      <button class="sidebar-close-btn" id="sidebar-close" aria-label="Tutup menu">&#x2715;</button>
+    </div>
+    <div class="sidebar-search">
+      <input type="search" class="search-input" placeholder="&#x1F50D;  Cari token, component...">
+    </div>
+    <div class="nav-scroll">
+      <nav class="nav-menu">
+        <div class="nav-section nav-section--menu is-open">
+          <button type="button" class="nav-menu-toggle" aria-expanded="true">
+            <h3 class="nav-title">Overview</h3>
+            <img src="../../assets/icons/icon-chevron-mini-down.svg" alt="" class="nav-menu-toggle__chevron" aria-hidden="true">
+          </button>
+          <ul class="nav-list">
+            <li><a href="../../index.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>Home</a></li>
+          </ul>
+        </div>
+        <div class="nav-section nav-section--menu is-open">
+          <button type="button" class="nav-menu-toggle" aria-expanded="true">
+            <h3 class="nav-title">Foundations</h3>
+            <img src="../../assets/icons/icon-chevron-mini-down.svg" alt="" class="nav-menu-toggle__chevron" aria-hidden="true">
+          </button>
+          <ul class="nav-list">
+            <li><a href="../../foundations/colors/colors.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 010 20V2z"/></svg>Colors</a></li>
+            <li><a href="../../foundations/typography/typography.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4,7 4,4 20,4 20,7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>Typography</a></li>
+            <li><a href="../../foundations/spacing/spacing.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="21" y1="10" x2="3" y2="10"/><line x1="21" y1="6" x2="3" y2="6"/><line x1="21" y1="14" x2="3" y2="14"/><line x1="21" y1="18" x2="3" y2="18"/></svg>Spacing</a></li>
+            <li><a href="../../foundations/shadows/shadows.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="14" height="14" rx="2"/><path d="M7 7h12a2 2 0 012 2v12a2 2 0 01-2 2H7a2 2 0 01-2-2V7z" opacity="0.4"/></svg>Shadows</a></li>
+            <li><a href="../../foundations/borders/borders.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg>Borders &amp; Radius</a></li>
+            <li><a href="../../foundations/grid/grid.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>Grid &amp; Layout</a></li>
+            <li><a href="../../foundations/icons/icons.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="5" height="5" rx="1"/><rect x="10" y="3" width="5" height="5" rx="1"/></svg>Icons</a></li>
+          </ul>
+        </div>
+        <div class="nav-section nav-section--menu is-open">
+          <button type="button" class="nav-menu-toggle" aria-expanded="true">
+            <h3 class="nav-title">Komponen</h3>
+            <img src="../../assets/icons/icon-chevron-mini-down.svg" alt="" class="nav-menu-toggle__chevron" aria-hidden="true">
+          </button>
+          <ul class="nav-list">
+            <li><a href="../Button/button.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="3"/></svg>Button</a></li>
+            <li><a href="../Breadcrumbs/breadcrumbs.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>Breadcrumbs</a></li>
+            <li><a href="../Page Header/page-header.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="5" rx="1"/><rect x="3" y="13" width="11" height="5" rx="1"/></svg>Page Header</a></li>
+            <li><a href="../Page layout/page-layout.html" class="nav-link active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Page Layout</a></li>
+            <li><a href="../Navigation menu/navigation.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/></svg>Navigation Menu</a></li>
+            <li><a href="../Top & bottom Navigation/top-bottom-nav.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="17" width="20" height="4" rx="1"/></svg>Top &amp; Bottom Nav</a></li>
+            <li><a href="../Toast-Banner/banner.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="8" rx="2"/></svg>Toast Banner</a></li>
+            <li><a href="../Table/table.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="1"/></svg>Table</a></li>
+            <li><a href="../Modal/modal.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/></svg>Modal</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="sidebar-footer">
+      <div class="tailwind-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 6C9.33 6 7.67 7.33 7 10c1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35.98 1 2.09 2.15 4.59 2.15C19.67 12 21.33 10.67 22 8c-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C15.61 7.15 14.5 6 12 6zm-7 6c-2.67 0-4.33 1.33-5 4 1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35C6.39 17.15 7.5 18 10 18c2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C8.61 12.85 7.5 12 5 12z"/></svg>
+        Built with tokens.css
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="Buka menu">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="breadcrumb">
+        <a href="../../index.html">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="#">Components</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="current">Page Layout</span>
+      </div>
+      <div class="topbar-actions">
+        <button class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode">
+          <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/></svg>
+        </button>
+        <span class="version-badge">v2.0</span>
+      </div>
+    </div>
+
+    <div class="content-inner">
+      <section class="mb-12">
+        <div class="ds-hero-banner rounded-2xl overflow-hidden mb-3 flex flex-col lg:flex-row bg-neutral-n900" style="border:1px solid color-mix(in srgb, var(--color-neutral-n0) 7%, transparent);">
+          <div class="flex-1 px-8 py-10 lg:px-11 lg:py-12 flex flex-col justify-center">
+            <div class="flex items-center gap-100 mb-5">
+              <div class="flex items-center justify-center w-5 h-5 rounded-md" style="background:color-mix(in srgb, var(--color-blue-b300) 20%, transparent);">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--color-blue-b100)" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+              </div>
+              <span class="text-xs font-semibold uppercase tracking-[0.1em] text-blue-b100">Components · DS GPOS Lite V2</span>
+            </div>
+            <div class="font-bold text-neutral-n0 mb-3" style="font-size:2.5rem;letter-spacing:-0.035em;line-height:1.04;">Page Layout</div>
+            <p class="text-sm leading-relaxed max-w-md mb-8" style="color:color-mix(in srgb, var(--color-neutral-n0) 52%, transparent);line-height:1.7;">
+              Kerangka halaman website GPOS Lite: top navigation, sidebar, konten utama (banner, page header, tabel), dan footer navigation. Landasan grid 12 kolom tanpa overlay visual.
+            </p>
+            <div class="flex flex-wrap gap-100">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:color-mix(in srgb, var(--color-neutral-n0) 6%, transparent);color:color-mix(in srgb, var(--color-neutral-n0) 45%, transparent);border-color:color-mix(in srgb, var(--color-neutral-n0) 10%, transparent);">variant=website</span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:color-mix(in srgb, var(--color-blue-b300) 15%, transparent);color:var(--color-blue-b100);border-color:color-mix(in srgb, var(--color-blue-b300) 28%, transparent);">Figma-synced</span>
+            </div>
+          </div>
+          <div class="lg:w-80 lg:flex-shrink-0 p-300 flex items-center justify-center" style="background:color-mix(in srgb, var(--color-neutral-n0) 3%, transparent);border-left:1px solid color-mix(in srgb, var(--color-neutral-n0) 7%, transparent);">
+            <img src="figma/website.png" alt="Referensi page layout website" width="280" height="auto" style="max-width:100%;height:auto;border-radius:var(--border-radius-lg);border:1px solid var(--color-border);">
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-150">
+          <div class="hero-feat-card bg-neutral-n0 rounded-xl p-250 border border-neutral-n30">
+            <div class="text-sm font-semibold text-neutral-n900 mb-1.5">Top + Side</div>
+            <div class="text-xs" style="color:var(--color-text-tertiary);">ds-topnav--website + ds-sidebar-nav-expand</div>
+          </div>
+          <div class="hero-feat-card bg-neutral-n0 rounded-xl p-250 border border-neutral-n30">
+            <div class="text-sm font-semibold text-neutral-n900 mb-1.5">Konten utama</div>
+            <div class="text-xs" style="color:var(--color-text-tertiary);">Banner, page header, table parts</div>
+          </div>
+          <div class="hero-feat-card bg-neutral-n0 rounded-xl p-250 border border-neutral-n30">
+            <div class="text-sm font-semibold text-neutral-n900 mb-1.5">Grid 12 kolom</div>
+            <div class="text-xs" style="color:var(--color-text-tertiary);">margin &amp; gutter token — tidak ditampilkan di UI</div>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2 class="section-heading"><span class="section-heading__accent"></span>Varian Website</h2>
+        <p class="text-body-sm mb-6" style="color:var(--color-text-secondary);max-width:640px;line-height:1.7;">
+          Dua state sidebar mengikuti <code class="chip">figma/website.png</code>: menu utama dan submenu aktif (<code class="chip">submenu=on</code>).
+        </p>
+        <div class="pl-variant-grid">
+          <div class="pl-variant-card">
+            <div class="pl-variant-card__label">variant=website · menu utama</div>
+            <div class="pl-variant-card__body" data-pl-variant-host data-variant="main"></div>
+          </div>
+          <div class="pl-variant-card">
+            <div class="pl-variant-card__label">variant=website · submenu=on</div>
+            <div class="pl-variant-card__body" data-pl-variant-host data-variant="submenu"></div>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2 class="section-heading"><span class="section-heading__accent"></span>Playground</h2>
+        <p class="text-body-sm mb-6" style="color:var(--color-text-secondary);max-width:640px;line-height:1.7;">
+          Tabel part menunjukkan komponen DS yang disusun dalam layout. Preview memakai markup dari komponen parts yang ada.
+        </p>
+        <div class="pl-playground">
+          <div class="pl-playground__controls">
+            <div class="pl-playground__field">
+              <label for="pl-pg-variant">State sidebar</label>
+              <select id="pl-pg-variant" aria-label="Pilih state sidebar page layout">
+                <option value="main">menu utama</option>
+                <option value="submenu">submenu=on</option>
+              </select>
+            </div>
+          </div>
+          <div class="anatomy-table-wrap">
+            <table class="anatomy-table" id="pl-pg-parts-table" aria-label="Part page layout website">
+              <thead>
+                <tr><th>Part</th><th>Class / Komponen</th><th>Sumber</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Top navigation</td><td><code class="chip">.ds-topnav.ds-topnav--website</code></td><td>Top &amp; Bottom Nav</td></tr>
+                <tr><td>Sidebar navigation</td><td><code class="chip">.ds-sidebar-nav-expand</code></td><td>Navigation Menu</td></tr>
+                <tr><td>Toast banner</td><td><code class="chip">.ds-banner.ds-banner--success</code></td><td>Toast Banner</td></tr>
+                <tr><td>Page header</td><td><code class="chip">.ds-page-header--actions-on.ds-page-header--toolbar-on</code></td><td>Page Header</td></tr>
+                <tr><td>Data table</td><td><code class="chip">.ds-table.ds-table--data</code></td><td>Table</td></tr>
+                <tr><td>Footer navigation</td><td><code class="chip">.ds-footer-nav</code></td><td>Top &amp; Bottom Nav</td></tr>
+                <tr data-part="submenu-row"><td>Submenu panel</td><td><code class="chip">.ds-page-layout--submenu-on</code></td><td>Page Layout</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="pl-playground__stage" id="pl-playground-host"></div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2 class="section-heading"><span class="section-heading__accent"></span>Do &amp; Don't</h2>
+        <div class="guideline-grid">
+          <article class="guideline-card">
+            <h3 class="guideline-card__title" style="color:var(--color-green-g400);">Do — Lakukan ini</h3>
+            <ul class="guideline-list">
+              <li>Gunakan <code class="chip">.ds-page-layout</code> sebagai shell; susun part dari komponen DS yang sudah ada.</li>
+              <li>Terapkan grid 12 kolom lewat <code class="chip">.ds-page-layout__content</code> dengan <code class="chip">--grid-margin</code> dan <code class="chip">--grid-gutter</code> — tanpa menampilkan garis grid di UI.</li>
+              <li>Top bar memakai <code class="chip">.ds-topnav--website</code>; sidebar memakai <code class="chip">.ds-sidebar-nav-expand</code>.</li>
+              <li>Page header untuk halaman data: <code class="chip">--actions-on</code> + <code class="chip">--toolbar-on</code> (search &amp; filter).</li>
+              <li>Area tabel memakai <code class="chip">.ds-table</code> dan kolom parts dari komponen Table.</li>
+              <li>Aksi bawah halaman memakai <code class="chip">.ds-footer-nav</code> (Kembali + Simpan).</li>
+            </ul>
+          </article>
+          <article class="guideline-card">
+            <h3 class="guideline-card__title" style="color:var(--color-red-r400);">Don't — Hindari ini</h3>
+            <ul class="guideline-list">
+              <li>Jangan menulis ulang style top nav, sidebar, banner, atau page header di dalam layout.</li>
+              <li>Jangan hardcode warna, spacing, atau radius — gunakan token dari <code class="chip">tokens.css</code>.</li>
+              <li>Jangan menampilkan overlay grid atau debug column di produksi.</li>
+              <li>Jangan mengganti sidebar dengan menu custom di luar pola <code class="chip">ds-nav-*</code>.</li>
+              <li>Jangan menempatkan lebih dari satu toast banner permanen di area konten.</li>
+              <li>Jangan mencampur variant top nav (tablet/mobile) pada layout website desktop.</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <footer class="page-footer" style="margin-top:64px;padding-top:24px;border-top:1px solid var(--color-border);font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-primary);">
+        &copy; 2026 <strong style="color:var(--color-text-secondary);">GPOS Lite Design System V2.0</strong>
+      </footer>
+    </div>
+  </main>
+</div>
+
+<template id="pl-layout-template">
+  <div class="ds-page-layout ds-page-layout--website" data-pl-layout>
+    <header class="ds-topnav ds-topnav--website" role="banner" aria-label="Top navigation">
+      <div class="ds-topnav__start">
+        <a href="#" class="ds-topnav-logo" tabindex="-1" style="pointer-events:none;" aria-label="GPOS Lite">
+          <img class="ds-topnav-logo__img" src="../../assets/images/logo-parts.svg" width="102" height="47" alt="GPOS Lite">
+        </a>
+      </div>
+      <div class="ds-topnav__end">
+        <button type="button" class="ds-btn ds-btn--subtle" tabindex="-1">Akses</button>
+        <button type="button" class="ds-topnav-notif" tabindex="-1" aria-label="Notifikasi">
+          <img class="ds-topnav-notif__icon" src="../../assets/icons/icon-bell.svg" alt="" aria-hidden="true">
+          <span class="ds-topnav-notif__indicator"><span class="ds-badge ds-badge--important">60</span></span>
+        </button>
+        <button type="button" class="ds-topnav-notif" tabindex="-1" aria-label="Notifikasi sekunder">
+          <img class="ds-topnav-notif__icon" src="../../assets/icons/icon-bell.svg" alt="" aria-hidden="true">
+          <span class="ds-topnav-notif__indicator"><span class="ds-badge ds-badge--important">60</span></span>
+        </button>
+        <button type="button" class="ds-topnav-profile" tabindex="-1" aria-label="Profil">
+          <div class="ds-avatar ds-avatar--lg">
+            <img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="" width="28" height="28">
+            <div class="ds-avatar__presence" aria-hidden="true"></div>
+          </div>
+        </button>
+      </div>
+    </header>
+    <div class="ds-page-layout__body">
+      <aside class="ds-page-layout__aside" aria-label="Sidebar aplikasi">
+        <div class="ds-page-layout__nav-main">
+          <nav class="ds-sidebar-nav-expand" aria-label="Menu utama">
+            <div class="ds-sidebar-nav-expand__scroll">
+              <div class="ds-sidebar-nav-expand__header">
+                <span class="ds-sidebar-nav-expand__title">MENU GPOS</span>
+                <button type="button" class="ds-sidebar-nav-expand__collapse" tabindex="-1" aria-label="Tutup sidebar">
+                  <img src="../../assets/icons/icon-chevron-left.svg" alt="" width="16" height="16">
+                </button>
+              </div>
+              <div class="ds-nav-menu-search-wrap">
+                <label class="ds-nav-menu-search">
+                  <input type="search" class="ds-nav-menu-search__input" placeholder="Cari Menu Disini" readonly tabindex="-1">
+                  <span class="ds-nav-menu-search__trail" aria-hidden="true">
+                    <img src="../../assets/icons/icon-magnifying-glass.svg" width="16" height="16" alt="">
+                  </span>
+                </label>
+              </div>
+              <div class="ds-nav-heading-snap ds-nav-heading-snap--no-icons">
+                <div class="ds-nav-heading-snap__label-row">
+                  <span class="block uppercase tracking-overline text-text-secondary text-overline font-medium">Terakhir Dibuka</span>
+                </div>
+              </div>
+              <ul class="ds-sidebar-nav-expand__recent" aria-label="Terakhir dibuka">
+                <li class="ds-sidebar-nav-expand__item">
+                  <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1">
+                    <img src="../../assets/icons/icon-sidebar-offline-dashboard-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
+                    <div class="ds-nav-mainmenu-snap__body">
+                      <span class="ds-nav-mainmenu-snap__title">Title</span>
+                      <span class="block text-text-secondary text-caption">Description</span>
+                    </div>
+                  </button>
+                </li>
+                <li class="ds-sidebar-nav-expand__item">
+                  <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1">
+                    <img src="../../assets/icons/icon-sidebar-offline-pos-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
+                    <div class="ds-nav-mainmenu-snap__body">
+                      <span class="ds-nav-mainmenu-snap__title">Title</span>
+                      <span class="block text-text-secondary text-caption">Description</span>
+                    </div>
+                  </button>
+                </li>
+              </ul>
+              <img src="../../assets/images/Divider.svg" width="240" height="2" alt="" class="ds-nav-divider" aria-hidden="true">
+              <ul class="ds-sidebar-nav-expand__menu" aria-label="Menu utama">
+                <li class="ds-sidebar-nav-expand__item">
+                  <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1">
+                    <img src="../../assets/icons/icon-sidebar-offline-news-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
+                    <div class="ds-nav-mainmenu-snap__body"><span class="ds-nav-mainmenu-snap__title">Berita</span></div>
+                  </button>
+                </li>
+                <li class="ds-sidebar-nav-expand__item">
+                  <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--leaf" tabindex="-1">
+                    <img src="../../assets/icons/icon-sidebar-offline-dashboard-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
+                    <div class="ds-nav-mainmenu-snap__body"><span class="ds-nav-mainmenu-snap__title">Dashboard</span></div>
+                  </button>
+                </li>
+                <li class="ds-sidebar-nav-expand__item">
+                  <button type="button" class="ds-nav-mainmenu-snap" tabindex="-1">
+                    <img src="../../assets/icons/icon-sidebar-offline-payable-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
+                    <div class="ds-nav-mainmenu-snap__body"><span class="ds-nav-mainmenu-snap__title">Belanja</span></div>
+                    <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
+                  </button>
+                </li>
+                <li class="ds-sidebar-nav-expand__item">
+                  <button type="button" class="ds-nav-mainmenu-snap ds-nav-mainmenu-snap--selected" tabindex="-1">
+                    <img src="../../assets/icons/icon-sidebar-offline-payable-off.svg" width="24" height="24" alt="" class="ds-nav-mainmenu-snap__lead" aria-hidden="true">
+                    <div class="ds-nav-mainmenu-snap__body"><span class="ds-nav-mainmenu-snap__title">Pembelian</span></div>
+                    <img src="../../assets/icons/icon-chevron-down.svg" width="16" height="16" alt="" class="ds-nav-mainmenu-snap__trail" aria-hidden="true">
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        <nav class="ds-sidebar-nav-expand ds-page-layout__nav-sub" aria-label="Submenu">
+          <div class="ds-sidebar-nav-expand__scroll">
+            <button type="button" class="ds-nav-heading-snap ds-page-layout__nav-back" tabindex="-1">
+              <div class="ds-nav-heading-snap__label-row">
+                <img src="../../assets/icons/icon-chevron-left.svg" alt="" width="12" height="12" class="ds-nav-heading-snap__lead" aria-hidden="true">
+                <span class="block uppercase tracking-overline text-text-secondary text-overline font-medium">Kembali ke Menu</span>
+              </div>
+            </button>
+            <ul class="ds-sidebar-nav-expand__menu" aria-label="Submenu Pembelian">
+              <li class="ds-sidebar-nav-expand__item">
+                <button type="button" class="ds-nav-submenu-snap" tabindex="-1">
+                  <img src="../../assets/icons/dot.svg" width="6" height="6" alt="" class="ds-nav-submenu-snap__dot" aria-hidden="true">
+                  <span class="ds-nav-submenu-snap__label">Rangkuman Pembelian</span>
+                </button>
+              </li>
+              <li class="ds-sidebar-nav-expand__item">
+                <button type="button" class="ds-nav-submenu-snap ds-nav-submenu-snap--selected" tabindex="-1">
+                  <img src="../../assets/icons/dot.svg" width="6" height="6" alt="" class="ds-nav-submenu-snap__dot" aria-hidden="true">
+                  <span class="ds-nav-submenu-snap__label">Pesanan Pembelian</span>
+                </button>
+              </li>
+              <li class="ds-sidebar-nav-expand__item">
+                <button type="button" class="ds-nav-submenu-snap" tabindex="-1">
+                  <img src="../../assets/icons/dot.svg" width="6" height="6" alt="" class="ds-nav-submenu-snap__dot" aria-hidden="true">
+                  <span class="ds-nav-submenu-snap__label">Penerimaan Barang</span>
+                </button>
+              </li>
+              <li class="ds-sidebar-nav-expand__item">
+                <button type="button" class="ds-nav-submenu-snap" tabindex="-1">
+                  <img src="../../assets/icons/dot.svg" width="6" height="6" alt="" class="ds-nav-submenu-snap__dot" aria-hidden="true">
+                  <span class="ds-nav-submenu-snap__label">Faktur Pembelian</span>
+                </button>
+              </li>
+              <li class="ds-sidebar-nav-expand__item">
+                <button type="button" class="ds-nav-submenu-snap" tabindex="-1">
+                  <img src="../../assets/icons/dot.svg" width="6" height="6" alt="" class="ds-nav-submenu-snap__dot" aria-hidden="true">
+                  <span class="ds-nav-submenu-snap__label">Retur Pembelian</span>
+                </button>
+              </li>
+              <li class="ds-sidebar-nav-expand__item">
+                <button type="button" class="ds-nav-submenu-snap" tabindex="-1">
+                  <img src="../../assets/icons/dot.svg" width="6" height="6" alt="" class="ds-nav-submenu-snap__dot" aria-hidden="true">
+                  <span class="ds-nav-submenu-snap__label">Periode Pembelian</span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </aside>
+      <div class="ds-page-layout__main">
+        <div class="ds-page-layout__content">
+          <div class="ds-banner ds-banner--success" role="status">
+            <div class="ds-banner__icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M2.25 12C2.25 6.61522 6.61522 2.25 12 2.25C17.3848 2.25 21.75 6.61522 21.75 12C21.75 17.3848 17.3848 21.75 12 21.75C6.61522 21.75 2.25 17.3848 2.25 12ZM15.6103 10.1859C15.8511 9.84887 15.773 9.38046 15.4359 9.1397C15.0989 8.89894 14.6305 8.97701 14.3897 9.31407L11.1543 13.8436L9.53033 12.2197C9.23744 11.9268 8.76256 11.9268 8.46967 12.2197C8.17678 12.5126 8.17678 12.9874 8.46967 13.2803L10.7197 15.5303C10.8756 15.6862 11.0921 15.7656 11.3119 15.7474C11.5316 15.7293 11.7322 15.6153 11.8603 15.4359L15.6103 10.1859Z" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="ds-banner__text">text banner</div>
+          </div>
+          <header class="ds-page-header ds-page-header--actions-on ds-page-header--toolbar-on" aria-label="Page header">
+            <div class="ds-page-header__row">
+              <div class="ds-page-header__start">
+                <nav class="ds-bc-container" aria-label="Breadcrumb">
+                  <button type="button" class="ds-bc-item ds-bc-item--default" tabindex="-1"><span class="ds-bc-text">Item</span><span class="ds-bc-sep" aria-hidden="true">/</span></button>
+                  <button type="button" class="ds-bc-item ds-bc-item--default" tabindex="-1"><span class="ds-bc-text">Item</span><span class="ds-bc-sep" aria-hidden="true">/</span></button>
+                  <span class="ds-bc-item ds-bc-item--focus" aria-current="page"><span class="ds-bc-text">Item</span></span>
+                </nav>
+                <h1 class="ds-page-header__title">Title</h1>
+              </div>
+              <div class="ds-page-header__actions" role="group" aria-label="Aksi halaman">
+                <button type="button" class="ds-btn" tabindex="-1">Default</button>
+                <button type="button" class="ds-btn ds-btn--primary" tabindex="-1">Primary Action</button>
+                <button type="button" class="ds-btn ds-btn--icon-only" tabindex="-1" aria-label="Menu lainnya">
+                  <img src="../../assets/icons/icon-ellipsis-vertical.svg" alt="" width="16" height="16" aria-hidden="true">
+                </button>
+              </div>
+            </div>
+            <div class="ds-page-header__row ds-page-header__row--toolbar">
+              <div class="ds-page-header__toolbar">
+                <div class="ds-page-header__search">
+                  <div class="ds-select-component">
+                    <button type="button" class="ds-select-trigger" tabindex="-1" aria-haspopup="listbox">
+                      <span class="ds-select-trigger__value">Value</span>
+                      <svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6,9 12,15 18,9"/></svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="ds-page-header__filter">
+                  <button type="button" class="ds-btn" tabindex="-1">
+                    Filter
+                    <img class="ds-dropdown-btn__chevron" src="../../assets/icons/icon-chevron-mini-down.svg" alt="" width="16" height="16" aria-hidden="true">
+                  </button>
+                </div>
+              </div>
+              <button type="button" class="ds-btn ds-page-header__table-action" tabindex="-1">
+                <img src="../../assets/icons/icon-adjustments-horizontal.svg" alt="" width="16" height="16" aria-hidden="true">
+                Atur Table
+              </button>
+            </div>
+          </header>
+          <div class="ds-page-layout__table-wrap">
+            <div class="ds-table-wrapper">
+              <div class="ds-table-scroll" tabindex="0" role="region" aria-label="Tabel data">
+                <table class="ds-table ds-table--row-hover ds-table--data" aria-label="Tabel data contoh">
+                  <thead>
+                    <tr>
+                      <th class="ds-table-header-cell ds-table-header-cell--checkbox" scope="col">
+                        <label class="ds-table-header-cell__checkbox-wrap">
+                          <input type="checkbox" class="ds-table-header-cell__checkbox-input" aria-label="Pilih semua" tabindex="-1">
+                          <span class="ds-table-header-cell__checkbox" aria-hidden="true"></span>
+                        </label>
+                      </th>
+                      <th scope="col">Title</th>
+                      <th scope="col">Title</th>
+                      <th scope="col">Title</th>
+                      <th scope="col">Title</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="ds-table-col-checkbox">
+                        <label class="ds-table-col-checkbox__wrap">
+                          <input type="checkbox" class="ds-table-col-checkbox__input" tabindex="-1" aria-label="Pilih baris">
+                          <span class="ds-table-col-checkbox__box" aria-hidden="true"></span>
+                        </label>
+                      </td>
+                      <td class="ds-table-col-icon"><div class="ds-table-col-icon__group"><img class="ds-table-col-icon__icon" src="../../assets/icons/icon-pencil.svg" alt="" width="24" height="24"></div></td>
+                      <td class="ds-table-col-link"><a class="ds-table-col-link__anchor" href="#" tabindex="-1">Text</a></td>
+                      <td><span class="ds-lozenge">LABEL</span></td>
+                      <td class="ds-table-col-link"><a class="ds-table-col-link__anchor" href="#" tabindex="-1">Text</a></td>
+                    </tr>
+                    <tr>
+                      <td class="ds-table-col-checkbox">
+                        <label class="ds-table-col-checkbox__wrap">
+                          <input type="checkbox" class="ds-table-col-checkbox__input" tabindex="-1" aria-label="Pilih baris">
+                          <span class="ds-table-col-checkbox__box" aria-hidden="true"></span>
+                        </label>
+                      </td>
+                      <td class="ds-table-col-icon"><div class="ds-table-col-icon__group"><img class="ds-table-col-icon__icon" src="../../assets/icons/icon-pencil.svg" alt="" width="24" height="24"></div></td>
+                      <td class="ds-table-col-link"><a class="ds-table-col-link__anchor" href="#" tabindex="-1">Text</a></td>
+                      <td><span class="ds-lozenge">LABEL</span></td>
+                      <td class="ds-table-col-link"><a class="ds-table-col-link__anchor" href="#" tabindex="-1">Text</a></td>
+                    </tr>
+                    <tr>
+                      <td class="ds-table-col-checkbox">
+                        <label class="ds-table-col-checkbox__wrap">
+                          <input type="checkbox" class="ds-table-col-checkbox__input" tabindex="-1" aria-label="Pilih baris">
+                          <span class="ds-table-col-checkbox__box" aria-hidden="true"></span>
+                        </label>
+                      </td>
+                      <td class="ds-table-col-icon"><div class="ds-table-col-icon__group"><img class="ds-table-col-icon__icon" src="../../assets/icons/icon-pencil.svg" alt="" width="24" height="24"></div></td>
+                      <td class="ds-table-col-link"><a class="ds-table-col-link__anchor" href="#" tabindex="-1">Text</a></td>
+                      <td><span class="ds-lozenge">LABEL</span></td>
+                      <td class="ds-table-col-link"><a class="ds-table-col-link__anchor" href="#" tabindex="-1">Text</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ds-page-layout__footer">
+          <footer class="ds-footer-nav" aria-label="Footer navigation">
+            <div></div>
+            <div class="ds-footer-nav__actions">
+              <button type="button" class="ds-btn ds-btn--subtle" tabindex="-1">Kembali</button>
+              <button type="button" class="ds-btn ds-btn--primary" tabindex="-1">Simpan</button>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script src="../../scripts/script.js"></script>
+<script src="../../scripts/sidebar-nav-menu.js"></script>
+<script>
+  (function () {
+    var prog = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', function () {
+      var total = document.documentElement.scrollHeight - window.innerHeight;
+      prog.style.width = (total > 0 ? (window.scrollY / total) * 100 : 0) + '%';
+    }, { passive: true });
+  })();
+  (function () {
+    var btn = document.getElementById('dark-toggle');
+    if (!btn) return;
+    var html = document.documentElement;
+    var stored = localStorage.getItem('ds-theme');
+    if (stored) html.setAttribute('data-theme', stored);
+    btn.addEventListener('click', function () {
+      var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('ds-theme', next);
+    });
+  })();
+
+  function mountLayout(host, submenuOn) {
+    var tpl = document.getElementById('pl-layout-template');
+    if (!tpl || !host) return;
+    host.innerHTML = '';
+    var node = tpl.content.firstElementChild.cloneNode(true);
+    if (submenuOn) node.classList.add('ds-page-layout--submenu-on');
+    host.appendChild(node);
+  }
+
+  document.querySelectorAll('[data-pl-variant-host]').forEach(function (host) {
+    mountLayout(host, host.getAttribute('data-variant') === 'submenu');
+  });
+
+  (function () {
+    var select = document.getElementById('pl-pg-variant');
+    var host = document.getElementById('pl-playground-host');
+    var submenuRow = document.querySelector('#pl-pg-parts-table [data-part="submenu-row"]');
+    function apply() {
+      var submenu = select && select.value === 'submenu';
+      mountLayout(host, submenu);
+      if (submenuRow) submenuRow.style.opacity = submenu ? '1' : '0.45';
+    }
+    if (select) select.addEventListener('change', apply);
+    apply();
+  })();
+</script>
+</body>
+</html>
