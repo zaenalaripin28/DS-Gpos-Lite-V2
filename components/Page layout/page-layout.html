@@ -103,6 +103,8 @@
 
     /* Grid landasan — dari foundations/grid (tidak divisualkan) */
     :root {
+      --grid-columns-sm: 4;
+      --grid-columns-md: 8;
       --grid-columns-lg: 12;
       --grid-margin: 24px;
       --grid-gutter: 16px;
@@ -114,7 +116,7 @@
       flex-direction: column;
       width: 100%;
       min-height: 520px;
-      background: var(--color-background);
+      background: var(--color-neutral-n0);
       border: 1px solid var(--color-border);
       border-radius: var(--border-radius-lg);
       overflow: hidden;
@@ -153,8 +155,90 @@
       z-index: 1;
       background: var(--color-neutral-n0);
     }
-    .ds-page-layout--submenu-on .ds-page-layout__nav-main { visibility: hidden; pointer-events: none; }
-    .ds-page-layout--submenu-on .ds-page-layout__nav-sub { display: flex; }
+    .ds-page-layout--website.ds-page-layout--submenu-on .ds-page-layout__aside .ds-page-layout__nav-main { visibility: hidden; pointer-events: none; }
+    .ds-page-layout--website.ds-page-layout--submenu-on .ds-page-layout__aside .ds-page-layout__nav-sub { display: flex; }
+    .ds-page-layout--website .ds-page-layout__overlay { display: none !important; }
+
+    /* Tablet / Mobile — sidebar drawer + scrim */
+    .ds-page-layout--tablet .ds-page-layout__aside,
+    .ds-page-layout--mobile .ds-page-layout__aside { display: none !important; }
+    .ds-page-layout__body { position: relative; }
+    .ds-page-layout__overlay {
+      display: none;
+      position: absolute;
+      inset: 0;
+      z-index: 20;
+    }
+    .ds-page-layout--tablet.ds-page-layout--menu-expand .ds-page-layout__overlay,
+    .ds-page-layout--tablet.ds-page-layout--submenu-on .ds-page-layout__overlay,
+    .ds-page-layout--mobile.ds-page-layout--menu-expand .ds-page-layout__overlay,
+    .ds-page-layout--mobile.ds-page-layout--submenu-on .ds-page-layout__overlay {
+      display: block;
+    }
+    .ds-page-layout__scrim {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      padding: 0;
+      margin: 0;
+      cursor: default;
+      background: color-mix(in srgb, var(--color-neutral-n900) 55%, transparent);
+    }
+    .ds-page-layout__drawer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: min(280px, 88%);
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--color-neutral-n0);
+      border-right: 1px solid var(--color-border);
+      overflow: hidden;
+    }
+    .ds-page-layout__drawer .ds-sidebar-nav-expand {
+      max-width: none;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 0;
+    }
+    .ds-page-layout__drawer .ds-sidebar-nav-expand__scroll {
+      max-height: none;
+      flex: 1;
+      min-height: 0;
+    }
+    .ds-page-layout--menu-expand .ds-page-layout__drawer .ds-page-layout__nav-sub,
+    .ds-page-layout--tablet.ds-page-layout--menu-expand .ds-page-layout__drawer .ds-page-layout__nav-sub,
+    .ds-page-layout--mobile.ds-page-layout--menu-expand .ds-page-layout__drawer .ds-page-layout__nav-sub { display: none; }
+    .ds-page-layout--submenu-on .ds-page-layout__drawer .ds-page-layout__nav-main,
+    .ds-page-layout--tablet.ds-page-layout--submenu-on .ds-page-layout__drawer .ds-page-layout__nav-main,
+    .ds-page-layout--mobile.ds-page-layout--submenu-on .ds-page-layout__drawer .ds-page-layout__nav-main {
+      visibility: hidden;
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+    }
+    .ds-page-layout--submenu-on .ds-page-layout__drawer .ds-page-layout__nav-sub,
+    .ds-page-layout--tablet.ds-page-layout--submenu-on .ds-page-layout__drawer .ds-page-layout__nav-sub,
+    .ds-page-layout--mobile.ds-page-layout--submenu-on .ds-page-layout__drawer .ds-page-layout__nav-sub {
+      display: flex;
+      flex: 1;
+      min-height: 0;
+      position: relative;
+    }
+    .ds-page-layout--tablet .ds-page-layout__content {
+      grid-template-columns: repeat(var(--grid-columns-md), minmax(0, 1fr));
+    }
+    .ds-page-layout--mobile .ds-page-layout__content {
+      grid-template-columns: repeat(var(--grid-columns-sm), minmax(0, 1fr));
+    }
+    .ds-page-layout--mobile .ds-page-header__actions > .ds-btn:not(.ds-btn--primary):not(.ds-btn--icon-only) {
+      display: none;
+    }
     .ds-page-layout__nav-back {
       width: 100%;
       max-width: none;
@@ -168,7 +252,7 @@
       min-width: 0;
       display: flex;
       flex-direction: column;
-      background: var(--color-neutral-n10);
+      background: var(--color-neutral-n0);
     }
     .ds-page-layout__content {
       flex: 1;
@@ -189,28 +273,77 @@
 
     .pl-variant-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: 1fr;
       gap: var(--space-200);
       margin-bottom: var(--space-300);
     }
-    @media (max-width: 1100px) { .pl-variant-grid { grid-template-columns: 1fr; } }
+    .pl-variant-grid--cols-3 { grid-template-columns: 1fr; }
+    .pl-preview-frame { width: 100%; }
+    .pl-preview-frame--tablet { max-width: 768px; }
+    .pl-preview-frame--mobile { max-width: 390px; }
     .pl-variant-card {
       border: 1px solid var(--color-border-light);
       border-radius: var(--border-radius-xl);
       overflow: hidden;
       background: var(--color-neutral-n0);
       box-shadow: var(--shadow-xs);
+      display: grid;
+      grid-template-columns: 200px 1fr;
+    }
+    .pl-variant-card__info {
+      padding: var(--space-200) var(--space-150);
+      background: var(--color-neutral-n10);
+      border-right: 1px solid var(--color-border-light);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-075);
+      min-width: 0;
+    }
+    .pl-variant-card__badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: var(--border-radius-sm);
+      background: var(--color-blue-b50);
+      color: var(--color-blue-b300);
+      font-size: 11px;
+      font-weight: var(--font-weight-semibold);
+      font-family: var(--font-primary);
+      width: fit-content;
+      letter-spacing: 0.02em;
     }
     .pl-variant-card__label {
-      padding: var(--space-100) var(--space-150);
-      font-size: var(--text-caption-medium-size);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-text-secondary);
-      background: var(--color-neutral-n10);
-      border-bottom: 1px solid var(--color-border-light);
       font-family: var(--font-primary);
+      font-size: var(--text-body-small-medium-size);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+      line-height: 1.4;
     }
-    .pl-variant-card__body { overflow-x: auto; }
+    .pl-variant-card__desc {
+      font-family: var(--font-primary);
+      font-size: var(--text-caption-regular-size);
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+      margin: 0;
+    }
+    .pl-variant-card__preview {
+      overflow: hidden;
+      position: relative;
+      height: 260px;
+      background: var(--color-neutral-n10);
+    }
+    .pl-variant-card__body {
+      transform: scale(0.5);
+      transform-origin: top left;
+      width: 200%;
+      pointer-events: none;
+      background: var(--color-neutral-n0);
+    }
+    @media (max-width: 640px) {
+      .pl-variant-card { grid-template-columns: 1fr; }
+      .pl-variant-card__info { border-right: none; border-bottom: 1px solid var(--color-border-light); }
+      .pl-variant-card__preview { height: 200px; }
+    }
 
     .pl-playground {
       border: 1px solid var(--color-border-light);
@@ -244,7 +377,7 @@
       font-size: var(--text-body-small-regular-size);
       padding: var(--space-100) var(--space-150);
     }
-    .pl-playground__stage { overflow-x: auto; background: var(--color-neutral-n20); padding: var(--space-200); }
+    .pl-playground__stage { overflow-x: auto; background: var(--color-neutral-n0); padding: var(--space-200); }
 
     .anatomy-table-wrap {
       border: 1px solid var(--color-border-light);
@@ -308,14 +441,44 @@
 
     /* ── Top nav (subset) ── */
     .ds-topnav {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: var(--space-100); min-height: 56px;
+      align-items: center;
+      gap: var(--space-100);
+      min-height: 56px;
       padding: var(--space-075) var(--space-150);
       background: var(--color-neutral-n0);
-      border-bottom: 1px solid var(--color-border);
       box-sizing: border-box;
     }
-    .ds-topnav__start, .ds-topnav__end { display: flex; align-items: center; gap: var(--space-100); }
+    .ds-topnav[data-pl-topnav] { display: none; }
+    .ds-page-layout--website .ds-topnav[data-pl-topnav="website"] {
+      display: flex;
+      justify-content: space-between;
+    }
+    .ds-page-layout--tablet .ds-topnav[data-pl-topnav="tablet"],
+    .ds-page-layout--mobile .ds-topnav[data-pl-topnav="mobile"] {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+    }
+    .ds-topnav__start, .ds-topnav__center, .ds-topnav__end {
+      display: flex;
+      align-items: center;
+      gap: var(--space-100);
+      min-width: 0;
+    }
+    .ds-topnav__start { justify-content: flex-start; }
+    .ds-topnav__center { justify-content: center; }
+    .ds-topnav__end { justify-content: flex-end; }
+    .ds-topnav__menu { display: none; }
+    .ds-topnav--tablet .ds-topnav__menu,
+    .ds-topnav--mobile .ds-topnav__menu { display: inline-flex; }
+    .ds-topnav__logo--center { display: none; }
+    .ds-topnav--tablet .ds-topnav__logo--start { display: none; }
+    .ds-topnav--tablet .ds-topnav__logo--center { display: inline-flex; }
+    .ds-topnav--mobile .ds-topnav__logo--start,
+    .ds-topnav--mobile .ds-topnav__logo--center { display: none; }
+    .ds-topnav--mobile .ds-topnav__akses,
+    .ds-topnav--mobile .ds-topnav__notif--secondary { display: none; }
+    .ds-topnav--tablet .ds-topnav__notif--secondary { display: inline-flex; }
+    .ds-topnav--mobile .ds-topnav__notif--secondary { display: none; }
     .ds-topnav-logo { display: inline-flex; align-items: center; padding: var(--space-050) var(--space-100); border: none; background: transparent; }
     .ds-topnav-logo__img { display: block; height: 32px; width: auto; object-fit: contain; }
     .ds-topnav-notif {
@@ -476,6 +639,21 @@
     .ds-btn--primary { background-color: var(--color-blue-b300); color: var(--color-neutral-n0); }
     .ds-btn--subtle { background: transparent; color: var(--color-neutral-n500); }
     .ds-btn--icon-only { padding: 0 var(--space-050); min-width: 32px; }
+    .ds-btn-subtle-default,
+    .ds-btn.ds-btn-subtle-default {
+      background-color: transparent;
+      color: var(--color-neutral-n900);
+    }
+    .ds-btn--icon-only.ds-btn-subtle-default:hover {
+      background-color: var(--color-neutral-n20);
+    }
+    .ds-btn--icon-only.ds-btn-subtle-default:active {
+      background-color: var(--color-neutral-n40);
+    }
+    .ds-btn--icon-only.ds-btn-subtle-default:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
     .ds-btn img { width: 16px; height: 16px; display: block; }
     .ds-select-component { display: grid; gap: 0; width: 100%; }
     .ds-select-trigger {
@@ -589,6 +767,7 @@
           </button>
           <ul class="nav-list">
             <li><a href="../Button/button.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="3"/></svg>Button</a></li>
+            <li><a href="../Range/range.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="12" x2="20" y2="12"/><circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/></svg>Range</a></li>
             <li><a href="../Breadcrumbs/breadcrumbs.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>Breadcrumbs</a></li>
             <li><a href="../Page Header/page-header.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="5" rx="1"/><rect x="3" y="13" width="11" height="5" rx="1"/></svg>Page Header</a></li>
             <li><a href="../Page layout/page-layout.html" class="nav-link active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Page Layout</a></li>
@@ -642,29 +821,29 @@
             </div>
             <div class="font-bold text-neutral-n0 mb-3" style="font-size:2.5rem;letter-spacing:-0.035em;line-height:1.04;">Page Layout</div>
             <p class="text-sm leading-relaxed max-w-md mb-8" style="color:color-mix(in srgb, var(--color-neutral-n0) 52%, transparent);line-height:1.7;">
-              Kerangka halaman website GPOS Lite: top navigation, sidebar, konten utama (banner, page header, tabel), dan footer navigation. Landasan grid 12 kolom tanpa overlay visual.
+              Kerangka halaman GPOS Lite untuk website, tablet, dan mobile: top navigation, sidebar (persisten atau drawer), konten utama, dan footer navigation. Landasan grid token tanpa overlay visual.
             </p>
             <div class="flex flex-wrap gap-100">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:color-mix(in srgb, var(--color-neutral-n0) 6%, transparent);color:color-mix(in srgb, var(--color-neutral-n0) 45%, transparent);border-color:color-mix(in srgb, var(--color-neutral-n0) 10%, transparent);">variant=website</span>
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:color-mix(in srgb, var(--color-blue-b300) 15%, transparent);color:var(--color-blue-b100);border-color:color-mix(in srgb, var(--color-blue-b300) 28%, transparent);">Figma-synced</span>
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-050 rounded-full text-xs font-semibold border" style="background:color-mix(in srgb, var(--color-neutral-n0) 6%, transparent);color:color-mix(in srgb, var(--color-neutral-n0) 45%, transparent);border-color:color-mix(in srgb, var(--color-neutral-n0) 10%, transparent);">website · tablet · mobile</span>
             </div>
           </div>
-          <div class="lg:w-80 lg:flex-shrink-0 p-300 flex items-center justify-center" style="background:color-mix(in srgb, var(--color-neutral-n0) 3%, transparent);border-left:1px solid color-mix(in srgb, var(--color-neutral-n0) 7%, transparent);">
-            <img src="figma/website.png" alt="Referensi page layout website" width="280" height="auto" style="max-width:100%;height:auto;border-radius:var(--border-radius-lg);border:1px solid var(--color-border);">
-          </div>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-150">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-150">
           <div class="hero-feat-card bg-neutral-n0 rounded-xl p-250 border border-neutral-n30">
-            <div class="text-sm font-semibold text-neutral-n900 mb-1.5">Top + Side</div>
-            <div class="text-xs" style="color:var(--color-text-tertiary);">ds-topnav--website + ds-sidebar-nav-expand</div>
+            <div class="text-sm font-semibold text-neutral-n900 mb-1.5">Website</div>
+            <div class="text-xs" style="color:var(--color-text-tertiary);">Sidebar persisten · grid 12 kolom</div>
           </div>
           <div class="hero-feat-card bg-neutral-n0 rounded-xl p-250 border border-neutral-n30">
-            <div class="text-sm font-semibold text-neutral-n900 mb-1.5">Konten utama</div>
-            <div class="text-xs" style="color:var(--color-text-tertiary);">Banner, page header, table parts</div>
+            <div class="text-sm font-semibold text-neutral-n900 mb-1.5">Tablet</div>
+            <div class="text-xs" style="color:var(--color-text-tertiary);">Drawer + scrim · ds-topnav--tablet · grid 8</div>
           </div>
           <div class="hero-feat-card bg-neutral-n0 rounded-xl p-250 border border-neutral-n30">
-            <div class="text-sm font-semibold text-neutral-n900 mb-1.5">Grid 12 kolom</div>
-            <div class="text-xs" style="color:var(--color-text-tertiary);">margin &amp; gutter token — tidak ditampilkan di UI</div>
+            <div class="text-sm font-semibold text-neutral-n900 mb-1.5">Mobile</div>
+            <div class="text-xs" style="color:var(--color-text-tertiary);">Drawer · topnav ringkas · grid 4</div>
+          </div>
+          <div class="hero-feat-card bg-neutral-n0 rounded-xl p-250 border border-neutral-n30">
+            <div class="text-sm font-semibold text-neutral-n900 mb-1.5">Parts</div>
+            <div class="text-xs" style="color:var(--color-text-tertiary);">Banner, page header, table, footer</div>
           </div>
         </div>
       </section>
@@ -672,16 +851,106 @@
       <section style="margin-bottom:48px;">
         <h2 class="section-heading"><span class="section-heading__accent"></span>Varian Website</h2>
         <p class="text-body-sm mb-6" style="color:var(--color-text-secondary);max-width:640px;line-height:1.7;">
-          Dua state sidebar mengikuti <code class="chip">figma/website.png</code>: menu utama dan submenu aktif (<code class="chip">submenu=on</code>).
+          Dua state sidebar: menu utama dan submenu aktif (<code class="chip">submenu=on</code>).
         </p>
         <div class="pl-variant-grid">
           <div class="pl-variant-card">
-            <div class="pl-variant-card__label">variant=website · menu utama</div>
-            <div class="pl-variant-card__body" data-pl-variant-host data-variant="main"></div>
+            <div class="pl-variant-card__info">
+              <span class="pl-variant-card__badge">website</span>
+              <div class="pl-variant-card__label">Menu Utama</div>
+              <p class="pl-variant-card__desc">Sidebar persisten tampil penuh, grid 12 kolom.</p>
+            </div>
+            <div class="pl-variant-card__preview">
+              <div class="pl-variant-card__body" data-pl-variant-host data-platform="website" data-state="main"></div>
+            </div>
           </div>
           <div class="pl-variant-card">
-            <div class="pl-variant-card__label">variant=website · submenu=on</div>
-            <div class="pl-variant-card__body" data-pl-variant-host data-variant="submenu"></div>
+            <div class="pl-variant-card__info">
+              <span class="pl-variant-card__badge">website</span>
+              <div class="pl-variant-card__label">Submenu Aktif</div>
+              <p class="pl-variant-card__desc">Panel submenu slide-in menggantikan menu utama di sidebar.</p>
+            </div>
+            <div class="pl-variant-card__preview">
+              <div class="pl-variant-card__body" data-pl-variant-host data-platform="website" data-state="submenu"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2 class="section-heading"><span class="section-heading__accent"></span>Varian Tablet</h2>
+        <p class="text-body-sm mb-6" style="color:var(--color-text-secondary);max-width:640px;line-height:1.7;">
+          Tiga state: menu tersembunyi, drawer menu expand, dan submenu aktif.
+        </p>
+        <div class="pl-variant-grid pl-variant-grid--cols-3">
+          <div class="pl-variant-card">
+            <div class="pl-variant-card__info">
+              <span class="pl-variant-card__badge">tablet</span>
+              <div class="pl-variant-card__label">Menu Tersembunyi</div>
+              <p class="pl-variant-card__desc">Top nav center-logo, tidak ada sidebar. Grid 8 kolom.</p>
+            </div>
+            <div class="pl-variant-card__preview">
+              <div class="pl-variant-card__body pl-preview-frame pl-preview-frame--tablet" data-pl-variant-host data-platform="tablet" data-state="hide"></div>
+            </div>
+          </div>
+          <div class="pl-variant-card">
+            <div class="pl-variant-card__info">
+              <span class="pl-variant-card__badge">tablet</span>
+              <div class="pl-variant-card__label">Menu Expand</div>
+              <p class="pl-variant-card__desc">Drawer terbuka dari kiri dengan scrim overlay gelap.</p>
+            </div>
+            <div class="pl-variant-card__preview">
+              <div class="pl-variant-card__body pl-preview-frame pl-preview-frame--tablet" data-pl-variant-host data-platform="tablet" data-state="expand"></div>
+            </div>
+          </div>
+          <div class="pl-variant-card">
+            <div class="pl-variant-card__info">
+              <span class="pl-variant-card__badge">tablet</span>
+              <div class="pl-variant-card__label">Submenu Aktif</div>
+              <p class="pl-variant-card__desc">Panel submenu tampil di dalam drawer yang sedang expand.</p>
+            </div>
+            <div class="pl-variant-card__preview">
+              <div class="pl-variant-card__body pl-preview-frame pl-preview-frame--tablet" data-pl-variant-host data-platform="tablet" data-state="submenu"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="margin-bottom:48px;">
+        <h2 class="section-heading"><span class="section-heading__accent"></span>Varian Mobile</h2>
+        <p class="text-body-sm mb-6" style="color:var(--color-text-secondary);max-width:640px;line-height:1.7;">
+          Tiga state: menu tersembunyi, drawer expand, dan submenu aktif. Top nav <code class="chip">--mobile</code> tanpa Akses; page header hanya Primary Action + menu lainnya.
+        </p>
+        <div class="pl-variant-grid pl-variant-grid--cols-3">
+          <div class="pl-variant-card">
+            <div class="pl-variant-card__info">
+              <span class="pl-variant-card__badge">mobile</span>
+              <div class="pl-variant-card__label">Menu Tersembunyi</div>
+              <p class="pl-variant-card__desc">Top nav ringkas tanpa Akses. Page header hanya Primary Action.</p>
+            </div>
+            <div class="pl-variant-card__preview">
+              <div class="pl-variant-card__body pl-preview-frame pl-preview-frame--mobile" data-pl-variant-host data-platform="mobile" data-state="hide"></div>
+            </div>
+          </div>
+          <div class="pl-variant-card">
+            <div class="pl-variant-card__info">
+              <span class="pl-variant-card__badge">mobile</span>
+              <div class="pl-variant-card__label">Menu Expand</div>
+              <p class="pl-variant-card__desc">Drawer menu terbuka penuh dengan scrim overlay gelap.</p>
+            </div>
+            <div class="pl-variant-card__preview">
+              <div class="pl-variant-card__body pl-preview-frame pl-preview-frame--mobile" data-pl-variant-host data-platform="mobile" data-state="expand"></div>
+            </div>
+          </div>
+          <div class="pl-variant-card">
+            <div class="pl-variant-card__info">
+              <span class="pl-variant-card__badge">mobile</span>
+              <div class="pl-variant-card__label">Submenu Aktif</div>
+              <p class="pl-variant-card__desc">Submenu tampil di dalam drawer, menu utama tersembunyi.</p>
+            </div>
+            <div class="pl-variant-card__preview">
+              <div class="pl-variant-card__body pl-preview-frame pl-preview-frame--mobile" data-pl-variant-host data-platform="mobile" data-state="submenu"></div>
+            </div>
           </div>
         </div>
       </section>
@@ -692,23 +961,29 @@
           Tabel part menunjukkan komponen DS yang disusun dalam layout. Preview memakai markup dari komponen parts yang ada.
         </p>
         <div class="pl-playground">
-          <div class="pl-playground__controls">
+          <div class="pl-playground__controls" style="grid-template-columns:repeat(2,minmax(0,1fr));">
             <div class="pl-playground__field">
-              <label for="pl-pg-variant">State sidebar</label>
-              <select id="pl-pg-variant" aria-label="Pilih state sidebar page layout">
-                <option value="main">menu utama</option>
-                <option value="submenu">submenu=on</option>
+              <label for="pl-pg-platform">Platform</label>
+              <select id="pl-pg-platform" aria-label="Pilih platform page layout">
+                <option value="website">website</option>
+                <option value="tablet">tablet</option>
+                <option value="mobile">mobile</option>
               </select>
+            </div>
+            <div class="pl-playground__field">
+              <label for="pl-pg-state">State menu</label>
+              <select id="pl-pg-state" aria-label="Pilih state menu page layout"></select>
             </div>
           </div>
           <div class="anatomy-table-wrap">
-            <table class="anatomy-table" id="pl-pg-parts-table" aria-label="Part page layout website">
+            <table class="anatomy-table" id="pl-pg-parts-table" aria-label="Part page layout">
               <thead>
                 <tr><th>Part</th><th>Class / Komponen</th><th>Sumber</th></tr>
               </thead>
               <tbody>
-                <tr><td>Top navigation</td><td><code class="chip">.ds-topnav.ds-topnav--website</code></td><td>Top &amp; Bottom Nav</td></tr>
-                <tr><td>Sidebar navigation</td><td><code class="chip">.ds-sidebar-nav-expand</code></td><td>Navigation Menu</td></tr>
+                <tr data-part="topnav"><td>Top navigation</td><td data-pl-token-topnav><code class="chip">.ds-topnav.ds-topnav--website</code></td><td>Top &amp; Bottom Nav</td></tr>
+                <tr data-part="sidebar"><td>Sidebar navigation</td><td data-pl-token-sidebar><code class="chip">.ds-sidebar-nav-expand</code></td><td>Navigation Menu</td></tr>
+                <tr data-part="drawer"><td>Menu drawer + scrim</td><td><code class="chip">.ds-page-layout__overlay</code></td><td>Page Layout</td></tr>
                 <tr><td>Toast banner</td><td><code class="chip">.ds-banner.ds-banner--success</code></td><td>Toast Banner</td></tr>
                 <tr><td>Page header</td><td><code class="chip">.ds-page-header--actions-on.ds-page-header--toolbar-on</code></td><td>Page Header</td></tr>
                 <tr><td>Data table</td><td><code class="chip">.ds-table.ds-table--data</code></td><td>Table</td></tr>
@@ -729,7 +1004,8 @@
             <ul class="guideline-list">
               <li>Gunakan <code class="chip">.ds-page-layout</code> sebagai shell; susun part dari komponen DS yang sudah ada.</li>
               <li>Terapkan grid 12 kolom lewat <code class="chip">.ds-page-layout__content</code> dengan <code class="chip">--grid-margin</code> dan <code class="chip">--grid-gutter</code> — tanpa menampilkan garis grid di UI.</li>
-              <li>Top bar memakai <code class="chip">.ds-topnav--website</code>; sidebar memakai <code class="chip">.ds-sidebar-nav-expand</code>.</li>
+              <li>Website: <code class="chip">.ds-topnav--website</code> + sidebar persisten. Tablet/mobile: <code class="chip">.ds-topnav--tablet</code> atau <code class="chip">--mobile</code> + drawer <code class="chip">.ds-page-layout__overlay</code>.</li>
+              <li>Grid: website 12 kolom, tablet 8 (<code class="chip">--grid-columns-md</code>), mobile 4 (<code class="chip">--grid-columns-sm</code>).</li>
               <li>Page header untuk halaman data: <code class="chip">--actions-on</code> + <code class="chip">--toolbar-on</code> (search &amp; filter).</li>
               <li>Area tabel memakai <code class="chip">.ds-table</code> dan kolom parts dari komponen Table.</li>
               <li>Aksi bawah halaman memakai <code class="chip">.ds-footer-nav</code> (Kembali + Simpan).</li>
@@ -743,7 +1019,8 @@
               <li>Jangan menampilkan overlay grid atau debug column di produksi.</li>
               <li>Jangan mengganti sidebar dengan menu custom di luar pola <code class="chip">ds-nav-*</code>.</li>
               <li>Jangan menempatkan lebih dari satu toast banner permanen di area konten.</li>
-              <li>Jangan mencampur variant top nav (tablet/mobile) pada layout website desktop.</li>
+              <li>Jangan mencampur variant top nav — pilih modifier sesuai breakpoint (website / tablet / mobile).</li>
+              <li>Jangan menampilkan sidebar persisten pada tablet/mobile; gunakan drawer + scrim.</li>
             </ul>
           </article>
         </div>
@@ -757,20 +1034,69 @@
 </div>
 
 <template id="pl-layout-template">
-  <div class="ds-page-layout ds-page-layout--website" data-pl-layout>
-    <header class="ds-topnav ds-topnav--website" role="banner" aria-label="Top navigation">
+  <div class="ds-page-layout" data-pl-layout>
+    <header class="ds-topnav ds-topnav--website" data-pl-topnav="website" role="banner" aria-label="Top navigation website">
       <div class="ds-topnav__start">
-        <a href="#" class="ds-topnav-logo" tabindex="-1" style="pointer-events:none;" aria-label="GPOS Lite">
+        <a href="#" class="ds-topnav-logo ds-topnav__logo--start" tabindex="-1" style="pointer-events:none;" aria-label="GPOS Lite">
           <img class="ds-topnav-logo__img" src="../../assets/images/logo-parts.svg" width="102" height="47" alt="GPOS Lite">
         </a>
       </div>
       <div class="ds-topnav__end">
-        <button type="button" class="ds-btn ds-btn--subtle" tabindex="-1">Akses</button>
+        <button type="button" class="ds-btn ds-btn--subtle ds-topnav__akses" tabindex="-1">Akses</button>
         <button type="button" class="ds-topnav-notif" tabindex="-1" aria-label="Notifikasi">
           <img class="ds-topnav-notif__icon" src="../../assets/icons/icon-bell.svg" alt="" aria-hidden="true">
           <span class="ds-topnav-notif__indicator"><span class="ds-badge ds-badge--important">60</span></span>
         </button>
-        <button type="button" class="ds-topnav-notif" tabindex="-1" aria-label="Notifikasi sekunder">
+        <button type="button" class="ds-topnav-notif ds-topnav__notif--secondary" tabindex="-1" aria-label="Notifikasi sekunder">
+          <img class="ds-topnav-notif__icon" src="../../assets/icons/icon-bell.svg" alt="" aria-hidden="true">
+          <span class="ds-topnav-notif__indicator"><span class="ds-badge ds-badge--important">60</span></span>
+        </button>
+        <button type="button" class="ds-topnav-profile" tabindex="-1" aria-label="Profil">
+          <div class="ds-avatar ds-avatar--lg">
+            <img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="" width="28" height="28">
+            <div class="ds-avatar__presence" aria-hidden="true"></div>
+          </div>
+        </button>
+      </div>
+    </header>
+    <header class="ds-topnav ds-topnav--tablet" data-pl-topnav="tablet" role="banner" aria-label="Top navigation tablet">
+      <div class="ds-topnav__start">
+        <button type="button" class="ds-btn ds-btn--icon-only ds-btn-subtle-default ds-topnav__menu" tabindex="-1" aria-label="Buka menu">
+          <img src="../../assets/icons/icon-menu.svg" alt="" width="16" height="16" aria-hidden="true">
+        </button>
+      </div>
+      <div class="ds-topnav__center">
+        <a href="#" class="ds-topnav-logo ds-topnav__logo--center" tabindex="-1" style="pointer-events:none;" aria-label="GPOS Lite">
+          <img class="ds-topnav-logo__img" src="../../assets/images/logo-parts.svg" width="102" height="47" alt="GPOS Lite">
+        </a>
+      </div>
+      <div class="ds-topnav__end">
+        <button type="button" class="ds-btn ds-btn--subtle ds-topnav__akses" tabindex="-1">Akses</button>
+        <button type="button" class="ds-topnav-notif" tabindex="-1" aria-label="Notifikasi">
+          <img class="ds-topnav-notif__icon" src="../../assets/icons/icon-bell.svg" alt="" aria-hidden="true">
+          <span class="ds-topnav-notif__indicator"><span class="ds-badge ds-badge--important">60</span></span>
+        </button>
+        <button type="button" class="ds-topnav-notif ds-topnav__notif--secondary" tabindex="-1" aria-label="Notifikasi sekunder">
+          <img class="ds-topnav-notif__icon" src="../../assets/icons/icon-bell.svg" alt="" aria-hidden="true">
+          <span class="ds-topnav-notif__indicator"><span class="ds-badge ds-badge--important">60</span></span>
+        </button>
+        <button type="button" class="ds-topnav-profile" tabindex="-1" aria-label="Profil">
+          <div class="ds-avatar ds-avatar--lg">
+            <img class="ds-avatar__image" src="../../assets/images/avatar.svg" alt="" width="28" height="28">
+            <div class="ds-avatar__presence" aria-hidden="true"></div>
+          </div>
+        </button>
+      </div>
+    </header>
+    <header class="ds-topnav ds-topnav--mobile" data-pl-topnav="mobile" role="banner" aria-label="Top navigation mobile">
+      <div class="ds-topnav__start">
+        <button type="button" class="ds-btn ds-btn--icon-only ds-btn-subtle-default ds-topnav__menu" tabindex="-1" aria-label="Buka menu">
+          <img src="../../assets/icons/icon-menu.svg" alt="" width="16" height="16" aria-hidden="true">
+        </button>
+      </div>
+      <div class="ds-topnav__center" aria-hidden="true"></div>
+      <div class="ds-topnav__end">
+        <button type="button" class="ds-topnav-notif" tabindex="-1" aria-label="Notifikasi">
           <img class="ds-topnav-notif__icon" src="../../assets/icons/icon-bell.svg" alt="" aria-hidden="true">
           <span class="ds-topnav-notif__indicator"><span class="ds-badge ds-badge--important">60</span></span>
         </button>
@@ -907,6 +1233,10 @@
           </div>
         </nav>
       </aside>
+      <div class="ds-page-layout__overlay" data-pl-overlay aria-hidden="true">
+        <div class="ds-page-layout__scrim" role="presentation"></div>
+        <aside class="ds-page-layout__drawer" aria-label="Menu drawer" data-pl-drawer></aside>
+      </div>
       <div class="ds-page-layout__main">
         <div class="ds-page-layout__content">
           <div class="ds-banner ds-banner--success" role="status">
@@ -1056,29 +1386,122 @@
     });
   })();
 
-  function mountLayout(host, submenuOn) {
+  var PL_STATE_OPTIONS = {
+    website: [
+      { value: 'main', label: 'menu utama' },
+      { value: 'submenu', label: 'submenu=on' }
+    ],
+    tablet: [
+      { value: 'hide', label: 'menu=hide' },
+      { value: 'expand', label: 'menu=expand' },
+      { value: 'submenu', label: 'submenu=on' }
+    ],
+    mobile: [
+      { value: 'hide', label: 'menu=hide' },
+      { value: 'expand', label: 'menu=expand' },
+      { value: 'submenu', label: 'submenu=on' }
+    ]
+  };
+
+  function mountLayout(host, opts) {
     var tpl = document.getElementById('pl-layout-template');
     if (!tpl || !host) return;
+    opts = opts || {};
+    var platform = opts.platform || 'website';
+    var state = opts.state || (platform === 'website' ? 'main' : 'hide');
+
     host.innerHTML = '';
     var node = tpl.content.firstElementChild.cloneNode(true);
-    if (submenuOn) node.classList.add('ds-page-layout--submenu-on');
+    node.classList.add('ds-page-layout--' + platform);
+
+    if (platform === 'website' && state === 'submenu') {
+      node.classList.add('ds-page-layout--submenu-on');
+    }
+    if (platform === 'tablet' || platform === 'mobile') {
+      if (state === 'expand') node.classList.add('ds-page-layout--menu-expand');
+      if (state === 'submenu') {
+        node.classList.add('ds-page-layout--menu-expand', 'ds-page-layout--submenu-on');
+      }
+      var aside = node.querySelector('.ds-page-layout__aside');
+      var drawer = node.querySelector('[data-pl-drawer]');
+      if (aside && drawer) drawer.innerHTML = aside.innerHTML;
+      var overlay = node.querySelector('[data-pl-overlay]');
+      if (overlay) overlay.setAttribute('aria-hidden', state === 'hide' ? 'true' : 'false');
+    }
+
     host.appendChild(node);
   }
 
+  function readVariantOpts(el) {
+    return {
+      platform: el.getAttribute('data-platform') || 'website',
+      state: el.getAttribute('data-state') || 'main'
+    };
+  }
+
   document.querySelectorAll('[data-pl-variant-host]').forEach(function (host) {
-    mountLayout(host, host.getAttribute('data-variant') === 'submenu');
+    mountLayout(host, readVariantOpts(host));
   });
 
   (function () {
-    var select = document.getElementById('pl-pg-variant');
+    var platformSelect = document.getElementById('pl-pg-platform');
+    var stateSelect = document.getElementById('pl-pg-state');
     var host = document.getElementById('pl-playground-host');
     var submenuRow = document.querySelector('#pl-pg-parts-table [data-part="submenu-row"]');
-    function apply() {
-      var submenu = select && select.value === 'submenu';
-      mountLayout(host, submenu);
-      if (submenuRow) submenuRow.style.opacity = submenu ? '1' : '0.45';
+    var drawerRow = document.querySelector('#pl-pg-parts-table [data-part="drawer"]');
+    var topnavToken = document.querySelector('[data-pl-token-topnav]');
+    var sidebarToken = document.querySelector('[data-pl-token-sidebar]');
+
+    function fillStateOptions(platform) {
+      if (!stateSelect) return;
+      var options = PL_STATE_OPTIONS[platform] || PL_STATE_OPTIONS.website;
+      var current = stateSelect.value;
+      stateSelect.innerHTML = '';
+      options.forEach(function (opt) {
+        var el = document.createElement('option');
+        el.value = opt.value;
+        el.textContent = opt.label;
+        stateSelect.appendChild(el);
+      });
+      var has = options.some(function (o) { return o.value === current; });
+      stateSelect.value = has ? current : options[0].value;
     }
-    if (select) select.addEventListener('change', apply);
+
+    function apply() {
+      var platform = platformSelect ? platformSelect.value : 'website';
+      var state = stateSelect ? stateSelect.value : 'main';
+      mountLayout(host, { platform: platform, state: state });
+
+      if (host) {
+        host.classList.remove('pl-preview-frame--tablet', 'pl-preview-frame--mobile');
+        if (platform === 'tablet') host.classList.add('pl-preview-frame--tablet');
+        if (platform === 'mobile') host.classList.add('pl-preview-frame--mobile');
+      }
+
+      var submenuOn = state === 'submenu';
+      if (submenuRow) submenuRow.style.opacity = submenuOn ? '1' : '0.45';
+
+      var drawerOn = (platform === 'tablet' || platform === 'mobile') && state !== 'hide';
+      if (drawerRow) drawerRow.style.opacity = drawerOn ? '1' : '0.45';
+
+      if (topnavToken) {
+        topnavToken.innerHTML = '<code class="chip">.ds-topnav.ds-topnav--' + platform + '</code>';
+      }
+      if (sidebarToken) {
+        sidebarToken.innerHTML = drawerOn
+          ? '<code class="chip">.ds-page-layout__drawer</code> + <code class="chip">.ds-sidebar-nav-expand</code>'
+          : '<code class="chip">.ds-sidebar-nav-expand</code>';
+      }
+    }
+
+    if (platformSelect) {
+      platformSelect.addEventListener('change', function () {
+        fillStateOptions(platformSelect.value);
+        apply();
+      });
+    }
+    if (stateSelect) stateSelect.addEventListener('change', apply);
+    fillStateOptions(platformSelect ? platformSelect.value : 'website');
     apply();
   })();
 </script>

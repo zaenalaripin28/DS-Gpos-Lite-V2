@@ -114,6 +114,52 @@
         pageHeaderItem.appendChild(pageHeaderLink);
       }
 
+      var radioItem = navList.querySelector('a[href*="/Radio/radio.html"]');
+      var radioLi = radioItem ? radioItem.closest('li') : null;
+      var toggleItem = navList.querySelector('a[href*="/Toggle/toggle.html"]');
+      var toggleLi = toggleItem ? toggleItem.closest('li') : null;
+
+      var rangeHref = '../Range/range.html';
+      if (buttonLink && buttonLink.getAttribute('href')) {
+        rangeHref = buttonLink.getAttribute('href').replace('/Button/button.html', '/Range/range.html');
+      }
+      var rangeItem = navList.querySelector('a[href*="/Range/range.html"]') ? null : document.createElement('li');
+      if (rangeItem) {
+        var rangeLink = document.createElement('a');
+        rangeLink.href = rangeHref;
+        rangeLink.className = 'nav-link';
+        rangeLink.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="12" x2="20" y2="12"/><circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/></svg>Range';
+        rangeItem.appendChild(rangeLink);
+      }
+      if (radioLi && rangeItem && toggleLi && radioLi.parentNode === navList) {
+        navList.insertBefore(rangeItem, toggleLi);
+      } else if (radioLi && rangeItem) {
+        radioLi.insertAdjacentElement('afterend', rangeItem);
+      }
+
+      var tooltipHref = '../Tooltip/tooltip.html';
+      if (buttonLink && buttonLink.getAttribute('href')) {
+        tooltipHref = buttonLink.getAttribute('href').replace('/Button/button.html', '/Tooltip/tooltip.html');
+      }
+      var tooltipItem = navList.querySelector('a[href*="/Tooltip/tooltip.html"]') ? null : document.createElement('li');
+      if (tooltipItem) {
+        var tooltipLink = document.createElement('a');
+        tooltipLink.href = tooltipHref;
+        tooltipLink.className = 'nav-link';
+        tooltipLink.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="6" width="16" height="10" rx="2"/><line x1="12" y1="6" x2="12" y2="3"/><path d="M10 3h4"/></svg>Tooltip';
+        tooltipItem.appendChild(tooltipLink);
+      }
+      var toggleItemForTooltip = navList.querySelector('a[href*="/Toggle/toggle.html"]');
+      var toggleLiForTooltip = toggleItemForTooltip ? toggleItemForTooltip.closest('li') : null;
+      var textFieldLi = navList.querySelector('a[href*="/Text Field/text field.html"]');
+      textFieldLi = textFieldLi ? textFieldLi.closest('li') : null;
+      if (toggleLiForTooltip && tooltipItem && toggleLiForTooltip.parentNode === navList) {
+        if (textFieldLi) navList.insertBefore(tooltipItem, textFieldLi);
+        else toggleLiForTooltip.insertAdjacentElement('afterend', tooltipItem);
+      } else if (toggleLiForTooltip && tooltipItem) {
+        toggleLiForTooltip.insertAdjacentElement('afterend', tooltipItem);
+      }
+
       var breadcrumbsLi = navList.querySelector('a[href*="/Breadcrumbs/breadcrumbs.html"]');
       breadcrumbsLi = breadcrumbsLi ? breadcrumbsLi.closest('li') : null;
       var tabsLi = navList.querySelector('a[href*="/Tabs/tabs.html"]');
