@@ -470,6 +470,12 @@
       .bp-table th:nth-child(5),
       .bp-table td:nth-child(5) { display: none; }
     }
+    @media (max-width: 480px) {
+      .spec-meta-grid { grid-template-columns: 1fr; }
+      .spec-meta-item { border-right: none; }
+      .spec-meta-item:nth-child(3) { grid-column: span 1; border-top: 1px solid var(--color-neutral-n30); }
+      .spec-meta-value { font-size: 16px; }
+    }
 
     /* ── Hero Banner ── */
     .ds-hero-banner { position:relative; overflow:hidden; }

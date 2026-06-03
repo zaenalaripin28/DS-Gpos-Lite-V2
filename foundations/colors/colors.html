@@ -97,7 +97,16 @@
 
       /* ── Usage Guide ── */
       .usage-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 20px; }
-      @media(max-width:640px){ .usage-grid{ grid-template-columns: 1fr; } }
+      @media (max-width: 860px) {
+        .usage-grid { grid-template-columns: repeat(2, 1fr); }
+      }
+      @media (max-width: 640px) {
+        .usage-grid { grid-template-columns: 1fr; }
+        .page-tabs { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
+        .swatch-row { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .swatch-item { min-width: 60px; flex-shrink: 0; }
+        .family-desc { font-size: .8rem; }
+      }
       .usage-card { border-radius: 10px; padding: 16px 18px; font-size: var(--font-size-xs); }
       .usage-card h4 {
         font-size: .6875rem; font-weight: var(--font-weight-bold); margin: 0 0 8px;
