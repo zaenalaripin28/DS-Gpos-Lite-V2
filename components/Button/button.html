@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -719,6 +719,8 @@
       .anatomy-grid  { grid-template-columns: 1fr !important; }
       .usage-grid-2  { grid-template-columns: 1fr !important; }
       .demo-wrap     { flex-direction: column !important; gap: 12px !important; }
+      .ds-hero-banner .flex-1 { min-width: 0; }
+      .ds-hero-banner .font-bold { font-size: clamp(1.5rem, 5vw, 2rem) !important; }
     }
 
     /* ================================================================
@@ -1012,8 +1014,6 @@
       border-radius: 0 2px 2px 0;
     }
 
-    /* ── Dark mode toggle ── */
-    .dark-toggle {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -1027,20 +1027,13 @@
       transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
       flex-shrink: 0;
     }
-    .dark-toggle:hover {
       background-color: var(--color-primary-50);
       border-color: var(--color-primary-200);
       color: var(--color-primary-600);
     }
-    .dark-toggle .icon-sun  { display: none; }
-    .dark-toggle .icon-moon { display: block; }
-    [data-theme="dark"] .dark-toggle .icon-sun  { display: block; }
-    [data-theme="dark"] .dark-toggle .icon-moon { display: none; }
-    [data-theme="dark"] .dark-toggle {
       border-color: #1A2E48;
       color: #94A3B8;
     }
-    [data-theme="dark"] .dark-toggle:hover {
       background-color: rgba(30,127,214,0.14);
       border-color: rgba(30,127,214,0.3);
       color: #7DB5E7;
@@ -1280,7 +1273,6 @@
     @media (prefers-reduced-motion: reduce) {
       .scroll-progress,
       .scroll-top-btn,
-      .dark-toggle { transition: none !important; }
     }
 
     /* ── Variant Tabs ── */
@@ -1360,37 +1352,185 @@
             <img src="../../assets/icons/icon-chevron-mini-down.svg" alt="" class="nav-menu-toggle__chevron" aria-hidden="true">
           </button>
           <ul class="nav-list">
-            <li><a href="../Button/button.html" class="nav-link active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="3"/><line x1="7" y1="12" x2="17" y2="12" opacity="0.5"/></svg>Button</a></li>
-            <li><a href="../Avatar/avatar.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Avatar</a></li>
-            <li><a href="../Badge/badge.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="9" width="22" height="6" rx="3"/><circle cx="6" cy="12" r="1.5" fill="currentColor" opacity="0.5"/></svg>Badge</a></li>
-            <li><a href="../Tags/tags.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/></svg>Tags</a></li>
-            <li><a href="../Lozenge/lozenge.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="7" width="16" height="10" rx="2"/></svg>Lozenge</a></li>
-            <li><a href="../Checkbox/checkbox.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg>Checkbox</a></li>
-            <li><a href="../Radio/radio.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg>Radio</a></li>
-            <li><a href="../Range/range.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="12" x2="20" y2="12"/><circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/></svg>Range</a></li>
-            <li><a href="../Toggle/toggle.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="5"/><circle cx="7" cy="12" r="3" fill="currentColor" stroke="none"/></svg>Toggle</a></li>
-            <li><a href="../Text Field/text field.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="10" rx="2"/><line x1="7" y1="11" x2="13" y2="11"/></svg>Text Field</a></li>
-            <li><a href="../Text Area/text area.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="16" height="14" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg>Text Area</a></li>
-            <li><a href="../Form/form.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="13" y2="16"/></svg>Form</a></li>
-            <li><a href="../Flags/flags.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>Flags</a></li>
-            <li><a href="../section messages/section-message.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="14" y2="13"/></svg>Section Message</a></li>
-            <li><a href="../Breadcrumbs/breadcrumbs.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/><line x1="3" y1="12" x2="15" y2="12" opacity="0.4"/></svg>Breadcrumbs</a></li>
-            <li><a href="../Page Header/page-header.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="5" rx="1"/><rect x="3" y="13" width="11" height="5" rx="1"/><line x1="17" y1="15" x2="21" y2="15"/><line x1="17" y1="18" x2="21" y2="18"/></svg>Page Header</a></li>
-            <li><a href="../Tabs/tabs.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="4" rx="1"/><rect x="2" y="13" width="14" height="4" rx="1"/></svg>Tabs</a></li>
-            <li><a href="../Pagination/pagination.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="10,6 4,12 10,18"/><polyline points="14,6 20,12 14,18"/><line x1="11.5" y1="12" x2="12.5" y2="12" opacity="0.55"/></svg>Pagination</a></li>
-            <li><a href="../Modal/modal.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="13" y2="13"/></svg>Modal</a></li>
-            <li><a href="../Popup/popup.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="8,10 12,14 16,10"/></svg>Popup</a></li>
-            <li><a href="../Table/table.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="1"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="9" y1="4" x2="9" y2="20"/><line x1="15" y1="4" x2="15" y2="20"/></svg>Table</a></li>
-            <li><a href="../Calendar/calendar.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Calendar</a></li>
-            <li><a href="../Time picker/time-picker.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><polyline points="12,7 12,12 16,14"/></svg>Time Picker</a></li>
-            <li><a href="../Date picker/date-picker.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="14" x2="8" y2="14"/><line x1="12" y1="14" x2="12" y2="14"/><line x1="16" y1="14" x2="16" y2="14"/></svg>Date Picker</a></li>
-            <li><a href="../Date time picker/date time picker.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><circle cx="12" cy="15" r="2"/><line x1="12" y1="12" x2="12" y2="15"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Date Time Picker</a></li>
-            <li><a href="../Toast-Banner/banner.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="8" rx="2"/><circle cx="6" cy="12" r="1" fill="currentColor" stroke="none"/><line x1="10" y1="12" x2="18" y2="12"/></svg>Toast Banner</a></li>
+            <li>
+              <a href="../Avatar/avatar.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                Avatar
+              </a>
+            </li>
+            <li>
+              <a href="../Badge/badge.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="9" width="22" height="6" rx="3"/><circle cx="6" cy="12" r="1.5" fill="currentColor" opacity="0.5"/></svg>
+                Badge
+              </a>
+            </li>
+            <li>
+              <a href="../Breadcrumbs/breadcrumbs.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/><line x1="3" y1="12" x2="15" y2="12" opacity="0.4"/></svg>
+                Breadcrumbs
+              </a>
+            </li>
+            <li>
+              <a href="../Button/button.html" class="nav-link active">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="3"/><line x1="7" y1="12" x2="17" y2="12" opacity="0.5"/></svg>
+                Button
+              </a>
+            </li>
+            <li>
+              <a href="../Calendar/calendar.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Calendar
+              </a>
+            </li>
+            <li>
+              <a href="../Checkbox/checkbox.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg>
+                Checkbox
+              </a>
+            </li>
+            <li>
+              <a href="../Date picker/date-picker.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="14" x2="8" y2="14"/><line x1="12" y1="14" x2="12" y2="14"/><line x1="16" y1="14" x2="16" y2="14"/></svg>
+                Date Picker
+              </a>
+            </li>
+            <li>
+              <a href="../Date time picker/date time picker.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><circle cx="12" cy="15" r="2"/><line x1="12" y1="12" x2="12" y2="15"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Date Time Picker
+              </a>
+            </li>
             <li><a href="../dropdown/dropdown.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="10" x2="17" y2="10"/><line x1="7" y1="14" x2="17" y2="14"/></svg>Dropdown Button</a></li>
-            <li><a href="../Select/select.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><polyline points="8,10 12,14 16,10"/></svg>Select</a></li>
-            <li><a href="../Inline edit/inline-edit.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Inline Edit</a></li>
-            <li><a href="../Navigation menu/navigation.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><line x1="7" y1="10" x2="17" y2="10"/><line x1="7" y1="14" x2="17" y2="14"/></svg>Navigation Menu</a></li>
+            <li>
+              <a href="../Flags/flags.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+                Flags
+              </a>
+            </li>
+            <li><a href="../Form/form.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="13" y2="16"/></svg>Form</a></li>
+            <li>
+              <a href="../Inline edit/inline-edit.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Inline Edit
+              </a>
+            </li>
+            <li>
+              <a href="../Lozenge/lozenge.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="7" width="16" height="10" rx="2"/></svg>
+                Lozenge
+              </a>
+            </li>
+            <li><a href="../Modal/modal.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="13" y2="13"/></svg>Modal</a></li>
+            <li>
+              <a href="../Navigation menu/navigation.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="6" width="18" height="12" rx="2"/>
+                  <line x1="7" y1="10" x2="17" y2="10"/>
+                  <line x1="7" y1="14" x2="17" y2="14"/>
+                </svg>
+                Navigation Menu
+              </a>
+            </li>
+            <li>
+              <a href="../Page Header/page-header.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="5" rx="1"/><rect x="3" y="13" width="11" height="5" rx="1"/><line x1="17" y1="15" x2="21" y2="15"/><line x1="17" y1="18" x2="21" y2="18"/></svg>
+                Page Header
+              </a>
+            </li>
+            <li>
+              <a href="../Page layout/page-layout.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+                Page Layout
+              </a>
+            </li>
+            <li>
+              <a href="../Pagination/pagination.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="10,6 4,12 10,18"/><polyline points="14,6 20,12 14,18"/><line x1="11.5" y1="12" x2="12.5" y2="12" opacity="0.55"/></svg>
+                Pagination
+              </a>
+            </li>
+            <li><a href="../Popup/popup.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="8,10 12,14 16,10"/></svg>Popup</a></li>
+            <li>
+              <a href="../Radio/radio.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg>
+                Radio
+              </a>
+            </li>
+            <li>
+              <a href="../Range/range.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="12" x2="20" y2="12"/><circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/></svg>
+                Range
+              </a>
+            </li>
+            <li>
+              <a href="../section messages/section-message.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="14" y2="13"/></svg>
+                Section Message
+              </a>
+            </li>
+            <li>
+              <a href="../Select/select.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><polyline points="8,10 12,14 16,10"/></svg>
+                Select
+              </a>
+            </li>
+            <li>
+              <a href="../Table/table.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="1"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="9" y1="4" x2="9" y2="20"/><line x1="15" y1="4" x2="15" y2="20"/></svg>
+                Table
+              </a>
+            </li>
+            <li>
+              <a href="../Tabs/tabs.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="4" rx="1"/><rect x="2" y="13" width="14" height="4" rx="1"/></svg>
+                Tabs
+              </a>
+            </li>
+            <li>
+              <a href="../Tags/tags.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/></svg>
+                Tags
+              </a>
+            </li>
+            <li>
+              <a href="../Text Area/text area.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="16" height="14" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg>
+                Text Area
+              </a>
+            </li>
+            <li>
+              <a href="../Text Field/text field.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="10" rx="2"/><line x1="7" y1="11" x2="13" y2="11"/></svg>
+                Text Field
+              </a>
+            </li>
+            <li><a href="../Time picker/time-picker.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><polyline points="12,7 12,12 16,14"/></svg>Time Picker</a></li>
+            <li>
+              <a href="../Toast-Banner/banner.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="8" rx="2"/><circle cx="6" cy="12" r="1" fill="currentColor" stroke="none"/><line x1="10" y1="12" x2="18" y2="12"/></svg>
+                Toast Banner
+              </a>
+            </li>
+            <li>
+              <a href="../Toggle/toggle.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="5"/><circle cx="7" cy="12" r="3" fill="currentColor" stroke="none"/></svg>
+                Toggle
+              </a>
+            </li>
+            <li>
+              <a href="../Tooltip/tooltip.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="6" width="16" height="10" rx="2"/><line x1="12" y1="6" x2="12" y2="3"/><path d="M10 3h4"/></svg>
+                Tooltip
+              </a>
+            </li>
             <li><a href="../Top & bottom Navigation/top-bottom-nav.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="17" width="20" height="4" rx="1"/><polyline points="9,11 5,7 9,3"/><polyline points="15,11 19,7 15,3"/></svg>Top &amp; Bottom Nav</a></li>
+            <li>
+              <a href="../Tourguide/tourguide.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4"/><circle cx="12" cy="16" r="0.5" fill="currentColor"/></svg>
+                Tourguide
+              </a>
+            </li>
+
           </ul>
         </div>
         <div class="nav-section nav-section--menu is-open">
@@ -1449,7 +1589,7 @@
         <div class="ds-hero-banner rounded-2xl overflow-hidden mb-3 flex flex-col lg:flex-row bg-neutral-n900" style="border: 1px solid rgba(255,255,255,0.07);">
 
           <!-- Left: Component metadata -->
-          <div class="flex-1 px-8 py-10 lg:px-11 lg:py-12 flex flex-col justify-center">
+          <div class="flex-1 min-w-0 px-8 py-10 lg:px-11 lg:py-12 flex flex-col justify-center">
 
             <!-- Kicker -->
             <div class="flex items-center gap-100 mb-5">
@@ -1574,6 +1714,28 @@
 
       </section>
 
+      <!-- Playground -->
+      <section class="ds-section-reveal mb-12">
+        <h2><span class="h2-bar"></span>Playground</h2>
+        <p class="section-desc">Tombol interaktif — arahkan kursor, klik, dan tekan tab untuk melihat setiap state. Ganti appearance di bawah.</p>
+        <div class="ds-playground-panel">
+          <div class="ds-playground-controls" style="margin-bottom:20px;">
+            <button type="button" class="ds-playground-control is-active" data-variant="default" id="demo-tab-default">Default</button>
+            <button type="button" class="ds-playground-control" data-variant="primary" id="demo-tab-primary">Primary</button>
+            <button type="button" class="ds-playground-control" data-variant="subtle" id="demo-tab-subtle">Subtle</button>
+            <button type="button" class="ds-playground-control" data-variant="link" id="demo-tab-link">Link</button>
+            <button type="button" class="ds-playground-control" data-variant="subtle-link" id="demo-tab-subtle-link">Subtle Link</button>
+            <button type="button" class="ds-playground-control" data-variant="danger" id="demo-tab-danger">Danger</button>
+            <button type="button" class="ds-playground-control" data-variant="warning" id="demo-tab-warning">Warning</button>
+            <button type="button" class="ds-playground-control" data-variant="icon-only" id="demo-tab-icon-only">Hanya Ikon</button>
+          </div>
+          <div class="ds-playground-stage demo-wrap">
+            <button type="button" class="ds-btn" id="interactive-demo-btn">Coba Saya</button>
+          </div>
+          <p style="text-align:center;font-size:12px;color:var(--color-text-tertiary);margin-top:12px;font-family:var(--font-primary);">Hover · click · focus · disabled via keyboard</p>
+        </div>
+      </section>
+
       <!-- ── Variant Filter Tabs ── -->
       <div class="variant-tabs" id="variant-tabs" style="position:sticky; top:56px; z-index:50; background:var(--color-background); border-bottom:1px solid var(--color-border); padding:0 0 0 0; margin-bottom:32px; overflow-x:auto; display:flex; gap:4px; padding:8px 0;">
         <button type="button" class="vtab vtab--active" data-tab="default">Default</button>
@@ -1592,33 +1754,6 @@
           appearance=default
         </div>
       </div>
-
-      <!-- =====================================================
-           SECTION 1: INTERACTIVE DEMO
-      ====================================================== -->
-      <section style="margin-bottom:48px;">
-        <h2 style="font-size:20px; font-weight:600; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--color-border); display:flex; align-items:center; gap:12px; color:var(--color-text-primary); letter-spacing:-0.01em; font-family:var(--font-primary);">
-          <span style="width:3px; height:18px; background:linear-gradient(to bottom,var(--color-primary-500),var(--color-primary-300)); border-radius:3px; flex-shrink:0; display:block;"></span>
-          Status Interaktif
-        </h2>
-        <p style="font-size:14px; color:var(--color-text-tertiary); margin-top:-12px; margin-bottom:28px; font-family:var(--font-primary);">Tombol interaktif langsung — arahkan kursor, klik, dan tekan tab untuk melihat setiap status.</p>
-
-        <!-- Variant selector -->
-        <div style="margin-bottom:16px; display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
-          <button type="button" class="vtab vtab--active" data-variant="default" id="demo-tab-default">Default</button>
-          <button type="button" class="vtab" data-variant="primary" id="demo-tab-primary">Primary</button>
-          <button type="button" class="vtab" data-variant="subtle" id="demo-tab-subtle">Subtle</button>
-          <button type="button" class="vtab" data-variant="link" id="demo-tab-link">Link</button>
-          <button type="button" class="vtab" data-variant="subtle-link" id="demo-tab-subtle-link">Subtle Link</button>
-          <button type="button" class="vtab" data-variant="danger" id="demo-tab-danger">Danger</button>
-          <button type="button" class="vtab" data-variant="warning" id="demo-tab-warning">Warning</button>
-          <button type="button" class="vtab" data-variant="icon-only" id="demo-tab-icon-only">Hanya Ikon</button>
-        </div>
-        <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:12px; padding:40px 32px; display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap;" class="demo-wrap">
-          <button type="button" class="ds-btn" id="interactive-demo-btn">Coba Saya</button>
-        </div>
-        <p style="text-align:center; font-size:12px; color:var(--color-text-tertiary); margin-top:12px; font-family:var(--font-primary);">Arahkan kursor, klik, fokus, dan tekan tab pada tombol di atas</p>
-      </section>
 
       <!-- =====================================================
            KOMPONEN SIAP PRODUKSI
@@ -5315,21 +5450,6 @@
   closeBtn.addEventListener('click', closeSidebar);
   overlay.addEventListener('click', closeSidebar);
 
-  /* ── Dark mode toggle ── */
-  const html       = document.documentElement;
-  const darkToggle = document.getElementById('dark-toggle');
-  const saved      = localStorage.getItem('ds-theme');
-
-  if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    html.dataset.theme = 'dark';
-  }
-
-  darkToggle.addEventListener('click', () => {
-    const isDark = html.dataset.theme === 'dark';
-    html.dataset.theme = isDark ? 'light' : 'dark';
-    localStorage.setItem('ds-theme', isDark ? 'light' : 'dark');
-  });
-
   /* ── Scroll progress + scroll-to-top ── */
   const progressBar  = document.getElementById('scroll-progress');
   const scrollTopBtn = document.getElementById('scroll-top-btn');
@@ -5391,10 +5511,10 @@
     warning:      ['ds-btn--warning'],
     'icon-only':  ['ds-btn--icon-only'],
   };
-  document.querySelectorAll('[data-variant]').forEach(tab => {
+  document.querySelectorAll('.ds-playground-control[data-variant]').forEach(tab => {
     tab.addEventListener('click', () => {
-      document.querySelectorAll('[data-variant]').forEach(t => t.classList.remove('vtab--active'));
-      tab.classList.add('vtab--active');
+      document.querySelectorAll('.ds-playground-control[data-variant]').forEach(t => t.classList.remove('is-active'));
+      tab.classList.add('is-active');
       const v = tab.dataset.variant;
       if (demoBtn) {
         demoBtn.className = 'ds-btn';

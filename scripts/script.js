@@ -2,10 +2,6 @@
 // Interactive Features Script
 
 document.addEventListener('DOMContentLoaded', function () {
-  // #region agent log
-  fetch('http://127.0.0.1:7253/ingest/14731c83-d77c-43d0-ab5d-15a3770de896',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'1524d6'},body:JSON.stringify({sessionId:'1524d6',runId:'pre-fix',hypothesisId:'H1-H2-H3',location:'scripts/script.js:5',message:'sidebar bootstrap context',data:{pathname:window.location.pathname,baseURI:document.baseURI,navCount:document.querySelectorAll('.nav-link').length},timestamp:Date.now()})}).catch(()=>{});
-  // #endregion
-
   function detectProjectBase() {
     const marker = '/DS-Gpos-Lite-V2/';
     const path = window.location.pathname || '/';
@@ -24,9 +20,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const targetPath = projectBase && !normalizedPath.startsWith(projectBase + '/') ? projectBase + normalizedPath : normalizedPath;
     const normalizedHref = targetPath + absolute.search + absolute.hash;
     link.setAttribute('href', normalizedHref);
-    // #region agent log
-    fetch('http://127.0.0.1:7253/ingest/14731c83-d77c-43d0-ab5d-15a3770de896',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'1524d6'},body:JSON.stringify({sessionId:'1524d6',runId:'post-fix',hypothesisId:'H5',location:'scripts/script.js:24',message:'nav href normalized',data:{text:(link.textContent||'').trim(),rawHref,normalizedHref,projectBase},timestamp:Date.now()})}).catch(()=>{});
-    // #endregion
   });
 
   // ================================================
@@ -66,11 +59,6 @@ document.addEventListener('DOMContentLoaded', function () {
   const currentPath = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav-link').forEach(function (link) {
     const href = (link.getAttribute('href') || '').split('/').pop();
-    // #region agent log
-    link.addEventListener('click', function () {
-      fetch('http://127.0.0.1:7253/ingest/14731c83-d77c-43d0-ab5d-15a3770de896',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'1524d6'},body:JSON.stringify({sessionId:'1524d6',runId:'pre-fix',hypothesisId:'H1-H4',location:'scripts/script.js:46',message:'nav link click resolution',data:{text:(this.textContent||'').trim(),hrefAttr:this.getAttribute('href')||'',resolvedURL:this.href||'',fromPath:window.location.pathname},timestamp:Date.now()})}).catch(()=>{});
-    });
-    // #endregion
     if (href === currentPath) {
       link.classList.add('active');
     }

@@ -65,18 +65,12 @@
       border-color: var(--color-blue-b75) !important;
       box-shadow: var(--shadow-md);
     }
-    .dark-toggle {
       display: inline-flex; align-items: center; justify-content: center;
       width: 32px; height: 32px; background: none;
       border: 1px solid var(--color-border); color: var(--color-text-secondary);
       cursor: pointer; border-radius: var(--border-radius-md);
       transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
     }
-    .dark-toggle:hover { background-color: var(--color-primary-50); border-color: var(--color-primary-200); color: var(--color-primary-600); }
-    .dark-toggle .icon-sun  { display: none; }
-    .dark-toggle .icon-moon { display: block; }
-    [data-theme="dark"] .dark-toggle .icon-sun  { display: block; }
-    [data-theme="dark"] .dark-toggle .icon-moon { display: none; }
     .section-heading {
       font-size: 20px; font-weight: 600; margin-bottom: 24px;
       padding-bottom: 16px; border-bottom: 1px solid var(--color-border);
@@ -549,38 +543,185 @@
             <img src="../../assets/icons/icon-chevron-mini-down.svg" alt="" class="nav-menu-toggle__chevron" aria-hidden="true">
           </button>
           <ul class="nav-list">
-            <li><a href="../Button/button.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="3"/><line x1="7" y1="12" x2="17" y2="12" opacity="0.5"/></svg>Button</a></li>
-            <li><a href="../Avatar/avatar.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>Avatar</a></li>
-            <li><a href="../Badge/badge.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="9" width="22" height="6" rx="3"/><circle cx="6" cy="12" r="1.5" fill="currentColor" opacity="0.5"/></svg>Badge</a></li>
-            <li><a href="../Tags/tags.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/></svg>Tags</a></li>
-            <li><a href="../Lozenge/lozenge.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="7" width="16" height="10" rx="2"/></svg>Lozenge</a></li>
-            <li><a href="../Checkbox/checkbox.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg>Checkbox</a></li>
-            <li><a href="../Radio/radio.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg>Radio</a></li>
-            <li><a href="../Range/range.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="12" x2="20" y2="12"/><circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/></svg>Range</a></li>
-            <li><a href="../Toggle/toggle.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="5"/><circle cx="7" cy="12" r="3" fill="currentColor" stroke="none"/></svg>Toggle</a></li>
-            <li><a href="../Text Field/text field.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="10" rx="2"/><line x1="7" y1="11" x2="13" y2="11"/></svg>Text Field</a></li>
-            <li><a href="../Text Area/text area.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="16" height="14" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg>Text Area</a></li>
-            <li><a href="../Form/form.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="13" y2="16"/></svg>Form</a></li>
-            <li><a href="../Flags/flags.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>Flags</a></li>
-            <li><a href="../section messages/section-message.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="14" y2="13"/></svg>Section Message</a></li>
-            <li><a href="../Breadcrumbs/breadcrumbs.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/><line x1="3" y1="12" x2="15" y2="12" opacity="0.4"/></svg>Breadcrumbs</a></li>
-            <li><a href="../Page Header/page-header.html" class="nav-link active"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="5" rx="1"/><rect x="3" y="13" width="11" height="5" rx="1"/><line x1="17" y1="15" x2="21" y2="15"/><line x1="17" y1="18" x2="21" y2="18"/></svg>Page Header</a></li>
-            <li><a href="../Tabs/tabs.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="4" rx="1"/><rect x="2" y="13" width="14" height="4" rx="1"/></svg>Tabs</a></li>
-            <li><a href="../Pagination/pagination.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="10,6 4,12 10,18"/><polyline points="14,6 20,12 14,18"/><line x1="11.5" y1="12" x2="12.5" y2="12" opacity="0.55"/></svg>Pagination</a></li>
-            <li><a href="../Modal/modal.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="13" y2="13"/></svg>Modal</a></li>
-            <li><a href="../Tourguide/tourguide.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="2"/><path d="M21 12h-3"/><path d="M6 12H3"/></svg>Tourguide</a></li>
-            <li><a href="../Popup/popup.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="8,10 12,14 16,10"/></svg>Popup</a></li>
-            <li><a href="../Table/table.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="1"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="9" y1="4" x2="9" y2="20"/><line x1="15" y1="4" x2="15" y2="20"/></svg>Table</a></li>
-            <li><a href="../Calendar/calendar.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Calendar</a></li>
-            <li><a href="../Time picker/time-picker.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><polyline points="12,7 12,12 16,14"/></svg>Time Picker</a></li>
-            <li><a href="../Date picker/date-picker.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Date Picker</a></li>
-            <li><a href="../Date time picker/date time picker.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><circle cx="12" cy="15" r="2"/><line x1="12" y1="12" x2="12" y2="15"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Date Time Picker</a></li>
-            <li><a href="../Toast-Banner/banner.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="8" rx="2"/><circle cx="6" cy="12" r="1" fill="currentColor" stroke="none"/><line x1="10" y1="12" x2="18" y2="12"/></svg>Toast Banner</a></li>
+            <li>
+              <a href="../Avatar/avatar.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                Avatar
+              </a>
+            </li>
+            <li>
+              <a href="../Badge/badge.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="9" width="22" height="6" rx="3"/><circle cx="6" cy="12" r="1.5" fill="currentColor" opacity="0.5"/></svg>
+                Badge
+              </a>
+            </li>
+            <li>
+              <a href="../Breadcrumbs/breadcrumbs.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/><line x1="3" y1="12" x2="15" y2="12" opacity="0.4"/></svg>
+                Breadcrumbs
+              </a>
+            </li>
+            <li>
+              <a href="../Button/button.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="3"/><line x1="7" y1="12" x2="17" y2="12" opacity="0.5"/></svg>
+                Button
+              </a>
+            </li>
+            <li>
+              <a href="../Calendar/calendar.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Calendar
+              </a>
+            </li>
+            <li>
+              <a href="../Checkbox/checkbox.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 12l3 3 5-6"/></svg>
+                Checkbox
+              </a>
+            </li>
+            <li>
+              <a href="../Date picker/date-picker.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="14" x2="8" y2="14"/><line x1="12" y1="14" x2="12" y2="14"/><line x1="16" y1="14" x2="16" y2="14"/></svg>
+                Date Picker
+              </a>
+            </li>
+            <li>
+              <a href="../Date time picker/date time picker.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><circle cx="12" cy="15" r="2"/><line x1="12" y1="12" x2="12" y2="15"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Date Time Picker
+              </a>
+            </li>
             <li><a href="../dropdown/dropdown.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="10" x2="17" y2="10"/><line x1="7" y1="14" x2="17" y2="14"/></svg>Dropdown Button</a></li>
-            <li><a href="../Select/select.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><polyline points="8,10 12,14 16,10"/></svg>Select</a></li>
-            <li><a href="../Inline edit/inline-edit.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Inline Edit</a></li>
-            <li><a href="../Navigation menu/navigation.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><line x1="7" y1="10" x2="17" y2="10"/><line x1="7" y1="14" x2="17" y2="14"/></svg>Navigation Menu</a></li>
+            <li>
+              <a href="../Flags/flags.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+                Flags
+              </a>
+            </li>
+            <li><a href="../Form/form.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="13" y2="16"/></svg>Form</a></li>
+            <li>
+              <a href="../Inline edit/inline-edit.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Inline Edit
+              </a>
+            </li>
+            <li>
+              <a href="../Lozenge/lozenge.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="7" width="16" height="10" rx="2"/></svg>
+                Lozenge
+              </a>
+            </li>
+            <li><a href="../Modal/modal.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="13" y2="13"/></svg>Modal</a></li>
+            <li>
+              <a href="../Navigation menu/navigation.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="6" width="18" height="12" rx="2"/>
+                  <line x1="7" y1="10" x2="17" y2="10"/>
+                  <line x1="7" y1="14" x2="17" y2="14"/>
+                </svg>
+                Navigation Menu
+              </a>
+            </li>
+            <li>
+              <a href="../Page Header/page-header.html" class="nav-link active">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="5" rx="1"/><rect x="3" y="13" width="11" height="5" rx="1"/><line x1="17" y1="15" x2="21" y2="15"/><line x1="17" y1="18" x2="21" y2="18"/></svg>
+                Page Header
+              </a>
+            </li>
+            <li>
+              <a href="../Page layout/page-layout.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="9" y1="4" x2="9" y2="20"/></svg>
+                Page Layout
+              </a>
+            </li>
+            <li>
+              <a href="../Pagination/pagination.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="10,6 4,12 10,18"/><polyline points="14,6 20,12 14,18"/><line x1="11.5" y1="12" x2="12.5" y2="12" opacity="0.55"/></svg>
+                Pagination
+              </a>
+            </li>
+            <li><a href="../Popup/popup.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="8,10 12,14 16,10"/></svg>Popup</a></li>
+            <li>
+              <a href="../Radio/radio.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none"/></svg>
+                Radio
+              </a>
+            </li>
+            <li>
+              <a href="../Range/range.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="12" x2="20" y2="12"/><circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/></svg>
+                Range
+              </a>
+            </li>
+            <li>
+              <a href="../section messages/section-message.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="14" y2="13"/></svg>
+                Section Message
+              </a>
+            </li>
+            <li>
+              <a href="../Select/select.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="12" rx="2"/><polyline points="8,10 12,14 16,10"/></svg>
+                Select
+              </a>
+            </li>
+            <li>
+              <a href="../Table/table.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="1"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="3" y1="16" x2="21" y2="16"/><line x1="9" y1="4" x2="9" y2="20"/><line x1="15" y1="4" x2="15" y2="20"/></svg>
+                Table
+              </a>
+            </li>
+            <li>
+              <a href="../Tabs/tabs.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="4" rx="1"/><rect x="2" y="13" width="14" height="4" rx="1"/></svg>
+                Tabs
+              </a>
+            </li>
+            <li>
+              <a href="../Tags/tags.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A2 2 0 013 12V7a4 4 0 014-4z"/></svg>
+                Tags
+              </a>
+            </li>
+            <li>
+              <a href="../Text Area/text area.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="16" height="14" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/></svg>
+                Text Area
+              </a>
+            </li>
+            <li>
+              <a href="../Text Field/text field.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="10" rx="2"/><line x1="7" y1="11" x2="13" y2="11"/></svg>
+                Text Field
+              </a>
+            </li>
+            <li><a href="../Time picker/time-picker.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><polyline points="12,7 12,12 16,14"/></svg>Time Picker</a></li>
+            <li>
+              <a href="../Toast-Banner/banner.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="20" height="8" rx="2"/><circle cx="6" cy="12" r="1" fill="currentColor" stroke="none"/><line x1="10" y1="12" x2="18" y2="12"/></svg>
+                Toast Banner
+              </a>
+            </li>
+            <li>
+              <a href="../Toggle/toggle.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="10" rx="5"/><circle cx="7" cy="12" r="3" fill="currentColor" stroke="none"/></svg>
+                Toggle
+              </a>
+            </li>
+            <li>
+              <a href="../Tooltip/tooltip.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="6" width="16" height="10" rx="2"/><line x1="12" y1="6" x2="12" y2="3"/><path d="M10 3h4"/></svg>
+                Tooltip
+              </a>
+            </li>
             <li><a href="../Top & bottom Navigation/top-bottom-nav.html" class="nav-link"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="17" width="20" height="4" rx="1"/><polyline points="9,11 5,7 9,3"/><polyline points="15,11 19,7 15,3"/></svg>Top &amp; Bottom Nav</a></li>
+            <li>
+              <a href="../Tourguide/tourguide.html" class="nav-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4"/><circle cx="12" cy="16" r="0.5" fill="currentColor"/></svg>
+                Tourguide
+              </a>
+            </li>
+
           </ul>
         </div>
         <div class="nav-section nav-section--menu is-open">
@@ -615,10 +756,6 @@
         <span class="current">Page Header</span>
       </div>
       <div class="topbar-actions">
-        <button class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode">
-          <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-          <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/></svg>
-        </button>
         <span class="version-badge">v2.0</span>
       </div>
     </div>
@@ -672,6 +809,186 @@
             <div class="text-sm font-semibold text-neutral-n900 mb-1.5">Sub-filter</div>
             <div class="text-xs" style="color:var(--color-text-tertiary);">Dropdown Button Default per sub-filter</div>
           </div>
+        </div>
+      </section>
+
+      <section class="ds-section-reveal mb-12">
+        <h2><span class="h2-bar"></span>Playground</h2>
+        <p class="section-desc">Pilih varian untuk melihat kombinasi part pada satu instance komponen.</p>
+        <div class="ds-playground-panel">
+        <div class="ph-playground">
+          <div class="ph-playground__controls">
+            <div class="ph-playground__field">
+              <label for="ph-pg-variant">Varian</label>
+              <select id="ph-pg-variant" aria-label="Pilih varian page header">
+                <option value="default">variant=default</option>
+                <option value="actions-on">variant=actions-on</option>
+                <option value="sf-off">actions-on, search &amp; filter-off</option>
+                <option value="sf-on" selected>actions-on, search &amp; filter-on</option>
+              </select>
+            </div>
+          </div>
+          <div class="anatomy-table-wrap" style="margin-bottom:0;border-top:1px solid var(--color-border-light);">
+            <table class="anatomy-table" id="ph-pg-parts-table" aria-label="Part aktif per varian">
+              <thead>
+                <tr><th>Part</th><th>Class / Komponen</th><th>Varian aktif</th></tr>
+              </thead>
+              <tbody>
+                <tr data-part="breadcrumb"><td>Breadcrumb trail</td><td><code class="chip">.ds-bc-container--trail</code></td><td data-status>—</td></tr>
+                <tr data-part="title"><td>Judul halaman</td><td><code class="chip">.ds-page-header__title</code></td><td data-status>—</td></tr>
+                <tr data-part="actions"><td>Grup aksi</td><td><code class="chip">.ds-page-header__actions</code></td><td data-status>—</td></tr>
+                <tr data-part="search"><td>Search</td><td><code class="chip">.ds-select-trigger</code></td><td data-status>—</td></tr>
+                <tr data-part="filter"><td>Filter utama</td><td><code class="chip">.ds-btn.ds-dropdown-btn</code></td><td data-status>—</td></tr>
+                <tr data-part="subfilters"><td>Sub-filter</td><td><code class="chip">.ds-page-header__subfilters</code></td><td data-status>—</td></tr>
+                <tr data-part="table"><td>Atur Table</td><td><code class="chip">.ds-page-header__table-action</code></td><td data-status>—</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="ph-playground__preview">
+            <header class="ds-page-header ds-page-header--actions-on ds-page-header--toolbar-on ds-page-header--subfilters-on" id="ph-playground-header" aria-label="Page header playground">
+              <div class="ds-page-header__row">
+                <div class="ds-page-header__start">
+                  <nav class="ds-bc-container ds-bc-container--trail" aria-label="Breadcrumb">
+                    <button type="button" class="ds-bc-item ds-bc-item--default">
+                      <span class="ds-bc-text">Item</span>
+                      <span class="ds-bc-sep" aria-hidden="true">/</span>
+                    </button>
+                    <button type="button" class="ds-bc-item ds-bc-item--default">
+                      <span class="ds-bc-text">Item</span>
+                      <span class="ds-bc-sep" aria-hidden="true">/</span>
+                    </button>
+                    <span class="ds-bc-item ds-bc-item--focus" aria-current="page">
+                      <span class="ds-bc-text">Item</span>
+                    </span>
+                  </nav>
+                  <h1 class="ds-page-header__title">Title</h1>
+                </div>
+                <div class="ds-page-header__actions" role="group" aria-label="Aksi halaman">
+                  <button type="button" class="ds-btn">Default</button>
+                  <button type="button" class="ds-btn ds-btn--primary">Primary Action</button>
+                  <button type="button" class="ds-btn ds-btn--icon-only" aria-label="Menu lainnya">
+                    <img src="../../assets/icons/icon-ellipsis-vertical.svg" alt="" width="16" height="16" aria-hidden="true">
+                  </button>
+                </div>
+              </div>
+              <div class="ds-page-header__row ds-page-header__row--toolbar">
+                <div class="ds-page-header__toolbar">
+                  <div class="ds-page-header__search">
+                    <div class="ds-select-component">
+                      <button type="button" class="ds-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="ds-select-trigger__value">Value</span>
+                        <svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6,9 12,15 18,9"></polyline></svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="ds-page-header__filter">
+                    <div class="ds-dropdown">
+                      <button type="button" class="ds-btn ds-dropdown-btn" id="ph-pg-main-filter" aria-haspopup="menu" aria-expanded="true">
+                        Filter
+                        <img class="ds-dropdown-btn__chevron" src="../../assets/icons/icon-chevron-mini-down.svg" alt="" width="16" height="16" aria-hidden="true">
+                      </button>
+                      <div class="ds-dropdown-menu" role="menu" aria-label="Filter" hidden>
+                        <button type="button" class="ds-dropdown-item" role="menuitem"><span class="ds-dropdown-item__label">Option</span></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button type="button" class="ds-btn ds-page-header__table-action">
+                  <img src="../../assets/icons/icon-adjustments-horizontal.svg" alt="" width="16" height="16" aria-hidden="true">
+                  Atur Table
+                </button>
+              </div>
+              <div class="ds-page-header__subfilters" role="group" aria-label="Sub-filter">
+                <div class="ds-dropdown">
+                  <button type="button" class="ds-btn ds-dropdown-btn" aria-haspopup="menu" aria-expanded="false">Filter<img class="ds-dropdown-btn__chevron" src="../../assets/icons/icon-chevron-mini-down.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+                  <div class="ds-dropdown-menu" role="menu" hidden><button type="button" class="ds-dropdown-item" role="menuitem"><span class="ds-dropdown-item__label">Option</span></button></div>
+                </div>
+                <div class="ds-dropdown">
+                  <button type="button" class="ds-btn ds-dropdown-btn" aria-haspopup="menu" aria-expanded="false">Filter<img class="ds-dropdown-btn__chevron" src="../../assets/icons/icon-chevron-mini-down.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+                  <div class="ds-dropdown-menu" role="menu" hidden><button type="button" class="ds-dropdown-item" role="menuitem"><span class="ds-dropdown-item__label">Option</span></button></div>
+                </div>
+                <div class="ds-dropdown">
+                  <button type="button" class="ds-btn ds-dropdown-btn" aria-haspopup="menu" aria-expanded="false">Filter<img class="ds-dropdown-btn__chevron" src="../../assets/icons/icon-chevron-mini-down.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+                  <div class="ds-dropdown-menu" role="menu" hidden><button type="button" class="ds-dropdown-item" role="menuitem"><span class="ds-dropdown-item__label">Option</span></button></div>
+                </div>
+                <div class="ds-dropdown">
+                  <button type="button" class="ds-btn ds-dropdown-btn" aria-haspopup="menu" aria-expanded="false">Filter<img class="ds-dropdown-btn__chevron" src="../../assets/icons/icon-chevron-mini-down.svg" alt="" width="16" height="16" aria-hidden="true"></button>
+                  <div class="ds-dropdown-menu" role="menu" hidden><button type="button" class="ds-dropdown-item" role="menuitem"><span class="ds-dropdown-item__label">Option</span></button></div>
+                </div>
+              </div>
+            </header>
+          </div>
+          <div class="code-card">
+            <div class="code-card__head">
+              <p class="code-card__title">.ds — Page Header · siap copy</p>
+              <button type="button" class="copy-btn" data-copy-target="code-page-header">Copy</button>
+            </div>
+            <pre><code id="code-page-header"><span class="c-cmt">&lt;!-- Page Header — DS GPOS Lite V2 --&gt;</span>
+<span class="c-cmt">&lt;!-- Modifier: --actions-on --toolbar-on --subfilters-on (filter-on) --&gt;</span>
+<span class="c-tag">&lt;header</span> <span class="c-attr">class=</span><span class="c-str">"ds-page-header ds-page-header--actions-on ds-page-header--toolbar-on ds-page-header--subfilters-on"</span> <span class="c-attr">aria-label=</span><span class="c-str">"Page header"</span><span class="c-tag">&gt;</span>
+
+  <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-page-header__row"</span><span class="c-tag">&gt;</span>
+    <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-page-header__start"</span><span class="c-tag">&gt;</span>
+      <span class="c-tag">&lt;nav</span> <span class="c-attr">class=</span><span class="c-str">"ds-bc-container ds-bc-container--trail"</span> <span class="c-attr">aria-label=</span><span class="c-str">"Breadcrumb"</span><span class="c-tag">&gt;</span>
+        <span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-bc-item ds-bc-item--default"</span><span class="c-tag">&gt;</span>
+          <span class="c-tag">&lt;span</span> <span class="c-attr">class=</span><span class="c-str">"ds-bc-text"</span><span class="c-tag">&gt;</span>Item<span class="c-tag">&lt;/span&gt;</span>
+          <span class="c-tag">&lt;span</span> <span class="c-attr">class=</span><span class="c-str">"ds-bc-sep"</span> <span class="c-attr">aria-hidden=</span><span class="c-str">"true"</span><span class="c-tag">&gt;</span>/<span class="c-tag">&lt;/span&gt;</span>
+        <span class="c-tag">&lt;/button&gt;</span>
+        <span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-bc-item ds-bc-item--default"</span><span class="c-tag">&gt;</span>
+          <span class="c-tag">&lt;span</span> <span class="c-attr">class=</span><span class="c-str">"ds-bc-text"</span><span class="c-tag">&gt;</span>Item<span class="c-tag">&lt;/span&gt;</span>
+          <span class="c-tag">&lt;span</span> <span class="c-attr">class=</span><span class="c-str">"ds-bc-sep"</span> <span class="c-attr">aria-hidden=</span><span class="c-str">"true"</span><span class="c-tag">&gt;</span>/<span class="c-tag">&lt;/span&gt;</span>
+        <span class="c-tag">&lt;/button&gt;</span>
+        <span class="c-tag">&lt;span</span> <span class="c-attr">class=</span><span class="c-str">"ds-bc-item ds-bc-item--focus"</span> <span class="c-attr">aria-current=</span><span class="c-str">"page"</span><span class="c-tag">&gt;</span>
+          <span class="c-tag">&lt;span</span> <span class="c-attr">class=</span><span class="c-str">"ds-bc-text"</span><span class="c-tag">&gt;</span>Item<span class="c-tag">&lt;/span&gt;</span>
+        <span class="c-tag">&lt;/span&gt;</span>
+      <span class="c-tag">&lt;/nav&gt;</span>
+      <span class="c-tag">&lt;h1</span> <span class="c-attr">class=</span><span class="c-str">"ds-page-header__title"</span><span class="c-tag">&gt;</span>Title<span class="c-tag">&lt;/h1&gt;</span>
+    <span class="c-tag">&lt;/div&gt;</span>
+    <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-page-header__actions"</span> <span class="c-attr">role=</span><span class="c-str">"group"</span> <span class="c-attr">aria-label=</span><span class="c-str">"Aksi halaman"</span><span class="c-tag">&gt;</span>
+      <span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-btn"</span><span class="c-tag">&gt;</span>Default<span class="c-tag">&lt;/button&gt;</span>
+      <span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-btn ds-btn--primary"</span><span class="c-tag">&gt;</span>Primary Action<span class="c-tag">&lt;/button&gt;</span>
+      <span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-btn ds-btn--icon-only"</span> <span class="c-attr">aria-label=</span><span class="c-str">"Menu lainnya"</span><span class="c-tag">&gt;</span>
+        <span class="c-tag">&lt;img</span> <span class="c-attr">src=</span><span class="c-str">"assets/icons/icon-ellipsis-vertical.svg"</span> <span class="c-attr">alt=</span><span class="c-str">""</span> <span class="c-attr">width=</span><span class="c-str">"16"</span> <span class="c-attr">height=</span><span class="c-str">"16"</span> <span class="c-attr">aria-hidden=</span><span class="c-str">"true"</span><span class="c-tag">&gt;</span>
+      <span class="c-tag">&lt;/button&gt;</span>
+    <span class="c-tag">&lt;/div&gt;</span>
+  <span class="c-tag">&lt;/div&gt;</span>
+
+  <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-page-header__row ds-page-header__row--toolbar"</span><span class="c-tag">&gt;</span>
+    <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-page-header__toolbar"</span><span class="c-tag">&gt;</span>
+      <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-page-header__search"</span><span class="c-tag">&gt;</span>
+        <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-select-component"</span><span class="c-tag">&gt;</span>
+          <span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-select-trigger"</span> <span class="c-attr">aria-haspopup=</span><span class="c-str">"listbox"</span> <span class="c-attr">aria-expanded=</span><span class="c-str">"false"</span><span class="c-tag">&gt;</span>
+            <span class="c-tag">&lt;span</span> <span class="c-attr">class=</span><span class="c-str">"ds-select-trigger__value"</span><span class="c-tag">&gt;</span>Value<span class="c-tag">&lt;/span&gt;</span>
+            <span class="c-tag">&lt;svg</span> <span class="c-attr">class=</span><span class="c-str">"ds-select-trigger__icon"</span> <span class="c-attr">viewBox=</span><span class="c-str">"0 0 24 24"</span> <span class="c-attr">fill=</span><span class="c-str">"none"</span> <span class="c-attr">stroke=</span><span class="c-str">"currentColor"</span> <span class="c-attr">stroke-width=</span><span class="c-str">"2"</span> <span class="c-attr">aria-hidden=</span><span class="c-str">"true"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;polyline</span> <span class="c-attr">points=</span><span class="c-str">"6,9 12,15 18,9"</span><span class="c-tag">&gt;&lt;/polyline&gt;&lt;/svg&gt;</span>
+          <span class="c-tag">&lt;/button&gt;</span>
+        <span class="c-tag">&lt;/div&gt;</span>
+      <span class="c-tag">&lt;/div&gt;</span>
+      <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-page-header__filter"</span><span class="c-tag">&gt;</span>
+        <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-dropdown"</span><span class="c-tag">&gt;</span>
+          <span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-btn ds-dropdown-btn"</span> <span class="c-attr">aria-haspopup=</span><span class="c-str">"menu"</span> <span class="c-attr">aria-expanded=</span><span class="c-str">"false"</span><span class="c-tag">&gt;</span>
+            Filter
+            <span class="c-tag">&lt;img</span> <span class="c-attr">class=</span><span class="c-str">"ds-dropdown-btn__chevron"</span> <span class="c-attr">src=</span><span class="c-str">"assets/icons/icon-chevron-mini-down.svg"</span> <span class="c-attr">alt=</span><span class="c-str">""</span> <span class="c-attr">width=</span><span class="c-str">"16"</span> <span class="c-attr">height=</span><span class="c-str">"16"</span> <span class="c-attr">aria-hidden=</span><span class="c-str">"true"</span><span class="c-tag">&gt;</span>
+          <span class="c-tag">&lt;/button&gt;</span>
+          <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-dropdown-menu"</span> <span class="c-attr">role=</span><span class="c-str">"menu"</span> <span class="c-attr">hidden</span><span class="c-tag">&gt;</span>...<span class="c-tag">&lt;/div&gt;</span>
+        <span class="c-tag">&lt;/div&gt;</span>
+      <span class="c-tag">&lt;/div&gt;</span>
+    <span class="c-tag">&lt;/div&gt;</span>
+    <span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-btn ds-page-header__table-action"</span><span class="c-tag">&gt;</span>
+      <span class="c-tag">&lt;img</span> <span class="c-attr">src=</span><span class="c-str">"assets/icons/icon-adjustments-horizontal.svg"</span> <span class="c-attr">alt=</span><span class="c-str">""</span> <span class="c-attr">width=</span><span class="c-str">"16"</span> <span class="c-attr">height=</span><span class="c-str">"16"</span> <span class="c-attr">aria-hidden=</span><span class="c-str">"true"</span><span class="c-tag">&gt;</span>
+      Atur Table
+    <span class="c-tag">&lt;/button&gt;</span>
+  <span class="c-tag">&lt;/div&gt;</span>
+
+  <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-page-header__subfilters"</span> <span class="c-attr">role=</span><span class="c-str">"group"</span> <span class="c-attr">aria-label=</span><span class="c-str">"Sub-filter"</span><span class="c-tag">&gt;</span>
+    <span class="c-cmt">&lt;!-- 4× ds-dropdown + ds-btn ds-dropdown-btn --&gt;</span>
+  <span class="c-tag">&lt;/div&gt;</span>
+
+<span class="c-tag">&lt;/header&gt;</span></code></pre>
+          </div>
+        </div>
+      </section>
+
+
         </div>
       </section>
 
@@ -1179,183 +1496,6 @@
       </section>
 
       <section style="margin-bottom:48px;">
-        <h2 class="section-heading"><span class="section-heading__accent"></span>Playground</h2>
-        <p class="text-body-sm mb-6" style="color:var(--color-text-secondary);line-height:var(--text-body-small-regular-lh);max-width:640px;">
-          Pilih varian untuk melihat kombinasi part pada satu instance komponen.
-        </p>
-        <div class="ph-playground">
-          <div class="ph-playground__controls">
-            <div class="ph-playground__field">
-              <label for="ph-pg-variant">Varian</label>
-              <select id="ph-pg-variant" aria-label="Pilih varian page header">
-                <option value="default">variant=default</option>
-                <option value="actions-on">variant=actions-on</option>
-                <option value="sf-off">actions-on, search &amp; filter-off</option>
-                <option value="sf-on" selected>actions-on, search &amp; filter-on</option>
-              </select>
-            </div>
-          </div>
-          <div class="anatomy-table-wrap" style="margin-bottom:0;border-top:1px solid var(--color-border-light);">
-            <table class="anatomy-table" id="ph-pg-parts-table" aria-label="Part aktif per varian">
-              <thead>
-                <tr><th>Part</th><th>Class / Komponen</th><th>Varian aktif</th></tr>
-              </thead>
-              <tbody>
-                <tr data-part="breadcrumb"><td>Breadcrumb trail</td><td><code class="chip">.ds-bc-container--trail</code></td><td data-status>—</td></tr>
-                <tr data-part="title"><td>Judul halaman</td><td><code class="chip">.ds-page-header__title</code></td><td data-status>—</td></tr>
-                <tr data-part="actions"><td>Grup aksi</td><td><code class="chip">.ds-page-header__actions</code></td><td data-status>—</td></tr>
-                <tr data-part="search"><td>Search</td><td><code class="chip">.ds-select-trigger</code></td><td data-status>—</td></tr>
-                <tr data-part="filter"><td>Filter utama</td><td><code class="chip">.ds-btn.ds-dropdown-btn</code></td><td data-status>—</td></tr>
-                <tr data-part="subfilters"><td>Sub-filter</td><td><code class="chip">.ds-page-header__subfilters</code></td><td data-status>—</td></tr>
-                <tr data-part="table"><td>Atur Table</td><td><code class="chip">.ds-page-header__table-action</code></td><td data-status>—</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="ph-playground__preview">
-            <header class="ds-page-header ds-page-header--actions-on ds-page-header--toolbar-on ds-page-header--subfilters-on" id="ph-playground-header" aria-label="Page header playground">
-              <div class="ds-page-header__row">
-                <div class="ds-page-header__start">
-                  <nav class="ds-bc-container ds-bc-container--trail" aria-label="Breadcrumb">
-                    <button type="button" class="ds-bc-item ds-bc-item--default">
-                      <span class="ds-bc-text">Item</span>
-                      <span class="ds-bc-sep" aria-hidden="true">/</span>
-                    </button>
-                    <button type="button" class="ds-bc-item ds-bc-item--default">
-                      <span class="ds-bc-text">Item</span>
-                      <span class="ds-bc-sep" aria-hidden="true">/</span>
-                    </button>
-                    <span class="ds-bc-item ds-bc-item--focus" aria-current="page">
-                      <span class="ds-bc-text">Item</span>
-                    </span>
-                  </nav>
-                  <h1 class="ds-page-header__title">Title</h1>
-                </div>
-                <div class="ds-page-header__actions" role="group" aria-label="Aksi halaman">
-                  <button type="button" class="ds-btn">Default</button>
-                  <button type="button" class="ds-btn ds-btn--primary">Primary Action</button>
-                  <button type="button" class="ds-btn ds-btn--icon-only" aria-label="Menu lainnya">
-                    <img src="../../assets/icons/icon-ellipsis-vertical.svg" alt="" width="16" height="16" aria-hidden="true">
-                  </button>
-                </div>
-              </div>
-              <div class="ds-page-header__row ds-page-header__row--toolbar">
-                <div class="ds-page-header__toolbar">
-                  <div class="ds-page-header__search">
-                    <div class="ds-select-component">
-                      <button type="button" class="ds-select-trigger" aria-haspopup="listbox" aria-expanded="false">
-                        <span class="ds-select-trigger__value">Value</span>
-                        <svg class="ds-select-trigger__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6,9 12,15 18,9"></polyline></svg>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="ds-page-header__filter">
-                    <div class="ds-dropdown">
-                      <button type="button" class="ds-btn ds-dropdown-btn" id="ph-pg-main-filter" aria-haspopup="menu" aria-expanded="true">
-                        Filter
-                        <img class="ds-dropdown-btn__chevron" src="../../assets/icons/icon-chevron-mini-down.svg" alt="" width="16" height="16" aria-hidden="true">
-                      </button>
-                      <div class="ds-dropdown-menu" role="menu" aria-label="Filter" hidden>
-                        <button type="button" class="ds-dropdown-item" role="menuitem"><span class="ds-dropdown-item__label">Option</span></button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <button type="button" class="ds-btn ds-page-header__table-action">
-                  <img src="../../assets/icons/icon-adjustments-horizontal.svg" alt="" width="16" height="16" aria-hidden="true">
-                  Atur Table
-                </button>
-              </div>
-              <div class="ds-page-header__subfilters" role="group" aria-label="Sub-filter">
-                <div class="ds-dropdown">
-                  <button type="button" class="ds-btn ds-dropdown-btn" aria-haspopup="menu" aria-expanded="false">Filter<img class="ds-dropdown-btn__chevron" src="../../assets/icons/icon-chevron-mini-down.svg" alt="" width="16" height="16" aria-hidden="true"></button>
-                  <div class="ds-dropdown-menu" role="menu" hidden><button type="button" class="ds-dropdown-item" role="menuitem"><span class="ds-dropdown-item__label">Option</span></button></div>
-                </div>
-                <div class="ds-dropdown">
-                  <button type="button" class="ds-btn ds-dropdown-btn" aria-haspopup="menu" aria-expanded="false">Filter<img class="ds-dropdown-btn__chevron" src="../../assets/icons/icon-chevron-mini-down.svg" alt="" width="16" height="16" aria-hidden="true"></button>
-                  <div class="ds-dropdown-menu" role="menu" hidden><button type="button" class="ds-dropdown-item" role="menuitem"><span class="ds-dropdown-item__label">Option</span></button></div>
-                </div>
-                <div class="ds-dropdown">
-                  <button type="button" class="ds-btn ds-dropdown-btn" aria-haspopup="menu" aria-expanded="false">Filter<img class="ds-dropdown-btn__chevron" src="../../assets/icons/icon-chevron-mini-down.svg" alt="" width="16" height="16" aria-hidden="true"></button>
-                  <div class="ds-dropdown-menu" role="menu" hidden><button type="button" class="ds-dropdown-item" role="menuitem"><span class="ds-dropdown-item__label">Option</span></button></div>
-                </div>
-                <div class="ds-dropdown">
-                  <button type="button" class="ds-btn ds-dropdown-btn" aria-haspopup="menu" aria-expanded="false">Filter<img class="ds-dropdown-btn__chevron" src="../../assets/icons/icon-chevron-mini-down.svg" alt="" width="16" height="16" aria-hidden="true"></button>
-                  <div class="ds-dropdown-menu" role="menu" hidden><button type="button" class="ds-dropdown-item" role="menuitem"><span class="ds-dropdown-item__label">Option</span></button></div>
-                </div>
-              </div>
-            </header>
-          </div>
-          <div class="code-card">
-            <div class="code-card__head">
-              <p class="code-card__title">.ds — Page Header · siap copy</p>
-              <button type="button" class="copy-btn" data-copy-target="code-page-header">Copy</button>
-            </div>
-            <pre><code id="code-page-header"><span class="c-cmt">&lt;!-- Page Header — DS GPOS Lite V2 --&gt;</span>
-<span class="c-cmt">&lt;!-- Modifier: --actions-on --toolbar-on --subfilters-on (filter-on) --&gt;</span>
-<span class="c-tag">&lt;header</span> <span class="c-attr">class=</span><span class="c-str">"ds-page-header ds-page-header--actions-on ds-page-header--toolbar-on ds-page-header--subfilters-on"</span> <span class="c-attr">aria-label=</span><span class="c-str">"Page header"</span><span class="c-tag">&gt;</span>
-
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-page-header__row"</span><span class="c-tag">&gt;</span>
-    <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-page-header__start"</span><span class="c-tag">&gt;</span>
-      <span class="c-tag">&lt;nav</span> <span class="c-attr">class=</span><span class="c-str">"ds-bc-container ds-bc-container--trail"</span> <span class="c-attr">aria-label=</span><span class="c-str">"Breadcrumb"</span><span class="c-tag">&gt;</span>
-        <span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-bc-item ds-bc-item--default"</span><span class="c-tag">&gt;</span>
-          <span class="c-tag">&lt;span</span> <span class="c-attr">class=</span><span class="c-str">"ds-bc-text"</span><span class="c-tag">&gt;</span>Item<span class="c-tag">&lt;/span&gt;</span>
-          <span class="c-tag">&lt;span</span> <span class="c-attr">class=</span><span class="c-str">"ds-bc-sep"</span> <span class="c-attr">aria-hidden=</span><span class="c-str">"true"</span><span class="c-tag">&gt;</span>/<span class="c-tag">&lt;/span&gt;</span>
-        <span class="c-tag">&lt;/button&gt;</span>
-        <span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-bc-item ds-bc-item--default"</span><span class="c-tag">&gt;</span>
-          <span class="c-tag">&lt;span</span> <span class="c-attr">class=</span><span class="c-str">"ds-bc-text"</span><span class="c-tag">&gt;</span>Item<span class="c-tag">&lt;/span&gt;</span>
-          <span class="c-tag">&lt;span</span> <span class="c-attr">class=</span><span class="c-str">"ds-bc-sep"</span> <span class="c-attr">aria-hidden=</span><span class="c-str">"true"</span><span class="c-tag">&gt;</span>/<span class="c-tag">&lt;/span&gt;</span>
-        <span class="c-tag">&lt;/button&gt;</span>
-        <span class="c-tag">&lt;span</span> <span class="c-attr">class=</span><span class="c-str">"ds-bc-item ds-bc-item--focus"</span> <span class="c-attr">aria-current=</span><span class="c-str">"page"</span><span class="c-tag">&gt;</span>
-          <span class="c-tag">&lt;span</span> <span class="c-attr">class=</span><span class="c-str">"ds-bc-text"</span><span class="c-tag">&gt;</span>Item<span class="c-tag">&lt;/span&gt;</span>
-        <span class="c-tag">&lt;/span&gt;</span>
-      <span class="c-tag">&lt;/nav&gt;</span>
-      <span class="c-tag">&lt;h1</span> <span class="c-attr">class=</span><span class="c-str">"ds-page-header__title"</span><span class="c-tag">&gt;</span>Title<span class="c-tag">&lt;/h1&gt;</span>
-    <span class="c-tag">&lt;/div&gt;</span>
-    <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-page-header__actions"</span> <span class="c-attr">role=</span><span class="c-str">"group"</span> <span class="c-attr">aria-label=</span><span class="c-str">"Aksi halaman"</span><span class="c-tag">&gt;</span>
-      <span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-btn"</span><span class="c-tag">&gt;</span>Default<span class="c-tag">&lt;/button&gt;</span>
-      <span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-btn ds-btn--primary"</span><span class="c-tag">&gt;</span>Primary Action<span class="c-tag">&lt;/button&gt;</span>
-      <span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-btn ds-btn--icon-only"</span> <span class="c-attr">aria-label=</span><span class="c-str">"Menu lainnya"</span><span class="c-tag">&gt;</span>
-        <span class="c-tag">&lt;img</span> <span class="c-attr">src=</span><span class="c-str">"assets/icons/icon-ellipsis-vertical.svg"</span> <span class="c-attr">alt=</span><span class="c-str">""</span> <span class="c-attr">width=</span><span class="c-str">"16"</span> <span class="c-attr">height=</span><span class="c-str">"16"</span> <span class="c-attr">aria-hidden=</span><span class="c-str">"true"</span><span class="c-tag">&gt;</span>
-      <span class="c-tag">&lt;/button&gt;</span>
-    <span class="c-tag">&lt;/div&gt;</span>
-  <span class="c-tag">&lt;/div&gt;</span>
-
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-page-header__row ds-page-header__row--toolbar"</span><span class="c-tag">&gt;</span>
-    <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-page-header__toolbar"</span><span class="c-tag">&gt;</span>
-      <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-page-header__search"</span><span class="c-tag">&gt;</span>
-        <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-select-component"</span><span class="c-tag">&gt;</span>
-          <span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-select-trigger"</span> <span class="c-attr">aria-haspopup=</span><span class="c-str">"listbox"</span> <span class="c-attr">aria-expanded=</span><span class="c-str">"false"</span><span class="c-tag">&gt;</span>
-            <span class="c-tag">&lt;span</span> <span class="c-attr">class=</span><span class="c-str">"ds-select-trigger__value"</span><span class="c-tag">&gt;</span>Value<span class="c-tag">&lt;/span&gt;</span>
-            <span class="c-tag">&lt;svg</span> <span class="c-attr">class=</span><span class="c-str">"ds-select-trigger__icon"</span> <span class="c-attr">viewBox=</span><span class="c-str">"0 0 24 24"</span> <span class="c-attr">fill=</span><span class="c-str">"none"</span> <span class="c-attr">stroke=</span><span class="c-str">"currentColor"</span> <span class="c-attr">stroke-width=</span><span class="c-str">"2"</span> <span class="c-attr">aria-hidden=</span><span class="c-str">"true"</span><span class="c-tag">&gt;</span><span class="c-tag">&lt;polyline</span> <span class="c-attr">points=</span><span class="c-str">"6,9 12,15 18,9"</span><span class="c-tag">&gt;&lt;/polyline&gt;&lt;/svg&gt;</span>
-          <span class="c-tag">&lt;/button&gt;</span>
-        <span class="c-tag">&lt;/div&gt;</span>
-      <span class="c-tag">&lt;/div&gt;</span>
-      <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-page-header__filter"</span><span class="c-tag">&gt;</span>
-        <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-dropdown"</span><span class="c-tag">&gt;</span>
-          <span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-btn ds-dropdown-btn"</span> <span class="c-attr">aria-haspopup=</span><span class="c-str">"menu"</span> <span class="c-attr">aria-expanded=</span><span class="c-str">"false"</span><span class="c-tag">&gt;</span>
-            Filter
-            <span class="c-tag">&lt;img</span> <span class="c-attr">class=</span><span class="c-str">"ds-dropdown-btn__chevron"</span> <span class="c-attr">src=</span><span class="c-str">"assets/icons/icon-chevron-mini-down.svg"</span> <span class="c-attr">alt=</span><span class="c-str">""</span> <span class="c-attr">width=</span><span class="c-str">"16"</span> <span class="c-attr">height=</span><span class="c-str">"16"</span> <span class="c-attr">aria-hidden=</span><span class="c-str">"true"</span><span class="c-tag">&gt;</span>
-          <span class="c-tag">&lt;/button&gt;</span>
-          <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-dropdown-menu"</span> <span class="c-attr">role=</span><span class="c-str">"menu"</span> <span class="c-attr">hidden</span><span class="c-tag">&gt;</span>...<span class="c-tag">&lt;/div&gt;</span>
-        <span class="c-tag">&lt;/div&gt;</span>
-      <span class="c-tag">&lt;/div&gt;</span>
-    <span class="c-tag">&lt;/div&gt;</span>
-    <span class="c-tag">&lt;button</span> <span class="c-attr">type=</span><span class="c-str">"button"</span> <span class="c-attr">class=</span><span class="c-str">"ds-btn ds-page-header__table-action"</span><span class="c-tag">&gt;</span>
-      <span class="c-tag">&lt;img</span> <span class="c-attr">src=</span><span class="c-str">"assets/icons/icon-adjustments-horizontal.svg"</span> <span class="c-attr">alt=</span><span class="c-str">""</span> <span class="c-attr">width=</span><span class="c-str">"16"</span> <span class="c-attr">height=</span><span class="c-str">"16"</span> <span class="c-attr">aria-hidden=</span><span class="c-str">"true"</span><span class="c-tag">&gt;</span>
-      Atur Table
-    <span class="c-tag">&lt;/button&gt;</span>
-  <span class="c-tag">&lt;/div&gt;</span>
-
-  <span class="c-tag">&lt;div</span> <span class="c-attr">class=</span><span class="c-str">"ds-page-header__subfilters"</span> <span class="c-attr">role=</span><span class="c-str">"group"</span> <span class="c-attr">aria-label=</span><span class="c-str">"Sub-filter"</span><span class="c-tag">&gt;</span>
-    <span class="c-cmt">&lt;!-- 4× ds-dropdown + ds-btn ds-dropdown-btn --&gt;</span>
-  <span class="c-tag">&lt;/div&gt;</span>
-
-<span class="c-tag">&lt;/header&gt;</span></code></pre>
-          </div>
-        </div>
-      </section>
-
-      <section style="margin-bottom:48px;">
         <h2 class="section-heading"><span class="section-heading__accent"></span>Do &amp; Don't</h2>
         <p class="text-body-sm mb-6" style="color:var(--color-text-secondary);line-height:var(--text-body-small-regular-lh);max-width:640px;">
           Panduan penggunaan Page Header agar konsisten dengan komponen DS yang sudah ada.
@@ -1430,19 +1570,7 @@
       prog.style.width = (total > 0 ? (window.scrollY / total) * 100 : 0) + '%';
     }, { passive: true });
   })();
-  (function () {
-    var btn = document.getElementById('dark-toggle');
-    if (!btn) return;
-    var html = document.documentElement;
-    var stored = localStorage.getItem('ds-theme');
-    if (stored) html.setAttribute('data-theme', stored);
-    btn.addEventListener('click', function () {
-      var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('ds-theme', next);
-    });
-  })();
-  document.querySelectorAll('.copy-btn[data-copy-target]').forEach(function (btn) {
+document.querySelectorAll('.copy-btn[data-copy-target]').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var el = document.getElementById(btn.getAttribute('data-copy-target'));
       if (!el) return;

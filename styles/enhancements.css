@@ -1180,3 +1180,177 @@ section > h2 {
     padding: var(--spacing-4);
   }
 }
+
+/* ============================================================
+   21. GLOBAL MICRO-INTERACTIONS — DOCS PAGES
+   ============================================================ */
+
+@keyframes ds-reveal {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.ds-hero-banner {
+  animation: ds-reveal 360ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.ds-section-reveal {
+  animation: ds-reveal 420ms cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.hero-feat-card {
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.hero-feat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.h2-bar {
+  width: 3px;
+  height: 18px;
+  background: linear-gradient(to bottom, var(--color-primary-500), var(--color-primary-300));
+  border-radius: 3px;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+section > h2 {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  letter-spacing: -0.01em;
+  margin-bottom: var(--spacing-3);
+  padding-bottom: var(--spacing-4);
+}
+
+.section-desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
+  line-height: var(--line-height-relaxed);
+  margin-top: calc(-1 * var(--spacing-2));
+  margin-bottom: var(--spacing-6);
+  max-width: 640px;
+}
+
+.ds-playground-panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-6);
+  transition: box-shadow var(--transition-base);
+}
+
+.ds-playground-panel:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.ds-playground-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-5);
+}
+
+.ds-playground-control {
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--border-radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  font-family: var(--font-primary);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.ds-playground-control:hover {
+  border-color: var(--color-primary-500);
+  color: var(--color-primary-600);
+  background: var(--color-primary-50);
+}
+
+.ds-playground-control.is-active {
+  background: var(--color-primary-500);
+  border-color: var(--color-primary-500);
+  color: var(--color-text-inverse);
+}
+
+.ds-playground-control:active {
+  transform: scale(0.97);
+}
+
+.ds-playground-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  padding: var(--spacing-8);
+  background: var(--color-neutral-n10);
+  border-radius: var(--border-radius-lg);
+  border: 1px dashed var(--color-border);
+}
+
+.copy-btn-block,
+.variant-copy-btn,
+.code-copy,
+.swatch-copy,
+.impl-copy {
+  transition: background-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.copy-btn-block:active,
+.variant-copy-btn:active,
+.code-copy:active,
+.swatch-copy:active,
+.impl-copy:active {
+  transform: scale(0.96);
+}
+
+@media (max-width: 640px) {
+  .swatch-row {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--border-radius-lg);
+  }
+
+  .swatch-item {
+    min-width: 68px;
+    flex: 0 0 68px;
+  }
+
+  .sem-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .ds-playground-controls {
+    gap: var(--spacing-1);
+  }
+
+  .ds-playground-stage {
+    padding: var(--spacing-5);
+    min-height: 96px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ds-hero-banner,
+  .ds-section-reveal {
+    animation: none;
+  }
+
+  .hero-feat-card:hover {
+    transform: none;
+  }
+
+  .ds-playground-control:active,
+  .copy-btn-block:active,
+  .variant-copy-btn:active {
+    transform: none;
+  }
+}
