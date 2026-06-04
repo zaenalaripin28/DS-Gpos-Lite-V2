@@ -59,10 +59,12 @@ Priority:
 * Translate into clean production HTML
 * Avoid absolute positioning unless required
 
-Reference folder:
+Optional anatomy folder (may be empty):
 `.claude/references/`
 
-If anatomy reference exists:
+Until files exist there, use `foundations/*/*.html`, `components/*/*.html`, and `components/*/figma/` as proportion references.
+
+If anatomy reference exists in `.claude/references/`:
 
 * treat it as source of truth
 * never estimate spacing or dimensions
@@ -177,3 +179,17 @@ Do not use inline styles unless explicitly required.
 
 Never use raw Tailwind colors.
 Always use semantic token utilities.
+
+---
+
+## Design System Knowledge Sources
+
+Before implementing Design System related changes, reference:
+
+* Docs/design-system-knowledge.md
+* Docs/design-principles.md
+* Docs/component-rules.md
+* Docs/engineer-skill.md
+* Docs/figma-make-skill.md
+
+These files describe the current repository implementation and should be treated as Design System documentation.
