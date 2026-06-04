@@ -1,295 +1,212 @@
-# Design System GPOS Lite V 2.0
+# Design System GPOS Lite V2
 
-Comprehensive design system documentation untuk GPOS Lite V2 dengan design tokens, components, dan implementation guidelines. Dibangun dengan CSS variables dan Tailwind CSS untuk easy scalability dan customization.
+Dokumentasi design system GPOS Lite V2 — design tokens, 7 foundations, 34 komponen, dan panduan implementasi. Dibangun dengan HTML statis, CSS custom properties, dan Tailwind CSS v3.
 
-## 📁 Struktur File
+**Brand color:** GPOS Blue `#1E7FD6` (`--color-primary-500`)
+
+---
+
+## Struktur Repositori
 
 ```
-├── index.html                 # Landing page & overview
-├── pages/
-│   ├── colors.html           # Color system & palette
-│   ├── typography.html       # Fonts, sizes, weights
-│   ├── spacing.html          # Spacing scale & rhythm
-│   ├── shadows.html          # Elevation system
-│   ├── borders.html          # Border radius & width
-│   ├── grid.html             # Responsive grid & layout
-│   └── components.html       # Component library
-├── css/
-│   └── styles.css            # All CSS variables & base styles
-├── js/
-│   └── script.js             # Interactive features
-├── tailwind.config.js        # Tailwind configuration
-└── README.md                 # This file
+├── index.html                    # Home & navigasi design system
+├── foundations/                  # 7 foundation pages (HTML)
+│   ├── colors/
+│   ├── typography/
+│   ├── spacing/
+│   ├── borders/
+│   ├── shadows/
+│   ├── grid/
+│   └── icons/
+├── components/                   # 34 komponen (HTML + CSS per folder)
+├── styles/
+│   ├── tokens.css                # Design tokens (CSS variables)
+│   ├── globals.css               # Base layout, sidebar, topbar
+│   └── enhancements.css          # Utilitas halaman dokumentasi
+├── assets/
+│   ├── icons/                    # 188 SVG icons
+│   └── images/
+├── Docs/                         # Knowledge base & panduan engineer
+│   ├── design-system-knowledge.md
+│   ├── design-principles.md
+│   ├── component-rules.md
+│   ├── engineer-skill.md
+│   └── figma-make-skill.md
+├── tailwind.config.js            # Mapping token → Tailwind utilities
+├── CLAUDE.md                     # Aturan implementasi untuk AI/engineer
+├── style_guide.md                # Visual style reference
+└── package.json
 ```
 
-## 🎨 Design Tokens Overview
+**Stack:** HTML statis · Tailwind CSS v3 · CSS custom properties · BEM `ds-*` · ikon dari `assets/icons/` saja
 
-### Color System
-- **Primary**: Indigo (#6366f1) - Main brand color
-- **Secondary**: Purple (#a855f7) - Accent color  
-- **Semantic Colors**: Success, Warning, Error, Info
-- **Grayscale**: Complete 10-step scale (50-900)
+**Tidak dipakai:** React, Vue, Storybook, external UI library
 
-**Usage**: Semua color tersedia sebagai CSS variables dan Tailwind utilities
-```css
-/* CSS Variables */
-background-color: var(--color-primary-500);
+---
 
-/* Tailwind */
-<div class="bg-primary-500 text-white">...</div>
-```
+## Quick Start
 
-### Typography
-- **Font Family**: Poppins (seluruh UI, termasuk code blocks)
-- **Font Sizes**: 9 levels (12px - 48px)
-- **Font Weights**: Light (300), Normal (400), Medium (500), Semibold (600), Bold (700)
+### 1. Buka dokumentasi lokal
 
-```html
-<h1 class="text-4xl font-bold">Heading 1</h1>
-<p class="text-base font-normal">Body text</p>
-<code class="font-primary text-sm">Code snippet</code>
-```
-
-### Spacing
-12-step spacing scale berbasis 4px base unit:
-```
-1 (4px), 2 (8px), 3 (12px), 4 (16px), 6 (24px), 
-8 (32px), 12 (48px), 16 (64px), 20 (80px), 24 (96px)
-```
-
-### Shadows
-1-level elevation system:
-- `shadow-sm`: Subtle (1px offset)
-
-### Border Radius
-- `rounded-none`: 0px
-- `rounded-sm`: 4px
-- `rounded-md`: 8px (default)
-- `rounded-lg`: 12px (cards)
-- `rounded-xl`: 16px (modals)
-- `rounded-2xl`: 24px
-- `rounded-full`: Pill shapes
-
-### Responsive Breakpoints
-```
-xs: 0 (mobile)
-sm: 640px (landscape mobile)
-md: 768px (tablet)
-lg: 1024px (desktop)
-xl: 1280px (wide desktop)
-2xl: 1536px (ultra wide)
-```
-
-## 🚀 Quick Start
-
-### 1. Copy Tailwind Config
-Gunakan `tailwind.config.js` yang sudah dikonfigurasi dengan semua design tokens kami:
+Buka `index.html` di browser, atau jalankan static server:
 
 ```bash
-# Copy tailwind.config.js ke project Anda
-cp tailwind.config.js ../your-project/
+npx serve .
 ```
 
-### 2. Copy CSS Variables
-Gunakan `css/styles.css` sebagai base stylesheet:
+### 2. Build Tailwind (opsional)
 
-```html
-<link rel="stylesheet" href="design-system/css/styles.css">
+```bash
+npm install
+npm run dev      # watch → dist/output.css
+npm run build    # minify → dist/output.css
 ```
 
-### 3. Use Tailwind Classes
-Semua design tokens sudah terintegrasi dengan Tailwind:
+Input build: `styles/globals.css` (meng-`@import` `tokens.css`).
+
+### 3. Integrasi ke project lain
+
+1. Salin `tailwind.config.js` ke project target
+2. Import token via `styles/tokens.css` atau `styles/globals.css`
+3. Gunakan utility Tailwind semantic (`bg-primary-500`, `text-neutral-n900`, `shadow-1`, dll.)
 
 ```html
-<!-- Button dengan design tokens -->
-<button class="px-6 py-3 rounded-md bg-primary-500 text-white font-semibold hover:bg-primary-600 transition-colors">
+<button class="px-6 py-3 rounded-md bg-primary-500 text-white font-semibold hover:bg-primary-600">
   Button
 </button>
-
-<!-- Card dengan design system -->
-<div class="p-6 rounded-lg shadow-md border border-gray-200 bg-white">
-  <h3 class="text-xl font-bold mb-2">Card Title</h3>
-  <p class="text-gray-600">Card content</p>
-</div>
 ```
-
-### 4. Reference CSS Variables
-Atau gunakan CSS variables untuk custom styling:
 
 ```css
 .custom-component {
   background-color: var(--color-primary-500);
   padding: var(--spacing-4);
   border-radius: var(--border-radius-md);
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-1);
 }
 ```
-
-## 📖 Documentation Guide
-
-### Untuk Designers
-- **Colors**: Lengkap color palette dengan shade levels dan usage
-- **Typography**: Font selections, sizes, weights, dan line heights
-- **Spacing**: Spacing scale dengan visual examples
-- **Shadows**: Elevation system dengan use cases
-- **Borders**: Border radius dan width options
-- **Components**: Ready-to-use component patterns
-
-### Untuk Developers
-- **Tailwind Config**: Siap pakai configuration dengan semua tokens
-- **CSS Variables**: Lengkap CSS variable definitions di `css/styles.css`
-- **Code Examples**: Copy-paste ready code untuk setiap foundation
-- **Best Practices**: Do's and Don'ts untuk consistent implementation
-
-## 💡 Implementation Guidelines
-
-### ✅ Best Practices
-
-1. **Gunakan Design Tokens**
-   ```html
-   <!-- Good -->
-   <div class="bg-primary-500 px-4 py-2 rounded-md">Button</div>
-   
-   <!-- Avoid -->
-   <div style="background-color: #6366f1; padding: 8px 16px;">Button</div>
-   ```
-
-2. **Mobile-First Design**
-   ```html
-   <!-- Base = mobile, then enhance for larger screens -->
-   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-     ...
-   </div>
-   ```
-
-3. **Semantic Naming**
-   ```html
-   <!-- Use semantic colors for status -->
-   <div class="bg-success-100 text-success-700">Success message</div>
-   <div class="bg-error-100 text-error-700">Error message</div>
-   ```
-
-4. **Consistent Spacing**
-   ```html
-   <!-- Maintain rhythm dengan spacing scale -->
-   <div class="mb-4">Item 1</div>
-   <div class="mb-4">Item 2</div>
-   <div class="mt-8">Section break</div>
-   ```
-
-5. **Accessibility First**
-   - Maintain contrast ratio ≥ 4.5:1 untuk text
-   - Use semantic HTML elements
-   - Ensure keyboard navigation
-   - Test dengan screen readers
-
-### ❌ Avoid
-
-- Hardcode color values - gunakan CSS variables/Tailwind classes
-- Create custom color palettes - use existing system
-- Skip responsive testing - test semua breakpoints
-- Ignore accessibility - always test a11y
-
-## 📱 Responsive Strategy
-
-```html
-<!-- Mobile first approach -->
-<div class="flex flex-col gap-4 md:flex-row md:gap-6 lg:gap-8">
-  <aside class="w-full md:w-64">Sidebar</aside>
-  <main class="flex-1">Content</main>
-</div>
-```
-
-Breakpoint prefixes:
-- `sm:` - 640px and up
-- `md:` - 768px and up (tablet)
-- `lg:` - 1024px and up (desktop)
-- `xl:` - 1280px and up (wide desktop)
-- `2xl:` - 1536px and up (ultra wide)
-
-## 🔧 Customization
-
-Untuk customize design system, edit file-file berikut:
-
-### 1. Colors
-**File**: `css/styles.css`
-```css
-:root {
-  --color-primary-500: #6366f1; /* Change primary color */
-  --color-primary-600: #4f46e5; /* And all shade variations */
-  ...
-}
-```
-
-### 2. Fonts
-**File**: `css/styles.css`
-```css
-:root {
-  --font-primary: 'Your Font', sans-serif;
-  --font-size-base: 1rem;
-}
-```
-
-### 3. Spacing
-**File**: `css/styles.css` & `tailwind.config.js`
-```css
---spacing-4: 1rem; /* Change base spacing unit */
-```
-
-## 🧪 Testing Checklist
-
-- [ ] Color contrast meets WCAG AA (4.5:1)
-- [ ] Responsive layout works on all breakpoints
-- [ ] Keyboard navigation works
-- [ ] Screen reader compatible
-- [ ] No hardcoded values (using tokens)
-- [ ] Consistent spacing throughout
-- [ ] Button hover/focus states
-- [ ] Form validation states
-
-## 📚 Additional Resources
-
-### Tailwind CSS Docs
-- https://tailwindcss.com/docs
-- Utility classes reference
-- Component examples
-
-### Design Tokens
-- CSS Variables: `css/styles.css`
-- Tailwind Config: `tailwind.config.js`
-- All values documented in HTML pages
-
-### WCAG Accessibility
-- Color contrast checker: https://webaim.org/resources/contrastchecker/
-- Accessibility guidelines: https://www.w3.org/WAI/WCAG21/quickref/
-
-## 🔄 Version History
-
-### V 2.0
-- Complete design system documentation
-- 6 core color palettes
-- Responsive 12-column grid
-- Elevation system dengan shadows
-- Typography scale dengan multiple font weights
-- Spacing system berbasis 4px base unit
-- Tailwind CSS integration
-- Multi-page documentation dengan best practices
-
-## 👥 Contributing
-
-Saat menambahkan token atau component baru:
-
-1. Update `css/styles.css` dengan CSS variable
-2. Update `tailwind.config.js` dengan config
-3. Dokumentasikan di halaman yang sesuai
-4. Tambahkan usage guidelines (Do's & Don'ts)
-5. Test accessibility compliance
-
-## 📝 License
-
-Design System GPOS Lite V 2.0 - Internal Use
 
 ---
 
-**Maintained with ❤️ | Last Updated: 2024**
+## Design Tokens
+
+Semua token terpusat di `styles/tokens.css`. Sumber: `GP Lite Design tokens.json`.
+
+| Kategori | Contoh |
+|---|---|
+| Brand / primary | `--color-primary-500` → `#1E7FD6` |
+| GP Lite palette | `--color-blue-b*`, `--color-neutral-n*`, dll. |
+| Semantic | `--color-background`, `--color-text-*`, `--color-border` |
+| Typography | `--font-*`, `--font-size-*`, `--text-{category}-{variant}-*` |
+| Spacing | `--spacing-*` (rem), `--space-*` (GP Lite scale) |
+| Radius & border | `--border-radius-*`, `--border-width-*` |
+| Elevation | `--shadow-1` (default), `--shadow-md` (komponen tertentu) |
+| Layout | `--sidebar-width`, `--topbar-height`, `--breakpoint-*` |
+
+**Aturan shadow:**
+- Default: `--shadow-1` / `shadow-1`
+- Sekunder (Modal, Dropdown, Section Message, dll.): `--shadow-md` / `shadow-md`
+- Jangan buat custom shadow di luar token
+
+---
+
+## Foundations (7)
+
+| Foundation | Path |
+|---|---|
+| Colors | `foundations/colors/colors.html` |
+| Typography | `foundations/typography/typography.html` |
+| Spacing | `foundations/spacing/spacing.html` |
+| Borders | `foundations/borders/borders.html` |
+| Shadows | `foundations/shadows/shadows.html` |
+| Grid | `foundations/grid/grid.html` |
+| Icons | `foundations/icons/icons.html` |
+
+---
+
+## Components (34)
+
+Avatar · Badge · Breadcrumbs · Button · Calendar · Checkbox · Date picker · Date time picker · Dropdown · Flags · Form · Inline edit · Lozenge · Modal · Navigation menu · Page Header · Page layout · Pagination · Popup · Radio · Range · Section messages · Select · Table · Tabs · Tags · Text Area · Text Field · Time picker · Toast-Banner · Toggle · Tooltip · Top & bottom Navigation · Tourguide
+
+Setiap komponen: `components/{Name}/*.html` + CSS scoped di halaman.
+
+---
+
+## Panduan Implementasi
+
+### Prioritas sumber (wajib)
+
+1. Token system (`styles/tokens.css`, `tailwind.config.js`)
+2. Anatomy spec (`.claude/references/` — folder reserved, kosong saat ini)
+3. Visual reference (`foundations/*/*.html`, `components/*/*.html`, `components/*/figma/`)
+4. Struktur existing
+
+### Best practices
+
+- Gunakan semantic token utilities — hindari hardcode warna/spacing/radius
+- Mobile-first responsive (`sm:`, `md:`, `lg:`, `xl:`, `2xl:`)
+- Semantic HTML + ARIA untuk aksesibilitas
+- Hover / focus / active / disabled states konsisten
+- Ikon hanya dari `assets/icons/`
+
+### Hindari
+
+- Hardcode hex/rgba di luar token
+- External icon library
+- Redesign visual tanpa permintaan
+- Token baru tanpa persetujuan
+
+---
+
+## Dokumentasi Engineer
+
+| File | Isi |
+|---|---|
+| `Docs/design-system-knowledge.md` | Katalog token, struktur repo, komponen |
+| `Docs/design-principles.md` | Filosofi visual & interaksi |
+| `Docs/component-rules.md` | DO/DON'T per komponen |
+| `Docs/engineer-skill.md` | Workflow implementasi |
+| `Docs/figma-make-skill.md` | Figma → HTML workflow |
+| `CLAUDE.md` | Aturan proyek untuk AI assistant |
+| `style_guide.md` | Referensi visual (`index.html` = primary) |
+
+---
+
+## Breakpoints
+
+```
+xs: 0       (mobile)
+sm: 640px   (landscape mobile)
+md: 768px   (tablet)
+lg: 1024px  (desktop)
+xl: 1280px  (wide desktop)
+2xl: 1536px (ultra wide)
+```
+
+---
+
+## Contributing
+
+Saat menambah token atau komponen:
+
+1. Update `styles/tokens.css` (token existing saja — jangan buat token baru tanpa persetujuan)
+2. Update `tailwind.config.js` jika perlu mapping utility
+3. Dokumentasikan di halaman foundation/komponen yang sesuai
+4. Sinkronkan `Docs/` jika ada perubahan aturan
+5. Uji aksesibilitas (kontras, keyboard, screen reader)
+
+---
+
+## Version History
+
+### V2.0 (2026)
+
+- 7 foundation pages + 34 komponen HTML
+- Token system GP Lite (`tokens.css`)
+- Tailwind integration + BEM `ds-*`
+- Knowledge base di `Docs/`
+- Shadow policy: `shadow-1` default, `shadow-md` sekunder
+- Storybook dihapus — dokumentasi via HTML statis
+
+---
+
+**Maintained by GPOS Team · Last Updated: June 2026**

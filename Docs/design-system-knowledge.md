@@ -32,11 +32,10 @@
 | `patterns/*`, `templates/*`, `navigation/*` | ❌ | Dirujuk di Tailwind content, tidak ada di disk |
 | `components/*` | ✅ | 34 halaman dokumentasi (`*.html`) |
 | `CSS/*` | ❌ | Styles di `styles/` |
-| `js/*` (root) | ❌ | JS inline di HTML; modul: `foundations/icons/iconsData.js`, `components/Button/Button.js` |
+| `js/*` (root) | ❌ | JS inline di HTML; modul: `foundations/icons/iconsData.js` |
 | `assets/*` | ✅ | `assets/icons/` (188 SVG), `assets/images/` (6 file) |
 | `foundations/*` | ✅ | colors, typography, spacing, borders, shadows, grid, icons |
 | `styles/*` | ✅ | `tokens.css`, `globals.css`, `enhancements.css` |
-| `.storybook/*` | ✅ | Storybook HTML (`package.json` scripts) |
 | `.claude/references/` | ⚠️ | Folder reserved (per `CLAUDE.md`); **kosong** saat ini — gunakan `foundations/*`, `components/*/*.html`, `components/*/figma/` |
 
 ### Arsitektur dokumentasi
@@ -54,7 +53,7 @@ index.html
 
 **Brand:** GPOS Blue `#1E7FD6` (`--color-primary-500`, `--color-blue-b300`).
 
-**Build npm:** `dev` / `build` / `watch` memakai input `./styles/styles.css` — file tersebut **tidak ada** di repo saat ini; token aktif di `styles/tokens.css` via `globals.css`.
+**Build npm:** `dev` / `build` / `watch` memakai input `./styles/globals.css` → output `./dist/output.css`.
 
 ---
 
@@ -151,18 +150,13 @@ Semua token terpusat di `styles/tokens.css` (`:root`). Sumber eksternal yang dis
 - Path ikon: `../../assets/icons/...`
 - `data-*` pada playground (contoh Page Layout: `data-pl-topnav`)
 
-### Storybook
-
-- `components/Button/Button.js` + `.storybook/main.js`, `preview.js`
-- Addon: `@storybook/addon-a11y` (devDependency)
-
 ---
 
 ## Tailwind Implementasi
 
 ### Config
 
-- **Build:** `tailwind.config.js` — `content` mencakup `index.html`, `components/**`, `foundations/**`, `styles/**`, `src/stories/**`
+- **Build:** `tailwind.config.js` — `content` mencakup `index.html`, `components/**`, `foundations/**`, `styles/**`
 - **Runtime:** CDN + inline `theme.extend` mirror config di halaman HTML komponen/foundation
 
 ### Mapping utama (`theme.extend`)
@@ -381,7 +375,6 @@ Pola yang **muncul di implementasi** halaman komponen (bukan standar baru).
 | `tailwind.config.js` | Build Tailwind |
 | `foundations/icons/iconsData.js` | Katalog ikon |
 | Inline `<script>` | Sidebar, copy code, playground per halaman |
-| `components/Button/Button.js` | Storybook |
 
 **Catatan:** Class `ds-*` komponen ada di `<style>` per file HTML, **bukan** di `globals.css`.
 
@@ -701,7 +694,6 @@ Pola bersama: `globals.css` + `enhancements.css` + Tailwind CDN + CSS scoped BEM
 | Grid | `foundations/grid/grid.html` |
 | Komponen | `components/*/*.html` |
 | Index | `index.html` |
-| Storybook | `.storybook/`, `package.json` |
 
 ---
 

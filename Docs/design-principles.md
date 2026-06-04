@@ -269,7 +269,6 @@ Modifier dokumentasi dan CSS memisahkan:
 ### Prinsip umum (`CLAUDE.md`)
 
 - **Semantic HTML** dan aksesibilitas dipertahankan; struktur komponen dan class naming dijaga bila memungkinkan.
-- Storybook memakai `@storybook/addon-a11y` (devDependency) — pengujian a11y ada di toolchain, bukan runtime produk.
 
 ### Bahasa & landmark
 

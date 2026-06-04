@@ -313,7 +313,7 @@ Setiap entri: **Appearance** · **Layout** · **Variants** · **States** · **Re
 | **Layout** | Horizontal center; icon + label; spinner saat loading |
 | **Variants** | primary, subtle, subtle-link, danger, warning, link, icon-only, compact, loading, none |
 | **States** | hover: b400 (primary) / n20 (subtle); press: b500 / n40; focus: 2px ring b200; disabled: reduced opacity |
-| **Ref** | `components/Button/button.html`, `Button.js` (Storybook) |
+| **Ref** | `components/Button/button.html` |
 
 **Design:** Satu primary per section. Danger = red `r300` family. Icon-only = square tap target + label aksesibel di spek.
 

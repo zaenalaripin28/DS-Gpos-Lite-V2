@@ -10,7 +10,6 @@ module.exports = {
     './navigation/**/*.html',
     './components/**/*.js',
     './styles/**/*.css',
-    './src/stories/**/*.js',
   ],
   theme: {
     extend: {

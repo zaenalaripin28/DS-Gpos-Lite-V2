@@ -331,4 +331,3 @@ Sebelum PR / selesai task, verifikasi:
 | Prinsip visual | `Docs/design-principles.md` |
 | Pedoman agent | `CLAUDE.md` |
 | Index navigasi | `index.html` |
-| Storybook (Button) | `components/Button/Button.js`, `.storybook/` |
