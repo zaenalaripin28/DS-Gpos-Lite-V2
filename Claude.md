@@ -13,21 +13,10 @@
 ## Tech
 
 * Tailwind CSS only
-* React + HTML + Tailwind are allowed (hybrid stack)
-* No Vue / Mantine
+* No React / Vue / Mantine
 * No external UI library
 * No unnecessary JavaScript
 * Avoid inline styles unless required
-
-Canonical stack for this repository:
-
-* Runtime implementation: `src/GposLite/components/*.tsx`
-* Visual/anatomy reference: `components/*/*.html`, `foundations/*/*.html`, `components/*/figma/`
-
-Not canonical (do not use as implementation source):
-
-* Storybook (`src/stories/`, `.storybook/`) — not active in this repo
-* `foundations/*.mdx` — not present
 
 ---
 
@@ -185,7 +174,7 @@ Tailwind CSS only.
 Do not use Mantine.
 Do not use Bootstrap.
 Do not use external UI libraries.
-HTML foundation/component doc pages: no React embeds. Product runtime: use `src/GposLite/components/*.tsx` only.
+Do not use React components.
 Do not use inline styles unless explicitly required.
 
 Never use raw Tailwind colors.
@@ -197,12 +186,10 @@ Always use semantic token utilities.
 
 Before implementing Design System related changes, reference:
 
-* Docs/components-index.md
 * Docs/design-system-knowledge.md
 * Docs/design-principles.md
 * Docs/component-rules.md
 * Docs/engineer-skill.md
 * Docs/figma-make-skill.md
-* Docs/figma-make-context.md
 
 These files describe the current repository implementation and should be treated as Design System documentation.
