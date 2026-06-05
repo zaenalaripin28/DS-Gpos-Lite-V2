@@ -1,5 +1,8 @@
 # GPOS Lite V2 — Documentation Audit
 
+> **⚠️ Dokumen historis (2026-06-04).** Banyak temuan di bawah sudah diselesaikan pada P0–P3 (2026-06-05).  
+> **Gunakan sebagai referensi audit awal saja.** Untuk status terkini: `Docs/documentation-changes-summary.md`, `CLAUDE.md`, `Docs/components-index.md`, `Docs/figma-make-context.md`.
+
 **Date:** 2026-06-04  
 **Scope:** `Docs/design-system-knowledge.md`, `Docs/design-principles.md`, `Docs/component-rules.md`, `Docs/engineer-skill.md`, `Docs/figma-make-skill.md`  
 **Compared against:** `CLAUDE.md`, `style_guide.md`, `styles/tokens.css`, `foundations/*`, `components/*`, `index.html`, `package.json`, `tailwind.config.js`  

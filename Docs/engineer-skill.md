@@ -9,13 +9,13 @@
 
 ## Peran dokumen ini
 
-Gunakan file ini sebagai **checklist kerja** saat menulis atau mengubah HTML/CSS di DS-Gpos-Lite-V2. Jika ada konflik, urutan otoritas:
+Gunakan file ini sebagai **checklist kerja** saat menulis atau mengubah komponen di DS-Gpos-Lite-V2 (runtime React + visual reference HTML). Jika ada konflik, urutan otoritas:
 
-1. Implementasi di file yang diminta (`components/*/*.html`, `foundations/*/*.html`)
+1. Runtime behavior/logika komponen di `src/GposLite/components/*.tsx`
 2. `styles/tokens.css` + `tailwind.config.js`
 3. `Docs/component-rules.md` untuk komponen spesifik
 4. `Docs/design-system-knowledge.md` untuk token & pola global
-5. `foundations/*`, `components/*/*.html`, `components/*/figma/` untuk proporsi — `.claude/references/` **kosong saat ini**; bila anatomy ditambahkan, naikkan prioritas di atas visual reference
+5. Visual/anatomy fidelity di `foundations/*`, `components/*/*.html`, `components/*/figma/`, dan `.claude/references/`
 
 ---
 
@@ -29,7 +29,7 @@ Jangan pernah (kecuali user secara eksplisit meminta perubahan token/config):
 | Komponen / variant / state baru | Class & modifier di halaman komponen yang ada |
 | Warna/spacing/radius/shadow/z-index hardcoded | `var(--…)` atau utility Tailwind semantic |
 | Warna Tailwind default (`bg-blue-500`, dll.) | `bg-blue-b300`, `bg-primary-500`, `text-neutral-n900`, … |
-| React, Vue, Mantine, Bootstrap, UI library eksternal | HTML statis + Tailwind + CSS scoped |
+| Vue, Mantine, Bootstrap, UI library eksternal | Stack existing: React (`src/GposLite`) + HTML reference + Tailwind |
 | Ikon library eksternal | `assets/icons/icon-*.svg` via `<img>` |
 | Redesign, refactor luas, DOM/wrapper berlebihan | Perubahan minimal pada file yang diminta |
 | Contoh/placeholder yang tidak ada di repo | Salin markup dari halaman doc komponen |
@@ -43,11 +43,23 @@ styles/tokens.css          → semua design token (:root)
 styles/globals.css         → reset, typography base, .sidebar, .topbar (bukan ds-* komponen)
 styles/enhancements.css    → utilitas halaman dokumentasi saja
 tailwind.config.js         → mapping token → Tailwind (build)
+src/GposLite/components/   → 34 komponen runtime React (TSX)
+src/GposLite/styles/       → style runtime komponen React
 index.html                 → home DS
 foundations/{topic}/*.html → token & pedoman foundation
-components/{Name}/*.html   → implementasi + <style> komponen + Tailwind CDN
+components/{Name}/*.html   → visual/anatomy reference + <style> komponen + Tailwind CDN
 assets/icons/              → 188 SVG
 ```
+
+### Stack scope — React, HTML, Storybook
+
+| Layer | Path | Status |
+|---|---|---|
+| **Runtime (canonical)** | `src/GposLite/components/*.tsx` | 34 komponen React — dipakai FE produk |
+| **Visual reference** | `components/*/*.html` | Dokumentasi + anatomy fidelity |
+| **Storybook / MDX** | `src/stories/`, `.storybook/`, `foundations/*.mdx` | **Tidak aktif** di repo saat ini — jangan jadikan sumber implementasi |
+
+README menyatakan dokumentasi via HTML statis; hybrid stack = React runtime + HTML reference. Jangan buat Storybook baru kecuali diminta eksplisit.
 
 **Halaman komponen/foundation standar:**
 
@@ -89,8 +101,9 @@ assets/icons/              → 188 SVG
 ### Sebelum coding
 
 1. Buka **`Docs/component-rules.md`** → bagian komponen target.
-2. Buka **`components/{Name}/*.html`** → salin struktur HTML + class dari contoh/playground.
-3. Jangan menambah modifier di luar yang didefinisikan di `<style>` halaman itu.
+2. Buka **`src/GposLite/components/{Name}.tsx`** → source utama behavior/runtime.
+3. Buka **`components/{Name}/*.html`** → source visual/anatomy class & state matrix.
+4. Jangan menambah modifier di luar yang didefinisikan pada source existing.
 
 ### Pola global (`Docs/component-rules.md`)
 
@@ -101,41 +114,16 @@ assets/icons/              → 188 SVG
 | State doc | `--hover`, `--focus`, `--press` untuk matrix; produksi: `:hover`, `:focus-visible`, `:active` |
 | Compose | Date/Time picker → `ds-select-trigger` + calendar/listbox · Page layout → `ds-topnav` + child components · Form → `ds-form-row` + field components |
 
-### 34 komponen (root class)
+### Registry komponen
 
-| Komponen | Root / catatan |
+**Jangan duplikasi daftar 34 komponen di sini.** Gunakan:
+
+| Kebutuhan | Buka |
 |---|---|
-| Avatar | `ds-avatar` + `--sm\|md\|lg\|xl` |
-| Badge | `ds-badge` |
-| Breadcrumbs | `ds-bc-container` |
-| Button | `ds-btn` + `--primary\|subtle\|danger\|…` |
-| Calendar | `ds-calendar` + `ds-calendar-day` |
-| Checkbox / Radio / Toggle | `ds-checkbox` / `ds-radio` / `ds-toggle` + native `<input>` |
-| Date Picker | `ds-date-picker` + `ds-select-trigger` + `ds-calendar` |
-| Date Time Picker | `ds-date-time-picker` |
-| Dropdown | `ds-dropdown` + `role="menu"` |
-| Flags | `ds-flag` + `--collapsed` |
-| Form | `ds-form-row`, `ds-form-message` |
-| Inline Edit | `ds-inline-edit` |
-| Lozenge | `ds-lozenge` |
-| Modal | `modal-composition-item` + footer `ds-btn` |
-| Navigation Menu | `ds-sidebar-nav-expand` |
-| Page Header | `ds-page-header` |
-| Page Layout | `ds-page-layout` + `--website\|tablet\|mobile` |
-| Pagination | `nav.ds-pagination` |
-| Popup | `popup-anchor-wrap` |
-| Range | `ds-range` + `assets/images/range=*.svg` |
-| Section Message | `ds-section-message` |
-| Select | `ds-select-trigger`, `ds-option` |
-| Table | `ds-table` + `ds-table-scroll` |
-| Tabs | `ds-tablist` / `ds-tab` |
-| Tags | `ds-tag` |
-| Text Area / Text Field | `ds-text-area` / `ds-text-field` (+ phone, icon, search variants) |
-| Time Picker | `ds-time-picker` |
-| Toast Banner | `ds-banner` (`components/Toast-Banner/banner.html`) |
-| Tooltip | `ds-tooltip` |
-| Top & Bottom Nav | `ds-topnav`, `ds-footer-nav` |
-| Tourguide | `ds-tourguide`, `ds-spotlight-card` |
+| Registry + link AI doc | `Docs/components-index.md` |
+| Tabel file + root class | `Docs/design-system-knowledge.md` → Components |
+| DO/DON'T per komponen | `Docs/component-rules.md` |
+| Runtime TSX | `src/GposLite/components/{Name}.tsx` |
 
 ### Aturan CTA & form (ringkas dari component-rules)
 
@@ -233,6 +221,120 @@ assets/icons/              → 188 SVG
 <!-- atau alt deskriptif / aria-label pada parent button -->
 ```
 
+### Appendix — WCAG, motion, keyboard (P2)
+
+Pola berikut **sudah muncul di implementasi**; gunakan saat menambah halaman/komponen baru.
+
+#### Kontras (target WCAG 2.1 AA)
+
+| Konteks | Target | Referensi repo |
+|---|---|---|
+| Body copy / label | **4.5:1** minimum | `foundations/colors/colors.html`, badge WCAG di `button.html` / `form.html` |
+| Teks besar (≥18px regular / ≥14px bold) | **3:1** minimum | Typography foundation |
+| Fokus / state interaktif | Ring terlihat (`blue-b200` / `primary-500`) | Button, Table scroll, Checkbox |
+
+Gunakan pasangan token semantic (`--color-text-primary` on `--color-surface`) — hindari hex ad hoc.
+
+#### Reduced motion
+
+Banyak halaman memakai:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+```
+
+**Contoh:** `index.html`, `button.html`, `table.html`, `avatar.html`, foundations. Terapkan pola yang sama pada komponen baru yang punya transisi/animasi.
+
+#### Skip link
+
+Halaman dengan konten panjang / tabel data boleh menyertakan skip link ke `#main-content`:
+
+```html
+<a href="#main-content" class="skip-link">Lewati ke konten utama</a>
+```
+
+**Referensi:** `components/Table/table.html` (`.skip-link` — visible on `:focus`).
+
+#### Keyboard — Escape menutup overlay
+
+| Komponen | Perilaku | File |
+|---|---|---|
+| Select | `Escape` menutup listbox | `components/Select/select.html` |
+| Date Picker | `Escape` menutup panel kalender | `components/Date picker/date-picker.html` |
+| Date Time Picker | `Escape` menutup dropdown date/time | `components/Date time picker/date time picker.html` |
+
+Overlay baru (dropdown, popover, dialog) sebaiknya mengikuti kontrak yang sama.
+
+#### Live regions
+
+| Pola | Pemakaian |
+|---|---|
+| `role="alert"` | Pesan error form (`ds-form-message--error`) |
+| `aria-live="polite"` | Loading Select, Popup playground |
+| Teks banner/toast | Makna dari copy — **tanpa** dismiss button di `banner.html` saat ini |
+
+#### Modal & overlay (status implementasi)
+
+- Modal doc menyebut focus trap (script inline) — belum distandarkan `aria-modal` / `aria-labelledby` di seluruh contoh.
+- Saat memperluas Modal/Popup: tambahkan `aria-modal="true"`, label/deskripsi via `aria-labelledby` / `aria-describedby`, dan trap fokus konsisten dengan halaman referensi.
+
+#### Touch target (guidance)
+
+- Action button default memakai padding ~12–16px (`--space-150` / `--space-200`).
+- Icon-only button: pertahankan hit area ≥ **40px** (lihat `ds-form-row__action-btn` 40×40 di `form.html`).
+- `--compact` / `--icon-only`: jangan kurangi di bawah area sentuh nyaman tanpa alasan layout.
+
+---
+
+## Responsive — decision matrix (P2)
+
+Repo punya **dua sistem breakpoint**. Pilih sesuai konteks:
+
+| Konteks kerja | Gunakan | Nilai |
+|---|---|---|
+| Utility Tailwind di markup (`sm:`, `md:`, …) | `tailwind.config.js` / `tokens.css` `--breakpoint-*` | 640 / 768 / 1024 / 1280 / 1536 |
+| Layout halaman / mockup grid | `foundations/grid/grid.html` | SM 320–600, MD 601–1024, LG 1025–1440, XL 1400+; margin 24px; gutter 16px |
+| Shell aplikasi | Varian komponen Page Layout / Topnav | `ds-topnav--website` / `--tablet` / `--mobile` |
+
+**Aturan:** satu varian topnav per viewport — jangan campur `--website` dan `--mobile` dalam satu layout.
+
+### Contoh — Table (`components/Table/table.html`)
+
+| Lebar | Perilaku |
+|---|---|
+| Semua | Tabel data dalam `.ds-table-scroll` — `overflow-x: auto`, `-webkit-overflow-scrolling: touch` |
+| Semua | `.ds-table--data` `min-width: 36rem` — scroll horizontal bila kolom tidak muat |
+| Semua | Scroll region fokus keyboard: `tabindex="0"` + ring `blue-b200` pada `:focus-visible` |
+| Doc shell | Skip link ke `#main-content` untuk lompatan keyboard |
+
+**Jangan** memaksa kolom menyusut di bawah min-width — pertahankan scroll horizontal.
+
+### Contoh — Form (`components/Form/form.html`)
+
+| Lebar | Perilaku |
+|---|---|
+| Desktop | `.ds-form-row` max-width 540px; label di atas field (stack vertikal) |
+| Desktop | `.ds-form-row__field` grid `1fr auto` (field + action button) |
+| ≤640px | `.form-parts-stack__row` → `grid-template-columns: 1fr` (label/field stack) |
+| ≤640px | `.ds-form-row__field` → satu kolom; `max-width: 100%` pada row & playground |
+
+**Compose:** `ds-form-row` + `ds-text-field` / `ds-select-trigger` — jangan buat layout form baru di luar pola row.
+
+### Contoh — Page Layout (ringkas)
+
+| Varian | Kapan |
+|---|---|
+| `ds-topnav--website` | Desktop lebar |
+| `ds-topnav--tablet` | Tablet |
+| `ds-topnav--mobile` | Mobile — menu/icon-only patterns |
+
+**Referensi:** `components/Page layout/page-layout.html`, `components/Top & bottom Navigation/top-bottom-nav.html`.
+
 ---
 
 ## HTML structure — pola implementasi
@@ -305,6 +407,11 @@ Sebelum PR / selesai task, verifikasi:
 - [ ] Form: native input + label; error dengan `role="alert"` bila applicable
 - [ ] Interactive custom control: `aria-expanded` / roles sesuai tabel a11y di atas
 - [ ] Focus visible dengan ring token (`blue-b200` / `primary-500`)
+- [ ] Kontras teks/latar memenuhi target WCAG AA (4.5:1 body, 3:1 large text)
+- [ ] `prefers-reduced-motion` diterapkan bila komponen punya transisi/animasi
+- [ ] Overlay punya kontrak keyboard (`Escape` menutup) bila applicable
+- [ ] Tabel lebar: horizontal scroll via `.ds-table-scroll`, bukan memotong kolom
+- [ ] Form mobile: row/field stack di breakpoint ≤640px (lihat `form.html`)
 - [ ] Elevation dari token `--shadow-1` atau `--shadow-md` sesuai halaman komponen referensi (bukan custom shadow)
 - [ ] Tidak ada dependency UI framework baru
 - [ ] Contoh kode di doc = markup aktual di halaman (bukan placeholder)
@@ -313,12 +420,13 @@ Sebelum PR / selesai task, verifikasi:
 
 ## Workflow AI (Claude Code / Cursor)
 
-1. **Baca** `CLAUDE.md` + bagian relevan di `Docs/component-rules.md`.
-2. **Buka** file HTML komponen yang menjadi referensi; salin struktur class.
-3. **Cek** `styles/tokens.css` jika perlu nama variable pasti.
-4. **Edit minimal** — diff kecil, jangan rewrite file panjang tanpa permintaan.
-5. **Jangan** usulkan token/komponen/variant baru; jika tidak ada di repo, laporkan ke user.
-6. **Output** prefer diff; hanya potongan yang berubah.
+1. **Baca** `CLAUDE.md`, `Docs/component-rules.md`, dan `Docs/figma-make-context.md`.
+2. **Buka** source React (`src/GposLite/components/{Name}.tsx`) untuk logic dan API komponen.
+3. **Buka** source HTML referensi (`components/{Name}/*.html`) untuk fidelity visual.
+4. **Cek** `styles/tokens.css` dan `tailwind.config.js` jika perlu nama token/class pasti.
+5. **Edit minimal** — diff kecil, jangan rewrite file panjang tanpa permintaan.
+6. **Jangan** usulkan token/komponen/variant baru; jika tidak ada di repo, laporkan ke user.
+7. **Output** prefer diff; hanya potongan yang berubah.
 
 ---
 

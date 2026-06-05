@@ -175,13 +175,9 @@ module.exports = {{
     './index.html',
     './components/**/*.html',
     './foundations/**/*.html',
-    './pages/**/*.html',
-    './patterns/**/*.html',
-    './templates/**/*.html',
-    './navigation/**/*.html',
+    './src/GposLite/**/*.tsx',
     './components/**/*.js',
     './styles/**/*.css',
-    './src/stories/**/*.js',
   ],
   theme: {{
     extend: {{

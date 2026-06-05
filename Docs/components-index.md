@@ -1,13 +1,13 @@
 # Components Index — GPOS Lite DS V2
 
 > AI-readable registry for Figma Make, Cursor, Claude, and code-generation tools.
-> Read individual component docs in `docs/components/` before generating UI.
+> Read individual component docs in `Docs/components/` before generating UI.
 
 ## System Constraints
 
 | Rule | Detail |
 |------|--------|
-| Stack | HTML + Tailwind CSS only — no React, Vue, Mantine, Bootstrap |
+| Stack | React + HTML + Tailwind CSS (hybrid); no Vue, Mantine, Bootstrap |
 | Colors | Semantic tokens only via `styles/tokens.css` and Tailwind aliases |
 | Spacing | `--space-*` and `--spacing-*` tokens — no arbitrary px |
 | Icons | `assets/icons/` only — catalog in `foundations/icons/iconsData.js` |
@@ -33,6 +33,8 @@
 **Spacing:** `--space-025`(2px) · `--space-050`(4px) · `--space-075`(6px) · `--space-100`(8px) · `--space-150`(12px) · `--space-200`(16px) · `--space-250`(20px) · `--space-300`(24px)
 
 **Typography:** body-sm · body-md · body-lg · caption · overline · title (see `foundations/typography/typography.html`)
+
+> Per-component variant/state detail: `Docs/design-system-knowledge.md` (Components) · DO/DON'T: `Docs/component-rules.md`
 
 ## Component Registry (34 components)
 
@@ -76,7 +78,9 @@
 ## AI Workflow
 
 1. Identify component from registry above
-2. Read `docs/components/{slug}.md`
-3. Open source HTML — copy exact class names and DOM structure
-4. Reference `styles/tokens.css` for any CSS custom property
-5. Never invent variants, colors, or spacing outside documented tokens
+2. Read `Docs/components/{slug}.md`
+3. Open React source `src/GposLite/components/{Name}.tsx` untuk behavior/runtime logic
+4. Open source HTML `components/{Name}/{slug}.html` untuk visual/anatomy fidelity
+5. Reference `styles/tokens.css` dan `tailwind.config.js` untuk token mapping
+6. Always include `Docs/figma-make-context.md` when preparing AI/Figma Make output
+7. Never invent variants, colors, or spacing outside documented tokens

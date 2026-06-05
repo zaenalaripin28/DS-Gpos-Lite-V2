@@ -1,5 +1,11 @@
 # GPOS Lite — Figma Make Rules
 
+> Canonical source untuk Figma Make:
+> 1) Runtime behavior/API: `src/GposLite/components/*.tsx`
+> 2) Token system: `styles/tokens.css`, `tailwind.config.js`
+> 3) Visual/anatomy reference: `components/*/*.html`, `foundations/*/*.html`, `components/*/figma/`, `.claude/references/`
+> 4) Wajib baca konteks lengkap: `Docs/figma-make-context.md`
+
 ## Core Principle
 
 GPOS Lite adalah Design System yang sudah jadi.
@@ -21,6 +27,22 @@ Konsistensi lebih penting daripada kreativitas.
 # Required Design Workflow
 
 Sebelum membuat desain apa pun, WAJIB mengikuti urutan berikut:
+
+## Step 0 — Read Canonical Context
+
+Baca dulu:
+
+* `Docs/figma-make-context.md`
+* `Docs/components-index.md`
+* `Docs/component-rules.md`
+
+Tujuan:
+
+* Menentukan komponen existing yang bisa di-reuse
+* Menentukan token, state, dan struktur yang valid
+* Menghindari mismatch antara React runtime vs HTML reference
+
+---
 
 ## Step 1 — Read Layout
 
@@ -78,6 +100,11 @@ Sebelum menambahkan UI:
 
 Cari terlebih dahulu apakah komponen sudah tersedia.
 
+Gunakan source sesuai kebutuhan:
+
+* Behavior/runtime: `src/GposLite/components/{Name}.tsx`
+* Visual/anatomy: `components/{Name}/{slug}.html`
+
 Prioritas:
 
 1. Existing Component
@@ -98,6 +125,12 @@ Gunakan urutan berikut:
 5. Existing Variants
 
 Jangan membuat komponen baru jika versi yang setara sudah tersedia.
+
+Jika ada konflik source:
+
+1. Ikuti behavior/API dari `src/GposLite/components/*.tsx`
+2. Ikuti token dari `styles/tokens.css`
+3. Ikuti visual fidelity dari HTML reference
 
 ---
 
@@ -151,6 +184,8 @@ Gunakan variant yang sudah tersedia:
 
 Jangan mencampur variant dalam satu layout.
 
+**Decision matrix (P2):** lihat `Docs/figma-make-context.md` (RESPONSIVE DECISION MATRIX) dan `Docs/engineer-skill.md` — contoh Table (horizontal scroll), Form (stack ≤640px), Page Layout (satu topnav variant per viewport).
+
 ---
 
 # Component Rules
@@ -183,6 +218,10 @@ Sebelum final:
 
 ✓ Menggunakan token Design System
 
+✓ Konsisten dengan source React runtime (`src/GposLite/components/*.tsx`)
+
+✓ Konsisten dengan visual reference (`components/*/*.html`)
+
 ✓ Tidak ada warna baru
 
 ✓ Tidak ada spacing baru
@@ -195,4 +234,10 @@ Sebelum final:
 
 ✓ Responsive menggunakan variant existing
 
+✓ Kontras WCAG AA (4.5:1 body) dan reduced motion dipertimbangkan
+
+✓ Overlay punya kontrak keyboard (Escape) bila applicable
+
 Jika komponen sudah tersedia di Design System, gunakan komponen tersebut dan jangan membuat komponen baru.
+
+**A11y detail:** `Docs/engineer-skill.md` (Appendix — WCAG, motion, keyboard) · `Docs/figma-make-context.md` (ACCESSIBILITY APPENDIX).

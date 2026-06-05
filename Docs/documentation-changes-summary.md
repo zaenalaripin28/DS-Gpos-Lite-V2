@@ -98,6 +98,35 @@ Diperbarui di: knowledge (scope table), principles, engineer-skill, figma-make; 
 
 ---
 
-## Remaining (P2+, out of scope)
+## P2 (2026-06-05)
 
-Masih terbuka per `Docs/documentation-audit.md`: WCAG appendix, responsive matrix per komponen, motion/z-index foundation pages, deduplication inventory, Storybook/React exception di CLAUDE.
+| Item | Status |
+|---|---|
+| WCAG / reduced motion / keyboard / skip link appendix | Added to `Docs/engineer-skill.md` |
+| Responsive decision matrix + Table/Form/Page Layout examples | Added to `Docs/engineer-skill.md`, `Docs/design-system-knowledge.md`, `Docs/figma-make-context.md` |
+| Checklist engineer diperluas (kontras, motion, Escape, responsive) | `Docs/engineer-skill.md` |
+| Figma PNG: Avatar, Badge, Breadcrumbs, Pagination, Toast-Banner | User-added; **Range** masih tanpa PNG |
+
+## P3 (2026-06-05)
+
+| Item | Status |
+|---|---|
+| Motion / z-index / breakpoint token docs | `Docs/design-system-knowledge.md` (section Motion, Z-Index & Breakpoints) |
+| Motion / z-index / breakpoints di figma-make-context | Expanded token tables |
+| Deduplicate component inventory | Removed closing list in knowledge base; engineer-skill → link `components-index`; components-index → link knowledge base |
+| Storybook / React scope | `CLAUDE.md`, `Docs/engineer-skill.md`, knowledge base scope table |
+| Figma PNG Range | User-added (0% / 50% / 100% variants) — 34/34 components complete |
+
+## P4 polish (2026-06-05)
+
+| Item | Status |
+|---|---|
+| `documentation-audit.md` ditandai historis | Banner superseded P0–P3 |
+| `component-rules.md` hybrid stack + registry link | Runtime TSX + visual HTML |
+| `README.md` entry point `components-index.md` | Ditambahkan di tabel docs |
+
+**AI-readability estimasi setelah P4:** ~9.2–9.5 / 10
+
+## Remaining (opsional)
+
+Halaman foundation HTML terpisah untuk motion/z-index (saat ini cukup di knowledge base). Per-komponen a11y depth (Modal/Popup) masih bisa diperdalam.

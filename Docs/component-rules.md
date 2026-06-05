@@ -1,6 +1,12 @@
 # GPOS Lite — Component Rules
 
-> **Source of truth:** `components/*/*.html`, `styles/tokens.css`, `CLAUDE.md`, `Docs/design-system-knowledge.md`. Hanya aturan yang sudah diimplementasi; tidak menambah variant, state, atau arsitektur baru.
+> **Source of truth (hybrid stack):**
+> 1. Runtime behavior/API: `src/GposLite/components/*.tsx`
+> 2. Visual/anatomy: `components/*/*.html`, `components/*/figma/`
+> 3. Token: `styles/tokens.css`, `tailwind.config.js`
+> 4. Registry AI: `Docs/components-index.md` · Konteks lengkap: `Docs/figma-make-context.md`
+>
+> Hanya aturan yang sudah diimplementasi; tidak menambah variant, state, atau arsitektur baru.
 
 ---
 
@@ -8,7 +14,8 @@
 
 | Aturan | Implementasi |
 |---|---|
-| File | Satu halaman doc per komponen: `components/{Name}/{slug}.html` |
+| Runtime | Komponen produk: `src/GposLite/components/{Name}.tsx` + `src/GposLite/styles/{slug}.css` |
+| File doc | Satu halaman referensi per komponen: `components/{Name}/{slug}.html` |
 | Stylesheet | `../../styles/globals.css` + `enhancements.css`; CSS komponen di `<style>` halaman |
 | Class | BEM `ds-{block}`, `ds-{block}__{element}`, `ds-{block}--{modifier}` — kecuali Modal (`modal-*`), Popup (`popup-*`) |
 | Token | Hanya `var(--*)` / utility Tailwind yang memetakan token; tanpa hex hardcoded |

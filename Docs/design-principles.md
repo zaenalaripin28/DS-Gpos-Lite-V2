@@ -1,6 +1,6 @@
 # GPOS Lite Design System V2 — Design Principles
 
-> **Source of truth:** perilaku visual dan interaksi yang sudah diimplementasikan di repositori. Dokumen ini diekstrak dari `CLAUDE.md`, `style_guide.md`, `styles/tokens.css`, halaman `foundations/*`, `components/*`, dan `Docs/design-system-knowledge.md`.
+> **Source of truth:** perilaku visual dan interaksi yang sudah diimplementasikan di repositori. Dokumen ini diekstrak dari `CLAUDE.md`, `style_guide.md`, `styles/tokens.css`, `src/GposLite/components/*`, halaman `foundations/*`, `components/*`, dan `Docs/design-system-knowledge.md`.
 
 Tidak menambah prinsip baru di luar yang tercermin di kode dan dokumentasi foundation.
 
@@ -52,7 +52,7 @@ Tidak menambah prinsip baru di luar yang tercermin di kode dan dokumentasi found
 ### Figma & referensi visual (`CLAUDE.md`)
 
 - Figma sebagai referensi visual; proporsi dari `foundations/*`, `components/*/*.html`, dan `components/*/figma/`.
-- Folder `.claude/references/` **kosong saat ini** — bila anatomy spec ditambahkan nanti, jadikan source of truth; sampai itu jangan estimasi spacing/dimensi di luar token.
+- Folder `.claude/references/` tersedia untuk anatomy reference; bila ada konteks anatomy yang relevan, jadikan source of truth di atas visual reference lain.
 
 ---
 
@@ -310,10 +310,11 @@ Modifier dokumentasi dan CSS memisahkan:
 
 Urutan yang tercatat di `style_guide.md` dan `CLAUDE.md`:
 
-1. Existing token system (`styles/tokens.css`)
-2. Existing `index.html` / halaman foundation & komponen (`.claude/references/` bila terisi)
-3. Existing component structure
-4. Existing responsive behavior (termasuk varian mobile pada page layout & topnav)
+1. Existing runtime behavior (`src/GposLite/components/*.tsx`)
+2. Existing token system (`styles/tokens.css`)
+3. Existing `index.html` / halaman foundation & komponen / `.claude/references/` untuk visual-anatomy reference
+4. Existing component structure
+5. Existing responsive behavior (termasuk varian mobile pada page layout & topnav)
 
 ---
 

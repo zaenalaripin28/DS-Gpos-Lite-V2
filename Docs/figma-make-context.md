@@ -1,13 +1,13 @@
 # GPOS Lite DS V2 — Figma Make / AI Context
 
 > Single knowledge base for Figma Make, Claude, Cursor, ChatGPT. Dense reference — no invented components/tokens/variants.
-> **Priority:** source HTML → `styles/tokens.css` → `tailwind.config.js` → this file.
+> **Priority:** runtime source `src/GposLite/components/*.tsx` → HTML reference `components/*/*.html` → `styles/tokens.css` → `tailwind.config.js` → this file.
 
 ## HARD CONSTRAINTS
 
 | Rule | Enforcement |
 |------|-------------|
-| Stack | HTML + Tailwind CSS — no React/Vue/Mantine/Bootstrap |
+| Stack | React + HTML + Tailwind CSS (hybrid); no Vue/Mantine/Bootstrap |
 | Colors | `var(--*)` or Tailwind semantic aliases — no hex in markup/CSS |
 | Spacing | `--space-*` / `--spacing-*` — no arbitrary px |
 | Icons | `assets/icons/icon-*.svg` via `<img>` — `foundations/icons/iconsData.js` |
@@ -20,14 +20,41 @@
 
 ## SOURCE HIERARCHY
 
-1. `components/{Name}/*.html` — implementation truth
-2. `styles/tokens.css` — all `--*` tokens
-3. `tailwind.config.js` — utility aliases
-4. `foundations/*/*.html` — color/typography/spacing/border/shadow/grid/icons reference
-5. `Docs/component-rules.md` — per-component DO/DON'T
-6. `Docs/components/{slug}.md` — extended AI docs
+1. `src/GposLite/components/{Name}.tsx` — runtime behavior/API truth
+2. `components/{Name}/*.html` — visual/anatomy truth
+3. `styles/tokens.css` — all `--*` tokens
+4. `tailwind.config.js` — utility aliases
+5. `foundations/*/*.html` — color/typography/spacing/border/shadow/grid/icons reference
+6. `Docs/component-rules.md` — per-component DO/DON'T
+7. `Docs/components/{slug}.md` — extended AI docs
 
 > `docs/foundations/` not present; foundations live in `foundations/` directory.
+
+## RESPONSIVE DECISION MATRIX (P2)
+
+| Context | Use |
+|---------|-----|
+| Tailwind utilities (`sm:`, `md:`, …) | `tailwind.config.js` screens: 640 / 768 / 1024 / 1280 / 1536 |
+| Page layout mockups / grid | `foundations/grid/grid.html`: SM 320–600, MD 601–1024, LG 1025–1440, XL 1400+ |
+| App shell | `ds-topnav--website` / `--tablet` / `--mobile` (one variant per viewport) |
+
+**Component examples:**
+- **Table:** `.ds-table-scroll` + horizontal scroll; `min-width: 36rem` on `--data`; keyboard focus on scroll region
+- **Form:** ≤640px stack label/field (`form-parts-stack__row` → 1 column); full-width rows
+- **Page Layout:** compose `ds-page-layout` + single topnav variant per breakpoint
+
+## ACCESSIBILITY APPENDIX (P2)
+
+| Topic | Rule | Source |
+|-------|------|--------|
+| Contrast | WCAG 2.1 AA — 4.5:1 body, 3:1 large text | `foundations/colors/colors.html` |
+| Reduced motion | `@media (prefers-reduced-motion: reduce)` on animated components | `button.html`, `table.html`, foundations |
+| Skip link | `<a href="#main-content" class="skip-link">` on long data pages | `table.html` |
+| Escape | Close overlay on `Escape` | `select.html`, `date-picker.html`, `date-time-picker.html` |
+| Touch | Icon actions ≥40px hit area where possible | `form.html` |
+| Live regions | `role="alert"` errors; `aria-live="polite"` loading | `form.html`, `select.html` |
+
+Full checklist: `Docs/engineer-skill.md`.
 
 ## DESIGN TOKENS (`styles/tokens.css`)
 
@@ -60,8 +87,25 @@ Font: `--font-primary` (Poppins) · Sizes: `--font-size-xs|sm|base|lg|xl|2xl|3xl
 Styles: `--text-body-small|medium|large-{regular|medium}-{size|weight|lh}` · `--text-caption-*` · `--text-overline-medium-*` · `--text-title-medium-*` · `--text-header-*` · `--text-display-*`
 Tailwind: `text-body-sm`, `text-body-md`, `text-body-lg`, `text-caption`, `text-overline`, `text-title`, `font-medium`, `font-semibold`
 
-### Radius · Border · Shadow · Z
-`--border-radius-none|sm|md|lg|xl|2xl|3xl|full` · `--border-width-0|1|2|4` · `--shadow-1|xs|sm|md|lg|xl|2xl|brand|inner|none` · `--z-dropdown|sticky|fixed|modal-backdrop|modal|popover|tooltip`
+### Radius · Border · Shadow
+`--border-radius-none|sm|md|lg|xl|2xl|3xl|full` · `--border-width-0|1|2|4` · `--shadow-1|xs|sm|md|lg|xl|2xl|brand|inner|none`
+
+### Motion (transition)
+`--transition-fast` 150ms · `--transition-base` 200ms · `--transition-slow` 300ms · `--transition-spring` 400ms — honor `prefers-reduced-motion`
+
+### Z-index stack
+| Token | Value | Layer |
+|-------|-------|-------|
+| `--z-dropdown` | 1000 | Menus, listbox |
+| `--z-sticky` | 1020 | Sticky header |
+| `--z-fixed` | 1030 | Fixed sidebar |
+| `--z-modal-backdrop` | 1040 | Overlay |
+| `--z-modal` | 1050 | Dialog |
+| `--z-popover` | 1060 | Popover |
+| `--z-tooltip` | 1070 | Tooltip |
+
+### Breakpoints (Tailwind)
+`sm` 640 · `md` 768 · `lg` 1024 · `xl` 1280 · `2xl` 1536 — grid foundation uses different ranges; see RESPONSIVE DECISION MATRIX
 
 ### Layout tokens
 Sidebar: `--sidebar-*` → `bg-sidebar`, `text-sidebar-link`, `text-sidebar-link-active` · Topbar: `--topbar-bg|border`

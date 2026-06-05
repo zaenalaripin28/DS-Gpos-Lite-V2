@@ -1,6 +1,6 @@
 # Design System GPOS Lite V2
 
-Dokumentasi design system GPOS Lite V2 — design tokens, 7 foundations, 34 komponen, dan panduan implementasi. Dibangun dengan HTML statis, CSS custom properties, dan Tailwind CSS v3.
+Dokumentasi design system GPOS Lite V2 — design tokens, 7 foundations, 34 komponen, dan panduan implementasi. Menggunakan stack hybrid: React + Tailwind + CSS custom properties untuk implementasi runtime, dan HTML statis sebagai visual/anatomy reference.
 
 **Brand color:** GPOS Blue `#1E7FD6` (`--color-primary-500`)
 
@@ -19,6 +19,9 @@ Dokumentasi design system GPOS Lite V2 — design tokens, 7 foundations, 34 komp
 │   ├── grid/
 │   └── icons/
 ├── components/                   # 34 komponen (HTML + CSS per folder)
+├── src/GposLite/                 # 34 komponen runtime React (TSX + CSS)
+│   ├── components/
+│   └── styles/
 ├── styles/
 │   ├── tokens.css                # Design tokens (CSS variables)
 │   ├── globals.css               # Base layout, sidebar, topbar
@@ -31,16 +34,21 @@ Dokumentasi design system GPOS Lite V2 — design tokens, 7 foundations, 34 komp
 │   ├── design-principles.md
 │   ├── component-rules.md
 │   ├── engineer-skill.md
-│   └── figma-make-skill.md
+│   ├── figma-make-skill.md
+│   └── figma-make-context.md
 ├── tailwind.config.js            # Mapping token → Tailwind utilities
 ├── CLAUDE.md                     # Aturan implementasi untuk AI/engineer
 ├── style_guide.md                # Visual style reference
 └── package.json
 ```
 
-**Stack:** HTML statis · Tailwind CSS v3 · CSS custom properties · BEM `ds-*` · ikon dari `assets/icons/` saja
+**Stack:** React (TSX) · HTML statis (reference) · Tailwind CSS v3 · CSS custom properties · BEM `ds-*` · ikon dari `assets/icons/` saja
 
-**Tidak dipakai:** React, Vue, Storybook, external UI library
+**Posisi stack:**
+- Runtime implementation: `src/GposLite/components/*.tsx`
+- Visual/anatomy reference: `components/*/*.html`, `foundations/*/*.html`, `components/*/figma/`
+
+**Tidak dipakai:** Vue, Mantine, Bootstrap, external UI library
 
 ---
 
@@ -89,7 +97,7 @@ Input build: `styles/globals.css` (meng-`@import` `tokens.css`).
 
 ## Design Tokens
 
-Semua token terpusat di `styles/tokens.css`. Sumber: `GP Lite Design tokens.json`.
+Semua token terpusat di `styles/tokens.css`. Snapshot JSON: `styles/gp-lite-design-tokens.json` (regenerate: `python3 scripts/export_tokens_json.py`).
 
 | Kategori | Contoh |
 |---|---|
@@ -135,10 +143,11 @@ Setiap komponen: `components/{Name}/*.html` + CSS scoped di halaman.
 
 ### Prioritas sumber (wajib)
 
-1. Token system (`styles/tokens.css`, `tailwind.config.js`)
-2. Anatomy spec (`.claude/references/` — folder reserved, kosong saat ini)
-3. Visual reference (`foundations/*/*.html`, `components/*/*.html`, `components/*/figma/`)
-4. Struktur existing
+1. Runtime component behavior (`src/GposLite/components/*.tsx`)
+2. Token system (`styles/tokens.css`, `tailwind.config.js`)
+3. Anatomy spec (`.claude/references/` jika tersedia)
+4. Visual reference (`foundations/*/*.html`, `components/*/*.html`, `components/*/figma/`)
+5. Struktur existing
 
 ### Best practices
 
@@ -161,11 +170,13 @@ Setiap komponen: `components/{Name}/*.html` + CSS scoped di halaman.
 
 | File | Isi |
 |---|---|
+| `Docs/components-index.md` | **Entry point AI** — registry 34 komponen + workflow |
 | `Docs/design-system-knowledge.md` | Katalog token, struktur repo, komponen |
 | `Docs/design-principles.md` | Filosofi visual & interaksi |
 | `Docs/component-rules.md` | DO/DON'T per komponen |
 | `Docs/engineer-skill.md` | Workflow implementasi |
 | `Docs/figma-make-skill.md` | Figma → HTML workflow |
+| `Docs/figma-make-context.md` | Context lengkap token, registry, dan composition untuk AI/Figma Make |
 | `CLAUDE.md` | Aturan proyek untuk AI assistant |
 | `style_guide.md` | Referensi visual (`index.html` = primary) |
 
@@ -205,7 +216,8 @@ Saat menambah token atau komponen:
 - Tailwind integration + BEM `ds-*`
 - Knowledge base di `Docs/`
 - Shadow policy: `shadow-1` default, `shadow-md` sekunder
-- Storybook dihapus — dokumentasi via HTML statis
+- Hybrid stack: React runtime (`src/GposLite`) + HTML visual reference; Storybook tidak aktif
+- 34/34 komponen punya folder `figma/` dengan PNG export
 
 ---
 

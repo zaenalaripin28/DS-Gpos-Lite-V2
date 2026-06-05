@@ -15,11 +15,12 @@
 5. [Tailwind](#tailwind-implementasi)
 6. [Pola aksesibilitas](#pola-aksesibilitas)
 7. [Foundations](#foundations)
-8. [Assets](#assets)
-9. [Styles & JavaScript](#styles--javascript)
-10. [Components (34)](#components)
-11. [index.html](#indexhtml--home)
-12. [Referensi file](#referensi-file-kunci)
+8. [Motion, z-index & breakpoints (token)](#motion-z-index--breakpoints-token)
+9. [Assets](#assets)
+10. [Styles & JavaScript](#styles--javascript)
+11. [Components (34)](#components)
+12. [index.html](#indexhtml--home)
+13. [Referensi file](#referensi-file-kunci)
 
 ---
 
@@ -28,28 +29,39 @@
 | Path | Status | Catatan |
 |---|---|---|
 | `index.html` | ✅ | Home / navigasi DS |
-| `pages/*` | ❌ | Tidak ada folder `pages/` (hanya dirujuk di `tailwind.config.js` content) |
-| `patterns/*`, `templates/*`, `navigation/*` | ❌ | Dirujuk di Tailwind content, tidak ada di disk |
-| `components/*` | ✅ | 34 halaman dokumentasi (`*.html`) |
+| `pages/*`, `patterns/*`, `templates/*`, `navigation/*` | ❌ | Tidak ada di disk (ghost paths sudah dihapus dari `tailwind.config.js`) |
+| `styles/gp-lite-design-tokens.json` | ✅ | Snapshot token dari `tokens.css` |
+| `components/*` | ✅ | 34 halaman dokumentasi (`*.html`); 34/34 punya folder `figma/` dengan PNG export |
+| `src/stories/`, `.storybook/` | ❌ | Tidak aktif di repo saat ini — dokumentasi via HTML + `src/GposLite` |
+| `src/GposLite/components/*` | ✅ | 34 komponen runtime React (`*.tsx`) |
+| `src/GposLite/styles/*` | ✅ | CSS per komponen runtime React |
 | `CSS/*` | ❌ | Styles di `styles/` |
 | `js/*` (root) | ❌ | JS inline di HTML; modul: `foundations/icons/iconsData.js` |
 | `assets/*` | ✅ | `assets/icons/` (188 SVG), `assets/images/` (6 file) |
 | `foundations/*` | ✅ | colors, typography, spacing, borders, shadows, grid, icons |
-| `styles/*` | ✅ | `tokens.css`, `globals.css`, `enhancements.css` |
-| `.claude/references/` | ⚠️ | Folder reserved (per `CLAUDE.md`); **kosong** saat ini — gunakan `foundations/*`, `components/*/*.html`, `components/*/figma/` |
+| `styles/*` | ✅ | `tokens.css`, `globals.css`, `enhancements.css`, `gp-lite-design-tokens.json` |
+| `.claude/references/` | ✅ | Folder anatomy reference tersedia; tetap fallback ke `foundations/*`, `components/*/*.html`, `components/*/figma/` bila konteks belum cukup |
 
-### Arsitektur dokumentasi
+### Arsitektur repository (canonical stack)
 
 ```
 index.html
+├── src/GposLite/components/*.tsx  → canonical runtime components
+├── src/GposLite/styles/*.css      → canonical runtime component styles
 ├── styles/globals.css      → @import tokens.css + layout sidebar/topbar
 ├── styles/enhancements.css   → utilitas halaman dokumentasi
 ├── tailwind.config.js        → mapping token → Tailwind (build)
 ├── foundations/{topic}/*.html
-└── components/{Name}/*.html  → <style> komponen + Tailwind CDN inline config
+└── components/{Name}/*.html  → visual/anatomy reference + Tailwind CDN inline config
 ```
 
-**Stack:** HTML statis, Tailwind CSS v3 (`package.json`), CDN + inline config di halaman komponen/foundation, CSS custom properties, BEM `ds-*` (kecuali Modal/Popup).
+**Stack hybrid (canonical):** React (TSX) + Tailwind + CSS custom properties untuk runtime, dengan HTML statis sebagai reference visual/anatomy.
+
+**Rule pemakaian source:**
+
+1. Behavior/runtime logic: `src/GposLite/components/*.tsx`
+2. Token/styling scale: `styles/tokens.css`, `tailwind.config.js`
+3. Visual anatomy/layout fidelity: `components/*/*.html`, `foundations/*/*.html`, `components/*/figma/`
 
 **Brand:** GPOS Blue `#1E7FD6` (`--color-primary-500`, `--color-blue-b300`).
 
@@ -59,7 +71,7 @@ index.html
 
 ## Design Tokens — Katalog
 
-Semua token terpusat di `styles/tokens.css` (`:root`). Sumber eksternal yang disebut di file: `GP Lite Design tokens.json`.
+Semua token terpusat di `styles/tokens.css` (`:root`). Snapshot JSON untuk tooling: `styles/gp-lite-design-tokens.json` (export: `scripts/export_tokens_json.py`).
 
 | Kategori | Prefix / nama | Rentang baris (tokens.css) |
 |---|---|---|
@@ -157,7 +169,8 @@ Semua token terpusat di `styles/tokens.css` (`:root`). Sumber eksternal yang dis
 ### Config
 
 - **Build:** `tailwind.config.js` — `content` mencakup `index.html`, `components/**`, `foundations/**`, `styles/**`
-- **Runtime:** CDN + inline `theme.extend` mirror config di halaman HTML komponen/foundation
+- **Runtime app/library:** kelas Tailwind pada komponen React `src/GposLite/components/*.tsx`
+- **Runtime docs:** CDN + inline `theme.extend` mirror config di halaman HTML komponen/foundation
 
 ### Mapping utama (`theme.extend`)
 
@@ -187,6 +200,24 @@ Semua token terpusat di `styles/tokens.css` (`:root`). Sumber eksternal yang dis
 |---|---|
 | `tokens.css` / `tailwind.config.js` `screens` | sm 640, md 768, lg 1024, xl 1280, 2xl 1536 |
 | `foundations/grid/grid.html` | SM 320–600, MD 601–1024, LG 1025–1440, XL 1400+; kolom 4/8/12/12; margin 24px; gutter 16px |
+
+### Responsive — decision matrix (P2)
+
+| Konteks | Pakai |
+|---|---|
+| Utility class `sm:` / `md:` / … | Tailwind screens (`tailwind.config.js`) |
+| Margin halaman, kolom layout mockup | Grid foundation (`foundations/grid/grid.html`) |
+| Shell app (topnav/footer) | `ds-topnav--website` / `--tablet` / `--mobile` |
+
+**Contoh implementasi:**
+
+| Komponen | Perilaku responsif |
+|---|---|
+| **Table** | `.ds-table-scroll` horizontal scroll; `min-width: 36rem` pada `--data`; skip link di halaman doc |
+| **Form** | ≤640px: label/field stack (`form-parts-stack__row` 1 kolom); `ds-form-row` full width |
+| **Page Layout** | Satu varian topnav per breakpoint — lihat `page-layout.html` |
+
+Detail lengkap: `Docs/engineer-skill.md` (bagian Responsive — decision matrix).
 
 ---
 
@@ -242,6 +273,18 @@ Pola yang **muncul di implementasi** halaman komponen (bukan standar baru).
 - **Aturan repo:** `<img src="assets/icons/...">` — tanpa inline SVG di komponen (kecuali Toast Banner doc memakai inline SVG di contoh — catat sebagai implementasi halaman itu)
 - Dekoratif: `alt=""` + `aria-hidden="true"`
 - Informatif: `alt` deskriptif atau `aria-label` pada kontrol induk
+
+### Appendix a11y tambahan (P2)
+
+| Topik | Ringkasan | Referensi |
+|---|---|---|
+| WCAG kontras | Target AA: 4.5:1 body, 3:1 large text | `foundations/colors/colors.html`, `button.html` |
+| Reduced motion | `@media (prefers-reduced-motion: reduce)` mematikan transisi panjang | `index.html`, `table.html`, banyak komponen |
+| Skip link | Lompat ke `#main-content` | `components/Table/table.html` |
+| Escape overlay | Menutup Select / Date Picker / Date Time Picker | `select.html`, `date-picker.html`, `date-time-picker.html` |
+| Touch target | Icon action ≥40px di form row | `form.html` `ds-form-row__action-btn` |
+
+Detail checklist: `Docs/engineer-skill.md` (Appendix — WCAG, motion, keyboard).
 
 ---
 
@@ -348,6 +391,52 @@ Pola yang **muncul di implementasi** halaman komponen (bukan standar baru).
 
 ---
 
+## Motion, Z-Index & Breakpoints (token)
+
+> Tidak ada halaman foundation HTML terpisah untuk motion/z-index/breakpoint — token ada di `styles/tokens.css`. Detail responsif: [Responsive — decision matrix](#responsive--decision-matrix-p2).
+
+### Motion / transition
+
+| Token | Nilai | Pemakaian umum |
+|---|---|---|
+| `--transition-fast` | 150ms ease-in-out | Hover button, kontrol ringan |
+| `--transition-base` | 200ms ease-in-out | Default interaksi |
+| `--transition-slow` | 300ms ease-in-out | Sidebar collapse, panel |
+| `--transition-spring` | 400ms cubic-bezier(0.175, 0.885, 0.32, 1.275) | Animasi dengan overshoot ringan |
+
+**Aturan:** gunakan token di atas; hormati `prefers-reduced-motion` (lihat `Docs/engineer-skill.md`).
+
+### Z-index stack
+
+| Token | Nilai | Lapisan |
+|---|---|---|
+| `--z-hide` | -1 | Sembunyikan dari stack |
+| `--z-base` | 0 | Konten default |
+| `--z-dropdown` | 1000 | Menu, select listbox |
+| `--z-sticky` | 1020 | Header sticky |
+| `--z-fixed` | 1030 | Sidebar doc shell |
+| `--z-modal-backdrop` | 1040 | Overlay backdrop |
+| `--z-modal` | 1050 | Dialog/modal |
+| `--z-popover` | 1060 | Popover, popup panel |
+| `--z-tooltip` | 1070 | Tooltip (paling atas) |
+
+**Aturan:** jangan hardcode `z-index` di luar skala token.
+
+### Breakpoint (Tailwind / CSS)
+
+| Token / screen | px | Catatan |
+|---|---|---|
+| `--breakpoint-xs` / default | 0 | Mobile |
+| `--breakpoint-sm` / `sm:` | 640 | Landscape mobile |
+| `--breakpoint-md` / `md:` | 768 | Tablet |
+| `--breakpoint-lg` / `lg:` | 1024 | Desktop |
+| `--breakpoint-xl` / `xl:` | 1280 | Wide desktop |
+| `--breakpoint-2xl` / `2xl:` | 1536 | Ultra wide |
+
+Grid foundation memakai rentang berbeda (320–1400+) — lihat [Grid & Layout](#grid--layout) dan matriks responsif P2.
+
+---
+
 # Assets
 
 ## `assets/icons/`
@@ -381,6 +470,9 @@ Pola yang **muncul di implementasi** halaman komponen (bukan standar baru).
 ---
 
 # Components
+
+> **Registry AI (entry point):** `Docs/components-index.md` — daftar 34 komponen + link ke `Docs/components/{slug}.md`.  
+> Bagian di bawah = katalog implementasi + variant/a11y per komponen (sumber detail di knowledge base).
 
 Pola bersama: `globals.css` + `enhancements.css` + Tailwind CDN + CSS scoped BEM + matrix variant di halaman doc.
 
@@ -693,10 +785,6 @@ Pola bersama: `globals.css` + `enhancements.css` + Tailwind CDN + CSS scoped BEM
 | Shadows | `foundations/shadows/shadows.html` |
 | Grid | `foundations/grid/grid.html` |
 | Komponen | `components/*/*.html` |
+| Component registry (AI) | `Docs/components-index.md` |
+| Runtime React | `src/GposLite/components/` |
 | Index | `index.html` |
-
----
-
-# Daftar Komponen (34)
-
-Avatar, Badge, Breadcrumbs, Button, Calendar, Checkbox, Date Picker, Date Time Picker, Dropdown Button, Flags, Form, Inline Edit, Lozenge, Modal, Navigation Menu, Page Header, Page Layout, Pagination, Popup, Radio, Range, Section Message, Select, Table, Tabs, Tags, Text Area, Text Field, Time Picker, Toast Banner, Toggle, Tooltip, Top & Bottom Navigation, Tourguide.
