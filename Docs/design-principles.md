@@ -43,7 +43,25 @@ Tidak menambah prinsip baru di luar yang tercermin di kode dan dokumentasi found
 ### Page layout komponen (`components/Page layout/`)
 
 - Pola aplikasi: `ds-page-layout` → `header.ds-topnav` + main + `footer.ds-footer-nav`.
+- Implementasi detail topnav & footer nav: `components/Top & bottom Navigation/top-bottom-nav.html`.
 - Varian topnav: `--website`, `--tablet`, `--mobile` untuk adaptasi lebar.
+
+### Navigation menu (`components/Navigation menu/navigation.html`)
+
+- **Referensi implementasi** menu navigasi vertikal sidebar produk — bukan sidebar gelap shell dokumentasi DS.
+- Parts atomik: **Menu Search**, **Heading Menu** (`--no-icons` untuk section tanpa ikon), **Divider**, **Main Menu** (`ds-nav-mainmenu-snap`), **Submenu Content** (`ds-nav-submenu-snap`).
+- Komposisi: **Navigation Menu** (Main Menu + Submenu Content), **Sidebar Navigation Expand** (`ds-sidebar-nav-expand`), **Sidebar Navigation Hide** (`ds-sidebar-nav-expand--hide`).
+- State interaksi: `--hover`, `--press`, `--selected` (latar `--color-blue-b50`); satu item `--selected` per section.
+- Pola menu: `isMenu=single` (tanpa submenu), `hide` (parent + chevron-down), `expand` (parent `-on` + chevron-up + daftar submenu).
+- Urutan susunan: Menu Search → Heading Menu → Divider → Main Menu → Submenu Content → Divider penutup.
+
+### Top & bottom navigation (`components/Top & bottom Navigation/top-bottom-nav.html`)
+
+- **Referensi implementasi** chrome horizontal aplikasi: top navigation + footer navigation.
+- Top nav (`ds-topnav`, `role="banner"`): tiga zona `__start` / `__center` / `__end`; varian responsif `--website`, `--tablet`, `--mobile`.
+- Parts topnav: **Logo** (`ds-topnav-logo`), **Notification Indicator** (`ds-topnav-notif`), profil pengguna.
+- Footer nav (`ds-footer-nav`, `role="contentinfo"`): pager (`__pager`, `__nav-btns`, `__page`) + aksi (`__actions`); min-height **56px**, latar `--color-neutral-n0`.
+- Halaman ini juga memuat playground, Do & Don't, dan snippet kode DS untuk setiap part.
 
 ### Filosofi ruang (`style_guide.md`)
 
@@ -286,7 +304,8 @@ Modifier dokumentasi dan CSS memisahkan:
 
 - Pola ARIA yang diimplementasikan: `listbox`/`option`, `menu`/`menuitem`, `tablist`/`tab`/`tabpanel`, `grid` (calendar), `switch` (toggle), `tooltip`, `dialog` (date picker).
 - Popup/loading: `aria-live="polite"` di contoh playground.
-- Navigasi: `aria-current="page"` (breadcrumbs, pagination), `aria-expanded` + `aria-controls` (dropdown, flags, select).
+- Navigasi: `aria-current="page"` (breadcrumbs, pagination), `aria-expanded` + `aria-controls` (dropdown, flags, select, submenu sidebar — lihat `components/Navigation menu/navigation.html`).
+- Topnav & footer nav: `role="banner"` / `role="contentinfo"`, `aria-label` pada landmark — lihat `components/Top & bottom Navigation/top-bottom-nav.html`.
 
 ### Fokus & keyboard
 
@@ -314,7 +333,7 @@ Urutan yang tercatat di `style_guide.md` dan `CLAUDE.md`:
 2. Existing token system (`styles/tokens.css`)
 3. Existing `index.html` / halaman foundation & komponen / `.claude/references/` untuk visual-anatomy reference
 4. Existing component structure
-5. Existing responsive behavior (termasuk varian mobile pada page layout & topnav)
+5. Existing responsive behavior (termasuk varian mobile pada page layout, topnav `--website`/`--tablet`/`--mobile`, dan sidebar `--hide`)
 
 ---
 
@@ -327,3 +346,5 @@ Urutan yang tercatat di `style_guide.md` dan `CLAUDE.md`:
 | Visual language ringkas | `style_guide.md` |
 | Token | `styles/tokens.css` |
 | Foundations | `foundations/*/*.html` |
+| Navigation menu | `components/Navigation menu/navigation.html` |
+| Top & bottom navigation | `components/Top & bottom Navigation/top-bottom-nav.html` |

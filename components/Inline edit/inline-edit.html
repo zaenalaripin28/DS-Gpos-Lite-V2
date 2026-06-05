@@ -464,23 +464,6 @@
     }
     [data-theme="dark"] .parts-grid__cell { background: #080F1E !important; }
     [data-theme="dark"] .parts-grid { border-color: #1A2E48; }
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px; height: 32px;
-      background: none;
-      border: 1px solid var(--color-border);
-      color: var(--color-text-secondary);
-      cursor: pointer;
-      border-radius: var(--border-radius-md);
-      transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
-      flex-shrink: 0;
-    }
-      background-color: var(--color-primary-50);
-      border-color: var(--color-primary-200);
-      color: var(--color-primary-600);
-    }
   </style>
 </head>
 <body>
@@ -1064,6 +1047,7 @@
 <script>
   var IE_EDIT_STATES = ['focus', 'typing'];
   var ieSavedValue = 'Value';
+  var ieFocusGeneration = 0;
 
   function ieIsEditState(state) {
     return IE_EDIT_STATES.indexOf(state) !== -1;
@@ -1092,15 +1076,23 @@
       trigger.removeAttribute('aria-disabled');
     }
 
-    valueEl.textContent = ieSavedValue;
+    if (valueEl) valueEl.textContent = ieSavedValue;
 
     input.classList.remove('ds-inline-edit__input--typing');
     if (editing) {
       if (!opts.keepDraft) input.value = ieSavedValue;
       if (state === 'typing') input.classList.add('ds-inline-edit__input--typing');
       if (opts.focusInput !== false) {
-        requestAnimationFrame(function () { input.focus(); });
+        var focusGen = ++ieFocusGeneration;
+        requestAnimationFrame(function () {
+          if (focusGen !== ieFocusGeneration) return;
+          var stateSelect = document.getElementById('ie-playground-state');
+          if (!stateSelect || !ieIsEditState(stateSelect.value)) return;
+          input.focus();
+        });
       }
+    } else {
+      input.blur();
     }
 
     if (hint) {
@@ -1119,6 +1111,7 @@
     var stateSelect = document.getElementById('ie-playground-state');
     if (!input) return;
 
+    ieFocusGeneration++;
     if (save) {
       ieSavedValue = input.value.trim() || 'Value';
     } else {
@@ -1158,13 +1151,15 @@
 
     if (input) {
       input.addEventListener('focus', function () {
-        if (stateSelect && stateSelect.value !== 'typing') {
+        if (!stateSelect || !ieIsEditState(stateSelect.value)) return;
+        if (stateSelect.value !== 'typing') {
           stateSelect.value = 'focus';
           ieApplyPlaygroundState('focus', { keepDraft: true, focusInput: false });
         }
       });
       input.addEventListener('input', function () {
-        if (stateSelect) stateSelect.value = 'typing';
+        if (!stateSelect || !ieIsEditState(stateSelect.value)) return;
+        stateSelect.value = 'typing';
         ieApplyPlaygroundState('typing', { keepDraft: true, focusInput: false });
       });
     }
@@ -1185,9 +1180,6 @@
       setTimeout(function () { btn.textContent = 'Salin'; btn.classList.remove('copied'); }, 2000);
     });
   }
-
-  /* Dark mode */
-  });
 
   /* Scroll progress + back-to-top */
   (function () {
