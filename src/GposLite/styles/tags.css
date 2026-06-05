@@ -1,0 +1,945 @@
+/* from components/Tags/tags.html */
+
+.ds-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-050);
+      padding: var(--space-050) var(--space-100);
+      border-radius: var(--border-radius-full);
+      border: 1px solid transparent;
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-medium-size);
+      font-weight: var(--text-body-small-medium-weight);
+      line-height: var(--text-body-small-medium-lh);
+      white-space: nowrap;
+      vertical-align: middle;
+      transition: background-color var(--transition-fast), color var(--transition-fast),
+                  border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .ds-tag--standard {
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n900);
+    }
+
+    /* content=text only | leading icon + text */
+    .ds-tag--standard:not(.ds-tag--removable):hover,
+    .ds-tag--standard:not(.ds-tag--removable).ds-tag--state-hover {
+      background-color: var(--color-neutral-n40);
+    }
+    .ds-tag--standard:not(.ds-tag--removable):active,
+    .ds-tag--standard:not(.ds-tag--removable).ds-tag--state-pressed {
+      background-color: var(--color-neutral-n60);
+    }
+    .ds-tag--standard:not(.ds-tag--removable):focus-visible,
+    .ds-tag--standard:not(.ds-tag--removable).ds-tag--state-focus {
+      outline: none;
+      background-color: var(--color-neutral-n20);
+      border-color: var(--color-blue-b200);
+      box-shadow: 0 0 0 1px var(--color-blue-b200);
+    }
+
+    .ds-tag__icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      display: block;
+    }
+
+    /* content=text + remove | leading icon + text + remove — semua varian */
+    .ds-tag--removable {
+      padding-right: var(--space-050);
+      --ds-tag-removable-icon-danger: brightness(0) saturate(100%) invert(32%) sepia(89%) saturate(2976%) hue-rotate(346deg) brightness(95%) contrast(95%);
+      --ds-tag-removable-icon-accent: brightness(0) saturate(100%) invert(11%) sepia(68%) saturate(3048%) hue-rotate(346deg) brightness(93%) contrast(93%);
+    }
+    .ds-tag--removable:hover,
+    .ds-tag--removable.ds-tag--state-hover {
+      background-color: var(--color-red-r50);
+      color: var(--color-red-r300);
+    }
+    .ds-tag--removable:active,
+    .ds-tag--removable.ds-tag--state-pressed {
+      background-color: var(--color-red-r75);
+      color: var(--color-red-r500);
+    }
+    .ds-tag--removable.ds-tag--state-focus {
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n900);
+    }
+    .ds-tag--removable:hover .ds-tag__icon,
+    .ds-tag--removable.ds-tag--state-hover .ds-tag__icon,
+    .ds-tag--removable:hover .ds-tag__remove img,
+    .ds-tag--removable.ds-tag--state-hover .ds-tag__remove img {
+      filter: var(--ds-tag-removable-icon-danger);
+    }
+    .ds-tag--removable:active .ds-tag__icon,
+    .ds-tag--removable.ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--removable:active .ds-tag__remove img,
+    .ds-tag--removable.ds-tag--state-pressed .ds-tag__remove img {
+      filter: var(--ds-tag-removable-icon-accent);
+    }
+    .ds-tag--removable.ds-tag--state-focus .ds-tag__icon,
+    .ds-tag--removable.ds-tag--state-focus .ds-tag__remove img {
+      filter: none;
+    }
+
+    /* ================================================================
+       DS Tag — variant=bluelight (Tags/figma/component-tag-bluelight.png)
+         Background.Accent.Blue.Subtler   → --color-blue-b75
+         Background.Accent.Blue.Subtlest  → --color-blue-b50
+         Background.Accent.Blue.Subtle    → --color-blue-b200 (pressed, matrix)
+         Text.Bold                        → --color-neutral-n900
+         Text.Brand                       → --color-blue-b300
+         Border.Focused                   → --color-blue-b200
+         removable → sama token varian standard
+    ================================================================ */
+    .ds-tag--bluelight {
+      background-color: var(--color-blue-b75);
+      color: var(--color-neutral-n900);
+    }
+
+    .ds-tag--bluelight:not(.ds-tag--removable):hover,
+    .ds-tag--bluelight:not(.ds-tag--removable).ds-tag--state-hover {
+      background-color: var(--color-blue-b50);
+      color: var(--color-blue-b300);
+    }
+    .ds-tag--bluelight:not(.ds-tag--removable):active,
+    .ds-tag--bluelight:not(.ds-tag--removable).ds-tag--state-pressed {
+      background-color: var(--color-blue-b200);
+      color: var(--color-neutral-n900);
+    }
+    .ds-tag--bluelight:not(.ds-tag--removable):focus-visible,
+    .ds-tag--bluelight:not(.ds-tag--removable).ds-tag--state-focus {
+      outline: none;
+      background-color: var(--color-blue-b75);
+      border-color: var(--color-blue-b200);
+      box-shadow: 0 0 0 1px var(--color-blue-b200);
+    }
+
+    /* ================================================================
+       DS Tag — variant=redlight (Tags/figma/component-tag-redlight.png)
+         Background.Accent.Red.Subtler    → --color-red-r75   (default, focus)
+         Background.Accent.Red.Subtlest   → --color-red-r50   (hover)
+         Background.Accent.Red.Subtle     → --color-red-r100  (pressed)
+         Text.Accent.Red                  → --color-red-r500  (semua state kecuali hover)
+         Text.Danger                      → --color-red-r300  (hover — teks & ikon)
+         Border.Focused                   → --color-blue-b200
+         removable bg → sama token varian standard
+    ================================================================ */
+    .ds-tag--redlight {
+      background-color: var(--color-red-r75);
+      color: var(--color-red-r500);
+      --ds-tag-redlight-icon-accent: brightness(0) saturate(100%) invert(11%) sepia(68%) saturate(3048%) hue-rotate(346deg) brightness(93%) contrast(93%);
+      --ds-tag-redlight-icon-danger: brightness(0) saturate(100%) invert(32%) sepia(89%) saturate(2976%) hue-rotate(346deg) brightness(95%) contrast(95%);
+    }
+
+    /* content=text only | leading icon + text — hover: Text.Danger */
+    .ds-tag--redlight:hover,
+    .ds-tag--redlight.ds-tag--state-hover {
+      color: var(--color-red-r300);
+    }
+    .ds-tag--redlight:not(.ds-tag--removable):hover,
+    .ds-tag--redlight:not(.ds-tag--removable).ds-tag--state-hover {
+      background-color: var(--color-red-r50);
+    }
+
+    .ds-tag--redlight:not(.ds-tag--removable):active,
+    .ds-tag--redlight:not(.ds-tag--removable).ds-tag--state-pressed,
+    .ds-tag--redlight:not(.ds-tag--removable):focus-visible,
+    .ds-tag--redlight:not(.ds-tag--removable).ds-tag--state-focus {
+      color: var(--color-red-r500);
+    }
+    .ds-tag--redlight:not(.ds-tag--removable):active,
+    .ds-tag--redlight:not(.ds-tag--removable).ds-tag--state-pressed {
+      background-color: var(--color-red-r100);
+    }
+    .ds-tag--redlight:not(.ds-tag--removable):focus-visible,
+    .ds-tag--redlight:not(.ds-tag--removable).ds-tag--state-focus {
+      outline: none;
+      background-color: var(--color-red-r75);
+      border-color: var(--color-blue-b200);
+      box-shadow: 0 0 0 1px var(--color-blue-b200);
+    }
+
+    /* removable — teks: hover Text.Danger, selain itu Text.Accent.Red */
+    .ds-tag--redlight.ds-tag--removable:hover,
+    .ds-tag--redlight.ds-tag--removable.ds-tag--state-hover {
+      color: var(--color-red-r300);
+    }
+    .ds-tag--redlight.ds-tag--removable:active,
+    .ds-tag--redlight.ds-tag--removable.ds-tag--state-pressed,
+    .ds-tag--redlight.ds-tag--removable.ds-tag--state-focus {
+      color: var(--color-red-r500);
+    }
+
+    /* Ikon — default/pressed/focus: Text.Accent.Red */
+    .ds-tag--redlight .ds-tag__icon,
+    .ds-tag--redlight .ds-tag__remove img {
+      filter: var(--ds-tag-redlight-icon-accent);
+    }
+    .ds-tag--redlight:active .ds-tag__icon,
+    .ds-tag--redlight.ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--redlight:active .ds-tag__remove img,
+    .ds-tag--redlight.ds-tag--state-pressed .ds-tag__remove img,
+    .ds-tag--redlight.ds-tag--state-focus .ds-tag__icon {
+      filter: var(--ds-tag-redlight-icon-accent);
+    }
+
+    /* Ikon — hover: Text.Danger */
+    .ds-tag--redlight:hover .ds-tag__icon,
+    .ds-tag--redlight.ds-tag--state-hover .ds-tag__icon,
+    .ds-tag--redlight:hover .ds-tag__remove img,
+    .ds-tag--redlight.ds-tag--state-hover .ds-tag__remove img {
+      filter: var(--ds-tag-redlight-icon-danger);
+    }
+
+    .ds-tag--redlight.ds-tag--removable.ds-tag--state-focus .ds-tag__remove.ds-tag__remove--state-focus img {
+      filter: brightness(0) invert(1);
+    }
+
+    /* ================================================================
+       DS Tag — variant=greenlight (Tags/figma/component-tag-greenlight.png)
+         Background.Accent.Green.Subtler    → --color-green-g75   (default, focus)
+         Background.Accent.Green.Subtlest   → --color-green-g50   (hover)
+         Background.Accent.Green.Subtle      → --color-green-g100  (pressed)
+         Text.Accent.Green                  → --color-green-g500
+         Text.Success                       → --color-green-g300  (hover — teks & ikon)
+         removable hover → Background.Danger.Tag + Text.Danger (global)
+         Border.Focused                     → --color-blue-b200
+    ================================================================ */
+    .ds-tag--greenlight {
+      background-color: var(--color-green-g75);
+      color: var(--color-green-g500);
+      --ds-tag-greenlight-icon-accent: brightness(0) saturate(100%) invert(24%) sepia(89%) saturate(1200%) hue-rotate(128deg) brightness(92%) contrast(101%);
+      --ds-tag-greenlight-icon-success: brightness(0) saturate(100%) invert(42%) sepia(93%) saturate(1352%) hue-rotate(118deg) brightness(96%) contrast(101%);
+    }
+
+    /* content=text only | leading icon + text — hover: Text.Success */
+    .ds-tag--greenlight:not(.ds-tag--removable):hover,
+    .ds-tag--greenlight:not(.ds-tag--removable).ds-tag--state-hover {
+      color: var(--color-green-g300);
+    }
+    .ds-tag--greenlight:not(.ds-tag--removable):hover,
+    .ds-tag--greenlight:not(.ds-tag--removable).ds-tag--state-hover {
+      background-color: var(--color-green-g50);
+    }
+
+    .ds-tag--greenlight:not(.ds-tag--removable):active,
+    .ds-tag--greenlight:not(.ds-tag--removable).ds-tag--state-pressed,
+    .ds-tag--greenlight:not(.ds-tag--removable):focus-visible,
+    .ds-tag--greenlight:not(.ds-tag--removable).ds-tag--state-focus {
+      color: var(--color-green-g500);
+    }
+    .ds-tag--greenlight:not(.ds-tag--removable):active,
+    .ds-tag--greenlight:not(.ds-tag--removable).ds-tag--state-pressed {
+      background-color: var(--color-green-g100);
+    }
+    .ds-tag--greenlight:not(.ds-tag--removable):focus-visible,
+    .ds-tag--greenlight:not(.ds-tag--removable).ds-tag--state-focus {
+      outline: none;
+      background-color: var(--color-green-g75);
+      border-color: var(--color-blue-b200);
+      box-shadow: 0 0 0 1px var(--color-blue-b200);
+    }
+
+    /* Ikon — default/pressed/focus netral: Text.Accent.Green */
+    .ds-tag--greenlight:not(.ds-tag--removable) .ds-tag__icon,
+    .ds-tag--greenlight:not(.ds-tag--removable) .ds-tag__remove img {
+      filter: var(--ds-tag-greenlight-icon-accent);
+    }
+    .ds-tag--greenlight:not(.ds-tag--removable):active .ds-tag__icon,
+    .ds-tag--greenlight:not(.ds-tag--removable).ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--greenlight:not(.ds-tag--removable):active .ds-tag__remove img,
+    .ds-tag--greenlight:not(.ds-tag--removable).ds-tag--state-pressed .ds-tag__remove img,
+    .ds-tag--greenlight:not(.ds-tag--removable).ds-tag--state-focus .ds-tag__icon {
+      filter: var(--ds-tag-greenlight-icon-accent);
+    }
+
+    /* removable default ikon: Text.Accent.Green */
+    .ds-tag--greenlight.ds-tag--removable:not(:hover):not(.ds-tag--state-hover):not(:active):not(.ds-tag--state-pressed) .ds-tag__icon,
+    .ds-tag--greenlight.ds-tag--removable:not(:hover):not(.ds-tag--state-hover):not(:active):not(.ds-tag--state-pressed) .ds-tag__remove img {
+      filter: var(--ds-tag-greenlight-icon-accent);
+    }
+
+    /* removable pressed — ikon: Text.Accent.Red */
+    .ds-tag--greenlight.ds-tag--removable:active .ds-tag__icon,
+    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--greenlight.ds-tag--removable:active .ds-tag__remove img,
+    .ds-tag--greenlight.ds-tag--removable.ds-tag--state-pressed .ds-tag__remove img {
+      filter: var(--ds-tag-removable-icon-accent);
+    }
+
+    /* Ikon — hover netral: Text.Success */
+    .ds-tag--greenlight:not(.ds-tag--removable):hover .ds-tag__icon,
+    .ds-tag--greenlight:not(.ds-tag--removable).ds-tag--state-hover .ds-tag__icon {
+      filter: var(--ds-tag-greenlight-icon-success);
+    }
+
+    /* ================================================================
+       DS Tag — variant=greylight (Tags/figma/component-tag-greylight.png)
+         Background.Accent.Gray.Subtler     → --color-neutral-n40   (default, focus)
+         Background.Accent.Gray.Subtlest    → --color-neutral-n20   (hover)
+         Background.Accent.Gray.Subtle      → --color-neutral-n70   (pressed)
+         Text.Bold                          → --color-neutral-n900
+         Text.Subtle                        → --color-neutral-n300  (hover — teks & ikon)
+         removable hover/pressed → global Danger.Tag (sama greenlight)
+         Border.Focused                     → --color-blue-b200
+    ================================================================ */
+    .ds-tag--greylight {
+      background-color: var(--color-neutral-n40);
+      color: var(--color-neutral-n900);
+      --ds-tag-greylight-icon-subtle: brightness(0) saturate(100%) invert(38%) sepia(14%) saturate(1018%) hue-rotate(182deg) brightness(92%) contrast(88%);
+    }
+
+    /* content=text only | leading icon + text — hover: Text.Subtle */
+    .ds-tag--greylight:not(.ds-tag--removable):hover,
+    .ds-tag--greylight:not(.ds-tag--removable).ds-tag--state-hover {
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n300);
+    }
+
+    .ds-tag--greylight:not(.ds-tag--removable):active,
+    .ds-tag--greylight:not(.ds-tag--removable).ds-tag--state-pressed,
+    .ds-tag--greylight:not(.ds-tag--removable):focus-visible,
+    .ds-tag--greylight:not(.ds-tag--removable).ds-tag--state-focus {
+      color: var(--color-neutral-n900);
+    }
+    .ds-tag--greylight:not(.ds-tag--removable):active,
+    .ds-tag--greylight:not(.ds-tag--removable).ds-tag--state-pressed {
+      background-color: var(--color-neutral-n70);
+    }
+    .ds-tag--greylight:not(.ds-tag--removable):focus-visible,
+    .ds-tag--greylight:not(.ds-tag--removable).ds-tag--state-focus {
+      outline: none;
+      background-color: var(--color-neutral-n40);
+      border-color: var(--color-blue-b200);
+      box-shadow: 0 0 0 1px var(--color-blue-b200);
+    }
+
+    /* Ikon — hover netral: Text.Subtle */
+    .ds-tag--greylight:not(.ds-tag--removable):hover .ds-tag__icon,
+    .ds-tag--greylight:not(.ds-tag--removable).ds-tag--state-hover .ds-tag__icon {
+      filter: var(--ds-tag-greylight-icon-subtle);
+    }
+    .ds-tag--greylight:not(.ds-tag--removable):active .ds-tag__icon,
+    .ds-tag--greylight:not(.ds-tag--removable).ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--greylight:not(.ds-tag--removable).ds-tag--state-focus .ds-tag__icon {
+      filter: none;
+    }
+
+    /* ================================================================
+       DS Tag — variant=yellowlight (Tags/figma/component-tag-yellowlight.png)
+         Background.Accent.Yellow.Subtler    → --color-orange-o75   (default, focus)
+         Background.Accent.Yellow.Subtlest   → --color-orange-o50   (hover)
+         Background.Accent.Yellow.Subtle     → --color-orange-o100  (pressed)
+         Text.Accent.Yellow                  → --color-orange-o500
+         Text.Warning                        → --color-orange-o300  (hover — teks & ikon)
+         removable hover/pressed → sama varian greenlight (global Danger.Tag)
+         Border.Focused                      → --color-blue-b200
+    ================================================================ */
+    .ds-tag--yellowlight {
+      background-color: var(--color-orange-o75);
+      color: var(--color-orange-o500);
+      --ds-tag-yellowlight-icon-accent: brightness(0) saturate(100%) invert(28%) sepia(72%) saturate(1800%) hue-rotate(12deg) brightness(95%) contrast(101%);
+      --ds-tag-yellowlight-icon-warning: brightness(0) saturate(100%) invert(58%) sepia(98%) saturate(2200%) hue-rotate(1deg) brightness(102%) contrast(101%);
+    }
+
+    /* content=text only | leading icon + text — hover: Text.Warning */
+    .ds-tag--yellowlight:not(.ds-tag--removable):hover,
+    .ds-tag--yellowlight:not(.ds-tag--removable).ds-tag--state-hover {
+      color: var(--color-orange-o300);
+    }
+    .ds-tag--yellowlight:not(.ds-tag--removable):hover,
+    .ds-tag--yellowlight:not(.ds-tag--removable).ds-tag--state-hover {
+      background-color: var(--color-orange-o50);
+    }
+
+    .ds-tag--yellowlight:not(.ds-tag--removable):active,
+    .ds-tag--yellowlight:not(.ds-tag--removable).ds-tag--state-pressed,
+    .ds-tag--yellowlight:not(.ds-tag--removable):focus-visible,
+    .ds-tag--yellowlight:not(.ds-tag--removable).ds-tag--state-focus {
+      color: var(--color-orange-o500);
+    }
+    .ds-tag--yellowlight:not(.ds-tag--removable):active,
+    .ds-tag--yellowlight:not(.ds-tag--removable).ds-tag--state-pressed {
+      background-color: var(--color-orange-o100);
+    }
+    .ds-tag--yellowlight:not(.ds-tag--removable):focus-visible,
+    .ds-tag--yellowlight:not(.ds-tag--removable).ds-tag--state-focus {
+      outline: none;
+      background-color: var(--color-orange-o75);
+      border-color: var(--color-blue-b200);
+      box-shadow: 0 0 0 1px var(--color-blue-b200);
+    }
+
+    /* Ikon — default/pressed/focus netral: Text.Accent.Yellow */
+    .ds-tag--yellowlight:not(.ds-tag--removable) .ds-tag__icon,
+    .ds-tag--yellowlight:not(.ds-tag--removable) .ds-tag__remove img {
+      filter: var(--ds-tag-yellowlight-icon-accent);
+    }
+    .ds-tag--yellowlight:not(.ds-tag--removable):active .ds-tag__icon,
+    .ds-tag--yellowlight:not(.ds-tag--removable).ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--yellowlight:not(.ds-tag--removable):active .ds-tag__remove img,
+    .ds-tag--yellowlight:not(.ds-tag--removable).ds-tag--state-pressed .ds-tag__remove img,
+    .ds-tag--yellowlight:not(.ds-tag--removable).ds-tag--state-focus .ds-tag__icon {
+      filter: var(--ds-tag-yellowlight-icon-accent);
+    }
+
+    /* removable default ikon: Text.Accent.Yellow */
+    .ds-tag--yellowlight.ds-tag--removable:not(:hover):not(.ds-tag--state-hover):not(:active):not(.ds-tag--state-pressed) .ds-tag__icon,
+    .ds-tag--yellowlight.ds-tag--removable:not(:hover):not(.ds-tag--state-hover):not(:active):not(.ds-tag--state-pressed) .ds-tag__remove img {
+      filter: var(--ds-tag-yellowlight-icon-accent);
+    }
+
+    /* removable pressed — ikon: Text.Accent.Red */
+    .ds-tag--yellowlight.ds-tag--removable:active .ds-tag__icon,
+    .ds-tag--yellowlight.ds-tag--removable.ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--yellowlight.ds-tag--removable:active .ds-tag__remove img,
+    .ds-tag--yellowlight.ds-tag--removable.ds-tag--state-pressed .ds-tag__remove img {
+      filter: var(--ds-tag-removable-icon-accent);
+    }
+
+    /* Ikon — hover netral: Text.Warning */
+    .ds-tag--yellowlight:not(.ds-tag--removable):hover .ds-tag__icon,
+    .ds-tag--yellowlight:not(.ds-tag--removable).ds-tag--state-hover .ds-tag__icon {
+      filter: var(--ds-tag-yellowlight-icon-warning);
+    }
+
+    /* ================================================================
+       DS Tag — variant=purplelight (Tags/figma/component-tag-purplelight.png)
+         Background.Accent.Purple.Subtler    → --color-purple-p75   (default, focus)
+         Background.Accent.Purple.Subtlest   → --color-purple-p50   (hover)
+         Background.Accent.Purple.Subtle     → --color-purple-p100  (pressed)
+         Text.Accent.Purple                  → --color-purple-p500
+         Text.Discovery                      → --color-purple-p300  (hover — teks & ikon)
+         removable hover/pressed → sama varian greenlight (global Danger.Tag)
+         Border.Focused                      → --color-blue-b200
+    ================================================================ */
+    .ds-tag--purplelight {
+      background-color: var(--color-purple-p75);
+      color: var(--color-purple-p500);
+      --ds-tag-purplelight-icon-accent: brightness(0) saturate(100%) invert(16%) sepia(42%) saturate(4200%) hue-rotate(252deg) brightness(92%) contrast(95%);
+      --ds-tag-purplelight-icon-discovery: brightness(0) saturate(100%) invert(33%) sepia(95%) saturate(4500%) hue-rotate(248deg) brightness(98%) contrast(98%);
+    }
+
+    /* content=text only | leading icon + text — hover: Text.Discovery */
+    .ds-tag--purplelight:not(.ds-tag--removable):hover,
+    .ds-tag--purplelight:not(.ds-tag--removable).ds-tag--state-hover {
+      color: var(--color-purple-p300);
+    }
+    .ds-tag--purplelight:not(.ds-tag--removable):hover,
+    .ds-tag--purplelight:not(.ds-tag--removable).ds-tag--state-hover {
+      background-color: var(--color-purple-p50);
+    }
+
+    .ds-tag--purplelight:not(.ds-tag--removable):active,
+    .ds-tag--purplelight:not(.ds-tag--removable).ds-tag--state-pressed,
+    .ds-tag--purplelight:not(.ds-tag--removable):focus-visible,
+    .ds-tag--purplelight:not(.ds-tag--removable).ds-tag--state-focus {
+      color: var(--color-purple-p500);
+    }
+    .ds-tag--purplelight:not(.ds-tag--removable):active,
+    .ds-tag--purplelight:not(.ds-tag--removable).ds-tag--state-pressed {
+      background-color: var(--color-purple-p100);
+    }
+    .ds-tag--purplelight:not(.ds-tag--removable):focus-visible,
+    .ds-tag--purplelight:not(.ds-tag--removable).ds-tag--state-focus {
+      outline: none;
+      background-color: var(--color-purple-p75);
+      border-color: var(--color-blue-b200);
+      box-shadow: 0 0 0 1px var(--color-blue-b200);
+    }
+
+    /* Ikon — default/pressed/focus netral: Text.Accent.Purple */
+    .ds-tag--purplelight:not(.ds-tag--removable) .ds-tag__icon,
+    .ds-tag--purplelight:not(.ds-tag--removable) .ds-tag__remove img {
+      filter: var(--ds-tag-purplelight-icon-accent);
+    }
+    .ds-tag--purplelight:not(.ds-tag--removable):active .ds-tag__icon,
+    .ds-tag--purplelight:not(.ds-tag--removable).ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--purplelight:not(.ds-tag--removable):active .ds-tag__remove img,
+    .ds-tag--purplelight:not(.ds-tag--removable).ds-tag--state-pressed .ds-tag__remove img,
+    .ds-tag--purplelight:not(.ds-tag--removable).ds-tag--state-focus .ds-tag__icon {
+      filter: var(--ds-tag-purplelight-icon-accent);
+    }
+
+    /* removable default ikon: Text.Accent.Purple */
+    .ds-tag--purplelight.ds-tag--removable:not(:hover):not(.ds-tag--state-hover):not(:active):not(.ds-tag--state-pressed) .ds-tag__icon,
+    .ds-tag--purplelight.ds-tag--removable:not(:hover):not(.ds-tag--state-hover):not(:active):not(.ds-tag--state-pressed) .ds-tag__remove img {
+      filter: var(--ds-tag-purplelight-icon-accent);
+    }
+
+    /* removable pressed — ikon: Text.Accent.Red */
+    .ds-tag--purplelight.ds-tag--removable:active .ds-tag__icon,
+    .ds-tag--purplelight.ds-tag--removable.ds-tag--state-pressed .ds-tag__icon,
+    .ds-tag--purplelight.ds-tag--removable:active .ds-tag__remove img,
+    .ds-tag--purplelight.ds-tag--removable.ds-tag--state-pressed .ds-tag__remove img {
+      filter: var(--ds-tag-removable-icon-accent);
+    }
+
+    /* Ikon — hover netral: Text.Discovery */
+    .ds-tag--purplelight:not(.ds-tag--removable):hover .ds-tag__icon,
+    .ds-tag--purplelight:not(.ds-tag--removable).ds-tag--state-hover .ds-tag__icon {
+      filter: var(--ds-tag-purplelight-icon-discovery);
+    }
+
+    .tag-state-matrix + .tag-state-matrix {
+      margin-top: 32px;
+    }
+
+    .ds-tag__label {
+      font: inherit;
+      line-height: inherit;
+    }
+
+    .ds-tag__remove {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      margin: 0 calc(var(--space-025) * -1) 0 0;
+      padding: 0;
+      border: none;
+      background: transparent;
+      border-radius: var(--border-radius-full);
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .ds-tag__remove img {
+      width: 12px;
+      height: 12px;
+      display: block;
+    }
+    .ds-tag__remove:focus-visible,
+    .ds-tag__remove.ds-tag__remove--state-focus {
+      outline: none;
+      background-color: var(--color-blue-b300);
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+    .ds-tag__remove:focus-visible img,
+    .ds-tag__remove.ds-tag__remove--state-focus img {
+      filter: brightness(0) invert(1);
+    }
+
+    button.ds-tag {
+      cursor: pointer;
+      font: inherit;
+      appearance: none;
+    }
+
+    .tag-state-matrix {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--color-surface);
+    }
+    .tag-state-matrix__head {
+      padding: 10px 16px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-text-tertiary);
+      background: var(--color-neutral-n20);
+      border-bottom: 1px solid var(--color-border);
+      font-family: var(--font-primary);
+      text-align: center;
+    }
+    .tag-state-matrix__head:not(:last-child) {
+      border-right: 1px solid var(--color-border);
+    }
+    .tag-state-matrix__label {
+      grid-column: 1 / -1;
+      padding: 8px 16px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font-primary);
+      color: var(--color-text-tertiary);
+      background: var(--color-neutral-n10);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .tag-state-matrix__cell {
+      padding: 24px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 64px;
+      background: var(--color-neutral-n10);
+      border-top: 1px solid var(--color-border);
+      border-right: 1px solid var(--color-border);
+    }
+    .tag-state-matrix__cell:nth-child(5n+4) {
+      border-right: none;
+    }
+
+    .usage-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .usage-grid-2 > div {
+      transition: transform 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .usage-grid-2 > div:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .usage-info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .usage-info-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .tw-snippet-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--color-neutral-n30);
+    }
+    .tw-snippet-row:last-child { border-bottom: none; }
+    .tw-snippet-code {
+      flex: 1;
+      font-family: var(--font-primary);
+      font-size: 11px;
+      line-height: 1.55;
+      color: var(--color-neutral-n700);
+      word-break: break-all;
+    }
+    .tw-copy-btn {
+      flex-shrink: 0;
+      padding: 4px 10px;
+      background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n40);
+      border-radius: var(--border-radius-sm);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-neutral-n400);
+      cursor: pointer;
+      font-family: var(--font-primary);
+      transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+    }
+    .tw-copy-btn:hover {
+      background: var(--color-blue-b300);
+      border-color: var(--color-blue-b300);
+      color: var(--color-neutral-n0);
+    }
+        .variant-copy {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--color-neutral-n30);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+    .variant-copy--inline {
+      margin: 0;
+      padding: 0;
+      border-top: none;
+      flex: 1;
+      min-width: 140px;
+      max-width: 420px;
+    }
+    .parts-grid__cell .variant-copy {
+      margin-top: 8px;
+      padding-top: 0;
+      border-top: none;
+      justify-content: center;
+    }
+    .variant-matrix__label .variant-copy {
+      margin-top: 6px;
+      padding-top: 0;
+      border-top: none;
+    }
+    .variant-copy__code {
+      flex: 1;
+      min-width: 0;
+      font-size: 10px;
+      font-family: var(--font-primary);
+      color: var(--color-blue-b300);
+      background: var(--color-neutral-n20);
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--color-neutral-n30);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .variant-copy-btn {
+      flex-shrink: 0;
+      padding: 3px 8px;
+      background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n40);
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--color-neutral-n400);
+      cursor: pointer;
+      font-family: var(--font-primary);
+      transition: all 120ms ease;
+    }
+    .variant-copy-btn:hover {
+      background: var(--color-blue-b300);
+      border-color: var(--color-blue-b300);
+      color: var(--color-neutral-n0);
+    }
+    .variant-copy-btn.copied {
+      background: var(--color-green-g300);
+      border-color: var(--color-green-g300);
+      color: var(--color-neutral-n0);
+    }
+
+    .tw-copy-btn.copied {
+      background: var(--color-green-g400);
+      border-color: var(--color-green-g400);
+      color: var(--color-neutral-n0);
+    }
+
+    @media (max-width: 900px) {
+      .tag-state-matrix { grid-template-columns: repeat(2, 1fr); }
+      .tag-state-matrix__head:nth-child(3),
+      .tag-state-matrix__head:nth-child(4) { display: none; }
+      .usage-info-grid { grid-template-columns: 1fr !important; }
+      .usage-grid-2 { grid-template-columns: 1fr !important; }
+    }
+
+    section > h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: none !important;
+      background-image: linear-gradient(to right, var(--color-primary-500) 0%, rgba(30,127,214,0.18) 32%, transparent 68%) !important;
+      background-repeat: no-repeat !important;
+      background-size: 100% 1px !important;
+      background-position: left bottom !important;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--color-text-primary);
+      letter-spacing: -0.01em;
+      font-family: var(--font-primary);
+    }
+    section > h2::before {
+      content: '';
+      width: 3px;
+      height: 18px;
+      background: linear-gradient(to bottom, var(--color-primary-500), var(--color-primary-300));
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    code {
+      font-family: var(--font-primary) !important;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 7px;
+      background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n30);
+      border-radius: 4px;
+      color: var(--color-blue-b300);
+    }
+    .anatomy-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      font-family: var(--font-primary);
+      letter-spacing: 0.04em;
+      color: var(--color-text-secondary);
+    }
+    .anatomy-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--color-blue-b300);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .anatomy-grid > div {
+      transition: transform 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .anatomy-grid > div:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(9, 30, 66, 0.11), 0 3px 8px rgba(9, 30, 66, 0.06);
+    }
+    .anatomy-grid > div > div:last-child {
+      border-top: 2px solid var(--color-neutral-n30) !important;
+    }
+    @media (max-width: 900px) {
+      .anatomy-grid { grid-template-columns: 1fr !important; }
+    }
+    [data-theme="dark"] .anatomy-grid > div {
+      background-color: #0F1D30 !important;
+      border-color: #1A2E48 !important;
+    }
+    [data-theme="dark"] .anatomy-grid > div > div:first-child { background: #080F1E !important; }
+    [data-theme="dark"] .anatomy-grid > div > div:last-child {
+      background: #0F1D30 !important;
+      border-top-color: #1A2E48 !important;
+    }
+    [data-theme="dark"] .usage-grid-2 > div,
+    [data-theme="dark"] .usage-info-card { background-color: #0F1D30 !important; border-color: #1A2E48 !important; }
+    [data-theme="dark"] .tag-state-matrix { border-color: #1A2E48; }
+    [data-theme="dark"] .tag-state-matrix__cell,
+    [data-theme="dark"] .tag-state-matrix__head { background: #0F1D30; border-color: #1A2E48; }
+    [data-theme="dark"] .tag-state-matrix__label { background: #080F1E; border-color: #1A2E48; }
+
+    /* ── Scroll Progress ── */
+    .scroll-progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+      background: linear-gradient(90deg, var(--color-primary-500), var(--color-blue-b75));
+      z-index: 9999; transition: width .1s linear; border-radius: 0 2px 2px 0;
+      pointer-events: none;
+    }
+
+    .variant-impl-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; }
+
+    /* ── Hero Banner ── */
+    .ds-hero-banner { position: relative; overflow: hidden; }
+    .ds-hero-banner::before {
+      content: ''; position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px; pointer-events: none; z-index: 0;
+    }
+    .ds-hero-banner > * { position: relative; z-index: 1; }
+    .hero-feat-card {
+      transition: transform 160ms cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 160ms cubic-bezier(0.25,0.46,0.45,0.94), border-color 160ms ease;
+    }
+    .hero-feat-card:hover {
+      transform: translateY(-3px); border-color: var(--color-blue-b75) !important;
+      box-shadow: 0 12px 32px rgba(9,30,66,0.11), 0 3px 8px rgba(9,30,66,0.06);
+    }
+    @keyframes ds-reveal { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes ds-card-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .ds-hero-banner { animation: ds-reveal 360ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .hero-feat-card:nth-child(1) { animation: ds-card-rise 280ms 120ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .hero-feat-card:nth-child(2) { animation: ds-card-rise 280ms 152ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .hero-feat-card:nth-child(3) { animation: ds-card-rise 280ms 184ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    .hero-feat-card:nth-child(4) { animation: ds-card-rise 280ms 216ms cubic-bezier(0.25,0.46,0.45,0.94) both; }
+
+    @media (max-width: 640px) {
+      .tag-state-matrix { overflow-x: auto; }
+      .usage-info-grid,
+      .usage-grid-2 { grid-template-columns: 1fr !important; }
+      .ds-hero-banner { flex-direction: column !important; }
+      .ds-hero-banner > div:last-child { border-left: none !important; border-top: 1px solid rgba(255,255,255,0.07); }
+    }
+
+    /* ── Sidebar dark theme ── */
+    :root {}
+    .sidebar {
+      background-color: var(--sidebar-bg);
+      margin: 12px;
+      height: calc(100vh - 24px);
+      border-radius: var(--border-radius-2xl);
+      border-right: none;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.22), 0 1px 6px rgba(0,0,0,0.14);
+    }
+    @media (max-width: 768px) {
+      .sidebar { margin: 0; height: 100vh; border-radius: 0; box-shadow: var(--shadow-2xl); }
+    }
+    .sidebar-header { background-color: var(--sidebar-header-bg); border-bottom-color: var(--sidebar-border); }
+    .sidebar-brand-text .logo    { color: var(--sidebar-logo-color); }
+    .sidebar-brand-text .version { color: var(--sidebar-version-color); }
+    .sidebar-close-btn          { color: var(--sidebar-link-color); }
+    .sidebar-close-btn:hover    { color: #F1F5F9; background: transparent; }
+    .sidebar-search { border-bottom-color: var(--sidebar-border); }
+    .search-input {
+      background-color: var(--sidebar-search-bg);
+      border-color: var(--sidebar-search-border);
+      color: var(--sidebar-link-color);
+    }
+    .search-input::placeholder { color: var(--sidebar-section-title); }
+    .search-input:focus {
+      border-color: var(--color-primary-500);
+      background-color: var(--sidebar-link-hover-bg);
+      color: var(--sidebar-link-hover-color);
+      box-shadow: 0 0 0 3px rgba(30,127,214,0.15);
+    }
+    .nav-scroll { scrollbar-color: var(--sidebar-border) transparent; }
+    .nav-scroll::-webkit-scrollbar-thumb { background: var(--sidebar-border); }
+    .nav-title { color: var(--sidebar-section-title); }
+    .nav-link {
+      color: var(--sidebar-link-color);
+      border-left: 2px solid transparent;
+      border-radius: var(--border-radius-md);
+    }
+    .nav-link:hover {
+      background-color: var(--sidebar-link-hover-bg);
+      color: var(--sidebar-link-hover-color);
+      border-left-color: rgba(30,127,214,0.5);
+    }
+    .nav-link.active {
+      background-color: var(--sidebar-link-active-bg);
+      color: var(--sidebar-link-active-color);
+      border-left-color: var(--sidebar-link-active-border);
+    }
+    .nav-link svg        { opacity: 0.6; }
+    .nav-link:hover svg,
+    .nav-link.active svg { opacity: 1; }
+    .sidebar-footer {
+      background-color: var(--sidebar-header-bg);
+      border-top-color: var(--sidebar-border);
+    }
+    .tailwind-badge {
+      background: rgba(6,182,212,0.08);
+      border-color: rgba(6,182,212,0.2);
+      color: var(--color-secondary-300);
+    }
+    .sidebar-logo-icon {
+      background: rgba(30,127,214,0.25);
+      color: #7DB5E7;
+      border: 1px solid rgba(30,127,214,0.3);
+    }
+
+    /* ── Dark toggle button ── */
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px; background: none;
+      border: 1px solid var(--color-border); color: var(--color-text-secondary);
+      cursor: pointer; border-radius: var(--border-radius-md);
+      transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+      flex-shrink: 0;
+    }
+
+    /* ── Floating topbar ── */
+    .main-content { background-color: var(--color-gray-50, #F7F8FA); }
+    .topbar {
+      margin: 12px 20px 0;
+      padding: 0 24px;
+      background-color: rgba(255,255,255,0.92) !important;
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-2xl);
+      box-shadow: var(--shadow-sm);
+      top: 12px;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+    }
+    .content-inner { padding-top: 24px; }
+    [data-theme="dark"] .topbar { background-color: rgba(7,16,29,0.95) !important; border-bottom-color: #1A2E48; }
+
+    /* ── Scroll progress (align class with other pages) ── */
+    .scroll-progress-bar {
+      position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+      background: linear-gradient(90deg, #1E7FD6 0%, #22D3EE 100%);
+      z-index: 99999; transition: width 80ms linear;
+      pointer-events: none; border-radius: 0 2px 2px 0;
+    }

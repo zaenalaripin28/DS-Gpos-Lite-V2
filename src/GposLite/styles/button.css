@@ -1,0 +1,551 @@
+/* DS Button — dari components/Button/button.html */
+
+.ds-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-025);
+      padding: 0 var(--space-150);
+      min-height: 32px;
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n900);       /* --Color-Text-Bold → #091E42 */
+      font-family: var(--font-primary);       /* Poppins */
+      font-size: var(--font-size-sm);         /* 14px */
+      font-weight: var(--font-weight-medium); /* 500 */
+      line-height: var(--text-body-small-medium-lh); /* 20px */
+      word-wrap: break-word;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background-color var(--transition-fast);
+    }
+
+    .ds-btn:hover        { background-color: var(--color-neutral-n30); }
+    .ds-btn:active       { background-color: var(--color-neutral-n40); }
+    .ds-btn:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-primary-500), 0 0 0 4px rgba(30,127,214,0.2);
+    }
+    .ds-btn:disabled,
+    .ds-btn--disabled {
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n50);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    /* Static state snapshots (for showcase cards) */
+    .ds-btn--hover    { background-color: var(--color-neutral-n30); }
+    .ds-btn--press    { background-color: var(--color-neutral-n40); }
+    .ds-btn--focus    { outline: none; box-shadow: 0 0 0 2px var(--color-primary-500); }
+    .ds-btn--selected,
+    .ds-btn[aria-pressed="true"] {
+      background-color: var(--color-blue-b50);   /* Background.Selected */
+      color: var(--color-blue-b300);             /* Text.Selected */
+    }
+    .ds-btn[aria-pressed="true"]:hover {
+      background-color: var(--color-blue-b400);  /* Background.Selected.Hover */
+      color: var(--color-neutral-n0);            /* Text.Inverse — bg gelap */
+    }
+
+    /* Compact spacing modifier */
+    .ds-btn--compact { min-height: 24px; }
+
+    /* ── Primary appearance ── */
+    .ds-btn--primary {
+      background-color: var(--color-blue-b300);  /* Background.Brand.Bold */
+      color: var(--color-neutral-n0);            /* Text.Inverse */
+    }
+    .ds-btn--primary:hover  { background-color: var(--color-blue-b400); }  /* Background.Brand.Hover */
+    .ds-btn--primary:active { background-color: var(--color-blue-b500); }  /* Background.Brand.Pressed */
+    .ds-btn--primary:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200);  /* Border.Focused */
+    }
+    .ds-btn--primary:disabled,
+    .ds-btn--primary.ds-btn--disabled {
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n50);
+    }
+    /* Static snapshots for primary */
+    .ds-btn--primary.ds-btn--hover { background-color: var(--color-blue-b400); color: var(--color-neutral-n0); }
+    .ds-btn--primary.ds-btn--press { background-color: var(--color-blue-b500); color: var(--color-neutral-n0); }
+    .ds-btn--primary.ds-btn--focus { box-shadow: 0 0 0 2px var(--color-blue-b200); }
+    /* Selected overrides white text back to brand tokens */
+    .ds-btn--primary[aria-pressed="true"] {
+      background-color: var(--color-blue-b50);   /* Background.Selected */
+      color: var(--color-blue-b300);             /* Text.Selected */
+    }
+
+    /* ── Subtle appearance ── */
+    .ds-btn--subtle {
+      background-color: transparent;
+      color: var(--color-neutral-n900);          /* Text.Bold */
+    }
+    .ds-btn--subtle:hover  { background-color: var(--color-neutral-n20); }  /* Background.Neutral.Hover */
+    .ds-btn--subtle:active { background-color: var(--color-neutral-n40); }  /* Background.Neutral.Pressed */
+    .ds-btn--subtle:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200);  /* Border.Focused */
+    }
+    .ds-btn--subtle:disabled,
+    .ds-btn--subtle.ds-btn--disabled {
+      background-color: transparent;
+      color: var(--color-neutral-n50);
+    }
+    /* Static snapshots for subtle */
+    .ds-btn--subtle.ds-btn--hover { background-color: var(--color-neutral-n20); color: var(--color-neutral-n900); }
+    .ds-btn--subtle.ds-btn--press { background-color: var(--color-neutral-n40); color: var(--color-neutral-n900); }
+    .ds-btn--subtle.ds-btn--focus { box-shadow: 0 0 0 2px var(--color-blue-b200); }
+    /* Selected */
+    .ds-btn--subtle[aria-pressed="true"] {
+      background-color: var(--color-blue-b50);   /* Background.Selected */
+      color: var(--color-blue-b300);             /* Text.Selected */
+    }
+
+    /* None spacing modifier */
+    .ds-btn--none {
+      padding: 0 var(--space-050);           /* 4px (px-1) */
+      min-height: 20px;
+      border-radius: var(--border-radius-sm); /* 4px (rounded-sm) */
+    }
+
+    /* ── Link appearance ── */
+    .ds-btn--link {
+      background-color: transparent;
+      color: var(--color-blue-b300);         /* Text.Link */
+    }
+    .ds-btn--link:hover {
+      background-color: transparent;
+      text-decoration: underline;
+    }
+    .ds-btn--link:active {
+      background-color: transparent;
+      text-decoration: underline;
+      color: var(--color-blue-b400);         /* Text.Link.Pressed */
+    }
+    .ds-btn--link:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200);  /* Border.Focused */
+    }
+    .ds-btn--link:disabled,
+    .ds-btn--link.ds-btn--disabled {
+      background-color: transparent;
+      color: var(--color-neutral-n60);       /* Text.Disabled */
+      text-decoration: none;
+    }
+    /* Static snapshots for link */
+    .ds-btn--link.ds-btn--hover { background-color: transparent; text-decoration: underline; color: var(--color-blue-b300); }
+    .ds-btn--link.ds-btn--press { background-color: transparent; text-decoration: underline; color: var(--color-blue-b400); }
+    .ds-btn--link.ds-btn--focus { box-shadow: 0 0 0 2px var(--color-blue-b200); }
+    /* Selected */
+    .ds-btn--link[aria-pressed="true"] {
+      background-color: var(--color-blue-b50);   /* Background.Selected */
+      color: var(--color-blue-b300);             /* Text.Selected */
+      text-decoration: none;
+    }
+    /* Link spacing=none has zero horizontal padding (no px class in Figma) */
+    .ds-btn--link.ds-btn--none { padding: 0; }
+
+    /* ── Subtle Link appearance ── */
+    .ds-btn--subtle-link {
+      background-color: transparent;
+      color: var(--color-neutral-n300);         /* Text.Subtle */
+    }
+    .ds-btn--subtle-link:hover {
+      background-color: transparent;
+      text-decoration: underline;
+    }
+    .ds-btn--subtle-link:active {
+      background-color: transparent;
+      text-decoration: underline;
+      color: var(--color-neutral-n900);         /* Text.Bold */
+    }
+    .ds-btn--subtle-link:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200);  /* Border.Focused */
+    }
+    .ds-btn--subtle-link:disabled,
+    .ds-btn--subtle-link.ds-btn--disabled {
+      background-color: transparent;
+      color: var(--color-neutral-n60);          /* Text.Disabled */
+      text-decoration: none;
+    }
+    /* Static snapshots for subtle-link */
+    .ds-btn--subtle-link.ds-btn--hover { background-color: transparent; text-decoration: underline; color: var(--color-neutral-n300); }
+    .ds-btn--subtle-link.ds-btn--press { background-color: transparent; text-decoration: underline; color: var(--color-neutral-n900); }
+    .ds-btn--subtle-link.ds-btn--focus { box-shadow: 0 0 0 2px var(--color-blue-b200); }
+    /* Selected */
+    .ds-btn--subtle-link[aria-pressed="true"] {
+      background-color: var(--color-blue-b50);   /* Background.Selected */
+      color: var(--color-blue-b300);             /* Text.Selected */
+      text-decoration: none;
+    }
+    /* Subtle-link spacing=none has zero horizontal padding (no px class in Figma) */
+    .ds-btn--subtle-link.ds-btn--none { padding: 0; }
+
+    /* ── Danger appearance ── */
+    .ds-btn--danger {
+      background-color: var(--color-red-r300);    /* Background.Danger.Bold */
+      color: var(--color-neutral-n0);             /* Text.Inverse */
+    }
+    .ds-btn--danger:hover  { background-color: var(--color-red-r400); }  /* Background.Danger.Button-Hover */
+    .ds-btn--danger:active { background-color: var(--color-red-r500); }  /* Background.Danger.Pressed */
+    .ds-btn--danger:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200);  /* Border.Focused */
+    }
+    .ds-btn--danger:disabled,
+    .ds-btn--danger.ds-btn--disabled {
+      background-color: var(--color-neutral-n40);   /* Background.Disable */
+      color: var(--color-neutral-n60);              /* Text.Disabled */
+    }
+    /* Static snapshots for danger */
+    .ds-btn--danger.ds-btn--hover { background-color: var(--color-red-r400); color: var(--color-neutral-n0); }
+    .ds-btn--danger.ds-btn--press { background-color: var(--color-red-r500); color: var(--color-neutral-n0); }
+    .ds-btn--danger.ds-btn--focus { box-shadow: 0 0 0 2px var(--color-blue-b200); }
+
+    /* ── Warning appearance ── */
+    .ds-btn--warning {
+      background-color: var(--color-orange-o200);   /* Background.Warning.Bold */
+      color: var(--color-neutral-n900);             /* Text.Warning-Inverse → Text.Bold */
+    }
+    .ds-btn--warning:hover  { background-color: var(--color-orange-o300); }  /* Background.Warning.Pressed */
+    .ds-btn--warning:active { background-color: var(--color-orange-o300); }  /* Background.Warning.Pressed */
+    .ds-btn--warning:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200);  /* Border.Focused */
+    }
+    .ds-btn--warning:disabled,
+    .ds-btn--warning.ds-btn--disabled {
+      background-color: var(--color-neutral-n40);   /* Background.Disable */
+      color: var(--color-neutral-n60);              /* Text.Disabled */
+    }
+    /* Static snapshots for warning */
+    .ds-btn--warning.ds-btn--hover { background-color: var(--color-orange-o300); color: var(--color-neutral-n900); }
+    .ds-btn--warning.ds-btn--press { background-color: var(--color-orange-o300); color: var(--color-neutral-n900); }
+    .ds-btn--warning.ds-btn--focus { box-shadow: 0 0 0 2px var(--color-blue-b200); }
+
+    /* ── Icon-only modifier ── */
+    .ds-btn--icon-only {
+      padding: 0 var(--space-050);     /* 4px H (px-1) */
+      gap: 0;
+    }
+    .ds-btn--icon-only:hover  { background-color: var(--color-neutral-n40); }  /* Background.Neutral.Bold.Hover */
+    .ds-btn--icon-only:active { background-color: var(--color-neutral-n60); }  /* Background.Neutral.Bold.Pressed */
+    .ds-btn--icon-only.ds-btn--compact {
+      padding: var(--space-025);       /* 2px all (p-0.5) */
+    }
+    .ds-btn--icon-only:focus-visible,
+    .ds-btn--icon-only.ds-btn--focus {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-primary-500);
+    }
+    .ds-btn--icon-only:disabled,
+    .ds-btn--icon-only.ds-btn--disabled {
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n50);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .ds-btn--icon-only:disabled path,
+    .ds-btn--icon-only.ds-btn--disabled path {
+      stroke: var(--color-neutral-n50);
+    }
+    .ds-btn--icon-only.ds-btn--hover { background-color: var(--color-neutral-n40); }
+    .ds-btn--icon-only.ds-btn--press { background-color: var(--color-neutral-n60); }
+    .ds-btn--icon-only[aria-pressed="true"] {
+      background-color: var(--color-blue-b50);
+      color: var(--color-blue-b300);
+    }
+    .ds-btn--icon-only.ds-btn--primary:hover,
+    .ds-btn--icon-only.ds-btn--primary.ds-btn--hover { background-color: var(--color-blue-b400); color: var(--color-neutral-n0); }
+    .ds-btn--icon-only.ds-btn--primary:active,
+    .ds-btn--icon-only.ds-btn--primary.ds-btn--press { background-color: var(--color-blue-b500); color: var(--color-neutral-n0); }
+    .ds-btn--icon-only.ds-btn--primary:focus-visible,
+    .ds-btn--icon-only.ds-btn--primary.ds-btn--focus { box-shadow: 0 0 0 2px var(--color-blue-b200); }
+    .ds-btn--icon-only.ds-btn--primary:disabled,
+    .ds-btn--icon-only.ds-btn--primary.ds-btn--disabled {
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n50);
+    }
+    .ds-btn--icon-only.ds-btn--primary[aria-pressed="true"] {
+      background-color: var(--color-blue-b50);
+      color: var(--color-blue-b300);
+    }
+
+    /* ── Loading modifier ── */
+    .ds-btn--loading {
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* ── Button token aliases (copy: .ds-btn-{appearance}-{state}) ── */
+    .ds-btn-default-default { /* = .ds-btn */ }
+    .ds-btn-default-hover,
+    .ds-btn.ds-btn-default-hover { background-color: var(--color-neutral-n30); }
+    .ds-btn-default-press,
+    .ds-btn.ds-btn-default-press { background-color: var(--color-neutral-n40); }
+    .ds-btn-default-focus,
+    .ds-btn.ds-btn-default-focus { outline: none; box-shadow: 0 0 0 2px var(--color-primary-500); }
+    .ds-btn-default-disabled,
+    .ds-btn.ds-btn-default-disabled,
+    .ds-btn-default-disabled:disabled {
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n50);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .ds-btn-default-selected,
+    .ds-btn.ds-btn-default-selected,
+    .ds-btn-default-selected[aria-pressed="true"] {
+      background-color: var(--color-blue-b50);
+      color: var(--color-blue-b300);
+    }
+    .ds-btn-default-compact,
+    .ds-btn.ds-btn-default-compact { min-height: 24px; }
+    .ds-btn-primary-default,
+    .ds-btn.ds-btn-primary-default {
+      background-color: var(--color-blue-b300);
+      color: var(--color-neutral-n0);
+    }
+    .ds-btn-primary-hover,
+    .ds-btn.ds-btn-primary-hover { background-color: var(--color-blue-b400); color: var(--color-neutral-n0); }
+    .ds-btn-primary-press,
+    .ds-btn.ds-btn-primary-press { background-color: var(--color-blue-b500); color: var(--color-neutral-n0); }
+    .ds-btn-primary-focus,
+    .ds-btn.ds-btn-primary-focus { box-shadow: 0 0 0 2px var(--color-blue-b200); }
+    .ds-btn-primary-disabled,
+    .ds-btn.ds-btn-primary-disabled,
+    .ds-btn-primary-disabled:disabled {
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n50);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .ds-btn-primary-selected,
+    .ds-btn.ds-btn-primary-selected,
+    .ds-btn-primary-selected[aria-pressed="true"] {
+      background-color: var(--color-blue-b50);
+      color: var(--color-blue-b300);
+    }
+    .ds-btn-primary-compact,
+    .ds-btn.ds-btn-primary-compact { min-height: 24px; }
+    .ds-btn-subtle-default,
+    .ds-btn.ds-btn-subtle-default { background-color: transparent; color: var(--color-neutral-n900); }
+    .ds-btn-subtle-hover,
+    .ds-btn.ds-btn-subtle-hover { background-color: var(--color-neutral-n20); color: var(--color-neutral-n900); }
+    .ds-btn-subtle-press,
+    .ds-btn.ds-btn-subtle-press { background-color: var(--color-neutral-n40); color: var(--color-neutral-n900); }
+    .ds-btn-subtle-focus,
+    .ds-btn.ds-btn-subtle-focus { box-shadow: 0 0 0 2px var(--color-blue-b200); }
+    .ds-btn-subtle-disabled,
+    .ds-btn.ds-btn-subtle-disabled,
+    .ds-btn-subtle-disabled:disabled {
+      background-color: transparent;
+      color: var(--color-neutral-n50);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .ds-btn-subtle-selected,
+    .ds-btn.ds-btn-subtle-selected,
+    .ds-btn-subtle-selected[aria-pressed="true"] {
+      background-color: var(--color-blue-b50);
+      color: var(--color-blue-b300);
+    }
+    .ds-btn-subtle-compact,
+    .ds-btn.ds-btn-subtle-compact { min-height: 24px; }
+    .ds-btn-link-default,
+    .ds-btn.ds-btn-link-default { background-color: transparent; color: var(--color-blue-b300); }
+    .ds-btn-link-hover,
+    .ds-btn.ds-btn-link-hover { background-color: var(--color-blue-b50); color: var(--color-blue-b300); text-decoration: underline; }
+    .ds-btn-link-press,
+    .ds-btn.ds-btn-link-press { background-color: transparent; color: var(--color-blue-b400); text-decoration: underline; }
+    .ds-btn-link-focus,
+    .ds-btn.ds-btn-link-focus { box-shadow: 0 0 0 2px var(--color-blue-b200); }
+    .ds-btn-link-disabled,
+    .ds-btn.ds-btn-link-disabled,
+    .ds-btn-link-disabled:disabled {
+      background-color: transparent;
+      color: var(--color-neutral-n50);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .ds-btn-link-selected,
+    .ds-btn.ds-btn-link-selected,
+    .ds-btn-link-selected[aria-pressed="true"] {
+      background-color: var(--color-blue-b50);
+      color: var(--color-blue-b300);
+    }
+    .ds-btn-link-compact,
+    .ds-btn.ds-btn-link-compact { min-height: 24px; }
+    .ds-btn-subtle-link-default,
+    .ds-btn.ds-btn-subtle-link-default { background-color: transparent; color: var(--color-neutral-n300); }
+    .ds-btn-subtle-link-hover,
+    .ds-btn.ds-btn-subtle-link-hover { background-color: transparent; color: var(--color-neutral-n300); text-decoration: underline; }
+    .ds-btn-subtle-link-press,
+    .ds-btn.ds-btn-subtle-link-press { background-color: transparent; color: var(--color-neutral-n900); text-decoration: underline; }
+    .ds-btn-subtle-link-focus,
+    .ds-btn.ds-btn-subtle-link-focus { box-shadow: 0 0 0 2px var(--color-blue-b200); }
+    .ds-btn-subtle-link-disabled,
+    .ds-btn.ds-btn-subtle-link-disabled,
+    .ds-btn-subtle-link-disabled:disabled {
+      background-color: transparent;
+      color: var(--color-neutral-n50);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .ds-btn-subtle-link-selected,
+    .ds-btn.ds-btn-subtle-link-selected,
+    .ds-btn-subtle-link-selected[aria-pressed="true"] {
+      background-color: var(--color-blue-b50);
+      color: var(--color-blue-b300);
+    }
+    .ds-btn-subtle-link-compact,
+    .ds-btn.ds-btn-subtle-link-compact { min-height: 24px; }
+    .ds-btn-danger-default,
+    .ds-btn.ds-btn-danger-default {
+      background-color: var(--color-red-r300);
+      color: var(--color-neutral-n0);
+    }
+    .ds-btn-danger-hover,
+    .ds-btn.ds-btn-danger-hover { background-color: var(--color-red-r400); color: var(--color-neutral-n0); }
+    .ds-btn-danger-press,
+    .ds-btn.ds-btn-danger-press { background-color: var(--color-red-r500); color: var(--color-neutral-n0); }
+    .ds-btn-danger-focus,
+    .ds-btn.ds-btn-danger-focus { box-shadow: 0 0 0 2px var(--color-blue-b200); }
+    .ds-btn-danger-disabled,
+    .ds-btn.ds-btn-danger-disabled,
+    .ds-btn-danger-disabled:disabled {
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n50);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .ds-btn-danger-selected,
+    .ds-btn.ds-btn-danger-selected,
+    .ds-btn-danger-selected[aria-pressed="true"] {
+      background-color: var(--color-blue-b50);
+      color: var(--color-blue-b300);
+    }
+    .ds-btn-danger-compact,
+    .ds-btn.ds-btn-danger-compact { min-height: 24px; }
+    .ds-btn-warning-default,
+    .ds-btn.ds-btn-warning-default {
+      background-color: var(--color-orange-o200);
+      color: var(--color-neutral-n900);
+    }
+    .ds-btn-warning-hover,
+    .ds-btn.ds-btn-warning-hover { background-color: var(--color-orange-o300); color: var(--color-neutral-n900); }
+    .ds-btn-warning-press,
+    .ds-btn.ds-btn-warning-press { background-color: var(--color-orange-o300); color: var(--color-neutral-n900); }
+    .ds-btn-warning-focus,
+    .ds-btn.ds-btn-warning-focus { box-shadow: 0 0 0 2px var(--color-blue-b200); }
+    .ds-btn-warning-disabled,
+    .ds-btn.ds-btn-warning-disabled,
+    .ds-btn-warning-disabled:disabled {
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n50);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .ds-btn-warning-selected,
+    .ds-btn.ds-btn-warning-selected,
+    .ds-btn-warning-selected[aria-pressed="true"] {
+      background-color: var(--color-blue-b50);
+      color: var(--color-blue-b300);
+    }
+    .ds-btn-warning-compact,
+    .ds-btn.ds-btn-warning-compact { min-height: 24px; }
+    .ds-btn-default-icon-only,
+    .ds-btn.ds-btn-default-icon-only { padding: 0 var(--space-050); gap: 0; }
+    .ds-btn-default-icon-only-hover,
+    .ds-btn.ds-btn-default-icon-only-hover { background-color: var(--color-neutral-n40); }
+    .ds-btn-default-icon-only-press,
+    .ds-btn.ds-btn-default-icon-only-press { background-color: var(--color-neutral-n60); }
+    .ds-btn-default-icon-only-focus,
+    .ds-btn.ds-btn-default-icon-only-focus { outline: none; box-shadow: 0 0 0 2px var(--color-primary-500); }
+    .ds-btn-default-icon-only-disabled,
+    .ds-btn.ds-btn-default-icon-only-disabled,
+    .ds-btn-default-icon-only-disabled:disabled {
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n50);
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+    .ds-btn-default-icon-only-selected,
+    .ds-btn.ds-btn-default-icon-only-selected,
+    .ds-btn-default-icon-only-selected[aria-pressed="true"] {
+      background-color: var(--color-blue-b50);
+      color: var(--color-blue-b300);
+    }
+    .ds-btn-primary-compact-default,
+    .ds-btn.ds-btn-primary-compact-default {
+      background-color: var(--color-blue-b300);
+      color: var(--color-neutral-n0);
+      min-height: 24px;
+    }
+    .ds-btn-primary-compact-hover,
+    .ds-btn.ds-btn-primary-compact-hover { background-color: var(--color-blue-b400); color: var(--color-neutral-n0); min-height: 24px; }
+    .ds-btn-primary-compact-press,
+    .ds-btn.ds-btn-primary-compact-press { background-color: var(--color-blue-b500); color: var(--color-neutral-n0); min-height: 24px; }
+    .ds-btn-primary-compact-focus,
+    .ds-btn.ds-btn-primary-compact-focus { box-shadow: 0 0 0 2px var(--color-blue-b200); min-height: 24px; }
+    .ds-btn-primary-compact-disabled,
+    .ds-btn.ds-btn-primary-compact-disabled,
+    .ds-btn-primary-compact-disabled:disabled {
+      background-color: var(--color-neutral-n20);
+      color: var(--color-neutral-n50);
+      cursor: not-allowed;
+      pointer-events: none;
+      min-height: 24px;
+    }
+    .ds-btn-primary-compact-selected,
+    .ds-btn.ds-btn-primary-compact-selected,
+    .ds-btn-primary-compact-selected[aria-pressed="true"] {
+      background-color: var(--color-blue-b50);
+      color: var(--color-blue-b300);
+      min-height: 24px;
+    }
+    .ds-btn-primary-icon-only,
+    .ds-btn.ds-btn-primary-icon-only { padding: 0 var(--space-050); gap: 0; }
+    .ds-btn-subtle-icon-only,
+    .ds-btn.ds-btn-subtle-icon-only { padding: 0 var(--space-050); gap: 0; }
+    .ds-btn-link-icon-only,
+    .ds-btn.ds-btn-link-icon-only { padding: 0 var(--space-050); gap: 0; }
+    .ds-btn-subtle-link-icon-only,
+    .ds-btn.ds-btn-subtle-link-icon-only { padding: 0 var(--space-050); gap: 0; }
+    .ds-btn-danger-icon-only,
+    .ds-btn.ds-btn-danger-icon-only { padding: 0 var(--space-050); gap: 0; }
+    .ds-btn-warning-icon-only,
+    .ds-btn.ds-btn-warning-icon-only { padding: 0 var(--space-050); gap: 0; }
+    .ds-btn-default-loading,
+    .ds-btn.ds-btn-default-loading,
+    .ds-btn-primary-loading,
+    .ds-btn.ds-btn-primary-loading,
+    .ds-btn-subtle-loading,
+    .ds-btn.ds-btn-subtle-loading,
+    .ds-btn-link-loading,
+    .ds-btn.ds-btn-link-loading,
+    .ds-btn-subtle-link-loading,
+    .ds-btn.ds-btn-subtle-link-loading,
+    .ds-btn-danger-loading,
+    .ds-btn.ds-btn-danger-loading,
+    .ds-btn-warning-loading,
+    .ds-btn.ds-btn-warning-loading {
+      pointer-events: none;
+      cursor: default;
+    }
+
+    @keyframes ds-spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    .ds-spinner {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      animation: ds-spin 0.75s linear infinite;
+    }

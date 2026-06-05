@@ -1,0 +1,207 @@
+/* from components/Tabs/tabs.html */
+
+.ds-tab {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: var(--space-050);
+      padding: var(--space-050) var(--space-100);
+      background: transparent;
+      border: none;
+      border-radius: var(--border-radius-sm);
+      cursor: pointer;
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-medium-size);
+      font-weight: var(--text-body-small-medium-weight);
+      line-height: var(--text-body-small-medium-lh);
+      color: var(--color-neutral-n300);
+      transition: color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .ds-tab__label {
+      display: block;
+      text-align: center;
+      color: inherit;
+      font: inherit;
+      white-space: nowrap;
+    }
+
+    .ds-tab__indicator {
+      display: block;
+      height: 2px;
+      min-height: 2px;
+      border-radius: var(--border-radius-full);
+      background-color: transparent;
+      transition: background-color var(--transition-fast);
+    }
+
+    .ds-tab:hover .ds-tab__indicator,
+    .ds-tab.ds-tab--hover .ds-tab__indicator {
+      background-color: var(--color-neutral-n40);
+    }
+
+    .ds-tab:active,
+    .ds-tab.ds-tab--press {
+      color: var(--color-neutral-n900);
+    }
+    .ds-tab:active .ds-tab__indicator,
+    .ds-tab.ds-tab--press .ds-tab__indicator {
+      background-color: var(--color-neutral-n40);
+    }
+
+    .ds-tab:focus-visible,
+    .ds-tab.ds-tab--focus {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+
+    /* ── part=selected ── */
+    .ds-tab--selected,
+    .ds-tab[aria-selected="true"] {
+      color: var(--color-blue-b300);
+    }
+    .ds-tab--selected .ds-tab__indicator,
+    .ds-tab[aria-selected="true"] .ds-tab__indicator {
+      background-color: var(--color-blue-b300);
+    }
+    .ds-tab--selected:hover .ds-tab__indicator,
+    .ds-tab--selected.ds-tab--hover .ds-tab__indicator,
+    .ds-tab[aria-selected="true"]:hover .ds-tab__indicator {
+      background-color: var(--color-blue-b300);
+    }
+    .ds-tab--selected:active,
+    .ds-tab--selected.ds-tab--press,
+    .ds-tab[aria-selected="true"]:active {
+      color: var(--color-neutral-n900);
+    }
+    .ds-tab--selected:active .ds-tab__indicator,
+    .ds-tab--selected.ds-tab--press .ds-tab__indicator,
+    .ds-tab[aria-selected="true"]:active .ds-tab__indicator {
+      background-color: var(--color-blue-b300);
+    }
+
+    /* ── part=default:required / notification — label row ── */
+    .ds-tab__row {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-050);
+    }
+    .ds-tab__required {
+      flex-shrink: 0;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: inherit;
+      line-height: 1;
+      color: var(--color-red-r300);
+    }
+    .ds-tab__badge {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    /* Badge (notification) — sama dengan badge.html appearance=important */
+    .ds-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: var(--space-025) var(--space-075);
+      border-radius: var(--border-radius-full);
+      font-family: var(--font-primary);
+      font-size: var(--font-size-xs);
+      font-weight: var(--font-weight-normal);
+      line-height: 1.5;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+    .ds-badge--important {
+      background-color: var(--color-red-r300);
+      color: var(--color-neutral-n0);
+    }
+
+    /* ── Tabs component (tablist) — figma/Tabs-components.png ── */
+    .ds-tablist {
+      display: inline-flex;
+      align-items: flex-end;
+      flex-wrap: nowrap;
+      gap: var(--space-200);
+      max-width: 100%;
+    }
+    .ds-tablist--track {
+      border-bottom: 1px solid var(--color-neutral-n40);
+      width: 100%;
+    }
+    .ds-tablist--track .ds-tab__indicator {
+      margin-bottom: -1px;
+    }
+
+    /* ── Usage / Do-Don't grids ── */
+    .usage-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .usage-grid-2 > div {
+      transition: transform 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  box-shadow 160ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .usage-grid-2 > div:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(9, 30, 66, 0.09);
+    }
+    .usage-info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .usage-info-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    /* ── Tailwind copy snippets ── */
+    .tw-snippet-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--color-neutral-n30);
+    }
+    .tw-snippet-row:last-child { border-bottom: none; }
+    .tw-snippet-code {
+      flex: 1;
+      font-family: var(--font-primary);
+      font-size: 11px;
+      line-height: 1.55;
+      color: var(--color-neutral-n700);
+      word-break: break-all;
+    }
+    .tw-copy-btn {
+      flex-shrink: 0;
+      padding: 4px 10px;
+      background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n40);
+      border-radius: var(--border-radius-sm);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-neutral-n400);
+      cursor: pointer;
+      font-family: var(--font-primary);
+      transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+    }
+    .tw-copy-btn:hover {
+      background: var(--color-blue-b300);
+      border-color: var(--color-blue-b300);
+      color: var(--color-neutral-n0);
+    }
+    .tw-copy-btn.copied {
+      background: var(--color-green-g300);
+      border-color: var(--color-green-g300);
+      color: var(--color-neutral-n0);
+    }
+
+    /* ================================================================

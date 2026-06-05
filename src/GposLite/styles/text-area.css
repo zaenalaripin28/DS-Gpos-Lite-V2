@@ -1,0 +1,76 @@
+/* from components/Text Area/text area.html */
+
+.ds-text-area { width: 100%; max-width: 420px; font-family: var(--font-primary); }
+    .ds-text-area__field {
+      width: 100%;
+      min-height: 96px;
+      resize: vertical;
+      border: 1px solid var(--color-neutral-n40);
+      border-radius: var(--border-radius-sm);
+      background: var(--color-neutral-n0);
+      color: var(--color-neutral-n900);
+      padding: var(--space-100);
+      font-size: var(--text-body-small-regular-size);
+      font-weight: var(--text-body-small-regular-weight);
+      line-height: var(--text-body-small-regular-lh);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+      outline: none;
+    }
+    .ds-text-area__field::placeholder { color: var(--color-neutral-n100); }
+    .ds-text-area__field:hover:not(:disabled),
+    .ds-text-area__field--hover { border-color: var(--color-neutral-n100); }
+    .ds-text-area__field:focus,
+    .ds-text-area__field--focus { border-color: var(--color-blue-b300); box-shadow: 0 0 0 2px var(--color-blue-b200); }
+    .ds-text-area--invalid .ds-text-area__field,
+    .ds-text-area__field--invalid { border-color: var(--color-red-r300); }
+    .ds-text-area--invalid .ds-text-area__field:focus,
+    .ds-text-area__field--invalid.ds-text-area__field--focus { box-shadow: 0 0 0 2px var(--color-red-r100); }
+    .ds-text-area__field:disabled,
+    .ds-text-area__field--disabled { background: var(--color-neutral-n20); color: var(--color-neutral-n50); border-color: var(--color-neutral-n30); cursor: not-allowed; }
+    .ds-text-area--compact .ds-text-area__field { min-height: 72px; padding: var(--space-075) var(--space-100); }
+    .preview-card { border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface); }
+
+    .copy-btn {
+      padding: 4px 10px;
+      background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n30);
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-neutral-n400);
+      cursor: pointer;
+      font-family: var(--font-primary);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .copy-btn:hover { background: var(--color-blue-b300); border-color: var(--color-blue-b300); color: var(--color-neutral-n0); }
+    .copy-btn.copied { background: var(--color-green-g300); border-color: var(--color-green-g300); color: var(--color-neutral-n0); }
+
+    section > h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: none !important;
+      background-image: linear-gradient(to right, var(--color-primary-500) 0%, rgba(30,127,214,0.18) 32%, transparent 68%) !important;
+      background-repeat: no-repeat !important;
+      background-size: 100% 1px !important;
+      background-position: left bottom !important;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--color-text-primary);
+      font-family: var(--font-primary);
+    }
+    section > h2::before {
+      content: '';
+      width: 3px;
+      height: 18px;
+      background: linear-gradient(to bottom, var(--color-primary-500), var(--color-primary-300));
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 640px) {
+      .ds-text-area { max-width: 100%; }
+    }

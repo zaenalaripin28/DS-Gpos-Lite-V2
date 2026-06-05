@@ -1,0 +1,61 @@
+/* DS Badge — dari components/Badge/badge.html */
+
+.ds-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--space-025);
+  padding: var(--space-025) var(--space-075);
+  border-radius: var(--border-radius-full);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.5;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.ds-badge--default {
+  background-color: var(--color-neutral-n20);
+  color: var(--color-neutral-n900);
+}
+
+.ds-badge--primary {
+  background-color: var(--color-blue-b300);
+  color: var(--color-neutral-n0);
+}
+
+.ds-badge--subtle {
+  background-color: var(--color-neutral-n10);
+  color: var(--color-blue-b300);
+}
+
+.ds-badge--important {
+  background-color: var(--color-red-r300);
+  color: var(--color-neutral-n0);
+}
+
+.ds-badge--added {
+  background-color: var(--color-green-g50);
+  color: var(--color-green-g300);
+}
+
+.ds-badge--removed {
+  background-color: var(--color-red-r50);
+  color: var(--color-red-r300);
+}
+
+.ds-badge__prefix {
+  flex-shrink: 0;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.5;
+}
+
+.ds-badge__content {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.5;
+}

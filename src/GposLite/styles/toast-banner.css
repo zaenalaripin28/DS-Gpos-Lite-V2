@@ -1,0 +1,58 @@
+/* from components/Toast-Banner/banner.html */
+
+.ds-banner {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      padding: 12px;           /* p-3 */
+      border-radius: 8px;      /* rounded-lg */
+      gap: 4px;                /* gap-1 */
+      font-family: var(--font-primary);
+    }
+
+    /* ── Icon slot ── */
+    .ds-banner__icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Text slot ── */
+    .ds-banner__text {
+      flex: 1;
+      font-size: 14px;         /* text-sm */
+      font-weight: 500;        /* font-medium */
+      line-height: 20px;       /* leading-5 */
+    }
+
+    /* ── appearance=warning ── */
+    .ds-banner--warning {
+      background-color: #FFA33D;   /* Color-Background-Warning-Bold = O200 */
+    }
+    .ds-banner--warning .ds-banner__text  { color: #091E42; }   /* Color-Text-Bold = N900 */
+    .ds-banner--warning .ds-banner__icon path { fill: #091E42; } /* Color-Icon-Bold = N900 */
+
+    /* ── appearance=success ── */
+    .ds-banner--success {
+      background-color: #00AA5B;   /* Color-Background-Success-Bold = G300 */
+    }
+    .ds-banner--success .ds-banner__text  { color: #FFFFFF; }   /* Color-Text-Inverse = N0 */
+    .ds-banner--success .ds-banner__icon path { fill: #FFFFFF; } /* Color-Icon-Inverse = N0 */
+
+    /* ── appearance=error ── */
+    .ds-banner--error {
+      background-color: #EC1C24;   /* Color-Background-Danger-Bold = R300 */
+    }
+    .ds-banner--error .ds-banner__text  { color: #FFFFFF; }    /* Color-Text-Inverse = N0 */
+    .ds-banner--error .ds-banner__icon path { fill: #FFFFFF; }  /* Color-Icon-Inverse = N0 */
+
+    /* ── appearance=announcement ── */
+    .ds-banner--announcement {
+      background-color: #42526D;   /* Color-Background-Neutral-Bold = N500 */
+    }
+    .ds-banner--announcement .ds-banner__text { color: #FFFFFF; } /* Color-Text-Inverse = N0 */
+
+    /* ================================================================

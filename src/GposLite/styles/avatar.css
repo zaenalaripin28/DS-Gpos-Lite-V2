@@ -1,0 +1,87 @@
+/* DS Avatar — dari components/Avatar/avatar.html */
+
+.ds-avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius-full);
+  background-color: var(--color-blue-b200);
+  flex-shrink: 0;
+}
+
+.ds-avatar__image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: var(--border-radius-full);
+  object-fit: cover;
+}
+
+.ds-avatar__presence {
+  position: absolute;
+  border-radius: var(--border-radius-full);
+  background-color: var(--color-green-g300);
+  border: 2px solid var(--color-neutral-n0);
+}
+
+.ds-avatar--xl {
+  width: 96px;
+  height: 96px;
+}
+.ds-avatar--xl .ds-avatar__image {
+  width: 64px;
+  height: 64px;
+}
+.ds-avatar--xl .ds-avatar__presence {
+  width: 16px;
+  height: 16px;
+  right: 0;
+  bottom: 0;
+}
+
+.ds-avatar--lg {
+  width: 40px;
+  height: 40px;
+}
+.ds-avatar--lg .ds-avatar__image {
+  width: 28px;
+  height: 28px;
+}
+.ds-avatar--lg .ds-avatar__presence {
+  width: 14px;
+  height: 14px;
+  right: -1px;
+  bottom: -1px;
+}
+
+.ds-avatar--md {
+  width: 32px;
+  height: 32px;
+}
+.ds-avatar--md .ds-avatar__image {
+  width: 20px;
+  height: 20px;
+}
+.ds-avatar--md .ds-avatar__presence {
+  width: 14px;
+  height: 14px;
+  right: -2px;
+  bottom: -2px;
+}
+
+.ds-avatar--sm {
+  width: 24px;
+  height: 24px;
+}
+.ds-avatar--sm .ds-avatar__image {
+  width: 16px;
+  height: 16px;
+}
+.ds-avatar--sm .ds-avatar__presence {
+  width: 12px;
+  height: 12px;
+  right: -2px;
+  bottom: -2px;
+}

@@ -1,0 +1,100 @@
+/* from components/Time picker/time-picker.html */
+
+.ds-time-picker {
+      width: 100%;
+      max-width: 320px;
+      position: relative;
+    }
+
+    .ds-time-picker__menu {
+      margin-top: var(--space-050);
+      border: 1px solid var(--color-blue-b300);
+      border-radius: 10px;
+      background: var(--color-neutral-n0);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+
+    .time-parts-shell {
+      width: 100%;
+      max-width: 320px;
+      border: 1px solid var(--color-neutral-n30);
+      border-radius: 10px;
+      background: var(--color-neutral-n0);
+      overflow: hidden;
+    }
+
+    .time-parts-list {
+      max-height: 344px;
+      overflow-y: auto;
+      padding: var(--space-150) var(--space-200);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-100);
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-neutral-n50) transparent;
+    }
+
+    .time-parts-list::-webkit-scrollbar {
+      width: var(--space-100);
+    }
+
+    .time-parts-list::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .time-parts-list::-webkit-scrollbar-thumb {
+      background: var(--color-neutral-n50);
+      border-radius: var(--border-radius-pill);
+    }
+
+    .time-parts-item {
+      min-height: 40px;
+      border: none;
+      background: transparent;
+      color: var(--color-neutral-n900);
+      text-align: left;
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+      font-weight: var(--text-body-small-regular-weight);
+      line-height: var(--text-body-small-regular-lh);
+      padding: var(--space-050) var(--space-100);
+      border-radius: var(--border-radius-sm);
+      cursor: pointer;
+      transition: background-color var(--transition-fast), color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .time-parts-item:hover {
+      background: var(--color-neutral-n20);
+    }
+
+    .time-parts-item:active {
+      background: var(--color-neutral-n30);
+    }
+
+    .time-parts-item:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+
+    .time-parts-item.is-selected {
+      background: var(--color-blue-b50);
+      color: var(--color-blue-b300);
+      font-weight: var(--text-body-small-medium-weight);
+    }
+
+    .usage-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-150);
+    }
+
+    @media (max-width: 640px) {
+      .ds-hero-banner .flex-1 { min-width: 0; }
+      .ds-hero-banner .font-bold { font-size: clamp(1.5rem, 5vw, 2rem) !important; }
+    }
+    @media (max-width: 920px) {
+      .usage-grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }

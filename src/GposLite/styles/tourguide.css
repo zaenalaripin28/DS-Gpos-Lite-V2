@@ -1,0 +1,187 @@
+/* from components/Tourguide/tourguide.html */
+
+.ds-tourguide {
+      position: absolute; left: 56px; top: 140px; width: 292px;
+      border-radius: var(--border-radius-sm);
+      background: var(--color-blue-b300); box-shadow: var(--shadow-md);
+      color: var(--color-neutral-n0); z-index: 3; overflow: hidden;
+    }
+    .ds-tourguide__body { padding: var(--space-150) var(--space-150) var(--space-100); }
+    .ds-tourguide__title {
+      margin: 0 0 var(--space-050); font-family: var(--font-primary);
+      font-size: var(--font-size-xl); font-weight: var(--font-weight-semibold);
+      line-height: var(--line-height-snug); color: var(--color-neutral-n0);
+    }
+    .ds-tourguide__text {
+      margin: 0; font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+      line-height: var(--text-body-small-regular-lh);
+      color: var(--color-text-inverse) !important;
+    }
+    .ds-tourguide__footer {
+      display: flex; align-items: center; gap: var(--space-100);
+      padding: 0 var(--space-150) var(--space-150);
+    }
+    .ds-tourguide__progress {
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-medium-size);
+      font-weight: var(--font-weight-medium);
+      line-height: var(--text-body-small-medium-lh);
+      color: var(--color-neutral-n0); margin-right: auto;
+    }
+
+    /* ── Component stage ── */
+    .tourguide-component-stage {
+      position: relative; min-height: 320px;
+      border-radius: var(--border-radius-lg); overflow: hidden;
+      background: var(--color-neutral-n900);
+      border: 1px solid color-mix(in srgb, var(--color-neutral-n0) 10%, transparent);
+    }
+    .tourguide-component-stage__overlay {
+      position: absolute; inset: 0;
+      background: color-mix(in srgb, var(--color-neutral-n800) 50%, transparent);
+    }
+    .tourguide-component-stage__target {
+      position: absolute; top: 56px; left: 56px;
+      width: 120px; height: 68px; border-radius: var(--border-radius-md);
+      border: 2px solid var(--color-blue-b300);
+      background: color-mix(in srgb, var(--color-neutral-n900) 80%, transparent);
+      z-index: 2;
+    }
+
+    /* ── Anatomy table ── */
+    .anatomy-table-wrap {
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--border-radius-lg);
+      background: var(--color-neutral-n0);
+      box-shadow: var(--shadow-xs); overflow: hidden;
+      margin-bottom: var(--space-250);
+    }
+    .anatomy-table {
+      width: 100%; border-collapse: collapse;
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+      color: var(--color-text-primary);
+    }
+    .anatomy-table th, .anatomy-table td {
+      text-align: left; padding: var(--space-150) var(--space-200);
+      border-bottom: 1px solid var(--color-border-light); vertical-align: top;
+    }
+    .anatomy-table th {
+      background: var(--color-neutral-n10); color: var(--color-text-secondary);
+      font-size: var(--text-caption-medium-size); font-weight: var(--font-weight-semibold);
+      text-transform: uppercase; letter-spacing: var(--letter-spacing-wide);
+    }
+    .anatomy-table tr:last-child td { border-bottom: none; }
+
+    /* ── Playground ── */
+    .tg-playground {
+      border: 1px solid var(--color-border-light);
+      border-radius: var(--border-radius-xl);
+      background: var(--color-neutral-n0);
+      overflow: hidden; box-shadow: var(--shadow-xs);
+      margin-bottom: var(--space-250);
+    }
+    .tg-playground__controls {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-150); padding: var(--space-200);
+      border-bottom: 1px solid var(--color-border-light);
+    }
+    .tg-playground__field { display: grid; gap: var(--space-050); }
+    .tg-playground__field label {
+      font-family: var(--font-primary);
+      font-size: var(--text-caption-medium-size); color: var(--color-text-secondary);
+    }
+    .tg-playground__field select {
+      appearance: none; border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-md); background: var(--color-surface);
+      color: var(--color-text-primary); font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+      padding: var(--space-100) var(--space-150);
+    }
+    .tg-playground__preview { padding: var(--space-250); background: var(--color-neutral-n900); }
+
+    /* ── Guideline grid ── */
+    .guideline-grid {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-150); margin-top: var(--space-250);
+    }
+    .guideline-card {
+      border-radius: var(--border-radius-lg); border: 1px solid var(--color-border-light);
+      background: var(--color-neutral-n0); padding: var(--space-200);
+    }
+    .guideline-card__title {
+      margin: 0 0 var(--space-100); font-family: var(--font-primary);
+      font-size: var(--text-body-small-medium-size); font-weight: var(--font-weight-semibold);
+      color: var(--color-text-primary);
+    }
+    .guideline-list {
+      margin: 0; padding-left: var(--space-200); display: grid; gap: var(--space-075);
+      font-family: var(--font-primary); font-size: var(--text-body-small-regular-size);
+      line-height: var(--text-body-small-regular-lh); color: var(--color-text-secondary);
+    }
+
+    /* ── Code block ── */
+    .code-card {
+      border-top: 1px solid var(--color-border-light);
+      background: #0F172A;
+    }
+    .code-card__head {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: var(--space-100); padding: var(--space-150) var(--space-200);
+      border-bottom: 1px solid #1E2D45;
+    }
+    .code-card__title {
+      margin: 0; font-family: var(--font-primary);
+      font-size: var(--text-caption-medium-size); color: #94A3B8;
+    }
+    .copy-btn {
+      padding: 4px 10px; background: #1E2D45; border: 1px solid #2D3F55;
+      border-radius: 6px; font-size: 11px; font-weight: 600;
+      color: #94A3B8; cursor: pointer;
+      transition: all 120ms ease; font-family: var(--font-primary); letter-spacing: 0.02em;
+    }
+    .copy-btn:hover { background: var(--color-blue-b300); border-color: var(--color-blue-b300); color: #fff; }
+    .copy-btn.copied { background: var(--color-green-g300); border-color: var(--color-green-g300); color: #fff; }
+    .code-card pre { margin: 0; padding: var(--space-250); overflow-x: auto; }
+    .code-card code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 12px; line-height: 1.7; color: #CBD5E1; white-space: pre;
+    }
+    .c-tag    { color: #7DB5E7; }
+    .c-attr   { color: #A3CBEE; }
+    .c-str    { color: #86EFAC; }
+    .c-cmt    { color: #475569; }
+
+    /* ── Code inline chip ── */
+    code.chip {
+      font-family: var(--font-primary) !important; font-size: 11px; font-weight: 500;
+      padding: 2px 7px; background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n30); border-radius: 4px;
+      color: var(--color-blue-b300); letter-spacing: 0.01em; line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .guideline-grid, .tg-playground__controls { grid-template-columns: 1fr; }
+      .ds-tourguide { width: calc(100% - 24px); left: 12px; top: 132px; }
+      .tourguide-component-stage__target { left: 12px; }
+    }
+
+    /* ── Dark mode ── */
+    [data-theme="dark"] body { background-color: #080F1E; color: #CBD5E1; }
+    [data-theme="dark"] .main-content { background-color: #080F1E; }
+    [data-theme="dark"] .part-card { background: #0F172A; border-color: #1E2D45; }
+    [data-theme="dark"] .part-card__head { background: #1E2D45; border-color: #2D3F55; color: #94A3B8; }
+    [data-theme="dark"] .anatomy-table-wrap { background: #0F172A; border-color: #1E2D45; }
+    [data-theme="dark"] .anatomy-table th { background: #1E2D45; color: #94A3B8; border-color: #2D3F55; }
+    [data-theme="dark"] .anatomy-table td { border-color: #2D3F55; color: #CBD5E1; }
+    [data-theme="dark"] .tg-playground { background: #0F172A; border-color: #1E2D45; }
+    [data-theme="dark"] .tg-playground__controls { border-color: #2D3F55; }
+    [data-theme="dark"] .tg-playground__field select { background: #1E2D45; border-color: #2D3F55; color: #CBD5E1; }
+    [data-theme="dark"] .guideline-card { background: #0F172A; border-color: #1E2D45; }
+    [data-theme="dark"] .guideline-card__title { color: #F1F5F9; }
+    [data-theme="dark"] .guideline-list { color: #94A3B8; }
+    [data-theme="dark"] .hero-feat-card { background: #0F172A !important; border-color: #1E2D45 !important; }
+    [data-theme="dark"] .hero-feat-card:hover { border-color: var(--color-blue-b200) !important; }
+    [data-theme="dark"] .hero-feat-card .text-neutral-n900 { color: #F1F5F9 !important; }
+    [data-theme="dark"] .section-heading { color: #F1F5F9; border-color: #1E2D45; }

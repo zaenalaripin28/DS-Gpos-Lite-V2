@@ -1,0 +1,193 @@
+/* from components/Form/form.html */
+
+.ds-form-row {
+      display: grid;
+      gap: var(--space-050);
+      width: 100%;
+      max-width: 540px;
+    }
+    .ds-form-row__label {
+      color: var(--color-text-secondary);
+      font-family: var(--font-primary);
+      font-size: var(--text-caption-medium-size);
+      font-weight: var(--text-caption-medium-weight);
+      line-height: var(--text-caption-medium-lh);
+      margin: 0;
+    }
+    .ds-form-row__field {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--space-050);
+      align-items: start;
+    }
+    .ds-form-row__select {
+      min-width: 0;
+    }
+    .ds-form-row__action-btn {
+      width: 40px;
+      min-height: 40px;
+      border: 1px solid var(--color-neutral-n30);
+      border-radius: var(--border-radius-sm);
+      background: var(--color-neutral-n20);
+      padding: 0;
+      flex-shrink: 0;
+    }
+    .ds-form-row__action-btn img {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+    .ds-form-row--default .ds-select-trigger {
+      border-color: var(--color-neutral-n40);
+      background: var(--color-neutral-n20);
+      color: var(--color-neutral-n200);
+    }
+    .ds-form-row--invalid .ds-select-trigger {
+      border-color: var(--color-red-r300);
+      box-shadow: 0 0 0 1px var(--color-red-r300);
+      color: var(--color-neutral-n800);
+    }
+    .ds-form-row--valid .ds-select-trigger {
+      border-color: var(--color-neutral-n40);
+      color: var(--color-neutral-n800);
+    }
+    .form-component-states {
+      display: grid;
+      gap: var(--space-200);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      background: var(--color-surface);
+      padding: var(--space-200);
+    }
+    .form-component-states__item {
+      display: grid;
+      gap: var(--space-075);
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: var(--space-150);
+    }
+    .form-component-states__item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+    .form-component-states__state {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      font-family: var(--font-primary);
+      color: var(--color-text-tertiary);
+    }
+    .usage-info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-100);
+    }
+    .usage-info-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: var(--space-150);
+    }
+    .usage-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-100);
+    }
+    .code-block {
+      background: var(--color-neutral-n10);
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-sm);
+      padding: var(--space-100) var(--space-150);
+      overflow-x: auto;
+      font-family: var(--font-primary);
+      font-size: 11px;
+      line-height: 1.6;
+      color: var(--color-neutral-n700);
+    }
+    .copy-btn {
+      padding: 4px 10px;
+      background: var(--color-neutral-n20);
+      border: 1px solid var(--color-neutral-n30);
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-neutral-n400);
+      cursor: pointer;
+      font-family: var(--font-primary);
+    }
+    .copy-btn:hover { background: var(--color-blue-b300); border-color: var(--color-blue-b300); color: var(--color-neutral-n0); }
+    .copy-btn.copied { background: var(--color-green-g300); border-color: var(--color-green-g300); color: var(--color-neutral-n0); }
+    .form-playground {
+      display: grid;
+      gap: var(--space-150);
+      max-width: 560px;
+    }
+    .form-playground__controls {
+      display: grid;
+      gap: var(--space-075);
+    }
+    .form-playground__control {
+      min-height: 40px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--border-radius-sm);
+      background: var(--color-neutral-n0);
+      color: var(--color-neutral-n500);
+      padding: 0 var(--space-075);
+      font-family: var(--font-primary);
+      font-size: var(--text-body-small-regular-size);
+    }
+    .form-playground__control:focus {
+      outline: none;
+      border-color: var(--color-blue-b300);
+      box-shadow: 0 0 0 2px var(--color-blue-b200);
+    }
+    .form-playground__stage {
+      padding: var(--space-200);
+      background: var(--color-neutral-n10);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+    }
+    .form-playground__hint {
+      font-size: 12px;
+      color: var(--color-text-tertiary);
+      line-height: 1.6;
+      font-family: var(--font-primary);
+      margin: 0;
+    }
+    section > h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: none !important;
+      background-image: linear-gradient(to right, var(--color-primary-500) 0%, rgba(30,127,214,0.18) 32%, transparent 68%) !important;
+      background-repeat: no-repeat !important;
+      background-size: 100% 1px !important;
+      background-position: left bottom !important;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--color-text-primary);
+      font-family: var(--font-primary);
+    }
+    section > h2::before {
+      content: '';
+      width: 3px;
+      height: 18px;
+      background: linear-gradient(to bottom, var(--color-primary-500), var(--color-primary-300));
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    @media (max-width: 900px) {
+      .usage-info-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .form-parts-stack__row { grid-template-columns: 1fr; gap: var(--space-075); }
+      .ds-form-row__field { grid-template-columns: 1fr; }
+      .usage-info-grid { grid-template-columns: 1fr; }
+      .usage-grid-2 { grid-template-columns: 1fr; }
+      .form-parts-stack { max-width: 100%; }
+      .ds-form-row { max-width: 100%; }
+      .form-playground { max-width: 100%; }
+    }
