@@ -12,10 +12,8 @@ GPOS Lite V2 Time picker component for dashboard UI patterns.
 
 ## Anatomy
 
-* Root container (`.ds-time-picker`)
-* Value (`.ds-time-picker__value`)
-* Icon (`.ds-time-picker__icon`)
-* Menu (`.ds-time-picker__menu`)
+* Trigger (`button.ds-select-trigger`) — reuse state Select
+* Picker panel (`.ds-time-picker`) → `__menu` (listbox options, interval 30 menit)
 
 ## Variants
 

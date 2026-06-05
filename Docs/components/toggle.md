@@ -12,15 +12,10 @@ Switch on/off boolean dengan ikon status check/x. Dua ukuran track dan empat sta
 
 ## Anatomy
 
-* Root container (`.ds-toggle`)
-* Input (`.ds-toggle__input`)
-* Track (`.ds-toggle__track`)
-* Thumb (`.ds-toggle__thumb`)
-* Icon (`.ds-toggle__icon`)
-* Head (`.ds-toggle__head`)
-* Label (`.ds-toggle__label`)
-* Cell (`.ds-toggle__cell`)
-* Row (`.ds-toggle__row`)
+* Root (`label.ds-toggle`)
+* Toggle Input (`.ds-toggle__input`)
+* Toggle Track (`.ds-toggle__track`)
+* Toggle Thumb (`.ds-toggle__thumb`)
 
 ## Variants
 

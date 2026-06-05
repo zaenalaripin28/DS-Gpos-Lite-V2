@@ -13,7 +13,7 @@ Komponen input multi-baris untuk konten panjang seperti catatan, deskripsi, dan 
 ## Anatomy
 
 * Root container (`.ds-text-area`)
-* Field (`.ds-text-area__field`)
+* Text Area Field (`.ds-text-area__field`)
 
 ## Variants
 

@@ -12,15 +12,12 @@ GPOS Lite V2 Calendar component for dashboard UI patterns.
 
 ## Anatomy
 
-* Root container (`.ds-calendar`)
-* Label (`.ds-calendar-month-header__label`)
-* Nav (`.ds-calendar-month-header__nav`)
-* Day (`.ds-calendar-month-header__day`)
-* Head (`.ds-calendar-month-header__head`)
-* Cell (`.ds-calendar-month-header__cell`)
-* Body (`.ds-calendar-month-header__body`)
-* Footer (`.ds-calendar-month-header__footer`)
-* Action (`.ds-calendar-month-header__action`)
+* Root (`.ds-calendar`) — `role="group"`
+* Body (`.ds-calendar__body`)
+* Month header (`.ds-calendar-month-header`) — `__label`, `__nav`
+* Week header (`.ds-calendar-week-header`) — `__day` (`role="columnheader"`)
+* Days grid (`.ds-calendar-days`) — `role="grid"`
+* Day button (`button.ds-calendar-day`) — `--outside`, `--today`, `--selected`, `--disabled`
 
 ## Variants
 

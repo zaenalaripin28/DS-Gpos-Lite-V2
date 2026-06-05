@@ -13,18 +13,10 @@ Slider nilai 0–100% dengan thumb 16×16px; track border/focus token; press tin
 ## Anatomy
 
 * Root container (`.ds-range`)
-* Thumb (`.ds-range__thumb`)
-* Track (`.ds-range__track`)
-* Input (`.ds-range__input`)
-* Fill (`.ds-range__fill`)
-* Thumb wrap (`.ds-range__thumb-wrap`)
-* Value (`.ds-range__value`)
-* Interactive (`.ds-range__interactive`)
-* Meta (`.ds-range__meta`)
-* Label (`.ds-range__label`)
-* Controls (`.ds-range__controls`)
-* Control (`.ds-range__control`)
-* Stage (`.ds-range__stage`)
+* Range Track (`.ds-range__track`)
+* Range Fill (`.ds-range__fill`)
+* Range Thumb (`.ds-range__thumb`)
+* Range Input (`.ds-range__input`)
 
 ## Variants
 

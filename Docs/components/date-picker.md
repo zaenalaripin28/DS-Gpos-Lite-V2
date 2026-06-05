@@ -12,14 +12,9 @@ GPOS Lite V2 Date picker component for dashboard UI patterns.
 
 ## Anatomy
 
-* Root container (`.ds-date-picker-layout`)
-* Value (`.ds-date-picker-layout__value`)
-* Icon (`.ds-date-picker-layout__icon`)
-* Chevron (`.ds-date-picker-layout__chevron`)
-* Body (`.ds-date-picker-layout__body`)
-* Label (`.ds-date-picker-layout__label`)
-* Nav (`.ds-date-picker-layout__nav`)
-* Day (`.ds-date-picker-layout__day`)
+* Composed root (`.ds-date-picker`) → `button.ds-select-trigger` + panel `.ds-calendar`
+* Doc showcase layout (`.ds-date-picker-layout`) — root halaman referensi, bukan composed API
+* Layout parts: `__value`, `__icon`, `__chevron`, `__body`, `__label`, `__nav`, `__day`
 
 ## Variants
 

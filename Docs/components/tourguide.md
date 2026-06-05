@@ -12,16 +12,10 @@ Komponen guided tour interaktif dengan spotlight overlay, tooltip langkah, progr
 
 ## Anatomy
 
-* Root container (`.ds-tourguide`)
-* Head (`.ds-tourguide__head`)
-* Title (`.ds-tourguide__title`)
-* Close (`.ds-tourguide__close`)
-* Body (`.ds-tourguide__body`)
-* Footer (`.ds-tourguide__footer`)
-* Text (`.ds-tourguide__text`)
-* Progress (`.ds-tourguide__progress`)
-* Overlay (`.ds-tourguide__overlay`)
-* Target (`.ds-tourguide__target`)
+* Tour card (`.ds-tourguide`) → `__title`, `__text`, `__body`, `__progress`, `__footer`
+* Spotlight card (`.ds-spotlight-card`) → `__head`, `__title`, `__body`, `__footer`, `__close`
+* Buttons (`button.ds-btn-spotlight`, `ds-btn-onboarding-replay`)
+* Overlay (`.ds-tourguide__overlay`), target (`.ds-tourguide__target`)
 
 ## Variants
 

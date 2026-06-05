@@ -13,11 +13,9 @@ GPOS Lite V2 Form component for dashboard UI patterns.
 ## Anatomy
 
 * Root container (`.ds-form-row`)
-* Label (ds-form-row__label)
-* Field (ds-form-row__field)
-* Select (ds-form-row__select)
-* Action button (ds-form-row__action-btn)
-* Message (ds-form-message)
+* Form Row Label (`.ds-form-row__label`)
+* Form Row Field (`.ds-form-row__field`)
+* Form Message (`.ds-form-message`)
 
 ## Variants
 

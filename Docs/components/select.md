@@ -12,12 +12,10 @@ Bagian option pada komponen Select untuk state default, hover, pressed, selected
 
 ## Anatomy
 
-* Root container (`.ds-select-component`)
-* Trigger (ds-select-trigger)
-* Component wrapper (ds-select-component)
-* Option (ds-option)
-* Option list (ds-option-list)
-* Dropdown panel (ds-select-dropdown)
+* Root trigger (`.ds-select-trigger`) → `__value`, `__icon`
+* Option (`.ds-option`) → `__control`, `__icon-slot`
+* Groups (`.ds-groups`, `.ds-group-label`)
+* Wrapper dokumentasi (`.ds-select-component`) — container halaman doc, bukan root komponen
 
 ## Variants
 
@@ -100,7 +98,7 @@ Use Select — Option Part when the interaction pattern matches the documented i
 * Reuse Tailwind semantic token utilities mapped in tailwind.config.js (e.g. bg-blue-b300, text-neutral-n900, gap-100, p-250).
 * Use CSS custom properties from styles/tokens.css only — never hardcode hex, rgb, or px values for colors/spacing/radius.
 * Use icons from assets/icons/ only — reference via relative path as in source.
-* Primary root class: .ds-select-component. Key related classes: .ds-select-component.
+* Primary root class: .ds-select-trigger. Key related classes: .ds-select-trigger__value, .ds-select-trigger__icon, .ds-option, .ds-option--selected.
 * Never create new variants, colors, spacing scales, or typography sizes unless explicitly requested.
 * Match HTML structure and state handling from components/Select/select.html.
 * Preserve semantic HTML, native form controls, and ARIA attributes from the implementation.
@@ -108,5 +106,5 @@ Use Select — Option Part when the interaction pattern matches the documented i
 ## Example Prompt For AI
 
 ```
-Implement Select — Option Part for GPOS Lite Design System V2. Source: components/Select/select.html Root class: .ds-select-component Appearances/variants: first, default States: selected, typing, loading, disabled, checked, hover, pressed Icons: icon-ellipsis-vertical.svg, icon-solid-information-circle.svg, icon-square-2-stack.svg, icon-x-mark.svg Stack: HTML + Tailwind CSS + tokens.css. No React. Copy exact class names from source.
+Implement Select — Option Part for GPOS Lite Design System V2. Source: components/Select/select.html Root class: .ds-select-trigger Appearances/variants: first, default States: selected, typing, loading, disabled, checked, hover, pressed Icons: icon-ellipsis-vertical.svg, icon-solid-information-circle.svg, icon-square-2-stack.svg, icon-x-mark.svg Stack: HTML + Tailwind CSS + tokens.css. No React. Copy exact class names from source.
 ```

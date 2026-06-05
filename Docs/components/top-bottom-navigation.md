@@ -12,19 +12,12 @@ Top navigation responsif (website, tablet, mobile) dari parts logo, notifikasi, 
 
 ## Anatomy
 
-* Root container (`.ds-topnav-logo`)
-* Img (`.ds-topnav-logo__img`)
-* Icon (`.ds-topnav-logo__icon`)
-* Indicator (`.ds-topnav-logo__indicator`)
-* Start (`.ds-topnav-logo__start`)
-* Center (`.ds-topnav-logo__center`)
-* End (`.ds-topnav-logo__end`)
-* Menu (`.ds-topnav-logo__menu`)
-* Logo (`.ds-topnav-logo__logo`)
-* Notif (`.ds-topnav-logo__notif`)
-* Akses (`.ds-topnav-logo__akses`)
-* Image (`.ds-topnav-logo__image`)
-* Presence (`.ds-topnav-logo__presence`)
+* Top bar root (`.ds-topnav`) — variant `--website`, `--tablet`, `--mobile`
+* Regions: `__start`, `__center`, `__end`, `__menu`, `__akses`, `__notif`
+* Logo (`.ds-topnav-logo`, `__img`) — child di dalam topnav, bukan root
+* Notifikasi (`.ds-topnav-notif`, `__icon`, `__indicator`)
+* Profil (`.ds-topnav-profile`) → compose `.ds-avatar`
+* Footer (`.ds-footer-nav`) → `__actions`, `__pager`, `__nav-btns`
 
 ## Variants
 
@@ -102,7 +95,7 @@ Di pojok kiri top navigation — sebagai tautan ke beranda atau dashboard utama 
 * Reuse Tailwind semantic token utilities mapped in tailwind.config.js (e.g. bg-blue-b300, text-neutral-n900, gap-100, p-250).
 * Use CSS custom properties from styles/tokens.css only — never hardcode hex, rgb, or px values for colors/spacing/radius.
 * Use icons from assets/icons/ only — reference via relative path as in source.
-* Primary root class: .ds-topnav-logo. Key related classes: .ds-topnav-logo, .ds-topnav-logo--hover, .ds-topnav-logo--press, .ds-topnav-logo__img.
+* Primary root class: .ds-topnav. Key related classes: .ds-topnav--website, .ds-topnav__start, .ds-topnav__end, .ds-topnav-logo, .ds-topnav-notif, .ds-footer-nav.
 * Never create new variants, colors, spacing scales, or typography sizes unless explicitly requested.
 * Match HTML structure and state handling from components/Top & bottom Navigation/top-bottom-nav.html.
 * Preserve semantic HTML, native form controls, and ARIA attributes from the implementation.
@@ -110,5 +103,5 @@ Di pojok kiri top navigation — sebagai tautan ke beranda atau dashboard utama 
 ## Example Prompt For AI
 
 ```
-Implement Top & Bottom Nav for GPOS Lite Design System V2. Source: components/Top & bottom Navigation/top-bottom-nav.html Root class: .ds-topnav-logo Appearances/variants: website, tablet, mobile Sizes: lg States: hover Icons: icon-bell.svg, icon-chevron-left.svg, icon-chevron-right.svg, icon-menu.svg Stack: HTML + Tailwind CSS + tokens.css. No React. Copy exact class names from source.
+Implement Top & Bottom Nav for GPOS Lite Design System V2. Source: components/Top & bottom Navigation/top-bottom-nav.html Root class: .ds-topnav Appearances/variants: website, tablet, mobile Sizes: lg States: hover Icons: icon-bell.svg, icon-chevron-left.svg, icon-chevron-right.svg, icon-menu.svg Stack: HTML + Tailwind CSS + tokens.css. No React. Copy exact class names from source.
 ```

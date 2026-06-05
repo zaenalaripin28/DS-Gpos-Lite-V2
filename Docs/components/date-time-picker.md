@@ -13,16 +13,9 @@ Komposisi Select trigger + Calendar + Time picker untuk memilih tanggal dan wakt
 ## Anatomy
 
 * Root container (`.ds-date-time-picker`)
-* Bar (`.ds-date-time-picker__bar`)
-* Segment (`.ds-date-time-picker__segment`)
-* Dropdown (`.ds-date-time-picker__dropdown`)
-* Value (`.ds-date-time-picker__value`)
-* Icon (`.ds-date-time-picker__icon`)
-* Chevron (`.ds-date-time-picker__chevron`)
-* Body (`.ds-date-time-picker__body`)
-* Label (`.ds-date-time-picker__label`)
-* Nav (`.ds-date-time-picker__nav`)
-* Day (`.ds-date-time-picker__day`)
+* Date Time Picker Bar (`.ds-date-time-picker__bar`)
+* Date Time Picker Segment (`.ds-date-time-picker__segment`)
+* Date Time Picker Dropdown (`.ds-date-time-picker__dropdown`)
 
 ## Variants
 

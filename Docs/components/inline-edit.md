@@ -12,10 +12,11 @@ Komponen pengeditan langsung pada teks atau nilai — aktif saat diklik, lengkap
 
 ## Anatomy
 
-* Root container (`.ds-inline-edit`)
-* Input (ds-inline-edit__input)
-* Actions (ds-inline-edit__actions)
-* Button (ds-inline-edit-btn)
+* Host (`.ds-inline-edit-host`) — `--active` saat mode edit
+* Root (`.ds-inline-edit`) — registry root
+* Input (`.ds-inline-edit__input`) — `--typing`
+* Actions (`.ds-inline-edit__actions`)
+* Buttons (`button.ds-inline-edit-btn`) — `--confirm`, `--cancel`
 
 ## Variants
 

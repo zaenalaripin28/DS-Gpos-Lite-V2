@@ -13,12 +13,11 @@ Overlay dialog yang memerlukan perhatian pengguna sebelum melanjutkan. Mendukung
 ## Anatomy
 
 * Root container (`.modal-composition-item`)
-* Header (modal-header-item + modal-header-item__title)
-* Body (modal-body-text-short / modal-body-text-long)
-* Footer (modal-footer-container + modal-footer-actions)
-* Icon (modal-header-icon)
-
-Footer buttons reuse `.ds-btn`, `.ds-btn--primary`, `.ds-btn--subtle`, `.ds-btn--warning`, `.ds-btn--danger`.
+* Body wrapper (`.modal-composition-body`)
+* Header (`.modal-header-item` + `__title`); icon (`.modal-header-icon`)
+* Body text (`p.modal-body-text-short` / `modal-body-text-long`)
+* Footer (`.modal-footer-container` + `.modal-footer-actions`)
+* Footer buttons reuse `.ds-btn`, `.ds-btn--primary`, `.ds-btn--subtle`, `.ds-btn--warning`, `.ds-btn--danger`
 
 ## Variants
 

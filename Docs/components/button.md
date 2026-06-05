@@ -13,7 +13,6 @@ Triggers an action or event. Follows the Figma variant architecture with appeara
 ## Anatomy
 
 * Root container (`.ds-btn`)
-* Spinner (ds-spinner — loading)
 
 ## Variants
 

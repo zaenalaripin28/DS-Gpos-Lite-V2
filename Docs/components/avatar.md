@@ -13,8 +13,6 @@ Merepresentasikan identitas pengguna secara visual. Tersedia dalam 4 ukuran deng
 ## Anatomy
 
 * Root container (`.ds-avatar`)
-* Image (`.ds-avatar__image`)
-* Presence (`.ds-avatar__presence`)
 
 ## Variants
 

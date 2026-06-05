@@ -13,8 +13,8 @@ Notifikasi lebar penuh yang tampil di area konten untuk menyampaikan pesan konte
 ## Anatomy
 
 * Root container (`.ds-banner`)
-* Icon (`.ds-banner__icon`)
-* Text (`.ds-banner__text`)
+* Banner Icon (`.ds-banner__icon`)
+* Banner Text (`.ds-banner__text`)
 
 ## Variants
 

@@ -12,10 +12,9 @@ Label konteks (&lt;TooltipPrimitive&gt;) yang muncul saat hover — default, tru
 
 ## Anatomy
 
-* Root container (`.ds-tooltip`)
-* Trigger (`.ds-tooltip-part__trigger`)
-* Row (`.ds-tooltip-part__row`)
-* Meta (`.ds-tooltip-part__meta`)
+* Root (`.ds-tooltip`) — variant posisi `--top`, `--bottom`, `--position-left`, `--position-center`, `--position-right`
+* Trigger — elemen interaktif yang membungkus tooltip
+* Bubble (`.ds-tooltip-part`) — pointer + label; `--truncate`, `--overflow`
 
 ## Variants
 

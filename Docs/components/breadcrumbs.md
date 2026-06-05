@@ -13,10 +13,9 @@ Navigasi hierarkis yang menunjukkan posisi halaman saat ini dalam struktur situs
 ## Anatomy
 
 * Root container (`.ds-bc-container`)
-* Item (ds-bc-item)
-* Separator (ds-bc-sep)
-* Text (ds-bc-text)
-* Icon (ds-bc-icon)
+* Bc Item (`.ds-bc-item`)
+* Bc Sep (`.ds-bc-sep`)
+* Bc Text (`.ds-bc-text`)
 
 ## Variants
 

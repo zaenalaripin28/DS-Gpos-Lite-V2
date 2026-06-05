@@ -561,11 +561,53 @@ Icons: `icon-arrow-uturn-left.svg`, `icon-x-mark.svg`
 DO: Judul singkat; instruksi satu kalimat | Progress langkah (mis. 1/3)
 DONT: Jangan instruksi multi-paragraf panjang | Jangan tanpa cara dismiss/tutup spotlight
 
+## COMPONENT RESOLUTION (read `components/` first)
+
+| Step | Source | Use for |
+|------|--------|---------|
+| 1 | `scripts/figma_component_registry.json` | `htmlPath`, `rootClass`, `id` — **authoritative** |
+| 2 | `components/{Name}/{slug}.html` | DOM, BEM classes, composed examples |
+| 3 | `.claude/figma/{id}.spec.json` | Resolved dimensions + token bindings |
+| 4 | `Docs/component-rules.md` | Per-component DO/DON'T |
+
+Folder names may contain spaces (`Navigation menu`, `Page layout`). Never guess paths.
+
+If `Docs/components-index.md` or `Docs/components/*.md` disagrees with registry on `rootClass`, **registry wins**.
+
+## TOKEN TRAPS (common AI mistakes)
+
+| Token / pattern | Actually for | NOT for |
+|-----------------|--------------|---------|
+| `--sidebar-bg`, `--sidebar-link-*` | Doc site shell (`index.html`) | `ds-sidebar-nav-expand` in app |
+| `--sidebar-width: 270px` | Doc sidebar | Page layout aside uses **280px** in `page-layout.html` |
+| Generic SaaS dark sidebar | — | Navigation Menu is **white** `--color-neutral-n0` |
+| `--color-background` as nav fill | Page canvas | Nav component surface |
+
+## SCREEN SHELL (dashboard / 1-frame tasks)
+
+Mandatory HTML reads before generating UI or Figma:
+
+- `components/Page layout/page-layout.html` (`#pl-layout-template`)
+- `components/Navigation menu/navigation.html`
+- `components/Top & bottom Navigation/top-bottom-nav.html`
+
+Structure:
+
+```
+ds-page-layout.ds-page-layout--website
+├── ds-topnav.ds-topnav--website
+└── ds-page-layout__body
+    ├── ds-page-layout__aside → ds-sidebar-nav-expand
+    └── ds-page-layout__main → __content + __footer
+```
+
+Default page content from template: `ds-banner` + `ds-page-header` + `ds-table` + `ds-footer-nav`. No invented KPI cards or menu labels.
+
 ## COMPOSITION (reuse — do not rebuild)
 
 | UI | Components | Source |
 |----|------------|--------|
-| App shell | `ds-page-layout` + `ds-topnav` + sidebar + `ds-footer-nav` | `components/Page layout/page-layout.html` |
+| App shell | `ds-page-layout` + `ds-topnav` + `ds-sidebar-nav-expand` + `ds-footer-nav` | `components/Page layout/page-layout.html` |
 | List page | `ds-page-header` + `ds-table` + `ds-pagination` | `components/Page Header/page-header.html`, `Table/table.html` |
 | Form row | `ds-form-row` + `ds-text-field`/`ds-select-trigger` + `ds-form-message` | `components/Form/form.html` |
 | Date input | `ds-select-trigger` + `ds-calendar` | `components/Date picker/date-picker.html` |

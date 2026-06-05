@@ -12,19 +12,13 @@ Kerangka halaman GPOS Lite untuk website, tablet, dan mobile: top navigation, si
 
 ## Anatomy
 
-* Root container (`.ds-page-layout`)
-* Body (`.ds-page-layout__body`)
-* Aside (`.ds-page-layout__aside`)
-* Scroll (`.ds-page-layout__scroll`)
-* Nav sub (`.ds-page-layout__nav-sub`)
-* Nav main (`.ds-page-layout__nav-main`)
-* Overlay (`.ds-page-layout__overlay`)
-* Scrim (`.ds-page-layout__scrim`)
-* Drawer (`.ds-page-layout__drawer`)
-* Content (`.ds-page-layout__content`)
-* Actions (`.ds-page-layout__actions`)
-* Nav back (`.ds-page-layout__nav-back`)
-* Main (`.ds-page-layout__main`)
+* Root container (`.ds-page-layout`) — variant `--website`, `--tablet`, `--mobile`
+* Top nav (`header.ds-topnav`) — **di atas** `__body`, full width (compose Top & Bottom Navigation)
+* Body (`.ds-page-layout__body`) — flex row
+* Aside (`.ds-page-layout__aside`, 280px, `--color-neutral-n0`) → compose `.ds-sidebar-nav-expand`
+* Main (`.ds-page-layout__main`) → `__content` (grid 12 kolom) + `__footer` → `.ds-footer-nav`
+* Drawer (`.ds-page-layout__drawer`), overlay (`.ds-page-layout__overlay`), scrim (`.ds-page-layout__scrim`) — tablet/mobile
+* Nav regions (`.ds-page-layout__nav-main`, `__nav-sub`) — konteks mobile drawer
 
 ## Variants
 

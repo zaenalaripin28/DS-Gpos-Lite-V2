@@ -27,6 +27,44 @@
 
 ---
 
+## Komposisi layar (app shell / dashboard)
+
+> Task "dashboard", "halaman POS", "1 frame SaaS" = **reuse komponen** dari `components/`, bukan desain baru.
+> Registry path + root class: `scripts/figma_component_registry.json`.
+
+### Wajib dibaca
+
+| Peran | File HTML |
+|-------|-----------|
+| Shell halaman | `components/Page layout/page-layout.html` — template `#pl-layout-template` |
+| Sidebar nav | `components/Navigation menu/navigation.html` — root `ds-sidebar-nav-expand` |
+| Top bar | `components/Top & bottom Navigation/top-bottom-nav.html` — root `ds-topnav` |
+| Konten (sesuai halaman) | `Page Header`, `Table`, `Toast-Banner`, dll. |
+
+### Hierarki `ds-page-layout--website`
+
+1. `ds-topnav.ds-topnav--website` — **di atas** `ds-page-layout__body`, full width
+2. `ds-page-layout__body` — flex row
+3. `ds-page-layout__aside` (280px, `--color-neutral-n0`, border-right) → `ds-sidebar-nav-expand`
+4. `ds-page-layout__main` → `__content` (grid 12 kolom) + `__footer` (`ds-footer-nav`)
+
+**DON'T:** sidebar + main sejajar tanpa topnav; KPI/chart widget yang tidak ada di HTML referensi.
+
+### Navigation Menu — jangan tertukar dengan doc sidebar
+
+| | `ds-sidebar-nav-expand` (Navigation Menu) | `--sidebar-*` tokens (doc site) |
+|---|-------------------------------------------|----------------------------------|
+| Dipakai di | App shell `page-layout.html` | Dokumentasi `index.html` |
+| Background | `--color-neutral-n0` | `--sidebar-bg` (navy) |
+| Item | `ds-nav-mainmenu-snap`, `ds-nav-submenu-snap` | Link dokumentasi generik |
+| Icon | `icon-sidebar-offline-*` 24px | Ikon doc / chevron section |
+
+**DO:** header `MENU GPOS`, search "Cari Menu Disini", section Terakhir Dibuka, divider, menu dari template HTML.
+
+**DON'T:** logo brand + versi app; heading `MENU`/`AKUN` buatan; footer profil user; icon placeholder kotak; selected state solid blue + teks putih.
+
+---
+
 ## Avatar
 
 **File:** `components/Avatar/avatar.html`

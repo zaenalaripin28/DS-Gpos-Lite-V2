@@ -64,6 +64,8 @@ Optional anatomy folder (may be empty):
 
 Until files exist there, use `foundations/*/*.html`, `components/*/*.html`, and `components/*/figma/` as proportion references.
 
+**Screen / dashboard tasks:** resolve paths from `scripts/figma_component_registry.json`, then read `components/Page layout/page-layout.html`, `components/Navigation menu/navigation.html`, and `components/Top & bottom Navigation/top-bottom-nav.html` before composing. Sidebar app = `ds-sidebar-nav-expand` (white `--color-neutral-n0`), not `--sidebar-*` doc tokens. Details: `Docs/figma-generate-skill.md`, `Docs/component-rules.md` § Komposisi layar.
+
 If anatomy reference exists in `.claude/references/`:
 
 * treat it as source of truth

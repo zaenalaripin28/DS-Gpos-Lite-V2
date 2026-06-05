@@ -176,7 +176,11 @@ Setiap komponen: `components/{Name}/*.html` + CSS scoped di halaman.
 | `Docs/component-rules.md` | DO/DON'T per komponen |
 | `Docs/engineer-skill.md` | Workflow implementasi |
 | `Docs/figma-make-skill.md` | Figma → HTML workflow |
+| `Docs/figma-generate-skill.md` | **Code → Figma** — library build + komposisi layar (wajib baca `components/`) |
+| `scripts/figma_component_registry.json` | `htmlPath` + `rootClass` resmi per komponen (authoritative) |
 | `Docs/figma-make-context.md` | Context lengkap token, registry, dan composition untuk AI/Figma Make |
+| `.claude/figma/*.spec.json` | Auto-extracted anatomy per komponen (34) |
+| `.cursor/scripts/figma-prep-all.sh` | Prep prompt untuk build 1 library frame |
 | `CLAUDE.md` | Aturan proyek untuk AI assistant |
 | `style_guide.md` | Referensi visual (`index.html` = primary) |
 

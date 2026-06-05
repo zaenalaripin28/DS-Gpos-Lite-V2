@@ -13,8 +13,8 @@ Label kecil untuk menampilkan informasi seperti jumlah, status, atau perubahan n
 ## Anatomy
 
 * Root container (`.ds-badge`)
-* Prefix (`.ds-badge__prefix`)
-* Content (`.ds-badge__content`)
+* Badge Prefix (`.ds-badge__prefix`)
+* Badge Content (`.ds-badge__content`)
 
 ## Variants
 

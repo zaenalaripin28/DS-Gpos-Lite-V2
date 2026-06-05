@@ -12,19 +12,10 @@ GPOS Lite V2 Flags component for dashboard UI patterns.
 
 ## Anatomy
 
-* Root container (`.ds-flag`)
-* Head (`.ds-flag-part__head`)
-* Label (`.ds-flag-part__label`)
-* Cell (`.ds-flag-part__cell`)
-* Header (`.ds-flag-part__header`)
-* Icon (`.ds-flag-part__icon`)
-* Main (`.ds-flag-part__main`)
-* Title row (`.ds-flag-part__title-row`)
-* Title (`.ds-flag-part__title`)
-* Controls (`.ds-flag-part__controls`)
-* Body (`.ds-flag-part__body`)
-* Description (`.ds-flag-part__description`)
-* Actions (`.ds-flag-part__actions`)
+* Root (`.ds-flag`) — variant `--normal`, `--success`, `--error`, `--warning`, `--info`, `--collapsed`
+* Header (`.ds-flag__header`), main (`.ds-flag__main`), title (`.ds-flag__title`), icon (`.ds-flag__icon`)
+* Body (`.ds-flag__body`), actions (`.ds-flag__actions`)
+* Interactive control (`button.ds-flag-part`) — hover/press/focus states
 
 ## Variants
 

@@ -12,19 +12,10 @@ Overlay kontekstual yang muncul di sekitar elemen trigger. Mendukung 6 posisi (t
 
 ## Anatomy
 
-* Root container (`.popup-anchor-btn`)
-* Preview (`.popup-anchor-btn__preview`)
-* Footer (`.popup-anchor-btn__footer`)
-* Name (`.popup-anchor-btn__name`)
-* Desc (`.popup-anchor-btn__desc`)
-* Controls (`.popup-anchor-btn__controls`)
-* Field (`.popup-anchor-btn__field`)
-* Field label (`.popup-anchor-btn__field-label`)
-* Control (`.popup-anchor-btn__control`)
-* Hint (`.popup-anchor-btn__hint`)
-* Stage (`.popup-anchor-btn__stage`)
-* Label (`.popup-anchor-btn__label`)
-* Dot (`.popup-anchor-btn__dot`)
+* Root container (`.popup-anchor-wrap`) — posisi: `--left`, `--center`, `--right`
+* Panel (`.popup-part-panel`)
+* Trigger (`button` + optional `.popup-anchor-btn` pada tombol)
+* Playground/doc wrapper memakai class `popup-anchor-btn__*` untuk UI dokumentasi — **bukan** root komponen
 
 ## Variants
 
@@ -97,7 +88,7 @@ Use Popup when the interaction pattern matches the documented implementation in 
 * Reuse Tailwind semantic token utilities mapped in tailwind.config.js (e.g. bg-blue-b300, text-neutral-n900, gap-100, p-250).
 * Use CSS custom properties from styles/tokens.css only — never hardcode hex, rgb, or px values for colors/spacing/radius.
 * Use icons from assets/icons/ only — reference via relative path as in source.
-* Primary root class: .popup-anchor-btn. Key related classes: .popup-anchor-btn.
+* Primary root class: .popup-anchor-wrap. Key related classes: .popup-part-panel, .popup-anchor-wrap--left, .popup-anchor-wrap--center, .popup-anchor-wrap--right.
 * Never create new variants, colors, spacing scales, or typography sizes unless explicitly requested.
 * Match HTML structure and state handling from components/Popup/popup.html.
 * Preserve semantic HTML, native form controls, and ARIA attributes from the implementation.
@@ -105,5 +96,5 @@ Use Popup when the interaction pattern matches the documented implementation in 
 ## Example Prompt For AI
 
 ```
-Implement Popup for GPOS Lite Design System V2. Source: components/Popup/popup.html Root class: .popup-anchor-btn States: hover Stack: HTML + Tailwind CSS + tokens.css. No React. Copy exact class names from source.
+Implement Popup for GPOS Lite Design System V2. Source: components/Popup/popup.html Root class: .popup-anchor-wrap States: hover Stack: HTML + Tailwind CSS + tokens.css. No React. Copy exact class names from source.
 ```

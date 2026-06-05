@@ -12,19 +12,11 @@ Parts tabel (sort, header, cell, kolom) dan komponen lengkap dengan pagination. 
 
 ## Anatomy
 
-* Root container (`.ds-table`)
-* Icon (`.ds-table-sort__icon`)
-* Label (`.ds-table-sort__label`)
-* Checkbox wrap (`.ds-table-sort__checkbox-wrap`)
-* Checkbox input (`.ds-table-sort__checkbox-input`)
-* Checkbox (`.ds-table-sort__checkbox`)
-* Content (`.ds-table-sort__content`)
-* Text (`.ds-table-sort__text`)
-* Description (`.ds-table-sort__description`)
-* Group (`.ds-table-sort__group`)
-* Header (`.ds-table-sort__header`)
-* Row (`.ds-table-sort__row`)
-* Wrap (`.ds-table-sort__wrap`)
+* Scroll wrapper (`.ds-table-scroll`) — `role="region"`, `tabindex="0"`
+* Table (`table.ds-table`) — variant `--data`, `--sticky-head`, `--row-hover`
+* Header cell (`th.ds-table-header-cell`) — optional `.ds-table-sort` (`--asc`, `--desc`)
+* Body cell (`td.ds-table-cell`) — `--hover`, `--focused`
+* Column types (`.ds-table-col-text`, `--link`, `--status`, dll.)
 
 ## Variants
 

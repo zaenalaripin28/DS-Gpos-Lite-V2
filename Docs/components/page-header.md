@@ -12,13 +12,11 @@ Header halaman dengan breadcrumb, judul, aksi primer, pencarian, filter, dan kon
 
 ## Anatomy
 
-* Root container (`.ds-page-header`)
-* Row (ds-page-header__row)
-* Title (ds-page-header__title)
-* Actions (ds-page-header__actions)
-* Toolbar (ds-page-header__toolbar)
-* Search (ds-page-header__search)
-* Subfilters (ds-page-header__subfilters)
+* Root (`header.ds-page-header`) — `--actions-on`, `--toolbar-on`, `--subfilters-on`
+* Row (`.ds-page-header__row`, `__row--toolbar`)
+* Start (`.ds-page-header__start`) → title (`h1.ds-page-header__title`)
+* Actions (`.ds-page-header__actions`), search (`.ds-page-header__search`), filter (`.ds-page-header__filter`)
+* Subfilters (`.ds-page-header__subfilters`), toolbar (`.ds-page-header__toolbar`)
 
 ## Variants
 

@@ -1,0 +1,439 @@
+{
+  "version": "1.0.0",
+  "sourceOfTruth": [
+    "styles/tokens.css",
+    "styles/gp-lite-design-tokens.json",
+    "components/*/*.html",
+    "src/GposLite/styles/*.css",
+    "Docs/figma-generate-skill.md",
+    "Docs/figma-make-context.md",
+    "Docs/component-rules.md",
+    "Docs/components-index.md"
+  ],
+  "buildPhases": [
+    {
+      "id": "foundations",
+      "label": "Foundations",
+      "items": [
+        "foundations/colors/colors.html",
+        "foundations/typography/typography.html",
+        "foundations/spacing/spacing.html",
+        "foundations/borders/borders.html",
+        "foundations/shadows/shadows.html",
+        "foundations/grid/grid.html",
+        "foundations/icons/icons.html"
+      ]
+    },
+    {
+      "id": "atoms",
+      "label": "Atoms",
+      "componentIds": ["avatar", "badge", "button", "checkbox", "lozenge", "radio", "tags", "toggle", "tooltip", "range"]
+    },
+    {
+      "id": "inputs",
+      "label": "Inputs",
+      "componentIds": ["text-field", "text-area", "select"]
+    },
+    {
+      "id": "molecules",
+      "label": "Molecules",
+      "componentIds": ["dropdown", "pagination", "tabs", "calendar", "date-picker", "time-picker", "date-time-picker", "inline-edit", "breadcrumbs"]
+    },
+    {
+      "id": "feedback",
+      "label": "Feedback & Overlays",
+      "componentIds": ["section-messages", "toast-banner", "flags", "modal", "popup", "tourguide"]
+    },
+    {
+      "id": "data",
+      "label": "Data",
+      "componentIds": ["table"]
+    },
+    {
+      "id": "navigation",
+      "label": "Navigation",
+      "componentIds": ["navigation-menu", "top-bottom-navigation"]
+    },
+    {
+      "id": "layout",
+      "label": "Layout & Shell",
+      "componentIds": ["page-header", "form", "page-layout"]
+    }
+  ],
+  "components": [
+    {
+      "id": "avatar",
+      "name": "Avatar",
+      "slug": "avatar",
+      "htmlPath": "components/Avatar/avatar.html",
+      "reactPath": "src/GposLite/components/Avatar.tsx",
+      "reactCssPath": "src/GposLite/styles/avatar.css",
+      "docPath": "Docs/components/avatar.md",
+      "rootClass": "ds-avatar",
+      "layer": "atom"
+    },
+    {
+      "id": "badge",
+      "name": "Badge",
+      "slug": "badge",
+      "htmlPath": "components/Badge/badge.html",
+      "reactPath": "src/GposLite/components/Badge.tsx",
+      "reactCssPath": "src/GposLite/styles/badge.css",
+      "docPath": "Docs/components/badge.md",
+      "rootClass": "ds-badge",
+      "layer": "atom"
+    },
+    {
+      "id": "breadcrumbs",
+      "name": "Breadcrumbs",
+      "slug": "breadcrumbs",
+      "htmlPath": "components/Breadcrumbs/breadcrumbs.html",
+      "reactPath": "src/GposLite/components/Breadcrumbs.tsx",
+      "reactCssPath": "src/GposLite/styles/breadcrumbs.css",
+      "docPath": "Docs/components/breadcrumbs.md",
+      "rootClass": "ds-bc-container",
+      "layer": "molecule"
+    },
+    {
+      "id": "button",
+      "name": "Button",
+      "slug": "button",
+      "htmlPath": "components/Button/button.html",
+      "reactPath": "src/GposLite/components/Button.tsx",
+      "reactCssPath": "src/GposLite/styles/button.css",
+      "docPath": "Docs/components/button.md",
+      "rootClass": "ds-btn",
+      "layer": "atom"
+    },
+    {
+      "id": "calendar",
+      "name": "Calendar",
+      "slug": "calendar",
+      "htmlPath": "components/Calendar/calendar.html",
+      "reactPath": "src/GposLite/components/Calendar.tsx",
+      "reactCssPath": "src/GposLite/styles/calendar.css",
+      "docPath": "Docs/components/calendar.md",
+      "rootClass": "ds-calendar",
+      "layer": "molecule"
+    },
+    {
+      "id": "checkbox",
+      "name": "Checkbox",
+      "slug": "checkbox",
+      "htmlPath": "components/Checkbox/checkbox.html",
+      "reactPath": "src/GposLite/components/Checkbox.tsx",
+      "reactCssPath": "src/GposLite/styles/checkbox.css",
+      "docPath": "Docs/components/checkbox.md",
+      "rootClass": "ds-checkbox",
+      "layer": "atom"
+    },
+    {
+      "id": "date-picker",
+      "name": "Date Picker",
+      "slug": "date-picker",
+      "htmlPath": "components/Date picker/date-picker.html",
+      "reactPath": "src/GposLite/components/DatePicker.tsx",
+      "reactCssPath": "src/GposLite/styles/date-picker.css",
+      "docPath": "Docs/components/date-picker.md",
+      "rootClass": "ds-date-picker-layout",
+      "layer": "molecule"
+    },
+    {
+      "id": "date-time-picker",
+      "name": "Date Time Picker",
+      "slug": "date-time-picker",
+      "htmlPath": "components/Date time picker/date time picker.html",
+      "reactPath": "src/GposLite/components/DateTimePicker.tsx",
+      "reactCssPath": "src/GposLite/styles/date-time-picker.css",
+      "docPath": "Docs/components/date-time-picker.md",
+      "rootClass": "ds-date-time-picker",
+      "layer": "molecule"
+    },
+    {
+      "id": "dropdown",
+      "name": "Dropdown Button",
+      "slug": "dropdown",
+      "htmlPath": "components/dropdown/dropdown.html",
+      "reactPath": "src/GposLite/components/Dropdown.tsx",
+      "reactCssPath": "src/GposLite/styles/dropdown.css",
+      "docPath": "Docs/components/dropdown.md",
+      "rootClass": "ds-dropdown",
+      "layer": "molecule"
+    },
+    {
+      "id": "flags",
+      "name": "Flags",
+      "slug": "flags",
+      "htmlPath": "components/Flags/flags.html",
+      "reactPath": "src/GposLite/components/Flags.tsx",
+      "reactCssPath": "src/GposLite/styles/flags.css",
+      "docPath": "Docs/components/flags.md",
+      "rootClass": "ds-flag",
+      "layer": "feedback"
+    },
+    {
+      "id": "form",
+      "name": "Form",
+      "slug": "form",
+      "htmlPath": "components/Form/form.html",
+      "reactPath": "src/GposLite/components/Form.tsx",
+      "reactCssPath": "src/GposLite/styles/form.css",
+      "docPath": "Docs/components/form.md",
+      "rootClass": "ds-form-row",
+      "layer": "layout"
+    },
+    {
+      "id": "inline-edit",
+      "name": "Inline Edit",
+      "slug": "inline-edit",
+      "htmlPath": "components/Inline edit/inline-edit.html",
+      "reactPath": "src/GposLite/components/InlineEdit.tsx",
+      "reactCssPath": "src/GposLite/styles/inline-edit.css",
+      "docPath": "Docs/components/inline-edit.md",
+      "rootClass": "ds-inline-edit",
+      "layer": "molecule"
+    },
+    {
+      "id": "lozenge",
+      "name": "Lozenge",
+      "slug": "lozenge",
+      "htmlPath": "components/Lozenge/lozenge.html",
+      "reactPath": "src/GposLite/components/Lozenge.tsx",
+      "reactCssPath": "src/GposLite/styles/lozenge.css",
+      "docPath": "Docs/components/lozenge.md",
+      "rootClass": "ds-lozenge",
+      "layer": "atom"
+    },
+    {
+      "id": "modal",
+      "name": "Modal",
+      "slug": "modal",
+      "htmlPath": "components/Modal/modal.html",
+      "reactPath": "src/GposLite/components/Modal.tsx",
+      "reactCssPath": "src/GposLite/styles/modal.css",
+      "docPath": "Docs/components/modal.md",
+      "rootClass": "modal-composition-item",
+      "layer": "feedback"
+    },
+    {
+      "id": "navigation-menu",
+      "name": "Navigation Menu",
+      "slug": "navigation-menu",
+      "htmlPath": "components/Navigation menu/navigation.html",
+      "reactPath": "src/GposLite/components/NavigationMenu.tsx",
+      "reactCssPath": "src/GposLite/styles/navigation-menu.css",
+      "docPath": "Docs/components/navigation-menu.md",
+      "rootClass": "ds-sidebar-nav-expand",
+      "layer": "navigation"
+    },
+    {
+      "id": "page-header",
+      "name": "Page Header",
+      "slug": "page-header",
+      "htmlPath": "components/Page Header/page-header.html",
+      "reactPath": "src/GposLite/components/PageHeader.tsx",
+      "reactCssPath": "src/GposLite/styles/page-header.css",
+      "docPath": "Docs/components/page-header.md",
+      "rootClass": "ds-page-header",
+      "layer": "layout"
+    },
+    {
+      "id": "page-layout",
+      "name": "Page Layout",
+      "slug": "page-layout",
+      "htmlPath": "components/Page layout/page-layout.html",
+      "reactPath": "src/GposLite/components/PageLayout.tsx",
+      "reactCssPath": "src/GposLite/styles/page-layout.css",
+      "docPath": "Docs/components/page-layout.md",
+      "rootClass": "ds-page-layout",
+      "layer": "layout"
+    },
+    {
+      "id": "pagination",
+      "name": "Pagination",
+      "slug": "pagination",
+      "htmlPath": "components/Pagination/pagination.html",
+      "reactPath": "src/GposLite/components/Pagination.tsx",
+      "reactCssPath": "src/GposLite/styles/pagination.css",
+      "docPath": "Docs/components/pagination.md",
+      "rootClass": "ds-pagination",
+      "layer": "molecule"
+    },
+    {
+      "id": "popup",
+      "name": "Popup",
+      "slug": "popup",
+      "htmlPath": "components/Popup/popup.html",
+      "reactPath": "src/GposLite/components/Popup.tsx",
+      "reactCssPath": "src/GposLite/styles/popup.css",
+      "docPath": "Docs/components/popup.md",
+      "rootClass": "popup-anchor-wrap",
+      "layer": "feedback"
+    },
+    {
+      "id": "radio",
+      "name": "Radio",
+      "slug": "radio",
+      "htmlPath": "components/Radio/radio.html",
+      "reactPath": "src/GposLite/components/Radio.tsx",
+      "reactCssPath": "src/GposLite/styles/radio.css",
+      "docPath": "Docs/components/radio.md",
+      "rootClass": "ds-radio",
+      "layer": "atom"
+    },
+    {
+      "id": "range",
+      "name": "Range",
+      "slug": "range",
+      "htmlPath": "components/Range/range.html",
+      "reactPath": "src/GposLite/components/Range.tsx",
+      "reactCssPath": "src/GposLite/styles/range.css",
+      "docPath": "Docs/components/range.md",
+      "rootClass": "ds-range",
+      "layer": "atom"
+    },
+    {
+      "id": "section-messages",
+      "name": "Section Message",
+      "slug": "section-messages",
+      "htmlPath": "components/section messages/section-message.html",
+      "reactPath": "src/GposLite/components/SectionMessage.tsx",
+      "reactCssPath": "src/GposLite/styles/section-message.css",
+      "docPath": "Docs/components/section-messages.md",
+      "rootClass": "ds-section-message",
+      "layer": "feedback"
+    },
+    {
+      "id": "select",
+      "name": "Select",
+      "slug": "select",
+      "htmlPath": "components/Select/select.html",
+      "reactPath": "src/GposLite/components/Select.tsx",
+      "reactCssPath": "src/GposLite/styles/select.css",
+      "docPath": "Docs/components/select.md",
+      "rootClass": "ds-select-trigger",
+      "layer": "input"
+    },
+    {
+      "id": "table",
+      "name": "Table",
+      "slug": "table",
+      "htmlPath": "components/Table/table.html",
+      "reactPath": "src/GposLite/components/Table.tsx",
+      "reactCssPath": "src/GposLite/styles/table.css",
+      "docPath": "Docs/components/table.md",
+      "rootClass": "ds-table",
+      "layer": "data"
+    },
+    {
+      "id": "tabs",
+      "name": "Tabs",
+      "slug": "tabs",
+      "htmlPath": "components/Tabs/tabs.html",
+      "reactPath": "src/GposLite/components/Tabs.tsx",
+      "reactCssPath": "src/GposLite/styles/tabs.css",
+      "docPath": "Docs/components/tabs.md",
+      "rootClass": "ds-tab",
+      "layer": "molecule"
+    },
+    {
+      "id": "tags",
+      "name": "Tags",
+      "slug": "tags",
+      "htmlPath": "components/Tags/tags.html",
+      "reactPath": "src/GposLite/components/Tags.tsx",
+      "reactCssPath": "src/GposLite/styles/tags.css",
+      "docPath": "Docs/components/tags.md",
+      "rootClass": "ds-tag",
+      "layer": "atom"
+    },
+    {
+      "id": "text-area",
+      "name": "Text Area",
+      "slug": "text-area",
+      "htmlPath": "components/Text Area/text area.html",
+      "reactPath": "src/GposLite/components/TextArea.tsx",
+      "reactCssPath": "src/GposLite/styles/text-area.css",
+      "docPath": "Docs/components/text-area.md",
+      "rootClass": "ds-text-area",
+      "layer": "input"
+    },
+    {
+      "id": "text-field",
+      "name": "Text Field",
+      "slug": "text-field",
+      "htmlPath": "components/Text Field/text field.html",
+      "reactPath": "src/GposLite/components/TextField.tsx",
+      "reactCssPath": "src/GposLite/styles/text-field.css",
+      "docPath": "Docs/components/text-field.md",
+      "rootClass": "ds-text-field",
+      "layer": "input"
+    },
+    {
+      "id": "time-picker",
+      "name": "Time Picker",
+      "slug": "time-picker",
+      "htmlPath": "components/Time picker/time-picker.html",
+      "reactPath": "src/GposLite/components/TimePicker.tsx",
+      "reactCssPath": "src/GposLite/styles/time-picker.css",
+      "docPath": "Docs/components/time-picker.md",
+      "rootClass": "ds-time-picker",
+      "layer": "molecule"
+    },
+    {
+      "id": "toast-banner",
+      "name": "Toast Banner",
+      "slug": "toast-banner",
+      "htmlPath": "components/Toast-Banner/banner.html",
+      "reactPath": "src/GposLite/components/ToastBanner.tsx",
+      "reactCssPath": "src/GposLite/styles/toast-banner.css",
+      "docPath": "Docs/components/toast-banner.md",
+      "rootClass": "ds-banner",
+      "layer": "feedback"
+    },
+    {
+      "id": "toggle",
+      "name": "Toggle",
+      "slug": "toggle",
+      "htmlPath": "components/Toggle/toggle.html",
+      "reactPath": "src/GposLite/components/Toggle.tsx",
+      "reactCssPath": "src/GposLite/styles/toggle.css",
+      "docPath": "Docs/components/toggle.md",
+      "rootClass": "ds-toggle",
+      "layer": "atom"
+    },
+    {
+      "id": "tooltip",
+      "name": "Tooltip",
+      "slug": "tooltip",
+      "htmlPath": "components/Tooltip/tooltip.html",
+      "reactPath": "src/GposLite/components/Tooltip.tsx",
+      "reactCssPath": "src/GposLite/styles/tooltip.css",
+      "docPath": "Docs/components/tooltip.md",
+      "rootClass": "ds-tooltip",
+      "layer": "atom"
+    },
+    {
+      "id": "top-bottom-navigation",
+      "name": "Top & Bottom Nav",
+      "slug": "top-bottom-navigation",
+      "htmlPath": "components/Top & bottom Navigation/top-bottom-nav.html",
+      "reactPath": "src/GposLite/components/TopBottomNav.tsx",
+      "reactCssPath": "src/GposLite/styles/top-bottom-nav.css",
+      "docPath": "Docs/components/top-bottom-navigation.md",
+      "rootClass": "ds-topnav",
+      "layer": "navigation"
+    },
+    {
+      "id": "tourguide",
+      "name": "Tourguide",
+      "slug": "tourguide",
+      "htmlPath": "components/Tourguide/tourguide.html",
+      "reactPath": "src/GposLite/components/Tourguide.tsx",
+      "reactCssPath": "src/GposLite/styles/tourguide.css",
+      "docPath": "Docs/components/tourguide.md",
+      "rootClass": "ds-tourguide",
+      "layer": "feedback"
+    }
+  ]
+}

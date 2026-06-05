@@ -13,10 +13,10 @@ Kotak kontrol 16×16px untuk seleksi multi opsi dalam form, tabel bulk-select, a
 ## Anatomy
 
 * Root container (`.ds-checkbox`)
-* Hidden input (ds-checkbox__input)
-* Box (ds-checkbox__box)
-* Icon (ds-checkbox__icon — check/minus)
-* Label (ds-checkbox__label)
+* Checkbox Input (`.ds-checkbox__input`)
+* Checkbox Box (`.ds-checkbox__box`)
+* Checkbox Icon (`.ds-checkbox__icon`)
+* Checkbox Label (`.ds-checkbox__label`)
 
 ## Variants
 

@@ -13,6 +13,8 @@
 | Icons | `assets/icons/` only — catalog in `foundations/icons/iconsData.js` |
 | Typography | `--font-primary`, `--text-*` tokens from foundations |
 | Pages | No `/pages` directory — component docs live in `components/` |
+| Root class | **`scripts/figma_component_registry.json`** — jika bentrok dengan tabel di bawah, ikuti registry |
+| Screen tasks | Baca `page-layout.html` + `navigation.html` + `top-bottom-nav.html` sebelum compose — lihat `Docs/figma-generate-skill.md` |
 
 ## Foundation References
 
@@ -53,14 +55,14 @@
 | Inline Edit | [inline-edit.md](./components/inline-edit.md) | `components/Inline edit/inline-edit.html` | `.ds-inline-edit` |
 | Lozenge | [lozenge.md](./components/lozenge.md) | `components/Lozenge/lozenge.html` | `.ds-lozenge` |
 | Modal | [modal.md](./components/modal.md) | `components/Modal/modal.html` | `.modal-composition-item` |
-| Navigation Menu | [navigation-menu.md](./components/navigation-menu.md) | `components/Navigation menu/navigation.html` | `.ds-nav-item` |
+| Navigation Menu | [navigation-menu.md](./components/navigation-menu.md) | `components/Navigation menu/navigation.html` | `.ds-sidebar-nav-expand` |
 | Page Header | [page-header.md](./components/page-header.md) | `components/Page Header/page-header.html` | `.ds-page-header` |
 | Page Layout | [page-layout.md](./components/page-layout.md) | `components/Page layout/page-layout.html` | `.ds-page-layout` |
 | Pagination | [pagination.md](./components/pagination.md) | `components/Pagination/pagination.html` | `.ds-pagination` |
-| Popup | [popup.md](./components/popup.md) | `components/Popup/popup.html` | `.popup-anchor-btn` |
+| Popup | [popup.md](./components/popup.md) | `components/Popup/popup.html` | `.popup-anchor-wrap` |
 | Radio | [radio.md](./components/radio.md) | `components/Radio/radio.html` | `.ds-radio` |
 | Range | [range.md](./components/range.md) | `components/Range/range.html` | `.ds-range` |
-| Select — Option Part | [select.md](./components/select.md) | `components/Select/select.html` | `.ds-select-component` |
+| Select — Option Part | [select.md](./components/select.md) | `components/Select/select.html` | `.ds-select-trigger` |
 | Table | [table.md](./components/table.md) | `components/Table/table.html` | `.ds-table` |
 | Tabs | [tabs.md](./components/tabs.md) | `components/Tabs/tabs.html` | `.ds-tab` |
 | Tags | [tags.md](./components/tags.md) | `components/Tags/tags.html` | `.ds-tag` |
@@ -70,17 +72,37 @@
 | Toast Banner | [toast-banner.md](./components/toast-banner.md) | `components/Toast-Banner/banner.html` | `.ds-banner` |
 | Toggle | [toggle.md](./components/toggle.md) | `components/Toggle/toggle.html` | `.ds-toggle` |
 | Tooltip | [tooltip.md](./components/tooltip.md) | `components/Tooltip/tooltip.html` | `.ds-tooltip` |
-| Top & Bottom Nav | [top-bottom-navigation.md](./components/top-bottom-navigation.md) | `components/Top & bottom Navigation/top-bottom-nav.html` | `.ds-topnav-logo` |
+| Top & Bottom Nav | [top-bottom-navigation.md](./components/top-bottom-navigation.md) | `components/Top & bottom Navigation/top-bottom-nav.html` | `.ds-topnav` |
 | Tourguide | [tourguide.md](./components/tourguide.md) | `components/Tourguide/tourguide.html` | `.ds-tourguide` |
 | Dropdown Button | [dropdown.md](./components/dropdown.md) | `components/dropdown/dropdown.html` | `.ds-dropdown` |
 | section messages | [section-messages.md](./components/section-messages.md) | `components/section messages/section-message.html` | `.ds-section-message` |
 
 ## AI Workflow
 
-1. Identify component from registry above
-2. Read `Docs/components/{slug}.md`
-3. Open React source `src/GposLite/components/{Name}.tsx` untuk behavior/runtime logic
-4. Open source HTML `components/{Name}/{slug}.html` untuk visual/anatomy fidelity
-5. Reference `styles/tokens.css` dan `tailwind.config.js` untuk token mapping
-6. Always include `Docs/figma-make-context.md` when preparing AI/Figma Make output
-7. Never invent variants, colors, or spacing outside documented tokens
+1. Resolve `htmlPath` + `rootClass` dari `scripts/figma_component_registry.json`
+2. **Buka** `components/{Name}/{slug}.html` — sumber anatomi utama (jangan skip)
+3. Read `Docs/components/{slug}.md` + `Docs/component-rules.md` (section komponen)
+4. Open React `src/GposLite/components/{Name}.tsx` untuk behavior/runtime logic
+5. Untuk Figma: baca `.claude/figma/{id}.spec.json` setelah HTML
+6. Reference `styles/tokens.css` dan `tailwind.config.js` untuk token mapping
+7. Always include `Docs/figma-make-context.md` when preparing AI/Figma Make output
+8. Never invent variants, colors, menu items, or spacing outside documented HTML
+
+### Screen / dashboard (1 frame)
+
+1. `components/Page layout/page-layout.html` — shell (`#pl-layout-template`)
+2. `components/Navigation menu/navigation.html` — `ds-sidebar-nav-expand` (bukan tema `--sidebar-*`)
+3. `components/Top & bottom Navigation/top-bottom-nav.html` — `ds-topnav--website`
+4. Child content dari registry (banner, page-header, table, …)
+5. Skill: `Docs/figma-generate-skill.md` § Komposisi layar
+
+## Figma Generate (Code → Figma)
+
+| Step | Command / File |
+|------|----------------|
+| Prep 1 komponen | `./.cursor/scripts/figma-prep.sh {id}` |
+| Prep library (34) | `./.cursor/scripts/figma-prep-all.sh` |
+| Regenerate specs | `python3 scripts/extract_figma_specs.py --validate` |
+| Skill doc | `Docs/figma-generate-skill.md` |
+| Spec per komponen | `.claude/figma/{id}.spec.json` |
+| Library manifest | `.claude/figma-library-manifest.json` |

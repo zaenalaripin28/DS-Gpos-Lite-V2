@@ -12,19 +12,9 @@ Input teks satu baris untuk formulir — termasuk varian Phone Number Field deng
 
 ## Anatomy
 
-* Root container (`.ds-text-field`)
-* Input (`.ds-text-field__input`)
-* Group (`.ds-text-field__group`)
-* Prefix (`.ds-text-field__prefix`)
-* Divider (`.ds-text-field__divider`)
-* Chip (`.ds-text-field__chip`)
-* Caret (`.ds-text-field__caret`)
-* Action (`.ds-text-field__action`)
-* Leading (`.ds-text-field__leading`)
-* Trailing (`.ds-text-field__trailing`)
-* Head (`.ds-text-field__head`)
-* Label (`.ds-text-field__label`)
-* Cell (`.ds-text-field__cell`)
+* Root (`.ds-text-field`) → `input.ds-text-field__input`
+* Group (`.ds-text-field__group`), prefix (`.ds-text-field__prefix`), divider (`.ds-text-field__divider`)
+* Variants: `ds-phone-field`, `ds-icon-text-field`, `ds-search-select-field` (+ `__group`, `__prefix`)
 
 ## Variants
 

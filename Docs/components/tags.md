@@ -12,12 +12,10 @@ Chip pill untuk label, filter aktif, atau tag yang bisa dihapus. Tersedia 7 vari
 
 ## Anatomy
 
-* Root container (`.ds-tag`)
-* Icon (`.ds-tag__icon`)
-* Remove (`.ds-tag__remove`)
-* Label (`.ds-tag__label`)
-* Head (`.ds-tag__head`)
-* Cell (`.ds-tag__cell`)
+* Root (`span.ds-tag`)
+* Tag Icon (`.ds-tag__icon`)
+* Tag Label (`.ds-tag__label`)
+* Tag Remove (`.ds-tag__remove`)
 
 ## Variants
 

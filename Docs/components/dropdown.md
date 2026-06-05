@@ -12,11 +12,10 @@ Trigger .ds-btn + panel .ds-dropdown-menu dengan item parts (default, checkbox, 
 
 ## Anatomy
 
-* Root container (`.ds-dropdown`)
-* Button (ds-dropdown-btn)
-* Menu (ds-dropdown-menu)
-* Item (ds-dropdown-item)
-* Chevron (ds-dropdown-btn__chevron)
+* Root (`.ds-dropdown`)
+* Trigger (`button` + `.ds-dropdown-btn`, optional `--icon-only`)
+* Menu (`.ds-dropdown-menu`, optional `--scrollable`)
+* Item (`button.ds-dropdown-item`) — `__lead`, `__label`, `__trail`, `__checkbox`, `__radio`
 
 ## Variants
 

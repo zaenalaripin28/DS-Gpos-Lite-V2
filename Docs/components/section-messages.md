@@ -13,15 +13,13 @@ GPOS Lite V2 section messages component for dashboard UI patterns.
 ## Anatomy
 
 * Root container (`.ds-section-message`)
-* Header (`.ds-section-message__header`)
-* Icon (`.ds-section-message__icon`)
-* Main (`.ds-section-message__main`)
-* Title (`.ds-section-message__title`)
-* Body (`.ds-section-message__body`)
-* Description (`.ds-section-message__description`)
-* Actions (`.ds-section-message__actions`)
-* Action (`.ds-section-message__action`)
-* Action sep (`.ds-section-message__action-sep`)
+* Section Message Icon (`.ds-section-message__icon`)
+* Section Message Main (`.ds-section-message__main`)
+* Section Message Header (`.ds-section-message__header`)
+* Section Message Title (`.ds-section-message__title`)
+* Section Message Description (`.ds-section-message__description`)
+* Section Message Actions (`.ds-section-message__actions`)
+* Section Message Action (`.ds-section-message__action`)
 
 ## Variants
 

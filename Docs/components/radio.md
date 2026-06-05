@@ -12,12 +12,10 @@ Pilihan eksklusif dalam grup — part lingkaran, komponen berlabel, dan radio gr
 
 ## Anatomy
 
-* Root container (`.ds-radio`)
-* Hidden input (ds-radio__input)
-* Circle (ds-radio__circle)
-* Dot (ds-radio__dot)
-* Label (ds-radio__label)
-* Group (ds-radio-group + ds-radio-group__legend)
+* Root (`label.ds-radio`)
+* Radio Input (`.ds-radio__input`)
+* Radio Circle (`.ds-radio__circle`)
+* Radio Label (`.ds-radio__label`)
 
 ## Variants
 

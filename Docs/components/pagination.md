@@ -13,7 +13,7 @@ Navigasi halaman berbasis token untuk list dan tabel dengan data besar. Mendukun
 ## Anatomy
 
 * Root container (`.ds-pagination`)
-* Item (`.ds-pagination__item`)
+* Pagination Item (`.ds-pagination__item`)
 
 ## Variants
 

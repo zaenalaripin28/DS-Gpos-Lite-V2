@@ -12,19 +12,18 @@ Menu navigasi vertikal sidebar — parts atomik + komposisi Navigation Menu (Mai
 
 ## Anatomy
 
-* Root container (`.ds-nav-item`)
-* Shell (`.ds-sidebar-nav-expand__shell`)
-* Toolbar (`.ds-sidebar-nav-expand__toolbar`)
-* Field (`.ds-sidebar-nav-expand__field`)
-* Label (`.ds-sidebar-nav-expand__label`)
-* Control (`.ds-sidebar-nav-expand__control`)
-* Check (`.ds-sidebar-nav-expand__check`)
-* Stage wrap (`.ds-sidebar-nav-expand__stage-wrap`)
-* Badge (`.ds-sidebar-nav-expand__badge`)
-* Stage (`.ds-sidebar-nav-expand__stage`)
-* List (`.ds-sidebar-nav-expand__list`)
-* Footer (`.ds-sidebar-nav-expand__footer`)
-* Hint (`.ds-sidebar-nav-expand__hint`)
+* Root container (`.ds-sidebar-nav-expand`) — surface putih `--color-neutral-n0`, **bukan** token `--sidebar-*`
+* Scroll (`.ds-sidebar-nav-expand__scroll`)
+* Header (`.ds-sidebar-nav-expand__header`) — title `MENU GPOS` + collapse button
+* Title (`.ds-sidebar-nav-expand__title`)
+* Collapse (`.ds-sidebar-nav-expand__collapse`)
+* Search wrap (`.ds-nav-menu-search-wrap`) → `.ds-nav-menu-search` + `__input` + `__trail`
+* Heading (`.ds-nav-heading-snap`, `.ds-nav-heading-snap--no-icons`) — mis. "Terakhir Dibuka"
+* Recent list (`.ds-sidebar-nav-expand__recent`)
+* Divider (`.ds-nav-divider`)
+* Menu list (`.ds-sidebar-nav-expand__menu`) → item (`.ds-sidebar-nav-expand__item`)
+* Main menu snap (`.ds-nav-mainmenu-snap`) — `__lead` (icon 24px), `__body`, `__title`, `__trail`
+* Submenu (`.ds-nav-composed__submenu`) → `.ds-nav-submenu-snap` + `__dot` + `__label`
 
 ## Variants
 
@@ -136,7 +135,7 @@ Use Navigation Menu when the interaction pattern matches the documented implemen
 * Reuse Tailwind semantic token utilities mapped in tailwind.config.js (e.g. bg-blue-b300, text-neutral-n900, gap-100, p-250).
 * Use CSS custom properties from styles/tokens.css only — never hardcode hex, rgb, or px values for colors/spacing/radius.
 * Use icons from assets/icons/ only — reference via relative path as in source.
-* Primary root class: .ds-nav-item
+* Primary root class: .ds-sidebar-nav-expand
 * Never create new variants, colors, spacing scales, or typography sizes unless explicitly requested.
 * Match HTML structure and state handling from components/Navigation menu/navigation.html.
 * Preserve semantic HTML, native form controls, and ARIA attributes from the implementation.
@@ -144,5 +143,5 @@ Use Navigation Menu when the interaction pattern matches the documented implemen
 ## Example Prompt For AI
 
 ```
-Implement Navigation Menu for GPOS Lite Design System V2. Source: components/Navigation menu/navigation.html Root class: .ds-nav-item States: default, hover, press, selected, focus, typing, rest Icons: </code, dot.svg, dot.svg</code, icon-chevron-down.svg, icon-chevron-left.svg, icon-chevron-right.svg, icon-chevron-up.svg, icon-magnifying-glass.svg, icon-sidebar-offline-app-off.svg, icon-sidebar-offline-belanja-off.svg, icon-sidebar-offline-company-off.svg, icon-sidebar-offline-customer-off.svg, icon-sidebar-offline-dashboard-off.svg, icon-sidebar-offline-dashboard-on.svg, icon-sidebar-offline-finance-off.svg, icon-sidebar-offline-inventory-off.svg, icon-sidebar-offline-invoice-off.svg, icon-sidebar-offline-kas-bank-off.svg, icon-sidebar-offline-ledger-off.svg, icon-sidebar-offline-master-off.svg, icon-sidebar-offline-medikal-off.svg, icon-sidebar-offline-medikal-on.svg, icon-sidebar-offline-megaphone-off.svg, icon-sidebar-offline-news-off.svg, icon-sidebar-offline-payable-off.svg, icon-sidebar-offline-pos-off.svg, icon-sidebar-offline-pos-on.svg, icon-sidebar-offline-principal-off.svg, icon-sidebar-offline-product-off.svg, icon-sidebar-offline-product-on.svg, icon-sidebar-offline-report-off.svg, icon-sidebar-offline-setting-off.svg, icon-sidebar-offline-smart-forecasrting-off.svg, icon-x-circle-outline.svg Stack: HTML + Tailwind CSS + tokens.css. No React. Copy exact class names from source.
+Implement Navigation Menu for GPOS Lite Design System V2. Source: components/Navigation menu/navigation.html Root class: .ds-sidebar-nav-expand States: default, hover, press, selected, focus, typing, rest Icons: </code, dot.svg, dot.svg</code, icon-chevron-down.svg, icon-chevron-left.svg, icon-chevron-right.svg, icon-chevron-up.svg, icon-magnifying-glass.svg, icon-sidebar-offline-app-off.svg, icon-sidebar-offline-belanja-off.svg, icon-sidebar-offline-company-off.svg, icon-sidebar-offline-customer-off.svg, icon-sidebar-offline-dashboard-off.svg, icon-sidebar-offline-dashboard-on.svg, icon-sidebar-offline-finance-off.svg, icon-sidebar-offline-inventory-off.svg, icon-sidebar-offline-invoice-off.svg, icon-sidebar-offline-kas-bank-off.svg, icon-sidebar-offline-ledger-off.svg, icon-sidebar-offline-master-off.svg, icon-sidebar-offline-medikal-off.svg, icon-sidebar-offline-medikal-on.svg, icon-sidebar-offline-megaphone-off.svg, icon-sidebar-offline-news-off.svg, icon-sidebar-offline-payable-off.svg, icon-sidebar-offline-pos-off.svg, icon-sidebar-offline-pos-on.svg, icon-sidebar-offline-principal-off.svg, icon-sidebar-offline-product-off.svg, icon-sidebar-offline-product-on.svg, icon-sidebar-offline-report-off.svg, icon-sidebar-offline-setting-off.svg, icon-sidebar-offline-smart-forecasrting-off.svg, icon-x-circle-outline.svg Stack: HTML + Tailwind CSS + tokens.css. No React. Copy exact class names from source.
 ```

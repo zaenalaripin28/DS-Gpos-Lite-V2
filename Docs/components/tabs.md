@@ -12,12 +12,9 @@ Navigasi horizontal antar panel konten. Satu tab aktif per baris; sisanya defaul
 
 ## Anatomy
 
-* Root container (`.ds-tab`)
-* Label (`.ds-tab__label`)
-* Indicator (`.ds-tab__indicator`)
-* Row (`.ds-tab__row`)
-* Required (`.ds-tab__required`)
-* Badge (`.ds-tab__badge`)
+* Tab list (`.ds-tablist`) — `role="tablist"`, optional `--track`
+* Tab button (`.ds-tab`) — registry root; child dalam tablist
+* Label (`.ds-tab__label`), indicator (`.ds-tab__indicator`), badge (`.ds-tab__badge`), required (`.ds-tab__required`)
 
 ## Variants
 
