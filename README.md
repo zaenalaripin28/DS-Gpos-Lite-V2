@@ -30,6 +30,7 @@ Dokumentasi design system GPOS Lite V2 — design tokens, 7 foundations, 34 komp
 │   ├── icons/                    # 188 SVG icons
 │   └── images/
 ├── Docs/                         # Knowledge base & panduan engineer
+│   ├── design.md                 # Entry point — foundations, components, Docs map
 │   ├── design-system-knowledge.md
 │   ├── design-principles.md
 │   ├── component-rules.md
@@ -170,7 +171,8 @@ Setiap komponen: `components/{Name}/*.html` + CSS scoped di halaman.
 
 | File | Isi |
 |---|---|
-| `Docs/components-index.md` | **Entry point AI** — registry 34 komponen + workflow |
+| `Docs/design.md` | **Entry point** — peta foundations, 34 komponen, Docs, workflow AI |
+| `Docs/components-index.md` | Registry AI — 34 komponen + workflow Figma/code |
 | `Docs/design-system-knowledge.md` | Katalog token, struktur repo, komponen |
 | `Docs/design-principles.md` | Filosofi visual & interaksi |
 | `Docs/component-rules.md` | DO/DON'T per komponen |

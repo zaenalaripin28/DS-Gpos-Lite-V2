@@ -188,6 +188,7 @@ Always use semantic token utilities.
 
 Before implementing Design System related changes, reference:
 
+* Docs/design.md
 * Docs/design-system-knowledge.md
 * Docs/design-principles.md
 * Docs/component-rules.md

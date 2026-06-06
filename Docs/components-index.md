@@ -1,7 +1,7 @@
 # Components Index — GPOS Lite DS V2
 
 > AI-readable registry for Figma Make, Cursor, Claude, and code-generation tools.
-> Read individual component docs in `Docs/components/` before generating UI.
+> Mulai dari [`design.md`](./design.md) · baca `Docs/components/{slug}.md` sebelum generate UI.
 
 ## System Constraints
 
