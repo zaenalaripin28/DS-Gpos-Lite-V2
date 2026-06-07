@@ -471,7 +471,7 @@ Grid foundation memakai rentang berbeda (320–1400+) — lihat [Grid & Layout](
 
 # Components
 
-> **Registry AI (entry point):** `Docs/components-index.md` — daftar 34 komponen + link ke `Docs/components/{slug}.md`.  
+> **Registry AI (entry point):** `Docs/components-index.md` · **Modular AI docs:** `Docs/ai/`  
 > Bagian di bawah = katalog implementasi + variant/a11y per komponen (sumber detail di knowledge base).
 
 Pola bersama: `globals.css` + `enhancements.css` + Tailwind CDN + CSS scoped BEM + matrix variant di halaman doc.

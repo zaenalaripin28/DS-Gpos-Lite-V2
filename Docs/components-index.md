@@ -15,6 +15,7 @@
 | Pages | No `/pages` directory — component docs live in `components/` |
 | Root class | **`scripts/figma_component_registry.json`** — jika bentrok dengan tabel di bawah, ikuti registry |
 | Screen tasks | Baca `page-layout.html` + `navigation.html` + `top-bottom-nav.html` sebelum compose — lihat `Docs/figma-generate-skill.md` |
+| **AI modular docs** | `Docs/ai/` — [skill.md](./ai/skill.md), [tokens.md](./ai/tokens.md), [colors.md](./ai/colors.md), [spacing.md](./ai/spacing.md), [typography.md](./ai/typography.md), [components.md](./ai/components.md), [patterns.md](./ai/patterns.md), [anti-patterns.md](./ai/anti-patterns.md), [accessibility.md](./ai/accessibility.md) |
 
 ## Foundation References
 

@@ -3,6 +3,8 @@
 > Panduan implementasi untuk engineer, **Claude Code**, dan **Cursor**.  
 > **Source of truth:** kode di repositori — bukan interpretasi desain baru.
 
+> **AI modular docs:** [`Docs/ai/skill.md`](./ai/skill.md) — entry point terpisah per topik ([tokens](./ai/tokens.md), [colors](./ai/colors.md), [spacing](./ai/spacing.md), [typography](./ai/typography.md), [components](./ai/components.md), [patterns](./ai/patterns.md), [anti-patterns](./ai/anti-patterns.md), [accessibility](./ai/accessibility.md)).
+
 **Dokumen terkait:** `CLAUDE.md` (aturan wajib) · `Docs/design-system-knowledge.md` (katalog) · `Docs/component-rules.md` (per komponen) · `Docs/design-principles.md` (prinsip visual)
 
 ---

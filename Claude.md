@@ -189,6 +189,7 @@ Always use semantic token utilities.
 Before implementing Design System related changes, reference:
 
 * Docs/design.md
+* Docs/ai/skill.md (AI entry point — modular: tokens, colors, spacing, typography, components, patterns, anti-patterns, accessibility)
 * Docs/design-system-knowledge.md
 * Docs/design-principles.md
 * Docs/component-rules.md

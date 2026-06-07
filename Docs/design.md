@@ -202,6 +202,26 @@ Detail: [`Docs/component-rules.md` § Komposisi layar](./component-rules.md) · 
 
 ## Dokumentasi `Docs/`
 
+### AI modular (`Docs/ai/`)
+
+Dokumentasi terpisah per topik — optimal untuk context AI:
+
+| File | Isi |
+|------|-----|
+| [ai/skill.md](./ai/skill.md) | **Entry point AI** — workflow, authority, checklist |
+| [ai/tokens.md](./ai/tokens.md) | Katalog token, z-index, motion, breakpoints |
+| [ai/colors.md](./ai/colors.md) | Palette, semantic color, kontras |
+| [ai/spacing.md](./ai/spacing.md) | `--space-*`, kategori, grid margin/gutter |
+| [ai/typography.md](./ai/typography.md) | Poppins, 19 text styles |
+| [ai/components.md](./ai/components.md) | Registry 34 komponen |
+| [ai/patterns.md](./ai/patterns.md) | Compose, app shell, responsive |
+| [ai/anti-patterns.md](./ai/anti-patterns.md) | Larangan & kesalahan umum |
+| [ai/accessibility.md](./ai/accessibility.md) | ARIA, keyboard, WCAG, motion |
+
+Index: [ai/README.md](./ai/README.md)
+
+### Dokumen lengkap
+
 | Dokumen | Audiens | Isi |
 |---------|---------|-----|
 | **design.md** (ini) | Semua | Entry point & peta repo |
@@ -210,7 +230,7 @@ Detail: [`Docs/component-rules.md` § Komposisi layar](./component-rules.md) · 
 | [component-rules.md](./component-rules.md) | Engineer / AI | DO/DON'T + Structure per komponen |
 | [components-index.md](./components-index.md) | AI / Figma | Registry 34 komponen + workflow |
 | [components/*.md](./components/) | AI | Anatomy, variant, token, prompt per komponen |
-| [engineer-skill.md](./engineer-skill.md) | Engineer | Implementasi, responsive, a11y checklist |
+| [engineer-skill.md](./engineer-skill.md) | Engineer | Implementasi, responsive, a11y checklist (mirror `ai/skill.md`) |
 | [figma-make-skill.md](./figma-make-skill.md) | AI | Figma → HTML |
 | [figma-make-context.md](./figma-make-context.md) | AI | Konteks lengkap Figma Make |
 | [figma-generate-skill.md](./figma-generate-skill.md) | AI / Figma MCP | Code → Figma, komposisi layar |
