@@ -1,4 +1,5 @@
 ---
+name: design-system
 title: GPOS Lite Design System V2 — Comprehensive Reference
 description: Consolidated design system documentation — single source of truth for all design decisions, tokens, components, and patterns
 keywords: [design-system, tokens, components, foundations, patterns, tailwind, accessibility]
