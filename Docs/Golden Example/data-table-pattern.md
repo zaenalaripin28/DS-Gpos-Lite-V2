@@ -1,7 +1,7 @@
-# Pattern: List Management Page
+# Pattern: data table Page
 
 Purpose:
-Display and manage collections of business records.
+Display and manage collections of data table records.
 
 Components:
 - Page Layout 
@@ -11,13 +11,13 @@ Components:
 - Table 
 - Pagination
 
-Structure:
+Structure Layout:
 
 Page Layout
-├─ Navigation Menu
 ├─ Top Navigation
+├─ Navigation Menu 
 └─ Content
-   ├─ Page Header with seacrh & filter
+   ├─ Page Header with search & filter
    ├─ Table
    └─ Pagination
 

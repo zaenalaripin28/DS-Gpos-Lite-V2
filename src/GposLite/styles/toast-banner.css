@@ -4,17 +4,17 @@
       display: flex;
       align-items: center;
       width: 100%;
-      padding: 12px;           /* p-3 */
-      border-radius: 8px;      /* rounded-lg */
-      gap: 4px;                /* gap-1 */
+      padding: var(--space-150);           /* 12px */
+      border-radius: var(--border-radius-md); /* 8px */
+      gap: var(--space-050);               /* 4px */
       font-family: var(--font-primary);
     }
 
     /* ── Icon slot ── */
     .ds-banner__icon {
       flex-shrink: 0;
-      width: 24px;
-      height: 24px;
+      width: var(--space-300);  /* 24px */
+      height: var(--space-300); /* 24px */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -23,36 +23,36 @@
     /* ── Text slot ── */
     .ds-banner__text {
       flex: 1;
-      font-size: 14px;         /* text-sm */
-      font-weight: 500;        /* font-medium */
-      line-height: 20px;       /* leading-5 */
+      font-size: var(--font-size-sm);            /* 14px */
+      font-weight: var(--font-weight-medium);    /* 500 */
+      line-height: var(--text-body-small-medium-lh); /* 20px */
     }
 
     /* ── appearance=warning ── */
     .ds-banner--warning {
-      background-color: #FFA33D;   /* Color-Background-Warning-Bold = O200 */
+      background-color: var(--color-orange-o200);   /* Color-Background-Warning-Bold = O200 */
     }
-    .ds-banner--warning .ds-banner__text  { color: #091E42; }   /* Color-Text-Bold = N900 */
-    .ds-banner--warning .ds-banner__icon path { fill: #091E42; } /* Color-Icon-Bold = N900 */
+    .ds-banner--warning .ds-banner__text  { color: var(--color-neutral-n900); }   /* Color-Text-Bold = N900 */
+    .ds-banner--warning .ds-banner__icon path { fill: var(--color-neutral-n900); } /* Color-Icon-Bold = N900 */
 
     /* ── appearance=success ── */
     .ds-banner--success {
-      background-color: #00AA5B;   /* Color-Background-Success-Bold = G300 */
+      background-color: var(--color-green-g300);   /* Color-Background-Success-Bold = G300 */
     }
-    .ds-banner--success .ds-banner__text  { color: #FFFFFF; }   /* Color-Text-Inverse = N0 */
-    .ds-banner--success .ds-banner__icon path { fill: #FFFFFF; } /* Color-Icon-Inverse = N0 */
+    .ds-banner--success .ds-banner__text  { color: var(--color-neutral-n0); }   /* Color-Text-Inverse = N0 */
+    .ds-banner--success .ds-banner__icon path { fill: var(--color-neutral-n0); } /* Color-Icon-Inverse = N0 */
 
     /* ── appearance=error ── */
     .ds-banner--error {
-      background-color: #EC1C24;   /* Color-Background-Danger-Bold = R300 */
+      background-color: var(--color-red-r300);   /* Color-Background-Danger-Bold = R300 */
     }
-    .ds-banner--error .ds-banner__text  { color: #FFFFFF; }    /* Color-Text-Inverse = N0 */
-    .ds-banner--error .ds-banner__icon path { fill: #FFFFFF; }  /* Color-Icon-Inverse = N0 */
+    .ds-banner--error .ds-banner__text  { color: var(--color-neutral-n0); }    /* Color-Text-Inverse = N0 */
+    .ds-banner--error .ds-banner__icon path { fill: var(--color-neutral-n0); }  /* Color-Icon-Inverse = N0 */
 
     /* ── appearance=announcement ── */
     .ds-banner--announcement {
-      background-color: #42526D;   /* Color-Background-Neutral-Bold = N500 */
+      background-color: var(--color-neutral-n500);   /* Color-Background-Neutral-Bold = N500 */
     }
-    .ds-banner--announcement .ds-banner__text { color: #FFFFFF; } /* Color-Text-Inverse = N0 */
+    .ds-banner--announcement .ds-banner__text { color: var(--color-neutral-n0); } /* Color-Text-Inverse = N0 */
 
     /* ================================================================
